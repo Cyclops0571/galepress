@@ -1,0 +1,72 @@
+/*
+@mixin box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*/
+/* BOOTSTRAP MIXINS */
+/* line 3, ../../sass/modules/colorpicker.scss */
+div.colorPicker-picker {
+  height: 20px;
+  width: 20px;
+  padding: 0 !important;
+  border-radius: 4px;
+  background: url('/galepress/img/btn-colorpicker.png?1363266081') no-repeat top right;
+  border-top: 1px solid black;
+  border-bottom: 1px solid #171717;
+  border-right: 1px solid #171717;
+  border-left: 1px solid #171717;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  line-height: 20px;
+}
+
+/* line 18, ../../sass/modules/colorpicker.scss */
+div.colorPicker-palette {
+  width: 110px;
+  position: absolute;
+  border: 1px solid #272727;
+  background-color: #171717;
+  padding: 2px;
+  z-index: 9999;
+}
+
+/* line 26, ../../sass/modules/colorpicker.scss */
+div.colorPicker_hexWrap {
+  width: 100%;
+  float: left;
+}
+
+/* line 27, ../../sass/modules/colorpicker.scss */
+div.colorPicker_hexWrap label {
+  font-size: 95%;
+  color: #2F2F2F;
+  margin: 5px 2px;
+  width: 25%;
+  color: #848484;
+}
+
+/* line 28, ../../sass/modules/colorpicker.scss */
+div.colorPicker_hexWrap input {
+  margin: 5px 2px;
+  padding: 0;
+  font-size: 95%;
+  border: 1px solid #272727;
+  width: 65%;
+  background: #171717;
+  color: #dcdcde;
+}
+
+/* line 30, ../../sass/modules/colorpicker.scss */
+div.colorPicker-swatch {
+  height: 12px;
+  width: 12px;
+  border: 1px solid #272727;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 12px;
+}

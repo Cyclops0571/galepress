@@ -1,0 +1,17 @@
+/* widget-icon */
+    .widget-icon-taurus{display: inline-block; background: rgba(255,255,255,0.2); font-size: 24px; 
+                 -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; text-align: center; line-height: 20px; width: 40px; height: 40px; padding: 5px 0px;}
+    .widget-icon-taurus:hover{background: rgba(255,255,255,0.3); text-decoration: none;}                
+    
+    .widget-icon-taurus.widget-icon-dark{background: rgba(0,0,0,0.2);}
+        .widget-icon-taurus.widget-icon-dark:hover{background: rgba(0,0,0,0.3);}
+    
+        .widget-icon-taurus.widget-icon-large{width: 60px; height: 60px; padding: 10px 0px; line-height: 40px; font-size: 24px;}
+        .widget-icon-taurus.widget-icon-xlarge{width: 90px; height: 90px; padding: 15px 0px; line-height: 60px; font-size: 36px;}
+        
+    .widget-icon-taurus.widget-icon-circle{background: transparent; border: 1px solid #428bca; margin: 3px 5px; padding: 7px;}
+        .widget-icon-taurus.widget-icon-circle:hover{background: rgba(0,0,0,0.3);}
+        
+    .widget-icon-taurus.widget-icon-circle.widget-icon-dark{border-color: #111; color: #333;}
+        .widget-icon-taurus.widget-icon-circle.widget-icon-dark:hover{background: rgba(0,0,0,0.1);}    
+/* eof widget-icon */

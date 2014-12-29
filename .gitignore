@@ -1,0 +1,13 @@
+# OS or Editor folders
+.DS_Store
+Thumbs.db
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+nbproject
+
+# Folders to ignore
+.vagrant
+storage

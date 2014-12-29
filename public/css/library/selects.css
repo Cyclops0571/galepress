@@ -1,0 +1,163 @@
+/*
+@mixin box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*/
+/* BOOTSTRAP MIXINS */
+/* line 3, ../../sass/library/selects.scss */
+.select, .select-arrowed {
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+/* line 6, ../../sass/library/selects.scss */
+.select.opened, .opened.select-arrowed {
+  z-index: 999;
+}
+/* line 8, ../../sass/library/selects.scss */
+.select.opened .options, .opened.select-arrowed .options {
+  display: block;
+}
+/* line 13, ../../sass/library/selects.scss */
+.select.idle .selected, .idle.select-arrowed .selected {
+  color: #9da0ab;
+}
+/* line 19, ../../sass/library/selects.scss */
+.select.negative:hover .selected, .negative.select-arrowed:hover .selected {
+  background-color: #000;
+}
+/* line 23, ../../sass/library/selects.scss */
+.select.negative .selected, .negative.select-arrowed .selected {
+  background-color: #000;
+  color: #dcdcde;
+  -webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.06);
+  -moz-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+/* line 30, ../../sass/library/selects.scss */
+.select .selected, .select-arrowed .selected {
+  background-color: #171717;
+  border-radius: 4px;
+  color: #dcdcde;
+  font-weight: normal;
+  cursor: pointer;
+  display: block;
+  height: 26px;
+  line-height: 18px;
+  padding: 4px 8px 6px;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  line-height: 16px \9;
+}
+/* line 47, ../../sass/library/selects.scss */
+.select .selected:hover, .select-arrowed .selected:hover {
+  background-color: black;
+}
+/* line 49, ../../sass/library/selects.scss */
+.select .selected:hover .icon, .select-arrowed .selected:hover .icon {
+  background-position: 0 -30px;
+}
+/* line 53, ../../sass/library/selects.scss */
+.select .selected .icon, .select-arrowed .selected .icon {
+  background: url('/galepress/img/select/selected-icon.png?1362763283') 0 0 no-repeat;
+  border-radius: 50%;
+  height: 19px;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  width: 19px;
+}
+/* line 64, ../../sass/library/selects.scss */
+.select .options, .select-arrowed .options {
+  background-color: #171717;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: none;
+  padding: 20px 0 8px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  z-index: 4;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+/* line 76, ../../sass/library/selects.scss */
+.select .stack, .select-arrowed .stack {
+  padding-bottom: 2px;
+  max-height: 140px;
+  overflow: auto;
+}
+/* line 80, ../../sass/library/selects.scss */
+.select .stack li, .select-arrowed .stack li {
+  color: #bcbbbc;
+  cursor: pointer;
+  height: 26px;
+  padding: 6px 16px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 89, ../../sass/library/selects.scss */
+.select .stack li:hover, .select-arrowed .stack li:hover, .select .stack li:focus, .select-arrowed .stack li:focus, .select .stack li.highlighted, .select-arrowed .stack li.highlighted {
+  color: #171717;
+  -webkit-box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.3);
+  background: #b7882f;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ebaf3c), color-stop(100%, #b7882f));
+  background-image: -webkit-linear-gradient(top, #ebaf3c, #b7882f);
+  background-image: -moz-linear-gradient(top, #ebaf3c, #b7882f);
+  background-image: -ms-linear-gradient(top, #ebaf3c, #b7882f);
+  background-image: -o-linear-gradient(top, #ebaf3c, #b7882f);
+  background-image: linear-gradient(top, #ebaf3c, #b7882f);
+  -pie-background: linear-gradient(#ebaf3c, #b7882f);
+}
+/* line 94, ../../sass/library/selects.scss */
+.select .stack li.inactive-result, .select-arrowed .stack li.inactive-result {
+  display: none;
+}
+/* line 100, ../../sass/library/selects.scss */
+.select .select-search, .select-arrowed .select-search {
+  display: none;
+  margin-bottom: 5px;
+  padding: 1px 9px 3px;
+}
+/* line 104, ../../sass/library/selects.scss */
+.select .select-search input, .select-arrowed .select-search input {
+  background-color: #30333b;
+  border: 1px solid #252525;
+  border-radius: 2px;
+  color: white;
+  padding: 4px 9px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* line 121, ../../sass/library/selects.scss */
+.select-arrowed .selected .icon {
+  background-image: url('/galepress/img/select/selected-icon-arrowed.png?1362763348');
+}
+
+/* line 128, ../../sass/library/selects.scss */
+.select .selected, .select-arrowed .selected, .select-arrowed .selected, .select .stack li, .select-arrowed .stack li, .select-arrowed .stack li {
+  font-size: 12px;
+}

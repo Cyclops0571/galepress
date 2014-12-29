@@ -1,0 +1,260 @@
+/*
+@mixin box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*/
+/* BOOTSTRAP MIXINS */
+/* line 5, ../../sass/library/text-inputs.scss */
+input[type='text'],
+input[type='password'] {
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  height: 26px;
+  padding: 0 10px;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 15, ../../sass/library/text-inputs.scss */
+input[type='text'].prefix, input[type='text'] .postfix,
+input[type='password'].prefix,
+input[type='password'] .postfix {
+  display: block;
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 26px;
+  line-height: 26px;
+}
+/* line 25, ../../sass/library/text-inputs.scss */
+input[type='text'].prefix,
+input[type='password'].prefix {
+  left: 2px;
+  -moz-border-radius-topleft: 4px;
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  -moz-border-radius-topright: 0px;
+  -webkit-border-top-right-radius: 0px;
+  border-top-right-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  overflow: hidden;
+}
+/* line 32, ../../sass/library/text-inputs.scss */
+input[type='text'].postfix,
+input[type='password'].postfix {
+  right: 2px;
+  -moz-border-radius-topright: 2px;
+  -webkit-border-top-right-radius: 2px;
+  border-top-right-radius: 2px;
+  -moz-border-radius-bottomright: 2px;
+  -webkit-border-bottom-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* line 40, ../../sass/library/text-inputs.scss */
+.text, .text-rounded {
+  position: relative;
+}
+/* line 45, ../../sass/library/text-inputs.scss */
+.text.dark input[type='text'], .dark.text-rounded input[type='text'],
+.text.dark input[type='password'],
+.dark.text-rounded input[type='password'] {
+  background: #171717;
+  color: #bcbbbc;
+  border-top: 1px solid black;
+  border-bottom: 1px solid #171717;
+  border-right: 1px solid #171717;
+  border-left: 1px solid #171717;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding-top: 4px \9;
+}
+/* line 55, ../../sass/framework/_mixins.scss */
+.text.dark input[type='text']:-moz-placeholder, .dark.text-rounded input[type='text']:-moz-placeholder,
+.text.dark input[type='password']:-moz-placeholder,
+.dark.text-rounded input[type='password']:-moz-placeholder {
+  color: #434343;
+}
+/* line 58, ../../sass/framework/_mixins.scss */
+.text.dark input[type='text']::-webkit-input-placeholder, .dark.text-rounded input[type='text']::-webkit-input-placeholder,
+.text.dark input[type='password']::-webkit-input-placeholder,
+.dark.text-rounded input[type='password']::-webkit-input-placeholder {
+  color: #434343;
+}
+/* line 61, ../../sass/framework/_mixins.scss */
+.text.dark input[type='text'].placeholder, .dark.text-rounded input[type='text'].placeholder,
+.text.dark input[type='password'].placeholder,
+.dark.text-rounded input[type='password'].placeholder {
+  color: #434343;
+}
+/* line 55, ../../sass/library/text-inputs.scss */
+.text.dark input[type='text']:hover, .dark.text-rounded input[type='text']:hover,
+.text.dark input[type='password']:hover,
+.dark.text-rounded input[type='password']:hover {
+  -webkit-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+/* line 58, ../../sass/library/text-inputs.scss */
+.text.dark input[type='text']:focus, .dark.text-rounded input[type='text']:focus,
+.text.dark input[type='password']:focus,
+.dark.text-rounded input[type='password']:focus {
+  -webkit-box-shadow: 0 0 0 1px #1681bf;
+  -moz-box-shadow: 0 0 0 1px #1681bf;
+  box-shadow: 0 0 0 1px #1681bf;
+}
+/* line 66, ../../sass/library/text-inputs.scss */
+.text.light input[type='text'], .light.text-rounded input[type='text'],
+.text.light input[type='password'],
+.light.text-rounded input[type='password'] {
+  background: #dcdcde;
+  border: none;
+  color: black;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: #9a9a9a;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #9a9a9a));
+  background-image: -webkit-linear-gradient(top, #fdfdfd, #9a9a9a);
+  background-image: -moz-linear-gradient(top, #fdfdfd, #9a9a9a);
+  background-image: -ms-linear-gradient(top, #fdfdfd, #9a9a9a);
+  background-image: -o-linear-gradient(top, #fdfdfd, #9a9a9a);
+  background-image: linear-gradient(top, #fdfdfd, #9a9a9a);
+  -pie-background: linear-gradient(#fdfdfd, #9a9a9a);
+  padding-top: 5px \9;
+}
+/* line 55, ../../sass/framework/_mixins.scss */
+.text.light input[type='text']:-moz-placeholder, .light.text-rounded input[type='text']:-moz-placeholder,
+.text.light input[type='password']:-moz-placeholder,
+.light.text-rounded input[type='password']:-moz-placeholder {
+  color: #848484;
+}
+/* line 58, ../../sass/framework/_mixins.scss */
+.text.light input[type='text']::-webkit-input-placeholder, .light.text-rounded input[type='text']::-webkit-input-placeholder,
+.text.light input[type='password']::-webkit-input-placeholder,
+.light.text-rounded input[type='password']::-webkit-input-placeholder {
+  color: #848484;
+}
+/* line 61, ../../sass/framework/_mixins.scss */
+.text.light input[type='text'].placeholder, .light.text-rounded input[type='text'].placeholder,
+.text.light input[type='password'].placeholder,
+.light.text-rounded input[type='password'].placeholder {
+  color: #848484;
+}
+/* line 74, ../../sass/library/text-inputs.scss */
+.text.light input[type='text']:hover, .light.text-rounded input[type='text']:hover,
+.text.light input[type='password']:hover,
+.light.text-rounded input[type='password']:hover {
+  -webkit-box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+/* line 77, ../../sass/library/text-inputs.scss */
+.text.light input[type='text']:focus, .light.text-rounded input[type='text']:focus,
+.text.light input[type='password']:focus,
+.light.text-rounded input[type='password']:focus {
+  background: white;
+  -webkit-box-shadow: 0 0 0 3px #80a62d;
+  -moz-box-shadow: 0 0 0 3px #80a62d;
+  box-shadow: 0 0 0 3px #80a62d;
+}
+/* line 55, ../../sass/framework/_mixins.scss */
+.text.light input[type='text']:focus:-moz-placeholder, .light.text-rounded input[type='text']:focus:-moz-placeholder,
+.text.light input[type='password']:focus:-moz-placeholder,
+.light.text-rounded input[type='password']:focus:-moz-placeholder {
+  color: #cccccc;
+}
+/* line 58, ../../sass/framework/_mixins.scss */
+.text.light input[type='text']:focus::-webkit-input-placeholder, .light.text-rounded input[type='text']:focus::-webkit-input-placeholder,
+.text.light input[type='password']:focus::-webkit-input-placeholder,
+.light.text-rounded input[type='password']:focus::-webkit-input-placeholder {
+  color: #cccccc;
+}
+/* line 61, ../../sass/framework/_mixins.scss */
+.text.light input[type='text']:focus.placeholder, .light.text-rounded input[type='text']:focus.placeholder,
+.text.light input[type='password']:focus.placeholder,
+.light.text-rounded input[type='password']:focus.placeholder {
+  color: #cccccc;
+}
+/* line 83, ../../sass/library/text-inputs.scss */
+.text.light input[type='submit'], .light.text-rounded input[type='submit'] {
+  background-position: center -30px;
+}
+/* line 88, ../../sass/library/text-inputs.scss */
+.text input[type='submit'], .text-rounded input[type='submit'] {
+  background-color: transparent;
+  background-position: center 0;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  height: 19px;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  width: 19px;
+}
+/* line 102, ../../sass/library/text-inputs.scss */
+.text input[type='submit']:hover, .text-rounded input[type='submit']:hover, .text input[type='submit']:focus, .text-rounded input[type='submit']:focus {
+  background-position: center -30px;
+}
+
+/* line 114, ../../sass/library/text-inputs.scss */
+.text-rounded input[type='text'],
+.text-rounded input[type='password'] {
+  border-radius: 30px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* line 123, ../../sass/library/text-inputs.scss */
+.text input.search-button, .text-rounded input.search-button {
+  background-image: url('/galepress/img/text-input/search-button.png?1332136382');
+}
+
+/* line 140, ../../sass/library/text-inputs.scss */
+.input-append input[class*="span"],
+.input-append .uneditable-input[class*="span"],
+.input-prepend input[class*="span"],
+.input-prepend .uneditable-input[class*="span"],
+.row-fluid input[class*="span"],
+.row-fluid select[class*="span"],
+.row-fluid textarea[class*="span"],
+.row-fluid .uneditable-input[class*="span"],
+.row-fluid .input-prepend [class*="span"],
+.row-fluid .input-append [class*="span"] {
+  display: inline-block;
+}
+
+/* line 157, ../../sass/library/text-inputs.scss */
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  cursor: not-allowed;
+  background-color: #848484;
+}
+
+/* line 165, ../../sass/library/text-inputs.scss */
+input[type="radio"][disabled],
+input[type="checkbox"][disabled],
+input[type="radio"][readonly],
+input[type="checkbox"][readonly] {
+  background-color: transparent;
+}
