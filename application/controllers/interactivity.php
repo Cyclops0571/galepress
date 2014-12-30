@@ -426,6 +426,357 @@ class Interactivity_Controller extends Base_Controller
 						$cfp->ProcessTypeID = eProcessTypes::Insert;
 						$cfp->save();
 
+
+						//if($currentUser->UserID==65)
+						//{
+							try
+							{
+								//added by hknsrr, weblink, pagelink ve bookmark annotation içeren pdf'lerin sisteme yüklendikleri zaman bu annotationların sisteme kaydedilerek int. tasarlayıcıda gösterilmesi.
+								$annotations_path = "pages[".$i."]/annots";
+						        $anncount = (int) $p->pcos_get_number($doc, "length:".$annotations_path);
+						        $bookmarkCount = (int)$p->pcos_get_number($doc, "length:bookmarks");
+
+						        if($bookmarkCount > 0 && (int)$cf->Transferred != 1 && !$bookmarksAdded)
+						        {
+						        	for ($bookmarkIndex = 0; $bookmarkIndex < $bookmarkCount; $bookmarkIndex++)
+							        {
+							        	//$bookmarkLevel = (int)$p->pcos_get_number($doc, "bookmarks[" .$bookmarkIndex. "]/level");
+							        	$bookmarkDestpage = (int)$p->pcos_get_number($doc, "bookmarks[" .$bookmarkIndex. "]/destpage");
+							        	$bookmarkTitle = $p->pcos_get_string($doc, "bookmarks[" .$bookmarkIndex. "]/Title");
+							        	//Log::info($bookmarkDestpage.". sayfada ".$bookmarkCount." adet bookmark bulundu");
+							        	//Log::info("bookmark title: ".$bookmarkTitle);
+							        	//Log::info("bookmark level: ".$bookmarkLevel);
+
+							        	$lastComponentNo = DB::table('PageComponent')
+																->where('ContentFilePageID', '=', $cfp->ContentFilePageID+$bookmarkDestpage-1)
+																->where('StatusID', '=', eStatus::Active)
+																->order_by('No', 'DESC')
+																->take(1)
+																->only('No');
+
+										//Log::info("lastcomponent no: ".$lastComponentNo);
+
+										if($lastComponentNo==null)
+											$lastComponentNo=0;
+
+						                $linkAnnotPageComponent = new PageComponent();
+										$linkAnnotPageComponent->ContentFilePageID = $cfp->ContentFilePageID+$bookmarkDestpage-1;
+										$linkAnnotPageComponent->ComponentID = 10;
+										$linkAnnotPageComponent->No = $lastComponentNo+1;
+										$linkAnnotPageComponent->StatusID = eStatus::Active;
+										$linkAnnotPageComponent->CreatorUserID = $currentUser->UserID;
+										$linkAnnotPageComponent->DateCreated = new DateTime();
+										$linkAnnotPageComponent->ProcessUserID = $currentUser->UserID;
+										$linkAnnotPageComponent->ProcessDate = new DateTime();
+										$linkAnnotPageComponent->ProcessTypeID = eProcessTypes::Insert;
+										$linkAnnotPageComponent->save();
+
+										//Bookmark Component
+										for($j = 0; $j < 4; $j++)
+										{
+											$pcp = new PageComponentProperty();
+											$pcp->PageComponentID = $linkAnnotPageComponent->PageComponentID;
+											if($j==0)
+											{
+												$pcp->Name = "pcid";
+												$pcp->Value = "0";
+											}
+											elseif($j==1)
+											{
+												$pcp->Name = "text";
+												$pcp->Value = $bookmarkTitle;
+											}
+											elseif($j==2)
+											{
+												$pcp->Name = "trigger-x";
+												$pcp->Value = 10;
+											}
+											elseif($j==3)
+											{
+												$pcp->Name = "trigger-y";
+												$pcp->Value = 10;
+											}
+
+
+											$pcp->StatusID = eStatus::Active;
+											$pcp->CreatorUserID = $currentUser->UserID;
+											$pcp->DateCreated = new DateTime();
+											$pcp->ProcessUserID = $currentUser->UserID;
+											$pcp->ProcessDate = new DateTime();
+											$pcp->ProcessTypeID = eProcessTypes::Insert;
+											$pcp->save();
+										}
+							        }
+							        $bookmarksAdded=true;
+						        }
+
+						        if($anncount > 0 && (int)$cf->Transferred != 1)
+						        {
+						        	//Log::info("annotation count: ".$anncount);
+					        		//$docInfo = $p->pcos_get_stream($doc, "","/Root/Metadata");
+					          		// $posStart = strpos($docInfo, '<xmp:CreatorTool>');
+					          		// $posEnd = strpos($docInfo, '</xmp:CreatorTool>');
+
+					          		// $docInfoFind = substr($docInfo, $posStart, $posEnd);
+					            	//$indesignFind = strpos($docInfo,"indesign");
+					            	//Log::info($docInfo);
+
+						            for ($ann = 0; $ann < $anncount; $ann++)
+						            {
+						            	$annotation_path = $annotations_path."[".$ann."]";
+						            	$linkDest = (int)$p->pcos_get_number($doc, $annotation_path."/destpage");
+						            	$pcosmode = $p->pcos_get_string($doc, "pcosmode");
+						            	//Log::info("link dest: ".$linkDest);
+						            	//Web Link
+
+						        		if($pcosmode=="URI" || $pcosmode==">>")
+						        		{
+						        			//Log::info("girdi");
+						        			//Print the type of the annotation
+									        $subtype = $p->pcos_get_string($doc, $annotation_path."/Subtype");
+									        
+									        //Log::info("Type: ".$p->get_buffer()." Count: ". $anncount);
+								        	$uri_path = $annotation_path."/A/URI";
+							        		$uri = $p->pcos_get_string($doc, $uri_path);
+
+									        //Print the rectangle for the annotation.
+									        if($subtype=="Link" && $subtype!="null" && substr($uri, 0, 2)!="yl")
+									        {
+									        	$rect_path = $annotation_path."/Rect";
+
+										       	$pageHeight=$height;
+
+								            	//Log::info("x: ".$p->pcos_get_number($doc, $rect_path."[0]"));
+
+								            	$rectY=$pageHeight-(int)$p->pcos_get_number($doc, $rect_path."[3]");
+								                //Log::info("y: ".$rectY);
+								            
+								            	$rectHeight=$pageHeight-(int)$p->pcos_get_number($doc, $rect_path."[1]")-$rectY;
+
+								            	if($rectHeight<0)
+								            		$rectHeight*=-1;
+								            	//Log::info("rectHeight: ".$rectHeight);
+										         
+								            	$rectX=$p->pcos_get_number($doc, $rect_path."[0]");
+								            	$rectWidth=$p->pcos_get_number($doc, $rect_path."[2]")-$rectX;
+								            	//Log::info("rectWidth: ".$rectWidth);
+
+								                //Log::info("Page No: ".$cfp->No);
+
+								                $lastComponentNo = DB::table('PageComponent')
+																->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+																->where('StatusID', '=', eStatus::Active)
+																->order_by('No', 'DESC')
+																->take(1)
+																->only('No');
+
+												if($lastComponentNo==null)
+													$lastComponentNo=0;
+
+								                $linkAnnotPageComponent = new PageComponent();
+												$linkAnnotPageComponent->ContentFilePageID = $cfp->ContentFilePageID;
+												$linkAnnotPageComponent->ComponentID = 4;
+												$linkAnnotPageComponent->No = $lastComponentNo+1;
+												$linkAnnotPageComponent->StatusID = eStatus::Active;
+												$linkAnnotPageComponent->CreatorUserID = $currentUser->UserID;
+												$linkAnnotPageComponent->DateCreated = new DateTime();
+												$linkAnnotPageComponent->ProcessUserID = $currentUser->UserID;
+												$linkAnnotPageComponent->ProcessDate = new DateTime();
+												$linkAnnotPageComponent->ProcessTypeID = eProcessTypes::Insert;
+												$linkAnnotPageComponent->save();
+
+												//Log::info("x: ".$rectX);
+												//Log::info("y: ".$rectY);
+												//Log::info("width: ".$rectWidth);
+												//Log::info("height: ".$rectHeight);
+
+												//Weblink Component
+												for($j = 0; $j < 8; $j++)
+												{
+													$pcp = new PageComponentProperty();
+													$pcp->PageComponentID = $linkAnnotPageComponent->PageComponentID;
+													if($j==0)
+													{
+														$pcp->Name = "pcid";
+														$pcp->Value = "0";
+													}
+													elseif($j==1)
+													{
+														$pcp->Name = "type";
+														$pcp->Value = "2";
+													}
+													elseif($j==2)
+													{
+														$pcp->Name = "page";
+														$pcp->Value = $cfp->No;
+													}
+													elseif($j==3)
+													{
+														$pcp->Name = "url";
+														$pcp->Value = $uri;
+													}
+													elseif($j==4)
+													{
+														$pcp->Name = "x";
+														$pcp->Value = $rectX;
+													}
+													elseif($j==5)
+													{
+														$pcp->Name = "y";
+														$pcp->Value = $rectY;
+													}
+													elseif($j==6)
+													{
+														$pcp->Name = "w";
+														$pcp->Value = $rectWidth;
+													}
+													elseif($j==7)
+													{
+														$pcp->Name = "h";
+														$pcp->Value = $rectHeight;
+													}
+
+													$pcp->StatusID = eStatus::Active;
+													$pcp->CreatorUserID = $currentUser->UserID;
+													$pcp->DateCreated = new DateTime();
+													$pcp->ProcessUserID = $currentUser->UserID;
+													$pcp->ProcessDate = new DateTime();
+													$pcp->ProcessTypeID = eProcessTypes::Insert;
+													$pcp->save();
+												}
+									        }
+
+						        		}
+						        		//Page Link
+						        		else
+						        		{
+						        			//Log::info("ikinciye girdi");
+						        			
+						        			//Print the type of the annotation
+									        $subtype = $p->pcos_get_string($doc, $annotation_path."/Subtype");
+									        
+									        //Log::info("Type: ".$p->get_buffer()." Count: ". $anncount);
+								        	//$uri_path = $annotation_path."/A/URI";
+							        		//$uri = $p->pcos_get_string($doc, $uri_path);
+
+									        //Print the rectangle for the annotation.
+									        if($subtype=="Link" && $subtype!="null")
+									        {
+									        	$rect_path = $annotation_path."/Rect";
+
+										       	$pageHeight=$height;
+
+										       	//Log::info("pageHeight: ".$pageHeight);
+								            	//Log::info("x: ".$p->pcos_get_number($doc, $rect_path."[0]"));
+								            	//Log::info("1: ".$p->pcos_get_number($doc, $rect_path."[1]"));
+								            	//Log::info("2: ".$p->pcos_get_number($doc, $rect_path."[2]"));
+								            	//Log::info("y: ".$p->pcos_get_number($doc, $rect_path."[3]"));
+
+								            	$rectY=$pageHeight-(int)$p->pcos_get_number($doc, $rect_path."[3]");
+								                //Log::info("y: ".$rectY);
+								            
+								            	$rectHeight=$pageHeight-(int)$p->pcos_get_number($doc, $rect_path."[1]")-$rectY;
+								            	if($rectHeight<0)
+								            		$rectHeight*=-1;
+								            	//Log::info("rectHeight: ".$rectHeight);
+										         
+								            	$rectX=$p->pcos_get_number($doc, $rect_path."[0]");
+								            	$rectWidth=$p->pcos_get_number($doc, $rect_path."[2]")-$rectX;
+								            	//Log::info("rectWidth: ".$rectWidth);
+
+								                //Log::info("Page No: ".$cfp->No);
+
+								                $lastComponentNo = DB::table('PageComponent')
+																->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+																->where('StatusID', '=', eStatus::Active)
+																->order_by('No', 'DESC')
+																->take(1)
+																->only('No');
+
+												if($lastComponentNo==null)
+													$lastComponentNo=0;
+
+								                $linkAnnotPageComponent = new PageComponent();
+												$linkAnnotPageComponent->ContentFilePageID = $cfp->ContentFilePageID;
+												$linkAnnotPageComponent->ComponentID = 4;
+												$linkAnnotPageComponent->No = $lastComponentNo+1;
+												$linkAnnotPageComponent->StatusID = eStatus::Active;
+												$linkAnnotPageComponent->CreatorUserID = $currentUser->UserID;
+												$linkAnnotPageComponent->DateCreated = new DateTime();
+												$linkAnnotPageComponent->ProcessUserID = $currentUser->UserID;
+												$linkAnnotPageComponent->ProcessDate = new DateTime();
+												$linkAnnotPageComponent->ProcessTypeID = eProcessTypes::Insert;
+												$linkAnnotPageComponent->save();
+
+												//Weblink Component
+												for($j = 0; $j < 8; $j++)
+												{
+													$pcp = new PageComponentProperty();
+													$pcp->PageComponentID = $linkAnnotPageComponent->PageComponentID;
+													if($j==0)
+													{
+														$pcp->Name = "pcid";
+														$pcp->Value = "0";
+													}
+													elseif($j==1)
+													{
+														$pcp->Name = "type";
+														$pcp->Value = "1";
+													}
+													elseif($j==2)
+													{
+														$pcp->Name = "page";
+														$pcp->Value = $linkDest;
+													}
+													elseif($j==3)
+													{
+														$pcp->Name = "url";
+														$pcp->Value = "http://";
+													}
+													elseif($j==4)
+													{
+														$pcp->Name = "x";
+														$pcp->Value = $rectX;
+													}
+													elseif($j==5)
+													{
+														$pcp->Name = "y";
+														$pcp->Value = $rectY;
+													}
+													elseif($j==6)
+													{
+														$pcp->Name = "w";
+														$pcp->Value = $rectWidth;
+													}
+													elseif($j==7)
+													{
+														$pcp->Name = "h";
+														$pcp->Value = $rectHeight;
+													}
+
+													$pcp->StatusID = eStatus::Active;
+													$pcp->CreatorUserID = $currentUser->UserID;
+													$pcp->DateCreated = new DateTime();
+													$pcp->ProcessUserID = $currentUser->UserID;
+													$pcp->ProcessDate = new DateTime();
+													$pcp->ProcessTypeID = eProcessTypes::Insert;
+													$pcp->save();
+												}
+									        }
+						        		}
+
+						            }
+						        }
+						    }
+						    catch(Exception $e) {
+								//echo $e->getMessage();
+								//Log::info($oc->No.'-sm:0');
+								Log::info($e->getMessage());
+								//array_push($oldPagesSimilarity, 0);
+							}
+
+						//}
+
 						if($oldContentFileID > 0) {
 
 							$oldPagesSimilarity = array();
@@ -484,13 +835,20 @@ class Interactivity_Controller extends Base_Controller
 									->where('StatusID', '=', eStatus::Active)
 									->get();
 
+								$lastComponentNo = DB::table('PageComponent')
+									->where('ContentFilePageID', '=', $oldContentFilePageID)
+									->where('StatusID', '=', eStatus::Active)
+									->order_by('No', 'DESC')
+									->take(1)
+									->only('No');
+
 								foreach($oldComponents as $oldComponent)
 								{
 									//insert
 									$newPageComponent = new PageComponent();
 									$newPageComponent->ContentFilePageID = $cfp->ContentFilePageID;
 									$newPageComponent->ComponentID = $oldComponent->ComponentID;
-									$newPageComponent->No = $cfp->No;
+									$newPageComponent->No = $oldPageNo; //modified by hknsrr, no değerler, aynı oldğu zaman sayfadaki kompenentler sayfaya yapışıyordu...
 									$newPageComponent->StatusID = eStatus::Active;
 									$newPageComponent->CreatorUserID = $currentUser->UserID;
 									$newPageComponent->DateCreated = new DateTime();
@@ -519,6 +877,8 @@ class Interactivity_Controller extends Base_Controller
 										$newPageComponentProperty->ProcessTypeID = eProcessTypes::Insert;
 										$newPageComponentProperty->save();
 									}
+
+									$oldPageNo++;
 								}
 							}
 						}

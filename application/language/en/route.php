@@ -92,5 +92,8 @@ return array(
 	'website_contact' => 'contact',
 	'website_sitemap' => 'sitemap',
 	'website_search' => 'search',
-	'website_blog' => 'blog'
+	'website_blog' => 'blog',
+	'website_article_workflow' => 'blog/article-work-flow',
+	'website_article_brandvalue' => 'blog/article-brand-value',
+	'website_article_whymobile' => 'blog/article-why-mobile'
 );

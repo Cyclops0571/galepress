@@ -46,6 +46,7 @@
 				</li>
 				<li class="<?php echo (URI::current() === __("route.website_customers")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_customers')}}">{{__('website.page_customers')}}</a></li>
 				<li class="<?php echo (URI::current() === __("route.website_tutorials")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_tutorials')}}">{{__('website.page_tutorials')}}</a></li>
+				<li class="<?php echo (URI::current() === __("route.website_blog")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_blog')}}">Blog</a></li>
 				<li class="<?php echo (URI::current() === __("route.website_contact")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}">{{__('website.page_contact')}}</a></li>
 			</ul>
 		</nav>

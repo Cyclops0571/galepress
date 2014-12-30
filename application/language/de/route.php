@@ -92,5 +92,8 @@ return array(
 	'website_contact' => 'kontakt',
 	'website_sitemap' => 'sitemap',
 	'website_search' => 'suchen',
-	'website_blog' => 'blog'
+	'website_blog' => 'blog',
+	'website_article_workflow' => 'blog/article-work-flow',
+	'website_article_brandvalue' => 'blog/article-markenwert',
+	'website_article_whymobile' => 'blog/article-warum-mobile'
 );

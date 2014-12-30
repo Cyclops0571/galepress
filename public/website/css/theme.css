@@ -898,7 +898,7 @@ background:url(../img/de_icon.png) no-repeat;
 padding:0;
 }
 .lang{
-	list-style:none; width:95px; /*margin-top:7px;*/
+	list-style:none; width:95px; margin-top:7px;
 }
 .lang a{
 	float:left;

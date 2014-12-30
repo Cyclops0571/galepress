@@ -496,7 +496,9 @@ class UploadHandler
             preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
             $name .= '.'.$matches[1];
         }
-        return $name;
+        //return $name;
+        //edited by hknsrr;
+        return preg_replace('/\s+/', '', $name);
     }
 
     protected function get_file_name($name, $type, $index, $content_range) {

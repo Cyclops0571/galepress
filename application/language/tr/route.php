@@ -92,5 +92,8 @@ return array(
 	'website_contact' => 'iletisim',
 	'website_sitemap' => 'site-haritasi',
 	'website_search' => 'arama',
-	'website_blog' => 'blog'
+	'website_blog' => 'blog',
+	'website_article_workflow' => 'blog/makale-is-akisi',
+	'website_article_brandvalue' => 'blog/makale-marka-degeri',
+	'website_article_whymobile' => 'blog/makale-neden-mobil'
 );

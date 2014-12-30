@@ -87,14 +87,31 @@ class Ws
 			{
 				if($r->PublishDate === '0000-00-00 00:00:00' || $r->PublishDate <= date("Y-m-d H:i:s"))
 				{
-					array_push($contents, array(
-						'ContentID' => (int)$r->ContentID,
-						'ContentName' => $r->Name,
-						'ContentMonthlyName' => $r->MonthlyName,
-						'ContentBlocked' => ((int)$r->Blocked == 1 ? true : false),
-						'ContentStatus' => ((int)$r->Status == 1 ? true : false),
-						'ContentVersion' => (int)$r->Version
-					));	
+					///*** Edited by hknsrr
+					//Adem abinin isteği üzerine demo uygulamasındaki 1328 id'li içerik için Master dami bilgisi eklenmiştir.
+					if($r->ContentID != 1328)
+					{
+						array_push($contents, array(
+							'ContentID' => (int)$r->ContentID,
+							'ContentName' => $r->Name,
+							'ContentMonthlyName' => $r->MonthlyName,
+							'ContentBlocked' => ((int)$r->Blocked == 1 ? true : false),
+							'ContentStatus' => ((int)$r->Status == 1 ? true : false),
+							'ContentVersion' => (int)$r->Version
+						));	
+					}
+					else
+					{
+						array_push($contents, array(
+							'ContentID' => (int)$r->ContentID,
+							'ContentName' => $r->Name,
+							'ContentMonthlyName' => $r->MonthlyName,
+							'ContentBlocked' => ((int)$r->Blocked == 1 ? true : false),
+							'ContentStatus' => ((int)$r->Status == 1 ? true : false),
+							'ContentVersion' => (int)$r->Version,
+							'Master' => true
+						));	
+					}
 				}
 			}
 			return $contents;

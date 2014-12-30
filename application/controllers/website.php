@@ -58,4 +58,44 @@ class Website_Controller extends Base_Controller
 	{
 		return View::make('website.pages.blog');
 	}
+
+	public function get_article_workflow()
+	{
+		try
+		{
+			return View::make('website.pages.article-workflow');
+		}
+		catch(Exception $e)
+		{
+			//throw new Exception($e->getMessage());
+			return Redirect::to(__('route.website_blog'));
+		}
+		
+	}
+	public function get_article_brandvalue()
+	{
+		try
+		{
+			return View::make('website.pages.article-brandvalue');
+		}
+		catch(Exception $e)
+		{
+			//throw new Exception($e->getMessage());
+			return Redirect::to(__('route.website_blog'));
+		}
+		
+	}
+	public function get_article_whymobile()
+	{
+		try
+		{
+			return View::make('website.pages.article-whymobile');
+		}
+		catch(Exception $e)
+		{
+			//throw new Exception($e->getMessage());
+			return Redirect::to(__('route.website_blog'));
+		}
+		
+	}
 }
