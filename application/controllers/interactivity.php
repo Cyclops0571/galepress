@@ -357,7 +357,7 @@ class Interactivity_Controller extends Base_Controller
 					}
 				
 					$pageCount = (int)$p->pcos_get_number($doc, "length:pages");
-					
+					$bookmarksAdded = false;
 					for($i = 0; $i < $pageCount; $i++)
 					{
 						$width = (float)$p->pcos_get_number($doc, "pages[".$i."]/width");
