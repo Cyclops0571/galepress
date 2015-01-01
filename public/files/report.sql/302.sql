@@ -23,7 +23,7 @@ FROM (
 		FROM `Customer` cu 
 			INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 
 			INNER JOIN `Content` cn ON cn.`ApplicationID`=ap.`ApplicationID` AND cn.`StatusID`=1 
-			INNER JOIN `Log` rq ON rq.`ContentID`=cn.`ContentID` AND rq.`Url` LIKE '%?RequestTypeID=%' AND rq.`Date` BETWEEN '{SD}' AND '{ED}'
+			INNER JOIN `Log` rq ON rq.`ContentID`=cn.`ContentID` AND rq.`Url` LIKE '%?RequestTypeID=1001%' AND rq.`Date` BETWEEN '{SD}' AND '{ED}'
 		WHERE
 			cu.`CustomerID`=COALESCE({CUSTOMERID}, cu.`CustomerID`) AND 
 			ap.`ApplicationID`=COALESCE({APPLICATIONID}, ap.`ApplicationID`) AND 
