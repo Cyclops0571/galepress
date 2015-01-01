@@ -31,4 +31,5 @@ FROM (
 			cu.`StatusID`=1
 	) t
 ) y 
+WHERE `Device` IN ('iOS', 'Android')
 GROUP BY `Device`
