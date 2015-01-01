@@ -130,9 +130,9 @@ class Reports_Controller extends Base_Controller
 		}
 		else if((int)$id == 301) {
 			$report = '301';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "Date", "String", "Bit", "String", "Bit", "Bit", "Size", "Number", "Size");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentName", "ContentApproval", "ContentBlocked", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic");
+			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
+			$arrFieldType = array("String", "String", "String", "Date", "String", "Bit", "String", "Bit", "Bit", "Size", "Size");
+			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentName", "ContentApproval", "ContentBlocked", "AmountOfFileSize", "AmountOfTraffic");
 			$arrFieldCaption = __("common.reports_columns_report301")->get();
 			$sql = File::get(path('public').'files/report.sql/301.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);

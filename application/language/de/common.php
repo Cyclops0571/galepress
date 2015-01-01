@@ -333,7 +333,7 @@ return array(
 	'reports_graph' => 'Graphik für Geräteverwendung',
 	'reports_columns_report101' => array("Kundennummer", "Kundenbezeichnung", "Anzahl der Applikationen", "Anzahl der Blockierungen", "Anzahl der Inhalte", "Anzahl der bestätigten Inhalte ", " Anzahl der blockierten Inhalte ", "Größe der Datei (Byte)", "Summe der Downloads ", "Gesamtverkehr (Byte)"),
 	'reports_columns_report201' => array("Kundennummer", "Kundenbezeichnung", "Bezeichnung der Applikation", "SKT", "Applikationsstatus", "Blockierte Applikation", "Anzahl der Inhalte", "Anzahl der bestätigten Inhalte", "Anzahl der blockierten Inhalte", "Größe der Datei (Byte)", "Anzahl der Downloads", "Gesamtverkehr (Byte)"),
-	'reports_columns_report301' => array("Kundennummer", "Kundenbezeichnung", "Bezeichnung der Applikation", "SKT", "Applikationsstatus", "Blockierte Applikation", "Inhaltsbezeichnung", "Inhaltsbestätigung", "Blockierter Inhalt", "Größe der Datei (Byte)", "Anzahl der Downloads", "Gesamtverkehr (Byte)"),
+	'reports_columns_report301' => array("Kundennummer", "Kundenbezeichnung", "Bezeichnung der Applikation", "SKT", "Applikationsstatus", "Blockierte Applikation", "Inhaltsbezeichnung", "Inhaltsbestätigung", "Blockierter Inhalt", "Größe der Datei (Byte)", "Gesamtverkehr (Byte)"),
 	'reports_columns_report302' => array("Gerät", "Anzahl der Geräte"),
 	'reports_columns_report1101' => array("Kundennummer", "Kundenbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),
 	'reports_columns_report1201' => array("Kundennummer", "Kundenbezeichnung", "Applikationsbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),

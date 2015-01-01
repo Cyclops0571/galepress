@@ -329,7 +329,7 @@ return array(
 	'reports_graph' => 'Device usage graphic',
 	'reports_columns_report101' => array("Customer No", "Customer Name", "Application Count", "Blocked Application Count", "Content Count", "Approved Content Count", "Blocked Content Count", "Total File Size (Byte)", "Download Count", "Total Traffic (Byte)"),
 	'reports_columns_report201' => array("Customer No", "Customer Name", "Application Name", "Expiration Date", "Application Status", "Blocked Application", "Content Count", "Approved Content Count", "Blocked Content Count", "Total File Size (Byte)", "Download Count", "Total Traffic (Byte)"),
-	'reports_columns_report301' => array("Customer No", "Customer Name", "Application Name", "Expiration Date", "Application Status", "Blocked Application", "Content Name", "Approved Content", "Blocked Content", "Total File Size (Byte)", "Download Count", "Total Traffic (Byte)"),
+	'reports_columns_report301' => array("Customer No", "Customer Name", "Application Name", "Expiration Date", "Application Status", "Blocked Application", "Content Name", "Approved Content", "Blocked Content", "Total File Size (Byte)", "Total Traffic (Byte)"),
 	'reports_columns_report302' => array("Device", "Device Count"),
 	'reports_columns_report1101' => array("Customer No", "Customer Name", "Country", "City", "District", "Download Count"),
 	'reports_columns_report1201' => array("Customer No", "Customer Name", "Application Name", "Country", "City", "District", "Download Count"),
