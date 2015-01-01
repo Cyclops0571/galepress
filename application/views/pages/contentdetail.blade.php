@@ -16,6 +16,7 @@
 	$IsBuyable = 0;
 	$Price = 0;
 	$CurrencyID = 0;
+	$IsMaster = 0;
 	$Identifier = '';
 	$AutoDownload = 0;
 	$Approval = 0;
@@ -43,6 +44,7 @@
 		//$Price = (float)$row->Price;
 		$Price = number_format((float)$row->Price, 2, '.', '');
 		$CurrencyID = (int)$row->CurrencyID;
+		$IsMaster = (int)$row->IsMaster;
 		$Identifier = $row->Identifier;
 		$AutoDownload = (int)$row->AutoDownload;
 		$Approval = (int)$row->Approval;
@@ -503,7 +505,20 @@
 		                <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_identifier') }}"><span class="icon-info-sign"></span></a></div>
 		           	</div>
    				</div>
-			</div>  
+			</div>
+			<div class="block">
+	            <div class="content controls" style="overflow:visible">
+	                <div class="form-row">
+	                    <div class="col-md-3">{{ __('common.contents_ismaster') }}</div>
+	                    <div class="col-md-8">
+	                        <div class="checkbox-inline">
+	                           <input type="checkbox" name="IsMaster" id="IsMaster" value="1"{{ ((int)$IsMaster == 1 ? ' checked="checked"' : '') }} />
+	                       	</div>                             
+	                   </div>
+	                    <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_ismaster') }}"><span class="icon-info-sign"></span></a></div>
+	               	</div>
+   				</div>
+			</div>
 			<div class="block disabledFields">
 			    <div class="content controls" style="overflow:visible">
 			        <div class="form-row">

@@ -30,7 +30,7 @@ class Ws_v101_Contents_Controller extends Base_Controller
 			$application = Ws::getApplication($content->ApplicationID);
 			$customer = Ws::getCustomer($application->CustomerID);
 			$categories = Ws::getContentCategories($contentID);
-			$get_detailArray = array(
+			return Response::json(array(
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
@@ -43,25 +43,14 @@ class Ws_v101_Contents_Controller extends Base_Controller
 				'ContentPrice' => $content->Price,
 				'ContentCurrency' => $content->Currency(1),
 				'ContentIdentifier' => $content->Identifier,
+				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),
 				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),
 				'ContentBlocked' => ((int)$content->Blocked == 1 ? true : false),
 				'ContentStatus' => ((int)$content->Status == 1 ? true : false),
 				'ContentVersion' => (int)$content->Version,
 				'ContentPdfVersion' => (1000 + ($content->PdfVersion === null ? 1 : (int)$content->PdfVersion)),
 				'ContentCoverImageVersion' => (1000 + ($content->CoverImageVersion === null ? 1 : (int)$content->CoverImageVersion))
-			);
-
-			///*** Edited by hknsrr
-			//Adem abinin isteği üzerine demo uygulamasındaki 1328 id'li içerik için Master dami bilgisi eklenmiştir.
-			if($contentID!=1328)
-			{
-				return Response::json($get_detailArray);
-			}
-			else
-			{
-				$get_detailArray=array_merge($get_detailArray, array('Master' => true));
-				return Response::json($get_detailArray);
-			}
+			));
 			/*
 			$arr = array(
 				'status' => 0,

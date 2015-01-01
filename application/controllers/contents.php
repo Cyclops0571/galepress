@@ -431,6 +431,7 @@ class Contents_Controller extends Base_Controller
 							(float)$current->Price != (float)Input::get('Price') || 
 							(int)$current->CurrencyID != (int)Input::get('CurrencyID') ||
 							$current->Identifier != Input::get('Identifier') ||
+							(int)$current->IsMaster != (int)Input::get('IsMaster') || 
 							(int)$current->AutoDownload != (int)Input::get('AutoDownload') ||
 							//(int)$current->Approval != (int)Input::get('Approval') ||
 							(int)$current->Blocked != (int)Input::get('Blocked') || 
@@ -473,6 +474,21 @@ class Contents_Controller extends Base_Controller
 					$s->Price = (float)Input::get('Price');
 					$s->CurrencyID = (int)Input::get('CurrencyID');
 					$s->Identifier = Input::get('Identifier');
+					$s->IsMaster = (int)Input::get('IsMaster');
+
+					if ((int)$s->IsMaster == 1) {
+						$contents = DB::table('Content')->where('ApplicationID', '=', $applicationID)->get();
+						foreach ($contents as $content) {
+							$a = Content::find($content->ContentID);
+							$a->IsMaster = 0;
+							$a->Version = (int)$a->Version + 1;
+							$a->ProcessUserID = $currentUser->UserID;
+							$a->ProcessDate = new DateTime();
+							$a->ProcessTypeID = eProcessTypes::Update;
+							$a->save();
+						}
+					}
+
 					$s->AutoDownload = (int)Input::get('AutoDownload');
 					if((int)$currentUser->UserTypeID == eUserTypes::Manager) 
 					{

@@ -26,6 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, host: 81, guest: 81
   config.vm.network :forwarded_port, host: 3000, guest: 3000
   config.vm.network :forwarded_port, host: 3001, guest: 3001
+  config.vm.network :forwarded_port, host: 3306, guest: 3306
   config.vm.network :forwarded_port, host: 9000, guest: 9000
   config.vm.network :forwarded_port, host: 9001, guest: 9001
   config.vm.network :forwarded_port, guest: 27017, host: 27017
