@@ -147,7 +147,7 @@ class Reports_Controller extends Base_Controller
 			$report = '302';
 			$arrColumnWidth = array("100px", "100px");
 			$arrFieldType = array("String", "Number");
-			$arrFieldName = array("Device", "DeviceCount");
+			$arrFieldName = array("Device", "DownloadCount");
 			$arrFieldCaption = __("common.reports_columns_report302")->get();
 			$sql = File::get(path('public').'files/report.sql/302.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);

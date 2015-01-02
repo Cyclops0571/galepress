@@ -57,7 +57,7 @@
                                 @endfor
                                 </tr>
                                 @if($report == "302")
-                                    <?php $arrReport302 = $arrReport302.", ['".$row["Device"]."', ".$row["DeviceCount"]."]"; ?>
+                                    <?php $arrReport302 = $arrReport302.", ['".$row["Device"]."', ".$row["DownloadCount"]."]"; ?>
                                 @endif
                             @empty
                                 <tr>

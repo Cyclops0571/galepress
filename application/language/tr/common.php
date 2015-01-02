@@ -333,7 +333,7 @@ return array(
 	'reports_columns_report101' => array("Müşteri No", "Müşteri Adı", "Uygulama Adeti", "Bloke Uygulama Adeti", "İçerik Adeti", "Onaylanmış İçerik Adeti", "Bloke İçerik Adeti", "Toplam Dosya Boyutu (Byte)", "İndirilme Adeti", "Toplam Trafik (Byte)"),
 	'reports_columns_report201' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "SKT", "Uygulama Durumu", "Uygulama Bloke", "İçerik Adeti", "Onaylanmış İçerik Adeti", "Bloke İçerik Adeti", "Toplam Dosya Boyutu (Byte)", "İndirilme Adeti", "Toplam Trafik (Byte)"),
 	'reports_columns_report301' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "SKT", "Uygulama Durumu", "Uygulama Bloke", "İçerik Adı", "İçerik Onay", "İçerik Bloke", "Toplam Dosya Boyutu (Byte)", "Toplam Trafik (Byte)"),
-	'reports_columns_report302' => array("Cihaz", "Cihaz Adeti"),
+	'reports_columns_report302' => array("Cihaz", "İndirilme Adeti"),
 	'reports_columns_report1101' => array("Müşteri No", "Müşteri Adı", "Ülke", "Şehir", "İlçe", "İndirilme Adeti"),
 	'reports_columns_report1201' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "Ülke", "Şehir", "İlçe", "İndirilme Adeti"),
 	'reports_columns_report1301' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "İndirilme Adeti"),

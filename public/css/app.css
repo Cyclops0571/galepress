@@ -1483,6 +1483,18 @@ div.colorPicker-palette {
   right: 38px !important;
 }
 
+@-moz-document url-prefix() { 
+  div.colorPicker-palette {
+    width: 110px;
+    position: absolute;
+    border: 1px solid #272727;
+    background-color: #171717;
+    padding: 2px;
+    z-index: 9999;
+    right: 38px !important;
+  }
+}
+
 /* line 27, ../sass/modules/colorpicker.scss */
 div.colorPicker_hexWrap {
   width: 100%;

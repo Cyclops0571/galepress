@@ -29,7 +29,6 @@ class PushNotification_Task {
 					->take(1000)
 					->get(array('c.CustomerID', 'a.ApplicationID', 'a.NotificationText', 'a.CkPem', 'p.PushNotificationID', 'p.DeviceToken', 'p.DeviceType'));
 				
-			$unisacDevice=0;
 			foreach($pn as $n)
 			{
 				try
@@ -41,19 +40,6 @@ class PushNotification_Task {
 					
 						// Put your device token here (without spaces):
 						$deviceToken = $n->DeviceToken;
-
-						if($n->ApplicationID == 117)
-						{
-							if($unisacDevice==0)
-							{
-								$deviceToken="2601df4ff3e8b2805ea15c83e235ae6bea1be9da1eadd2bee18bf33022f999d1";
-								$unisacDevice++;
-							}
-							else
-							{
-								$deviceToken="test_gonderme_2601df4ff3e8b2805ea15c83e235ae6bea1be9da1eadd2bee18bf33022f999d1";
-							}
-						}
 						
 						// Put your private key's passphrase here:
 						$passphrase = Config::get('custom.passphrase');
@@ -120,26 +106,43 @@ class PushNotification_Task {
 						//$googleAPIKey = 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY';
 						$googleAPIKey = Config::get('custom.google_api_key');
 
-						if($n->ApplicationID == 117)
-						{
-							$googleAPIKey = "test_gonderme_AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY"
-							$deviceToken="test_gonderme_2601df4ff3e8b2805ea15c83e235ae6bea1be9da1eadd2bee18bf33022f999d1";
-						}
-
-						$data = array(
-							'headers' => array(
-								'Authorization: key='.$googleAPIKey,
-								'Content-Type: application/json'
-							),
-							'fields' => array(
-								'registration_ids' => array(
-									$n->DeviceToken
+						// if($n->ApplicationID == 117)
+						// {
+						// 	Log::info('unisac uygulamasina gonderiliyor...')
+						// 	$data = array(
+						// 		'headers' => array(
+						// 			'Authorization: key='.$googleAPIKey,
+						// 			'Content-Type: application/json'
+						// 		),
+						// 		'fields' => array(
+						// 			'registration_ids' => array(
+						// 				'APA91bExr94g-fLd8GbcuJvCyC9QT4nu2PQWDcP7tMVEiu3BE6QW8B8ABEF2RTVFmTDY2u298AZ-yw_IuKx7hpWXlbNdGDyBSQFuT_xHwx6k_-fQgh7YDYuHeuOyOV-BIFVbhJTY3hKbpOFW1IauORmNNDknbgajpw'
+						// 			),
+						// 			'data' => array(
+						// 				"message" => $n->NotificationText
+						// 			)
+						// 		)
+						// 	);
+						// }
+						//else
+						//{
+							//Log::info('diger uygulamalara gonderiliyor...')
+							$data = array(
+								'headers' => array(
+									'Authorization: key='.$googleAPIKey,
+									'Content-Type: application/json'
 								),
-								'data' => array(
-									"message" => $n->NotificationText
+								'fields' => array(
+									'registration_ids' => array(
+										$n->DeviceToken
+									),
+									'data' => array(
+										"message" => $n->NotificationText
+									)
 								)
-							)
-						);
+							);
+						//}
+
 						$ch = curl_init();
 						curl_setopt($ch, CURLOPT_URL, 'https://android.googleapis.com/gcm/send');
 						curl_setopt($ch, CURLOPT_POST, true);
