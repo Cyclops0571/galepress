@@ -18,9 +18,6 @@ FROM (
 		SELECT DATE_FORMAT(`Time`,'%Y-%m-%d') AS `Time`, COUNT(*) AS DownloadCount
 		FROM (
 			SELECT 
-				cu.`CustomerID`, cu.`CustomerNo`, cu.`CustomerName`, 
-				ap.`ApplicationID`, ap.`Name` AS `ApplicationName`, ap.`ExpirationDate`, ap.`ApplicationStatusID`, IFNULL(ap.`Blocked`, 0) AS `ApplicationBlocked`, 
-				cn.`ContentID`, cn.`Name` AS `ContentName`, IFNULL(cn.`Approval`, 0) AS `ContentApproval`, IFNULL(cn.`Blocked`, 0) AS `ContentBlocked`, 
 				st.`Time` 
 			FROM `Customer` cu 
 				INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 
@@ -41,9 +38,6 @@ UNION ALL
 SELECT 199 AS indx, CURRENT_DATE AS `Time`, COUNT(*) AS DownloadCount
 FROM (
 	SELECT
-		cu.`CustomerID`, cu.`CustomerNo`, cu.`CustomerName`, 
-		ap.`ApplicationID`, ap.`Name` AS `ApplicationName`, ap.`ExpirationDate`, ap.`ApplicationStatusID`, IFNULL(ap.`Blocked`, 0) AS `ApplicationBlocked`, 
-		cn.`ContentID`, cn.`Name` AS `ContentName`, IFNULL(cn.`Approval`, 0) AS `ContentApproval`, IFNULL(cn.`Blocked`, 0) AS `ContentBlocked`, 
 		st.`Time` 
 	FROM `Customer` cu 
 		INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 
@@ -62,9 +56,6 @@ UNION ALL
 SELECT 299 AS indx, CURRENT_DATE AS `Time`, COUNT(*) AS DownloadCount
 FROM (
 	SELECT
-		cu.`CustomerID`, cu.`CustomerNo`, cu.`CustomerName`, 
-		ap.`ApplicationID`, ap.`Name` AS `ApplicationName`, ap.`ExpirationDate`, ap.`ApplicationStatusID`, IFNULL(ap.`Blocked`, 0) AS `ApplicationBlocked`, 
-		cn.`ContentID`, cn.`Name` AS `ContentName`, IFNULL(cn.`Approval`, 0) AS `ContentApproval`, IFNULL(cn.`Blocked`, 0) AS `ContentBlocked`, 
 		st.`Time` 
 	FROM `Customer` cu 
 		INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 

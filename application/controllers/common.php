@@ -356,6 +356,106 @@ class Common_Controller extends Base_Controller
 			$columns[$i]=date('d', $add_day).' '.Common::monthName((int)date('m', $add_day));
 		}
 
+		$sql = File::get(path('public').'files/report.sql/Dashboard3.sql');
+		$sql = str_replace('{DATE}', $date, $sql);
+		$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? ''.$customerID : 'null'), $sql);
+		$sql = str_replace('{APPLICATIONID}', ($applicationID > 0 ? ''.$applicationID : 'null'), $sql);
+		$sql = str_replace('{CONTENTID}', ($contentID > 0 ? ''.$contentID : 'null'), $sql);
+		$devices = DB::table(DB::raw('('.$sql.') t'))->get();
+		$iosTotalDownload = 0;
+		$androidTotalDownload = 0;
+
+		$ios = array();
+
+		$ios[1] = '0';
+		$ios[2] = '0';
+		$ios[3] = '0';
+		$ios[4] = '0';
+		$ios[5] = '0';
+
+
+		$android = array();
+
+		$android[1] = '0';
+		$android[2] = '0';
+		$android[3] = '0';
+		$android[4] = '0';
+		$android[5] = '0';
+
+		$lastMonth=$devices[0]->Month;
+
+		$monthTotal=0;
+
+		$currentMonth=1;
+
+		foreach($devices as $d) {
+			if($d->Param5 == 'ios' || $d->Param5=='')
+			{
+				$iosTotalDownload += $d->DownloadCount;
+
+
+				if($lastMonth == $d->Month)
+				{
+					$monthTotal += $d->DownloadCount;
+					$ios[$currentMonth] = $monthTotal;
+				}
+
+				else
+				{
+					$lastMonth--;
+					$currentMonth++;
+					$monthTotal=0;
+					if($lastMonth==0)
+						$lastMonth=12;
+
+					$monthTotal += $d->DownloadCount;
+					$ios[$currentMonth] = $monthTotal;
+				}
+			}			
+		}
+
+		$lastMonth=$devices[0]->Month;
+
+		$monthTotal=0;
+
+		$currentMonth=1;
+
+		foreach($devices as $d) {
+			if($d->Param5 == 'android' || $d->Param5=='Android')
+			{
+				$androidTotalDownload += $d->DownloadCount;
+
+				if($lastMonth == $d->Month)
+				{
+					$monthTotal += $d->DownloadCount;
+					$android[$currentMonth] = $monthTotal;
+				}
+
+				else
+				{
+					$lastMonth--;
+					$currentMonth++;
+					$monthTotal=0;
+					if($lastMonth==0)
+						$lastMonth=12;
+
+					$monthTotal += $d->DownloadCount;
+					$android[$currentMonth] = $monthTotal;
+				}
+			}			
+		}
+
+		if(($iosTotalDownload + $androidTotalDownload)>0)
+		{
+			$iosTotalDownloadPerc = ($iosTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+			$androidTotalDownloadPerc = ($androidTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+		}
+		else
+		{
+			$iosTotalDownloadPerc = 0;
+			$androidTotalDownloadPerc = 0;
+		}
+
 		//$previousMonthsMaxData = ($previousMonthsMaxData == 0 ? 1 : $previousMonthsMaxData);
 		$data = array(
 			'customerID' => $customerID,
@@ -373,7 +473,14 @@ class Common_Controller extends Base_Controller
 			'appDetail' => $appDetail,
 			'previousMonths' => $previousMonths,
 			'previousMonthsMaxData' => $previousMonthsMaxData,
-			'columns' => implode('-', $columns)
+			'columns' => implode('-', $columns),
+			'iosTotalDownload' => $iosTotalDownload,
+			'androidTotalDownload' => $androidTotalDownload,
+			'iosTotalDownloadPerc' => $iosTotalDownloadPerc,
+			'androidTotalDownloadPerc' => $androidTotalDownloadPerc,
+			'iosDeviceDownload' => implode('-', $ios),
+			'androidDeviceDownload' => implode('-', $android)
+
 		);
 		return View::make('pages.home', $data);
 	}

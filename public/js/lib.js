@@ -365,6 +365,29 @@ $(document).ready(function() {
 
 	    });
 
+	    $("#dash_chart_2").bind("plothover", function (event, pos, item) {
+	        
+	        $("#x").text(pos.x.toFixed(2));
+	        $("#y").text(pos.y.toFixed(2));
+
+	        if (item) {
+	            if (previousPoint != item.dataIndex) {
+	                previousPoint = item.dataIndex;
+
+	                $(".ftooltip").remove();
+	                var x = item.datapoint[0].toFixed(2),
+	                    y = item.datapoint[1].toFixed(2);
+
+	                showTooltip(item.pageX, item.pageY,
+	                            item.series.label + ": " + y);
+	            }
+	        }else {
+	            $(".ftooltip").remove();
+	            previousPoint = null;            
+	        }
+
+	    });
+
 	    $({numberValue: $('#myKnob').val()}).animate({numberValue: parseInt($('#myKnob').attr("data-value"))}, {
 	        duration: 4000,
 	        easing: 'swing',
@@ -394,6 +417,180 @@ $(document).ready(function() {
 	                                      yaxis: {min: 0, max: (attrMaxData>0 ? attrMaxData : 100), tickDecimals:0 },
 	                                      legend: {show: false}});
 	    });
+
+	    // var data99  = [ [1, 23], [2, 11], [3, 14], [4, 23], [5, 27] ];
+	    // $.plot($("#dash_chart_2"), [{ 	data: data99, label: "Cihaz" }],{
+  			// 							series: {bars: { show: true }},
+					// 					grid: { hoverable: true, clickable: true},
+					// 					xaxis: {ticks: [[1,'Ocak'], [2,'Şubat'], [3,'Mart'], [4,'Nisan'], [5,'Mayıs']]},
+					// 					yaxis: {tickDecimals:0 },
+					// 					legend: {show: false}});
+
+
+		var attrDataIos = $("#dash_chart_2").attr("ios").split('-');
+		var attrDataAndroid = $("#dash_chart_2").attr("android").split('-');
+		var attrColumnsDevice = $("#dash_chart_2").attr("columns").split('-');
+	    var data98 = [[0, attrDataIos[4]],[1, attrDataIos[3]],[2, attrDataIos[2]],[3, attrDataIos[1]],[4, attrDataIos[0]]]; //IOS
+	    var data99 = [[0.2, attrDataAndroid[4]],[1.2, attrDataAndroid[3]],[2.2, attrDataAndroid[2]],[3.2, attrDataAndroid[1]],[4.2, attrDataAndroid[0]]]; //ANDROID
+        var dataset = [{ label: "iOS", data: data98, color: "#cecece" },{ label: "Android", data: data99, color: "#a4c739" }];
+        var ticks = [[0, attrColumnsDevice[4]], [1, attrColumnsDevice[3]], [2, attrColumnsDevice[2]], [3, attrColumnsDevice[1]],[4, attrColumnsDevice[0]]];
+ 
+        var options = {
+            series: {
+             bars: {
+                 show: true,
+                 barWidth: 0.3,
+                 align: 'center'
+             },
+         },
+            xaxis: {
+                axisLabel: "Cihaz",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial',
+                axisLabelPadding: 10,
+                ticks: ticks
+            },
+            yaxis: {
+                axisLabel: "İndirilme Adeti",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial',
+                axisLabelPadding: 3,
+                min: 0, 
+                tickDecimals:0
+            },
+            grid: {
+                hoverable: true,
+                borderWidth: 2
+            }
+        };
+ 
+        $.plot($("#dash_chart_2"), dataset, options);
+
+
+
+
+
+
+//      var data = [{
+//      "label": "iOS",
+//      "data": [[11, "17017"], [2, "77260"]]
+//  },
+//  {
+//      "label": "Android",
+//      "data": [[8, "96113"], [5, "33407"]]
+//  }
+// ];
+ 
+//      var options = {
+//          series: {
+//              bars: {
+//                  show: true,
+//                  barWidth: 6,
+//                  align: 'center'
+//              },
+//          },
+//          yaxes: {
+//              min: 0
+//          },
+//          xaxis: {
+//             axisLabel: "Cihaz",
+//           	axisLabelUseCanvas: true,
+//             axisLabelFontSizePixels: 12,
+//             axisLabelFontFamily: 'Verdana, Arial',
+//             axisLabelPadding: 10
+         
+//          }
+//      };
+ 
+
+//      $.plot($('#dash_chart_2'), data, options);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// var s1 = [200, 600, 250, 400, 550];
+		 //    var s2 = [460, 300, 350, 200, 100];
+		 //    // Can specify a custom tick Array.
+		 //    // Ticks should match up one for each y value (category) in the series.
+		 //    var ticks = ['May', 'June', 'July', 'August', 'September'];
+		     
+		 //    var plot3 = $.jqplot('dash_chart_2', [s1, s2], {
+		 //        // The "seriesDefaults" option is an options object that will
+		 //        // be applied to all series in the chart.
+		 //        seriesDefaults:{
+		 //            renderer:$.jqplot.BarRenderer,
+		 //            rendererOptions: {fillToZero: true}
+		 //        },
+		 //        // Show the legend and put it outside the grid, but inside the
+		 //        // plot container, shrinking the grid to accomodate the legend.
+		 //        // A value of "outside" would not shrink the grid and allow
+		 //        // the legend to overflow the container.
+		 //        legend: {
+		 //            show: true,
+		 //            placement: 'outsideGrid'
+		 //        },
+		 //        axes: {
+		 //            // Use a category axis on the x axis and use our custom ticks.
+		 //            xaxis: {
+		 //                renderer: $.jqplot.CategoryAxisRenderer,
+		 //                ticks: ticks
+		 //            },
+		 //            // Pad the y axis just a little so bars can get close to, but
+		 //            // not touch, the grid boundaries.  1.2 is the default padding.
+		 //            yaxis: {
+		 //                tickDecimals:0
+		 //            }
+		 //        }
+		 //    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	    //UYGULAMA DETAYI
 		var arrStart = $("#startDate").text().split('.');
