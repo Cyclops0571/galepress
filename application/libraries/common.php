@@ -499,7 +499,12 @@ class Common
 			
 			// open file stream
 			$fc = fopen($file, "r");
-			  
+
+
+			//http://stackoverflow.com/questions/1507985/php-determine-how-many-bytes-sent-over-http
+			//http://php.net/manual/en/function.ignore-user-abort.php
+			ignore_user_abort(true);
+
 			while(!feof($fc)) {
 				
 				// send the current file part to the browser
@@ -509,21 +514,23 @@ class Common
 		 
 				// flush the content to the browser
 				flush();
-				
-				//$dataTransferred = $dataTransferred + round($download_rate * 1024);
-				$dataTransferred = $dataTransferred + strlen($contents);
-				$percentage = ($dataTransferred * 100) / $fileSize;
-				
-				$r = Requestt::find($requestID);
-				$r->DataTransferred = $dataTransferred;
-				$r->Percentage = $percentage;
-				$r->ProcessUserID = 0;
-				$r->ProcessDate = new DateTime();
-				$r->ProcessTypeID = eProcessTypes::Update;
-				$r->save();
-				
+
+				if (!connection_aborted()) {
+					//$dataTransferred = $dataTransferred + round($download_rate * 1024);
+					$dataTransferred = $dataTransferred + strlen($contents);
+					$percentage = ($dataTransferred * 100) / $fileSize;
+					
+					$r = Requestt::find($requestID);
+					$r->DataTransferred = $dataTransferred;
+					$r->Percentage = $percentage;
+					$r->ProcessUserID = 0;
+					$r->ProcessDate = new DateTime();
+					$r->ProcessTypeID = eProcessTypes::Update;
+					$r->save();	
+				}
+
 				// sleep one second
-				//sleep(1);
+				sleep(1);
 			}
 			
 			// close file stream
