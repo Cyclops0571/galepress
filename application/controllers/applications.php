@@ -206,51 +206,80 @@ class Applications_Controller extends Base_Controller
 			}
 
 			$currentUser = Auth::User();
+			
+			DB::transaction(function() use ($currentUser, $id)
+			{
+				$customerID = 0;
+				$applicationID = 0;
 
-			//Update Application
-			$s = Application::find($id);
-			/*
-			if($id == 0)
-			{
-				$s->Version = 1;
-			}
-			else
-			{
-				if($hasModified)
-				{
-					$s->Version = (int)$s->Version + 1;	
+				$app = DB::table('Application')->where('ApplicationID', '=', (int)$id)->first();
+				if ($app) {
+					$customerID = (int)$app->CustomerID;
+					$applicationID = (int)$app->ApplicationID;
 				}
-			}
-			*/
-			$s->NotificationText = Input::get('NotificationText');
-			$s->ProcessUserID = $currentUser->UserID;
-			$s->ProcessDate = new DateTime();
-			$s->ProcessTypeID = eProcessTypes::Update;
-			$s->save();
 
-			//Insert
-			$deviceTokens = array();
-			$tokens = DB::table('Token')
-						->where('ApplicationID', '=', $id)
-						->raw_where('DeviceToken NOT IN (SELECT DeviceToken FROM `PushNotification` WHERE ApplicationID='.(int)$id.' AND Sent=0)')
-						->get();
-			foreach($tokens as $token)
-			{
-				if(!in_array($token->DeviceToken, $deviceTokens))
+				//Update Application
+				//$s = Application::find($id);
+				/*
+				if($id == 0)
 				{
-					//save to push notification
-					$p = new PushNotification();
-					$p->TokenID = $token->TokenID;
-					$p->CustomerID = $token->CustomerID;
-					$p->ApplicationID = $token->ApplicationID;
-					$p->ApplicationToken = $token->ApplicationToken;
-					$p->DeviceToken = $token->DeviceToken;
-					$p->DeviceType = $token->DeviceType;
-					$p->Sent = 0;
-					$p->save();
-					array_push($deviceTokens, $token->DeviceToken);
+					$s->Version = 1;
 				}
-			}
+				else
+				{
+					if($hasModified)
+					{
+						$s->Version = (int)$s->Version + 1;	
+					}
+				}
+				*/
+				//$s->NotificationText = Input::get('NotificationText');
+				//$s->ProcessUserID = $currentUser->UserID;
+				//$s->ProcessDate = new DateTime();
+				//$s->ProcessTypeID = eProcessTypes::Update;
+				//$s->save();
+
+				$s = new PushNotification();
+				$s->CustomerID = (int)$customerID;
+				$s->ApplicationID = (int)$applicationID;
+				$s->NotificationText = Input::get('NotificationText');
+				$s->StatusID = eStatus::Active;
+				$s->CreatorUserID = $currentUser->UserID;
+				$s->DateCreated = new DateTime();
+				$s->ProcessUserID = $currentUser->UserID;
+				$s->ProcessDate = new DateTime();
+				$s->ProcessTypeID = eProcessTypes::Insert;
+				$s->save();
+
+				//Insert
+				$deviceTokens = array();
+				$tokens = DB::table('Token')->where('ApplicationID', '=', (int)$applicationID)->get();
+				foreach($tokens as $token)
+				{
+					if(!in_array($token->DeviceToken, $deviceTokens))
+					{
+						//save to push notification
+						$p = new PushNotificationDevice();
+						$p->PushNotificationID = $s->PushNotificationID;
+						$p->TokenID = $token->TokenID;
+						$p->UDID = $token->UDID;
+						$p->ApplicationToken = $token->ApplicationToken;
+						$p->DeviceToken = $token->DeviceToken;
+						$p->DeviceType = $token->DeviceType;
+						$p->Sent = 0;
+						$p->ErrorCount = 0;
+						//$p->LastErrorDetail = '';
+						$p->StatusID = eStatus::Active;
+						$p->CreatorUserID = $currentUser->UserID;
+						$p->DateCreated = new DateTime();
+						$p->ProcessUserID = $currentUser->UserID;
+						$p->ProcessDate = new DateTime();
+						$p->ProcessTypeID = eProcessTypes::Insert;
+						$p->save();
+						array_push($deviceTokens, $token->DeviceToken);
+					}
+				}
+			});
 		}
 		catch (Exception $e)
 		{

@@ -16,18 +16,29 @@ class PushNotification_Task {
 					})
 					->join('PushNotification AS p', function($join)
 					{
+						$join->on('p.CustomerID', '=', 'c.CustomerID');
 						$join->on('p.ApplicationID', '=', 'a.ApplicationID');
-						$join->on('p.Sent', '=', DB::raw(0));
+						$join->on('p.StatusID', '=', DB::raw(eStatus::Active));
 					})
+					->join('PushNotificationDevice AS d', function($join)
+					{
+						$join->on('d.PushNotificationID', '=', 'p.PushNotificationID');
+						$join->on('d.Sent', '=', DB::raw(0));
+						$join->on('d.ErrorCount', '<', 2);
+						$join->on('d.StatusID', '=', DB::raw(eStatus::Active));
+					})
+					/*
 					->where(function($query)
 					{
-						$query->where_null('p.ErrorCount');
-						$query->or_where('p.ErrorCount', '<', 2);
+						$query->where_null('d.ErrorCount');
+						$query->or_where('d.ErrorCount', '<', 2);
 					})
+					*/
 					->where('c.StatusID', '=', eStatus::Active)
 					->order_by('p.PushNotificationID', 'DESC')
+					->order_by('d.PushNotificationDeviceID', 'DESC')
 					->take(1000)
-					->get(array('c.CustomerID', 'a.ApplicationID', 'a.NotificationText', 'a.CkPem', 'p.PushNotificationID', 'p.DeviceToken', 'p.DeviceType'));
+					->get(array('c.CustomerID', 'a.ApplicationID', 'a.CkPem', 'p.PushNotificationID', 'p.NotificationText', 'd.PushNotificationDeviceID', 'd.DeviceToken', 'd.DeviceType'));
 				
 			foreach($pn as $n)
 			{
@@ -81,13 +92,13 @@ class PushNotification_Task {
 							if ($result)
 							{
 								//echo 'Message successfully delivered' . PHP_EOL;
-								$c = PushNotification::find((int)$n->PushNotificationID);
+								$c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
 								$c->Sent = 1;
 								$c->save();
 							}
 							else
 							{
-								$c = PushNotification::find((int)$n->PushNotificationID);
+								$c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
 								$c->ErrorCount = (int)$c->ErrorCount + 1;
 								$c->LastErrorDetail = 'Message not delivered!';
 								$c->save();
@@ -159,13 +170,13 @@ class PushNotification_Task {
 						$json = json_decode($result, true);
 						if($json['success'] === 1)
 						{
-							$c = PushNotification::find((int)$n->PushNotificationID);
+							$c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
 							$c->Sent = 1;
 							$c->save();
 						}
 						else
 						{
-							$c = PushNotification::find((int)$n->PushNotificationID);
+							$c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
 							$c->ErrorCount = (int)$c->ErrorCount + 1;
 							$c->LastErrorDetail = 'Message not delivered!';
 							$c->save();
@@ -174,7 +185,7 @@ class PushNotification_Task {
 				}
 				catch (Exception $e)
 				{
-					$c = PushNotification::find((int)$n->PushNotificationID);
+					$c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
 					$c->ErrorCount = (int)$c->ErrorCount + 1;
 					$c->LastErrorDetail = $e->getMessage();
 					$c->save();

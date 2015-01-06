@@ -573,28 +573,6 @@ class Contents_Controller extends Base_Controller
 						$a->save();
 					}
 					
-					/*
-					if((int)Input::get('hdnFileSelected', 0) == 1)
-					{
-						$tokens = DB::table('Token')
-									->where('ApplicationID', '=', $applicationID)
-									->raw_where('DeviceToken NOT IN (SELECT DeviceToken FROM `PushNotification` WHERE ApplicationID='.(int)$applicationID.' AND Sent=0)')
-									->get();
-						foreach($tokens as $token)
-						{
-							//save to push notification
-							$p = new PushNotification();
-							$p->TokenID = $token->TokenID;
-							$p->CustomerID = $token->CustomerID;
-							$p->ApplicationID = $token->ApplicationID;
-							$p->ApplicationToken = $token->ApplicationToken;
-							$p->DeviceToken = $token->DeviceToken;
-							$p->Sent = 0;
-							$p->save();
-						}
-					}
-					*/
-					
 					$customerID = Application::find($applicationID)->CustomerID;
 					//$applicationID
 					$contentID = $s->ContentID;

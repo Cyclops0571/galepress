@@ -158,9 +158,10 @@ class Ws
 	// Save token
 	public static function saveToken($customerID, $applicationID) 
 	{
-		$deviceType = Input::get('deviceType', 'ios');
+		$UDID = Input::get('udid', '');
 		$applicationToken = Input::get('applicationToken', '');
 		$deviceToken = Input::get('deviceToken', '');
+		$deviceType = Input::get('deviceType', 'ios');
 
 		//if(strlen($applicationToken) > 0 && strlen($deviceToken) > 0)
 		if(strlen($deviceToken) > 0)
@@ -170,6 +171,7 @@ class Ws
 				$s = new Token();
 				$s->CustomerID = (int)$customerID;
 				$s->ApplicationID = (int)$applicationID;
+				$s->UDID = $UDID;
 				$s->ApplicationToken = $applicationToken;
 				$s->DeviceToken = $deviceToken;
 				$s->DeviceType = $deviceType;
