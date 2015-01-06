@@ -1,4 +1,4 @@
-SELECT t1.Year, t1.Month, IFNULL(t2.DownloadCount, 0) AS DownloadCount
+SELECT t1.Year, t1.Month, IFNULL(t2.DownloadCount, 0) AS DownloadCount, t2.Param5 AS Param5
 FROM (
 		SELECT YEAR(DATE_ADD('{DATE}', INTERVAL(-1) MONTH)) AS Year, MONTH(DATE_ADD('{DATE}', INTERVAL(-1) MONTH)) AS Month
 		UNION ALL
@@ -11,10 +11,10 @@ FROM (
 		SELECT YEAR(DATE_ADD('{DATE}', INTERVAL(-5) MONTH)) AS Year, MONTH(DATE_ADD('{DATE}', INTERVAL(-5) MONTH)) AS Month
 	) t1
 	LEFT JOIN (
-		SELECT YEAR(`Time`) AS Year, MONTH(`Time`) AS Month, COUNT(*) AS DownloadCount
+		SELECT YEAR(`Time`) AS Year, MONTH(`Time`) AS Month, `Param5`, COUNT(*) AS DownloadCount
 		FROM (
 			SELECT 
-				st.`Time` 
+				st.`Time`, st.`Param5`
 			FROM `Customer` cu 
 				INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 
 				INNER JOIN `Content` cn ON cn.`ApplicationID`=ap.`ApplicationID` AND cn.`StatusID`=1 
@@ -27,6 +27,6 @@ FROM (
 				cn.`ContentID`=COALESCE({CONTENTID}, cn.`ContentID`) AND 
 				cu.`StatusID`=1
 		) t
-		GROUP BY YEAR(`Time`), MONTH(`Time`)
-) t2 ON t1.Year=t2.Year AND t1.Month=t2.Month
+		GROUP BY YEAR(`Time`), MONTH(`Time`), `Param5`
+	) t2 ON t1.Year=t2.Year AND t1.Month=t2.Month
 ORDER BY Year DESC, Month DESC

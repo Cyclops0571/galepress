@@ -5,79 +5,128 @@
 <div class="container" id="dashboard">     
     <div class="row">              
         <div class="col-md-9">
-            <div class="block block-drop-shadow">
-                <div class="head bg-default bg-light-ltr">
-                    <h2>{{ __('common.dashboard_title') }}</h2>
-                    <span class="hp-info pull-right">
-                    {{Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date"))}}
-                    </span>              
-                    <div class="head-panel nm">
-                        <div class="left_abs_100 reportSubtitle" style="margin-top: 70px; text-align:center; font-size: 11px;">
-                            {{ __('common.dashboard_yesterday') }}
-                        </div>
-                        <div class="left_abs_100" style="margin-top: 20px; text-align:center;">
-                            <div class="knob">
-                                <input id="myKnob" type="text" data-fgColor="#FFFFFF" data-min="0" data-value="{{ $downloadTodayTotalData }}" data-max="{{ $downloadTodayTotalData }}" data-width="100" data-height="100" data-readOnly="true"/>
-                            </div> 
-                        </div>
-                        <br/>
-                        <div class="chart" id="dash_chart_1" data="{{ $downloadStatistics }}" maxdata="{{ $downloadMaxData }}" columns="{{ $columns }}" style="height: 165px; padding:1px !important; position: static !important;"></div>
-                    </div>
-                    <div class="head-panel nm">
-                        <div class="hp-info pull-left">
-                            <div class="hp-icon">
-                                <span class="icon-download-alt"></span>
+            <div class="col-md-12">
+                <div class="block block-drop-shadow">
+                    <div class="head bg-default bg-light-ltr">
+                        <h2>{{ __('common.dashboard_title') }}</h2>
+                        <span class="hp-info pull-right">
+                        {{Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date"))}}
+                        </span>              
+                        <div class="head-panel nm">
+                            <div class="left_abs_100 reportSubtitle" style="margin-top: 70px; text-align:center; font-size: 11px;">
+                                {{ __('common.dashboard_yesterday') }}
                             </div>
-                            <span class="hp-main" id="myKnobText">&nbsp;{{ $downloadTotalData }}</span>
-                            <span class="hp-sm">&nbsp; {{ __('common.dashboard_weekly_total') }}</span>
-                        </div>                                                       
-                        <div class="hp-info pull-right">
-                            <div class="hp-icon">
-                                <span class="icon-cloud-download"></span>
-                            </div>                                                 
-                            <span class="hp-main">&nbsp;{{ $downloadMonthTotalData }}</span>
-                            <span class="hp-sm">&nbsp;{{ Common::monthName((int)date('m')).' '.date('Y') }}</span>
-                        </div>                            
+                            <div class="left_abs_100" style="margin-top: 20px; text-align:center;">
+                                <div class="knob">
+                                    <input id="myKnob" type="text" data-fgColor="#FFFFFF" data-min="0" data-value="{{ $downloadTodayTotalData }}" data-max="{{ $downloadTodayTotalData }}" data-width="100" data-height="100" data-readOnly="true"/>
+                                </div> 
+                            </div>
+                            <br/>
+                            <div class="chart" id="dash_chart_1" data="{{ $downloadStatistics }}" maxdata="{{ $downloadMaxData }}" columns="{{ $columns }}" style="height: 165px; padding:1px !important; position: static !important;"></div>
+                        </div>
+                        <div class="head-panel nm">
+                            <div class="hp-info pull-left">
+                                <div class="hp-icon">
+                                    <span class="icon-download-alt"></span>
+                                </div>
+                                <span class="hp-main" id="myKnobText">&nbsp;{{ $downloadTotalData }}</span>
+                                <span class="hp-sm">&nbsp; {{ __('common.dashboard_weekly_total') }}</span>
+                            </div>                                                       
+                            <div class="hp-info pull-right">
+                                <div class="hp-icon">
+                                    <span class="icon-cloud-download"></span>
+                                </div>                                                 
+                                <span class="hp-main">&nbsp;{{ $downloadMonthTotalData }}</span>
+                                <span class="hp-sm">&nbsp;{{ Common::monthName((int)date('m')).' '.date('Y') }}</span>
+                            </div>                            
+                        </div>
                     </div>
                 </div>
-            </div> 
-            <div class="block block-drop-shadow">
-                <div class="content list">
-                    <div class="list-title">{{ __('common.dashboard_previous_months') }}</div>
-                    @foreach ($previousMonths as $month)
-                    <div class="list-item">
-                        <div class="list-text">
-                            <div class="col-md-11">
-                                <strong>{{ $month->Year }} {{ Common::monthName($month->Month) }}</strong>
-                                <span class="monthlyPer">{{$month->DownloadCount}} / {{ $previousMonthsMaxData }}</span>
-                                <div class="progress progress-small">
-                                    <div class="progress-bar progress-bar-info previous-month" role="progressbar" aria-valuemin="0" aria-value="{{ (int)((int)$month->DownloadCount * 100 / ($previousMonthsMaxData == 0 ? 1 : $previousMonthsMaxData)) }}" aria-valuemax="100"></div>
+            </div>
+            <div class="col-md-7">
+                <div class="block block-drop-shadow">
+                    <div class="head bg-dot30">
+                        <h2>{{ __('common.reports_graph') }}</h2>                  
+                        <div class="head-panel nm">                            
+                            <div class="chart" id="dash_chart_2" ios='{{$iosDeviceDownload}}' android='{{$androidDeviceDownload}}' columns='<?php foreach ($previousMonths as $month) { echo Common::monthName($month->Month)." ".$month->Year."-"; } ?>' style="height: 150px;"></div>
+                        </div>                        
+                    </div>                                        
+                    
+                    <div class="head bg-dot30">                      
+                        <div class="head-panel nm">                            
+                            <div class="hp-info pull-left">
+                                <div class="hp-icon">
+                                    <span class="icon-globe"></span>
+                                </div>                                
+                                <span class="hp-main"><?php $devicesTotalDownload=0; foreach ($previousMonths as $month){$devicesTotalDownload+=$month->DownloadCount;} echo $devicesTotalDownload;?></span>
+                                <span class="hp-sm">{{ __('common.dashboard_total') }}</span>
+                            </div>                                                        
+                            <div class="hp-info pull-left">
+                                <div class="hp-icon">
+                                    <span class="icon-apple"></span>
+                                </div>                                
+                                <span class="hp-main" style="margin-left: 35px;">{{$iosTotalDownload}}</span>
+                                <span class="hp-sm" style="margin-left: 35px;">iOS</span>
+                            </div>                            
+                            <div class="hp-info pull-left">
+                                <div class="hp-icon">
+                                    <span class="icon-android"></span>
+                                </div>                                
+                                <span class="hp-main" style="margin-left: 35px;">{{$androidTotalDownload}}</span>
+                                <span class="hp-sm" style="margin-left: 35px;">Android</span>
+                            </div> 
+                                                                                   
+                        </div>                        
+                    </div>                    
+                    
+                    <div class="head bg-dot30">
+                        <h2 style="text-transform:none;">{{ __('common.reports_graph_ratio') }}</h2>                
+                        <div class="head-panel nm">                            
+                            <div class="progress">                                
+                                <div class="progress-bar progress-bar-success tip" title="iOS" style="width: {{$iosTotalDownloadPerc}}%; background:#cecece"><span style="color:black !important;"><?php echo round($iosTotalDownloadPerc, 2)."%" ?></span></div>
+                                <div class="progress-bar progress-bar-info tip" title="Android" style="width: {{$androidTotalDownloadPerc}}%; background:#a4c739"><span style="color:black;"><?php echo round($androidTotalDownloadPerc, 2)."%" ?></span></div>
+                            </div>                            
+                        </div>                        
+                    </div>                                    
+                    
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="block block-drop-shadow">
+                    <div class="content list">
+                        <div class="list-title">{{ __('common.dashboard_previous_months') }}</div>
+                        @foreach ($previousMonths as $month)
+                        <div class="list-item">
+                            <div class="list-text">
+                                <div class="col-md-10">
+                                    <strong>{{ $month->Year }} {{ Common::monthName($month->Month) }}</strong>
+                                    <span class="monthlyPer">{{$month->DownloadCount}} / {{ $previousMonthsMaxData }}</span><span class="icon-cloud-download"></span>
+                                    <div class="progress progress-small">
+                                        <div class="progress-bar progress-bar-info previous-month" role="progressbar" aria-valuemin="0" aria-value="{{ (int)((int)$month->DownloadCount * 100 / ($previousMonthsMaxData == 0 ? 1 : $previousMonthsMaxData)) }}" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="head-panel nm">
-                                    <div class="hp-info pull-right monthlyDown">
-                                        <div class="hp-icon">
-                                            <span class="icon-cloud-download"></span>
-                                        </div>                                                 
-                                        <span class="hp-main">&nbsp;{{ $month->DownloadCount }}</span>                                
-                                        <span class="hp-sm">&nbsp;{{ __('common.dashboard_total') }}</span>                                
+                                <div class="col-md-2">
+                                    <div class="head-panel nm">
+                                        <div class="hp-info monthlyDown tac">                                    
+                                            <span>{{ __('common.dashboard_total') }}</span>   
+                                            <span>{{ $month->DownloadCount }}</span>                          
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
-                    <div class="footer footer-defaut tac hide">
-                        <div class="pull-left" style="width: 200px;">
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                                <input type="text" class="datepicker form-control" value="10/08/2013"/>
-                                <div class="input-group-btn"><button class="btn" style="line-height:27px;"><span class="icon-search"></span></button></div>
-                            </div>                                                        
-                        </div>
-                        <div class="pull-right">
-                            <a href="#" id="monthHideBtn"><span id="monthHideIcon" class="icon-chevron-up"></span></a>
+                        @endforeach
+                        <div class="footer footer-defaut tac hide">
+                            <div class="pull-left" style="width: 200px;">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar"></span></div>
+                                    <input type="text" class="datepicker form-control" value="10/08/2013"/>
+                                    <div class="input-group-btn"><button class="btn" style="line-height:27px;"><span class="icon-search"></span></button></div>
+                                </div>                                                        
+                            </div>
+                            <div class="pull-right">
+                                <a href="#" id="monthHideBtn"><span id="monthHideIcon" class="icon-chevron-up"></span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -147,7 +196,7 @@
                         </div>
                     </div>
                 </div>                  
-            </div>             
+            </div>     
         </div>
         <div class="col-md-3">
             <div class="block bg-light" id="my-info-block">

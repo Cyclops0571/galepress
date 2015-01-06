@@ -9,11 +9,10 @@ SELECT
 	COUNT(*) AS `DownloadCount`
 FROM (
 	SELECT 
-		cu.`CustomerID`, cu.`CustomerNo`, cu.`CustomerName`, cu.`DateCreated`,
-		ap.`ApplicationID`, ap.`Name` AS `ApplicationName`, ap.`ExpirationDate`, (SELECT `DisplayName` FROM `GroupCodeLanguage` WHERE `GroupCodeID`=ap.`ApplicationStatusID` AND `LanguageID`=1) AS `ApplicationStatusName`, IFNULL(ap.`Blocked`, 0) AS `ApplicationBlocked`, 
-		cn.`ContentID`, cn.`Name` AS `ContentName`, IFNULL(cn.`Approval`, 0) AS `ContentApproval`, IFNULL(cn.`Blocked`, 0) AS `ContentBlocked`, cn.`TotalFileSize` AS `AmountOfFileSize`,
-		IFNULL(st.`Country`, '') AS `Country`, IFNULL(st.`City`, '') AS `City`, IFNULL(st.`District`, '') AS `District`, IFNULL(st.`Quarter`, '') AS `Quarter`, IFNULL(st.`Avenue`, '') AS `Avenue`, IFNULL(st.`Lat`, '') AS `Lat`, IFNULL(st.`Long`, '') AS `Long`
-		
+		cu.`CustomerNo`, cu.`CustomerName`,
+		ap.`Name` AS `ApplicationName`,
+		cn.`Name` AS `ContentName`,
+		IFNULL(st.`Country`, '') AS `Country`, IFNULL(st.`City`, '') AS `City`, IFNULL(st.`District`, '') AS `District`
 	FROM `Customer` cu 
 		INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 
 		INNER JOIN `Content` cn ON cn.`ApplicationID`=ap.`ApplicationID` AND cn.`StatusID`=1 
@@ -25,3 +24,15 @@ FROM (
 		cu.`StatusID`=1
 ) t 
 GROUP BY `CustomerNo`, `CustomerName`, `ApplicationName`, `ContentName`, `Country`, `City`, `District`
+
+/*
+SELECT c.CustomerNo, c.CustomerName, a.Name,co.Name, s.Country, s.City, s.District, count(*) as 'DownloadCount' 
+FROM db.Statistic s inner join Customer c on s.CustomerID=c.CustomerID inner join Application a on a.CustomerID=c.CustomerID inner join Content co on a.ApplicationID=co.ApplicationID and s.ContentID=co.ContentID
+where s.Type=10 and 
+c.CustomerID=60 AND 
+a.ApplicationID=58 AND 
+s.ContentID=1436 AND 
+c.`StatusID`=1 and
+s.Time BETWEEN '2015-01-01' AND '2015-02-31' 
+Group By c.CustomerNo, c.CustomerName, a.Name,co.Name, s.Country, s.City, s.District;
+*/

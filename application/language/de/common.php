@@ -333,6 +333,7 @@ return array(
 	'reports_device' => 'Gerät',
 	'reports_usage' => 'Summe der Verwendung',
 	'reports_graph' => 'Graphik für Geräteverwendung',
+	'reports_graph_ratio' => 'Geräteverwendung Verhältnis',
 	'reports_columns_report101' => array("Kundennummer", "Kundenbezeichnung", "Anzahl der Applikationen", "Anzahl der Blockierungen", "Anzahl der Inhalte", "Anzahl der bestätigten Inhalte ", " Anzahl der blockierten Inhalte ", "Größe der Datei (Byte)", "Summe der Downloads ", "Gesamtverkehr (Byte)"),
 	'reports_columns_report201' => array("Kundennummer", "Kundenbezeichnung", "Bezeichnung der Applikation", "SKT", "Applikationsstatus", "Blockierte Applikation", "Anzahl der Inhalte", "Anzahl der bestätigten Inhalte", "Anzahl der blockierten Inhalte", "Größe der Datei (Byte)", "Anzahl der Downloads", "Gesamtverkehr (Byte)"),
 	'reports_columns_report301' => array("Kundennummer", "Kundenbezeichnung", "Bezeichnung der Applikation", "SKT", "Applikationsstatus", "Blockierte Applikation", "Inhaltsbezeichnung", "Inhaltsbestätigung", "Blockierter Inhalt", "Größe der Datei (Byte)", "Gesamtverkehr (Byte)"),
@@ -359,7 +360,7 @@ return array(
 						"Galepress",
 	
 	'dashboard_title' => 'ANZAHL DER DOWNLOADS',
-	'dashboard_total' => 'Insgesamt',
+	'dashboard_total' => 'Gesamt',
 	'dashboard_welcome' => 'Willkommen',
 	'dashboard_lastlogin_time' => 'Uhrzeit desletzten Einloggens:',
 	'dashboard_app_count' => 'Anzahl der Applikationen',
