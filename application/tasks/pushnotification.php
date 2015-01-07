@@ -24,7 +24,7 @@ class PushNotification_Task {
 					{
 						$join->on('d.PushNotificationID', '=', 'p.PushNotificationID');
 						$join->on('d.Sent', '=', DB::raw(0));
-						$join->on('d.ErrorCount', '<', 2);
+						$join->on('d.ErrorCount', '<', DB::raw(2));
 						$join->on('d.StatusID', '=', DB::raw(eStatus::Active));
 					})
 					/*
