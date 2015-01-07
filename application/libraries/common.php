@@ -530,7 +530,7 @@ class Common
 				}
 
 				// sleep one second
-				sleep(1);
+				//sleep(1);
 			}
 			
 			// close file stream
