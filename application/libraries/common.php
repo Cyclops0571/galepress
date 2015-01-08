@@ -18,11 +18,9 @@ class Common
 		return 0;
 	}
 	
-	
 	public static function xmlEscape($string) {
 		return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
 	}
-	
 
 	public static function CheckCategoryOwnership($categoryID)
 	{
@@ -487,12 +485,16 @@ class Common
 			
 			// set the download rate limit (=> 200,0 kb/s)
 			$download_rate = 200.0;
+			$download_rate = 1.0;
 			
 			// send headers
 			header('Cache-control: private');
-			header('Content-Type: application/octet-stream'); 
+			//header('Content-Type: application/octet-stream');
+			//header('Pragma: no-cache');  
+			//header("Content-Transfer-Encoding: binary"); 
+			header("Content-type: application/x-download");
 			header('Content-Length: '.$fileSize);
-			header('Content-Disposition: filename='.str_replace(" ", "_", $filename)); //dosya isminde bosluk varsa problem oluyor!!!
+			header('Content-Disposition: attachment; filename="'.str_replace(" ", "_", $filename).'"'); //dosya isminde bosluk varsa problem oluyor!!!
 			
 			// flush content
 			flush();
@@ -503,21 +505,19 @@ class Common
 
 			//http://stackoverflow.com/questions/1507985/php-determine-how-many-bytes-sent-over-http
 			//http://php.net/manual/en/function.ignore-user-abort.php
-			ignore_user_abort(true);
+			//http://php.net/manual/en/function.http-send-file.php
+			//http://stackoverflow.com/questions/737045/send-a-file-to-client
+			//ignore_user_abort(true);
 
 			while(!feof($fc)) {
 				
 				// send the current file part to the browser
-				$contents = fread($fc, round($download_rate * 1024));
-				
-				print $contents;
+				print fread($fc, round($download_rate * 1024));
 		 
-				// flush the content to the browser
-				flush();
-
-				if (!connection_aborted()) {
+				//if (!connection_aborted()) {
 					//$dataTransferred = $dataTransferred + round($download_rate * 1024);
-					$dataTransferred = $dataTransferred + strlen($contents);
+					//$dataTransferred = $dataTransferred + strlen($contents);
+					$dataTransferred = ftell($fc);
 					$percentage = ($dataTransferred * 100) / $fileSize;
 					
 					$r = Requestt::find($requestID);
@@ -526,11 +526,14 @@ class Common
 					$r->ProcessUserID = 0;
 					$r->ProcessDate = new DateTime();
 					$r->ProcessTypeID = eProcessTypes::Update;
-					$r->save();	
-				}
+					$r->save();
+				//}
+
+				// flush the content to the browser
+				flush();
 
 				// sleep one second
-				//sleep(1);
+				sleep(1);
 			}
 			
 			// close file stream
