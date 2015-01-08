@@ -44,12 +44,12 @@ class PushNotification_Task {
 					{
 						$cert = path('public').'files/customer_'.$n->CustomerID.'/application_'.$n->ApplicationID.'/'.$n->CkPem;
 
-						$result = $this->ios_ckpem($cert, $n->NotificationText, $n->DeviceToken);
+						$result = $this->iosInternal($cert, $n->NotificationText, $n->DeviceToken);
 					}
 					//android
 					elseif($n->DeviceType === 'android')
 					{
-						$result = $this->android($n->ApplicationID, $n->NotificationText, $n->DeviceToken);
+						$result = $this->androidInternal($n->NotificationText, $n->DeviceToken);
 					}
 
 					if ($result)
@@ -100,8 +100,12 @@ class PushNotification_Task {
 		}
 	}
 
-	public function ios($applicationID, $message, $deviceToken)
+	public function ios($args)
 	{
+		$applicationID = $args[0];
+		$message = $args[1];
+		$deviceToken = $args[2];
+
 		$app = DB::table('Application')
 				->where('ApplicationID', '=', (int)$applicationID)
 				->first();
@@ -109,10 +113,18 @@ class PushNotification_Task {
 			throw new Exception('Application not found!');
 		}
 		$cert = path('public').'files/customer_'.$app->CustomerID.'/application_'.$app->ApplicationID.'/'.$app->CkPem;
-		return $this->ios_ckpem($cert, $message, $deviceToken);
+		echo $this->iosInternal($cert, $message, $deviceToken);
 	}
 
-	public function ios_ckpem($cert, $message, $deviceToken)
+	public function android($args)
+	{
+		$applicationID = $args[0];
+		$message = $args[1];
+		$deviceToken = $args[2];
+		echo $this->androidInternal($message, $deviceToken);
+	}
+
+	public function iosInternal($cert, $message, $deviceToken)
 	{
 		$success = false;
 
@@ -164,7 +176,7 @@ class PushNotification_Task {
 		return $success;
 	}
 
-	public function android($applicationID, $message, $deviceToken)
+	public function androidInternal($message, $deviceToken)
 	{
 		$success = false;
 		//$googleAPIKey = 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY';
@@ -205,19 +217,6 @@ class PushNotification_Task {
 		}
 		return $success;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	public function run_backup()
 	{
