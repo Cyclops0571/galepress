@@ -241,7 +241,7 @@ function getURL($page) {
 			<nav>
 				<ul class="nav nav-pills nav-top">
 					<li class="lang" style="list-style:none;">
-						<div style="margin-top:6px; float:left; width:85px; height:12px;">
+						<div style="float:left; width:85px; height:12px;">
 							<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
 								<input type="submit" style="width:20px; height:20px;" class="buttonTR" value="         " name="submit_tr"/>
 								&nbsp;
