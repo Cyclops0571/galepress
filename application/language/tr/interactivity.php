@@ -153,6 +153,7 @@ return array(
 	'tooltip_icon_new' => 'Yeni Tooltip İkonu Yükle',
 	'tooltip_icon1' => 'Pasif Tooltip İkonu',
 	'tooltip_icon2' => 'Aktif Tooltip İkonu',
+	'tooltip_background_opacity' => 'Arkaplan Saydamlık',
 	
 	'scroll_name' => 'SCROLL',
 	'scroll_componentid' => 'Scroll',

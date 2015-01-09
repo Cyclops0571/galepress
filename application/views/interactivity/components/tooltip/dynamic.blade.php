@@ -2,7 +2,13 @@
 if(!isset($transparent)) $transparent = 0;
 if(!isset($bgcolor)) $bgcolor = '#151515';
 if(!isset($iconcolor)) $iconcolor = '#da0606';
-if($transparent == 1) $bgcolor = "transparent";
+if(!isset($boxopacity)) $boxopacity = 1;
+if($transparent == 1)
+{
+	$bgcolor = "transparent";
+	$boxopacity = 0;
+}
+
 
 $vFile = path('public').$filename;
 if(File::exists($vFile) && is_file($vFile)) {
@@ -83,12 +89,16 @@ else
 
 	.hs-tooltip{
 		background: {{ $bgcolor }} !important;
+		opacity: {{ $boxopacity }} !important;
 	}
 	.hsmap-image{
 		display: none !important;
 	}
 	*{
 		-webkit-tap-highlight-color: transparent !important;
+	}
+	#myScrollableDiv{
+		word-wrap: break-word;
 	}
 	/**/
 	</style>

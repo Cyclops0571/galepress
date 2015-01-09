@@ -96,6 +96,7 @@
             height:auto;
             font-size:18px;
             filter:alpha(opacity=80); /* For IE8 and earlier */
+            -webkit-font-smoothing: antialiased; /*FOR SAFARI FONT RENDER BUG*/
         }
 
         .bubble::before {

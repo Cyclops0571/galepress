@@ -1289,7 +1289,13 @@ var cNotification = new function () {
 				easing: easingEffect,
 				step: function(now){
 					object.css({
-						transform: "rotate(" + now + "deg)"
+						'-webkit-transform': "rotate(" + now + "deg)"
+					}).css({
+						'-moz-transform': "rotate(" + now + "deg)"
+					}).css({
+						'-ms-transform': "rotate(" + now + "deg)"
+					}).css({
+						'transform': "rotate(" + now + "deg)"
 					});
 				},
 		        complete: function(){

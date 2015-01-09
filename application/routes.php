@@ -437,7 +437,26 @@ Route::post('ws/v101/statistics', array('uses' => 'ws.v101.statistics@create'));
 
 Route::get('test', array('do' => function()
 {
-	return 5;
+
+	// test algoritma calisma
+	$fibonacci = array();
+
+	$itemCount = 10;
+
+	for ($i=0; $i <= $itemCount ; $i++) { 
+
+		if($i<2)
+			array_push($fibonacci,$i);
+		else
+		{
+			$fibonacci[$i] = $fibonacci[$i-2] + $fibonacci[$i-1];
+		}
+
+	}
+
+	print_r($fibonacci);
+
+
 }));
 
 Route::get('test2', array('do' => function()

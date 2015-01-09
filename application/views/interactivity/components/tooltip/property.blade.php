@@ -17,6 +17,7 @@ $content = '';
 $transparent = 0;
 $bgcolor = '#151515';
 $iconcolor = '#f00';
+$boxopacity = 1;
 
 $iconwidth = 30;
 $iconheight = 30;
@@ -35,6 +36,7 @@ if(isset($Properties))
         if($prop->Name == 'iconcolor') $iconcolor = $prop->Value;
         if($prop->Name == 'iconwidth') $iconwidth = $prop->Value;
         if($prop->Name == 'iconheight') $iconheight = $prop->Value;
+        if($prop->Name == 'boxopacity') $boxopacity = $prop->Value;
         if($prop->Name == 'option') $option = (int)$prop->Value;
         if($prop->Name == 'filename')
         {
@@ -158,6 +160,10 @@ if(isset($Properties))
             <div class="text dark">
                 <label for="comp-{id}-iconcolor">{{ __('interactivity.tooltip_iconcolor') }}</label>
                 <input name="comp-{id}-iconcolor" type="text" value="{{ $iconcolor }}" />
+            </div>
+            <div class="text dark">
+                <label for="comp-{id}-boxopacity">{{ __('interactivity.tooltip_background_opacity') }} <span style="font-size:10px;">(0.1, 0.2, ... , 1)</span></label>
+                <input type="text" name="comp-{id}-boxopacity" placeholder="0.85" value="{{ $boxopacity }}">
             </div>
             <div class="text">
                 <label for="comp-{id}-init">{{ __('interactivity.tooltip_init') }}</label>

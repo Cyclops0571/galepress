@@ -153,6 +153,7 @@ return array(
 	'tooltip_icon_new' => 'Upload New Tooltip Icon',
 	'tooltip_icon1' => 'UnFocused Tooltip Icon',
 	'tooltip_icon2' => 'Focused Tooltip Icon',
+	'tooltip_background_opacity' => 'Background Opacity',
 	
 	'scroll_name' => 'SCROLL',
 	'scroll_componentid' => 'Scroll',

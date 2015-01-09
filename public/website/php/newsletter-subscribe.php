@@ -5,9 +5,9 @@ session_cache_limiter('nocache');
 header('Expires: ' . gmdate('r', 0));
 header('Content-type: application/json');
 
-$apiKey 	= 'd0e2af9801bb5a186af081316dcce1ce-us7'; - // How get your Mailchimp API KEY - http://kb.mailchimp.com/article/where-can-i-find-my-api-key
-$listId 	= '048c127fb9'; - // How to get your Mailchimp LIST ID - http://kb.mailchimp.com/article/how-can-i-find-my-list-id
-$submit_url	= "http://us7.api.mailchimp.com/1.3/?method=listSubscribe"; - // Replace us2 with your actual datacenter
+$apiKey 	= '4924b41acaaae4d5f6a8ab3c31bb9b1d-us3'; - // How get your Mailchimp API KEY - http://kb.mailchimp.com/article/where-can-i-find-my-api-key
+$listId 	= '9229023c51'; - // How to get your Mailchimp LIST ID - http://kb.mailchimp.com/article/how-can-i-find-my-list-id
+$submit_url	= "http://us3.api.mailchimp.com/1.3/?method=listSubscribe"; - // Replace us2 with your actual datacenter
 
 $double_optin = false;
 $send_welcome = false;
