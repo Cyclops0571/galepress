@@ -535,6 +535,19 @@ class Common
 				// sleep one second
 				//sleep(1);
 			}
+			/*
+			$dataTransferred = ftell($fc);
+			$percentage = ($dataTransferred * 100) / $fileSize;
+
+			$r = Requestt::find($requestID);
+			$r->DataTransferred = $dataTransferred;
+			$r->Percentage = $percentage;
+			$r->ProcessUserID = 0;
+			$r->ProcessDate = new DateTime();
+			$r->ProcessTypeID = eProcessTypes::Update;
+			$r->save();
+			*/
+
 			// close file stream
 			fclose($fc);
 			/*
@@ -920,5 +933,4 @@ class Common
 
     	return $rs;
     }
-	
 }
