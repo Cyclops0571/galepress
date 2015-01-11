@@ -485,59 +485,67 @@ class Common
 			
 			// set the download rate limit (=> 200,0 kb/s)
 			$download_rate = 200.0;
-			$download_rate = 1.0;
 			
 			// send headers
-			header('Cache-control: private');
-			//header('Content-Type: application/octet-stream');
-			//header('Pragma: no-cache');  
-			//header("Content-Transfer-Encoding: binary"); 
-			header("Content-type: application/x-download");
-			header('Content-Length: '.$fileSize);
-			header('Content-Disposition: attachment; filename="'.str_replace(" ", "_", $filename).'"'); //dosya isminde bosluk varsa problem oluyor!!!
-			
-			// flush content
-			flush();
+			ob_end_clean();
+			set_time_limit(0);
+			header("Cache-Control: no-store, no-cache, must-revalidate");
+			header("Cache-Control: post-check=0, pre-check=0", FALSE);
+			header("Pragma: no-cache");
+			header("Expires: ".GMDATE("D, d M Y H:i:s", MKTIME(DATE("H")+2, DATE("i"), DATE("s"), DATE("m"), DATE("d"), DATE("Y")))." GMT");
+			header("Last-Modified: ".GMDATE("D, d M Y H:i:s")." GMT");
+			header("Content-Type: application/octet-stream");
+			header("Content-Length: ".$fileSize);
+			header('Content-Disposition: inline; filename="'.str_replace(" ", "_", $filename).'"'); //dosya isminde bosluk varsa problem oluyor!!!
+			header("Content-Transfer-Encoding: binary\n");
 			
 			// open file stream
 			$fc = fopen($file, "r");
 
-
+			//http://psoug.org/snippet/Download_File_To_Client_53.htm
 			//http://stackoverflow.com/questions/1507985/php-determine-how-many-bytes-sent-over-http
 			//http://php.net/manual/en/function.ignore-user-abort.php
 			//http://php.net/manual/en/function.http-send-file.php
 			//http://stackoverflow.com/questions/737045/send-a-file-to-client
+
+			//SELECT RequestID, FileSize, DataTransferred, Percentage FROM Request ORDER BY RequestID DESC LIMIT 10;
 			//ignore_user_abort(true);
 
-			while(!feof($fc)) {
+			while(!feof($fc) && connection_status() == 0) {
 				
-				// send the current file part to the browser
+				//echo fread($fc, round($download_rate * 1024));
 				print fread($fc, round($download_rate * 1024));
-		 
-				//if (!connection_aborted()) {
-					//$dataTransferred = $dataTransferred + round($download_rate * 1024);
-					//$dataTransferred = $dataTransferred + strlen($contents);
-					$dataTransferred = ftell($fc);
-					$percentage = ($dataTransferred * 100) / $fileSize;
-					
-					$r = Requestt::find($requestID);
-					$r->DataTransferred = $dataTransferred;
-					$r->Percentage = $percentage;
-					$r->ProcessUserID = 0;
-					$r->ProcessDate = new DateTime();
-					$r->ProcessTypeID = eProcessTypes::Update;
-					$r->save();
-				//}
-
+				
 				// flush the content to the browser
 				flush();
 
+				//$dataTransferred = $dataTransferred + round($download_rate * 1024);
+				//$dataTransferred = $dataTransferred + strlen($contents);
+				$dataTransferred = ftell($fc);
+				$percentage = ($dataTransferred * 100) / $fileSize;
+				
+				$r = Requestt::find($requestID);
+				$r->DataTransferred = $dataTransferred;
+				$r->Percentage = $percentage;
+				$r->ProcessUserID = 0;
+				$r->ProcessDate = new DateTime();
+				$r->ProcessTypeID = eProcessTypes::Update;
+				$r->save();
+
 				// sleep one second
-				sleep(1);
+				//sleep(1);
 			}
-			
 			// close file stream
 			fclose($fc);
+			/*
+			$r = Requestt::find($requestID);
+			$r->DataTransferred = $fileSize;
+			$r->Percentage = 100;
+			$r->ProcessUserID = 0;
+			$r->ProcessDate = new DateTime();
+			$r->ProcessTypeID = eProcessTypes::Update;
+			$r->save();
+			*/
 		}
 		else {
 			throw new Exception(__('common.file_notfound'), "102");
