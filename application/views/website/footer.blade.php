@@ -12,7 +12,7 @@
 					{{__('website.newsletter_success')}}
 				</div>
 				<div class="alert alert-error hidden" id="newsletterError"></div>
-				<form class="form-inline" id="newsletterForm" action="website/php/newsletter-subscribe.php" method="POST">
+				<form class="form-inline" id="newsletterForm" action="/website/php/newsletter-subscribe.php" method="POST">
 					<div class="control-group">
 						<div class="input-append">
 							<input class="span2" placeholder="&nbsp;{{__('website.newsletter_email')}}" name="email" id="email" type="text">

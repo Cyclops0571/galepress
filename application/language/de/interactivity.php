@@ -153,6 +153,7 @@ return array(
 	'tooltip_icon_new' => 'Upload Tooltip Icon',
 	'tooltip_icon1' => 'Unkonzentriert Tooltip Icon',
 	'tooltip_icon2' => 'Focused Tooltip Icon',
+	'tooltip_background_opacity' => 'Hintergrund Deckkraft',
 	
 	'scroll_name' => 'BLÄTTERN',
 	'scroll_componentid' => 'Blättern',

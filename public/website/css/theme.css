@@ -355,6 +355,8 @@ div.slider-container {
 div.slider-container div.caption {
 	filter: alpha(opacity=0);
 	opacity: 0;
+	-webkit-font-smoothing: antialiased; /*FOR SAFARI FONT RENDER BUG*/
+
 }
 
 div.slider-container div.top-label {
