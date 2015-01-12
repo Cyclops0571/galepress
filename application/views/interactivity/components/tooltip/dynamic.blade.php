@@ -9,7 +9,6 @@ if($transparent == 1)
 	$boxopacity = 0;
 }
 
-
 $vFile = path('public').$filename;
 if(File::exists($vFile) && is_file($vFile)) {
     $fname = File::name($vFile);
@@ -48,6 +47,20 @@ else
     $vFile2 = '/'.$filename2;
 }
 
+//hex to rgb
+$hex = str_replace("#", "", $bgcolor);
+
+if(strlen($hex) == 3) {
+  $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+  $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+  $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+} else {
+  $r = hexdec(substr($hex,0,2));
+  $g = hexdec(substr($hex,2,2));
+  $b = hexdec(substr($hex,4,2));
+}
+$rgb = array($r, $g, $b);
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -71,25 +84,24 @@ else
 	}
 	@if( $init == "right")
 	.hs-spot-object.right .hs-tooltip:before{
-		border-right: 8px solid {{ $bgcolor }} !important;
+		border-right: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 	}
 	@elseif( $init == "left")
 	.hs-spot-object.left .hs-tooltip:before{
-		border-left: 8px solid {{ $bgcolor }} !important;
+		border-left: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 	}
 	@elseif( $init == "top")
 	.hs-spot-object.top .hs-tooltip:before{
-		border-top: 8px solid {{ $bgcolor }} !important;
+		border-top: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 	}
 	@elseif( $init == "bottom")
 	.hs-spot-object.bottom .hs-tooltip:before{
-		border-bottom: 8px solid {{ $bgcolor }} !important;
+		border-bottom: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 	}
 	@endif
 
 	.hs-tooltip{
-		background: {{ $bgcolor }} !important;
-		opacity: {{ $boxopacity }} !important;
+		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 	}
 	.hsmap-image{
 		display: none !important;
