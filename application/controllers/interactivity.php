@@ -513,16 +513,17 @@ class Interactivity_Controller extends Base_Controller
 						        if($anncount > 0 && (int)$cf->Transferred != 1)
 						        {
 						        	//Log::info("annotation count: ".$anncount);
-					        		//$docInfo = $p->pcos_get_stream($doc, "","/Root/Metadata");
-					          		// $posStart = strpos($docInfo, '<xmp:CreatorTool>');
-					          		// $posEnd = strpos($docInfo, '</xmp:CreatorTool>');
-
-					          		// $docInfoFind = substr($docInfo, $posStart, $posEnd);
-					            	//$indesignFind = strpos($docInfo,"indesign");
-					            	//Log::info($docInfo);
+					        		$docInfo = $p->pcos_get_stream($doc, "","/Root/Metadata");
+					          		//$posStart = strpos($docInfo, '<xmp:CreatorTool>');
+					          		//$posEnd = strpos($docInfo, '</xmp:CreatorTool>');
+					          		//$docInfoFind = substr($docInfo, $posStart, $posEnd);
+					            	$indesignFind = strpos($docInfo,"indesign");
 
 						            for ($ann = 0; $ann < $anncount; $ann++)
 						            {
+						            	if($ann>25)
+						            		break;
+						            	
 						            	$annotation_path = $annotations_path."[".$ann."]";
 						            	$linkDest = (int)$p->pcos_get_number($doc, $annotation_path."/destpage");
 						            	$pcosmode = $p->pcos_get_string($doc, "pcosmode");
@@ -623,7 +624,10 @@ class Interactivity_Controller extends Base_Controller
 													elseif($j==5)
 													{
 														$pcp->Name = "y";
-														$pcp->Value = $rectY;
+														if($indesignFind>0)
+															$pcp->Value = $rectY-$rectHeight; //indesign
+														else
+															$pcp->Value = $rectY; //not indesign
 													}
 													elseif($j==6)
 													{
