@@ -517,19 +517,20 @@ class Interactivity_Controller extends Base_Controller
 					          		//$posStart = strpos($docInfo, '<xmp:CreatorTool>');
 					          		//$posEnd = strpos($docInfo, '</xmp:CreatorTool>');
 					          		//$docInfoFind = substr($docInfo, $posStart, $posEnd);
-					            	$indesignFind = strpos($docInfo,"indesign");
+					            	//$indesignFind = strpos($docInfo,"InDesign");
+					            	preg_match("/indesign/i", $docInfo, $indesignFind);
 
 						            for ($ann = 0; $ann < $anncount; $ann++)
 						            {
 						            	if($ann>25)
 						            		break;
-						            	
+
 						            	$annotation_path = $annotations_path."[".$ann."]";
 						            	$linkDest = (int)$p->pcos_get_number($doc, $annotation_path."/destpage");
 						            	$pcosmode = $p->pcos_get_string($doc, "pcosmode");
 						            	//Log::info("link dest: ".$linkDest);
+						            	
 						            	//Web Link
-
 						        		if($pcosmode=="URI" || $pcosmode==">>")
 						        		{
 						        			//Log::info("girdi");
@@ -624,7 +625,7 @@ class Interactivity_Controller extends Base_Controller
 													elseif($j==5)
 													{
 														$pcp->Name = "y";
-														if($indesignFind>0)
+														if(isset($indesignFind[0]))
 															$pcp->Value = $rectY-$rectHeight; //indesign
 														else
 															$pcp->Value = $rectY; //not indesign
@@ -745,7 +746,10 @@ class Interactivity_Controller extends Base_Controller
 													elseif($j==5)
 													{
 														$pcp->Name = "y";
-														$pcp->Value = $rectY;
+														if(isset($indesignFind[0]))
+															$pcp->Value = $rectY-$rectHeight; //indesign
+														else
+															$pcp->Value = $rectY; //not indesign
 													}
 													elseif($j==6)
 													{
