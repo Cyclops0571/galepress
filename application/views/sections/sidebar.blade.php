@@ -54,10 +54,11 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 			{{ HTML::nav_link(__('route.reports').'?r=201', __('common.menu_report_201')) }}
 			{{ HTML::nav_link(__('route.reports').'?r=301', __('common.menu_report_301')) }}
 			{{ HTML::nav_link(__('route.reports').'?r=302', __('common.menu_report_302')) }}
-			{{ HTML::nav_link(__('route.reports').'?r=1301', __('common.menu_report_1301')) }}
-			{{ HTML::nav_link(__('route.reports').'?r=1302', __('common.menu_report_1302')) }}
+			{{ HTML::nav_link(__('route.reports').'?r=1001', __('common.menu_report_1001')) }}
 			{{ HTML::nav_link(__('route.reports').'?r=1101', __('common.menu_report_1101')) }}
 			{{ HTML::nav_link(__('route.reports').'?r=1201', __('common.menu_report_1201')) }}
+			{{ HTML::nav_link(__('route.reports').'?r=1301', __('common.menu_report_1301')) }}
+			{{ HTML::nav_link(__('route.reports').'?r=1302', __('common.menu_report_1302')) }}
 		</ul>
 	</li>                          
 	<li>

@@ -24,15 +24,3 @@ FROM (
 		cu.`StatusID`=1
 ) t 
 GROUP BY `CustomerNo`, `CustomerName`, `ApplicationName`, `ContentName`, `Country`, `City`, `District`
-
-/*
-SELECT c.CustomerNo, c.CustomerName, a.Name,co.Name, s.Country, s.City, s.District, count(*) as 'DownloadCount' 
-FROM db.Statistic s inner join Customer c on s.CustomerID=c.CustomerID inner join Application a on a.CustomerID=c.CustomerID inner join Content co on a.ApplicationID=co.ApplicationID and s.ContentID=co.ContentID
-where s.Type=10 and 
-c.CustomerID=60 AND 
-a.ApplicationID=58 AND 
-s.ContentID=1436 AND 
-c.`StatusID`=1 and
-s.Time BETWEEN '2015-01-01' AND '2015-02-31' 
-Group By c.CustomerNo, c.CustomerName, a.Name,co.Name, s.Country, s.City, s.District;
-*/

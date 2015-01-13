@@ -205,6 +205,37 @@ class Reports_Controller extends Base_Controller
 			$sql = str_replace('{CONTENTID}', ($contentID > 0 ? ''.$contentID : 'null'), $sql);
 			//$rows = DB::table(DB::raw('('.$sql.') t'))->get();
 		}
+		else if((int)$id == 1001) {
+			$report = '1001';
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "Number"),
+					'fieldName' => array("ApplicationName", "ContentName", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1001")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1001_admin")->get()
+				)
+			);
+			//Uygulama secildiyse uygulama adini gosterme!
+			if ((int)$currentUser->UserTypeID == eUserTypes::Customer && (int)$applicationID > 0) {
+				array_shift($arrReport['customer']['columnWidth']);
+				array_shift($arrReport['customer']['fieldType']);
+				array_shift($arrReport['customer']['fieldName']);
+				array_shift($arrReport['customer']['fieldCaption']);
+			}
+			$sql = File::get(path('public').'files/report.sql/1001.sql');
+			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
+			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
+			$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? ''.$customerID : 'null'), $sql);
+			$sql = str_replace('{APPLICATIONID}', ($applicationID > 0 ? ''.$applicationID : 'null'), $sql);
+			$sql = str_replace('{CONTENTID}', ($contentID > 0 ? ''.$contentID : 'null'), $sql);
+			//$rows = DB::table(DB::raw('('.$sql.') t'))->get();
+		}
 		elseif((int)$id == 1101) {
 			$report = '1101';
 			$arrReport = array(
