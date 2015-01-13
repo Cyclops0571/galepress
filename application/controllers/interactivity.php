@@ -522,7 +522,7 @@ class Interactivity_Controller extends Base_Controller
 
 						            for ($ann = 0; $ann < $anncount; $ann++)
 						            {
-						            	if($ann>25)
+						            	if($ann>30)
 						            		break;
 
 						            	$annotation_path = $annotations_path."[".$ann."]";

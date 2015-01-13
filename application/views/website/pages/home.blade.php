@@ -246,83 +246,139 @@
 				<div class="flexslider unstyled" data-plugin-options='{"directionNav":false, "animation":"slide", "slideshow": false, "maxVisibleItems": 6}'>
 					<ul class="slides">
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-1.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/asemble.png" alt="asemble" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-2.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/bigblue.png" alt="bigblue" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-3.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/bilimteknoloji.png" alt="bilimteknoloji" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-4.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/birka.png" alt="birka" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-5.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/buyukkulup.png" alt="buyukkulup" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-6.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/cansa.png" alt="cansa" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-7.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/cpf.png" alt="cpf" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small" src="/website/img/logo-client-8.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/detaysoft.png" alt="detaysoft" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-9.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/emlakpazari.png" alt="emlakpazari" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-10.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/enerjisa.png" alt="enerjisa" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-11.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/franchise.png" alt="franchise" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-12.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/gbm.png" alt="gbm" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-13.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/genta.png" alt="genta" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-14.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/gimdes.png" alt="gimdes" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-15_.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/gpviewer.png" alt="gpviewer" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-16.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/honda.png" alt="honda" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-17.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/housekeeper.png" alt="housekeeper" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-18.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/inciler.png" alt="inciler" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-19.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/keas.png" alt="keas" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-20.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/lastikmagazin.png" alt="lastikmagazin" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-21.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/lazanya.png" alt="lazanya" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-22.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/metalmedya.png" alt="metalmedya" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-24.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/mies.png" alt="mies" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-23.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/migros.png" alt="migros" ></div>
 						</li>
 						<li>
-							<div class="span2"> <img class="mobile-max-width small"  src="/website/img/logo-client-25.jpg" ></div>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/mopas.png" alt="mopas" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/mototal.png" alt="mototal" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/mototas.png" alt="mototas" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/mpark.png" alt="mpark" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/nbs.png" alt="nbs" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/odavizyon.png" alt="odavizyon" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/oguzmetal.png" alt="oguzmetal" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/orucgida.png" alt="orucgida" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/pleon.png" alt="pleon" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/proasci.png" alt="proasci" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/remax.png" alt="remax" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/renovia.png" alt="renovia" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/restoran.png" alt="restoran" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/tatbak.png" alt="tatbak" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/tatlihayat.png" alt="tatlihayat" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/teknikyapi.png" alt="teknikyapi" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/tgsd.png" alt="tgsd" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/unisac.png" alt="unisac" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/velespit.png" alt="velespit" ></div>
+						</li>
+						<li>
+							<div class="span2"> <img class="mobile-max-width small" src="/website/img/references/zen.png" alt="zen" ></div>
 						</li>
 					</ul>
 				</div>
-
 			</div>
 		</div>
 	</div>

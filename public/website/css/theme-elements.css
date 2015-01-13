@@ -286,6 +286,7 @@ a.thumb-info {
 	overflow: hidden;
 	position: relative;
 	text-decoration: none;
+	text-align: center;
 }
 
 a.thumb-info:hover span.thumb-info-action-icon {
