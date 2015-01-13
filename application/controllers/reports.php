@@ -51,6 +51,7 @@ class Reports_Controller extends Base_Controller
 		//if(strlen($ed) == 12) 
 		$ed = $ed.' 23:59:59';
 		//return 'sd: '.Common::dateWrite($sd).'-ed: '.Common::dateWrite($ed);
+		$currentUser = Auth::User();
 
 		if($map == 1) {
 
@@ -105,10 +106,20 @@ class Reports_Controller extends Base_Controller
 
 		if((int)$id == 101) {
 			$report = '101';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "Number", "Number", "Number", "Number", "Number", "Size", "Number", "Size");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationCount", "ApplicationBlockedCount", "ContentCount", "ContentApprovalCount", "ContentBlockedCount", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic");
-			$arrFieldCaption = __("common.reports_columns_report101")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "Number", "Number", "Number", "Number", "Number", "Size", "Number", "Size"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationCount", "ApplicationBlockedCount", "ContentCount", "ContentApprovalCount", "ContentBlockedCount", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic"),
+					'fieldCaption' => __("common.reports_columns_report101")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "Number", "Number", "Number", "Number", "Number", "Size", "Number", "Size"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationCount", "ApplicationBlockedCount", "ContentCount", "ContentApprovalCount", "ContentBlockedCount", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic"),
+					'fieldCaption' => __("common.reports_columns_report101")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/101.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -117,10 +128,20 @@ class Reports_Controller extends Base_Controller
 		}
 		else if((int)$id == 201) {
 			$report = '201';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "Date", "String", "Bit", "Number", "Number", "Number", "Size", "Number", "Size");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentCount", "ContentApprovalCount", "ContentBlockedCount", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic");
-			$arrFieldCaption = __("common.reports_columns_report201")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "Date", "String", "Bit", "Number", "Number", "Number", "Size", "Number", "Size"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentCount", "ContentApprovalCount", "ContentBlockedCount", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic"),
+					'fieldCaption' => __("common.reports_columns_report201")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "Date", "String", "Bit", "Number", "Number", "Number", "Size", "Number", "Size"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentCount", "ContentApprovalCount", "ContentBlockedCount", "AmountOfFileSize", "DownloadCount", "AmountOfTraffic"),
+					'fieldCaption' => __("common.reports_columns_report201")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/201.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -130,10 +151,27 @@ class Reports_Controller extends Base_Controller
 		}
 		else if((int)$id == 301) {
 			$report = '301';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "Date", "String", "Bit", "String", "Bit", "Bit", "Size", "Size");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentName", "ContentApproval", "ContentBlocked", "AmountOfFileSize", "AmountOfTraffic");
-			$arrFieldCaption = __("common.reports_columns_report301")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "Size", "Size"),
+					'fieldName' => array("ApplicationName", "ContentName", "AmountOfFileSize", "AmountOfTraffic"),
+					'fieldCaption' => __("common.reports_columns_report301")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "Date", "String", "Bit", "String", "Bit", "Bit", "Size", "Size"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ExpirationDate", "ApplicationStatusName", "ApplicationBlocked", "ContentName", "ContentApproval", "ContentBlocked", "AmountOfFileSize", "AmountOfTraffic"),
+					'fieldCaption' => __("common.reports_columns_report301_admin")->get()
+				)
+			);
+			//Uygulama secildiyse uygulama adini gosterme!
+			if ((int)$currentUser->UserTypeID == eUserTypes::Customer && (int)$applicationID > 0) {
+				array_shift($arrReport['customer']['columnWidth']);
+				array_shift($arrReport['customer']['fieldType']);
+				array_shift($arrReport['customer']['fieldName']);
+				array_shift($arrReport['customer']['fieldCaption']);
+			}
 			$sql = File::get(path('public').'files/report.sql/301.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -145,10 +183,20 @@ class Reports_Controller extends Base_Controller
 		}
 		else if((int)$id == 302) {
 			$report = '302';
-			$arrColumnWidth = array("100px", "100px");
-			$arrFieldType = array("String", "Number");
-			$arrFieldName = array("Device", "DownloadCount");
-			$arrFieldCaption = __("common.reports_columns_report302")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px"),
+					'fieldType' => array("String", "Number"),
+					'fieldName' => array("Device", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report302")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px"),
+					'fieldType' => array("String", "Number"),
+					'fieldName' => array("Device", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report302")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/302.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -159,10 +207,20 @@ class Reports_Controller extends Base_Controller
 		}
 		elseif((int)$id == 1101) {
 			$report = '1101';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "String", "String", "Number");
-			$arrFieldName = array("CustomerNo", "CustomerName", "Country", "City", "District", "DownloadCount");
-			$arrFieldCaption = __("common.reports_columns_report1101")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "Country", "City", "District", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1101")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "Country", "City", "District", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1101")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/1101.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -174,10 +232,20 @@ class Reports_Controller extends Base_Controller
 		}
 		elseif((int)$id == 1201) {
 			$report = '1201';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "String", "String", "String", "Number");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "Country", "City", "District", "DownloadCount");
-			$arrFieldCaption = __("common.reports_columns_report1201")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "Country", "City", "District", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1201")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "Country", "City", "District", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1201")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/1201.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -190,10 +258,20 @@ class Reports_Controller extends Base_Controller
 		}
 		elseif((int)$id == 1301) {
 			$report = '1301';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "String", "String", "String", "String", "Number");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "DownloadCount");
-			$arrFieldCaption = __("common.reports_columns_report1301")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1301")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "DownloadCount"),
+					'fieldCaption' => __("common.reports_columns_report1301")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/1301.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -207,10 +285,20 @@ class Reports_Controller extends Base_Controller
 		}
 		elseif((int)$id == 1302) {
 			$report = '1302';
-			$arrColumnWidth = array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px");
-			$arrFieldType = array("String", "String", "String", "String", "String", "String", "String", "Number", "Number", "Number");
-			$arrFieldName = array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "Page", "People", "Duration");
-			$arrFieldCaption = __("common.reports_columns_report1302")->get();
+			$arrReport = array(
+				'customer' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Number", "Number", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "Page", "People", "Duration"),
+					'fieldCaption' => __("common.reports_columns_report1302")->get()
+				),
+				'admin' => array(
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Number", "Number", "Number"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "Page", "People", "Duration"),
+					'fieldCaption' => __("common.reports_columns_report1302")->get()
+				)
+			);
 			$sql = File::get(path('public').'files/report.sql/1302.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -283,14 +371,18 @@ class Reports_Controller extends Base_Controller
 		//$rows = DB::table(DB::raw('('.$sql.') t'))->get();
 		$rows = DB::table(DB::raw('('.$sql.') t'))->paginate($rowcount);
 
+		$reportUser = 'customer';
+		if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
+			$reportUser = 'admin';
+		}
 		$data = array(
 			'report' => $report,
 			'sd' => $sd,
 			'ed' => $ed,
-			'arrColumnWidth' => $arrColumnWidth,
-			'arrFieldCaption' => $arrFieldCaption,
-			'arrFieldType' => $arrFieldType,
-			'arrFieldName' => $arrFieldName,
+			'arrColumnWidth' => $arrReport[$reportUser]['columnWidth'],
+			'arrFieldCaption' => $arrReport[$reportUser]['fieldCaption'],
+			'arrFieldType' => $arrReport[$reportUser]['fieldType'],
+			'arrFieldName' => $arrReport[$reportUser]['fieldName'],
 			'rows' => $rows
 		);
 		return View::make('pages.reportdetail', $data);
