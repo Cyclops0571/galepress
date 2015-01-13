@@ -51,9 +51,9 @@ return array(
 	'menu_pushnotify' => 'Bildirim Gönder',
 	'menu_logout' => 'Çıkış',
 	
-	'menu_report_101' => 'Müşteri Raporu',
-	'menu_report_201' => 'Uygulama Raporu',
-	'menu_report_301' => 'Trafik Raporu',
+	'menu_report_101' => 'Müşteri Trafik Raporu',
+	'menu_report_201' => 'Uygulama Trafik Raporu',
+	'menu_report_301' => 'İçerik Trafik Raporu',
 	'menu_report_302' => 'Cihaz Raporu',
 	'menu_report_1101' => 'Müşteri Konum Raporu',
 	'menu_report_1201' => 'Uygulama Konum Raporu',

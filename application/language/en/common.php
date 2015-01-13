@@ -51,9 +51,9 @@ return array(
 	'menu_pushnotify' => 'Push Notification',
 	'menu_logout' => 'Exit',
 	
-	'menu_report_101' => 'Customer Report',
-	'menu_report_201' => 'Application Report',
-	'menu_report_301' => 'Traffic Report',
+	'menu_report_101' => 'Customer Traffic Report',
+	'menu_report_201' => 'Application Traffic Report',
+	'menu_report_301' => 'Content Traffic Report',
 	'menu_report_302' => 'Device Report',
 	'menu_report_1101' => 'Customer Location Report',
 	'menu_report_1201' => 'Application Location Report',
