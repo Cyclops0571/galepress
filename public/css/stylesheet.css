@@ -130,6 +130,7 @@ a:hover,a:focus,a:active{color: #FFF; text-decoration: none;}
                         .page-navigation li a span[class^='icon-']{position: absolute; left: 10px; top: 9px; font-size: 16px;}
                         .page-navigation li a i[class^='icon-']{position: absolute; right: 10px; top: 10px; font-size: 12px;}            
                     .page-navigation li a:hover{background: rgba(0,0,0,0.1);}
+                    .page-navigation li a.visited{background: rgba(0,0,0,0.2);}
             .page-navigation li.active > ul{display: block;}
             
             .page-navigation > li > ul > li > a{padding-left: 35px;border-bottom:1px solid rgba(0,0,0,0.1);}

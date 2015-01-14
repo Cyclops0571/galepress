@@ -18,7 +18,7 @@ class Reports_Controller extends Base_Controller
 	public function get_index()
     {
 		$report = (int)Input::get('r', '101');
-		$reportName = __("common.menu_report_".$report)->get();
+		$reportName = __("common.menu_report_".$report."_detail")->get();
 
 		$data = array(
 			'caption' => $this->caption,

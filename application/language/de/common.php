@@ -60,6 +60,16 @@ return array(
 	'menu_report_1201' => 'Applikationsstandortbericht',
 	'menu_report_1301' => 'Verkehrs-Bericht',
 	'menu_report_1302' => 'Abrufbericht',
+
+	'menu_report_101_detail' => 'Kundenbericht',
+	'menu_report_201_detail' => 'Applikationsbericht',
+	'menu_report_301_detail' => 'Verkehrsbericht',
+	'menu_report_302_detail' => 'Gerätebericht',
+	'menu_report_1001_detail' => 'Download Bericht',
+	'menu_report_1101_detail' => 'Kundenstandortbericht',
+	'menu_report_1201_detail' => 'Applikationsstandortbericht',
+	'menu_report_1301_detail' => 'Verkehrs-Bericht',
+	'menu_report_1302_detail' => 'Seitenaufrufe Bericht',
 	
 	'statistics_user' => 'Benutzername:',
 	'statistics_lastlogin' => 'Letztes Einloggen:',
