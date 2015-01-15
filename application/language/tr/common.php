@@ -396,5 +396,5 @@ return array(
 	'site_system_message_expired' => 'Oturumunuz sonlandı!',
 
 	'month_names' => array('', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'),
-	'auth_failed' => 'Kullanıcı izin vermedi',
+	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">Kullanıcı izin vermedi</span>',
 );

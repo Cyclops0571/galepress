@@ -399,5 +399,5 @@ return array(
 	'site_system_message_expired' => 'Sitzung beendet!',
 
 	'month_names' => array('', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'),	
-	'auth_failed' => 'Kullanıcı izin vermedi',
+	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">Benutzer war es nicht möglich</span>',
 );

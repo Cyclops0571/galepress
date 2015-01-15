@@ -489,20 +489,20 @@ $(document).ready(function() {
         	$("#radio_de").attr("class","checked");
         }
     }
-   function modalClose()
+   	function modalClose()
     {
         $("#modalChangeLanguage").css("display","none");
     }
     function trActive()
     {
-        document.location.href = '/tr';
+        document.location.href = '/tr/giris';
         $("#radio_tr").attr("class","checked");
         $("#radio_en").attr("class","none");
         $("#radio_de").attr("class","none");
     }
     function enActive()
     {
-        document.location.href = '/en';
+        document.location.href = '/en/home';
         $("#radio_tr").attr("class","none");
         $("#radio_en").attr("class","checked");
         $("#radio_de").attr("class","none");
@@ -510,7 +510,7 @@ $(document).ready(function() {
     function deActive()
     {
 
-        document.location.href = '/de';
+        document.location.href = '/de/startseite';
         $("#radio_tr").attr("class","none");
         $("#radio_en").attr("class","none");
         $("#radio_de").attr("class","checked");

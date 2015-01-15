@@ -395,5 +395,5 @@ return array(
 	'site_system_message_expired' => 'Your session expired!',
 
 	'month_names' => array('', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),	
-	'auth_failed' => 'Kullanıcı izin vermedi',
+	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">User didn\'t allow</span>' ,
 );
