@@ -386,7 +386,7 @@ class Reports_Controller extends Base_Controller
 		        {
 		        	//$arrFieldType = array("String", "String", "String", "Date", "String", "Bit", "Number", "Number", "Number", "Size", "Number", "Size");
 
-		        	if($arrFieldType[$j] == 'DateTime' || $arrFieldType[$j] == 'Date' || $arrFieldType[$j] == 'Bit')
+		        	if($arrFieldType[$j] == 'Percent' || $arrFieldType[$j] == 'DateTime' || $arrFieldType[$j] == 'Date' || $arrFieldType[$j] == 'Bit')
 		        	{
 		        		$r .= Common::getFormattedData($row[$arrFieldName[$j]], $arrFieldType[$j])."".$sep;
 		        	}
