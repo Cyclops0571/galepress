@@ -10,11 +10,11 @@
                     <div class="head bg-default bg-light-ltr">
                         <h2>{{ __('common.dashboard_title') }}</h2>
                         <span class="hp-info pull-right">
-                        {{Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date"))}}
+                            {{Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date"))}}
                         </span>              
                         <div class="head-panel nm">
                             <div class="left_abs_100 reportSubtitle" style="margin-top: 70px; text-align:center; font-size: 11px;">
-                                {{ __('common.dashboard_yesterday') }}
+                                {{ __('common.dashboard_today') }}
                             </div>
                             <div class="left_abs_100" style="margin-top: 20px; text-align:center;">
                                 <div class="knob">
@@ -47,48 +47,65 @@
                 <div class="block block-drop-shadow">
                     <div class="head bg-dot30">
                         <h2>{{ __('common.reports_graph') }}</h2>                  
-                        <div class="head-panel nm">                            
-                            <div class="chart" id="dash_chart_2" ios='{{$iosDeviceDownload}}' android='{{$androidDeviceDownload}}' columns='<?php foreach ($previousMonths as $month) { echo Common::monthName($month->Month)." ".$month->Year."-"; } ?>' style="height: 150px;"></div>
+                        <div class="head-panel nm">
+                            <div class="chart" id="dash_chart_2" ios='{{ $iosDeviceDownload }}' android='{{ $androidDeviceDownload }}' columns='{{ $deviceColumns }}' style="height: 150px;"></div>
                         </div>                        
-                    </div>                                        
-                    
+                    </div>
                     <div class="head bg-dot30">                      
                         <div class="head-panel nm">                            
                             <div class="hp-info pull-left">
                                 <div class="hp-icon">
                                     <span class="icon-globe"></span>
                                 </div>                                
-                                <span class="hp-main"><?php $devicesTotalDownload=0; foreach ($previousMonths as $month){$devicesTotalDownload+=$month->DownloadCount;} echo $devicesTotalDownload;?></span>
+                                <span class="hp-main">
+                                    <?php
+                                        /*
+                                        $devicesTotalDownload = 0;
+                                        foreach ($previousMonths as $month) {
+                                            $devicesTotalDownload += $month->DownloadCount;
+                                        }
+                                        echo $devicesTotalDownload;
+                                        */
+                                        echo (int)$iosTotalDownload + (int)$androidTotalDownload;
+                                    ?>
+                                </span>
                                 <span class="hp-sm">{{ __('common.dashboard_total') }}</span>
                             </div>                                                        
                             <div class="hp-info pull-left">
                                 <div class="hp-icon">
                                     <span class="icon-apple"></span>
                                 </div>                                
-                                <span class="hp-main" style="margin-left: 35px;">{{$iosTotalDownload}}</span>
+                                <span class="hp-main" style="margin-left: 35px;">{{ $iosTotalDownload }}</span>
                                 <span class="hp-sm" style="margin-left: 35px;">iOS</span>
                             </div>                            
                             <div class="hp-info pull-left">
                                 <div class="hp-icon">
                                     <span class="icon-android"></span>
                                 </div>                                
-                                <span class="hp-main" style="margin-left: 35px;">{{$androidTotalDownload}}</span>
+                                <span class="hp-main" style="margin-left: 35px;">{{ $androidTotalDownload }}</span>
                                 <span class="hp-sm" style="margin-left: 35px;">Android</span>
-                            </div> 
-                                                                                   
+                            </div>
                         </div>                        
                     </div>                    
-                    
                     <div class="head bg-dot30">
                         <h2 style="text-transform:none;">{{ __('common.reports_graph_ratio') }}</h2>                
                         <div class="head-panel nm">                            
-                            <div class="progress">                                
-                                <div class="progress-bar progress-bar-success tip" title="iOS" style="width: {{$iosTotalDownloadPerc}}%; background:#cecece"><span style="color:black !important;"><?php echo round($iosTotalDownloadPerc, 2)."%" ?></span></div>
-                                <div class="progress-bar progress-bar-info tip" title="Android" style="width: {{$androidTotalDownloadPerc}}%; background:#a4c739"><span style="color:black;"><?php echo round($androidTotalDownloadPerc, 2)."%" ?></span></div>
+                            <div class="progress">
+                                <?php
+                                $iosTotalDownloadPercent = 0;
+                                $androidTotalDownloadPercent = 0;
+
+                                if($iosTotalDownload + $androidTotalDownload > 0)
+                                {
+                                    $iosTotalDownloadPercent = ($iosTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+                                    $androidTotalDownloadPercent = ($androidTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+                                }
+                                ?>
+                                <div class="progress-bar progress-bar-success tip" title="iOS" style="width: {{$iosTotalDownloadPercent}}%; background:#cecece"><span style="color:black !important;"><?php echo round($iosTotalDownloadPercent, 2)."%" ?></span></div>
+                                <div class="progress-bar progress-bar-info tip" title="Android" style="width: {{$androidTotalDownloadPercent}}%; background:#a4c739"><span style="color:black;"><?php echo round($androidTotalDownloadPercent, 2)."%" ?></span></div>
                             </div>                            
                         </div>                        
                     </div>                                    
-                    
                 </div>
             </div>
             <div class="col-md-5">
@@ -294,6 +311,12 @@
         </div>             
     </div>
 </div>
+
+
+
+
+
+
         <?php
             $expiringApps = DB::table('Application')
                         ->where('CustomerID', '=', $customerID)
@@ -351,4 +374,9 @@
             };
         });
         </script>
+
+
+
+
+
 @endsection

@@ -281,13 +281,25 @@ class Common_Controller extends Base_Controller
 			}
 		}
 		$contentID = (int)Input::get('ddlContent', '0');
-		$date = Common::dateWrite(Input::get('date', date("d.m.Y")));
+		//$date = Common::dateWrite(Input::get('date', date("d.m.Y")));
+		$date = Common::dateWrite(Input::get('date', date("d.m.Y")), false);
 
 		if(!Common::CheckApplicationOwnership($applicationID)) 
 		{
 			return;
 		}
 
+		$appDetail = Application::where('ApplicationID', '=', $applicationID)->first();
+		
+		//$sql = 'SELECT * FROM `Content` WHERE ApplicationID IN (SELECT ApplicationID FROM `Application` WHERE CustomerID='.(int)Auth::User()->CustomerID.') AND StatusID=1';
+		//$contentCount = DB::table(DB::raw('('.$sql.') t'))->count();
+		$arrApp = array();
+		foreach($applications as $app) {
+			array_push($arrApp, (int)$app->ApplicationID);
+		}
+		$contentCount = DB::table('Content')->where_in('ApplicationID', $arrApp)->where('StatusID', '=', eStatus::Active)->count();
+		
+		//indirilme raporu son hafta
 		$w = array();
 		$w[1] = '0';
 		$w[2] = '0';
@@ -329,13 +341,14 @@ class Common_Controller extends Base_Controller
 				}
 			}
 		}
-		$sql = ''.
-			'SELECT * '.
-			'FROM `Content` '.
-			'WHERE ApplicationID IN (SELECT ApplicationID FROM `Application` WHERE CustomerID='.(int)Auth::User()->CustomerID.') AND StatusID=1';
-		$contentCount = DB::table(DB::raw('('.$sql.') t'))->count();
-		$appDetail = Application::where('ApplicationID', '=', $applicationID)->first();
 
+		$columns = array();
+		for($i = 0; $i < 7; $i++) {
+			$add_day = strtotime($date." - $i days");
+			$columns[$i] = date('d', $add_day).' '.Common::monthName((int)date('m', $add_day));
+		}
+
+		//indirilme raporu son 5 ay
 		$sql = File::get(path('public').'files/report.sql/Dashboard2.sql');
 		$sql = str_replace('{DATE}', $date, $sql);
 		$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? ''.$customerID : 'null'), $sql);
@@ -349,138 +362,76 @@ class Common_Controller extends Base_Controller
 			}
 		}
 
-		$columns = array();
-		for($i=1;$i<=7;$i++)
-		{
-			$add_day = strtotime($date . " - $i days");
-			$columns[$i]=date('d', $add_day).' '.Common::monthName((int)date('m', $add_day));
-		}
-
+		//cihaz son 5 ay
 		$sql = File::get(path('public').'files/report.sql/Dashboard3.sql');
 		$sql = str_replace('{DATE}', $date, $sql);
 		$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? ''.$customerID : 'null'), $sql);
 		$sql = str_replace('{APPLICATIONID}', ($applicationID > 0 ? ''.$applicationID : 'null'), $sql);
 		$sql = str_replace('{CONTENTID}', ($contentID > 0 ? ''.$contentID : 'null'), $sql);
 		$devices = DB::table(DB::raw('('.$sql.') t'))->get();
+		//return var_dump($devices);
+
 		$iosTotalDownload = 0;
 		$androidTotalDownload = 0;
 
 		$ios = array();
-
 		$ios[1] = '0';
 		$ios[2] = '0';
 		$ios[3] = '0';
 		$ios[4] = '0';
 		$ios[5] = '0';
 
-
 		$android = array();
-
 		$android[1] = '0';
 		$android[2] = '0';
 		$android[3] = '0';
 		$android[4] = '0';
 		$android[5] = '0';
-
-		$lastMonth=$devices[0]->Month;
-
-		$monthTotal=0;
-
-		$currentMonth=1;
-
-		foreach($devices as $d) {
-			if($d->Param5 == 'ios' || $d->Param5=='')
-			{
-				$iosTotalDownload += $d->DownloadCount;
-
-
-				if($lastMonth == $d->Month)
-				{
-					$monthTotal += $d->DownloadCount;
-					$ios[$currentMonth] = $monthTotal;
-				}
-
-				else
-				{
-					$lastMonth--;
-					$currentMonth++;
-					$monthTotal=0;
-					if($lastMonth==0)
-						$lastMonth=12;
-
-					$monthTotal += $d->DownloadCount;
-					$ios[$currentMonth] = $monthTotal;
-				}
-			}			
-		}
-
-		$lastMonth=$devices[0]->Month;
-
-		$monthTotal=0;
-
-		$currentMonth=1;
-
-		foreach($devices as $d) {
-			if($d->Param5 == 'android' || $d->Param5=='Android')
-			{
-				$androidTotalDownload += $d->DownloadCount;
-
-				if($lastMonth == $d->Month)
-				{
-					$monthTotal += $d->DownloadCount;
-					$android[$currentMonth] = $monthTotal;
-				}
-
-				else
-				{
-					$lastMonth--;
-					$currentMonth++;
-					$monthTotal=0;
-					if($lastMonth==0)
-						$lastMonth=12;
-
-					$monthTotal += $d->DownloadCount;
-					$android[$currentMonth] = $monthTotal;
-				}
-			}			
-		}
-
-		if(($iosTotalDownload + $androidTotalDownload)>0)
+		
+		foreach($devices as $d)
 		{
-			$iosTotalDownloadPerc = ($iosTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
-			$androidTotalDownloadPerc = ($androidTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+			if ($d->Device == 'iOS')
+			{
+				$ios[$d->indx] = $d->DownloadCount;
+				$iosTotalDownload = $iosTotalDownload + (int)$d->DownloadCount;
+			}
+			else if($d->Device == 'Android') {
+				$android[$d->indx] = $d->DownloadCount;
+				$androidTotalDownload = $androidTotalDownload + (int)$d->DownloadCount;
+			}
 		}
-		else
-		{
-			$iosTotalDownloadPerc = 0;
-			$androidTotalDownloadPerc = 0;
-		}
+		$ios = array_reverse($ios);
+		$android = array_reverse($android);
 
+		$deviceColumns = array();
+		foreach ($previousMonths as $month) {
+			array_push($deviceColumns, Common::monthName($month->Month)." ".$month->Year);
+		}
+		//$deviceColumns = array_reverse($deviceColumns);
+        
 		//$previousMonthsMaxData = ($previousMonthsMaxData == 0 ? 1 : $previousMonthsMaxData);
 		$data = array(
 			'customerID' => $customerID,
 			'applicationID' => $applicationID,
 			'contentID' => $contentID,
 			'date' => $date,
+			'appDetail' => $appDetail,
 			'applications' => $applications,
+			'applicationCount' => count($applications),
+			'contentCount' => $contentCount,
 			'downloadStatistics' => implode('-', $w),
 			'downloadMaxData' => $downloadMaxData,
 			'downloadTotalData' => $downloadTotalData,
 			'downloadTodayTotalData' => $downloadTodayTotalData,
 			'downloadMonthTotalData' => $downloadMonthTotalData,
-			'applicationCount' => count($applications),
-			'contentCount' => $contentCount,
-			'appDetail' => $appDetail,
+			'columns' => implode('-', $columns),
 			'previousMonths' => $previousMonths,
 			'previousMonthsMaxData' => $previousMonthsMaxData,
-			'columns' => implode('-', $columns),
 			'iosTotalDownload' => $iosTotalDownload,
 			'androidTotalDownload' => $androidTotalDownload,
-			'iosTotalDownloadPerc' => $iosTotalDownloadPerc,
-			'androidTotalDownloadPerc' => $androidTotalDownloadPerc,
 			'iosDeviceDownload' => implode('-', $ios),
-			'androidDeviceDownload' => implode('-', $android)
-
+			'androidDeviceDownload' => implode('-', $android),
+			'deviceColumns' => implode('-', $deviceColumns)
 		);
 		return View::make('pages.home', $data);
 	}

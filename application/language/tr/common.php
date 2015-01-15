@@ -379,6 +379,7 @@ return array(
 	'dashboard_previous_months' => 'Önceki Aylar',
 	'dashboard_weekly_total' => 'Haftalık Toplam',
 	'dashboard_yesterday' => 'Dün',
+	'dashboard_today' => 'Bugün',
 	'dashboard_filter' => 'Filtreleme',
 	'dashboard_app' => 'Uygulama',
 	'dashboard_content' => 'İçerik',

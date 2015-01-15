@@ -378,6 +378,7 @@ return array(
 	'dashboard_previous_months' => 'Prevıous Months',
 	'dashboard_weekly_total' => 'Weekly Total',
 	'dashboard_yesterday' => 'Yesterday',
+	'dashboard_today' => 'Today',
 	'dashboard_filter' => 'FILTER',
 	'dashboard_app' => 'Application',
 	'dashboard_content' => 'Content',

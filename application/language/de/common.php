@@ -382,6 +382,7 @@ return array(
 	'dashboard_previous_months' => 'Vormonate',
 	'dashboard_weekly_total' => 'Wochensumme',
 	'dashboard_yesterday' => 'Gestern',
+	'dashboard_today' => 'Today',
 	'dashboard_filter' => 'Filterung',
 	'dashboard_app' => 'Applikation',
 	'dashboard_content' => 'Inhalt',
