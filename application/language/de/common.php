@@ -354,7 +354,8 @@ return array(
 	'reports_columns_report1001_admin' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Download Count"),
 	'reports_columns_report1101' => array("Kundennummer", "Kundenbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),
 	'reports_columns_report1201' => array("Kundennummer", "Kundenbezeichnung", "Applikationsbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),
-	'reports_columns_report1301' => array("Kundennummer", "Kundenbezeichnung", "Applikationsbezeichnung", "Inhaltsbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),
+	'reports_columns_report1301' => array("Applikationsbezeichnung", "Inhaltsbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),
+	'reports_columns_report1301_admin' => array("Kundennummer", "Kundenbezeichnung", "Applikationsbezeichnung", "Inhaltsbezeichnung", "Land", "Stadt", "Bezirk", "Anzahl der Downloads"),
 	'reports_columns_report1302' => array("Kundennummer", "Kundenbezeichnung", "Applikationsbezeichnung", "Inhaltsbezeichnung", "Land", "Stadt", "Bezirk", "Seite", "User Count", "Dauer (Sekunde)"),
 
 	'task_subject' => 'Während der Galepress.com-Aufgabe ist ein Fehler aufgetreten.',
@@ -398,5 +399,5 @@ return array(
 	'site_system_message_expired' => 'Sitzung beendet!',
 
 	'month_names' => array('', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'),	
-
+	'auth_failed' => 'Kullanıcı izin vermedi',
 );

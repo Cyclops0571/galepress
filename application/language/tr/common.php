@@ -351,7 +351,8 @@ return array(
 	'reports_columns_report1001_admin' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "İndirilme Adeti"),
 	'reports_columns_report1101' => array("Müşteri No", "Müşteri Adı", "Ülke", "Şehir", "İlçe", "İndirilme Adeti"),
 	'reports_columns_report1201' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "Ülke", "Şehir", "İlçe", "İndirilme Adeti"),
-	'reports_columns_report1301' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "İndirilme Adeti"),
+	'reports_columns_report1301' => array("Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "İndirilme Yüzdesi"),
+	'reports_columns_report1301_admin' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "İndirilme Yüzdesi"),
 	'reports_columns_report1302' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "Sayfa", "Kullanıcı Sayısı", "Süre (Saniye)"),
 
 	'task_subject' => 'Galepress.com görevi esnasında hata oluştu',
@@ -395,5 +396,5 @@ return array(
 	'site_system_message_expired' => 'Oturumunuz sonlandı!',
 
 	'month_names' => array('', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'),
-
+	'auth_failed' => 'Kullanıcı izin vermedi',
 );

@@ -291,18 +291,25 @@ class Reports_Controller extends Base_Controller
 			$report = '1301';
 			$arrReport = array(
 				'customer' => array(
-					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
-					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Number"),
-					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "DownloadCount"),
+					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px"),
+					'fieldType' => array("String", "String", "String", "String", "String", "Percent"),
+					'fieldName' => array("ApplicationName", "ContentName", "Country", "City", "District", "Percent"),
 					'fieldCaption' => __("common.reports_columns_report1301")->get()
 				),
 				'admin' => array(
 					'columnWidth' => array("100px", "100px", "100px", "100px", "100px", "100px", "100px", "100px"),
-					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Number"),
-					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "DownloadCount"),
-					'fieldCaption' => __("common.reports_columns_report1301")->get()
+					'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Percent"),
+					'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "Percent"),
+					'fieldCaption' => __("common.reports_columns_report1301_admin")->get()
 				)
 			);
+			//Uygulama secildiyse uygulama adini gosterme!
+			if ((int)$currentUser->UserTypeID == eUserTypes::Customer && (int)$applicationID > 0) {
+				array_shift($arrReport['customer']['columnWidth']);
+				array_shift($arrReport['customer']['fieldType']);
+				array_shift($arrReport['customer']['fieldName']);
+				array_shift($arrReport['customer']['fieldCaption']);
+			}
 			$sql = File::get(path('public').'files/report.sql/1301.sql');
 			$sql = str_replace('{SD}', Common::dateWrite($sd, false), $sql);
 			$sql = str_replace('{ED}', Common::dateWrite($ed, false), $sql);
@@ -401,6 +408,7 @@ class Reports_Controller extends Base_Controller
 		*/
 		//$rows = DB::table(DB::raw('('.$sql.') t'))->get();
 		$rows = DB::table(DB::raw('('.$sql.') t'))->paginate($rowcount);
+		//return var_dump($rows->results);
 
 		$reportUser = 'customer';
 		if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {

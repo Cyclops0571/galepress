@@ -793,11 +793,23 @@ class Common
 		//$FieldTypeVariant
 		//Number
 		//String
+		//Percent
 		//DateTime
 		//Date
 		//Bit
-		if($type == "Number" || $type == "String") {
+		if($type == "Number") {
 			$ret = $data;
+		}
+		elseif($type == "String") {
+			if(Common::startsWith($data, '!!!')) {
+				$ret = __('common.'.str_replace('!!!', '', $data))->get();
+			}
+			else {
+				$ret = $data;
+			}
+		}
+		elseif($type == "Percent") {
+			$ret = '% '.round((float)$data, 2);
 		}
 		elseif($type == "DateTime") {
 			$ret = Common::dateRead($data, "dd.MM.yyyy HH:mm");

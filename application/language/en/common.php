@@ -350,7 +350,8 @@ return array(
 	'reports_columns_report1001_admin' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Download Count"),
 	'reports_columns_report1101' => array("Customer No", "Customer Name", "Country", "City", "District", "Download Count"),
 	'reports_columns_report1201' => array("Customer No", "Customer Name", "Application Name", "Country", "City", "District", "Download Count"),
-	'reports_columns_report1301' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Download Count"),
+	'reports_columns_report1301' => array("Application Name", "Content Name", "Country", "City", "District", "Download Percent"),
+	'reports_columns_report1301_admin' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Download Percent"),
 	'reports_columns_report1302' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Page", "User Count", "Duration (Second)"),
 
 	'task_subject' => 'An error occurred during the task galepress.com',
@@ -394,5 +395,5 @@ return array(
 	'site_system_message_expired' => 'Your session expired!',
 
 	'month_names' => array('', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),	
-
+	'auth_failed' => 'Kullanıcı izin vermedi',
 );
