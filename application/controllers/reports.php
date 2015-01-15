@@ -349,6 +349,11 @@ class Reports_Controller extends Base_Controller
 			//$rows = DB::table(DB::raw('('.$sql.') t'))->get();
 		}
 
+		$reportUser = 'customer';
+		if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
+			$reportUser = 'admin';
+		}
+		
 		if($xls == 1) {
 			header("Content-Type: application/octet-stream"); 
 			header("Content-Transfer-Encoding: binary"); 
@@ -358,6 +363,16 @@ class Reports_Controller extends Base_Controller
 
 			$schema_insert = "";
 			$sep = "\t";
+			/*
+			'arrColumnWidth' => $arrReport[$reportUser]['columnWidth'],
+			'arrFieldCaption' => $arrReport[$reportUser]['fieldCaption'],
+			'arrFieldType' => $arrReport[$reportUser]['fieldType'],
+			'arrFieldName' => $arrReport[$reportUser]['fieldName'],
+			*/
+			$arrFieldCaption = $arrReport[$reportUser]['fieldCaption'];
+			$arrFieldType = $arrReport[$reportUser]['fieldType'];
+			$arrFieldName = $arrReport[$reportUser]['fieldName'];
+
 			for ($i = 0; $i < count($arrFieldCaption); $i++) {
 				$schema_insert .= $arrFieldCaption[$i].$sep;
 			}
@@ -410,10 +425,6 @@ class Reports_Controller extends Base_Controller
 		$rows = DB::table(DB::raw('('.$sql.') t'))->paginate($rowcount);
 		//return var_dump($rows->results);
 
-		$reportUser = 'customer';
-		if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
-			$reportUser = 'admin';
-		}
 		$data = array(
 			'report' => $report,
 			'sd' => $sd,

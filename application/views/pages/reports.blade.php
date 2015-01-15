@@ -77,7 +77,7 @@
                         <div class="col-md-3">
                             <input class="btn btn-mini" type="button" onClick="cReport.downloadAsExcel();" value="{{ __('common.reports_excel') }}">
                         </div>
-                        <div class="col-md-3{{ ($report == "101" || $report == "201" || $report == "301" || $report == "302" || $report == "1302" ? ' hidden' : '') }}">
+                        <div class="col-md-3{{ ($report == "101" || $report == "201" || $report == "301" || $report == "302" || $report == "1001" || $report == "1302" ? ' hidden' : '') }}">
                             <input class="btn btn-mini" type="button" onClick="cReport.viewOnMap();" value="{{ __('common.reports_viewonmap') }}">
                         </div>
                     </div>
