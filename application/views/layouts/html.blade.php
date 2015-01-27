@@ -43,6 +43,7 @@
         {{ HTML::script('js/flot/jquery.flot.js'); }}
         {{ HTML::script('js/flot/jquery.flot.animator.js'); }}
         {{ HTML::script('js/flot/jquery.flot.resize.js'); }}
+        {{ HTML::script('js/flot/jquery.flot.grow.js'); }}
 
         {{ HTML::script('uploadify/jquery.uploadify-3.1.min.js'); }}
         {{ HTML::script('bundles/jupload/js/jquery.iframe-transport.js'); }}

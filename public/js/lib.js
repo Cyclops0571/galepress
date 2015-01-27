@@ -408,6 +408,15 @@ $(document).ready(function() {
                  barWidth: 0.3,
                  align: 'center'
              },
+             grow:{
+             	active:true,
+				steps:40,
+				growings:[
+					{
+						stepMode:"linear"
+					}
+				]
+			}
          },
             xaxis: {
                 axisLabel: "Cihaz",
