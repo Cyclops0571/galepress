@@ -51,6 +51,8 @@ return array(
 	'contents_passwords' => 'passwords',
 	'contents_passwords_save' => 'passwords/save',
 	'contents_passwords_delete' => 'passwords/delete',
+
+	'application_form_create' => 'applicationform',
 	
 	'orders' => 'orders',
 	'orders_new' => 'orders/new',

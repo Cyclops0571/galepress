@@ -45,7 +45,7 @@
 					<ul class="social-icons">
 						<li class="facebook"><a href="https://www.facebook.com/pages/Galepress/267455253374597?fref=ts" target="_blank" title="Facebook">Facebook</a></li>
 						<li class="twitter"><a href="https://twitter.com/GalePress" target="_blank" title="Twitter">Twitter</a></li>
-						<li class="linkedin"><a href="http://www.linkedin.com/profile/view?id=269652107&trk=tab_pro" target="_blank" title="Linkedin">Linkedin</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/company/galepress" target="_blank" title="Linkedin">Linkedin</a></li>
 					</ul>
 				</div>
 			</div>

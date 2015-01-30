@@ -51,6 +51,8 @@ return array(
 	'contents_passwords' => 'kennworter',
 	'contents_passwords_save' => 'kennworter/speichern',
 	'contents_passwords_delete' => 'kennworter/loschen',
+
+	'application_form_create' => 'antragsformular',
 	
 	'orders' => 'bestellungen',
 	'orders_new' => 'bestellungen/neu',

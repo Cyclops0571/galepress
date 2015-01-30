@@ -52,6 +52,8 @@ return array(
 	'contents_passwords_save' => 'parolalar/kaydet',
 	'contents_passwords_delete' => 'parolalar/sil',
 
+	'application_form_create' => 'uygulamaformu',
+
 	'orders' => 'siparisler',
 	'orders_new' => 'siparisler/yeni',
 	'orders_show' => 'siparisler/(:num)',

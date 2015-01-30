@@ -108,6 +108,12 @@ class Orders_Controller extends Base_Controller
 		return Redirect::to(__('route.home'));
     }
 
+    public function get_appForm()
+    {
+    	$lastorderno = DB::table('Order')->order_by('OrderID', 'DESC')->first();
+		return View::make('pages.applicationformcreate')->with('lastorderno', $lastorderno);
+    }
+
 	public function get_new()
     {
 		$currentUser = Auth::User();
@@ -181,7 +187,11 @@ class Orders_Controller extends Base_Controller
 		if ($v->passes())
 		{
 			$orderNo = Input::get('OrderNo');
-
+			$lastorderno = DB::table('Order')->order_by('OrderID', 'DESC')->first();
+			if($orderNo==$lastorderno->OrderNo)
+			{
+				$orderNo = 'm000'.($lastorderno->OrderID+1);
+			}
 			//hdnPdfName
 			$sourcePdfFileName = Input::get('hdnPdfName');
 			$sourcePdfFilePath = 'files/temp';
@@ -365,6 +375,20 @@ class Orders_Controller extends Base_Controller
 			}
 			$s->save();
 
+			$toEmail = array(
+				"hakan.sarier@detaysoft.com"
+			);
+			$subject = "Yeni Bir Uygulama Formu Gönderildi!";
+			$msg = "Sayın Yetkili, \n\n".$orderNo." siparis numarasına ait uygulama formunu lütfen işleme alınız.";
+
+			Message::send(function($m) use($toEmail, $subject, $msg)
+			{
+				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+				$m->to($toEmail);
+				$m->subject($subject);
+				$m->body($msg);
+			});
+
 			return "success=".base64_encode("true");
 		}
 		return "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.detailpage_validation'));
@@ -417,7 +441,7 @@ class Orders_Controller extends Base_Controller
 				'upload_dir' => path('public').'files/temp/',
 				'upload_url' => URL::base().'/files/temp/',
 				'param_name' => $element,
-				'accept_file_types' => '/\.(png)$/i'
+				'accept_file_types' => '/\.(gif|jpe?g|png|tiff)$/i'
 			);
 		}
 

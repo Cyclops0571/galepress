@@ -12,9 +12,9 @@
 		<nav>
 			<ul class="nav nav-pills nav-top">
 				<li class="lang">
-						<a href="/tr" class="buttonTR"></a>
-						<a href="/en" class="buttonEng"></a>
-						<a href="/de" class="buttonDe"></a>
+					<a href="/tr" class="buttonTR"></a>
+					<a href="/en" class="buttonEng"></a>
+					<a href="/de" class="buttonDe"></a>
 				</li>
 				<li class="adminPanel" title="{{__('website.cms2')}}" style="letter-spacing:1px;"><a href="/{{ Session::get('language') }}/{{__('route.login')}}"><i class="icon-user" ></i>{{__('website.cms2_abbr')}}</a>
 				</li>
@@ -30,7 +30,7 @@
 			<ul class="social-icons">
 				<li class="facebook"><a href="https://www.facebook.com/pages/Galepress/267455253374597?fref=ts" target="_blank" title="Facebook">Facebook</a></li>
 				<li class="twitter"><a href="https://twitter.com/GalePress" target="_blank" title="Twitter">Twitter</a></li>
-				<li class="linkedin"><a href="http://www.linkedin.com/profile/view?id=269652107&trk=tab_pro" target="_blank" title="Linkedin">Linkedin</a></li>
+				<li class="linkedin"><a href="https://www.linkedin.com/company/galepress" target="_blank" title="Linkedin">Linkedin</a></li>
 			</ul>
 		</div>
 		<nav>
@@ -42,6 +42,7 @@
 						<li class="<?php echo (URI::current() === __("route.website_galepress")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.website_galepress")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.website_galepress')}}">{{__('website.page_galepress')}}</a></li>
 						<li class="<?php echo (URI::current() === __("route.website_products")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.website_products")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.website_products')}}">{{__('website.page_products')}}</a></li>
 						<li class="<?php echo (URI::current() === __("route.website_advantages")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.website_advantages")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.website_advantages')}}">{{__('website.page_advantages')}}</a></li>
+						<li class="<?php echo (URI::current() === __("route.application_form_create")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.application_form_create")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.application_form_create')}}">{{__('common.orders_appformcreate')}}</a></li>
 					</ul>
 				</li>
 				<li class="<?php echo (URI::current() === __("route.website_customers")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_customers')}}">{{__('website.page_customers')}}</a></li>

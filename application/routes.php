@@ -255,6 +255,7 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.contents_passwords_delete')->get($currentLanguage), array('as' => 'contents_passwords_delete', 'before' => 'auth', 'uses' => 'contentpasswords@delete'));
 
 	//Orders
+	Route::get(__('route.application_form_create')->get($currentLanguage), array('as' => 'application_form_create', 'uses' => 'orders@appForm'));
 	Route::get(__('route.orders')->get($currentLanguage), array('as' => 'orders', 'before' => 'auth', 'uses' => 'orders@index'));
 	Route::get(__('route.orders_new')->get($currentLanguage), array('as' => 'orders_new', 'before' => 'auth', 'uses' => 'orders@new'));
 	Route::get(__('route.orders_show')->get($currentLanguage), array('as' => 'orders_show', 'before' => 'auth', 'uses' => 'orders@show'));
@@ -278,7 +279,7 @@ foreach($languages as $currentLanguage) {
 			else if($type == 'uploadpng1024x1024' || $type == 'uploadpng640x960' || $type == 'uploadpng640x1136' || $type == 'uploadpng1536x2048' || $type == 'uploadpng2048x1536')
 			{
 				$rules = array(
-					'Filedata' => 'mimes:png'
+					'Filedata' => 'mimes:png,jpeg,gif,tiff'
 				);
 			}
 			else {
