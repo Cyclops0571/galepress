@@ -315,21 +315,21 @@
                   return;
                 }
 
-                // o = $("#Description");
-                // if(o.val().length == 0 || o.val().length < 100) {
-                //     $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
-                //     if(o.val().length == 0) {
-                //         $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail") }}');
-                //     }
-                //     else if(o.val().length < 100){
-                //         $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail_minlimit") }}');  
-                //     }
-                //     $('#myModal').modal('show');
-                //     $( "#firstListItem").removeClass('appListSuccess');
-                //     $( "a#firstListItem").find('i').css('opacity','0.3');
-                //     $( "a#firstListItem").find('i').css('color','#999');
-                //   return;
-                // }
+                o = $("#Description");
+                if(o.val().length == 0 || o.val().length < 100) {
+                    $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
+                    if(o.val().length == 0) {
+                        $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail") }}');
+                    }
+                    else if(o.val().length < 100){
+                        $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail_minlimit") }}');  
+                    }
+                    $('#myModal').modal('show');
+                    $( "#firstListItem").removeClass('appListSuccess');
+                    $( "a#firstListItem").find('i').css('opacity','0.3');
+                    $( "a#firstListItem").find('i').css('color','#999');
+                  return;
+                }
 
                 o = $("#Keywords");
                 if(o.val().length == 0) {
