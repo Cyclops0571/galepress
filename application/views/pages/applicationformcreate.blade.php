@@ -228,12 +228,11 @@
             <div id="stage1">
               <div class="pull-right"><span style="color: #428bca;font-size: 17px;font-family: monospace; font-weight:bold">*</span><span style="font-size: 13px;font-style: italic; color: rgb(165, 165, 165);">  {{ __('common.orders_appformrequiredfields') }}</span></div>
               <hr style="margin-top:3px; margin-bottom:10px; clear:both;">
-              
               <div class="form-group">
                 <label>{{ __('common.orders_list_column1') }} <span style="color: #428bca;font-size: 17px;font-family: monospace;">*</span></label>
                 <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="OrderNoPopup" data-toggle="popover" title="{{ __('common.orders_list_column1') }}" data-content="{{ __('common.orders_hints_orderno') }}" class="fa fa-info-circle"></i>
-                <input type="hidden" name="Product" id="Product" value="$product">
-                <input type="hidden" name="Qty" id="Qty" value="$qty">
+                <input type="hidden" name="Product" id="Product" value="<?php echo $product; ?>">
+                <input type="hidden" name="Qty" id="Qty" value="<?php echo $qty; ?>">
                 <input type="text" placeholder="{{ __('common.orders_list_column1') }}" name="OrderNo" id="OrderNo" maxlength="50" class="form-control" value="<?php echo $orderNo; ?>" readonly="true" required>
               </div>
 

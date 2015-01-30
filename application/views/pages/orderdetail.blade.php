@@ -71,7 +71,7 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="col-md-3">{{ __('common.orders_orderno') }}<span class="error">*</span></div>
+						<div class="col-md-3">{{ __('common.orders_list_column1') }}<span class="error">*</span></div>
 						{{ $errors->first('OrderNo', '<p class="error">:message</p>') }}
 						<div class="col-md-9">
 							<input type="text" name="OrderNo" id="OrderNo" class="form-control textbox required" value="{{ $OrderNo }}"/>

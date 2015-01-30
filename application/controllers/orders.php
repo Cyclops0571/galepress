@@ -376,7 +376,10 @@ class Orders_Controller extends Base_Controller
 			$s->save();
 
 			$toEmail = array(
-				"hakan.sarier@detaysoft.com"
+				"info@galepress.com",
+				"denizkaracali@gmail.com",
+				"deniz.karacali@detaysoft.com",
+				"ercan.solcun@detaysoft.com"
 			);
 			$subject = "Yeni Bir Uygulama Formu Gönderildi!";
 			$msg = "Sayın Yetkili, \n\n".$orderNo." siparis numarasına ait uygulama formunu lütfen işleme alınız.";
