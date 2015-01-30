@@ -1449,55 +1449,55 @@
     </div><!-- /.modal -->
     
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-    $("#OrderNoPopup").popover();
-    $("#AppNamePopup").popover();
-    $("#AppDescPopup").popover();
-    $("#KeywordsPopup").popover();
+            $("#OrderNoPopup").popover();
+            $("#AppNamePopup").popover();
+            $("#AppDescPopup").popover();
+            $("#KeywordsPopup").popover();
 
-    $("#EmailPopup").popover();
-    $("#WebSitePopup").popover();
-    $("#FacePopup").popover();
-    $("#TwitterPopup").popover();
+            $("#EmailPopup").popover();
+            $("#WebSitePopup").popover();
+            $("#FacePopup").popover();
+            $("#TwitterPopup").popover();
 
-    $("#pdf1024Popup").popover();
-    $("#otherImages").popover();
+            $("#pdf1024Popup").popover();
+            $("#otherImages").popover();
 
-    $('textarea').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
-    $('#Name').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
-    $('#OrderNo').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
+            $('textarea').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
+            $('#Name').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
+            $('#OrderNo').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
 
-        var _URL = window.URL || window.webkitURL;
+            var _URL = window.URL || window.webkitURL;
 
-        function imageDimensionCheck(input, w, h, type, size){
+            function imageDimensionCheck(input, w, h, type, size){
 
-            if(size>5){
-                $('#myModal').find('.modal-title').text('{{ __("common.orders_image_filesize") }}');
-                $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_maxfilesize") }}');
-                $('#myModal').modal('show');
-                $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
-                $('html, body').animate({ scrollTop: 0 }, 'slow');
-                $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                $( "#secondListItem").removeClass('appListSuccess');
-                $( "a#secondListItem").find('i').css('opacity','0.3');
-                $( "a#secondListItem").find('i').css('color','#999');
-                return;
-            }
-            else{
-                var file, img;
-                if ((file = input.files[0])){
-                    img = new Image();
-                    img.onload = function () {
-                      var imgWidth = this.width;
-                      var imgHeight = this.height;
+                if(size>5){
+                    $('#myModal').find('.modal-title').text('{{ __("common.orders_image_filesize") }}');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_maxfilesize") }}');
+                    $('#myModal').modal('show');
+                    $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                    $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                    $( "#secondListItem").removeClass('appListSuccess');
+                    $( "a#secondListItem").find('i').css('opacity','0.3');
+                    $( "a#secondListItem").find('i').css('color','#999');
+                    return;
+                }
+                else{
+                    var file, img;
+                    if ((file = input.files[0])){
+                        img = new Image();
+                        img.onload = function () {
+                            var imgWidth = this.width;
+                            var imgHeight = this.height;
                             if(imgWidth!=w || imgHeight!=h){
                                 $('#myModal').find('.modal-title').text('{{ __("common.orders_image_resolution") }}');
                                 $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_yourimage") }}'.replace(":resolution",w+"x"+h));
                                 $('#myModal').modal('show');
                                 $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
                                 $('html, body').animate({ scrollTop: 0 }, 'slow');
-                
+
                                 $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
                                 $( "#secondListItem").removeClass('appListSuccess');
                                 $( "a#secondListItem").find('i').css('opacity','0.3');
@@ -1508,364 +1508,363 @@
                                 $( "ul li:nth-child(2) a" ).addClass('appListSuccess');
                                 $('#'+input.id).parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
                             }    
-                    };
-                    img.src = _URL.createObjectURL(file);
+                        };
+                        img.src = _URL.createObjectURL(file);
+                    }
                 }
             }
-        }
 
-        var fileType, fileSize;
-        $("#Image1024x1024").change(function (e) {
-            fileType=this.files[0].type.split('/');
-            fileSize= (this.files[0].size) /1024 /1024;
-            imageDimensionCheck(this, 1024, 1024, fileType[1], fileSize);
-        });
-
-        $("#Image640x960").change(function (e) {
-            fileType=this.files[0].type.split('/');
-            fileSize= (this.files[0].size) /1024 /1024;
-            imageDimensionCheck(this, 640, 960, fileType[1], fileSize);
-        });
-
-        $("#Image640x1136").change(function (e) {
-            fileType=this.files[0].type.split('/');
-            fileSize= (this.files[0].size) /1024 /1024;
-            imageDimensionCheck(this, 640, 1136, fileType[1], fileSize);
-        });
-
-        $("#Image1536x2048").change(function (e) {
-            fileType=this.files[0].type.split('/');
-            fileSize= (this.files[0].size) /1024 /1024;
-            imageDimensionCheck(this, 1536, 2048, fileType[1], fileSize);
-        });
-
-        $("#Image2048x1536").change(function (e) {
-            fileType=this.files[0].type.split('/');
-            fileSize= (this.files[0].size) /1024 /1024;
-            imageDimensionCheck(this, 2048, 1536, fileType[1], fileSize);
-        });
-
-        $('#appBackButton').on('click',function(){
-            $( ".appimg" ).fadeTo( 'slow' , 0);
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
-            // if( $('ul li:nth-child(3)').hasClass('active')==true){
-
-            //   setTimeout(function(){
-            //     startAnime();
-            //   },2000)
-
-            // }
-            $( "#appSubmitButton" ).val("{{ __('common.orders_form_next') }}");
-            if($( "ul li:nth-child(2)" ).hasClass("active")==true){
-                $( "#stage2" ).animate( {marginTop: "-1000"}, 500, function() {
-                $( "#stage2" ).addClass('hide');
-                $( "#stage3" ).addClass('hide');
-                $( "#stage4" ).addClass('hide');
-                $('#stage1').css('margin-top','-800px').removeClass('hide');
-                $( "#stage1" ).animate({
-                marginTop: "0"
-                }, 1000);
-                $( "#appBackButton" ).fadeOut();
-                $( "ul li:nth-child(2)" ).removeClass("active");
-                $( "ul li:nth-child(2)" ).prev().addClass("active");
+            var fileType, fileSize;
+            $("#Image1024x1024").change(function (e) {
+                fileType=this.files[0].type.split('/');
+                fileSize= (this.files[0].size) /1024 /1024;
+                imageDimensionCheck(this, 1024, 1024, fileType[1], fileSize);
             });
 
-            $('ul li:nth-child(2)').prev().addClass('active').find('span').removeClass().addClass('liBordersActive');
-            $('ul li:nth-child(2)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
-            $( ".appimg" ).fadeTo( 'slow', 1);
-            $( ".appimg img" ).each(function(){
-                $(this).addClass('hide');
+            $("#Image640x960").change(function (e) {
+                fileType=this.files[0].type.split('/');
+                fileSize= (this.files[0].size) /1024 /1024;
+                imageDimensionCheck(this, 640, 960, fileType[1], fileSize);
             });
 
-             $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-                $('#detailStage').text('{{ __("common.orders_form_addappdetail") }}');
-                $( "#detailStage" ).animate( {marginLeft: "0"},500);
-            });
-            }
-            if($( "ul li:nth-child(3)" ).hasClass("active")==true){
-                $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
-                $( "#stage3" ).addClass('hide');
-                $( "#stage1" ).addClass('hide');
-                $( "#stage4" ).addClass('hide');
-                $('#stage2').css('margin-top','-800px').removeClass('hide');
-                $( "#stage2" ).animate({
-                    marginTop: "0"
-                  }, 1000);
-                $( "ul li:nth-child(2)" ).removeClass().addClass("active");
-                $( "ul li:nth-child(3)" ).removeClass("active");
+            $("#Image640x1136").change(function (e) {
+                fileType=this.files[0].type.split('/');
+                fileSize= (this.files[0].size) /1024 /1024;
+                imageDimensionCheck(this, 640, 1136, fileType[1], fileSize);
             });
 
-            $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-            $('ul li:nth-child(3)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
+            $("#Image1536x2048").change(function (e) {
+                fileType=this.files[0].type.split('/');
+                fileSize= (this.files[0].size) /1024 /1024;
+                imageDimensionCheck(this, 1536, 2048, fileType[1], fileSize);
+            });
 
-            $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-            $('#detailStage').text('{{ __("common.orders_form_loadappimages") }}');
-            $( "#detailStage" ).animate( {marginLeft: "0"},500);
-        });
-            }
-        });
+            $("#Image2048x1536").change(function (e) {
+                fileType=this.files[0].type.split('/');
+                fileSize= (this.files[0].size) /1024 /1024;
+                imageDimensionCheck(this, 2048, 1536, fileType[1], fileSize);
+            });
 
-        $('ul li a').on('click',function(){
-            $( "li" ).each(function() {
-                $( this ).find('a').removeClass('active');
-                if($( this ).hasClass('disabled')==false)
-                    $( this ).removeClass();
+            $('#appBackButton').on('click',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0);
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+
+                $( "#appSubmitButton" ).val("{{ __('common.orders_form_next') }}");
+                if($( "ul li:nth-child(2)" ).hasClass("active")==true){
+                    $( "#stage2" ).animate( {marginTop: "-1000"}, 500, function() {
+                        $( "#stage2" ).addClass('hide');
+                        $( "#stage3" ).addClass('hide');
+                        $( "#stage4" ).addClass('hide');
+                        $('#stage1').css('margin-top','-800px').removeClass('hide');
+                        $( "#stage1" ).animate({
+                            marginTop: "0"
+                        }, 1000);
+                        $( "#appBackButton" ).fadeOut();
+                        $( "ul li:nth-child(2)" ).removeClass("active");
+                        $( "ul li:nth-child(2)" ).prev().addClass("active");
+                    });
+
+                    $('ul li:nth-child(2)').prev().addClass('active').find('span').removeClass().addClass('liBordersActive');
+                    $('ul li:nth-child(2)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
+                    $( ".appimg" ).fadeTo( 'slow', 1);
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    });
+
+                    $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+                        $('#detailStage').text('{{ __("common.orders_form_addappdetail") }}');
+                        $( "#detailStage" ).animate( {marginLeft: "0"},500);
+                    });
+                }
+                if($( "ul li:nth-child(3)" ).hasClass("active")==true){
+                    $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
+                        $( "#stage3" ).addClass('hide');
+                        $( "#stage1" ).addClass('hide');
+                        $( "#stage4" ).addClass('hide');
+                        $('#stage2').css('margin-top','-800px').removeClass('hide');
+                        $( "#stage2" ).animate({
+                            marginTop: "0"
+                        }, 1000);
+                        $( "ul li:nth-child(2)" ).removeClass().addClass("active");
+                        $( "ul li:nth-child(3)" ).removeClass("active");
+                    });
+
+                    $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                    $('ul li:nth-child(3)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
+
+                    $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+                        $('#detailStage').text('{{ __("common.orders_form_loadappimages") }}');
+                        $( "#detailStage" ).animate( {marginLeft: "0"},500);
+                    });
+                }
+            });
+
+            $('ul li a').on('click',function(){
+                $( "li" ).each(function() {
+                    $( this ).find('a').removeClass('active');
+                    if($( this ).hasClass('disabled')==false)
+                        $( this ).removeClass();
                     $(this).find('span').removeClass().addClass('liBorders');
+                });
+                $( this ).parent().addClass('active');
+            })
+
+            $('ul li:nth-child(1) a').on('click',function(){
+                $( ".appimg #launcImages" ).fadeTo('slow', 0);
+                $( this ).parent().addClass('active');
+                $('ul li:nth-child(1)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                $( "#appBackButton" ).fadeOut();
+                $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
+
+            })
+
+            $('ul li:nth-child(2) a').on('click',function(){
+                $( ".appimg" ).fadeTo( 'slow', 1);
+                $( ".appimg img" ).each(function(){
+                    $(this).addClass('hide');
+                });
+                $( this ).parent().addClass('active');
+                $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                $( "#appBackButton" ).fadeIn();
+                $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
+
+            })
+
+            $('ul li:nth-child(3) a').on('click',function(){
+                $( this ).parent().addClass('active');
+                $('ul li:nth-child(3)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                $( "#appBackButton" ).fadeIn();
+                $('#appSubmitButton').val('{{ __("common.orders_formfinal") }}');
+
+            })
+
+            $('#stage2').mouseover(function(){
+                $( ".appimg > img" ).each(function(){
+                    $(this).addClass('hide');
+                });
+            })
+
+            $('#Image1024x1024').mouseover(function(){
+                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg #launcImages img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgLaunch1').removeClass('hide');
+                    $(this).fadeTo('slow', 1).dequeue();
+                }).dequeue();
             });
-            $( this ).parent().addClass('active');
-        })
 
-        $('ul li:nth-child(1) a').on('click',function(){
-            $( ".appimg #launcImages" ).fadeTo('slow', 0);
-            $( this ).parent().addClass('active');
-            $('ul li:nth-child(1)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-            $( "#appBackButton" ).fadeOut();
-            $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
-
-        })
-
-        $('ul li:nth-child(2) a').on('click',function(){
-            $( ".appimg" ).fadeTo( 'slow', 1);
-            $( ".appimg img" ).each(function(){
-                $(this).addClass('hide');
+            $('#Pdf').mouseover(function(){
+                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg #launcImages img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgLaunch3').removeClass('hide');
+                    $(this).fadeTo('slow', 1).dequeue();
+                }).dequeue();
             });
-            $( this ).parent().addClass('active');
-            $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-            $( "#appBackButton" ).fadeIn();
-            $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
 
-        })
-
-        $('ul li:nth-child(3) a').on('click',function(){
-            $( this ).parent().addClass('active');
-            $('ul li:nth-child(3)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-            $( "#appBackButton" ).fadeIn();
-            $('#appSubmitButton').val('{{ __("common.orders_formfinal") }}');
-
-        })
-
-        $('#stage2').mouseover(function(){
-            $( ".appimg > img" ).each(function(){
-                $(this).addClass('hide');
+            $('#Image640x960').mouseover(function(){
+                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg #launcImages img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgLaunch2').removeClass('hide');
+                    $(this).fadeTo('slow', 1).dequeue();
+                }).dequeue();
             });
-        })
 
-        $('#Image1024x1024').mouseover(function(){
-            $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                $( ".appimg #launcImages img" ).each(function(){
-                    $(this).addClass('hide');
-                })
-                $('#imgLaunch1').removeClass('hide');
-                $(this).fadeTo('slow', 1).dequeue();
-            }).dequeue();
-        });
-
-        $('#Pdf').mouseover(function(){
-            $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                $( ".appimg #launcImages img" ).each(function(){
-                    $(this).addClass('hide');
-                })
-                $('#imgLaunch3').removeClass('hide');
-                $(this).fadeTo('slow', 1).dequeue();
-            }).dequeue();
-        });
-
-        $('#Image640x960').mouseover(function(){
-             $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                $( ".appimg #launcImages img" ).each(function(){
-                    $(this).addClass('hide');
-                })
-                $('#imgLaunch2').removeClass('hide');
-                $(this).fadeTo('slow', 1).dequeue();
-            }).dequeue();
-        });
-
-        $('#Image640x1136').mouseover(function(){
-             $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                $( ".appimg #launcImages img" ).each(function(){
-                    $(this).addClass('hide');
-                })
-                $('#imgLaunch2').removeClass('hide');
-                $(this).fadeTo('slow', 1).dequeue();
-            }).dequeue();
-        });
-
-        $('#Image1536x2048').mouseover(function(){
-            $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                $( ".appimg #launcImages img" ).each(function(){
-                    $(this).addClass('hide');
-                })
-                $('#imgLaunch2').removeClass('hide');
-                $(this).fadeTo('slow', 1).dequeue();
-            }).dequeue();
-        });
-
-        $('#Image2048x1536').mouseover(function(){
-            $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                $( ".appimg #launcImages img" ).each(function(){
-                    $(this).addClass('hide');
-                })
-                $('#imgLaunch2').removeClass('hide');
-                $(this).fadeTo('slow', 1).dequeue();
-            }).dequeue();
-        });
-
-
-
-
-        $('.close').on('click',function(){
-            if(this.id!='modal-closeBtn')
-                $(this).parent().hide();
-        });
-        $('.modal-okBtn').on('click',function(){
-          $('#myModal').modal('hide');
-        });
-
-        $('#myModal').on('hidden.bs.modal', function (e) {
-            setTimeout(function() {
-                  $('.alert').fadeOut(3500);
-                  $('.file-status').fadeOut(3500);
+            $('#Image640x1136').mouseover(function(){
+                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg #launcImages img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgLaunch2').removeClass('hide');
+                    $(this).fadeTo('slow', 1).dequeue();
+                }).dequeue();
             });
-        })
-        $("#Pdf").change(function (e) {
-            fileType=this.files[0].type.split('/');
-            fileSize= (this.files[0].size) /1024 /1024;
-            if(fileType[1]!='pdf'){
-                $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
-                $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
-                $('#myModal').modal('show');
-                $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
-                $('html, body').animate({ scrollTop: 0 }, 'slow');
-                $('#hdnPdfSelected').val("0");
-                $('#hdnPdfName').val("");
-                $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                $( "#secondListItem").removeClass('appListSuccess');
-                $( "a#secondListItem").find('i').css('opacity','0.3');
-                $( "a#secondListItem").find('i').css('color','#999');
-                return;
-            }
-            else{
-                if(fileSize>5){
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_pdffilesize") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
+
+            $('#Image1536x2048').mouseover(function(){
+                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg #launcImages img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgLaunch2').removeClass('hide');
+                    $(this).fadeTo('slow', 1).dequeue();
+                }).dequeue();
+            });
+
+            $('#Image2048x1536').mouseover(function(){
+                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg #launcImages img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgLaunch2').removeClass('hide');
+                    $(this).fadeTo('slow', 1).dequeue();
+                }).dequeue();
+            });
+
+
+
+
+            $('.close').on('click',function(){
+                if(this.id!='modal-closeBtn')
+                    $(this).parent().hide();
+            });
+            $('.modal-okBtn').on('click',function(){
+                $('#myModal').modal('hide');
+            });
+
+            $('#myModal').on('hidden.bs.modal', function (e) {
+                setTimeout(function() {
+                    $('.alert').fadeOut(3500);
+                    $('.file-status').fadeOut(3500);
+                });
+            })
+            $("#Pdf").change(function (e) {
+                fileType=this.files[0].type.split('/');
+                fileSize= (this.files[0].size) /1024 /1024;
+                if(fileType[1]!='pdf'){
+                    $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
                     $('#myModal').modal('show');
                     $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
                     $('html, body').animate({ scrollTop: 0 }, 'slow');
                     $('#hdnPdfSelected').val("0");
                     $('#hdnPdfName').val("");
                     $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                    $( "#secondListItem").removeClass('appListSuccess');
                     $( "a#secondListItem").find('i').css('opacity','0.3');
                     $( "a#secondListItem").find('i').css('color','#999');
                     return;
                 }
                 else{
-                    $( "ul li:nth-child(2) a" ).addClass('appListSuccess'); 
-                    $("#Pdf").parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
+                    if(fileSize>5){
+                        $('#myModal').find('.modal-title').text('{{ __("common.orders_pdffilesize") }}');
+                        $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
+                        $('#myModal').modal('show');
+                        $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        $('#hdnPdfSelected').val("0");
+                        $('#hdnPdfName').val("");
+                        $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                        $( "a#secondListItem").find('i').css('opacity','0.3');
+                        $( "a#secondListItem").find('i').css('color','#999');
+                        return;
+                    }
+                    else{
+                        $( "ul li:nth-child(2) a" ).addClass('appListSuccess'); 
+                        $("#Pdf").parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
+                    }
                 }
-            }
-        })
+            })
 
-        $('#OrderNo').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-          });
-        });
+            $('#OrderNo').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                });
+            });
 
-        $('#Name').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgAppName').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
-        $('#Description').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgAppDesc').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
-        $('#Keywords').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgKeywords').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
-        $('#Email').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgEmail').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
-        $('#Website').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgWebSite').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
-        $('#Facebook').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgFacebook').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
-        $('#Twitter').on('focus',function(){
-          $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-            $( ".appimg img" ).each(function(){
-              $(this).addClass('hide');
-            })
-            $('#imgTwitter').removeClass('hide');
-            $( ".appimg" ).fadeTo( 'slow' , 1);
-          });
-        });
+            $('#Name').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgAppName').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
+            $('#Description').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgAppDesc').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
+            $('#Keywords').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgKeywords').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
+            $('#Email').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgEmail').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
+            $('#Website').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgWebSite').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
+            $('#Facebook').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgFacebook').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
+            $('#Twitter').on('focus',function(){
+                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    $( ".appimg img" ).each(function(){
+                        $(this).addClass('hide');
+                    })
+                    $('#imgTwitter').removeClass('hide');
+                    $( ".appimg" ).fadeTo( 'slow' , 1);
+                });
+            });
 
-        $( "#firstListItem").click(function(){
-          $( "#stage2" ).addClass('hide');
-          $( "#stage3" ).addClass('hide');
-          $( "#stage4" ).addClass('hide'); 
-          $( "#stage1" ).removeClass().fadeIn().css('margin-top','0');       
-        })
-        $( "#secondListItem").click(function(){
-          $( "#stage1" ).addClass('hide');
-          $( "#stage3" ).addClass('hide');
-          $( "#stage4" ).addClass('hide'); 
-          $( "#stage2" ).removeClass().fadeIn().css('margin-top','0');        
-        })
-        $( "#thirdListItem").click(function(){
-          $( "#stage1" ).addClass('hide');
-          $( "#stage2" ).addClass('hide');
-          $( "#stage3" ).addClass('hide');  
-          $( "#stage4" ).removeClass().fadeIn().css('margin-top','0');       
-        })
-    });
+            $( "#firstListItem").click(function(){
+                $( "#stage2" ).addClass('hide');
+                $( "#stage3" ).addClass('hide');
+                $( "#stage4" ).addClass('hide'); 
+                $( "#stage1" ).removeClass().fadeIn().css('margin-top','0');       
+            })
+            $( "#secondListItem").click(function(){
+                $( "#stage1" ).addClass('hide');
+                $( "#stage3" ).addClass('hide');
+                $( "#stage4" ).addClass('hide'); 
+                $( "#stage2" ).removeClass().fadeIn().css('margin-top','0');        
+            })
+            $( "#thirdListItem").click(function(){
+                $( "#stage1" ).addClass('hide');
+                $( "#stage2" ).addClass('hide');
+                if($( "a#thirdListItem").hasClass('appListSuccess')==false)
+                {
+                    $( "#stage3" ).removeClass().fadeIn().css('margin-top','0'); 
+                }
+                else{
+                    $( "#stage3" ).addClass('hide');
+                    $( "#stage4" ).removeClass().fadeIn().css('margin-top','0'); 
+                }      
+            })
+        });
     </script>
     </div>
-    <!-- JavaScript -->
-  <script src="/website/app-form/js/bootstrap.js"></script>
+    <script src="/website/app-form/js/bootstrap.js"></script>
     <script src="/website/js/jquery.inputlimiter.1.3.1.min.js"></script>
 </body>
 </html>
