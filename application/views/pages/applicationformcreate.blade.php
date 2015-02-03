@@ -245,7 +245,7 @@
               <div class="form-group">
                 <label>{{ __('common.orders_description') }} <span style="color: #428bca;font-size: 17px;font-family: monospace;">*</span></label>
                 <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="AppDescPopup" data-toggle="popover" title="{{ __('common.orders_description') }}" data-content="{{ __('common.orders_hints_appdescription') }}" class="fa fa-info-circle"></i>
-                <textarea id="Description" name="Description" placeholder="{{ __('common.orders_placeholders_appdescription') }}" minlength="100" maxlength="4000" rows="3" class="form-control" required></textarea>
+                <textarea id="Description" name="Description" placeholder="{{ __('common.orders_placeholders_appdescription') }}" minlength="100" rows="3" class="form-control" required></textarea>
               </div>
            
               <div class="form-group">
@@ -329,6 +329,12 @@
                     $( "a#firstListItem").find('i').css('color','#999');
                   return;
                 }
+                if(o.val().length > 4000) {
+                  $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
+                  $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_maxdesc") }}'); 
+                  $('#myModal').modal('show')
+                  return;
+                }
 
                 o = $("#Keywords");
                 if(o.val().length == 0) {
@@ -353,12 +359,95 @@
                   }
                 }
                 o = $("#Email");
-                if(!validateEmail(o.val())){
+                if(o.val().length>0){
+                  if(!validateEmail(o.val()))
+                  {
                     $('#myModal').on('hidden.bs.modal', function (e) {
                         o.focus();
                         $('#myModal').unbind('hidden.bs.modal');
                     })
-                 return;
+                    return;
+                  }
+                }
+
+
+                // function validate_website(website_url)
+                // {
+                //   var websiteReg =/[a-zA-Z0-9-]/;
+
+                //   console.log(websiteReg.test(website_url));
+
+                //   if (!websiteReg.test(website_url) || $("#Website").val().length<4)
+                //   {
+                //     $('#myModal').find('.modal-title').text('Website');
+                //     $('#myModal').find('.modal-body p').text('Website site adresi hatalı');
+                //     $('#myModal').modal('show');
+                //     return false; 
+                //   }
+                //   else
+                //   {
+                //     return true;
+                //   }         
+                // }
+
+                function validate_facebook(facebook_url)
+                {
+                  var facebookReg = /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i;
+
+                  if (!facebookReg.test(facebook_url) && $("#Facebook").val().length>0)
+                  {
+                    $('#myModal').find('.modal-title').text('Facebook');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_facebookformat") }}');
+                    $('#myModal').modal('show');
+                    return false; 
+                  }
+                  else
+                    return true;         
+                }
+
+                function validate_twitter(twitter_url)
+                {
+                  var twitterReg = /^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/i;
+
+                  if (twitterReg.test(twitter_url)==false && $("#Twitter").val().length>0)
+                  {
+                    $('#myModal').find('.modal-title').text('Twitter');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_twitterformat") }}');
+                    $('#myModal').modal('show');
+                    return false;
+                  }
+                  else
+                    return true;         
+                }
+
+                // o = $("#Website");
+                // if(!validate_website(o.val()))
+                // {
+                //   $('#myModal').on('hidden.bs.modal', function (e) {
+                //       o.focus();
+                //       $('#myModal').unbind('hidden.bs.modal');
+                //   })
+                //   return;
+                // }
+
+                o = $("#Facebook");
+                if(!validate_facebook(o.val()))
+                {
+                  $('#myModal').on('hidden.bs.modal', function (e) {
+                      o.focus();
+                      $('#myModal').unbind('hidden.bs.modal');
+                  })
+                  return;
+                }
+
+                o = $("#Twitter");
+                if(!validate_twitter(o.val()))
+                {
+                  $('#myModal').on('hidden.bs.modal', function (e) {
+                      o.focus();
+                      $('#myModal').unbind('hidden.bs.modal');
+                  })
+                  return;
                 }
              
                 if( $('ul li:nth-child(2)').prev().hasClass('active')==true){
@@ -542,7 +631,7 @@
                       return;
                     }                   
 
-                    $.ajax({
+                  $.ajax({
                   type: "POST",
                   url: '/' + $('#currentlanguage').val() + '/' + route["orders_save"],
                   data: $("form").serialize(),
@@ -589,9 +678,10 @@
                             $('ul li:nth-child(2)').prev().removeClass();
                             $('ul li:nth-child(2)').removeClass();
                             $('ul li:nth-child(3)').removeClass();
+                            //console.log(data);
                     }
                     else {
-                      //error
+                      //console.log("şoqq",data);
                     }
                   },
                   error: function (resp) {
@@ -1463,9 +1553,30 @@
             $("#pdf1024Popup").popover();
             $("#otherImages").popover();
 
-            $('textarea').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
-            $('#Name').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
-            $('#OrderNo').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}', });
+            $('#Description').inputlimiter({zeroPlural:false, limit:4000, allowExceed:true, remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}' });
+            $('#Name').inputlimiter({remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}' });
+            $('#Keywords').inputlimiter({remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}' });
+            $('#OrderNo').inputlimiter({ remText: '%n', limitText: '(%n) {{ __("common.orders_textarea_character") }}' });
+
+            $('#Description').bind('input',function() {
+              if($(this).val().length>4000)
+                $('#limiterBox').css('color','red');
+              else
+                $('#limiterBox').css('color','black');
+            });
+
+            $('#Description').bind('focusout',function() {
+              $('#limiterBox').css('color','black');
+            });
+
+            var lastHeight = 0;
+            $('textarea').bind('mousemove',function() {
+              if ($(this).css('height') != lastHeight)
+              {
+                $('#limiterBox').css("display","none"); 
+                lastHeight = $(this).css('height'); 
+              }
+            });
 
             var _URL = window.URL || window.webkitURL;
 

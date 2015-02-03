@@ -174,16 +174,31 @@ class Orders_Controller extends Base_Controller
 		if($userID == 0) {
 			$id = 0;
 		}
+		// Description alanında javascript ile alınan text uzunluğu ile sunucudan okunan text uzunluğu aynı olmadığı için aşağıdaki kontoller yapılmıştır.
+		//Javascript 4000 karaktere olumlu cevap döndürürken sunucu daha fazla karakter okuduğu için formu post etmiyordu. \n\r sebebiyle iki karakter fazla çıkartıyordu.
+		$tempDescription=Input::get('Description');
+		Input::merge(array_map('trim', Input::all()));
+		if(mb_strlen(str_replace(array("\n","\r"),"",$tempDescription),'utf8')<4000)
+		{
+			$rules = array(
+				'OrderNo' => 'required',
+				'Name' => 'required|max:14',
+				'Description' => 'required',
+				'Keywords' => 'required|max:100',
+				'hdnPdfName' => 'required',
+				'hdnImage1024x1024Name' => 'required'
+			);
+			$v = Validator::make(Input::all(), $rules);
+		}
+		else
+		{
+			return base64_encode(__('common.orders_warning_maxdesc'));
+		}
+		$Description = Input::get('Description');
+		$Description = preg_replace('/(?:(?:\r\n|\r|\n)\s*){2}/s', "\n\n", $Description);
 
-		$rules = array(
-			'OrderNo' => 'required',
-			'Name' => 'required|max:14',
-			'Description' => 'required|max:4000',
-			'Keywords' => 'required|max:100',
-			'hdnPdfName' => 'required',
-			'hdnImage1024x1024Name' => 'required'
-		);
-		$v = Validator::make(Input::all(), $rules);
+		$appName = Input::get('Name');
+
 		if ($v->passes())
 		{
 			$orderNo = Input::get('OrderNo');
@@ -239,7 +254,7 @@ class Orders_Controller extends Base_Controller
 			$s->ApplicationID = (int)Input::get('ApplicationID');
 			$s->OrderNo = $orderNo;
 			$s->Name = Input::get('Name');
-			$s->Description = Input::get('Description');
+			$s->Description = $Description;
 			$s->Keywords = Input::get('Keywords');
 			$s->Product = Input::get('Product', '');
 			$s->Qty = (int)Input::get('Qty', '0');
@@ -380,9 +395,9 @@ class Orders_Controller extends Base_Controller
 				"denizkaracali@gmail.com",
 				"deniz.karacali@detaysoft.com",
 				"ercan.solcun@detaysoft.com"
-			);
+ 			);
 			$subject = "Yeni Bir Uygulama Formu Gönderildi!";
-			$msg = "Sayın Yetkili, \n\n".$orderNo." siparis numarasına ait uygulama formunu lütfen işleme alınız.";
+			$msg = "Sayın Yetkili, \n\n".$appName." uygulaması için ".$orderNo." siparis numarasına ait uygulama formunu lütfen işleme alınız.";
 
 			Message::send(function($m) use($toEmail, $subject, $msg)
 			{
