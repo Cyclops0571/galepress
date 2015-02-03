@@ -74,29 +74,15 @@
           background: url(/website/app-form/images/pattern.jpg) repeat;
           background-color: white;
         }
-        .fileUpload {
-          position: relative;
-          overflow: hidden;
-          margin: 10px;
-          margin-top: -1px;
-          width: 150px;
-          height: 100px;
-        }
-        .fileUpload input.upload {
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin: 0;
+        .fileUploadRequiredField{
           padding: 0;
-          font-size: 20px;
-          cursor: pointer;
-          opacity: 0;
-          filter: alpha(opacity=0);
-          width: 150px;
-          height: 100px;
         }
         .noWhiteSpace{
           white-space: normal;
+          padding: 15px;
+          margin-top:10px;
+          position: relative;
+          cursor: pointer !important;
         }
         .appListSuccess{
           color: #464242 !important;
@@ -164,6 +150,13 @@
           -webkit-box-shadow:  0px 0px 0px 0px #e5e5e5;
           box-shadow:  0px 0px 0px 0px #e5e5e5;
         }
+        fieldset .row {
+          margin-top: -15px !important;
+        }
+        fieldset .btn-primary{
+          border-left: 3px solid #4E7DA5 !important;
+          border-bottom: 5px solid #4E7DA5 !important;
+        }
         legend.scheduler-border {
           font-size: 1.2em !important;
           font-weight: bold !important;
@@ -172,6 +165,24 @@
         input[type=button]
         {
             outline: 0 !important;
+        }
+        .screenshotsInfo{
+          color: rgba(0,0,0,0.3);
+          font-size: 24px;
+          cursor: pointer;
+          float: right;
+          margin-bottom: -20px;
+          margin-right: -18px;
+          margin-top: 12px;
+        }
+        .upload{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          cursor: pointer;
         }
         @media all and (max-width: 579px) {
           .fullStage {
@@ -692,14 +703,14 @@
               }
             </script>
             <div class="form-group hide" id="stage2" style="text-align: center;">
-                <div class="pull-right"><span style="color: #428bca;font-size: 17px;font-family: monospace; font-weight:bold">*</span><span style="font-size: 13px;font-style: italic; color: rgb(165, 165, 165);">  {{ __('common.orders_appformrequiredfields') }}</span></div>
-                <hr style="margin-top:3px; margin-bottom:10px; clear:both;">
-                <fieldset class="scheduler-border">
+              <div class="pull-right"><span style="color: #428bca;font-size: 17px;font-family: monospace; font-weight:bold">*</span><span style="font-size: 13px;font-style: italic; color: rgb(165, 165, 165);">  {{ __('common.orders_appformrequiredfields') }}</span></div>
+              <hr style="margin-top:3px; margin-bottom:10px; clear:both;" />
+              <fieldset class="scheduler-border">
                   <legend class="scheduler-border"><span style="color: #428bca;font-size: 17px;font-family: monospace; margin-top:-10px; font-weight:bold">*</span> Logo & PDF</legend>
                   <div class="control-group">
-                    <ul>
-                      <li style="float:left; list-style:none; background:none;">
-                        <div class="fileUpload btn btn-primary">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="btn-primary">
                           <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image1024x1024') }}</div>
                           <input id="Image1024x1024" name="Image1024x1024" type="file" class="upload" required/>
                           <input type="hidden" name="hdnImage1024x1024Selected" id="hdnImage1024x1024Selected" value="0" />
@@ -825,156 +836,156 @@
                           </script>
                         </div>
                         <i class="fa fa-check-circle hide"></i>
-                      </li>
-                      <li style="list-style:none; background:none;">
-                        <div class="fileUpload btn btn-primary">
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="btn-primary">
                             <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>PDF<br> {{ __('common.orders_app_fileload') }}</div>
                             <input id="Pdf" name="Pdf" type="file" class="upload" required/>
                             <input type="hidden" name="hdnPdfSelected" id="hdnPdfSelected" value="0" />
                             <input type="hidden" name="hdnPdfName" id="hdnPdfName" value="" />
-                          <script type="text/javascript">
-                          $(function(){
+                            <script type="text/javascript">
+                            $(function(){
 
-                            if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-                            {
-                              $("#Pdf").uploadify({
-                                'swf': '/uploadify/uploadify.swf',
-                                'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
-                                'cancelImg': '/uploadify/uploadify-cancel.png',
-                                'fileTypeDesc': 'PDF Files',
-                                'fileTypeExts': '*.pdf',
-                                'buttonText': "dil_orders_file_select",
-                                'formData': { 
-                                  'element': 'Pdf',
-                                  'type': 'uploadpdf'
-                                },
-                                'multi': false,
-                                'auto': true,
-                                'successTimeout': 300,
-                                'onSelect': function (file) {
-                                  $('#hdnPdfSelected').val("1");
-                                  $("[for='Pdf']").removeClass("hide");
-                                },
-                                'onUploadProgress': function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                                  var progress = totalBytesUploaded / totalBytesTotal * 100;
-                                  $("[for='Pdf'] label").html(progress.toFixed(0) + '%');
-                                  $("[for='Pdf'] div.scale").css('width', progress.toFixed(0) + '%');
-                                },
-                                'onUploadSuccess': function (file, data, response) {
+                              if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                              {
+                                $("#Pdf").uploadify({
+                                  'swf': '/uploadify/uploadify.swf',
+                                  'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                  'cancelImg': '/uploadify/uploadify-cancel.png',
+                                  'fileTypeDesc': 'PDF Files',
+                                  'fileTypeExts': '*.pdf',
+                                  'buttonText': "dil_orders_file_select",
+                                  'formData': { 
+                                    'element': 'Pdf',
+                                    'type': 'uploadpdf'
+                                  },
+                                  'multi': false,
+                                  'auto': true,
+                                  'successTimeout': 300,
+                                  'onSelect': function (file) {
+                                    $('#hdnPdfSelected').val("1");
+                                    $("[for='Pdf']").removeClass("hide");
+                                  },
+                                  'onUploadProgress': function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                                    var progress = totalBytesUploaded / totalBytesTotal * 100;
+                                    $("[for='Pdf'] label").html(progress.toFixed(0) + '%');
+                                    $("[for='Pdf'] div.scale").css('width', progress.toFixed(0) + '%');
+                                  },
+                                  'onUploadSuccess': function (file, data, response) {
 
-                                  if(data.getValue("success") == "true")
-                                  {
-                                    var fileName = data.getValue("filename");
+                                    if(data.getValue("success") == "true")
+                                    {
+                                      var fileName = data.getValue("filename");
 
-                                    $('#hdnPdfName').val(fileName);
+                                      $('#hdnPdfName').val(fileName);
+                                      $("[for='Pdf']").addClass("hide");
+                                    }
+                                    else {
+                                      $('#hdnPdfSelected').val("0");
+                                      $('#hdnPdfName').val("");
+                                      $("[for='Pdf']").addClass("hide");
+                                    }
+                                  },
+                                  'onCancel': function(file) {
+                                    $('#hdnPdfSelected').val("0");
+                                    $('#hdnPdfName').val("");
                                     $("[for='Pdf']").addClass("hide");
-                                  }
-                                  else {
+                                  },
+                                  'onUploadError' : function(file, errorCode, errorMsg, errorString) {
                                     $('#hdnPdfSelected').val("0");
                                     $('#hdnPdfName').val("");
                                     $("[for='Pdf']").addClass("hide");
                                   }
-                                },
-                                'onCancel': function(file) {
-                                  $('#hdnPdfSelected').val("0");
-                                  $('#hdnPdfName').val("");
-                                  $("[for='Pdf']").addClass("hide");
-                                },
-                                'onUploadError' : function(file, errorCode, errorMsg, errorString) {
-                                  $('#hdnPdfSelected').val("0");
-                                  $('#hdnPdfName').val("");
-                                  $("[for='Pdf']").addClass("hide");
-                                }
-                              });
-                            }
-                            else
-                            {
-                              $("#Pdf").fileupload({
-                                url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
-                                dataType: 'json',
-                                sequentialUploads: true,
-                                formData: { 
-                                  'element': 'Pdf',
-                                  'type': 'uploadpdf'
-                                },
-                                add: function(e, data)
-                                {
-                                  if(data.files[0].size /1024 /1024>5){
-
-                                    $('.alert').removeClass('alert-info').addClass('alert-error').show();
-                                      $('.alert span').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
-                                      $('html, body').animate({ scrollTop: 0 }, 'slow');
-                                      $('#hdnPdfSelected').val("0");
-                                    $('#hdnPdfName').val("");
-                                      return;
-
-                                  }
-                                  if(/\.(pdf)$/i.test(data.files[0].name))
+                                });
+                              }
+                              else
+                              {
+                                $("#Pdf").fileupload({
+                                  url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                  dataType: 'json',
+                                  sequentialUploads: true,
+                                  formData: { 
+                                    'element': 'Pdf',
+                                    'type': 'uploadpdf'
+                                  },
+                                  add: function(e, data)
                                   {
-                                    $('#hdnPdfSelected').val("1");
-                                    $("[for='Pdf']").removeClass("hide");
-                                    $("#pdfLoadingStatus").fadeIn();
+                                    if(data.files[0].size /1024 /1024>5){
+
+                                      $('.alert').removeClass('alert-info').addClass('alert-error').show();
+                                        $('.alert span').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
+                                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                                        $('#hdnPdfSelected').val("0");
+                                      $('#hdnPdfName').val("");
+                                        return;
+
+                                    }
+                                    if(/\.(pdf)$/i.test(data.files[0].name))
+                                    {
+                                      $('#hdnPdfSelected').val("1");
+                                      $("[for='Pdf']").removeClass("hide");
+                                      $("#pdfLoadingStatus").fadeIn();
+                                      
+                                      data.context = $("[for='Pdf']");
+                                      data.context.find('a').click(function(e){
+                                        e.preventDefault();
+                                        var template = $("[for='Pdf']");
+                                        data = template.data('data') || {};
+                                        if(data.jqXHR)
+                                        {
+                                          data.jqXHR.abort();
+                                        }
+                                      });
+                                      var xhr = data.submit();
+                                      data.context.data('data', { jqXHR: xhr });
+                                    }
+                                  },
+                                  progressall: function(e, data)
+                                  {
+                                    var progress = data.loaded / data.total * 100;
+                                    $("#pdfLoadingStatus").text(progress.toFixed(0) + '%');
                                     
-                                    data.context = $("[for='Pdf']");
-                                    data.context.find('a').click(function(e){
-                                      e.preventDefault();
-                                      var template = $("[for='Pdf']");
-                                      data = template.data('data') || {};
-                                      if(data.jqXHR)
-                                      {
-                                        data.jqXHR.abort();
-                                      }
-                                    });
-                                    var xhr = data.submit();
-                                    data.context.data('data', { jqXHR: xhr });
-                                  }
-                                },
-                                progressall: function(e, data)
-                                {
-                                  var progress = data.loaded / data.total * 100;
-                                  $("#pdfLoadingStatus").text(progress.toFixed(0) + '%');
-                                  
-                                  $("[for='Pdf'] label").html(progress.toFixed(0) + '%');
-                                  $("[for='Pdf'] div.scale").css('width', progress.toFixed(0) + '%');
-                                },
-                                done: function(e, data)
-                                {
-                                  if(data.textStatus == 'success')
+                                    $("[for='Pdf'] label").html(progress.toFixed(0) + '%');
+                                    $("[for='Pdf'] div.scale").css('width', progress.toFixed(0) + '%');
+                                  },
+                                  done: function(e, data)
                                   {
-                                    $('#hdnPdfName').val(data.result.fileName);
+                                    if(data.textStatus == 'success')
+                                    {
+                                      $('#hdnPdfName').val(data.result.fileName);
+                                      $("[for='Pdf']").addClass("hide");
+                                      $("#pdfLoadingStatus").fadeOut();
+                                    }
+                                  },
+                                  fail: function(e, data)
+                                  {
+                                    $('#hdnPdfSelected').val("0");
+                                    $('#hdnPdfName').val("");
                                     $("[for='Pdf']").addClass("hide");
-                                    $("#pdfLoadingStatus").fadeOut();
                                   }
-                                },
-                                fail: function(e, data)
-                                {
-                                  $('#hdnPdfSelected').val("0");
-                                  $('#hdnPdfName').val("");
-                                  $("[for='Pdf']").addClass("hide");
-                                }
-                              });
-                              
-                              //select file
-                              $("#PdfButton").removeClass("hide").click(function(){
-                                $("#Pdf").click();
-                              });
-                            }
-                          });
-                          </script>
+                                });
+                                
+                                //select file
+                                $("#PdfButton").removeClass("hide").click(function(){
+                                  $("#Pdf").click();
+                                });
+                              }
+                            });
+                            </script>
                         </div>
                         <i class="fa fa-check-circle hide"></i>
                         <div id="pdfLoadingStatus"  style="border:none; float:right"></div>
-                      </li>
-                    <ul>
-                    <i style="color: rgba(0,0,0,0.3); font-size:24px; cursor:pointer; float:right; margin-bottom:-20px; margin-right:-10px; margin-top:-32px;" id="pdf1024Popup" data-toggle="popover" title="{{ __('common.orders_title_pdfand1024') }}" data-content="{{ __('common.orders_hints_pdfand1024') }}" class="fa fa-info-circle"></i>
+                      </div>
+                    </div>
+                    <i id="pdf1024Popup" data-toggle="popover" title="{{ __('common.orders_title_pdfand1024') }}" data-content="{{ __('common.orders_hints_pdfand1024') }}" class="fa fa-info-circle screenshotsInfo"></i>
                   </div>
               </fieldset>
               <fieldset class="scheduler-border">
                   <legend class="scheduler-border">{{ __('common.orders_app_screenshots') }}</legend>
                   <div class="control-group">
-                    <ul>
-                      <li style="float:left; list-style:none; background:none;">
-                        <div class="fileUpload btn btn-primary">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="btn-primary">
                             <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image640x960') }}</div>
                             <input id="Image640x960" name="Image640x960" type="file" class="upload"/>
                             <input type="hidden" name="hdnImage640x960Selected" id="hdnImage640x960Selected" value="0" />
@@ -1099,12 +1110,12 @@
                           </script>
                         </div>
                         <i class="fa fa-check-circle hide"></i>
-                      </li>
-                      <li style="list-style:none; background:none;">
-                        <div class="fileUpload btn btn-primary">
-                            <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image640x1136') }}</div>
-                            <input id="Image640x1136" name="Image640x1136" type="file" class="upload"/>
-                            <input type="hidden" name="hdnImage640x1136Selected" id="hdnImage640x1136Selected" value="0" />
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="btn-primary">
+                          <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image640x1136') }}</div>
+                          <input id="Image640x1136" name="Image640x1136" type="file" class="upload"/>
+                          <input type="hidden" name="hdnImage640x1136Selected" id="hdnImage640x1136Selected" value="0" />
                           <input type="hidden" name="hdnImage640x1136Name" id="hdnImage640x1136Name" value="" />
                           <script type="text/javascript">
                           $(function(){
@@ -1225,12 +1236,15 @@
                           </script>
                         </div>
                         <i class="fa fa-check-circle hide"></i>
-                      </li>
-                      <li style="float:left; list-style:none; background:none;">
-                        <div class="fileUpload btn btn-primary">
-                            <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image1536x2048') }}</div>
-                            <input id="Image1536x2048" name="Image1536x2048" type="file" class="upload"/>
-                            <input type="hidden" name="hdnImage1536x2048Selected" id="hdnImage1536x2048Selected" value="0" />
+                      </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="btn-primary">
+                          <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image1536x2048') }}</div>
+                          <input id="Image1536x2048" name="Image1536x2048" type="file" class="upload"/>
+                          <input type="hidden" name="hdnImage1536x2048Selected" id="hdnImage1536x2048Selected" value="0" />
                           <input type="hidden" name="hdnImage1536x2048Name" id="hdnImage1536x2048Name" value="" />
                           <script type="text/javascript">
                           $(function(){
@@ -1351,12 +1365,12 @@
                           </script>
                         </div>
                         <i class="fa fa-check-circle hide"></i>
-                      </li>
-                      <li style="list-style:none; background:none;">
-                        <div class="fileUpload btn btn-primary">
-                            <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image2048x1536') }}</div>
-                            <input id="Image2048x1536" name="Image2048x1536" type="file" class="upload"/>
-                            <input type="hidden" name="hdnImage2048x1536Selected" id="hdnImage2048x1536Selected" value="0" />
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="btn-primary">
+                          <div class="noWhiteSpace"><i class="fa fa-cloud-upload" style="font-size:18px;"></i><br>{{ __('common.orders_image2048x1536') }}</div>
+                          <input id="Image2048x1536" name="Image2048x1536" type="file" class="upload"/>
+                          <input type="hidden" name="hdnImage2048x1536Selected" id="hdnImage2048x1536Selected" value="0" />
                           <input type="hidden" name="hdnImage2048x1536Name" id="hdnImage2048x1536Name" value="" />
                           <script type="text/javascript">
                           $(function(){
@@ -1480,16 +1494,16 @@
                           </script>
                         </div>
                         <i class="fa fa-check-circle hide"></i>
-                      </li>
-                    </ul>
-                    <i style="color: rgba(0,0,0,0.3); font-size:24px; cursor:pointer; float:right; margin-bottom:-12px; margin-right:-10px; margin-top:-42px;" id="otherImages" data-toggle="popover" title="{{ __('common.orders_title_appscreenshots') }}" data-content="{{ __('common.orders_hints_appscreenshots') }}" class="fa fa-info-circle"></i>
+                      </div>
+                    </div>
                   </div>
+                  <i id="otherImages" data-toggle="popover" title="{{ __('common.orders_title_appscreenshots') }}" data-content="{{ __('common.orders_hints_appscreenshots') }}" class="fa fa-info-circle screenshotsInfo"></i>
               </fieldset>
             </div>
             <div class="form-group hide" id="stage3">
-                <div class="row controls" style="padding-left:45px;">
-                    <h3>{{ __('common.orders_stage3_msg1') }}<br><br> {{ __('common.orders_stage3_msg2') }}</h3>
-                </div>
+              <div class="row controls" style="padding-left:45px;">
+                  <h3>{{ __('common.orders_stage3_msg1') }}<br><br> {{ __('common.orders_stage3_msg2') }}</h3>
+              </div>
             </div>
             <div class="form-group hide" id="stage4">
                 <div class="row controls" style="padding-left:45px;">
@@ -1497,10 +1511,10 @@
                   <h3>{{ __('common.orders_final_msg') }}</h3>
                 </div>
             </div>
-            <hr class="tall" style="margin: 1px 0 9px 0; height:1px; clear:both;">
-            <input type="button" value="{{ __('common.orders_form_next') }}" class="btn btn-primary pull-right" id="appSubmitButton" onclick="submitForm()" style="width: 23%;">
+            <hr class="tall" style="margin: 1px 0 9px 0; height:1px; clear:both;" />
+            <input type="button" value="{{ __('common.orders_form_next') }}" class="btn btn-primary pull-right" id="appSubmitButton" onclick="submitForm()" style="width: 119px;">
             <input type="button" class="btn btn-info hide" id="appBackButton" value="{{ __('common.orders_form_back') }}">
-                </form>
+          </form>
         </div>
         <div class="col-lg-6 col-sm-5 col-xs-4 appimg">
           <!--<img src="/website/app-form/images/test.jpg" class="hide" id="imgOrderNo">-->
