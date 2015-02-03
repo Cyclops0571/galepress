@@ -223,7 +223,7 @@
 
     <div id="page-wrapper">
       <div class="row fullStage">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-7 col-xs-8">
           <form role="form">
             <div id="stage1">
               <div class="pull-right"><span style="color: #428bca;font-size: 17px;font-family: monospace; font-weight:bold">*</span><span style="font-size: 13px;font-style: italic; color: rgb(165, 165, 165);">  {{ __('common.orders_appformrequiredfields') }}</span></div>
@@ -1502,7 +1502,7 @@
             <input type="button" class="btn btn-info hide" id="appBackButton" value="{{ __('common.orders_form_back') }}">
                 </form>
         </div>
-        <div class="col-lg-6 appimg">
+        <div class="col-lg-6 col-sm-5 col-xs-4 appimg">
           <!--<img src="/website/app-form/images/test.jpg" class="hide" id="imgOrderNo">-->
           <img src="/website/app-form/images/yeni2/04.png" class="hide" id="imgAppName">
           <img src="/website/app-form/images/yeni2/02.png" class="hide" id="imgAppDesc">
