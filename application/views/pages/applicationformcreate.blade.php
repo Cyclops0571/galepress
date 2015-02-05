@@ -272,111 +272,181 @@
               <hr style="margin-bottom:10px;margin-top:0px;">
 
               <div class="row">
-                  <div class="col-lg-6">
-
-                      <div class="form-group">
-                        <label>Email</label>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label>Email</label>
                       <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="EmailPopup" data-toggle="popover" title="Email" data-content="{{ __('common.orders_hints_email') }}" class="fa fa-info-circle"></i>
-                        <input id="Email" type="email" placeholder="youremail@youradress.com" name="Email" maxlength="50" class="form-control">
-                      </div>
-
-                      <div class="form-group">
-                        <label>Web Site</label>
+                      <input id="Email" type="email" placeholder="youremail@youradress.com" name="Email" maxlength="50" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Web Site</label>
                       <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="WebSitePopup" data-toggle="popover" title="Web Site" data-content="{{ __('common.orders_hints_website') }}" class="fa fa-info-circle"></i>
-                        <input id="Website" type="text" name="Website" placeholder="http://www.yoursite.com" maxlength="50" class="form-control">
-                      </div>
-
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label>Facebook</label>
+                      <input id="Website" type="text" name="Website" placeholder="http://www.yoursite.com" maxlength="50" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Facebook</label>
                     <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="FacePopup" data-toggle="popover" title="Facebook" data-content="{{ __('common.orders_hints_facebook') }}" class="fa fa-info-circle"></i>
-                      <input id="Facebook" type="text" placeholder="http://facebook.com/YourPage" name="Facebook" maxlength="50" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                      <label>Twitter</label>
-                    <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="TwitterPopup" data-toggle="popover" title="Twitter" data-content="{{ __('common.orders_hints_twitter') }}" class="fa fa-info-circle"></i>
-                      <input id="Twitter" type="text" name="Twitter" placeholder="http://twitter.com/YourPage" maxlength="50" class="form-control">
-                    </div>
+                    <input id="Facebook" type="text" placeholder="http://facebook.com/YourPage" name="Facebook" maxlength="50" class="form-control">
                   </div>
+
+                  <div class="form-group">
+                    <label>Twitter</label>
+                    <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="TwitterPopup" data-toggle="popover" title="Twitter" data-content="{{ __('common.orders_hints_twitter') }}" class="fa fa-info-circle"></i>
+                    <input id="Twitter" type="text" name="Twitter" placeholder="http://twitter.com/YourPage" maxlength="50" class="form-control">
+                  </div>
+                </div>
               </div>
             </div>
             <script type="text/javascript">
               //var startAnime;
               function submitForm() {
-                var finalStage=false;
-                //validation
-                var o, o2;
-                o = $("#OrderNo");
-                if(o.val().length == 0) {
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_placeholders_orderno") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_orderno") }}');
-                    $('#myModal').modal('show');
-                    $( "#firstListItem").removeClass('appListSuccess');
-                    $( "a#firstListItem").find('i').css('opacity','0.3');
-                    $( "a#firstListItem").find('i').css('color','#999');
-                  return;
-                }
-
-                o = $("#Name");
-                if(o.val().length == 0) {
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_name") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appname") }}');
-                    $('#myModal').modal('show');
-                    $( "#firstListItem").removeClass('appListSuccess');
-                    $( "a#firstListItem").find('i').css('opacity','0.3');
-                    $( "a#firstListItem").find('i').css('color','#999');
-                  return;
-                }
-
-                o = $("#Description");
-                if(o.val().length == 0 || o.val().length < 100) {
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
-                    if(o.val().length == 0) {
-                        $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail") }}');
-                    }
-                    else if(o.val().length < 100){
-                        $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail_minlimit") }}');  
-                    }
-                    $('#myModal').modal('show');
-                    $( "#firstListItem").removeClass('appListSuccess');
-                    $( "a#firstListItem").find('i').css('opacity','0.3');
-                    $( "a#firstListItem").find('i').css('color','#999');
-                  return;
-                }
-                if(o.val().length > 4000) {
-                  $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
-                  $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_maxdesc") }}'); 
-                  $('#myModal').modal('show')
-                  return;
-                }
-
-                o = $("#Keywords");
-                if(o.val().length == 0) {
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_keywords") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_keywords") }}');
-                    $('#myModal').modal('show');
-                    $( "#firstListItem").removeClass('appListSuccess');
-                    $( "a#firstListItem").find('i').css('opacity','0.3');
-                    $( "a#firstListItem").find('i').css('color','#999');
-                  return;
-                }
-
-                function validateEmail($email) {
-                  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                  if( !emailReg.test( $email ) ) {
-                    $('#myModal').find('.modal-title').text('Email');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_email") }}');
-                    $('#myModal').modal('show');
-                    return false;
-                  } else {
-                    return true;
+                  var finalStage=false;
+                  //validation
+                  var o, o2;
+                  o = $("#OrderNo");
+                  if(o.val().length == 0) {
+                      $('#myModal').find('.modal-title').text('{{ __("common.orders_placeholders_orderno") }}');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_orderno") }}');
+                      $('#myModal').modal('show');
+                      $( "#firstListItem").removeClass('appListSuccess');
+                      $( "a#firstListItem").find('i').css('opacity','0.3');
+                      $( "a#firstListItem").find('i').css('color','#999');
+                    return;
                   }
-                }
-                o = $("#Email");
-                if(o.val().length>0){
-                  if(!validateEmail(o.val()))
+
+                  o = $("#Name");
+                  if(o.val().length == 0) {
+                      $('#myModal').find('.modal-title').text('{{ __("common.orders_name") }}');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appname") }}');
+                      $('#myModal').modal('show');
+                      $( "#firstListItem").removeClass('appListSuccess');
+                      $( "a#firstListItem").find('i').css('opacity','0.3');
+                      $( "a#firstListItem").find('i').css('color','#999');
+                    return;
+                  }
+
+                  o = $("#Description");
+                  if(o.val().length == 0 || o.val().length < 100) {
+                      $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
+                      if(o.val().length == 0) {
+                          $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail") }}');
+                      }
+                      else if(o.val().length < 100){
+                          $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_appdetail_minlimit") }}');  
+                      }
+                      $('#myModal').modal('show');
+                      $( "#firstListItem").removeClass('appListSuccess');
+                      $( "a#firstListItem").find('i').css('opacity','0.3');
+                      $( "a#firstListItem").find('i').css('color','#999');
+                    return;
+                  }
+
+                  if(o.val().length > 4000) {
+                    $('#myModal').find('.modal-title').text('{{ __("common.orders_description") }}');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_maxdesc") }}'); 
+                    $('#myModal').modal('show')
+                    return;
+                  }
+
+                  o = $("#Keywords");
+                  if(o.val().length == 0) {
+                      $('#myModal').find('.modal-title').text('{{ __("common.orders_keywords") }}');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_keywords") }}');
+                      $('#myModal').modal('show');
+                      $( "#firstListItem").removeClass('appListSuccess');
+                      $( "a#firstListItem").find('i').css('opacity','0.3');
+                      $( "a#firstListItem").find('i').css('color','#999');
+                    return;
+                  }
+
+                  function validateEmail($email) {
+                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    if( !emailReg.test( $email ) ) {
+                      $('#myModal').find('.modal-title').text('Email');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_email") }}');
+                      $('#myModal').modal('show');
+                      return false;
+                    } else {
+                      return true;
+                    }
+                  }
+
+                  o = $("#Email");
+                  if(o.val().length>0){
+                    if(!validateEmail(o.val()))
+                    {
+                      $('#myModal').on('hidden.bs.modal', function (e) {
+                          o.focus();
+                          $('#myModal').unbind('hidden.bs.modal');
+                      })
+                      return;
+                    }
+                  }
+
+
+                  // function validate_website(website_url)
+                  // {
+                  //   var websiteReg =/[a-zA-Z0-9-]/;
+
+                  //   console.log(websiteReg.test(website_url));
+
+                  //   if (!websiteReg.test(website_url) || $("#Website").val().length<4)
+                  //   {
+                  //     $('#myModal').find('.modal-title').text('Website');
+                  //     $('#myModal').find('.modal-body p').text('Website site adresi hatalı');
+                  //     $('#myModal').modal('show');
+                  //     return false; 
+                  //   }
+                  //   else
+                  //   {
+                  //     return true;
+                  //   }         
+                  // }
+
+                  function validate_facebook(facebook_url)
+                  {
+                    var facebookReg = /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i;
+
+                    if (!facebookReg.test(facebook_url) && $("#Facebook").val().length>0)
+                    {
+                      $('#myModal').find('.modal-title').text('Facebook');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_facebookformat") }}');
+                      $('#myModal').modal('show');
+                      return false; 
+                    }
+                    else
+                      return true;         
+                  }
+
+                  function validate_twitter(twitter_url)
+                  {
+                    var twitterReg = /^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/i;
+
+                    if (twitterReg.test(twitter_url)==false && $("#Twitter").val().length>0)
+                    {
+                      $('#myModal').find('.modal-title').text('Twitter');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_twitterformat") }}');
+                      $('#myModal').modal('show');
+                      return false;
+                    }
+                    else
+                      return true;         
+                  }
+
+                  // o = $("#Website");
+                  // if(!validate_website(o.val()))
+                  // {
+                  //   $('#myModal').on('hidden.bs.modal', function (e) {
+                  //       o.focus();
+                  //       $('#myModal').unbind('hidden.bs.modal');
+                  //   })
+                  //   return;
+                  // }
+
+                  o = $("#Facebook");
+                  if(!validate_facebook(o.val()))
                   {
                     $('#myModal').on('hidden.bs.modal', function (e) {
                         o.focus();
@@ -384,326 +454,255 @@
                     })
                     return;
                   }
-                }
 
-
-                // function validate_website(website_url)
-                // {
-                //   var websiteReg =/[a-zA-Z0-9-]/;
-
-                //   console.log(websiteReg.test(website_url));
-
-                //   if (!websiteReg.test(website_url) || $("#Website").val().length<4)
-                //   {
-                //     $('#myModal').find('.modal-title').text('Website');
-                //     $('#myModal').find('.modal-body p').text('Website site adresi hatalı');
-                //     $('#myModal').modal('show');
-                //     return false; 
-                //   }
-                //   else
-                //   {
-                //     return true;
-                //   }         
-                // }
-
-                function validate_facebook(facebook_url)
-                {
-                  var facebookReg = /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i;
-
-                  if (!facebookReg.test(facebook_url) && $("#Facebook").val().length>0)
+                  o = $("#Twitter");
+                  if(!validate_twitter(o.val()))
                   {
-                    $('#myModal').find('.modal-title').text('Facebook');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_facebookformat") }}');
-                    $('#myModal').modal('show');
-                    return false; 
+                    $('#myModal').on('hidden.bs.modal', function (e) {
+                        o.focus();
+                        $('#myModal').unbind('hidden.bs.modal');
+                    })
+                    return;
                   }
-                  else
-                    return true;         
-                }
-
-                function validate_twitter(twitter_url)
-                {
-                  var twitterReg = /^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/i;
-
-                  if (twitterReg.test(twitter_url)==false && $("#Twitter").val().length>0)
-                  {
-                    $('#myModal').find('.modal-title').text('Twitter');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_twitterformat") }}');
-                    $('#myModal').modal('show');
-                    return false;
-                  }
-                  else
-                    return true;         
-                }
-
-                // o = $("#Website");
-                // if(!validate_website(o.val()))
-                // {
-                //   $('#myModal').on('hidden.bs.modal', function (e) {
-                //       o.focus();
-                //       $('#myModal').unbind('hidden.bs.modal');
-                //   })
-                //   return;
-                // }
-
-                o = $("#Facebook");
-                if(!validate_facebook(o.val()))
-                {
-                  $('#myModal').on('hidden.bs.modal', function (e) {
-                      o.focus();
-                      $('#myModal').unbind('hidden.bs.modal');
-                  })
-                  return;
-                }
-
-                o = $("#Twitter");
-                if(!validate_twitter(o.val()))
-                {
-                  $('#myModal').on('hidden.bs.modal', function (e) {
-                      o.focus();
-                      $('#myModal').unbind('hidden.bs.modal');
-                  })
-                  return;
-                }
              
-                if( $('ul li:nth-child(2)').prev().hasClass('active')==true){
-
-                $( "a#firstListItem").removeClass().addClass('appListSuccess');
-                $( "a#firstListItem").find('i').css('opacity','1');
-                $( "a#firstListItem").find('i').css('color','rgb(0, 202, 16);');
-                  $( "#stage1" ).animate( {marginTop: "-1000"}, 500, function() {
-                    $( "#stage1" ).addClass('hide');
-                      $('#stage2').css('margin-top','-800px').removeClass('hide');
-                      $( "#stage2" ).animate({
-                        marginTop: "0"
-                      }, 1000);
-                      $('#appBackButton').removeClass('hide').fadeIn();
-
-                      $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-                        $('#detailStage').text('{{ __("common.orders_form_loadappimages") }}');
-                        $( "#detailStage" ).animate( {marginLeft: "0"},500);
-                      });
-                  });
-
-                  $('ul li:nth-child(2)').prev().removeClass('active').find('span').removeClass().addClass('liBorders');
-                  $('ul li:nth-child(2)').removeClass('disabled').addClass('active').find('span').removeClass().addClass('liBordersActive');
-                  $( ".appimg" ).fadeTo( 'slow', 0);
-                  $( ".appimg img" ).each(function(){
-                    $(this).addClass('hide');
-                    });
-
-                  // startAnime = function(){
-
-                  //   if( $('ul li:nth-child(2)').hasClass('active')==true){
-
-                  //     $( ".appimg #launcImages" ).fadeTo( 'slow' , 1);
-
-                  //     $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                  //       $( ".appimg img" ).each(function(){
-                  //         $(this).addClass('hide');
-                  //       })
-                  //       $('#imgLaunch1').removeClass('hide');
-                  //       $( ".appimg" ).fadeTo( 'slow' , 1);
-                  //       if( $('ul li:nth-child(2)').hasClass('active')!=true){
-                  //         return;
-                  //       }
-
-                  //         $( ".appimg" ).delay(3000).fadeTo( 'slow' , 0, function() {
-                  //           $( ".appimg img" ).each(function(){
-                  //             $(this).addClass('hide');
-                  //           })
-                  //           $('#imgLaunch2').removeClass('hide');
-                  //           $( ".appimg" ).fadeTo( 'slow' , 1);
-
-                  //           if( $('ul li:nth-child(2)').hasClass('active')!=true){
-                  //             return;
-                  //           }
-
-                  //            $( ".appimg" ).delay(3000).fadeTo( 'slow' , 0, function() {
-                  //             $( ".appimg img" ).each(function(){
-                  //               $(this).addClass('hide');
-                  //             })
-                  //             $('#imgLaunch3').removeClass('hide');
-                  //             $( ".appimg" ).fadeTo( 'slow' , 1);
-
-                  //             if( $('ul li:nth-child(2)').hasClass('active')!=true){
-                  //               return;
-                  //             }
-
-
-                  //               $( ".appimg" ).delay(3000).fadeTo( 'slow' , 0, function() {
-                  //                 $( ".appimg img" ).each(function(){
-                  //                   $(this).addClass('hide');
-                  //                 })
-                  //                 $( ".appimg" ).fadeTo( 'slow' , 1);
-                  //                 if( $('ul li:nth-child(2)').hasClass('active')==true){
-                  //                   setTimeout(function(){
-                  //                     startAnime();
-                  //                   },1500)
-                  //                 }
-                  //               })
-
-                  //         })
-                  //     })
-                  //   })
-                  // }
-
-                  //   else{
-                  //     $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
-                  //     return;
-                  //   }
-                  // }
-
-                  // startAnime();
-                  return;
-                }
-            
-                if($( "ul li:nth-child(2)" ).hasClass("active")==true){
-
-                  if($('#hdnImage1024x1024Selected').val()==0 && $('#hdnPdfSelected').val()==0){
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_logoandpdffiles") }} ');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdfand1024") }}');
-                    $('#myModal').modal('show');
-                    $( "#secondListItem").removeClass('appListSuccess');
-                    $( "a#secondListItem").find('i').css('opacity','0.3');
-                    $( "a#secondListItem").find('i').css('color','#999');
-                    $(this).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                    return;
-                  }
-
-                  if($('#hdnImage1024x1024Selected').val()==0){
-                    $('#myModal').find('.modal-title').text('Logo');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_1024") }}');
-                    $('#myModal').modal('show');
-                    $( "#secondListItem").removeClass('appListSuccess');
-                    $( "a#secondListItem").find('i').css('opacity','0.3');
-                    $( "a#secondListItem").find('i').css('color','#999');
-                    $('#hdnImage1024x1024Selected').parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                    return;
-                  }    
-
-                  if($('#hdnPdfSelected').val()==0){
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
-                    $('#myModal').modal('show');
-                    $( "#secondListItem").removeClass('appListSuccess');
-                    $( "a#secondListItem").find('i').css('opacity','0.3');
-                    $( "a#secondListItem").find('i').css('color','#999');
-                    $('#Pdf').parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                    return;
-                  }
-
-                  $( "a#secondListItem").removeClass().addClass('appListSuccess');
-                  $( "a#secondListItem").find('i').css('opacity','1');
-                  $( "a#firstListItem").find('i').css('color','rgb(0, 202, 16);');
-
-                  $( "#stage2" ).animate( {marginTop: "-1000"}, 500, function() {
-                    $( "#stage2" ).addClass('hide');
-                    $('#stage3').css('margin-top','-800px').removeClass('hide');
-                    $( "#stage3" ).animate({
-                      marginTop: "0"
-                    }, 1000);
-                  });
-
-                  $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-
-                    $('#detailStage').text('{{ __("common.orders_submit_form") }}');
-                    $( "#detailStage" ).animate( {marginLeft: "0"},500);
-
-                    $('ul li:nth-child(2)').removeClass('active').find('span').removeClass().addClass('liBorders');
-                    $('ul li:nth-child(3)').removeClass('disabled').addClass('active').find('span').removeClass().addClass('liBordersActive');
-                    $('#appSubmitButton').val('{{ __("common.orders_formfinal") }}');
+                  if( $('ul li:nth-child(2)').prev().hasClass('active')==true){
 
                     $( "a#firstListItem").removeClass().addClass('appListSuccess');
-                    $( "a#secondListItem").removeClass().addClass('appListSuccess');
                     $( "a#firstListItem").find('i').css('opacity','1');
-                    $( "a#secondListItem").find('i').css('opacity','1');
                     $( "a#firstListItem").find('i').css('color','rgb(0, 202, 16);');
-                    $( "a#secondListItem").find('i').css('color','rgb(0, 202, 16);');
+                    $( "#stage1" ).animate( {marginTop: "-1000"}, 500, function() {
+                      $( "#stage1" ).addClass('hide');
+                        $('#stage2').css('margin-top','-800px').removeClass('hide');
+                        $( "#stage2" ).animate({
+                          marginTop: "0"
+                        }, 1000);
+                        $('#appBackButton').removeClass('hide').fadeIn();
 
-                    $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+                        $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+                          $('#detailStage').text('{{ __("common.orders_form_loadappimages") }}');
+                          $( "#detailStage" ).animate( {marginLeft: "0"},500);
+                        });
+                    });
 
-                  });
+                    $('ul li:nth-child(2)').prev().removeClass('active').find('span').removeClass().addClass('liBorders');
+                    $('ul li:nth-child(2)').removeClass('disabled').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                    $( ".appimg" ).fadeTo( 'slow', 0);
+                    $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                    });
 
-                  return;
+                    // startAnime = function(){
+
+                    //   if( $('ul li:nth-child(2)').hasClass('active')==true){
+
+                    //     $( ".appimg #launcImages" ).fadeTo( 'slow' , 1);
+
+                    //     $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                    //       $( ".appimg img" ).each(function(){
+                    //         $(this).addClass('hide');
+                    //       })
+                    //       $('#imgLaunch1').removeClass('hide');
+                    //       $( ".appimg" ).fadeTo( 'slow' , 1);
+                    //       if( $('ul li:nth-child(2)').hasClass('active')!=true){
+                    //         return;
+                    //       }
+
+                    //         $( ".appimg" ).delay(3000).fadeTo( 'slow' , 0, function() {
+                    //           $( ".appimg img" ).each(function(){
+                    //             $(this).addClass('hide');
+                    //           })
+                    //           $('#imgLaunch2').removeClass('hide');
+                    //           $( ".appimg" ).fadeTo( 'slow' , 1);
+
+                    //           if( $('ul li:nth-child(2)').hasClass('active')!=true){
+                    //             return;
+                    //           }
+
+                    //            $( ".appimg" ).delay(3000).fadeTo( 'slow' , 0, function() {
+                    //             $( ".appimg img" ).each(function(){
+                    //               $(this).addClass('hide');
+                    //             })
+                    //             $('#imgLaunch3').removeClass('hide');
+                    //             $( ".appimg" ).fadeTo( 'slow' , 1);
+
+                    //             if( $('ul li:nth-child(2)').hasClass('active')!=true){
+                    //               return;
+                    //             }
+
+
+                    //               $( ".appimg" ).delay(3000).fadeTo( 'slow' , 0, function() {
+                    //                 $( ".appimg img" ).each(function(){
+                    //                   $(this).addClass('hide');
+                    //                 })
+                    //                 $( ".appimg" ).fadeTo( 'slow' , 1);
+                    //                 if( $('ul li:nth-child(2)').hasClass('active')==true){
+                    //                   setTimeout(function(){
+                    //                     startAnime();
+                    //                   },1500)
+                    //                 }
+                    //               })
+
+                    //         })
+                    //     })
+                    //   })
+                    // }
+
+                    //   else{
+                    //     $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+                    //     return;
+                    //   }
+                    // }
+
+                    // startAnime();
+                    return;
                   }
+            
+                  if($( "ul li:nth-child(2)" ).hasClass("active")==true){
 
-                    o = $("#hdnImage1024x1024Selected");
-                    o2 = $("#hdnImage1024x1024Name");
-
-                    if(o.val() == 0 && o2.val().length == 0) {
-                      $('#myModal').find('.modal-title').text('{{ __("common.orders_icon") }}');
-                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_1024") }}');
+                    if($('#hdnImage1024x1024Selected').val()==0 && $('#hdnPdfSelected').val()==0){
+                      $('#myModal').find('.modal-title').text('{{ __("common.orders_logoandpdffiles") }} ');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdfand1024") }}');
                       $('#myModal').modal('show');
+                      $( "#secondListItem").removeClass('appListSuccess');
+                      $( "a#secondListItem").find('i').css('opacity','0.3');
+                      $( "a#secondListItem").find('i').css('color','#999');
+                      $(this).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
                       return;
                     }
 
-                    o = $("#hdnPdfSelected");
-                    o2 = $("#hdnPdfName");
-                    if(o.val() == 0 && o2.val().length == 0) {
+                    if($('#hdnImage1024x1024Selected').val()==0){
+                      $('#myModal').find('.modal-title').text('Logo');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_1024") }}');
+                      $('#myModal').modal('show');
+                      $( "#secondListItem").removeClass('appListSuccess');
+                      $( "a#secondListItem").find('i').css('opacity','0.3');
+                      $( "a#secondListItem").find('i').css('color','#999');
+                      $('#hdnImage1024x1024Selected').parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                      return;
+                    }    
+
+                    if($('#hdnPdfSelected').val()==0){
                       $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
                       $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
                       $('#myModal').modal('show');
+                      $( "#secondListItem").removeClass('appListSuccess');
+                      $( "a#secondListItem").find('i').css('opacity','0.3');
+                      $( "a#secondListItem").find('i').css('color','#999');
+                      $('#Pdf').parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
                       return;
-                    }                   
+                    }
+
+                    $( "a#secondListItem").removeClass().addClass('appListSuccess');
+                    $( "a#secondListItem").find('i').css('opacity','1');
+                    $( "a#firstListItem").find('i').css('color','rgb(0, 202, 16);');
+
+                    $( "#stage2" ).animate( {marginTop: "-1000"}, 500, function() {
+                      $( "#stage2" ).addClass('hide');
+                      $('#stage3').css('margin-top','-800px').removeClass('hide');
+                      $( "#stage3" ).animate({
+                        marginTop: "0"
+                      }, 1000);
+                    });
+
+                    $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+
+                      $('#detailStage').text('{{ __("common.orders_submit_form") }}');
+                      $( "#detailStage" ).animate( {marginLeft: "0"},500);
+
+                      $('ul li:nth-child(2)').removeClass('active').find('span').removeClass().addClass('liBorders');
+                      $('ul li:nth-child(3)').removeClass('disabled').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                      $('#appSubmitButton').val('{{ __("common.orders_formfinal") }}');
+
+                      $( "a#firstListItem").removeClass().addClass('appListSuccess');
+                      $( "a#secondListItem").removeClass().addClass('appListSuccess');
+                      $( "a#firstListItem").find('i').css('opacity','1');
+                      $( "a#secondListItem").find('i').css('opacity','1');
+                      $( "a#firstListItem").find('i').css('color','rgb(0, 202, 16);');
+                      $( "a#secondListItem").find('i').css('color','rgb(0, 202, 16);');
+
+                      $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+
+                    });
+
+                    return;
+                  }
+
+                  o = $("#hdnImage1024x1024Selected");
+                  o2 = $("#hdnImage1024x1024Name");
+
+                  if(o.val() == 0 && o2.val().length == 0) {
+                    $('#myModal').find('.modal-title').text('{{ __("common.orders_icon") }}');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_1024") }}');
+                    $('#myModal').modal('show');
+                    return;
+                  }
+
+                  o = $("#hdnPdfSelected");
+                  o2 = $("#hdnPdfName");
+                  if(o.val() == 0 && o2.val().length == 0) {
+                    $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
+                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
+                    $('#myModal').modal('show');
+                    return;
+                  }                   
 
                   $.ajax({
-                  type: "POST",
-                  url: '/' + $('#currentlanguage').val() + '/' + route["orders_save"],
-                  data: $("form").serialize(),
-                  success: function(data, textStatus) {
-                    if(data.getValue("success") == "true")
-                    {
+                    type: "POST",
+                    url: '/' + $('#currentlanguage').val() + '/' + route["orders_save"],
+                    data: $("form").serialize(),
+                    success: function(data, textStatus) {
+                      if(data.getValue("success") == "true")
+                      {
 
-                              $('#hdnImage1024x1024Selected').val(0);
-                              $('#hdnImage640x960Selected').val(0);
-                              $('#hdnImage640x1136Selected').val(0);
-                              $('#hdnImage1536x2048Selected').val(0);
-                              $('#hdnImage2048x1536Selected').val(0);
-                              $('#hdnPdfSelected').val(0);
+                        $('#hdnImage1024x1024Selected').val(0);
+                        $('#hdnImage640x960Selected').val(0);
+                        $('#hdnImage640x1136Selected').val(0);
+                        $('#hdnImage1536x2048Selected').val(0);
+                        $('#hdnImage2048x1536Selected').val(0);
+                        $('#hdnPdfSelected').val(0);
 
-                              $('#hdnImage1024x1024Name').val("");
-                              $('#hdnImage640x960Name').val("");
-                              $('#hdnImage640x1136Name').val("");
-                              $('#hdnImage1536x2048Name').val("");
-                              $('#hdnImage2048x1536Name').val("");
-                              $('#hdnPdfName').val("");
+                        $('#hdnImage1024x1024Name').val("");
+                        $('#hdnImage640x960Name').val("");
+                        $('#hdnImage640x1136Name').val("");
+                        $('#hdnImage1536x2048Name').val("");
+                        $('#hdnImage2048x1536Name').val("");
+                        $('#hdnPdfName').val("");
 
-                            $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
-                            $( "#stage3" ).addClass('hide');
-                              $('#stage4').css('margin-top','-800px').removeClass('hide');
-                              $( "#stage4" ).animate({
-                                marginTop: "0"
-                              }, 1000);
-                            });
-                            $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+                        $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
+                          $( "#stage3" ).addClass('hide');
+                            $('#stage4').css('margin-top','-800px').removeClass('hide');
+                            $( "#stage4" ).animate({
+                              marginTop: "0"
+                            }, 1000);
+                        });
+                        $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
 
-                            $( "a#thirdListItem").removeClass().addClass('appListSuccess');
-                            $( "a#thirdListItem").find('i').css('opacity','1');
-                            $( "a#thirdListItem").find('i').css('color','rgb(0, 202, 16);');
+                        $( "a#thirdListItem").removeClass().addClass('appListSuccess');
+                        $( "a#thirdListItem").find('i').css('opacity','1');
+                        $( "a#thirdListItem").find('i').css('color','rgb(0, 202, 16);');
 
-                            $('#appSubmitButton').fadeOut();
-                            $('#appBackButton').fadeOut();
+                        $('#appSubmitButton').fadeOut();
+                        $('#appBackButton').fadeOut();
 
-                            $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-                                $('#detailStage').text('{{ __("common.orders_submitted_form") }}');
-                                $( "#detailStage" ).animate( {marginLeft: "0"},500);
-                            });
+                        $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+                            $('#detailStage').text('{{ __("common.orders_submitted_form") }}');
+                            $( "#detailStage" ).animate( {marginLeft: "0"},500);
+                        });
 
-                            $('ul li:nth-child(2)').prev().parent().removeClass('ulDisabled');
-                            $('ul li:nth-child(2)').prev().removeClass();
-                            $('ul li:nth-child(2)').removeClass();
-                            $('ul li:nth-child(3)').removeClass();
-                            //console.log(data);
-                    }
-                    else {
-                      //console.log("şoqq",data);
-                    }
-                  },
-                  error: function (resp) {
-                    //error
-                      }
-                });
+                        $('ul li:nth-child(2)').prev().parent().removeClass('ulDisabled');
+                        $('ul li:nth-child(2)').prev().removeClass();
+                        $('ul li:nth-child(2)').removeClass();
+                        $('ul li:nth-child(3)').removeClass();
+                        //console.log(data);
+                        }
+                        else {
+                          //console.log("şoqq",data);
+                        }
+                    },
+                    error: function (resp) {
+                      //error
+                        }
+                  });
                 return false;
               }
             </script>
@@ -1601,46 +1600,46 @@
 
             function imageDimensionCheck(input, w, h, type, size){
 
-                if(size>5){
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_image_filesize") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_maxfilesize") }}');
-                    $('#myModal').modal('show');
-                    $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
-                    $('html, body').animate({ scrollTop: 0 }, 'slow');
-                    $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                    $( "#secondListItem").removeClass('appListSuccess');
-                    $( "a#secondListItem").find('i').css('opacity','0.3');
-                    $( "a#secondListItem").find('i').css('color','#999');
-                    return;
-                }
-                else{
-                    var file, img;
-                    if ((file = input.files[0])){
-                        img = new Image();
-                        img.onload = function () {
-                            var imgWidth = this.width;
-                            var imgHeight = this.height;
-                            if(imgWidth!=w || imgHeight!=h){
-                                $('#myModal').find('.modal-title').text('{{ __("common.orders_image_resolution") }}');
-                                $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_yourimage") }}'.replace(":resolution",w+"x"+h));
-                                $('#myModal').modal('show');
-                                $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
-                                $('html, body').animate({ scrollTop: 0 }, 'slow');
+              if(size>5){
+                  $('#myModal').find('.modal-title').text('{{ __("common.orders_image_filesize") }}');
+                  $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_maxfilesize") }}');
+                  $('#myModal').modal('show');
+                  $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
+                  $('html, body').animate({ scrollTop: 0 }, 'slow');
+                  $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                  $( "#secondListItem").removeClass('appListSuccess');
+                  $( "a#secondListItem").find('i').css('opacity','0.3');
+                  $( "a#secondListItem").find('i').css('color','#999');
+                  return;
+              }
+              else{
+                var file, img;
+                if ((file = input.files[0])){
+                  img = new Image();
+                  img.onload = function () {
+                      var imgWidth = this.width;
+                      var imgHeight = this.height;
+                      if(imgWidth!=w || imgHeight!=h){
+                          $('#myModal').find('.modal-title').text('{{ __("common.orders_image_resolution") }}');
+                          $('#myModal').find('.modal-body p').text('{{ __("common.orders_image_yourimage") }}'.replace(":resolution",w+"x"+h));
+                          $('#myModal').modal('show');
+                          $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
+                          $('html, body').animate({ scrollTop: 0 }, 'slow');
 
-                                $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                                $( "#secondListItem").removeClass('appListSuccess');
-                                $( "a#secondListItem").find('i').css('opacity','0.3');
-                                $( "a#secondListItem").find('i').css('color','#999');
-                                return;
-                            }
-                            else{
-                                $( "ul li:nth-child(2) a" ).addClass('appListSuccess');
-                                $('#'+input.id).parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
-                            }    
-                        };
-                        img.src = _URL.createObjectURL(file);
-                    }
+                          $('#'+input.id).parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                          $( "#secondListItem").removeClass('appListSuccess');
+                          $( "a#secondListItem").find('i').css('opacity','0.3');
+                          $( "a#secondListItem").find('i').css('color','#999');
+                          return;
+                      }
+                      else{
+                          $( "ul li:nth-child(2) a" ).addClass('appListSuccess');
+                          $('#'+input.id).parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
+                      }    
+                  };
+                  img.src = _URL.createObjectURL(file);
                 }
+              }
             }
 
             var fileType, fileSize;
@@ -1675,395 +1674,393 @@
             });
 
             $('#appBackButton').on('click',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0);
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+              $( ".appimg" ).fadeTo( 'slow' , 0);
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
 
-                $( "#appSubmitButton" ).val("{{ __('common.orders_form_next') }}");
-                if($( "ul li:nth-child(2)" ).hasClass("active")==true){
-                    $( "#stage2" ).animate( {marginTop: "-1000"}, 500, function() {
-                        $( "#stage2" ).addClass('hide');
-                        $( "#stage3" ).addClass('hide');
-                        $( "#stage4" ).addClass('hide');
-                        $('#stage1').css('margin-top','-800px').removeClass('hide');
-                        $( "#stage1" ).animate({
-                            marginTop: "0"
-                        }, 1000);
-                        $( "#appBackButton" ).fadeOut();
-                        $( "ul li:nth-child(2)" ).removeClass("active");
-                        $( "ul li:nth-child(2)" ).prev().addClass("active");
-                    });
+              $( "#appSubmitButton" ).val("{{ __('common.orders_form_next') }}");
+              if($( "ul li:nth-child(2)" ).hasClass("active")==true){
+                  $( "#stage2" ).animate( {marginTop: "-1000"}, 500, function() {
+                      $( "#stage2" ).addClass('hide');
+                      $( "#stage3" ).addClass('hide');
+                      $( "#stage4" ).addClass('hide');
+                      $('#stage1').css('margin-top','-800px').removeClass('hide');
+                      $( "#stage1" ).animate({
+                          marginTop: "0"
+                      }, 1000);
+                      $( "#appBackButton" ).fadeOut();
+                      $( "ul li:nth-child(2)" ).removeClass("active");
+                      $( "ul li:nth-child(2)" ).prev().addClass("active");
+                  });
 
-                    $('ul li:nth-child(2)').prev().addClass('active').find('span').removeClass().addClass('liBordersActive');
-                    $('ul li:nth-child(2)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
-                    $( ".appimg" ).fadeTo( 'slow', 1);
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    });
+                  $('ul li:nth-child(2)').prev().addClass('active').find('span').removeClass().addClass('liBordersActive');
+                  $('ul li:nth-child(2)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
+                  $( ".appimg" ).fadeTo( 'slow', 1);
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  });
 
-                    $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-                        $('#detailStage').text('{{ __("common.orders_form_addappdetail") }}');
-                        $( "#detailStage" ).animate( {marginLeft: "0"},500);
-                    });
-                }
-                if($( "ul li:nth-child(3)" ).hasClass("active")==true){
-                    $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
-                        $( "#stage3" ).addClass('hide');
-                        $( "#stage1" ).addClass('hide');
-                        $( "#stage4" ).addClass('hide');
-                        $('#stage2').css('margin-top','-800px').removeClass('hide');
-                        $( "#stage2" ).animate({
-                            marginTop: "0"
-                        }, 1000);
-                        $( "ul li:nth-child(2)" ).removeClass().addClass("active");
-                        $( "ul li:nth-child(3)" ).removeClass("active");
-                    });
+                  $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+                      $('#detailStage').text('{{ __("common.orders_form_addappdetail") }}');
+                      $( "#detailStage" ).animate( {marginLeft: "0"},500);
+                  });
+              }
+              if($( "ul li:nth-child(3)" ).hasClass("active")==true){
+                $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
+                    $( "#stage3" ).addClass('hide');
+                    $( "#stage1" ).addClass('hide');
+                    $( "#stage4" ).addClass('hide');
+                    $('#stage2').css('margin-top','-800px').removeClass('hide');
+                    $( "#stage2" ).animate({
+                        marginTop: "0"
+                    }, 1000);
+                    $( "ul li:nth-child(2)" ).removeClass().addClass("active");
+                    $( "ul li:nth-child(3)" ).removeClass("active");
+                });
 
-                    $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-                    $('ul li:nth-child(3)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
+                $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+                $('ul li:nth-child(3)').removeClass('disabled').removeClass('active').find('span').removeClass().addClass('liBorders');
 
-                    $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-                        $('#detailStage').text('{{ __("common.orders_form_loadappimages") }}');
-                        $( "#detailStage" ).animate( {marginLeft: "0"},500);
-                    });
-                }
+                $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+                    $('#detailStage').text('{{ __("common.orders_form_loadappimages") }}');
+                    $( "#detailStage" ).animate( {marginLeft: "0"},500);
+                });
+              }
             });
 
             $('ul li a').on('click',function(){
-                $( "li" ).each(function() {
-                    $( this ).find('a').removeClass('active');
-                    if($( this ).hasClass('disabled')==false)
-                        $( this ).removeClass();
-                    $(this).find('span').removeClass().addClass('liBorders');
-                });
-                $( this ).parent().addClass('active');
+              $( "li" ).each(function() {
+                  $( this ).find('a').removeClass('active');
+                  if($( this ).hasClass('disabled')==false)
+                      $( this ).removeClass();
+                  $(this).find('span').removeClass().addClass('liBorders');
+              });
+              $( this ).parent().addClass('active');
             })
 
             $('ul li:nth-child(1) a').on('click',function(){
-                $( ".appimg #launcImages" ).fadeTo('slow', 0);
-                $( this ).parent().addClass('active');
-                $('ul li:nth-child(1)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-                $( "#appBackButton" ).fadeOut();
-                $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
-
+              $( ".appimg #launcImages" ).fadeTo('slow', 0);
+              $( this ).parent().addClass('active');
+              $('ul li:nth-child(1)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+              $( "#appBackButton" ).fadeOut();
+              $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
             })
 
             $('ul li:nth-child(2) a').on('click',function(){
-                $( ".appimg" ).fadeTo( 'slow', 1);
-                $( ".appimg img" ).each(function(){
-                    $(this).addClass('hide');
-                });
-                $( this ).parent().addClass('active');
-                $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-                $( "#appBackButton" ).fadeIn();
-                $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
-
+              $( ".appimg" ).fadeTo( 'slow', 1);
+              $( ".appimg img" ).each(function(){
+                  $(this).addClass('hide');
+              });
+              $( this ).parent().addClass('active');
+              $('ul li:nth-child(2)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+              $( "#appBackButton" ).fadeIn();
+              $('#appSubmitButton').val('{{ __("common.orders_form_next") }}');
             })
 
             $('ul li:nth-child(3) a').on('click',function(){
-                $( this ).parent().addClass('active');
-                $('ul li:nth-child(3)').addClass('active').find('span').removeClass().addClass('liBordersActive');
-                $( "#appBackButton" ).fadeIn();
-                $('#appSubmitButton').val('{{ __("common.orders_formfinal") }}');
-
+              $( this ).parent().addClass('active');
+              $('ul li:nth-child(3)').addClass('active').find('span').removeClass().addClass('liBordersActive');
+              $( "#appBackButton" ).fadeIn();
+              $('#appSubmitButton').val('{{ __("common.orders_formfinal") }}');
             })
 
             $('#stage2').mouseover(function(){
-                $( ".appimg > img" ).each(function(){
-                    $(this).addClass('hide');
-                });
+              $( ".appimg > img" ).each(function(){
+                  $(this).addClass('hide');
+              });
             })
 
             $('#Image1024x1024').mouseover(function(){
-                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg #launcImages img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgLaunch1').removeClass('hide');
-                    $(this).fadeTo('slow', 1).dequeue();
-                }).dequeue();
+              $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg #launcImages img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgLaunch1').removeClass('hide');
+                  $(this).fadeTo('slow', 1).dequeue();
+              }).dequeue();
             });
 
             $('#Pdf').mouseover(function(){
-                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg #launcImages img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgLaunch3').removeClass('hide');
-                    $(this).fadeTo('slow', 1).dequeue();
-                }).dequeue();
+              $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg #launcImages img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgLaunch3').removeClass('hide');
+                  $(this).fadeTo('slow', 1).dequeue();
+              }).dequeue();
             });
 
             $('#Image640x960').mouseover(function(){
-                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg #launcImages img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgLaunch2').removeClass('hide');
-                    $(this).fadeTo('slow', 1).dequeue();
-                }).dequeue();
+              $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg #launcImages img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgLaunch2').removeClass('hide');
+                  $(this).fadeTo('slow', 1).dequeue();
+              }).dequeue();
             });
 
             $('#Image640x1136').mouseover(function(){
-                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg #launcImages img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgLaunch2').removeClass('hide');
-                    $(this).fadeTo('slow', 1).dequeue();
-                }).dequeue();
+              $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg #launcImages img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgLaunch2').removeClass('hide');
+                  $(this).fadeTo('slow', 1).dequeue();
+              }).dequeue();
             });
 
             $('#Image1536x2048').mouseover(function(){
-                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg #launcImages img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgLaunch2').removeClass('hide');
-                    $(this).fadeTo('slow', 1).dequeue();
-                }).dequeue();
+              $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg #launcImages img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgLaunch2').removeClass('hide');
+                  $(this).fadeTo('slow', 1).dequeue();
+              }).dequeue();
             });
 
             $('#Image2048x1536').mouseover(function(){
-                $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
-                $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg #launcImages img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgLaunch2').removeClass('hide');
-                    $(this).fadeTo('slow', 1).dequeue();
-                }).dequeue();
+              $( ".appimg" ).fadeTo( 'slow', 1).dequeue();
+              $( ".appimg #launcImages" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg #launcImages img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgLaunch2').removeClass('hide');
+                  $(this).fadeTo('slow', 1).dequeue();
+              }).dequeue();
             });
 
             $('.close').on('click',function(){
-                if(this.id!='modal-closeBtn')
-                    $(this).parent().hide();
+              if(this.id!='modal-closeBtn')
+                  $(this).parent().hide();
             });
             $('.modal-okBtn').on('click',function(){
-                $('#myModal').modal('hide');
+              $('#myModal').modal('hide');
             });
 
             $('#myModal').on('hidden.bs.modal', function (e) {
-                setTimeout(function() {
-                    $('.alert').fadeOut(3500);
-                    $('.file-status').fadeOut(3500);
-                });
+              setTimeout(function() {
+                  $('.alert').fadeOut(3500);
+                  $('.file-status').fadeOut(3500);
+              });
             })
             $("#Pdf").change(function (e) {
-                fileType=this.files[0].type.split('/');
-                fileSize= (this.files[0].size) /1024 /1024;
-                if(fileType[1]!='pdf'){
-                    $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
-                    $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
-                    $('#myModal').modal('show');
-                    $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
-                    $('html, body').animate({ scrollTop: 0 }, 'slow');
-                    $('#hdnPdfSelected').val("0");
-                    $('#hdnPdfName').val("");
-                    $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                    $( "#secondListItem").removeClass('appListSuccess');
-                    $( "a#secondListItem").find('i').css('opacity','0.3');
-                    $( "a#secondListItem").find('i').css('color','#999');
-                    return;
-                }
-                else{
-                    if(fileSize>5){
-                        $('#myModal').find('.modal-title').text('{{ __("common.orders_pdffilesize") }}');
-                        $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
-                        $('#myModal').modal('show');
-                        $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
-                        $('html, body').animate({ scrollTop: 0 }, 'slow');
-                        $('#hdnPdfSelected').val("0");
-                        $('#hdnPdfName').val("");
-                        $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
-                        $( "a#secondListItem").find('i').css('opacity','0.3');
-                        $( "a#secondListItem").find('i').css('color','#999');
-                        return;
-                    }
-                    else{
-                        $( "ul li:nth-child(2) a" ).addClass('appListSuccess'); 
-                        $("#Pdf").parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
-                    }
-                }
+              fileType=this.files[0].type.split('/');
+              fileSize= (this.files[0].size) /1024 /1024;
+              if(fileType[1]!='pdf'){
+                  $('#myModal').find('.modal-title').text('{{ __("common.orders_pdf") }}');
+                  $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdf") }}');
+                  $('#myModal').modal('show');
+                  $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
+                  $('html, body').animate({ scrollTop: 0 }, 'slow');
+                  $('#hdnPdfSelected').val("0");
+                  $('#hdnPdfName').val("");
+                  $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                  $( "#secondListItem").removeClass('appListSuccess');
+                  $( "a#secondListItem").find('i').css('opacity','0.3');
+                  $( "a#secondListItem").find('i').css('color','#999');
+                  return;
+              }
+              else{
+                  if(fileSize>5){
+                      $('#myModal').find('.modal-title').text('{{ __("common.orders_pdffilesize") }}');
+                      $('#myModal').find('.modal-body p').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
+                      $('#myModal').modal('show');
+                      $( "ul li:nth-child(2) a" ).removeClass('appListSuccess');
+                      $('html, body').animate({ scrollTop: 0 }, 'slow');
+                      $('#hdnPdfSelected').val("0");
+                      $('#hdnPdfName').val("");
+                      $("#Pdf").parent().next().removeClass().addClass('fa fa-exclamation-triangle').removeClass('hide').css('color','red').fadeIn();
+                      $( "a#secondListItem").find('i').css('opacity','0.3');
+                      $( "a#secondListItem").find('i').css('color','#999');
+                      return;
+                  }
+                  else{
+                      $( "ul li:nth-child(2) a" ).addClass('appListSuccess'); 
+                      $("#Pdf").parent().next().removeClass().addClass('fa fa-check-circle').removeClass('hide').css('color','rgb(0, 202, 16);').fadeIn();
+                  }
+              }
             })
 
             $('#OrderNo').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+              });
             });
 
             $('#Name').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgAppName').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgAppName').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $('input[type="text"], textarea, input[type="email"]').on('focusout',function(){
-                var inputID=$(this).attr('id');
-                if(!$(this).prev().hasClass(inputID+"isCheck"))
+              var inputID=$(this).attr('id');
+              if(!$(this).prev().hasClass(inputID+"isCheck"))
+              {
+                $(this).before("<i class='"+inputID+"isCheck'"+"></i>");
+              }
+              if($(this).val().length>0)
+              {
+                $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+              }
+              else
+              {
+                $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+              }
+
+              if($(this).attr('id')=='Description' && $(this).val().length<100)
+              {
+                  $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+              }
+
+              if($(this).attr('id')=='Facebook' && $(this).val().length>0)
+              {
+                function validate_facebook(facebook_url)
                 {
-                  $(this).before("<i class='"+inputID+"isCheck'"+"></i>");
+                  var facebookReg = /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i;
+                  if (!facebookReg.test(facebook_url))
+                  {
+                    return false; 
+                  }
+                  else
+                    return true;         
                 }
-                if($(this).val().length>0)
-                {
-                  $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
-                }
+                if(!validate_facebook($(this).val()))
+                  $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
                 else
+                  $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+              }
+              else if($(this).attr('id')=='Twitter' && $(this).val().length>0)
+              {
+                function validate_twitter(twitter_url)
+                {
+                  var twitterReg = /^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/i;
+                  if (!twitterReg.test(twitter_url))
+                  {
+                    return false;
+                  }
+                  else
+                    return true; 
+                }
+                if(!validate_twitter($(this).val()))
+                  $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                else
+                  $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+              }
+              else if($(this).attr('id')=='Website' && $(this).val().length>0)
+              {
+                  $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+              }
+              else if($(this).attr('id')=='Email' && $(this).val().length>0)
+              {
+                function validateEmail($email) {
+                  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                  if( !emailReg.test( $email ) ) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }
+                if(!validateEmail($(this).val()))
                 {
                   $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
                 }
-
-                if($(this).attr('id')=='Description' && $(this).val().length<100)
-                {
-                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                else{
+                  $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
                 }
-
-                if($(this).attr('id')=='Facebook' && $(this).val().length>0)
-                {
-                  function validate_facebook(facebook_url)
-                  {
-                    var facebookReg = /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i;
-                    if (!facebookReg.test(facebook_url))
-                    {
-                      return false; 
-                    }
-                    else
-                      return true;         
-                  }
-                  if(!validate_facebook($(this).val()))
-                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
-                  else
-                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
-                }
-                else if($(this).attr('id')=='Twitter' && $(this).val().length>0)
-                {
-                  function validate_twitter(twitter_url)
-                  {
-                    var twitterReg = /^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/i;
-                    if (!twitterReg.test(twitter_url))
-                    {
-                      return false;
-                    }
-                    else
-                      return true; 
-                  }
-                  if(!validate_twitter($(this).val()))
-                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
-                  else
-                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
-                }
-                else if($(this).attr('id')=='Website' && $(this).val().length>0)
-                {
-                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
-                }
-                else if($(this).attr('id')=='Email' && $(this).val().length>0)
-                {
-                  function validateEmail($email) {
-                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                    if( !emailReg.test( $email ) ) {
-                      return false;
-                    } else {
-                      return true;
-                    }
-                  }
-                  if(!validateEmail($(this).val()))
-                  {
-                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
-                  }
-                  else{
-                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
-                  }
-                }
-                else if($(this).attr('id')=='Email' || $(this).attr('id')=='Facebook' || $(this).attr('id')=='Twitter' || $(this).attr('id')=='Website')
-                  $(this).prev().css('display','none');
+              }
+              else if($(this).attr('id')=='Email' || $(this).attr('id')=='Facebook' || $(this).attr('id')=='Twitter' || $(this).attr('id')=='Website')
+                $(this).prev().css('display','none');
             });
             $('#Description').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgAppDesc').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgAppDesc').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $('#Keywords').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgKeywords').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgKeywords').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $('#Email').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgEmail').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgEmail').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $('#Website').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgWebSite').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgWebSite').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $('#Facebook').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgFacebook').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgFacebook').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $('#Twitter').on('focus',function(){
-                $( ".appimg" ).fadeTo( 'slow' , 0, function() {
-                    $( ".appimg img" ).each(function(){
-                        $(this).addClass('hide');
-                    })
-                    $('#imgTwitter').removeClass('hide');
-                    $( ".appimg" ).fadeTo( 'slow' , 1);
-                });
+              $( ".appimg" ).fadeTo( 'slow' , 0, function() {
+                  $( ".appimg img" ).each(function(){
+                      $(this).addClass('hide');
+                  })
+                  $('#imgTwitter').removeClass('hide');
+                  $( ".appimg" ).fadeTo( 'slow' , 1);
+              });
             });
             $( "#firstListItem").click(function(){
-                $( "#stage2" ).addClass('hide');
-                $( "#stage3" ).addClass('hide');
-                $( "#stage4" ).addClass('hide'); 
-                $( "#stage1" ).removeClass().fadeIn().css('margin-top','0');       
+              $( "#stage2" ).addClass('hide');
+              $( "#stage3" ).addClass('hide');
+              $( "#stage4" ).addClass('hide'); 
+              $( "#stage1" ).removeClass().fadeIn().css('margin-top','0');       
             })
             $( "#secondListItem").click(function(){
-                $( "#stage1" ).addClass('hide');
-                $( "#stage3" ).addClass('hide');
-                $( "#stage4" ).addClass('hide'); 
-                $( "#stage2" ).removeClass().fadeIn().css('margin-top','0');        
+              $( "#stage1" ).addClass('hide');
+              $( "#stage3" ).addClass('hide');
+              $( "#stage4" ).addClass('hide'); 
+              $( "#stage2" ).removeClass().fadeIn().css('margin-top','0');        
             })
             $( "#thirdListItem").click(function(){
-                $( "#stage1" ).addClass('hide');
-                $( "#stage2" ).addClass('hide');
-                if($( "a#thirdListItem").hasClass('appListSuccess')==false)
-                {
-                    $( "#stage3" ).removeClass().fadeIn().css('margin-top','0'); 
-                }
-                else{
-                    $( "#stage3" ).addClass('hide');
-                    $( "#stage4" ).removeClass().fadeIn().css('margin-top','0'); 
-                }      
+              $( "#stage1" ).addClass('hide');
+              $( "#stage2" ).addClass('hide');
+              if($( "a#thirdListItem").hasClass('appListSuccess')==false)
+              {
+                  $( "#stage3" ).removeClass().fadeIn().css('margin-top','0'); 
+              }
+              else
+              {
+                  $( "#stage3" ).addClass('hide');
+                  $( "#stage4" ).removeClass().fadeIn().css('margin-top','0'); 
+              }      
             })
         });
     </script>
