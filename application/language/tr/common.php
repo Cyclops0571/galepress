@@ -354,7 +354,7 @@ return array(
 	'orders_appformrequiredfields' => ' zorunlu alanları ifade eder.',
 	'orders_hints_orderno' => 'Sistem tarafından oluşturulan sipariş numarasını ifade eder.',
 	'orders_hints_appname' => 'Uygulama adı için en fazla 14 karakter girebilirsiniz.',
-	'orders_hints_appdescription' => 'Uygulamanızı açıklayan cümlelere yer vermelisiniz. Uygulama açıklamanız uygulama indirme sayfasında görüntülenecektir. En fazla 4000 karakter girebilirsiniz. En az 100 karakter girmeniz gerekmektedir.',
+	'orders_hints_appdescription' => 'Uygulamanızı açıklayıcı cümlelere yer vermelisiniz. Uygulama açıklamanız uygulama indirme sayfasında görüntülenecektir. En fazla 4000 karakter girebilirsiniz. En az 100 karakter girmeniz gerekmektedir.',
 	'orders_hints_keywords' => 'Anahtar kelimeler uygulamanızın bulunabilirliğini arttırır. En fazla 100 karakter girebilirsiniz.',
 	'orders_hints_email' => 'Email bilgisi kullanıcılarınızın sizinle kolaylıkla irtibata geçebilmesini sağlar. Email bilgisini girmediğiniz takdirde bir sonraki güncellemeye kadar email hesabınızı kaydedemeyeceksiniz.',
 	'orders_hints_website' => 'Uygulamanız içerisinde web sayfanızı görüntüleyebilirsiniz.',

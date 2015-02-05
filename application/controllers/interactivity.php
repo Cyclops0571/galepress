@@ -512,13 +512,22 @@ class Interactivity_Controller extends Base_Controller
 
 						        if($anncount > 0 && (int)$cf->Transferred != 1)
 						        {
-						        	//Log::info("annotation count: ".$anncount);
-					        		$docInfo = $p->pcos_get_stream($doc, "","/Root/Metadata");
+						        	if($p->pcos_get_string($doc, "type:/Root/Metadata")=="stream")
+						        	{
+						        		//Log::info("girdi");
+						        		$docInfo = $p->pcos_get_stream($doc, "","/Root/Metadata");
+						        		preg_match("/indesign/i", $docInfo, $indesignFind);
+						        	}
+						        	else
+						        	{
+						        		//Log::info("girmedi");
+						        		$indesignFind=null;
+						        	}
+					        		
 					          		//$posStart = strpos($docInfo, '<xmp:CreatorTool>');
 					          		//$posEnd = strpos($docInfo, '</xmp:CreatorTool>');
 					          		//$docInfoFind = substr($docInfo, $posStart, $posEnd);
 					            	//$indesignFind = strpos($docInfo,"InDesign");
-					            	preg_match("/indesign/i", $docInfo, $indesignFind);
 
 						            for ($ann = 0; $ann < $anncount; $ann++)
 						            {
