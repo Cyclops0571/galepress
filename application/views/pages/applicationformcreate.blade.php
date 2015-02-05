@@ -184,6 +184,11 @@
           opacity: 0;
           cursor: pointer;
         }
+        .isCheck{
+          color: rgba(0,0,0,0.3); font-size:14px; display: none;
+          margin-top: 7px;
+          display: inline-block;
+        }
         @media all and (max-width: 579px) {
           .fullStage {
             margin-top: 28px;
@@ -266,35 +271,35 @@
               </div>
               <hr style="margin-bottom:10px;margin-top:0px;">
 
-                <div class="row">
-                    <div class="col-lg-6">
+              <div class="row">
+                  <div class="col-lg-6">
 
-                        <div class="form-group">
-                          <label>Email</label>
-                        <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="EmailPopup" data-toggle="popover" title="Email" data-content="{{ __('common.orders_hints_email') }}" class="fa fa-info-circle"></i>
-                          <input id="Email" type="email" placeholder="youremail@youradress.com" name="Email" maxlength="50" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                          <label>Web Site</label>
-                        <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="WebSitePopup" data-toggle="popover" title="Web Site" data-content="{{ __('common.orders_hints_website') }}" class="fa fa-info-circle"></i>
-                          <input id="Website" type="text" name="Website" placeholder="http://www.yoursite.com" maxlength="50" class="form-control">
-                        </div>
-
-                    </div>
-                    <div class="col-lg-6">
                       <div class="form-group">
-                        <label>Facebook</label>
-                      <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="FacePopup" data-toggle="popover" title="Facebook" data-content="{{ __('common.orders_hints_facebook') }}" class="fa fa-info-circle"></i>
-                        <input id="Facebook" type="text" placeholder="http://facebook.com/YourPage" name="Facebook" maxlength="50" class="form-control">
+                        <label>Email</label>
+                      <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="EmailPopup" data-toggle="popover" title="Email" data-content="{{ __('common.orders_hints_email') }}" class="fa fa-info-circle"></i>
+                        <input id="Email" type="email" placeholder="youremail@youradress.com" name="Email" maxlength="50" class="form-control">
                       </div>
 
                       <div class="form-group">
-                        <label>Twitter</label>
-                      <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="TwitterPopup" data-toggle="popover" title="Twitter" data-content="{{ __('common.orders_hints_twitter') }}" class="fa fa-info-circle"></i>
-                        <input id="Twitter" type="text" name="Twitter" placeholder="http://twitter.com/YourPage" maxlength="50" class="form-control">
+                        <label>Web Site</label>
+                      <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="WebSitePopup" data-toggle="popover" title="Web Site" data-content="{{ __('common.orders_hints_website') }}" class="fa fa-info-circle"></i>
+                        <input id="Website" type="text" name="Website" placeholder="http://www.yoursite.com" maxlength="50" class="form-control">
                       </div>
+
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label>Facebook</label>
+                    <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="FacePopup" data-toggle="popover" title="Facebook" data-content="{{ __('common.orders_hints_facebook') }}" class="fa fa-info-circle"></i>
+                      <input id="Facebook" type="text" placeholder="http://facebook.com/YourPage" name="Facebook" maxlength="50" class="form-control">
                     </div>
+
+                    <div class="form-group">
+                      <label>Twitter</label>
+                    <i style="color: rgba(0,0,0,0.3); font-size:14px; cursor:pointer;" id="TwitterPopup" data-toggle="popover" title="Twitter" data-content="{{ __('common.orders_hints_twitter') }}" class="fa fa-info-circle"></i>
+                      <input id="Twitter" type="text" name="Twitter" placeholder="http://twitter.com/YourPage" maxlength="50" class="form-control">
+                    </div>
+                  </div>
               </div>
             </div>
             <script type="text/javascript">
@@ -1834,9 +1839,6 @@
                 }).dequeue();
             });
 
-
-
-
             $('.close').on('click',function(){
                 if(this.id!='modal-closeBtn')
                     $(this).parent().hide();
@@ -1906,6 +1908,85 @@
                     $( ".appimg" ).fadeTo( 'slow' , 1);
                 });
             });
+            $('input[type="text"], textarea, input[type="email"]').on('focusout',function(){
+                var inputID=$(this).attr('id');
+                if(!$(this).prev().hasClass(inputID+"isCheck"))
+                {
+                  $(this).before("<i class='"+inputID+"isCheck'"+"></i>");
+                }
+                if($(this).val().length>0)
+                {
+                  $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+                }
+                else
+                {
+                  $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                }
+
+                if($(this).attr('id')=='Description' && $(this).val().length<100)
+                {
+                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                }
+
+                if($(this).attr('id')=='Facebook' && $(this).val().length>0)
+                {
+                  function validate_facebook(facebook_url)
+                  {
+                    var facebookReg = /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i;
+                    if (!facebookReg.test(facebook_url))
+                    {
+                      return false; 
+                    }
+                    else
+                      return true;         
+                  }
+                  if(!validate_facebook($(this).val()))
+                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                  else
+                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+                }
+                else if($(this).attr('id')=='Twitter' && $(this).val().length>0)
+                {
+                  function validate_twitter(twitter_url)
+                  {
+                    var twitterReg = /^(https?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/i;
+                    if (!twitterReg.test(twitter_url))
+                    {
+                      return false;
+                    }
+                    else
+                      return true; 
+                  }
+                  if(!validate_twitter($(this).val()))
+                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                  else
+                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+                }
+                else if($(this).attr('id')=='Website' && $(this).val().length>0)
+                {
+                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+                }
+                else if($(this).attr('id')=='Email' && $(this).val().length>0)
+                {
+                  function validateEmail($email) {
+                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    if( !emailReg.test( $email ) ) {
+                      return false;
+                    } else {
+                      return true;
+                    }
+                  }
+                  if(!validateEmail($(this).val()))
+                  {
+                    $(this).prev().replaceWith( "<i class='fa fa-exclamation-triangle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:red;'></i>" );
+                  }
+                  else{
+                    $(this).prev().replaceWith( "<i class='fa fa-check-circle isCheck "+inputID+"isCheck"+ " pull-right'"+ "style='color:rgb(0, 202, 16);'></i>" );
+                  }
+                }
+                else if($(this).attr('id')=='Email' || $(this).attr('id')=='Facebook' || $(this).attr('id')=='Twitter' || $(this).attr('id')=='Website')
+                  $(this).prev().css('display','none');
+            });
             $('#Description').on('focus',function(){
                 $( ".appimg" ).fadeTo( 'slow' , 0, function() {
                     $( ".appimg img" ).each(function(){
@@ -1960,7 +2041,6 @@
                     $( ".appimg" ).fadeTo( 'slow' , 1);
                 });
             });
-
             $( "#firstListItem").click(function(){
                 $( "#stage2" ).addClass('hide');
                 $( "#stage3" ).addClass('hide');
