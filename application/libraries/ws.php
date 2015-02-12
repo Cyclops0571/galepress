@@ -178,6 +178,19 @@ class Ws
 				$s->DeviceType = $deviceType;
 				$s->save();
 			}
+			else {
+				//INFO:Added due to https://github.com/galepress/gp/issues/2
+				//Emre, Eger token tablosuna getAppDetail'den gelen bir deviceToken kaydedildiyse ayni deviceToken'ile baska insert yapilmiyor. 
+				//Fakat soyle bir durum soz konusu. Benim deviceToken'im kaydedildi ama daha sonra yeni update ile udid'lerde geliyor. 
+				//deviceToken tabloda varsa udid'sini update etmesi lazim. Yoksa udid eklemememizin bir manasi olmayacak. 
+				//bir cihaza uygualma bir kez kurulduysa hic udid'sini alamayiz.
+				DB::table('Token')
+					->where('ApplicationToken', '=', $applicationToken)
+					->where('DeviceToken', '=', $deviceToken)
+					->update(array(
+						'UDID' => $UDID
+					));
+			}
 		}
 	}
 }
