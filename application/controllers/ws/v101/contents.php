@@ -44,6 +44,7 @@ class Ws_v101_Contents_Controller extends Base_Controller
 				'ContentCurrency' => $content->Currency(1),
 				'ContentIdentifier' => $content->Identifier,
 				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),
+				'ContentOrientation' => (int)$content->Orientation,
 				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),
 				'ContentBlocked' => ((int)$content->Blocked == 1 ? true : false),
 				'ContentStatus' => ((int)$content->Status == 1 ? true : false),

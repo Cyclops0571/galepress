@@ -431,6 +431,7 @@ class Contents_Controller extends Base_Controller
 							(float)$current->Price != (float)Input::get('Price') || 
 							(int)$current->CurrencyID != (int)Input::get('CurrencyID') ||
 							$current->Identifier != Input::get('Identifier') ||
+							(int)$current->Orientation != (int)Input::get('Orientation') || 
 							(int)$current->IsMaster != (int)Input::get('IsMaster') || 
 							(int)$current->AutoDownload != (int)Input::get('AutoDownload') ||
 							//(int)$current->Approval != (int)Input::get('Approval') ||
@@ -474,6 +475,7 @@ class Contents_Controller extends Base_Controller
 					$s->Price = (float)Input::get('Price');
 					$s->CurrencyID = (int)Input::get('CurrencyID');
 					$s->Identifier = Input::get('Identifier');
+					$s->Orientation = (int)Input::get('Orientation');
 					$s->IsMaster = (int)Input::get('IsMaster');
 
 					if ((int)$s->IsMaster == 1) {

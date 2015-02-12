@@ -92,6 +92,7 @@ class Ws
 						'ContentName' => $r->Name,
 						'ContentMonthlyName' => $r->MonthlyName,
 						'ContentIsMaster' => ((int)$r->IsMaster == 1 ? true : false),
+						'ContentOrientation' => (int)$r->Orientation,
 						'ContentBlocked' => ((int)$r->Blocked == 1 ? true : false),
 						'ContentStatus' => ((int)$r->Status == 1 ? true : false),
 						'ContentVersion' => (int)$r->Version

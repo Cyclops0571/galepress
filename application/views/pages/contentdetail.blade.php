@@ -17,6 +17,7 @@
 	$Price = 0;
 	$CurrencyID = 0;
 	$IsMaster = 0;
+	$Orientation = 0;
 	$Identifier = '';
 	$AutoDownload = 0;
 	$Approval = 0;
@@ -45,6 +46,7 @@
 		$Price = number_format((float)$row->Price, 2, '.', '');
 		$CurrencyID = (int)$row->CurrencyID;
 		$IsMaster = (int)$row->IsMaster;
+		$Orientation = (int)$row->Orientation;
 		$Identifier = $row->Identifier;
 		$AutoDownload = (int)$row->AutoDownload;
 		$Approval = (int)$row->Approval;
@@ -444,6 +446,21 @@
 						</div>
                 	@endif
             	</div>
+			</div>
+			<div class="block">
+	            <div class="content controls" style="overflow:visible">
+	                <div class="form-row">
+	                    <div class="col-md-3">{{ __('common.contents_orientation') }}</div>
+	                    <div class="col-md-8">
+	                    	<select style="width: 100%;" tabindex="-1" id="Orientation" name="Orientation" class="form-control select2">
+	                            <option value="0"{{ ($Orientation == 0 ? ' selected="selected"' : '') }}>Landscape &amp; Portrait</option>
+	                            <option value="1"{{ ($Orientation == 1 ? ' selected="selected"' : '') }}>Landscape</option>
+	                            <option value="2"{{ ($Orientation == 2 ? ' selected="selected"' : '') }}>Portrait</option>
+	                        </select>
+	                   	</div>
+	                    <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_orientation') }}"><span class="icon-info-sign"></span></a></div>
+	               	</div>
+   				</div>
 			</div>
 			<div class="block">
 	            <div class="content controls" style="overflow:visible">
