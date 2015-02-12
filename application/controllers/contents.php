@@ -484,13 +484,17 @@ class Contents_Controller extends Base_Controller
 
 						$contents = DB::table('Content')->where('ApplicationID', '=', $applicationID)->get();
 						foreach ($contents as $content) {
-							$a = Content::find($content->ContentID);
-							$a->IsMaster = 0;
-							$a->Version = (int)$a->Version + 1;
-							$a->ProcessUserID = $currentUser->UserID;
-							$a->ProcessDate = new DateTime();
-							$a->ProcessTypeID = eProcessTypes::Update;
-							$a->save();
+							//INFO:Added due to https://github.com/galepress/gp/issues/18
+							if ((int)$id !== (int)$content->ContentID)
+							{
+								$a = Content::find($content->ContentID);
+								$a->IsMaster = 0;
+								$a->Version = (int)$a->Version + 1;
+								$a->ProcessUserID = $currentUser->UserID;
+								$a->ProcessDate = new DateTime();
+								$a->ProcessTypeID = eProcessTypes::Update;
+								$a->save();	
+							}
 						}
 					}
 
