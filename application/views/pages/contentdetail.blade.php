@@ -444,7 +444,20 @@
 						</div>
                 	@endif
             	</div>
-			</div>				
+			</div>
+			<div class="block">
+	            <div class="content controls" style="overflow:visible">
+	                <div class="form-row">
+	                    <div class="col-md-3">{{ __('common.contents_ismaster') }}</div>
+	                    <div class="col-md-8">
+	                        <div class="checkbox-inline">
+	                           <input type="checkbox" name="IsMaster" id="IsMaster" value="1"{{ ((int)$IsMaster == 1 ? ' checked="checked"' : '') }} />
+	                       	</div>                             
+	                   </div>
+	                    <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_ismaster') }}"><span class="icon-info-sign"></span></a></div>
+	               	</div>
+   				</div>
+			</div>
             <div class="block">
                 <div class="content controls" style="overflow:visible">
                     <div class="form-row" >
@@ -504,19 +517,6 @@
 		               </div>
 		                <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_identifier') }}"><span class="icon-info-sign"></span></a></div>
 		           	</div>
-   				</div>
-			</div>
-			<div class="block">
-	            <div class="content controls" style="overflow:visible">
-	                <div class="form-row">
-	                    <div class="col-md-3">{{ __('common.contents_ismaster') }}</div>
-	                    <div class="col-md-8">
-	                        <div class="checkbox-inline">
-	                           <input type="checkbox" name="IsMaster" id="IsMaster" value="1"{{ ((int)$IsMaster == 1 ? ' checked="checked"' : '') }} />
-	                       	</div>                             
-	                   </div>
-	                    <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_ismaster') }}"><span class="icon-info-sign"></span></a></div>
-	               	</div>
    				</div>
 			</div>
 			<div class="block disabledFields">

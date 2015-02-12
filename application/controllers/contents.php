@@ -477,6 +477,11 @@ class Contents_Controller extends Base_Controller
 					$s->IsMaster = (int)Input::get('IsMaster');
 
 					if ((int)$s->IsMaster == 1) {
+
+						//Unset IsProtected & password field due to https://github.com/galepress/gp/issues/7
+						$s->IsProtected = 0;
+						$s->Password = '';
+
 						$contents = DB::table('Content')->where('ApplicationID', '=', $applicationID)->get();
 						foreach ($contents as $content) {
 							$a = Content::find($content->ContentID);

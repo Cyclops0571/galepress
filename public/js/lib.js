@@ -67,6 +67,20 @@ $(function(){
 			$("label[for='Password']").html('Parola:');
 		}
 	});
+
+	$("#IsMaster").click(function(){
+		var e = $(this).parents('div.block:first').next();
+		if($(this).is(':checked')){
+			e.addClass("disabledFields");
+			$("#IsProtected").prop("checked", false).parent().removeClass("checked");
+			$('#Password').val('');
+			$('input', e).attr('disabled', 'disabled');
+		}
+		else {
+			e.removeClass("disabledFields");
+			$('input', e).removeAttr('disabled');
+		}
+	});
 	
 	$("#IsBuyable").click(function(){
 		if($(this).is(':checked')){
