@@ -73,6 +73,7 @@ $(function(){
 		if($(this).is(':checked')){
 			e.addClass("disabledFields");
 			$("#IsProtected").prop("checked", false).parent().removeClass("checked");
+			$("#IsProtected").click();
 			$('#Password').val('');
 			$('input', e).attr('disabled', 'disabled');
 		}

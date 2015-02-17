@@ -707,8 +707,8 @@ var cContent = new function () {
 		refresh = refresh ? refresh : false;
 		
 		//HAKAN START
-		if($("#IsProtected").is(':checked')){
-
+		if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')){
+			console.log('IsProtected-checked');
 			var t = 'GET';
 			var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
 			var d = "contentID=" + $("#ContentID").val() + '&type=qty';

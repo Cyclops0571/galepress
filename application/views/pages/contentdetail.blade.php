@@ -37,7 +37,6 @@
 		$MonthlyName = $row->MonthlyName;
 		$PublishDate = $row->PublishDate;
 		$CategoryID = (int)$row->CategoryID;
-		
 		$IsProtected = (int)$row->IsProtected;
 		$Password = $row->Password;
 		$IsBuyable = (int)$row->IsBuyable;
@@ -67,6 +66,11 @@
 		if($oldContentFile) {
 			$Transferable = (int)$oldContentFile->Interactivity == 1;
 			$Transferred = (int)$oldContentFile->Transferred == 1;
+		}
+
+		if ($IsMaster == 1) {
+			$IsProtected = 0;
+			$Password = '';
 		}
 		/*
 		$oldContentFileInteractivity = (int)DB::table('ContentFile')
@@ -475,13 +479,13 @@
 	               	</div>
    				</div>
 			</div>
-            <div class="block">
+            <div class="block {{ ((int)$IsMaster == 1 ? 'disabledFields' : '') }}">
                 <div class="content controls" style="overflow:visible">
                     <div class="form-row" >
                         <div class="col-md-3">{{ __('common.contents_isprotected') }}</div>
                         <div class="col-md-8">
                             <div class="checkbox-inline">
-                               <input type="checkbox" name="IsProtected" id="IsProtected" value="1"{{ ((int)$IsProtected == 1 ? ' checked="checked"' : '') }} />
+                               <input type="checkbox" name="IsProtected" id="IsProtected" value="1"{{ ((int)$IsProtected == 1 ? ' checked="checked"' : '') }} {{ ((int)$IsMaster == 1 ? 'disabled="disabled"' : '') }}/>
                            </div>
                        </div>
                        <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_isprotected') }}"><span class="icon-info-sign"></span></a></div>
@@ -491,7 +495,7 @@
                         	<a href="javascript:void(0);" class="widget-icon widget-icon-circle" onclick="cContent.showPasswordList();" data-toggle="modal"><span class="icon-group"></span></a>
 						</div>
                         <div class="col-md-8">               
-                         	<input type="password" name="Password" id="Password" class="form-control textbox" value="" />
+                         	<input type="password" name="Password" id="Password" class="form-control textbox" value="" {{ ((int)$IsMaster == 1 ? 'disabled="disabled"' : '') }}/>
                      	</div>
                       	<div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_password') }}"><span class="icon-info-sign"></span></a></div>
              		</div>
