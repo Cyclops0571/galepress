@@ -8,6 +8,8 @@ class PushNotification_Task {
 		//https://developer.apple.com/library/ios/technotes/tn2265/_index.html
 		try
 		{
+			$consoleLog = new ConsoleLog(Config::get('custom.' . __CLASS__), "Push Notification");
+			$consoleLog->save();
 			$pn = DB::table('Customer AS c')
 					->join('Application AS a', function($join)
 					{
@@ -75,6 +77,8 @@ class PushNotification_Task {
 					$c->save();
 				}
 			}
+			
+			$consoleLog->cli_text .= " Success";
 		}
 		catch (Exception $e)
 		{
