@@ -37,14 +37,13 @@ return array(
 	
 	'passphrase' => '1234',
 	'google_api_key' => 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY',
-	'TestDeneme_Task' => 1,
-	'BackupDatabase_Task' => 2,
-	'CreateInteractivePDF_Task' => 3,
-	'PushNotification_Task' => 4,
-	'PushWarningMail_Task' => 5,
-	'TransferLogsToDB_Task' => 6,
-	'UpdateLocation_Task' => 7,
-	'UpdateSize_Task' => 8,
-	'UpdateVirtualHost_Task' => 9,
-
+	'testdeneme_task' => 1,
+	'backupdatabase_task' => 2,
+	'createinteractivepdf_task' => 3,
+	'pushnotification_task' => 4,
+	'pushwarningmail_task' => 5,
+	'transferlogstodb_task' => 6,
+	'updatelocation_task' => 7,
+	'updatesize_task' => 8,
+	'updatevirtualhost_task' => 9,
 );

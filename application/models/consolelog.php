@@ -19,7 +19,7 @@ class ConsoleLog extends  Eloquent {
 	 */
 	public function __construct($logType, $text) {
 		parent::__construct();
-		$this->cli_type = $logType;
+		$this->cli_type = Config::get('custom.' . strtolower($logType));
 		$this->cli_text = $text;
 	}
 	
