@@ -4,15 +4,17 @@ class TestDeneme_Task {
 
     public function run()
     {
-		$consoleLog = new ConsoleLog(__CLASS__, "deneme log");
-		$consoleLog->save();
-		sleep(10); 
-		//..
-		var_dump($consoleLog->created_at);
-//		echo date("Y-m-d H:i:s", $consoleLog->created_at) . "-------" . date("Y-m-d H:i:s", $consoleLog->updated_at), PHP_EOL;
-		$consoleLog->cli_text .= " Success";
-		$consoleLog->save();
-//		echo date("Y-m-d H:i:s", $consoleLog->created_at) . "-------" . date("Y-m-d H:i:s", $consoleLog->updated_at), PHP_EOL;
+		$lockFile = path('base') . 'lock/' . __CLASS__ . ".lock";
+		
+		$fp = fopen($lockFile, 'r+');
+		/* Activate the LOCK_NB option on an LOCK_EX operation */
+		if(!flock($fp, LOCK_EX | LOCK_NB)) {
+			echo 'Unable to obtain lock';
+			exit(-1);
+		}
+		
+		sleep(30);
+		
     }
 
 }
