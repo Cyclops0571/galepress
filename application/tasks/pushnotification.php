@@ -75,7 +75,6 @@ class PushNotification_Task {
 
 				$consoleLog->cli_text .= " PushnotificationID:" . $pn[0]->PushNotificationID . " Success";
 				$consoleLog->save();
-				//
 			}
 		} catch (Exception $e) {
 			$toEmail = Config::get('custom.admin_email');
