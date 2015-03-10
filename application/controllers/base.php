@@ -1,4 +1,7 @@
 <?php
+require_once path("base") . "php-amqplib/vendor/autoload.php";
+use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class Base_Controller extends Controller {
 

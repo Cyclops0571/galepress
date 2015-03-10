@@ -279,6 +279,15 @@ class Applications_Controller extends Base_Controller
 						array_push($deviceTokens, $token->DeviceToken);
 					}
 				}
+				// burada queueya atiyoruz
+				$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
+				$channel = $connection->channel();
+				$channel->queue_declare('queue_pushnotification', false, false, false, false);
+				$msg = new AMQPMessage('Start Progress!');
+				$channel->basic_publish($msg, '', 'queue_pushnotification');
+				$channel->close();
+				$connection->close();
+				
 			});
 		}
 		catch (Exception $e)

@@ -21,7 +21,6 @@ class CreateInteractivePDF_Task {
 					})
 					->where('StatusID', '=', eStatus::Active)
 					->get();
-			
 			foreach($cf as $f)
 			{
 				try

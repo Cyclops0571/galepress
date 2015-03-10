@@ -1,17 +1,34 @@
 <?php
 
+require_once path("base") . "php-amqplib/vendor/autoload.php";
+
+use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+
 class PushNotification_Task {
 
 	public function run() {
 		$lockFile = path('base') . 'lock/' . __CLASS__ . ".lock";
 		$fp = fopen($lockFile, 'r+');
 		/* Activate the LOCK_NB option on an LOCK_EX operation */
-		if(!flock($fp, LOCK_EX | LOCK_NB)) {
+		if (!flock($fp, LOCK_EX | LOCK_NB)) {
 			echo 'Unable to obtain lock';
 			exit(-1);
 		}
-		
-		
+
+		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
+		$channel = $connection->channel();
+		$channel->queue_declare('queue_pushnotification', false, false, false, false);
+		$channel->basic_consume('queue_pushnotification', '', false, true, false, false, array($this, "sendNotification"));
+		while (count($channel->callbacks)) {
+			$channel->wait();
+			ob_flush();
+		}
+		$channel->close();
+		$connection->close();
+	}
+
+	public function sendNotification() {
 		//https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html
 		//https://developer.apple.com/library/ios/technotes/tn2265/_index.html
 		try {
@@ -34,7 +51,6 @@ class PushNotification_Task {
 					->where('c.StatusID', '=', eStatus::Active)
 					->order_by('p.PushNotificationID', 'DESC')
 					->order_by('d.PushNotificationDeviceID', 'DESC')
-					->take(1000)
 					->get(array('c.CustomerID', 'a.ApplicationID', 'a.CkPem', 'p.PushNotificationID', 'p.NotificationText', 'd.PushNotificationDeviceID', 'd.DeviceToken', 'd.DeviceType'));
 			if (count($pn) > 0) {
 				$consoleLog = new ConsoleLog(__CLASS__, "Push Notification");
