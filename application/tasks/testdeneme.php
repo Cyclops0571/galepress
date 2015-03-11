@@ -23,12 +23,12 @@ class TestDeneme_Task {
 
 		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
 		$channel = $connection->channel();
-		$channel->queue_declare('crateInteractivePdf', false, true, false, false);
+		$channel->queue_declare('queue_interactivepdf', false, true, false, false);
 		echo ' [*] Waiting for messages. To exit press CTRL+C', "\n";
 		$callback = function($msg) {
 			echo " [x] Received ", $msg->body, "\n";
 		};
-		$channel->basic_consume('crateInteractivePdf', '', false, true, false, false, $callback);
+		$channel->basic_consume('queue_interactivepdf', '', false, true, false, false, $callback);
 		while (count($channel->callbacks)) {
 			echo "calisiyorum";
 			ob_flush();

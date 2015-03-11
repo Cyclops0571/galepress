@@ -28,7 +28,6 @@ class CreateInteractivePDF_Task {
 	}
 
 	public function createInteractivePdf() {
-		echo "geldim"; return;
 		try {
 			$cf = DB::table('ContentFile')
 					->where('Interactivity', '=', 1)
@@ -372,7 +371,7 @@ class CreateInteractivePDF_Task {
 							}
 
 							//extract zip file
-							$zipFile = path('public') . 'files/components/' . $componentClass . '/files.zip';
+							$zipFile = path('public') . 'files/components/' . $componentClass . '/file.zip';
 
 							$zip = new ZipArchive();
 							$res = $zip->open($zipFile);
@@ -517,7 +516,7 @@ class CreateInteractivePDF_Task {
 			//$cf->LastErrorDetail = '';
 			$cf->InteractiveFilePath = $baseRelativePath;
 			$cf->InteractiveFileName = 'file.zip';
-			$cf->InteractiveFileSize = File::size($basePath . '/files.zip');
+			$cf->InteractiveFileSize = File::size($basePath . '/file.zip');
 			$cf->save();
 			//-----------------------------------------------------------------------------------------------
 		} catch (PDFlibException $e) {

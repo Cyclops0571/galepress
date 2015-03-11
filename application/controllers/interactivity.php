@@ -926,7 +926,6 @@ class Interactivity_Controller extends Base_Controller {
 			}
 
 			DB::transaction(function() use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included) {
-				$flagInvokeQueue = FALSE;
 				$closing = Input::get('closing');
 				$pageNo = (int) Input::get('pageno');
 				$ids = Input::get('compid');
@@ -957,7 +956,6 @@ class Interactivity_Controller extends Base_Controller {
 					$cf->ProcessDate = new DateTime();
 					$cf->ProcessTypeID = eProcessTypes::Update;
 					$cf->save();
-					$flagInvokeQueue = TRUE;
 				} else {
 					$cf = ContentFile::find($contentFileID);
 					$cf->Included = ($included == 1 ? 1 : 0);
@@ -1187,13 +1185,11 @@ class Interactivity_Controller extends Base_Controller {
 						}
 					}
 				}
-				if($flagInvokeQueue) {
-					$this->interactivityNotifyQueue();
-				}
 			});
 		} catch (Exception $e) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
+		$this->interactivityNotifyQueue();
 		return "success=" . base64_encode("true");
 	}
 
