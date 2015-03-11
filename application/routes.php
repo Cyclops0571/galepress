@@ -42,21 +42,9 @@ Route::get('(:any)/(:any)', array('do' => function(){
 
 
 
-Route::get('/', function()
-{
-	return View::make('website.pages.home');
-	/*
-	if(Auth::check())
-	{
-		return Redirect::to(__('route.home'));
-	}
-	else
-	{
-		return Redirect::to(__('route.login'));
-	}
-	*/
-});
-
+Route::get('/', function() { return View::make('website.pages.home'); });
+Route::get("mytest", "test@index");
+Route::get("mytest/(:any)", "test@index");
 $languages = Config::get('application.languages', array());
 
 foreach($languages as $currentLanguage) {
@@ -434,7 +422,7 @@ Route::get('ws/v101/contents/(:num)/file', array('uses' => 'ws.v101.contents@fil
 // WS-Statistics
 Route::post('ws/v101/statistics', array('uses' => 'ws.v101.statistics@create'));
 
-
+// <editor-fold defaultstate="collapsed" desc="Test Fonksiyonlari">
 
 Route::get('test', array('do' => function()
 {
@@ -995,6 +983,9 @@ Route::post('test2', array('do' => function()
 {
 	var_dump(Input::all());
 }));
+// </editor-fold>
+
+
 
 
 

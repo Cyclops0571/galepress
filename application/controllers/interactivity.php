@@ -1,5 +1,8 @@
 <?php
 
+use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+
 class Interactivity_Controller extends Base_Controller {
 
 	public $restful = true;
@@ -791,6 +794,7 @@ class Interactivity_Controller extends Base_Controller {
 					}
 					$p->close_pdi_document($doc);
 				});
+				$this->interactivityNotifyQueue();
 			} catch (PDFlibException $e) {
 				$data = array(
 					'errmsg' => "PDFlib exception occurred in starter_pcos sample:<br/>[" . $e->get_errnum() . "] " . $e->get_apiname() . ": " . $e->get_errmsg()
@@ -922,6 +926,7 @@ class Interactivity_Controller extends Base_Controller {
 			}
 
 			DB::transaction(function() use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included) {
+				$flagInvokeQueue = FALSE;
 				$closing = Input::get('closing');
 				$pageNo = (int) Input::get('pageno');
 				$ids = Input::get('compid');
@@ -952,6 +957,7 @@ class Interactivity_Controller extends Base_Controller {
 					$cf->ProcessDate = new DateTime();
 					$cf->ProcessTypeID = eProcessTypes::Update;
 					$cf->save();
+					$flagInvokeQueue = TRUE;
 				} else {
 					$cf = ContentFile::find($contentFileID);
 					$cf->Included = ($included == 1 ? 1 : 0);
@@ -1181,11 +1187,14 @@ class Interactivity_Controller extends Base_Controller {
 						}
 					}
 				}
+				if($flagInvokeQueue) {
+					$this->interactivityNotifyQueue();
+				}
 			});
-			return "success=" . base64_encode("true");
 		} catch (Exception $e) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
+		return "success=" . base64_encode("true");
 	}
 
 	public function post_transfer() {
@@ -1500,6 +1509,17 @@ class Interactivity_Controller extends Base_Controller {
 		} catch (Exception $e) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
+	}
+
+	private function interactivityNotifyQueue() {
+		// burada queueya atiyoruz
+		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
+		$channel = $connection->channel();
+		$channel->queue_declare('queue_interactivepdf', false, false, false, false);
+		$msg = new AMQPMessage('Interactivity Start Progress!');
+		$channel->basic_publish($msg, '', 'queue_interactivepdf');
+		$channel->close();
+		$connection->close();
 	}
 
 }

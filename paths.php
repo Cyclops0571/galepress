@@ -23,7 +23,8 @@
 
 $environments = array(
 
-	'local' => array('http://localhost*', '*.dev'),
+	'local' => array('http://localhost*', '*.dev', '*.galetest.com*'),
+	'live' => array('*.galepress.com*')
 
 );
 
@@ -146,3 +147,6 @@ function set_path($path, $value)
 {
 	$GLOBALS['laravel_paths'][$path] = $value;
 }
+
+define("ENV_TEST", "local");
+define("ENV_LIVE", "live");

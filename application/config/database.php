@@ -1,4 +1,14 @@
 <?php
+$dbName = "admin_galepress";
+$dbUserName = "admin_gpuser";
+$dbPassword = "tu4ydebyr";
+
+if(Laravel\Request::env() == ENV_TEST) {
+	$dbName = "admin_galepress";
+	$dbUserName = "admin_galepress";
+	$dbPassword = "tu4ydebyr";
+}
+
 
 return array(
 
@@ -70,9 +80,9 @@ return array(
 		'mysql' => array(
 			'driver'   => 'mysql',
 			'host'     => '127.0.0.1',
-			'database' => 'db',
-			'username' => 'root',
-			'password' => '',
+			'database' => $dbName,
+			'username' => $dbUserName,
+			'password' => $dbPassword,
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
