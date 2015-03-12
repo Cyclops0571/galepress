@@ -126,13 +126,6 @@ class Interactivity_Controller extends Base_Controller {
 				}
 
 				if ($componentName == 'video' || $componentName == 'audio' || $componentName == 'animation' || $componentName == 'tooltip' || $componentName == 'scroll' || $componentName == 'slideshow' || $componentName == 'gal360') {
-					/*
-					  if($componentName == 'gal360'){
-
-					  var_dump($data);
-					  return;
-					  }
-					 */
 					$url = '';
 					if (isset($data['url'])) {
 						$url = $data['url'];

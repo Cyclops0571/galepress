@@ -371,7 +371,7 @@ class CreateInteractivePDF_Task {
 							}
 
 							//extract zip file
-							$zipFile = path('public') . 'files/components/' . $componentClass . '/file.zip';
+							$zipFile = path('public') . 'files/components/' . $componentClass . '/files.zip';
 
 							$zip = new ZipArchive();
 							$res = $zip->open($zipFile);
