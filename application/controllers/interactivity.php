@@ -1186,11 +1186,11 @@ class Interactivity_Controller extends Base_Controller {
 					}
 				}
 			});
+			$this->interactivityNotifyQueue();
+			return "success=" . base64_encode("true");
 		} catch (Exception $e) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
-		$this->interactivityNotifyQueue();
-		return "success=" . base64_encode("true");
 	}
 
 	public function post_transfer() {

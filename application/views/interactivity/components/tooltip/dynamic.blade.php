@@ -9,6 +9,7 @@ if($transparent == 1)
 	$boxopacity = 0;
 }
 
+
 $vFile = path('public').$filename;
 if(File::exists($vFile) && is_file($vFile)) {
     $fname = File::name($vFile);
