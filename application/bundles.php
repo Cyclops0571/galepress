@@ -37,4 +37,5 @@ return array(
 	'docs' => array('handles' => 'docs'),
 	'messages' => array('auto' => true),
 	'jupload' => array('handles' => 'upload', 'auto' => true),
+  'mecaptcha' => array('handles' => 'upload', 'auto' => true),
 );

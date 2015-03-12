@@ -2,84 +2,106 @@
 
 @section('body-content')
 
-<div role="main" class="main">
-	<section class="page-top">
-		<div class="container">
-			<div class="row">
-				<div class="span12">
-					<ul class="breadcrumb">
-						<li><a href="/{{ Session::get('language') }}/">{{__('website.page_home')}}</a> <span class="divider">/</span></li>
-						<li class="active">{{__('website.page_contact')}}</li>
-					</ul>
-				</div>
-			</div>
-			<div class="row">
-				<div class="span12">
-					<h2>{{__('website.page_contact_upper')}}</h2>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Google Maps -->
-	<div id="googlemaps" class="google-map hidden-phone">
-		<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps?sll=41.02412729999838,29.082303075601857&amp;sspn=0.011445367295009806,0.027466615125843856&amp;t=m&amp;q=Detaysoft,+Alemda%C4%9F+Cd,+%C3%9Csk%C3%BCdar,+T%C3%BCrkiye&amp;dg=opt&amp;ie=UTF8&amp;hq=Detaysoft,&amp;hnear=Alemda%C4%9F+Cd,+%C3%9Csk%C3%BCdar,+T%C3%BCrkiye&amp;ll=41.028737,29.090552&amp;spn=0.011331,0.051455&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe><br />
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="span6">
-				<div class="alert alert-success hidden" id="contactSuccess">
-					{{__('website.contact_email_success')}}
-				</div>
-				<div class="alert alert-error hidden" id="contactError">
-					{{__('website.contact_email_error')}}
-				</div>
-				<h2 class="short"><strong>{{__('website.page_contact')}}</strong></h2>
-				<form action="" id="contactForm" type="post">
-					<div class="row controls">
-						<div class="span3 control-group">
-							<label>{{__('website.contact_name')}}</label>
-							<input type="text" value="" maxlength="100" class="span3" name="name" id="name">
-						</div>
-						<div class="span3 control-group">
-							<label>E-Mail *</label>
-							<input type="email" value="" maxlength="100" class="span3" name="email" id="email">
-						</div>
-					</div>
-					<div class="row controls">
-						<div class="span6 control-group">
-							<label>{{__('website.contact_subject')}}</label>
-							<input type="text" value="" maxlength="100" class="span6" name="subject" id="subject">
-						</div>
-					</div>
-					<div class="row controls">
-						<div class="span6 control-group">
-							<label>{{__('website.contact_message')}}</label>
-							<textarea maxlength="5000" rows="10" class="span6" name="message" id="message"></textarea>
-						</div>
-					</div>
-					<div class="btn-toolbar" style="float:right;">
-						<input type="submit" value="{{__('website.contact_send')}}" class="btn btn-primary btn-large" data-loading-text="{{__('website.contact_loading')}}">
-					</div>
-				</form>
-			</div>
-			<div class="span6">
-				<h4 class="pull-top">Detaysoft<strong></strong></h4>
-				<p>Detay Danışmanlık Bilgisayar Hizmetleri Sanayi ve Dış Ticaret A.Ş.</p>
-				<hr />
-				<h4><strong>{{__('website.contact_centraloffice')}}</strong></h4>
-				<ul class="unstyled">
-					<li><i class="icon-map-marker"></i> <strong>{{__('website.address')}}</strong> {{__('website.address_istanbul')}}</li>
-					<li><i class="icon-phone"></i> <strong>{{__('website.phone')}}</strong> +90 (216) 443 13 29</li>
-					<li><i class="icon-envelope"></i> <strong>E-Mail </strong> <a href="mailto:info@galepress.com">info@galepress.com</a></li>
-				</ul>
-				<hr />
-				<h4>{{__('website.contact_workinghours')}}</h4>
-				<ul class="unstyled">
-					{{__('website.contact_workinghours_detail')}}
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
-	
+      <section class="sep-bottom-2x">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 sep-top-2x">
+              <h4 class="upper">İLETİŞİM</h4>
+              <div class="contact-form">
+                <div id="successMessage" style="display:none" class="alert alert-success text-center">
+                  <p><i class="fa fa-check-circle fa-2x"></i></p>
+                  <p>Teşekkür ederiz. Mesajınız tarafımıza iletilmiştir.</p>
+                </div>
+                <div id="failureMessage" style="display:none" class="alert alert-danger text-center">
+                  <p><i class="fa fa-times-circle fa-2x"></i></p>
+                  <p>Bir problem oluştu. Lütfen daha sonra tekrar deneyiniz.</p>
+                </div>
+                <div id="incompleteMessage" style="display:none" class="alert alert-warning text-center">
+                  <p><i class="fa fa-exclamation-triangle fa-2x"></i></p>
+                  <p>Lütfen tüm alanları doldurunuz.</p>
+                </div>
+                <form id="contactForm" action="/website/php/contact.php" method="post" class="form-gray-fields validate">
+                  <div class="row">
+                    <div class="col-md-6 sep-top-xs">
+                      <div class="form-group">
+                        <label for="name">İsim</label>
+                        <input id="name" type="text" name="senderName" class="form-control input-lg required" placeholder="İsminizi girin...">
+                      </div>
+                    </div>
+                    <div class="col-md-6 sep-top-xs">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="senderEmail" class="form-control input-lg required email" placeholder="Email adresinizi girin...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 sep-top-xs">
+                      <div class="form-group">
+                        <label for="phone">Telefon</label>
+                        <input id="phone" type="text" name="phone" class="form-control input-lg required" placeholder="Telefon bilgisi girin...">
+                      </div>
+                    </div>
+                    <div class="col-md-6 sep-top-xs">
+                      <div class="form-group">
+                        <label for="phone">Şirket</label>
+                        <input id="company" type="text" name="company" class="form-control input-lg required" placeholder="Şirketinizi belirtin...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 sep-top-xs">
+                      <div class="form-group">
+                        <label for="comment">Yorumunuz</label>
+                        <textarea id="comment" rows="9" name="comment" class="form-control input-lg required" placeholder="Yorumunuzu ekleyin..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 sep-top-xs">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;Gönder</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-6 sep-top-2x">
+              <h4 class="upper">Lokasyon</h4>
+              <div class="sep-top-xs">
+                <div id="map-canvas" style="height:500px">
+                  <script>
+                    var
+                      lat = 41.024272,
+                      lon = 29.083097,
+                      infoText = [
+                        '<div style="white-space:nowrap">',, 
+                          '<h5>Detaysoft</h5>',
+                          'Alemdağ Cad. No: 109<br>',
+                          'Üsküdar / İstanbul / Türkiye<br>',
+                          '34692, Turkey',
+                        '</div>'
+                      ],
+                      mapOptions = {
+                        scrollwheel: false,
+                        markers: [
+                          { latitude: lat, longitude: lon, html: infoText.join('') }
+                        ],
+                        icon: {
+                          image: '/website/img/themes/royalblue/marker.png',
+                          iconsize: [72, 65],
+                          iconanchor: [12, 65],
+                        },
+                        latitude: lat,
+                        longitude: lon,
+                        zoom: 16
+                      };
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 @endsection

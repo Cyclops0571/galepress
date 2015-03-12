@@ -26,6 +26,12 @@
 	    	});
 	    </script>
 		@endif
-
+		@if(Session::has('confirm'))
+	    <script type="text/javascript">
+	    	$(function () {
+				cNotification.success("{{ Session::get('confirm') }}");
+	    	});
+	    </script>
+		@endif
     </body>
 @endsection

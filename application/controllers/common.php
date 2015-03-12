@@ -484,4 +484,48 @@ class Common_Controller extends Base_Controller
 			return "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.detailpage_validation'));
 		}
 	}
+
+	public function get_confirmemail()
+	{
+		$email = Input::get('email');
+		$code = Input::get('code');
+		
+		$rules = array(
+			'email' => 'required|email',
+			'code'  => 'required',
+		);
+		$v = Validator::make(Input::all(), $rules);
+		if ($v->passes())
+		{
+			$user = DB::table('User')
+						->where('Email', '=', $email)
+						->where('ConfirmCode', '=', $code)
+						->first();
+			if($user)
+			{
+				$s = User::find($user->UserID);
+				$s->StatusID = eStatus::Active;
+				$s->ProcessUserID = $user->UserID;
+				$s->ProcessDate = new DateTime();
+				$s->ProcessTypeID = eProcessTypes::Update;
+				$s->save();
+
+				// return View::make('pages.login')
+				// ->with('message', "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.login_accounthasbeenconfirmed')));
+
+				return Redirect::to(__('route.login'))
+				->with('confirm', __('common.login_accounthasbeenconfirmed'));
+
+				//return "success=".base64_encode("true")."&msg=".base64_encode(__('common.login_accounthasbeenconfirmed'));
+			}
+			else
+			{
+				return "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.login_accountticketnotfound'));
+			}
+		}
+		else
+		{
+			return "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.detailpage_validation'));
+		}
+	}
 }

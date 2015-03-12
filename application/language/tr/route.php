@@ -89,7 +89,7 @@ return array(
 	'website_galepress' => 'galepress-nedir',
 	'website_products' => 'urunler',
 	'website_advantages' => 'avantajlar',
-	'website_customers' => 'musterilerimiz',
+	'website_customers' => 'showcase',
 	'website_tutorials' => 'calisma-yapisi',
 	'website_contact' => 'iletisim',
 	'website_sitemap' => 'site-haritasi',
@@ -97,5 +97,16 @@ return array(
 	'website_blog' => 'blog',
 	'website_article_workflow' => 'blog/makale-is-akisi',
 	'website_article_brandvalue' => 'blog/makale-marka-degeri',
-	'website_article_whymobile' => 'blog/makale-neden-mobil'
+	'website_article_whymobile' => 'blog/makale-neden-mobil',
+	'website_sectors' => 'cozumler',
+	'website_sectors_retail' => 'cozumler-perakende',
+	'website_sectors_humanresources' => 'cozumler-insan-kaynaklari',
+	'website_sectors_education' => 'cozumler-egitim',
+	'website_sectors_realty' => 'cozumler-gayrimenkul',
+	'website_sectors_medicine' => 'cozumler-ilac',
+	'website_sectors_digitalpublishing' => 'cozumler-dijital-yayincilik',
+	'website_tryit' => 'deneyin',
+	'website_captcha' => 'mecaptcha',
+	'website_why_galepress' => 'nasil-calisir',
+	'confirmemail' => 'hesabi-onayla'
 );

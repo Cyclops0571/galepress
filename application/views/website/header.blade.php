@@ -1,55 +1,49 @@
-<header>
-	<div class="container">
-		<h1 class="logo"><a href="/{{ Session::get('language') }}/"><img alt="GalePress" src="/website/img/logo2.png"></a></h1>
-		<div class="search">
-			<form class="form-search" id="searchForm" action="/{{ Session::get('language') }}/{{ __('route.website_search') }}" method="get">
-				<div class="control-group">
-					<input type="text" class="input-medium search-query" name="q" id="q" placeholder="{{__('website.search')}}">
-					<button class="search" type="submit"><i class="icon-search"></i></button>
-				</div>
-			</form>
-		</div>
-		<nav>
-			<ul class="nav nav-pills nav-top">
-				<li class="lang">
-					<a href="/tr" class="buttonTR"></a>
-					<a href="/en" class="buttonEng"></a>
-					<a href="/de" class="buttonDe"></a>
-				</li>
-				<li class="adminPanel" title="{{__('website.cms2')}}" style="letter-spacing:1px;"><a href="/{{ Session::get('language') }}/{{__('route.login')}}"><i class="icon-user" ></i>{{__('website.cms2_abbr')}}</a>
-				</li>
-				<li>
-					<div class="bubble hidden">
-						<span style="position: relative; top: 18%; margin-left:-4px; line-height:25px; color:#FFF">{{__('website.cms2_desc')}}</span>
-					</div>
-				</li>
-				<li class="phone"> <span><i class="icon-phone"></i>+90 (216) 443 13 29</span></li>
-			</ul>
-		</nav>
-		<div class="social-icons">
-			<ul class="social-icons">
-				<li class="facebook"><a href="https://www.facebook.com/pages/Galepress/267455253374597?fref=ts" target="_blank" title="Facebook">Facebook</a></li>
-				<li class="twitter"><a href="https://twitter.com/GalePress" target="_blank" title="Twitter">Twitter</a></li>
-				<li class="linkedin"><a href="https://www.linkedin.com/company/galepress" target="_blank" title="Linkedin">Linkedin</a></li>
-			</ul>
-		</div>
-		<nav>
-			<ul class="nav nav-pills nav-main" id="mainMenu">
-				<li class="dropdown <?php echo (URI::current() === '/' ? ' active' : ' ') ?>"> <a href="/{{ Session::get('language') }}/">{{__('website.page_home')}}</a></li>
-				<li class="<?php echo (URI::current() === __("route.website_aboutus")->get() ? ' active' : ' ') ?>"> <a href="/{{ Session::get('language') }}/{{__('route.website_aboutus')}}">{{__('website.page_aboutus')}}</a></li>
-				<li class="dropdown <?php echo (URI::current() === __("route.website_galepress")->get() || URI::current() === __("route.website_products")->get() || URI::current() === __("route.website_advantages")->get() ? ' active' : ' ') ?>"> <a class="dropdown-toggle" href="#"> GalePress<i class="icon-angle-down"></i></a>
-					<ul class="dropdown-menu">
-						<li class="<?php echo (URI::current() === __("route.website_galepress")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.website_galepress")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.website_galepress')}}">{{__('website.page_galepress')}}</a></li>
-						<li class="<?php echo (URI::current() === __("route.website_products")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.website_products")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.website_products')}}">{{__('website.page_products')}}</a></li>
-						<li class="<?php echo (URI::current() === __("route.website_advantages")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.website_advantages")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.website_advantages')}}">{{__('website.page_advantages')}}</a></li>
-						<li class="<?php echo (URI::current() === __("route.application_form_create")->get() ? ' active' : ' ') ?>" <?php echo (URI::current() === __("route.application_form_create")->get() ? ' style="background:#00b4ff"' : ' ') ?>><a href="/{{ Session::get('language') }}/{{__('route.application_form_create')}}">{{__('common.orders_appformcreate')}}</a></li>
-					</ul>
-				</li>
-				<li class="<?php echo (URI::current() === __("route.website_customers")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_customers')}}">{{__('website.page_customers')}}</a></li>
-				<li class="<?php echo (URI::current() === __("route.website_tutorials")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_tutorials')}}">{{__('website.page_tutorials')}}</a></li>
-				<li class="<?php echo (URI::current() === __("route.website_blog")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_blog')}}">Blog</a></li>
-				<li class="<?php echo (URI::current() === __("route.website_contact")->get() ? ' active' : ' ') ?>"><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}">{{__('website.page_contact')}}</a></li>
-			</ul>
-		</nav>
-	</div>
-</header>
+    <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard"><a href="javascript:void(0)" class="search_button"><i class="fa fa-search"></i></a>
+      <form action="/{{ Session::get('language') }}" method="get" role="search" class="h_search_form" id="searchForm">
+        <div class="container">
+          <div class="h_search_form_wrapper">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm"><i class="fa fa-search fa-lg"></i></button>
+              </span>
+            <input type="text" class="form-control" name="q" id="q" placeholder="{{__('website.search')}}" style="color:#909090"></div>
+            <div class="h_search_close"><a href="#"><i class="fa fa-times"></i></a></div>
+          </div>
+        </div>
+      </form>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="/tr/" class="navbar-brand"><img src="/website/img/logo-white.png" alt="" class="logo-white"><img src="/website/img/logo-dark.png" alt="" class="logo-dark"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right service-nav">
+            <li>
+              <a href="/tr/deneyin">DENEYİN</a>
+            </li>
+            <li>
+              <a href="/tr/giris"><i class="fa fa-mobile fa-lg"></i>&nbsp;<span class="badge">GİRİŞ</span></a>
+            </li>
+            <li class="dropdown"><a href="/tr" title="Language" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Portfolio" data-ref="#" class="dropdown-toggle"><img src="/website/img/flags/trFlag.png" /><span class="caret"></span></a>
+              <ul aria-labelledby="menu_item_Portfolio" class="dropdown-menu" style="min-width:52px !important;width:52px !important;">
+                <li class="noTouch"><a href="#" title="English" data-ref="#"><img src="/website/img/flags/enFlagPassive.png" /></a></li>
+                <li class="noTouch"><a href="#" title="Deutsch" data-ref="#"><img src="/website/img/flags/deFlagPassive.png" /></a></li>
+              </ul>
+            </li>
+          </ul>
+          <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
+          <ul class="nav yamm navbar-nav navbar-left main-nav">
+              <li><a href="/tr/nasil-calisir" title="Nasıl çalışır?" id="menu_item_Home" data-ref="#">NASIL ÇALIŞIR?</a></li>
+
+              <li><a href="/tr/cozumler" title="Çözümler" id="menu_item_Pages" data-ref="#">ÇÖZÜMLER</a></li>
+
+              <li><a href="/tr/showcase" title="Showcase" id="menu_item_features-grid" data-ref="features-grid">SHOWCASE</a></li>
+
+              <li><a href="/tr/iletisim" title="İLETİŞİM" id="menu_item_Contactus" data-ref="#">İLETİŞİM</a></li>
+
+              <li><a href="/tr/blog" title="Blog" id="menu_item_Blog" data-ref="#">BLOG</a></li>
+
+              <!-- <li><a href="http://shop.galepress.com/" target="_blank" title="Shop" id="menu_item_Shop" data-ref="#">SHOP</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>

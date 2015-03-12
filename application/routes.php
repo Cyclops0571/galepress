@@ -59,6 +59,21 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_sitemap')->get($currentLanguage), array('as' => 'website_sitemap_get', 'uses' => 'website@sitemap'));
 	Route::get(__('route.website_search')->get($currentLanguage), array('as' => 'website_search_get', 'uses' => 'website@search'));
 	Route::get(__('route.website_blog')->get($currentLanguage), array('as' => 'website_blog_get', 'uses' => 'website@blog'));
+	Route::get(__('route.website_sectors')->get($currentLanguage), array('as' => 'website_sectors_get', 'uses' => 'website@sectors'));
+	Route::get(__('route.website_sectors_retail')->get($currentLanguage), array('as' => 'website_sectors_retail_get', 'uses' => 'website@sectors_retail'));
+	Route::get(__('route.website_sectors_humanresources')->get($currentLanguage), array('as' => 'website_sectors_humanresources_get', 'uses' => 'website@sectors_humanresources'));
+	Route::get(__('route.website_sectors_education')->get($currentLanguage), array('as' => 'website_sectors_education_get', 'uses' => 'website@sectors_education'));
+	Route::get(__('route.website_sectors_realty')->get($currentLanguage), array('as' => 'website_sectors_realty_get', 'uses' => 'website@sectors_realty'));
+	Route::get(__('route.website_sectors_medicine')->get($currentLanguage), array('as' => 'website_sectors_medicine_get', 'uses' => 'website@sectors_medicine'));
+	Route::get(__('route.website_sectors_digitalpublishing')->get($currentLanguage), array('as' => 'website_sectors_digitalpublishing_get', 'uses' => 'website@sectors_digitalpublishing'));
+	Route::get(__('route.website_why_galepress')->get($currentLanguage), array('as' => 'website_why_galepress_get', 'uses' => 'website@why_galepress'));
+	Route::get(__('route.website_tryit')->get($currentLanguage), array('as' => 'website_tryit_get', 'uses' => 'website@tryit'));
+	Route::post(__('route.website_tryit')->get($currentLanguage), array('as' => 'website_tryit_post', 'uses' => 'website@tryit'));
+	Route::get(__('route.website_captcha')->get($currentLanguage), array('as' => 'website_captcha_get', 'uses' => 'website@captcha_iframe'));
+	Route::get(__('route.confirmemail')->get($currentLanguage), array('as' => 'common_confirmemail_get', 'uses' => 'common@confirmemail'));
+
+
+
 
 	Route::get(__('route.website_article_workflow')->get($currentLanguage), array('as' => 'website_article_workflow_get', 'uses' => 'website@article_workflow'));
 	Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));

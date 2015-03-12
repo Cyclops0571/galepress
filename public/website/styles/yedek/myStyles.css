@@ -1,0 +1,111 @@
+#home-slider{
+	background-color: #202020 !important;
+}
+
+.sectorsImg{
+  position:absolute;
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
+.home-showcase .owl-carousel .clickable{
+	margin-top: -70px;
+}
+
+.item-ipad{
+	width: 200px;
+	margin: 0 auto;
+}
+
+.home-showcase .item-ipad .clickable{
+	margin-top: -80px !important;
+}
+.home-showcase .item-ipad .owl-theme .owl-controls .owl-page span{
+	width: 8px;
+	height: 8px;
+}
+
+.home-showcase .item{
+	margin: 0 auto;
+}
+
+.team-photo{
+	height: 250px;
+}
+
+.device-mockup.section-showcase{
+	position: absolute;
+	bottom: 0;
+}
+
+.item-iphone5{
+	width: 100px;
+	margin: 0 auto;
+}
+
+.home-showcase .item-iphone5 .clickable{
+	margin-top: -20px !important;
+}
+.home-showcase .item-iphone5 .owl-theme .owl-controls .owl-page span{
+	width: 6px;
+	height: 6px;
+}
+
+.item-s3{
+	width: 100px;
+	margin: 0 auto;
+}
+
+.home-showcase .item-s3 .clickable{
+	margin-top: -15px !important;
+}
+.home-showcase .item-s3 .owl-theme .owl-controls .owl-page span{
+	width: 4px;
+	height: 4px;
+}
+
+.item-nexus7{
+	width: 150px;
+}
+
+.home-showcase .item-nexus7 .clickable{
+	margin-top: -30px !important;
+}
+.home-showcase .item-nexus7 .owl-theme .owl-controls .owl-page span{
+	width: 5px;
+	height: 5px;
+}
+
+#footer .logo {
+max-height: 75px;
+margin-top: -15px;
+}
+img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); cursor: pointer}
+
+img.desaturate:hover { -webkit-filter: grayscale(0%); filter: grayscale(0%); }
+
+.newsletter{
+	background-color: #222 !important;
+	border: 1px solid #4F4F4F !important;
+	color:#A0A0A0;
+	outline: none !important;
+}
+
+.newsletter-text-input{
+	color:#909090 !important;
+	background: rgb(45, 45, 45) !important;
+}
+
+.newsletter-text-input:focus{
+	border: 1px solid #4F4F4F !important;
+}
+
+.cover-image{
+	background-size: cover !important;
+}
+
+.fluid-width-video-wrapper{
+	position: absolute !important;
+	top:0 !important;
+	left:0 !important;
+}

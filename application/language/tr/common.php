@@ -455,4 +455,13 @@ return array(
 
 	'month_names' => array('', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'),
 	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">Kullanıcı izin vermedi</span>',
+
+	'confirm_email_message' => "".
+							"Sayın :firstname :lastname, \n\n".
+							"Hesabınızı onaylamak için aşağıdaki linke tıklayabilirsiniz. Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n".
+							":url\n\n".
+							"Saygılarımızla, \n".
+							"Galepress",
+	'login_accounthasbeenconfirmed' => 'Hesabınız başarıyla onaylandı.',
+	'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!',
 );
