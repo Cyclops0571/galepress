@@ -44,14 +44,7 @@ class PushWarningMail_Task {
 					else {
 						$msg = "Sayın ".$user->FirstName." ".$user->LastName.",\n".$app->Name." uygulamanızın geçerlilik süresi bugün sonlanacaktır.\n\nSaygılarımızla,\nGalePress";
 					}
-					/*
-					$msg = __('common.task_message', array(
-							'task' => '`CreateInteractivePDF`',
-							'detail' => $e->getMessage()
-							)
-						);
-					*/
-					//Log::info($msg);
+
 					Bundle::start('messages');
 					
 					Message::send(function($m) use($toEmail, $subject, $msg)

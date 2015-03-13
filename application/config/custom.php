@@ -6,11 +6,6 @@ if(Laravel\Request::env() == ENV_TEST) {
 	$mailEmail = 'info@galetest.com';
 }
 
-$mailList = array(
-	'hakan.sarier@detaysoft.com',
-	'serdar.saygili@detaysoft.com'
-);
-
 return array(
 	
 	/*
@@ -25,7 +20,7 @@ return array(
 	
 	'url' => $serverUrl,
 	
-
+	'admin_mail_set' => array('hakan.sarier@detaysoft.com', 'serdar.saygili@detaysoft.com' ),
 	'admin_email' => 'hakan.sarier@detaysoft.com',
 	//'admin_email' => 'enes.taskiran@detaysoft.com',
 	//'admin_email' => 'adem.karakollu@detaysoft.com',

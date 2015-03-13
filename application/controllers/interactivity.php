@@ -383,9 +383,6 @@ class Interactivity_Controller extends Base_Controller {
 									//$bookmarkLevel = (int)$p->pcos_get_number($doc, "bookmarks[" .$bookmarkIndex. "]/level");
 									$bookmarkDestpage = (int) $p->pcos_get_number($doc, "bookmarks[" . $bookmarkIndex . "]/destpage");
 									$bookmarkTitle = $p->pcos_get_string($doc, "bookmarks[" . $bookmarkIndex . "]/Title");
-									//Log::info($bookmarkDestpage.". sayfada ".$bookmarkCount." adet bookmark bulundu");
-									//Log::info("bookmark title: ".$bookmarkTitle);
-									//Log::info("bookmark level: ".$bookmarkLevel);
 
 									$lastComponentNo = DB::table('PageComponent')
 											->where('ContentFilePageID', '=', $cfp->ContentFilePageID + $bookmarkDestpage - 1)
@@ -394,10 +391,10 @@ class Interactivity_Controller extends Base_Controller {
 											->take(1)
 											->only('No');
 
-									//Log::info("lastcomponent no: ".$lastComponentNo);
 
-									if ($lastComponentNo == null)
+									if ($lastComponentNo == null) {
 										$lastComponentNo = 0;
+									}
 
 									$linkAnnotPageComponent = new PageComponent();
 									$linkAnnotPageComponent->ContentFilePageID = $cfp->ContentFilePageID + $bookmarkDestpage - 1;
@@ -444,11 +441,9 @@ class Interactivity_Controller extends Base_Controller {
 
 							if ($anncount > 0 && (int) $cf->Transferred != 1) {
 								if ($p->pcos_get_string($doc, "type:/Root/Metadata") == "stream") {
-									//Log::info("girdi");
 									$docInfo = $p->pcos_get_stream($doc, "", "/Root/Metadata");
 									preg_match("/indesign/i", $docInfo, $indesignFind);
 								} else {
-									//Log::info("girmedi");
 									$indesignFind = null;
 								}
 
@@ -465,14 +460,11 @@ class Interactivity_Controller extends Base_Controller {
 									$annotation_path = $annotations_path . "[" . $ann . "]";
 									$linkDest = (int) $p->pcos_get_number($doc, $annotation_path . "/destpage");
 									$pcosmode = $p->pcos_get_string($doc, "pcosmode");
-									//Log::info("link dest: ".$linkDest);
 									//Web Link
 									if ($pcosmode == "URI" || $pcosmode == ">>") {
-										//Log::info("girdi");
 										//Print the type of the annotation
 										$subtype = $p->pcos_get_string($doc, $annotation_path . "/Subtype");
 
-										//Log::info("Type: ".$p->get_buffer()." Count: ". $anncount);
 										$uri_path = $annotation_path . "/A/URI";
 										$uri = $p->pcos_get_string($doc, $uri_path);
 
@@ -482,22 +474,17 @@ class Interactivity_Controller extends Base_Controller {
 
 											$pageHeight = $height;
 
-											//Log::info("x: ".$p->pcos_get_number($doc, $rect_path."[0]"));
 
 											$rectY = $pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[3]");
-											//Log::info("y: ".$rectY);
 
 											$rectHeight = $pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[1]") - $rectY;
 
 											if ($rectHeight < 0) {
 												$rectHeight*=-1;
 											}
-											//Log::info("rectHeight: ".$rectHeight);
 
 											$rectX = $p->pcos_get_number($doc, $rect_path . "[0]");
 											$rectWidth = $p->pcos_get_number($doc, $rect_path . "[2]") - $rectX;
-											//Log::info("rectWidth: ".$rectWidth);
-											//Log::info("Page No: ".$cfp->No);
 
 											$lastComponentNo = DB::table('PageComponent')
 													->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
@@ -522,10 +509,6 @@ class Interactivity_Controller extends Base_Controller {
 											$linkAnnotPageComponent->ProcessTypeID = eProcessTypes::Insert;
 											$linkAnnotPageComponent->save();
 
-											//Log::info("x: ".$rectX);
-											//Log::info("y: ".$rectY);
-											//Log::info("width: ".$rectWidth);
-											//Log::info("height: ".$rectHeight);
 											//Weblink Component
 											for ($j = 0; $j < 8; $j++) {
 												$pcp = new PageComponentProperty();
@@ -573,11 +556,9 @@ class Interactivity_Controller extends Base_Controller {
 									}
 									//Page Link
 									else {
-										//Log::info("ikinciye girdi");
 										//Print the type of the annotation
 										$subtype = $p->pcos_get_string($doc, $annotation_path . "/Subtype");
 
-										//Log::info("Type: ".$p->get_buffer()." Count: ". $anncount);
 										//$uri_path = $annotation_path."/A/URI";
 										//$uri = $p->pcos_get_string($doc, $uri_path);
 										//Print the rectangle for the annotation.
@@ -586,25 +567,16 @@ class Interactivity_Controller extends Base_Controller {
 
 											$pageHeight = $height;
 
-											//Log::info("pageHeight: ".$pageHeight);
-											//Log::info("x: ".$p->pcos_get_number($doc, $rect_path."[0]"));
-											//Log::info("1: ".$p->pcos_get_number($doc, $rect_path."[1]"));
-											//Log::info("2: ".$p->pcos_get_number($doc, $rect_path."[2]"));
-											//Log::info("y: ".$p->pcos_get_number($doc, $rect_path."[3]"));
 
 											$rectY = $pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[3]");
-											//Log::info("y: ".$rectY);
 
 											$rectHeight = $pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[1]") - $rectY;
 											if ($rectHeight < 0) {
 												$rectHeight*=-1;
 											}
-											//Log::info("rectHeight: ".$rectHeight);
 
 											$rectX = $p->pcos_get_number($doc, $rect_path . "[0]");
 											$rectWidth = $p->pcos_get_number($doc, $rect_path . "[2]") - $rectX;
-											//Log::info("rectWidth: ".$rectWidth);
-											//Log::info("Page No: ".$cfp->No);
 
 											$lastComponentNo = DB::table('PageComponent')
 													->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
@@ -677,10 +649,12 @@ class Interactivity_Controller extends Base_Controller {
 								}
 							}
 						} catch (Exception $e) {
-							//echo $e->getMessage();
-							//Log::info($oc->No.'-sm:0');
-							Log::info($e->getMessage());
-							//array_push($oldPagesSimilarity, 0);
+							$msg = __('common.task_message', array(
+								'task' => '`interactivity`',
+								'detail' => $e->getMessage()
+									)
+							);
+							Common::sendErrorMail($msg);
 						}
 
 						//}
@@ -689,7 +663,6 @@ class Interactivity_Controller extends Base_Controller {
 
 							$oldPagesSimilarity = array();
 
-							//Log::info('Sayfa '.($i + 1));
 
 							$newPage = new imagick($pdfRealPath . '/' . $imageFile);
 
@@ -703,7 +676,6 @@ class Interactivity_Controller extends Base_Controller {
 									$oldPage = new imagick(path('public') . $oc->FilePath . '/' . $oc->FileName);
 									$result = $newPage->compareImages($oldPage, Imagick::METRIC_MEANSQUAREERROR);
 
-									//Log::info($oc->No.'-sm:'.(1 - (float)$result[1]));
 
 									array_push($oldPagesSimilarity, (1 - (float) $result[1]));
 
@@ -712,8 +684,6 @@ class Interactivity_Controller extends Base_Controller {
 									unset($oldPage);
 								} catch (Exception $e) {
 									//echo $e->getMessage();
-									//Log::info($oc->No.'-sm:0');
-									//Log::info($e->getMessage());
 									array_push($oldPagesSimilarity, 0);
 								}
 							}
@@ -1028,7 +998,6 @@ class Interactivity_Controller extends Base_Controller {
 							$postedData = Input::get();
 							foreach ($postedData as $name => $value) {
 								if (Common::startsWith($name, 'comp-' . $id)) {
-									//Log::info('name:'.$name.' value:'.$value);
 
 									$name = str_replace('comp-' . $id . '-', "", $name);
 

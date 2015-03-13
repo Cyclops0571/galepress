@@ -93,24 +93,12 @@ class PushNotification_Task {
 				$consoleLog->save();
 			}
 		} catch (Exception $e) {
-			$toEmail = Config::get('custom.admin_email');
-			$subject = __('common.task_subject');
 			$msg = __('common.task_message', array(
 				'task' => '`PushNotification`',
 				'detail' => $e->getMessage()
 					)
 			);
-
-			Log::info($msg);
-
-			Bundle::start('messages');
-
-			Message::send(function($m) use($toEmail, $subject, $msg) {
-				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-				$m->to($toEmail);
-				$m->subject($subject);
-				$m->body($msg);
-			});
+			Common::sendErrorMail($msg);
 		}
 	}
 
@@ -142,9 +130,6 @@ class PushNotification_Task {
 		// Put your private key's passphrase here:
 		$passphrase = Config::get('custom.passphrase');
 
-		//Log::info('crt:'.$cert.' devToken:'.$deviceToken.' passphrase:'.$passphrase.' message:'.$message);
-		////////////////////////////////////////////////////////////////////////////////
-
 		$ctx = stream_context_create();
 		stream_context_set_option($ctx, 'ssl', 'local_cert', $cert);
 		stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
@@ -168,8 +153,6 @@ class PushNotification_Task {
 
 			// Send it to the server
 			$result = fwrite($fp, $msg, strlen($msg));
-
-			//Log::info($result);
 
 			if ($result) {
 				$success = true;
@@ -270,9 +253,6 @@ class PushNotification_Task {
 						// Put your alert message here:
 						$message = $n->NotificationText;
 
-						//Log::info('crt:'.$cert.' devToken:'.$deviceToken.' passphrase:'.$passphrase.' message:'.$message);
-						////////////////////////////////////////////////////////////////////////////////
-
 						$ctx = stream_context_create();
 						stream_context_set_option($ctx, 'ssl', 'local_cert', $cert);
 						stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
@@ -297,8 +277,6 @@ class PushNotification_Task {
 							// Send it to the server
 							$result = fwrite($fp, $msg, strlen($msg));
 
-							//Log::info($result);
-
 							if ($result) {
 								//echo 'Message successfully delivered' . PHP_EOL;
 								$c = PushNotificationDevice::find((int) $n->PushNotificationDeviceID);
@@ -321,27 +299,6 @@ class PushNotification_Task {
 						//$googleAPIKey = 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY';
 						$googleAPIKey = Config::get('custom.google_api_key');
 
-						// if($n->ApplicationID == 117)
-						// {
-						// 	Log::info('unisac uygulamasina gonderiliyor...')
-						// 	$data = array(
-						// 		'headers' => array(
-						// 			'Authorization: key='.$googleAPIKey,
-						// 			'Content-Type: application/json'
-						// 		),
-						// 		'fields' => array(
-						// 			'registration_ids' => array(
-						// 				'APA91bExr94g-fLd8GbcuJvCyC9QT4nu2PQWDcP7tMVEiu3BE6QW8B8ABEF2RTVFmTDY2u298AZ-yw_IuKx7hpWXlbNdGDyBSQFuT_xHwx6k_-fQgh7YDYuHeuOyOV-BIFVbhJTY3hKbpOFW1IauORmNNDknbgajpw'
-						// 			),
-						// 			'data' => array(
-						// 				"message" => $n->NotificationText
-						// 			)
-						// 		)
-						// 	);
-						// }
-						//else
-						//{
-						//Log::info('diger uygulamalara gonderiliyor...')
 						$data = array(
 							'headers' => array(
 								'Authorization: key=' . $googleAPIKey,
@@ -391,24 +348,12 @@ class PushNotification_Task {
 				}
 			}
 		} catch (Exception $e) {
-			$toEmail = Config::get('custom.admin_email');
-			$subject = __('common.task_subject');
 			$msg = __('common.task_message', array(
 				'task' => '`PushNotification`',
 				'detail' => $e->getMessage()
 					)
 			);
-
-			Log::info($msg);
-
-			Bundle::start('messages');
-
-			Message::send(function($m) use($toEmail, $subject, $msg) {
-				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-				$m->to($toEmail);
-				$m->subject($subject);
-				$m->body($msg);
-			});
+			Common::sendErrorMail($msg);
 		}
 	}
 
