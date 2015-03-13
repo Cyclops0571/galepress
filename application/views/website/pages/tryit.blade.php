@@ -168,7 +168,7 @@
                       </div>
                     </div>
                   </div> -->
-                  <div class="panel-heading" style="display:-webkit-box !important;">
+                  <div class="panel-heading" style="display:-webkit-box !important; height:80px;">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                       <input type="submit" value="Uygulama Oluştur" class="btn btn-primary btn-block" style="outline:none;">
                     </div>
