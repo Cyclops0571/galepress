@@ -2,6 +2,9 @@
 $serverUrl = 'http://www.galepress.com';
 $mailEmail = 'info@galepress.com';
 if(Laravel\Request::env() == ENV_TEST) {
+	$serverUrl = 'http://galetest.com';
+	$mailEmail = 'info@galetest.com';
+} else if(Laravel\Request::env() == ENV_LOCAL){
 	$serverUrl = 'http://localhost';
 	$mailEmail = 'info@galetest.com';
 }

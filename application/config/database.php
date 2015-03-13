@@ -2,11 +2,14 @@
 $dbName = "admin_galepress";
 $dbUserName = "admin_gpuser";
 $dbPassword = "tu4ydebyr";
-
 if(Laravel\Request::env() == ENV_TEST) {
 	$dbName = "admin_galepress";
 	$dbUserName = "admin_galepress";
 	$dbPassword = "tu4ydebyr";
+} else if(Laravel\Request::env() == ENV_LOCAL) {
+	$dbName = "db";
+	$dbUserName = "root";
+	$dbPassword = "";
 }
 
 
