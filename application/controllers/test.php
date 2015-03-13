@@ -20,21 +20,12 @@ class Test_Controller extends Base_Controller{
 
 	public function get_index() {
 		echo \Laravel\Request::env();
-		$toEmail = Config::get('custom.admin_email');
-		$subject = __('common.task_subject');
-		$fromEmail = Config::get('custom.mail_email');
 		$msg = __('common.task_message', array(
 				'task' => '`BackupDatabase`',
 				'detail' => "bilgi islem test"
 				)
 		);
-		Bundle::start('messages');
-		Message::send(function($m) use($fromEmail, $toEmail, $subject, $msg) {
-			$m->from($fromEmail, Config::get('custom.mail_displayname'));
-			$m->to($toEmail);
-			$m->subject($subject);
-			$m->body($msg);
-		});
+		Common::sendErrorMail($msg);
 	}
 
 }
