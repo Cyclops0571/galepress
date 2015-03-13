@@ -24,7 +24,6 @@ class UpdateLocation_Task {
 			{
 				if((float)$s->Lat > 0 && (float)$s->Long > 0) 
 				{
-					//Log::info("id=".$s->StatisticID.'    '.(float)$s->Lat.'     '.(float)$s->Long);
 
 					$currentLocation = DB::table('Statistic')
 						->where('Lat', '=', $s->Lat)
@@ -69,7 +68,6 @@ class UpdateLocation_Task {
 					        $response = curl_exec($ch);
 					        $apiRequest += 1;
 					        curl_close($ch);
-					        //Log::info($response);
 
 					        $json = json_decode($response, true);
 							if($json["status"] == "OK")
@@ -107,13 +105,6 @@ class UpdateLocation_Task {
 						//	//asd;
 						//}
 
-						//Log::info("StatisticID=".$s->StatisticID);
-						//Log::info("country=".$country);
-						//Log::info("city=".$city);
-						//Log::info("district=".$district);
-						//Log::info("quarter=".$quarter);
-						//Log::info("avenue=".$avenue);
-
 						$c = Statistic::find((int)$s->StatisticID);
 						$c->Country = $country;
 						$c->City = $city;
@@ -131,25 +122,13 @@ class UpdateLocation_Task {
 		}
 		catch (Exception $e)
 		{
-			$toEmail = Config::get('custom.admin_email');
-			$subject = __('common.task_subject');
 			$msg = __('common.task_message', array(
 					'task' => '`UpdateLocation`',
 					'detail' => $e->getMessage()
 					)
 				);
 			
-			Log::info($msg);
-			
-			Bundle::start('messages');
-			
-			Message::send(function($m) use($toEmail, $subject, $msg)
-			{
-				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-				$m->to($toEmail);
-				$m->subject($subject);
-				$m->body($msg);
-			});
+			Common::sendErrorMail($msg);
 		}
     }
 }

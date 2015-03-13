@@ -98,6 +98,7 @@ class PushNotification_Task {
 				'detail' => $e->getMessage()
 					)
 			);
+
 			Common::sendErrorMail($msg);
 		}
 	}
@@ -130,6 +131,7 @@ class PushNotification_Task {
 		// Put your private key's passphrase here:
 		$passphrase = Config::get('custom.passphrase');
 
+
 		$ctx = stream_context_create();
 		stream_context_set_option($ctx, 'ssl', 'local_cert', $cert);
 		stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
@@ -153,6 +155,7 @@ class PushNotification_Task {
 
 			// Send it to the server
 			$result = fwrite($fp, $msg, strlen($msg));
+
 
 			if ($result) {
 				$success = true;
@@ -253,6 +256,7 @@ class PushNotification_Task {
 						// Put your alert message here:
 						$message = $n->NotificationText;
 
+
 						$ctx = stream_context_create();
 						stream_context_set_option($ctx, 'ssl', 'local_cert', $cert);
 						stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
@@ -276,6 +280,7 @@ class PushNotification_Task {
 
 							// Send it to the server
 							$result = fwrite($fp, $msg, strlen($msg));
+
 
 							if ($result) {
 								//echo 'Message successfully delivered' . PHP_EOL;
@@ -353,6 +358,7 @@ class PushNotification_Task {
 				'detail' => $e->getMessage()
 					)
 			);
+
 			Common::sendErrorMail($msg);
 		}
 	}

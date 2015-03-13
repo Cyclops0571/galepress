@@ -102,25 +102,13 @@ class UpdateSize_Task {
 		}
 		catch (Exception $e)
 		{
-			$toEmail = Config::get('custom.admin_email');
-			$subject = __('common.task_subject');
 			$msg = __('common.task_message', array(
 					'task' => '`UpdateSize`',
 					'detail' => $e->getMessage()
 					)
 				);
 			
-			Log::info($msg);
-			
-			Bundle::start('messages');
-			
-			Message::send(function($m) use($toEmail, $subject, $msg)
-			{
-				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-				$m->to($toEmail);
-				$m->subject($subject);
-				$m->body($msg);
-			});
+			Common::sendErrorMail($msg);
 		}
     }
 }

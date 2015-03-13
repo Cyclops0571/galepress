@@ -28,6 +28,13 @@ class CreateInteractivePDF_Task {
 	}
 
 	public function run() {
+		$lockFile = path('base') . 'lock/' . __CLASS__ . ".lock";
+		$fp = fopen($lockFile, 'r+');
+		/* Activate the LOCK_NB option on an LOCK_EX operation */
+		if (!flock($fp, LOCK_EX | LOCK_NB)) {
+			echo 'Unable to obtain lock';
+			exit(-1);
+		}
 		try {
 			$cf = DB::table('ContentFile')
 					->where('Interactivity', '=', 1)
@@ -46,45 +53,21 @@ class CreateInteractivePDF_Task {
 				try {
 					$this->create($f->ContentFileID, (int) $f->Included);
 				} catch (Exception $e) {
-					$toEmail = Config::get('custom.admin_email');
-					$subject = __('common.task_subject');
 					$msg = __('common.task_message', array(
 						'task' => '`CreateInteractivePDF`',
 						'detail' => $e->getMessage()
 							)
 					);
-
-					Log::info($msg);
-
-					Bundle::start('messages');
-
-					Message::send(function($m) use($toEmail, $subject, $msg) {
-						$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-						$m->to($toEmail);
-						$m->subject($subject);
-						$m->body($msg);
-					});
+					Common::sendErrorMail($msg);
 				}
 			}
 		} catch (Exception $e) {
-			$toEmail = Config::get('custom.admin_email');
-			$subject = __('common.task_subject');
 			$msg = __('common.task_message', array(
 				'task' => '`CreateInteractivePDF`',
 				'detail' => $e->getMessage()
 					)
 			);
-
-			Log::info($msg);
-
-			Bundle::start('messages');
-
-			Message::send(function($m) use($toEmail, $subject, $msg) {
-				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-				$m->to($toEmail);
-				$m->subject($subject);
-				$m->body($msg);
-			});
+			Common::sendErrorMail($msg);
 		}
 	}
 
@@ -272,7 +255,6 @@ class CreateInteractivePDF_Task {
 							$trigger_h = 52;
 						}
 
-						//Log::info('before reverse trigger_y:'.$trigger_y);
 						//reverse y
 						$y = $height - $y - $h;
 						$trigger_y = $height - $trigger_y;
@@ -328,39 +310,9 @@ class CreateInteractivePDF_Task {
 
 						if ($componentClass == 'video' || $componentClass == 'audio' || $componentClass == 'animation' || $componentClass == 'tooltip' || $componentClass == 'scroll' || $componentClass == 'slideshow' || $componentClass == 'gal360') {
 
-							/*
-							  foreach($data as $var => $val)
-							  {
-							  Log::info($var." = ".$val);
-							  }
-							  //2013-04-20 09:33:01 INFO - pcid = 1935
-							  //2013-04-20 09:33:01 INFO - option = 1
-							  //2013-04-20 09:33:01 INFO - filename = files/customer_1/application_28/content_224/file_22/output/comp_1935/10_20130420093210_files/customer_1/application_28/content_224/file_22/output/comp_1935/10_20130420092710_files/customer_1/application_28/content_224/file_22/output/comp_1935/10_20130420092456_small.mp4
-							  //2013-04-20 09:33:01 INFO - url =
-							  //2013-04-20 09:33:01 INFO - videoinit = onstart
-							  //2013-04-20 09:33:01 INFO - hidecontrols = 1
-							  //2013-04-20 09:33:01 INFO - restartwhenfinished = 1
-							  //2013-04-20 09:33:01 INFO - mute = 0
-							  //2013-04-20 09:33:01 INFO - posteroption = 2
-							  //2013-04-20 09:33:01 INFO - posterimagename = 6.jpg
-							  //2013-04-20 09:33:01 INFO - x = 132
-							  //2013-04-20 09:33:01 INFO - y = 84
-							  //2013-04-20 09:33:01 INFO - w = 223
-							  //2013-04-20 09:33:01 INFO - h = 183
-							 */
 
 							//ylvideo://xxx.com/video.mp4?autostart=X?modal=0
 							//ylvideo://localhost/video=001.mp4?autostart=X?modal=0
-							/*
-							  $bladeTemplate = array(
-							  'video' => 'player.xml',
-							  'audio' => 'index.html',
-							  'tooltip' => 'index.html',
-							  'scroll' => 'index.html',
-							  'slideshow' => 'index.html',
-							  'gal360' => 'threesixty.js'
-							  );
-							 */
 
 							//create component directory
 							$outputPath = $path . '/output';
