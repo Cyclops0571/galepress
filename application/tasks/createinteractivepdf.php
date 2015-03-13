@@ -6,7 +6,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class CreateInteractivePDF_Task {
 
-	public function run() {
+	public function run_queue() {
 		$lockFile = path('base') . 'lock/' . __CLASS__ . ".lock";
 		$fp = fopen($lockFile, 'r+');
 		/* Activate the LOCK_NB option on an LOCK_EX operation */
@@ -27,7 +27,7 @@ class CreateInteractivePDF_Task {
 		$connection->close();
 	}
 
-	public function createInteractivePdf() {
+	public function run() {
 		try {
 			$cf = DB::table('ContentFile')
 					->where('Interactivity', '=', 1)
