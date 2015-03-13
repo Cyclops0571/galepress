@@ -1,8 +1,15 @@
 <?php
 $serverUrl = 'http://www.galepress.com';
+$mailEmail = 'info@galepress.com';
 if(Laravel\Request::env() == ENV_TEST) {
 	$serverUrl = 'http://localhost';
+	$mailEmail = 'info@galetest.com';
 }
+
+$mailList = array(
+	'hakan.sarier@detaysoft.com',
+	'serdar.saygili@detaysoft.com'
+);
 
 return array(
 	
@@ -14,7 +21,7 @@ return array(
 	'companyname' => 'GALEPRESS',
 	
 	'mail_displayname' => 'GALEPRESS',
-	'mail_email' => 'info@galepress.com',
+	'mail_email' => $mailEmail,
 	
 	'url' => $serverUrl,
 	
