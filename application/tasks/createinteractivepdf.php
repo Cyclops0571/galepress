@@ -1,40 +1,8 @@
 <?php
-require_once path("base") . "php-amqplib/vendor/autoload.php";
-
-use PhpAmqpLib\Connection\AMQPConnection;
-use PhpAmqpLib\Message\AMQPMessage;
 
 class CreateInteractivePDF_Task {
 
-	public function run_queue() {
-		$lockFile = path('base') . 'lock/' . __CLASS__ . ".lock";
-		$fp = fopen($lockFile, 'r+');
-		/* Activate the LOCK_NB option on an LOCK_EX operation */
-		if (!flock($fp, LOCK_EX | LOCK_NB)) {
-			echo 'Unable to obtain lock';
-			exit(-1);
-		}
-
-		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
-		$channel = $connection->channel();
-		$channel->queue_declare('queue_interactivepdf', false, false, false, false);
-		$channel->basic_consume('queue_interactivepdf', '', false, true, false, false, array($this, "createInteractivePdf"));
-		while (count($channel->callbacks)) {
-			$channel->wait();
-			ob_flush();
-		}
-		$channel->close();
-		$connection->close();
-	}
-
 	public function run() {
-		$lockFile = path('base') . 'lock/' . __CLASS__ . ".lock";
-		$fp = fopen($lockFile, 'r+');
-		/* Activate the LOCK_NB option on an LOCK_EX operation */
-		if (!flock($fp, LOCK_EX | LOCK_NB)) {
-			echo 'Unable to obtain lock';
-			exit(-1);
-		}
 		try {
 			$cf = DB::table('ContentFile')
 					->where('Interactivity', '=', 1)
@@ -313,7 +281,6 @@ class CreateInteractivePDF_Task {
 
 							//ylvideo://xxx.com/video.mp4?autostart=X?modal=0
 							//ylvideo://localhost/video=001.mp4?autostart=X?modal=0
-
 							//create component directory
 							$outputPath = $path . '/output';
 							$componentPath = $outputPath . '/comp_' . $c->PageComponentID;
