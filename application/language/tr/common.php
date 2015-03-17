@@ -414,6 +414,7 @@ return array(
 	'reports_columns_report1302' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "Sayfa", "Kullanıcı Sayısı", "Süre (Saniye)"),
 
 	'task_subject' => 'Galepress.com görevi esnasında hata oluştu',
+	'task_subject' => 'Galepress.com görevi durumu',
 	'task_message' => "".
 						"Sayın yetkili, \n\n".
 						":task görevi yapılırken bir hata oluştu. Hata detayını aşağıda görebilirsiniz.\n\n".

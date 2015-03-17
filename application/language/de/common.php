@@ -418,6 +418,7 @@ return array(
 	'reports_columns_report1302' => array("Kundennummer", "Kundenbezeichnung", "Applikationsbezeichnung", "Inhaltsbezeichnung", "Land", "Stadt", "Bezirk", "Seite", "User Count", "Dauer (Sekunde)"),
 
 	'task_subject' => 'Während der Galepress.com-Aufgabe ist ein Fehler aufgetreten.',
+	'task_status' => 'Galepress.com görevi durumu',
 	'task_message' => "".
 						"Sayın yetkili, \n\n".
 						":task görevi yapılırken bir hata oluştu. Hata detayını aşağıda görebilirsiniz.\n\n".
