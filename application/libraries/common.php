@@ -503,6 +503,21 @@ class Common {
 			});
 		}
 	}
+	
+	public static function sendStatusMail($msg) {
+		$toEmailSet = Config::get('custom.admin_email_set');
+		$subject = __('common.task_status');
+		Log::info($msg);
+		Bundle::start('messages');
+		foreach ($toEmailSet as $toEmail) {
+			Message::send(function($m) use($toEmail, $subject, $msg) {
+				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+				$m->to($toEmail);
+				$m->subject($subject);
+				$m->body($msg);
+			});
+		}
+	}
 
 	public static function sendEmail($toEmail, $toDisplayName, $subject, $msg) {
 		try {

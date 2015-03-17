@@ -47,7 +47,7 @@ class BackupDatabase_Task {
 		$username = Config::get('database.connections.mysql.username');
 		$password = Config::get('database.connections.mysql.password');
 		$schema = Config::get('database.connections.mysql.database');
-		$path = '/home/admin/domains/galepress.com/public_html/backup/'; // absolute and with trailing slash ##
+		$path = '/home/admin/database_backup/'; // absolute and with trailing slash ##
 		$opts = '--quick --lock-tables --add-drop-table'; // backup options for mysqldump ##
 
 		// email details ##
@@ -64,7 +64,14 @@ class BackupDatabase_Task {
 
 		// run mysqldump routine ##
 		exec(sprintf('mysqldump --host='.$host.' --user='.$username.' --password='.$password.' '.$schema.' '.$opts.' | '.$zip.' > '.$path.$backup.'', $host, $username, $password, $schema, $path.$backup));
-
+		
+		//secure copy database to our test server
+		$scpCommand = "scp " . $path.$backup . " root@37.9.205.204:/home/admin/database_backup";
+		$result = shell_exec($scpCommand);
+		Common::sendStatusMail($result);
+		
+		// <editor-fold defaultstate="collapsed" desc="old_Version Mail code">
+		/*
 		// email compressed file as inline attachment ##
 		$headers = "From: ".Config::get('custom.mail_email')." <".Config::get('custom.mail_displayname').">";
 
@@ -98,10 +105,14 @@ class BackupDatabase_Task {
 
 		// send ##
 		$res = mail( $email, $subject, $body, $headers );
+		
 
 		// check mail status ##
 		if ( !$res ) {
 			throw new Exception('FAILED to email mysqldump.');
 		}
+		 * 
+		 */
+		// </editor-fold>
 	}
 }

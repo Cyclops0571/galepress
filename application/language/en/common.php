@@ -414,6 +414,7 @@ return array(
 	'reports_columns_report1302' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Page", "User Count", "Duration (Second)"),
 
 	'task_subject' => 'An error occurred during the task galepress.com',
+	'task_status' => 'Task status message of galepress.com',
 	'task_message' => "".
 						"Authorized, \n\n".
 						":task mission not succesfully completed. You can see the mistakes below.\n\n".
