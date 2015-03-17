@@ -105,9 +105,9 @@
                       <div class="device">
                           <div class="screen">
                               <div data-auto-play="true" data-items="3" data-single-item="true" class="owl-carousel owl-theme">
-                                  <div class="item"><img src="/website/img/clients/carrefoursa/1.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/carrefoursa/2.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/carrefoursa/3.png" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/carrefoursa/1.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/carrefoursa/2.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/carrefoursa/3.jpg" alt="" class="img-responsive"></div>
                               </div>
                           </div>
                       </div>
@@ -128,9 +128,9 @@
                       <div class="device">
                           <div class="screen">
                               <div data-auto-play="true" data-items="3" data-single-item="true" data-auto-height="true" class="owl-carousel owl-theme">
-                                  <div class="item"><img src="/website/img/clients/zendiamond/1.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/zendiamond/2.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/zendiamond/3.png" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/zendiamond/1.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/zendiamond/2.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/zendiamond/3.jpg" alt="" class="img-responsive"></div>
                               </div>
                           </div>
                       </div>
@@ -150,9 +150,9 @@
                       <div class="device">
                           <div class="screen">
                               <div data-auto-play="true" data-items="3" data-single-item="true" data-auto-height="true" class="owl-carousel owl-theme">
-                                  <div class="item"><img src="/website/img/clients/renovia/1.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/renovia/2.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/renovia/3.png" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/renovia/1.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/renovia/2.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/renovia/3.jpg" alt="" class="img-responsive"></div>
                               </div>
                           </div>
                       </div>
@@ -172,9 +172,9 @@
                       <div class="device">
                           <div class="screen">
                               <div data-auto-play="true" data-items="3" data-single-item="true" data-auto-height="true" class="owl-carousel owl-theme">
-                                  <div class="item"><img src="/website/img/clients/pleon/1.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/pleon/2.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/pleon/3.png" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/pleon/1.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/pleon/2.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/pleon/3.jpg" alt="" class="img-responsive"></div>
                               </div>
                           </div>
                       </div>
@@ -194,9 +194,9 @@
                       <div class="device">
                           <div class="screen">
                               <div data-auto-play="true" data-items="3" data-single-item="true" data-auto-height="true" class="owl-carousel owl-theme">
-                                  <div class="item"><img src="/website/img/clients/mopas/1.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/mopas/2.png" alt="" class="img-responsive"></div>
-                                  <div class="item"><img src="/website/img/clients/mopas/3.png" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/mopas/1.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/mopas/2.jpg" alt="" class="img-responsive"></div>
+                                  <div class="item"><img src="/website/img/clients/mopas/3.jpg" alt="" class="img-responsive"></div>
                               </div>
                           </div>
                       </div>
