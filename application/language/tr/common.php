@@ -231,6 +231,9 @@ return array(
 	'contents_blocked' => 'Bloke:',
 	'contents_status' => 'Aktif:',
 	'contents_wrongpassword' => 'Hatalı parola!',
+	'contents_landscape' => 'Yatay',
+	'contents_portrait' => 'Dikey',
+	'contents_landscape_portrait' => 'Yatay ve Dikey',
 
 	'contents_tooltip_application' => 'Uygulama',
 	'contents_tooltip_name' => 'Tablet bilgisayarlarda gözükecek içerik adı.',
@@ -246,7 +249,7 @@ return array(
 	'contents_tooltip_price' => 'Henüz kullanımda değildir. Üzerinde çalışılmaktadır.',
 	'contents_tooltip_currency' => 'Henüz kullanımda değildir. Üzerinde çalışılmaktadır.',
 	'contents_tooltip_identifier' => 'Henüz kullanımda değildir. Üzerinde çalışılmaktadır.',
-	'contents_tooltip_orientation' => 'Henüz kullanımda değildir. Üzerinde çalışılmaktadır.',
+	'contents_tooltip_orientation' => 'İçeriğin yatay veya dikey gösterilmesini ayarlamaya yarar.',
 	'contents_tooltip_ismaster' => 'Henüz kullanımda değildir. Üzerinde çalışılmaktadır.',
 	'contents_tooltip_autodownload' => 'İşaretli içerikler kullanıcıya sorulmadan direk indirilecektir. Küçük boyutlu içeriklerde kullanılması tavsiye edilir, aksi halde programın başlaması uzun sürecektir.',
 	'contents_tooltip_approval' => 'Onay',

@@ -230,6 +230,9 @@ return array(
 	'contents_blocked' => 'Blockiert:',
 	'contents_status' => 'Aktiv:',
 	'contents_wrongpassword' => 'Falsches Passwort!',
+	'contents_landscape' => 'Landscape',
+	'contents_portrait' => 'Portrait',
+	'contents_landscape_portrait' => 'Landscape & Portrait',
 	
 	'contents_tooltip_application' => 'Applikation',
 	'contents_tooltip_name' => 'Inhaltsbezeichnung für Tabletcomputer',
@@ -245,7 +248,7 @@ return array(
 	'contents_tooltip_price' => 'Noch nicht verfügbar. Wird bearbeitet.',
 	'contents_tooltip_currency' => 'Noch nicht verfügbar. Wird bearbeitet.',
 	'contents_tooltip_identifier' => 'Noch nicht verfügbar. Wird bearbeitet.',
-	'contents_tooltip_orientation' => 'Noch nicht verfügbar. Wird bearbeitet.',
+	'contents_tooltip_orientation' => 'Determines the layout  of the content.',
 	'contents_tooltip_ismaster' => 'Noch nicht verfügbar. Wird bearbeitet.',
 	'contents_tooltip_autodownload' => 'Die markierten Inhalte werden ohne weitere Freigabe durch den Benutzer unmittelbar heruntergeladen. Empfohlen für die geringfügigen Inhalte. Ansonsten nimmt die Initialisierung des Programms eine gewisse Zeit in Anspruch.',
 	'contents_tooltip_approval' => 'Bestätigung',
