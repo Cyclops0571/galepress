@@ -3,6 +3,14 @@
 class PushNotification_Task {
 
 	public function run() {
+		$lockFile = path('public') . 'lock/PushNotification_Task_runner.lock';
+		$fp = fopen($lockFile, 'r+');
+		/* Activate the LOCK_NB option on an LOCK_EX operation */
+		while (!flock($fp, LOCK_EX | LOCK_NB)) {
+			echo 'Unable to obtain lock';
+			sleep(10);
+		}
+		
 		//https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html
 		//https://developer.apple.com/library/ios/technotes/tn2265/_index.html
 		try {
@@ -19,7 +27,7 @@ class PushNotification_Task {
 					->join('PushNotificationDevice AS d', function($join) {
 						$join->on('d.PushNotificationID', '=', 'p.PushNotificationID');
 						$join->on('d.Sent', '=', DB::raw(0));
-						$join->on('d.ErrorCount', '<', DB::raw(2));
+						$join->on('d.ErrorCount', '=', DB::raw(0));
 						$join->on('d.StatusID', '=', DB::raw(eStatus::Active));
 					})
 					->where('c.StatusID', '=', eStatus::Active)
