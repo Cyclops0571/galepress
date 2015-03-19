@@ -3,7 +3,7 @@
 class PushNotification_Task {
 
 	public function run() {
-		$lockFile = path('public') . 'lock/PushNotification_Task_runner.lock';
+		$lockFile = path('base') . 'lock/PushNotification_Task_runner.lock';
 		$fp = fopen($lockFile, 'r+');
 		/* Activate the LOCK_NB option on an LOCK_EX operation */
 		while (!flock($fp, LOCK_EX | LOCK_NB)) {
