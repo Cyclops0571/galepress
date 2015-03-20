@@ -41,11 +41,14 @@ class PushNotification_Task {
 					try {
 						$result = false;
 						if($n->ApplicationID == 117) {
-							$muhammedGunesIDSet = array(29233, 29235, 29236);
-							if(in_array($n->CustomerID , $muhammedGunesIDSet)) {
+							$muhammedGunesTokenSet = array(
+								'APA91bFscBHM2TntnUHnZf2od3NBRnyX0HQlM6rnE7UAqg8jnoGkRDbr4D-wT1h2ZNXye6oblyyxgnhTYZSwmRymeWn0itd7iYuM2f1a6-bOetAHXF8avlD0j629wBQFvLAAOA5lLv4U5-eSOCtDpMFI1BFISEg3KQ',
+								'APA91bGriPV7QNduoJ7455Q905FybBM1XuDdBjWR-MOX1NG7PYB3EhaUQDF2K-LO6qERryAbFCZIzsjVzZ44jJn92lkPS_LIM1b3SxtOd3sNVMZSrD_rhHvZ6OxNrUwDVRrV-M_-ecrmnRcjHVIR2n_bFtCjQhhhPg', 
+								'APA91bHXi1x4RnTAXwk1GEmsxydePrixx-CU7Me4C4YAumbJT_dXn8DjfCTwiK7lYbw5GCvCnUUMwUOjANQ3PCzBTcRVHniFJP4F6OYNBc34Y9Bq9gQ19F-SjheB8IeqFvBn620vylga6g5T1FytPoiC9qnBMFg8lw',
+								'APA91bFMcHOr0_Q5pfq53uwBoziWIRZ4AxKv8hTDUaRV3GOOi1VRfUCSCYfaDblDxsSO-WuDMKfIfWBXCCsvcuVvUq7MJpEyWXoPHgUqG3LMde1RO2ZETwWBcOeHxxhhs-13gNXDa5OfUSD7__ekmsF3odKbvqXONA'
+								);
+							if(in_array($n->DeviceToken , $muhammedGunesTokenSet)) {
 								$result = $this->androidInternal($n->NotificationText, $n->DeviceToken);
-								echo $n->CustomerID, PHP_EOL;
-								var_dump($result);
 							} else {
 								$result = TRUE;
 							}
@@ -182,16 +185,32 @@ class PushNotification_Task {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disabling SSL Certificate support temporarly
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data['fields']));
-		$result = curl_exec($ch);
-		if ($result === false) {
+		$response = curl_exec($ch);
+		if ($response === false) {
 			//die('Curl failed: ' . curl_error($ch));
 			throw new Exception('Curl failed: ' . curl_error($ch));
+		} else {
+			$responseArray = json_decode($response, TRUE);
+			if(isset($responseArray['success']) && $responseArray['success'] == 1) {
+				$success = true;
+			}
+			
+			if(isset($responseArray['results'])) {
+				foreach($responseArray['results'] as $result) {
+					if(isset($result['registration_id'])) {
+						$cannonicalToken = $result['registration_id'];
+						if($deviceToken != $cannonicalToken) {
+							//eger deviceToken degismis ise eski deviceToken ile tekrardan pushNotification yollama...
+							$token = Token::where('DeviceToken', '=', $deviceToken)->first();
+							$token instanceof Token;
+							$token->StatusID = eStatus::Deleted;
+							$token->save();
+						}
+					}
+				}
+			}
 		}
 		curl_close($ch);
-		$json = json_decode($result, true);
-		if ($json['success'] === 1) {
-			$success = true;
-		}
 		return $success;
 	}
 
