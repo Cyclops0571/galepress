@@ -68,6 +68,7 @@ class BackupDatabase_Task {
 		//secure copy database to our test server
 		$scpCommand = "scp " . $path.$backup . " root@37.9.205.204:/home/admin/database_backup";
 		$result = shell_exec($scpCommand);
+		$result .= "Database backup islemi sorunsuz calisti.";
 		Common::sendStatusMail($result);
 		
 		// <editor-fold defaultstate="collapsed" desc="old_Version Mail code">

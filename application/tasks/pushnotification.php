@@ -3,6 +3,14 @@
 class PushNotification_Task {
 
 	public function run() {
+		$lockFile = path('base') . 'lock/PushNotification_Task_runner.lock';
+		$fp = fopen($lockFile, 'r+');
+		/* Activate the LOCK_NB option on an LOCK_EX operation */
+		while (!flock($fp, LOCK_EX | LOCK_NB)) {
+			echo 'Unable to obtain lock';
+			sleep(10);
+		}
+		
 		//https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html
 		//https://developer.apple.com/library/ios/technotes/tn2265/_index.html
 		try {
@@ -19,7 +27,7 @@ class PushNotification_Task {
 					->join('PushNotificationDevice AS d', function($join) {
 						$join->on('d.PushNotificationID', '=', 'p.PushNotificationID');
 						$join->on('d.Sent', '=', DB::raw(0));
-						$join->on('d.ErrorCount', '<', DB::raw(2));
+						$join->on('d.ErrorCount', '=', DB::raw(0));
 						$join->on('d.StatusID', '=', DB::raw(eStatus::Active));
 					})
 					->where('c.StatusID', '=', eStatus::Active)
@@ -32,15 +40,20 @@ class PushNotification_Task {
 				foreach ($pn as $n) {
 					try {
 						$result = false;
-
-						//ios
-						if ($n->DeviceType === 'ios') {
+						if($n->ApplicationID == 117) {
+							$muhammedGunesIDSet = array(29233, 29235, 29236);
+							if(in_array($n->CustomerID , $muhammedGunesIDSet)) {
+								$result = $this->androidInternal($n->NotificationText, $n->DeviceToken);
+								echo $n->CustomerID, PHP_EOL;
+								var_dump($result);
+							} else {
+								$result = TRUE;
+							}
+						} else if ($n->DeviceType === 'ios') {
 							$cert = path('public') . 'files/customer_' . $n->CustomerID . '/application_' . $n->ApplicationID . '/' . $n->CkPem;
 
 							$result = $this->iosInternal($cert, $n->NotificationText, $n->DeviceToken);
-						}
-						//android
-						elseif ($n->DeviceType === 'android') {
+						} elseif ($n->DeviceType === 'android') {
 							$result = $this->androidInternal($n->NotificationText, $n->DeviceToken);
 						}
 

@@ -230,6 +230,9 @@ return array(
 	'contents_blocked' => 'Blocked:',
 	'contents_status' => 'Active:',
 	'contents_wrongpassword' => 'Wrong Password!',
+	'contents_landscape' => 'Landscape',
+	'contents_portrait' => 'Portrait',
+	'contents_landscape_portrait' => 'Landscape & Portrait',
 	
 	'contents_tooltip_application' => 'Application',
 	'contents_tooltip_name' => 'Content name for tablet pc.',
@@ -245,7 +248,7 @@ return array(
 	'contents_tooltip_price' => 'Is not used yet. We are working on.',
 	'contents_tooltip_currency' => 'Is not used yet. We are working on.',
 	'contents_tooltip_identifier' => 'Is not used yet. We are working on.',
-	'contents_tooltip_orientation' => 'Is not used yet. We are working on.',
+	'contents_tooltip_orientation' => 'Determines the layout  of the content.',
 	'contents_tooltip_ismaster' => 'Is not used yet. We are working on.',
 	'contents_tooltip_autodownload' => 'Marked content will be downloaded directly without prompting the user. It is recommended for usage in small-sized content, otherwise it will take longer to start the program.',
 	'contents_tooltip_approval' => 'Confirm',
