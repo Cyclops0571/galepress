@@ -89,7 +89,7 @@ return array(
 	'website_galepress' => 'galepress-nedir',
 	'website_products' => 'urunler',
 	'website_advantages' => 'avantajlar',
-	'website_customers' => 'showcase',
+	'website_customers' => 'referanslar',
 	'website_tutorials' => 'calisma-yapisi',
 	'website_contact' => 'iletisim',
 	'website_sitemap' => 'site-haritasi',
