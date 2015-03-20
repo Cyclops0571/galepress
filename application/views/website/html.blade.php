@@ -94,5 +94,35 @@
         <gcse:search></gcse:search>
     </div>
 
+
+    <script type="text/javascript">
+    $(function(){
+        if($('#blogIframe').length>0)
+        {
+            var waitForFinalEvent = (function () {
+                var timers = {};
+                return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                  uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                  clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+                };
+            })();
+
+            $('#blogIframe').load(function(){
+            $('#blogIframe').css('min-height',$('#blogIframe').contents().find('body').height()+50);
+            });
+
+            $(window).resize(function(){
+                waitForFinalEvent(function(){
+                    $('#blogIframe').css('min-height',$('#blogIframe').contents().find('body').height()+50);
+                }, 500, "resizeMyIframe");
+            });
+        }
+    })
+    </script>
   </body>
 </html>
