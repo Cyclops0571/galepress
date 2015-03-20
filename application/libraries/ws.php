@@ -176,6 +176,7 @@ class Ws
 				$s->ApplicationToken = $applicationToken;
 				$s->DeviceToken = $deviceToken;
 				$s->DeviceType = $deviceType;
+				$s->StatusID = eStatus::Active;
 				$s->save();
 			}
 			else {

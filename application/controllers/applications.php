@@ -230,7 +230,11 @@ class Applications_Controller extends Base_Controller {
 
 				//Insert
 				$deviceTokens = array();
-				$tokens = DB::table('Token')->where('ApplicationID', '=', (int) $applicationID)->get();
+				//Son geleni son alalim... onemli
+				$tokens = DB::table('Token')
+						->where('ApplicationID', '=', (int) $applicationID)
+						->where("StatusID", '=', eStatus::Active)
+						->get();
 				foreach ($tokens as $token) {
 					if (!in_array($token->DeviceToken, $deviceTokens)) {
 						//save to push notification
