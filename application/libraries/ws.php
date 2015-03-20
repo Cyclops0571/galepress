@@ -167,7 +167,7 @@ class Ws
 		//if(strlen($applicationToken) > 0 && strlen($deviceToken) > 0)
 		if(strlen($deviceToken) > 0)
 		{
-			if($deviceType == eDeviceType::android) {
+			if($deviceType == eDeviceType::android && !empty($UDID)) {
 				$token = Token::where('ApplicationID', '=', $applicationID)
 						->where('UDID', '=', $UDID)
 						->first();
