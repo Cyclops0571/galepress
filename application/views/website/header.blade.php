@@ -36,7 +36,7 @@
 
               <li><a href="/tr/cozumler" title="Çözümler" id="menu_item_Pages" data-ref="#">ÇÖZÜMLER</a></li>
 
-              <li><a href="/tr/showcase" title="Showcase" id="menu_item_features-grid" data-ref="features-grid">SHOWCASE</a></li>
+              <li><a href="/tr/referanslar" title="Showcase" id="menu_item_features-grid" data-ref="features-grid">REFERANSLAR</a></li>
 
               <li><a href="/tr/iletisim" title="İLETİŞİM" id="menu_item_Contactus" data-ref="#">İLETİŞİM</a></li>
 

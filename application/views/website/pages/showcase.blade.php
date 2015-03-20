@@ -5,7 +5,7 @@
         <div class="sep-top-3x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light sep-top-md sep-bottom-md">
-              <h2 class="small-space">Showcase</h2>
+              <h2 class="small-space">Referanslar</h2>
             </div>
             <div id="filters" class="button-group">
               <button data-filter="*" class="button is-checked">Tümünü Göster</button>
