@@ -165,6 +165,7 @@ class Ws
 		$deviceType = Input::get('deviceType', 'ios');
 
 		//if(strlen($applicationToken) > 0 && strlen($deviceToken) > 0)
+		$token = NULL;
 		if(strlen($deviceToken) > 0)
 		{
 			if($deviceType == eDeviceType::android && !empty($UDID)) {
