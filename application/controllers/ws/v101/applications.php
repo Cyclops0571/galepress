@@ -60,7 +60,7 @@ class Ws_v101_Applications_Controller extends Base_Controller
 				'ApplicationBlocked' => ((int)$application->Blocked == 1 ? true : false),
 				'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
 				'ApplicationVersion' => (int)$application->Version,
-				'Force' => 0
+				'Force' => (int)$application->Force
 			));
 		});
 	}
