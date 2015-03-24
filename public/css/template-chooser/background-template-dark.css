@@ -1,0 +1,32 @@
+.templateScreen .header{
+    background:#1E1E20 !important;
+    border-bottom: 1px solid #1c1c1c !important;
+}
+.templateScreen > .container{
+    background: #1E1E20 !important;
+    border-top: 1px solid #1c1c1c !important;
+}
+.templateScreen > .container .content-bar{
+    background: rgba(30,30,32,0.7) !important;
+}
+.templateScreen .footer{
+    background: rgba(30,30,32,0.9) !important;
+}
+/*************************************************/
+.templateReadScreen{
+    background: #1E1E20 !important;
+    border-bottom: 10px solid #1E1E20 !important;
+}
+.templateReadScreen .content-buttons input:hover{
+    background: #000 !important;
+}
+/********************************************************/
+.templateContentScreen .header{
+    background: rgba(30,30,32,0.9) !important;
+}
+.templateContentScreen .footer{
+    background: rgba(30,30,32,0.9) !important;
+}
+.templateContentScreen .thumbnails{
+    background: rgba(30,30,32,0.9) !important;
+}

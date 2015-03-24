@@ -162,6 +162,39 @@ class Contents_Controller extends Base_Controller
 				->get();
 					
 			$rows = Paginator::make($results, $count, $rowcount);
+
+
+
+
+
+			/*START SQL FOR TEMPLATE-CHOOSER*/
+
+			$sqlTemlateChooser = ''.
+			'SELECT '.
+				'a.Name AS ApplicationName, '.
+				'c.ContentID, '.
+				'c.Name, '.
+				'c.Detail, '.
+				'cf.FilePath, '.
+				'c.MonthlyName, '.
+				'cf.InteractiveFilePath, '.
+				'ccf.FileName '.
+			'FROM `Application` AS a '.
+				'LEFT JOIN  `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '.
+				'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '.
+				'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '.
+			'WHERE a.ApplicationID='.$applicationID;
+
+			$templateResults = DB::table(DB::raw('('.$sqlTemlateChooser.') t'))->order_by('ContentID', 'Desc')->get();
+			
+			//dd($templateResults);
+			/*END SQL FOR TEMPLATE-CHOOSER*/
+
+			// if(count($templateResults)==0){
+			// 	$app = Application::find($applicationID);
+			// 	$templateResults = array('appName' => $app->Name);
+			// 	//var_dump($templateResults); exit();
+			// }
 			
 			$data = array(
 				'page' => $this->page,
@@ -172,7 +205,8 @@ class Contents_Controller extends Base_Controller
 				'search' => $search,
 				'sort' => $sort,
 				'sort_dir' => $sort_dir,
-				'rows' => $rows
+				'rows' => $rows,
+				'templateResults' => $templateResults
 			);
 			
 			if(((int)$currentUser->UserTypeID == eUserTypes::Customer))
@@ -204,7 +238,7 @@ class Contents_Controller extends Base_Controller
 		}
 		catch(Exception $e)
 		{
-			//throw new Exception($e->getMessage());
+			throw new Exception($e->getMessage());
 			return Redirect::to(__('route.home'));
 		}
     }

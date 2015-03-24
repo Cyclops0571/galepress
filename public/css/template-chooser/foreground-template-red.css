@@ -1,0 +1,72 @@
+.templateScreen .header{
+    color: #B9121B !important;
+}
+.templateScreen > .container .content-bar{
+    color: #B9121B !important;
+}
+.templateScreen .app-name{
+    color:#B9121B !important;
+}
+.templateScreen .app-buttons{
+    color:#B9121B !important;
+}
+.templateScreen .header .header-categories{
+    background: url(/img/template-chooser/header-categories-red.png) center left;
+}
+.templateScreen .header .header-extras{
+    background: url(/img/template-chooser/header-extras-red.png) center right;
+}
+.templateScreen .footer .footer-home{
+    background: url(/img/template-chooser/footer-home-red.png) center center;
+}
+.templateScreen .footer .footer-library{
+    background: url(/img/template-chooser/footer-library-red.png) center center;
+}
+.templateScreen .footer .footer-download{
+    background: url(/img/template-chooser/footer-download-red.png) center center;
+}
+.templateScreen .footer .footer-info{
+    background: url(/img/template-chooser/footer-info-red.png) center center;
+}
+/*************************************************/
+.templateReadScreen{
+    color: #B9121B !important;
+}
+.templateReadScreen .content-buttons input{
+    color: #B9121B !important;
+    border: 1px solid #B9121B !important;
+}
+.templateReadScreen .content-buttons input:hover{
+    background: #D2D2D2 !important;
+}
+.templateReadScreen .loading{
+    background: #B9121B !important;
+}
+/********************************************************/
+.templateContentScreen div{
+    color: #B9121B !important;
+}
+.templateContentScreen .triangle span{
+    color: white !important;
+}
+.templateContentScreen .app-buttons{
+    color:#B9121B !important;
+}
+.templateContentScreen .thumbnails{
+    border-top: 3px solid #B9121B !important;
+}
+.templateContentScreen .triangle{
+    border-color: #B9121B transparent transparent transparent !important;
+}
+.templateContentScreen .footer .footer-home{
+    background: url(/img/template-chooser/footer-home-red.png) center center;
+}
+.templateContentScreen .footer .footer-library{
+    background: url(/img/template-chooser/footer-library-red.png) center center;
+}
+.templateContentScreen .footer .footer-download{
+    background: url(/img/template-chooser/footer-download-red.png) center center;
+}
+.templateContentScreen .footer .footer-info{
+    background: url(/img/template-chooser/footer-info-red.png) center center;
+}
