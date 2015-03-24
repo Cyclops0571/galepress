@@ -1,0 +1,72 @@
+.templateScreen .header{
+    color: #FFCE00 !important;
+}
+.templateScreen > .container .content-bar{
+    color: #FFCE00 !important;
+}
+.templateScreen .app-name{
+    color:#FFCE00 !important;
+}
+.templateScreen .app-buttons{
+    color:#FFCE00 !important;
+}
+.templateScreen .header .header-categories{
+    background: url(/img/template-chooser/header-categories-yellow.png) center left;
+}
+.templateScreen .header .header-extras{
+    background: url(/img/template-chooser/header-extras-yellow.png) center right;
+}
+.templateScreen .footer .footer-home{
+    background: url(/img/template-chooser/footer-home-yellow.png) center center;
+}
+.templateScreen .footer .footer-library{
+    background: url(/img/template-chooser/footer-library-yellow.png) center center;
+}
+.templateScreen .footer .footer-download{
+    background: url(/img/template-chooser/footer-download-yellow.png) center center;
+}
+.templateScreen .footer .footer-info{
+    background: url(/img/template-chooser/footer-info-yellow.png) center center;
+}
+/*************************************************/
+.templateReadScreen{
+    color: #FFCE00 !important;
+}
+.templateReadScreen .content-buttons input{
+    color: #FFCE00 !important;
+    border: 1px solid #FFCE00 !important;
+}
+.templateReadScreen .content-buttons input:hover{
+    background: #D2D2D2 !important;
+}
+.templateReadScreen .loading{
+    background: #FFCE00 !important;
+}
+/********************************************************/
+.templateContentScreen div{
+    color: #FFCE00 !important;
+}
+.templateContentScreen .triangle span{
+    color: white !important;
+}
+.templateContentScreen .app-buttons{
+    color:#FFCE00 !important;
+}
+.templateContentScreen .thumbnails{
+    border-top: 3px solid #FFCE00 !important;
+}
+.templateContentScreen .triangle{
+    border-color: #FFCE00 transparent transparent transparent !important;
+}
+.templateContentScreen .footer .footer-home{
+    background: url(/img/template-chooser/footer-home-yellow.png) center center;
+}
+.templateContentScreen .footer .footer-library{
+    background: url(/img/template-chooser/footer-library-yellow.png) center center;
+}
+.templateContentScreen .footer .footer-download{
+    background: url(/img/template-chooser/footer-download-yellow.png) center center;
+}
+.templateContentScreen .footer .footer-info{
+    background: url(/img/template-chooser/footer-info-yellow.png) center center;
+}
