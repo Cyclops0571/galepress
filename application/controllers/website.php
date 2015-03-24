@@ -273,26 +273,11 @@ class Website_Controller extends Base_Controller
 			$s->ConfirmCode = $confirmCode;
 			$s->save();
 
-        
-            // $s = User::find($user->UserID);
-            // $s->PWRecoveryCode = $pass;
-            // $s->PWRecoveryDate = new DateTime();
-            // $s->ProcessUserID = $user->UserID;
-            // $s->ProcessDate = new DateTime();
-            // $s->ProcessTypeID = eProcessTypes::Update;
-            // $s->save();
-
-			$serverUrl = 'http://www.galepress.com';
-            if(Laravel\Request::env() == ENV_TEST) {
-				$serverUrl = 'http://localhost';
-			}
-
-            
             $subject = "Kaydınızı Tamamlayın";
             $msg = __('common.confirm_email_message', array(
               'firstname' => $s->FirstName,
               'lastname' => $s->LastName,
-              'url' => $serverUrl.'/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode
+              'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode
               )
             );
             

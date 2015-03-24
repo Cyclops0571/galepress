@@ -36,7 +36,7 @@
     <div id="load"></div>
     <div class="page">
       @include('website.header')
-      @yield('body-content')
+      @_yield('body-content')
       @include('website.footer')
       <div id="back_to_top"><a href="#" class="fa fa-arrow-up fa-lg"></a></div>
     </div>

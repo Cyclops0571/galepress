@@ -79,5 +79,5 @@
         <![endif]-->
     @yield_section
 </head>
-@yield('body')
+@_yield('body')
 </html>

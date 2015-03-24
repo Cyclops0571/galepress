@@ -79,7 +79,7 @@
 </head>
 <body>
 <input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
-@yield('body-content')
+@_yield('body-content')
 <script src="/js/jquery.collapse.js" type="text/javascript"></script>
 <script src="/js/jquery.easytabs.js" type="text/javascript"></script>
 <script src="/js/redactor.min.js" type="text/javascript"></script>
