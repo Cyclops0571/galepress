@@ -1,7 +1,6 @@
 @layout('layouts.master')
 
 @section('content')
-
 <div class="container" id="dashboard">
     <div class="row">              
         <div class="col-md-9">

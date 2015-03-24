@@ -9,7 +9,7 @@
     <body id="login" class="bg-img-num1">
     	<input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
     	<div id="login_container">
-	    	@yield('content')
+	    	@_yield('content')
         </div>
         <div class="statusbar hidden" id="myNotification">
 	        <div class="statusbar-icon" style="margin-left:41%"><span></span></div>

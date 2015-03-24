@@ -165,33 +165,40 @@ class Ws
 		$deviceType = Input::get('deviceType', 'ios');
 
 		//if(strlen($applicationToken) > 0 && strlen($deviceToken) > 0)
+		$token = NULL;
 		if(strlen($deviceToken) > 0)
 		{
-			$cnt = Token::where('ApplicationToken', '=', $applicationToken)->where('DeviceToken', '=', $deviceToken)->count();
-			if($cnt == 0) {
-				$s = new Token();
-				$s->CustomerID = (int)$customerID;
-				$s->ApplicationID = (int)$applicationID;
-				$s->UDID = $UDID;
-				$s->ApplicationToken = $applicationToken;
-				$s->DeviceToken = $deviceToken;
-				$s->DeviceType = $deviceType;
-				$s->StatusID = eStatus::Active;
-				$s->save();
+			if($deviceType == eDeviceType::android && !empty($UDID)) {
+				$token = Token::where('ApplicationID', '=', $applicationID)
+						->where('UDID', '=', $UDID)
+						->first();
+				if($token) {
+					//eski android uygulamasi tekrardan geldi deviceTokeni guncelleyelim.
+					$token->DeviceToken = $deviceToken;
+				} 				
+			} else {
+				$token = Token::where('ApplicationToken', '=', $applicationToken)->where('DeviceToken', '=', $deviceToken)->first();
+				if($token) {
+					//INFO:Added due to https://github.com/galepress/gp/issues/2
+					//Emre, Eger token tablosuna getAppDetail'den gelen bir deviceToken kaydedildiyse ayni deviceToken'ile baska insert yapilmiyor. 
+					//Fakat soyle bir durum soz konusu. Benim deviceToken'im kaydedildi ama daha sonra yeni update ile udid'lerde geliyor. 
+					//deviceToken tabloda varsa udid'sini update etmesi lazim. Yoksa udid eklemememizin bir manasi olmayacak. 
+					//bir cihaza uygualma bir kez kurulduysa hic udid'sini alamayiz.
+					$token->UDID = $UDID;
+					
+				}
 			}
-			else {
-				//INFO:Added due to https://github.com/galepress/gp/issues/2
-				//Emre, Eger token tablosuna getAppDetail'den gelen bir deviceToken kaydedildiyse ayni deviceToken'ile baska insert yapilmiyor. 
-				//Fakat soyle bir durum soz konusu. Benim deviceToken'im kaydedildi ama daha sonra yeni update ile udid'lerde geliyor. 
-				//deviceToken tabloda varsa udid'sini update etmesi lazim. Yoksa udid eklemememizin bir manasi olmayacak. 
-				//bir cihaza uygualma bir kez kurulduysa hic udid'sini alamayiz.
-				DB::table('Token')
-					->where('ApplicationToken', '=', $applicationToken)
-					->where('DeviceToken', '=', $deviceToken)
-					->update(array(
-						'UDID' => $UDID
-					));
+			if(empty($token)) {
+				$token = new Token();
+				$token->CustomerID = (int)$customerID;
+				$token->ApplicationID = (int)$applicationID;
+				$token->UDID = $UDID;
+				$token->ApplicationToken = $applicationToken;
+				$token->DeviceToken = $deviceToken;
+				$token->DeviceType = $deviceType;
+				$token->StatusID = eStatus::Active;
 			}
+			$token->save();
 		}
 	}
 }

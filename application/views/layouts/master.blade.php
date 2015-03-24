@@ -18,7 +18,7 @@
                     @include('sections.sidebar')
                 </div>          
                  <div class="page-content">
-                    @yield('content')
+                    @_yield('content')
                 </div>
             </div>
         </div>

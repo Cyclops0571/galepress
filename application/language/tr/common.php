@@ -418,6 +418,7 @@ return array(
 
 	'task_subject' => 'Galepress.com görevi esnasında hata oluştu',
 	'task_subject' => 'Galepress.com görevi durumu',
+	'task_status' => 'Galepress.com görevi durumu',
 	'task_message' => "".
 						"Sayın yetkili, \n\n".
 						":task görevi yapılırken bir hata oluştu. Hata detayını aşağıda görebilirsiniz.\n\n".
