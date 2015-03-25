@@ -163,12 +163,7 @@ class Contents_Controller extends Base_Controller
 					
 			$rows = Paginator::make($results, $count, $rowcount);
 
-
-
-
-
 			/*START SQL FOR TEMPLATE-CHOOSER*/
-
 			$sqlTemlateChooser = ''.
 			'SELECT '.
 				'a.Name AS ApplicationName, '.
@@ -186,15 +181,7 @@ class Contents_Controller extends Base_Controller
 			'WHERE a.ApplicationID='.$applicationID;
 
 			$templateResults = DB::table(DB::raw('('.$sqlTemlateChooser.') t'))->order_by('ContentID', 'Desc')->get();
-			
-			//dd($templateResults);
 			/*END SQL FOR TEMPLATE-CHOOSER*/
-
-			// if(count($templateResults)==0){
-			// 	$app = Application::find($applicationID);
-			// 	$templateResults = array('appName' => $app->Name);
-			// 	//var_dump($templateResults); exit();
-			// }
 			
 			$data = array(
 				'page' => $this->page,

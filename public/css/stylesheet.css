@@ -311,17 +311,18 @@ box-shadow: 0px 1px 7px rgba(0,0,0,0.4); background: rgba(32,32,32,0.75);}
 .radiobox, .checkbox{margin: 0px; }
 .radiobox input[type="radio"], .radiobox-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]{margin-left: 0px;}
 .radiobox-inline, .checkbox-inline{cursor: default;}
+.radiobox-inline label, label input{cursor: pointer !important;}
 div.checker, div.radio, div.uploader {display: -moz-inline-box; display: inline-block; *display: inline; zoom: 1; vertical-align: middle;}
 div.checker:focus, div.radio:focus, div.uploader:focus {outline: 0;}
 div.radio, div.radio *, div.checker, div.checker *, div.uploader, div.uploader *{margin: 0;padding: 0;}
 div.checker,
-div.radio{margin-left: -20px; position: relative; margin-right: 5px; line-height: 19px; font-weight: normal;}
+div.radio{position: relative; margin-right: 5px; line-height: 19px; font-weight: normal;}
 div.checker, div.checker span, div.checker input,
 div.radio, div.radio span, div.radio input{width: 19px; height: 19px;}
 div.checker span,div.radio span
 {background: rgba(0,0,0,0.2); -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;        
  display: -moz-inline-box; display: inline-block; *display: inline; zoom: 1;text-align: center;}
-div.radio span{-moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; font-size: 13px;}
+div.radio span{-moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; font-size: 13px;  border: 1px solid rgb(65, 65, 65);}
     div.checker span.checked:before{content: "\f00c"; font-family: 'FontAwesome';position: absolute; left: 4px; top: 1px;}
     div.radio span.checked:before{content: "\f111"; font-family: 'FontAwesome';position: absolute; left: 4px; top: 0px;}        
 div.checker input,div.radio input

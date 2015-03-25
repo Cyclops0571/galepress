@@ -70,3 +70,6 @@
 .templateContentScreen .footer .footer-info{
     background: url(/img/template-chooser/footer-info-orange.png) center center;
 }
+.templateExtrasScreen .social-icons{
+    background: url(/img/template-chooser/social-icons-orange.png) center top;
+}

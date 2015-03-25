@@ -118,6 +118,27 @@ foreach($files as $file)
 		#slider-in-laptop .rsSlide img { width:100% !important; height:100% !important; }
 		@endif
 
+		.rsDefaultInv .rsBullet {
+		  width: 15px;
+		  height: 15px;
+		  display: inline-block;
+		  padding: 6px;
+		}
+
+		.rsDefaultInv .rsBullet span {
+		  display: block;
+		  width: 15px;
+		  height: 15px;
+		  border-radius: 50%;
+		  background: none !important;
+		  border: 1px solid #BBB !important;
+		}
+
+		.rsDefaultInv .rsBullet.rsNavSelected span {
+			background: black !important;
+			border: none !important;
+		}
+
 	</style>
 </head>
 <body>

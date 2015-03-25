@@ -86,7 +86,11 @@
         <script type="text/javascript">
         $(function(){
 
-            $('#templateBackgroundChange').on('change', function (e) {
+            $( ".templateScreen" ).click(function( event ) {
+              $(".templateReadScreen img").attr('src',event.target.src);
+            });
+
+            $('.templateBackgroundChange').on('change', function (e) {
                 $('.app-background-templates').remove();
                 if(this.value==0){
                     $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');        
@@ -94,9 +98,9 @@
                 else{
                     $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');        
                 }
-            })
+            });
 
-            $('#templateForegroundChange').on('change', function (e) {
+            $('.templateForegroundChange').on('change', function (e) {
                 $('.app-foreground-templates').remove();
                 if(this.value==0){
                     $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');        
@@ -116,7 +120,7 @@
                 else{
                     $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');        
                 }
-            })
+            });
 
             $('#modalTemplateChooser').on('shown.bs.modal', function () {
                 $('.container.content-list').addClass('blurred');
@@ -149,18 +153,35 @@
                         $('.templateScreen').removeClass('hide').fadeTo( "slow" , 1);
                     });
                 })
-            })
+            });
 
             $('#modalTemplateChooser').on('hidden.bs.modal', function (e) {
-              $('.templateSplashScreen, .templateScreen, .templateReadScreen, .templateContentScreen').addClass('hide');
-              $('.container.content-list').removeClass('blurred');
-              $('#templateChooserBox').hide(500);
-              $('#templateChooserBox .site-settings').removeClass('active');
-            })
+                $('.templateSplashScreen, .templateScreen, .templateReadScreen, .templateContentScreen').addClass('hide');
+                $('.container.content-list').removeClass('blurred');
+                $('#templateChooserBox').hide(500);
+                $('#templateChooserBox .site-settings').removeClass('active');
+                $('.templateExtrasScreen').addClass('hide').fadeTo( "fast" , 0);
+                $('.templateScreen').css('margin-left','0');
+                $('.templateScreen .footer').css('right','0')
+            });
 
             $('#templateChooserClose').click(function(){
                 $('#modalTemplateChooser').modal('hide');
-            })
+            });
+
+            $('.header-extras').click(function(){
+                if($('.templateExtrasScreen').hasClass('hide')){
+                    $('.templateExtrasScreen').removeClass('hide').fadeTo( "fast" , 1);
+                    $('.templateScreen').css('margin-left','-20%'); 
+                    $('.templateScreen .footer').css('right','20%');
+                }
+                else{
+                    $('.templateExtrasScreen').addClass('hide').fadeTo( "fast" , 0);
+                    $('.templateScreen').css('margin-left','0');
+                    $('.templateScreen .footer').css('right','0');
+                }
+            });
+
         })
         </script>
 
