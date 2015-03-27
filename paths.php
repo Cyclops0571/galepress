@@ -152,3 +152,4 @@ function set_path($path, $value)
 define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
+define("APP_VER", 1);

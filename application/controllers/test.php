@@ -19,13 +19,13 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-		echo \Laravel\Request::env();
-		$msg = __('common.task_message', array(
-				'task' => '`BackupDatabase`',
-				'detail' => "bilgi islem test"
-				)
-		);
-		Common::sendErrorMail($msg);
+		echo '1111111111';
+		$token = Token::where('ApplicationID', '=', '96')
+						->where('UDID', '=', '1bb7a359cc0b62d5')
+//						->where('UDID', '=', $UDID)
+						->first();
+		var_dump(DB::last_query());
+		var_dump($token);
 	}
 
 }

@@ -82,6 +82,17 @@ $(function(){
 			$('input', e).removeAttr('disabled');
 		}
 	});
+        
+        $("#IsUnpublishActive").click(function(){
+		if($(this).is(':checked')){
+                    $('#UnpublishDate').removeAttr('disabled', 'disabled');
+                    $('#UnpublishDate').removeClass('disabledFields');
+		} else {
+                    $('#UnpublishDate').attr('disabled', 'disabled');
+                    $('#UnpublishDate').addClass('disabledFields');
+                    
+		}
+	});
 	
 	$("#IsBuyable").click(function(){
 		if($(this).is(':checked')){

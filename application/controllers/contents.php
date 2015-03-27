@@ -3,7 +3,6 @@
 class Contents_Controller extends Base_Controller
 {
 	public $restful = true;
-	
 	public $page = '';
 	public $route = '';
 	public $table = '';
@@ -20,29 +19,26 @@ class Contents_Controller extends Base_Controller
 		$this->pk = 'ContentID';
 		$this->caption = __('common.contents_caption');
 		$this->detailcaption = __('common.contents_caption_detail');
-		$this->fields = array(
-				0 => array('35px', __('common.contents_list_column1'), ''),
-				1 => array('175px', __('common.contents_list_column2'), 'CustomerName'),
-				2 => array('175px', __('common.contents_list_column3'), 'ApplicationName'),
-				3 => array('', __('common.contents_list_column4'), 'Name'),
-				4 => array('65px', __('common.contents_list_column5'), 'Blocked'),
-				5 => array('100px', __('common.contents_list_column6'), 'Status'),
-				6 => array('75px', __('common.contents_list_column7'), 'ContentID')
-			);
-		
+		$this->fields = array();
+		$this->fields[] = array( __('common.contents_list_customer'), 'CustomerName');
+		$this->fields[] = array( __('common.contents_list_application'), 'ApplicationName');
+		$this->fields[] = array( __('common.contents_list_content_name'), 'Name');
+		$this->fields[] = array( __('common.contents_list_content_bloke'), 'Blocked');
+		$this->fields[] = array( __('common.contents_list_status'), 'Status');
+		$this->fields[] = array( __('common.contents_list_content_id'), 'ContentID');
+
 		if(Auth::check())
 		{
 			if((int)Auth::User()->UserTypeID == eUserTypes::Customer) 
 			{
-				$this->fields = array(
-						0 => array('35px', __('common.contents_list_customer_column1'), ''),
-						1 => array('', __('common.contents_list_customer_column2'), 'Name'),
-						2 => array('175px', __('common.contents_list_customer_column3'), 'CategoryName'),
-						3 => array('85px', __('common.contents_list_customer_column4'), 'PublishDate'),
-						4 => array('65px', __('common.contents_list_customer_column5'), 'Blocked'),
-						5 => array('100px', __('common.contents_list_customer_column6'), 'Status'),
-						6 => array('75px', __('common.contents_list_customer_column7'), 'ContentID')
-					);
+				$this->fields = array();
+				$this->fields[] = array( __('common.contents_list_content_name'), 'Name');
+				$this->fields[] = array( __('common.contents_list_content_category'), 'CategoryName');
+				$this->fields[] = array( __('common.contents_list_content_publishdate'), 'PublishDate');
+				$this->fields[] = array( __('common.contents_list_content_unpublishdate'), 'UnpublishDate');
+				$this->fields[] = array( __('common.contents_list_content_bloke'), 'Blocked');
+				$this->fields[] = array( __('common.contents_list_status'), 'Status');
+				$this->fields[] = array( __('common.contents_list_content_id'), 'ContentID');
 			}
 		}
 	}
@@ -82,6 +78,7 @@ class Contents_Controller extends Base_Controller
 						'END'.
 						') AS CategoryName, '.
 						'o.PublishDate, '.
+						'o.UnpublishDate, '.
 						'(CASE o.Blocked WHEN 1 THEN \''.__('common.contents_list_blocked1').'\' ELSE \''.__('common.contents_list_blocked0').'\' END) AS Blocked, '.
 						'(CASE o.Status WHEN 1 THEN \''.__('common.contents_list_status1').'\' ELSE \''.__('common.contents_list_status0').'\' END) AS Status, '.
 						'o.ContentID '.
@@ -163,7 +160,12 @@ class Contents_Controller extends Base_Controller
 					
 			$rows = Paginator::make($results, $count, $rowcount);
 
+
+
+
+
 			/*START SQL FOR TEMPLATE-CHOOSER*/
+
 			$sqlTemlateChooser = ''.
 			'SELECT '.
 				'a.Name AS ApplicationName, '.
@@ -181,7 +183,15 @@ class Contents_Controller extends Base_Controller
 			'WHERE a.ApplicationID='.$applicationID;
 
 			$templateResults = DB::table(DB::raw('('.$sqlTemlateChooser.') t'))->order_by('ContentID', 'Desc')->get();
+			
+			//dd($templateResults);
 			/*END SQL FOR TEMPLATE-CHOOSER*/
+
+			// if(count($templateResults)==0){
+			// 	$app = Application::find($applicationID);
+			// 	$templateResults = array('appName' => $app->Name);
+			// 	//var_dump($templateResults); exit();
+			// }
 			
 			$data = array(
 				'page' => $this->page,
@@ -225,7 +235,7 @@ class Contents_Controller extends Base_Controller
 		}
 		catch(Exception $e)
 		{
-			throw new Exception($e->getMessage());
+			//throw new Exception($e->getMessage());
 			return Redirect::to(__('route.home'));
 		}
     }
@@ -486,6 +496,8 @@ class Contents_Controller extends Base_Controller
 					$s->Detail = Input::get('Detail');
 					$s->MonthlyName = Input::get('MonthlyName');
 					$s->PublishDate = new DateTime(Common::dateWrite(Input::get('PublishDate')));
+					$s->IsUnpublishActive = (int)Input::get('IsUnpublishActive');
+					$s->UnpublishDate = new DateTime(Common::dateWrite(Input::get('UnpublishDate')));
 					//$s->CategoryID = (int)Input::get('CategoryID');
 					$s->IsProtected = (int)Input::get('IsProtected');
 					if(strlen(trim(Input::get('Password'))) > 0)

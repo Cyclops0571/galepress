@@ -1,5 +1,30 @@
 <?php
-
+/**
+ * @property int $ApplicationID Description
+ * @property int $CustomerID Description
+ * @property int $Name Description
+ * @property int $Detail Description
+ * @property int $StartDate Description
+ * @property int $ExpirationDate Description
+ * @property int $ApplicationStatusID Description
+ * @property int $IOSVersion Description
+ * @property int $IOSLink Description
+ * @property int $AndroidVersion Description
+ * @property int $AndroidLink Description
+ * @property int $Blocked Description
+ * @property int $Status Description
+ * @property int $Version Description
+ * @property int $Force Description
+ * @property int $TotalFileSize Description
+ * @property int $NotificationText Description
+ * @property int $CkPem Description
+ * @property int $StatusID Description
+ * @property int $CreatorUserID Description
+ * @property int $DateCreated Description
+ * @property int $ProcessUserID Description
+ * @property int $ProcessDate Description
+ * @property int $ProcessTypeID Description
+ */
 class Application extends Eloquent
 {
 	public static $timestamps = false;
