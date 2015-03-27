@@ -86,7 +86,7 @@ class Ws
 			foreach($rs as $r)
 			{
 				$serveContent = $r->PublishDate === '0000-00-00 00:00:00' || $r->PublishDate <= date("Y-m-d H:i:s");
-				$serveContent = $serveContent && ($r->IsUnpublishActive ==0 || $r->UnpublishDate >= date("Y-m-d"));
+				$serveContent = $serveContent && ($r->IsUnpublishActive ==0 || $r->UnpublishDate > date("Y-m-d"));
 				if($serveContent)
 				{
 					array_push($contents, array(
