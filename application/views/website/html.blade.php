@@ -11,25 +11,25 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
     <link rel="shortcut icon" href="/website/img/favicon2.ico">
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,200italic,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/website/styles/font-awesome.css">
-    <link rel="stylesheet" href="/website/styles/owl.carousel.css">
-    <link rel="stylesheet" href="/website/styles/owl.theme.css">
-    <link rel="stylesheet" href="/website/styles/slit-slider-style.css">
-    <link rel="stylesheet" href="/website/styles/slit-slider-custom.css">
-    <link rel="stylesheet" href="/website/styles/idangerous.swiper.css">
-    <link rel="stylesheet" href="/website/styles/yamm.css">
-    <link rel="stylesheet" href="/website/styles/animate.css">
-    <link rel="stylesheet" href="/website/styles/prettyPhoto.css">
-    <link rel="stylesheet" href="/website/styles/bootstrap-slider.css">
-    <link rel="stylesheet" href="/website/styles/device-mockups2.css">
-    <link rel="stylesheet" href="/website/styles/bootstrap.min.css">
-    <link rel="stylesheet" href="/website/styles/main.css">
-    <link rel="stylesheet" href="/website/styles/main-responsive.css">
-    <link id="primary_color_scheme" rel="stylesheet" href="/website/styles/theme_royalblue.css">
-    <link rel="stylesheet" href="/website/styles/myStyles.css">
+    <link rel="stylesheet" href="/website/styles/font-awesome.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/owl.carousel.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/owl.theme.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/slit-slider-style.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/slit-slider-custom.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/idangerous.swiper.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/yamm.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/animate.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/prettyPhoto.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/bootstrap-slider.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/device-mockups2.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/bootstrap.min.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/main.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/main-responsive.css?v=<?php echo APP_VER; ?>">
+    <link id="primary_color_scheme" rel="stylesheet" href="/website/styles/theme_royalblue.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" href="/website/styles/myStyles.css?v=<?php echo APP_VER; ?>">
     <script src="/website/scripts/vendor/modernizr.js"></script>
     <noscript>
-      <link rel="stylesheet" href="/website/styles/styleNoJs.css">
+      <link rel="stylesheet" href="/website/styles/styleNoJs.css?v=<?php echo APP_VER; ?>">
     </noscript>
   </head>
   <body>

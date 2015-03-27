@@ -18,12 +18,12 @@
 <link rel="shortcut icon" href="/website/img/favicon2.ico">
 <!-- Included CSS Files -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=all' rel='stylesheet' type='text/css' />
-<link rel="stylesheet" href="/css/app.css?v=10" type="text/css">
-<link rel="stylesheet" href="/css/app-extra.css?v=10" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.css" type="text/css">
-<link rel="stylesheet" href="/css/redactor.css" type="text/css">
-<link rel="stylesheet" href="/css/colorpicker.css" type="text/css">
-<link rel="stylesheet" href="/uploadify/uploadify.css" type="text/css">
+<link rel="stylesheet" href="/css/app.css?v=<?php echo APP_VER; ?>" type="text/css">
+<link rel="stylesheet" href="/css/app-extra.css?v=<?php echo APP_VER; ?>" type="text/css">
+<link rel="stylesheet" href="/css/font-awesome.css?v=<?php echo APP_VER; ?>" type="text/css">
+<link rel="stylesheet" href="/css/redactor.css?v=<?php echo APP_VER; ?>" type="text/css">
+<link rel="stylesheet" href="/css/colorpicker.css?v=<?php echo APP_VER; ?>" type="text/css">
+<link rel="stylesheet" href="/uploadify/uploadify.css?v=<?php echo APP_VER; ?>" type="text/css">
 <!--[if lt IE 9]>
 <link rel="stylesheet" href="/css/ie.css" type="text/css">
 <![endif]-->

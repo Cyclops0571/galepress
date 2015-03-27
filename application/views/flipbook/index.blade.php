@@ -5,14 +5,14 @@
     <title>GalePress Flipbook BETA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" type="text/css" href="/flipbook/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/flipbook/css/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="/flipbook/css/myStyles.css">
-    <link rel="stylesheet" type="text/css" href="/flipbook/css/stylesheets.css">
-    <link rel="stylesheet" type="text/css" href="/flipbook/css/flipbook.style.css">
-    <!--<link rel="stylesheet" type="text/css" href="/flipbook/css/flipbook.skin.black.css">-->
-    <link rel="stylesheet" type="text/css" href="/flipbook/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/flipbook/css/jquery.switchButton.css">
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/bootstrap.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/stylesheet.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/myStyles.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/stylesheets.css?v=<?php echo APP_VER; ?>">
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/flipbook.style.css?v=<?php echo APP_VER; ?>">
+    <!--<link rel="stylesheet" type="text/css" href="/flipbook/css/flipbook.skin.black.css?v=<?php echo APP_VER; ?>">-->
+    <link rel="stylesheet" type="text/css" href="/flipbook/css/font-awesome.min.css?v=<?php echo APP_VER; ?>">
+	<link rel="stylesheet" type="text/css" href="/flipbook/css/jquery.switchButton.css?v=<?php echo APP_VER; ?>">
 	<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Lato:300,400'>
 	<link rel="shortcut icon" href="/website/img/favicon2.ico">
 </head>

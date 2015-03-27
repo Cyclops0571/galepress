@@ -23,17 +23,17 @@
         <link rel="shortcut icon" href="/website/img/favicon2.ico">
         
         <!-- Begin CSS-->
-        {{ HTML::style('css/print.css', array('media' => 'print')); }}
-        {{ HTML::style('css/newdesign.css', array('media' => 'screen')); }}
-        {{ HTML::style('css/general.css', array('media' => 'screen')); }}
-        {{ HTML::style('css/fonts/open-sans-condensed/css/open-sans-condensed.css', array('media' => 'screen')); }}
-        {{ HTML::style('css/myApp.css?v=9', array('media' => 'screen')); }}
-        {{ HTML::style('uploadify/uploadify.css', array('media' => 'screen')); }}
-        {{ HTML::style('js/chosen_v1.0.0/chosen.css',array('media' => 'screen'));}}
-        {{ HTML::style('css/btn_interactive.css',array('media' => 'screen'));}}
+        {{ HTML::style('css/print.css?v=' . APP_VER, array('media' => 'print')); }}
+        {{ HTML::style('css/newdesign.css?v=' . APP_VER, array('media' => 'screen')); }}
+        {{ HTML::style('css/general.css?v=' . APP_VER, array('media' => 'screen')); }}
+        {{ HTML::style('css/fonts/open-sans-condensed/css/open-sans-condensed.css?v=' . APP_VER, array('media' => 'screen')); }}
+        {{ HTML::style('css/myApp.css?v=' . APP_VER, array('media' => 'screen')); }}
+        {{ HTML::style('uploadify/uploadify.css?v=' . APP_VER, array('media' => 'screen')); }}
+        {{ HTML::style('js/chosen_v1.0.0/chosen.css?v=' . APP_VER,array('media' => 'screen'));}}
+        {{ HTML::style('css/btn_interactive.css?v=' . APP_VER,array('media' => 'screen'));}}
 
-        <link rel="stylesheet" href="/css/template-chooser/master.css">
-        <link rel="stylesheet" href="/website/styles/device-mockups2.css">
+        <link rel="stylesheet" href="/css/template-chooser/master.css?v=<?php echo APP_VER; ?>">
+        <link rel="stylesheet" href="/website/styles/device-mockups2.css?v=<?php echo APP_VER; ?>">
 
         <!-- Begin JavaScript -->
         @include('js.language')
@@ -61,7 +61,7 @@
         {{ HTML::script('js/gurus.date.js'); }}
         {{ HTML::script('js/gurus.projectcore.js'); }}
         {{ HTML::script('js/session-check.js'); }}
-        {{ HTML::script('js/lib.js'); }}
+        {{ HTML::script('js/lib.js?v=' . APP_VER); }}
 
         {{ HTML::script('js/jqplot/jquery.jqplot.min.js'); }}
         {{ HTML::script('js/jqplot/jqplot.barRenderer.min.js'); }}

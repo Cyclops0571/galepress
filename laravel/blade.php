@@ -359,9 +359,9 @@ class Blade {
 	}
 
 	/**
-	 * Rewrites Blade @yield statements into Section statements.
+	 * Rewrites Blade @_yield statements into Section statements.
 	 *
-	 * The Blade @yield statement is a shortcut to the Section::_yield method.
+	 * The Blade @_yield statement is a shortcut to the Section::_yield method.
 	 *
 	 * @param  string  $value
 	 * @return string
