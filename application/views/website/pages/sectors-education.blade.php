@@ -7,8 +7,8 @@
         <div class="sep-top-5x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light">
-              <h2 class="small-space">EĞİTİM</h2>
-              <p class="lead upperNone">Mobil ile sürekli eğitim.</p>
+              <h2 class="small-space">{{__('website.education_title')}}</h2>
+              <p class="lead upperNone">{{__('website.education_subtitle')}}</p>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="lead">Öğrencilerin akıllı telefon ve tabletleri eğitim için kullanmalarını sağlamaya ne dersiniz? İçinde bulunduğumuz dijital çağa uygun olarak interaktif içerikler üreterek öğrencilerin dikkat eğrilerini yukarı çekin. Eğitim materyallerine her an ulaşabilmelerini sağlayarak öğrencilerin evde çalışmalarını da sağlayın. Anında güncelleme özelliğiyle ders notları, duyuruları sisteme hemen yükleyin ve push notification kullanarak öğrencilerin bunlardan hemen haberdar olmasını sağlayın.</p>
+                <p class="lead">{{__('website.education_description')}}</p>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Ders sunum ve notlarını, duyurularınızı öğrencilerinizle mobil cihazlarından ulaşabilecekleri bir aplikasyon aracılığıyla paylaşın. Eğitim sürecini dijitale geçirin.
+                    {{__('website.education_clause1')}}
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Dijital çağa uygun interaktif içerik üreterek öğrencilerinizin dikkat eğrilerini yukarı çekin.
+                    {{__('website.education_clause2')}}
                   </p>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Evde çalışma başarısını yukarı çekin! Öğrencileriniz eğitim materyallerine her yerden ulaşabilsin.
+                    {{__('website.education_clause3')}}
                   </p>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Eğitim materyallerinizi güncellemekte sıkıntı çekmeyin, müfredatınız her an çağın gerekliliklerine ayak uydurabilsin.
+                    {{__('website.education_clause4')}}
                   </p>
                 </div>
               </div>
@@ -80,9 +80,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <h5 class="action-title upper light">...</h5>
+              <h5 class="action-title upper light"></h5>
             </div>
-            <div class="col-md-3 text-right"><a href="/tr/deneyin" class="btn btn-light btn-bordered btn-lg">DENEYİN</a></div>
+            <div class="col-md-3 text-right"><a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit')}}</a></div>
           </div>
         </div>
       </section>

@@ -7,8 +7,8 @@
         <div class="sep-top-5x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light">
-              <h2 class="small-space">İnsan Kaynakları</h2>
-              <p class="lead upperNone">Yetenek havuzunuzu genişletin.</p>
+              <h2 class="small-space">{{__('website.hr_title')}}</h2>
+              <p class="lead upperNone">{{__('website.hr_subtitle')}}</p>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="lead">Tüm iş süreçleri mobile geçmişken İnsan Kaynakları departmanını da mobile taşımanın zamanı geldi. İş ilanlarınız ve başvurular için üçüncü platformlardan yararlanmaktansa kendi uygulamanızı geliştirip süreci dijitale taşıyın. Şirketiniz için özel tasarlanmış platform üzerinden bu süreci hızlandırın, başvurularını anında kontrol edin. Şirket içi performans raporlamalarını uygulamanıza yükleyerek yöneticilerin bunlara ulaşmasını kolaylaştırın. Ayrıca iç iletişimi güçlendirmek için periyodik dergiler hazırlayıp bunları uygulamanız üzerinden çalışanlarınızla paylaşın. Böylece hem rakiplerinizden farkınız olsun hem de çalışanlarınızın şirkete bağlılıklarını arttıracak teşvik edici bir sebep sunun.</p>
+                <p class="lead">{{__('website.hr_description')}}</p>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Mobil teknolojiden şirketinizin iç iletişimini güçlendirmek için faydalanın ve çalışanlarınızla her an etkileşimde olun.
+                    {{__('website.hr_clause1')}}
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Çalışanlarınızda şirkete bağlılık yaratmak ve iç iletişimi güçlendirmek için hazırlayacağınız periyodik dergiyi aplikasyon formatında paylaşın.
+                    {{__('website.hr_clause2')}}
                   </p>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    İş ilanlarınız ve başvurularınız için üçüncü partiler yerine kendi şirketinize özel tasarlanmış platformu kullanın. İlanlarınızı verip başvuruları kontrol edebileceğiniz bir uygulamayla işe alım sürecini dijitale geçirin.
+                    {{__('website.hr_clause3')}}
                   </p>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Şirketinizdeki ilgili departmanlar performans raporlamalarını dijital ortamda taşıyın.
+                    {{__('website.hr_clause4')}}
                   </p>
                 </div>
               </div>
@@ -80,9 +80,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <h5 class="action-title upper light">...</h5>
+              <h5 class="action-title upper light"></h5>
             </div>
-            <div class="col-md-3 text-right"><a href="/tr/deneyin" class="btn btn-light btn-bordered btn-lg">DENEYİN</a></div>
+            <div class="col-md-3 text-right"><a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit')}}</a></div>
           </div>
         </div>
       </section>

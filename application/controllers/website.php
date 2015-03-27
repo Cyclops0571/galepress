@@ -128,31 +128,31 @@ class Website_Controller extends Base_Controller
 
 
 		if (empty($customerName) || $customerName=="undefined")
-			$errors['name'] = 'First name is required.';
+			$errors['name'] = __('website.tryit_form_error_required_firstname');
 
 		if (empty($customerLastName) || $customerLastName=="undefined")
-			$errors['last_name'] = 'Last name is required.';
+			$errors['last_name'] = __('website.tryit_form_error_required_lastname');
 
 		if (empty($email) || $email=="undefined")
-			$errors['email'] = 'Email is required.';
+			$errors['email'] = __('website.tryit_form_error_required_email');
 
 		if (empty($appName) || $appName=="undefined")
-			$errors['app_name'] = 'appName is required.';
+			$errors['app_name'] = __('website.tryit_form_error_required_appname');
 
 		if (empty($userName) || $userName=="undefined")
-			$errors['user_name'] = 'user_name is required.';
+			$errors['user_name'] = __('website.tryit_form_error_required_username');
 
 		if (empty($password) || $password=="undefined")
-			$errors['password'] = 'password is required.';
+			$errors['password'] = __('website.tryit_form_error_required_pass');
 
 		if (empty($password_verify) || $password_verify=="undefined")
-			$errors['password_verify'] = 'password_verify is required.';
+			$errors['password_verify'] = __('website.tryit_form_error_required_pass2');
 
 		if ($password != $password_verify)
-			$errors['password_verify'] = 'Passwords must be matched';
+			$errors['password_verify'] = __('website.tryit_form_error_required_passmatch');
 
 		if (empty($captcha) || $captcha=="undefined")
-			$errors['captcha'] = 'captcha is required';
+			$errors['captcha'] = __('website.tryit_form_error_required_securitycode');
 
 		$rules = array(
         'captcha' => 'mecaptcha|required'
@@ -166,7 +166,7 @@ class Website_Controller extends Base_Controller
 	    }
 	    else if($captcha && !empty($captcha))
 	    {
-	    	$errors['captcha_invalid'] = 'Invalid captcha';
+	    	$errors['captcha_invalid'] = __('website.tryit_form_error_required_invalidcaptcha');
 	    }
 
 		//$errors['customerLastName'] = $customerLastName;
@@ -177,7 +177,7 @@ class Website_Controller extends Base_Controller
 
 		if($emailExist && !empty($email))
 		{
-			$errors['email_exist'] = 'Email is already exist';
+			$errors['email_exist'] = __('website.tryit_form_error2_email');
 		}
 
 		$userNameExist = DB::table('User')
@@ -186,14 +186,14 @@ class Website_Controller extends Base_Controller
 
 		if($userNameExist && !empty($userName))
 		{
-			$errors['user_name_exist'] = 'User is already exist';
+			$errors['user_name_exist'] = __('website.tryit_form_error_user');
 		}
 
 		// if there are errors
 		if (!empty($errors)) {
 			$data['success'] = false;
 			$data['errors'] = $errors;
-			$data['messageError'] = 'Please check the fields in red';
+			$data['messageError'] = __('website.tryit_form_error_required_checkfields');
 		} 
 		else {
 			//$data['userNameExist'] = $userNameExist;
@@ -273,7 +273,7 @@ class Website_Controller extends Base_Controller
 			$s->ConfirmCode = $confirmCode;
 			$s->save();
 
-            $subject = "Kaydınızı Tamamlayın";
+            $subject = __('common.confirm_email_title');
             $msg = __('common.confirm_email_message', array(
               'firstname' => $s->FirstName,
               'lastname' => $s->LastName,

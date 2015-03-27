@@ -6,61 +6,61 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 sep-top-2x">
-              <h4 class="upper">İLETİŞİM</h4>
+              <h4 class="upper">{{__('website.contact')}}</h4>
               <div class="contact-form">
                 <div id="successMessage" style="display:none" class="alert alert-success text-center">
                   <p><i class="fa fa-check-circle fa-2x"></i></p>
-                  <p>Teşekkür ederiz. Mesajınız tarafımıza iletilmiştir.</p>
+                  <p>{{__('website.contact_form_success_message')}}</p>
                 </div>
                 <div id="failureMessage" style="display:none" class="alert alert-danger text-center">
                   <p><i class="fa fa-times-circle fa-2x"></i></p>
-                  <p>Bir problem oluştu. Lütfen daha sonra tekrar deneyiniz.</p>
+                  <p>{{__('website.contact_form_error_message')}}</p>
                 </div>
                 <div id="incompleteMessage" style="display:none" class="alert alert-warning text-center">
                   <p><i class="fa fa-exclamation-triangle fa-2x"></i></p>
-                  <p>Lütfen tüm alanları doldurunuz.</p>
+                  <p>{{__('website.contact_form_required_message')}}</p>
                 </div>
                 <form id="contactForm" action="/website/php/contact.php" method="post" class="form-gray-fields validate">
                   <div class="row">
                     <div class="col-md-6 sep-top-xs">
                       <div class="form-group">
-                        <label for="name">İsim</label>
-                        <input id="name" type="text" name="senderName" class="form-control input-lg required" placeholder="İsminizi girin...">
+                        <label for="name">{{__('website.contact_form_name')}}</label>
+                        <input id="name" type="text" name="senderName" class="form-control input-lg required" placeholder="{{__('website.contact_form_placeholder_name')}}">
                       </div>
                     </div>
                     <div class="col-md-6 sep-top-xs">
                       <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="email" name="senderEmail" class="form-control input-lg required email" placeholder="Email adresinizi girin...">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="senderEmail" class="form-control input-lg required email" placeholder="{{__('website.contact_form_placeholder_email')}}">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 sep-top-xs">
                       <div class="form-group">
-                        <label for="phone">Telefon</label>
-                        <input id="phone" type="text" name="phone" class="form-control input-lg required" placeholder="Telefon bilgisi girin...">
+                        <label for="phone">{{__('website.contact_form_tel')}}</label>
+                        <input id="phone" type="text" name="phone" class="form-control input-lg required" placeholder="{{__('website.contact_form_placeholder_tel')}}">
                       </div>
                     </div>
                     <div class="col-md-6 sep-top-xs">
                       <div class="form-group">
-                        <label for="phone">Şirket</label>
-                        <input id="company" type="text" name="company" class="form-control input-lg required" placeholder="Şirketinizi belirtin...">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 sep-top-xs">
-                      <div class="form-group">
-                        <label for="comment">Yorumunuz</label>
-                        <textarea id="comment" rows="9" name="comment" class="form-control input-lg required" placeholder="Yorumunuzu ekleyin..."></textarea>
+                        <label for="phone">{{__('website.contact_form_company')}}</label>
+                        <input id="company" type="text" name="company" class="form-control input-lg required" placeholder="{{__('website.contact_form_placeholder_company')}}">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 sep-top-xs">
                       <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;Gönder</button>
+                        <label for="comment">{{__('website.contact_form_message')}}</label>
+                        <textarea id="comment" rows="9" name="comment" class="form-control input-lg required" placeholder="{{__('website.contact_form_placeholder_message')}}"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 sep-top-xs">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>&nbsp;{{__('website.contact_form_submit')}}</button>
                       </div>
                     </div>
                   </div>
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div class="col-md-6 sep-top-2x">
-              <h4 class="upper">Lokasyon</h4>
+              <h4 class="upper">{{__('website.contact_form_location')}}</h4>
               <div class="sep-top-xs">
                 <div id="map-canvas" style="height:500px">
                   <script>

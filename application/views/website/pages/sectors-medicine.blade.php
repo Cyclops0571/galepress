@@ -7,8 +7,8 @@
         <div class="sep-top-5x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light">
-              <h2 class="small-space">İLAÇ</h2>
-              <p class="lead upperNone">Saha ile merkez arasındaki sınırları kaldırın.</p>
+              <h2 class="small-space">{{__('website.pharmaceutical_title')}}</h2>
+              <p class="lead upperNone">{{__('website.pharmaceutical_subtitle')}}</p>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="lead">Artık mümessilleriniz doktorlara ilaç sunumunu mobil uygulamanız üzerinden yapabilir. Broşür ve sipariş formlarını dijitale geçirin ve böylece doktorların uygulama üzerinden detaylı olarak inceleyebilecekleri ilaç siparişleri online sipariş formu üzerinden anında sisteminize düşsün. Teslimat süresi ve broşür baskı maliyetlerinden kurtulun. Gelişmiş veri toplama sistemi sayesinde içeriğinize kim, nereden ulaşmış ve ne kadar zaman harcamış görün, sahadaki personel yönetiminizi sağlam verilere dayandırarak yeniden planlayın.</p>
+                <p class="lead">{{__('website.pharmaceutical_description')}}</p>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Mümessillerinin doktorlara ilaç tanıtımı sürecini dijitale taşıyın. İlaç tanıtma aplikasyonu sayesinde müşterilerinize ilaç detayları ve sunumlarını mobil cihazlar üzerinden yapın.
+                    {{__('website.pharmaceutical_clause1')}}
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Müşterileriniz olan doktorlarla olan ilaç satış ve teslimat süresini minimuma indirmek için mobile geçin. İlaç detaylarını da bulabilecekleri aplikasyon sayesinde sipariş ve satış adımlarını dijital ortam üzerinden yürütün.
+                    {{__('website.pharmaceutical_clause2')}}
                   </p>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Ürünlerinizi tüm detaylarıyla sunabileceğiz online kataloğu aplikasyonunuza dahil edeceğiniz online satış tooluyla satışlarınıza yeni bir soluk katın.
+                    {{__('website.pharmaceutical_clause3')}}
                   </p>
                 </div>
               </div>
@@ -70,9 +70,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <h5 class="action-title upper light">...</h5>
+              <h5 class="action-title upper light"></h5>
             </div>
-            <div class="col-md-3 text-right"><a href="/tr/deneyin" class="btn btn-light btn-bordered btn-lg">DENEYİN</a></div>
+            <div class="col-md-3 text-right"><a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit')}}</a></div>
           </div>
         </div>
       </section>

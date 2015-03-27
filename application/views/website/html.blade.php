@@ -97,31 +97,57 @@
 
     <script type="text/javascript">
     $(function(){
-        if($('#blogIframe').length>0)
-        {
-            var waitForFinalEvent = (function () {
-                var timers = {};
-                return function (callback, ms, uniqueId) {
-                if (!uniqueId) {
-                  uniqueId = "Don't call this twice without a uniqueId";
-                }
-                if (timers[uniqueId]) {
-                  clearTimeout (timers[uniqueId]);
-                }
-                timers[uniqueId] = setTimeout(callback, ms);
-                };
-            })();
 
-            $('#blogIframe').load(function(){
-            $('#blogIframe').css('min-height',$('#blogIframe').contents().find('body').height()+50);
-            });
+        if("{{ Session::get('language') }}"=="tr"){
 
-            $(window).resize(function(){
-                waitForFinalEvent(function(){
-                    $('#blogIframe').css('min-height',$('#blogIframe').contents().find('body').height()+50);
-                }, 500, "resizeMyIframe");
-            });
+            $('.dropdown.languageChange > a').attr('href','/tr');
+            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/trFlag.png');
+
+            $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
+            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
+
+
+        } else {
+
+            $('.dropdown.languageChange > a').attr('href','/en');
+            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/enFlag.png');
+
+            $('.dropdown.languageChange ul li:first-child a').attr('href','/tr');
+            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
         }
+
+        $('.dropdown.languageChange ul li').click(function(e){
+
+            //$('.dropdown.languageChange a').attr('href',$(this).);
+            $('.dropdown.languageChange a img').attr('src',$(e.target).find('img').attr('src'));
+
+        })
+
+        // if($('#blogIframe').length>0)
+        // {
+        //     var waitForFinalEvent = (function () {
+        //         var timers = {};
+        //         return function (callback, ms, uniqueId) {
+        //         if (!uniqueId) {
+        //           uniqueId = "Don't call this twice without a uniqueId";
+        //         }
+        //         if (timers[uniqueId]) {
+        //           clearTimeout (timers[uniqueId]);
+        //         }
+        //         timers[uniqueId] = setTimeout(callback, ms);
+        //         };
+        //     })();
+
+        //     $('#blogIframe').load(function(){
+        //     $('#blogIframe').css('min-height',$('#blogIframe').contents().find('body').height()+50);
+        //     });
+
+        //     $(window).resize(function(){
+        //         waitForFinalEvent(function(){
+        //             $('#blogIframe').css('min-height',$('#blogIframe').contents().find('body').height()+50);
+        //         }, 500, "resizeMyIframe");
+        //     });
+        // }
     })
     </script>
   </body>

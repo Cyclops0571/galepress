@@ -458,5 +458,15 @@ return array(
 	'site_system_message_expired' => 'Your session expired!',
 
 	'month_names' => array('', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),	
-	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">User didn\'t allow</span>' ,
+	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">User didn\'t allow</span>',
+
+	'confirm_email_title' => 'Create Your Account',
+	'confirm_email_message' => "".
+							"Dear :firstname :lastname, \n\n".
+							"To confirm your account, you can click the link below. If you make such a request, please ignore this email.\n\n".
+							":url\n\n".
+							"Best Regards, \n".
+							"Galepress",
+	'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
+	'login_accountticketnotfound' => 'Your request has not been found to confirm account!'
 );

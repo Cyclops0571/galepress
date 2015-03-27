@@ -7,8 +7,8 @@
         <div class="section-shade-half sep-top-5x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light">
-              <h2 class="small-space">DİJİTAL YAYINCILIK</h2>
-              <p class="lead upperNone">Baskı maliyetlerinden kurtulun.</p>
+              <h2 class="small-space">{{__('website.dp_title')}}</h2>
+              <p class="lead upperNone">{{__('website.dp_subtitle')}}</p>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="lead">Basılı materyaller artık dijitalde. Hazırladığınız broşür, katalog ve dergileri kullanıcılara mobil uygulamanız üzerinden ulaştırın. Katalog içinde ürünlerinizi tüm detaylarıyla kullanıcılara sunun ve uygulamanıza dahil edeceğiniz online satış tooluyla satışlarınıza yeni bir soluk katıp cironuzu yukarı çıkartın. Uygulama üzerinden sunacağınız yayınlarınızın içerisine interaktif reklamlar yerleştirerek reklam yayıncıları arasında öne çıkın. Tüm bunları yaparken de basılı materyal maliyetlerinden kurtulun.</p>
+                <p class="lead">{{__('website.dp_description')}}</p>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Periyodik olarak hazırladığınız broşürlerinizi dijital ortamda online katalog olarak yayınlayın.
+                    {{__('website.dp_clause1')}}
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Ürünlerinizi tüm detaylarıyla sunabileceğiz online kataloğu aplikasyonunuza dahil edeceğiniz online satış tooluyla satışlarınıza yeni bir soluk katın.
+                    {{__('website.dp_clause2')}}
                   </p>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Uygulama içi satışlar ile cironuzu yukarı çıkartın.
+                    {{__('website.dp_clause3')}}
                   </p>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Yayınlarınızın içerisine interaktif reklamlar yerleştirerek reklam yayıncıları arasında öne çıkın.
+                    {{__('website.dp_clause4')}}
                   </p>
                 </div>
               </div>
@@ -80,9 +80,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <h5 class="action-title upper light">...</h5>
+              <h5 class="action-title upper light"></h5>
             </div>
-            <div class="col-md-3 text-right"><a href="/tr/deneyin" class="btn btn-light btn-bordered btn-lg">DENEYİN</a></div>
+            <div class="col-md-3 text-right"><a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit')}}</a></div>
           </div>
         </div>
       </section>

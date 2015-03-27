@@ -99,6 +99,7 @@ return array(
 	'website_article_brandvalue' => 'blog/makale-marka-degeri',
 	'website_article_whymobile' => 'blog/makale-neden-mobil',
 	'website_sectors' => 'cozumler',
+	'website_showcase' => 'referanslar',
 	'website_sectors_retail' => 'cozumler-perakende',
 	'website_sectors_humanresources' => 'cozumler-insan-kaynaklari',
 	'website_sectors_education' => 'cozumler-egitim',

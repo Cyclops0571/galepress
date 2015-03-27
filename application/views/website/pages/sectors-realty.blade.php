@@ -7,8 +7,8 @@
         <div class="sep-top-5x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light">
-              <h2 class="small-space">GAYRİMENKUL</h2>
-              <p class="lead upperNone">Rekabetin bir adım önünde olun.</p>
+              <h2 class="small-space">{{__('website.realestate_title')}}</h2>
+              <p class="lead upperNone">{{__('website.realestate_subtitle')}}</p>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="lead">Gayrimenkul sektörünün ivmesi göz ardı edilemeyecek hıza ulaştı. Rekabetin en yoğun olduğu bu sektörde rakiplerinizden bir farkınız olsun istemez misiniz? Satışa hazır konut ve rezidanslarınızı ev sahibi olmak isteyenlere mobil cihazlar üzerinden pazarlayın. İnşaat projelerinin detaylarını uygulamanız üzerinden paylaşıp satışa hazır hale geldiklerinde müşterilerinize sanal tur yapma imkanı sağlayın. 360° tur seçeneğiyle hem konut arayanlar zamandan kazansın hem de siz satış ve pazarlama kanallarınızı güçlendirin. Saha aktivitelerinden sonra temasa geçtiğiniz müşterilere yeniden pazarlama aktivitesi düzenleme yolunda bir adım atın.</p>
+                <p class="lead">{{__('website.realestate_description')}}</p>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Satışa hazır konutlarınız ve rezidanslarınızın pazarlamasını mobile taşıyın.
+                    {{__('website.realestate_clause1')}}
                   </p>
                 </div>
               </div>
@@ -46,17 +46,17 @@
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    İnşaat projelerinizin detaylarının paylaşımını aplikasyon üzerinden yapın.
+                    {{__('website.realestate_clause2')}}
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 sep-bottom-md">
+                        <div class="col-md-4 sep-bottom-md">
               <div class="icon-box icon-xs icon-gradient">
                 <div class="icon-box-content">
                   <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
                   <p>
-                    Satışa sunduğunuz konut projelerinizi dijitale taşıyın ve müşterilerinize sanal tur yapma imkanı sağlayın. 360° tur ile satış ve pazarlama kanallarınızı güçlendirin.
+                    {{__('website.realestate_clause3')}}
                   </p>
                 </div>
               </div>
@@ -70,9 +70,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <h5 class="action-title upper light">...</h5>
+              <h5 class="action-title upper light"></h5>
             </div>
-            <div class="col-md-3 text-right"><a href="/tr/deneyin" class="btn btn-light btn-bordered btn-lg">DENEYİN</a></div>
+            <div class="col-md-3 text-right"><a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit')}}</a></div>
           </div>
         </div>
       </section>

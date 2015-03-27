@@ -21,9 +21,9 @@
 
                 <div class="slide-container">
                   <div class="slide-content text-center" id="videoSlide" style="display:none;">
-                    <h2 class="main-title" style="font-weight:200; margin-bottom:40px;">Mobil Dünya Parmaklarınızın Ucunda!</h2>
+                    <h2 class="main-title" style="font-weight:200; margin-bottom:40px;">{{__('website.home_video_title')}}</h2>
                     <blockquote class="sep-top-xs">
-                      <a href="/tr/deneyin" class="btn btn-light btn-bordered btn-lg">Deneyin</a><a href="/tr/nasil-calisir" class="btn btn-primary btn-lg">Keşfedin</a>
+                      <a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit_small')}}</a><a href="/{{ Session::get('language') }}/{{__('route.website_why_galepress')}}" class="btn btn-primary btn-lg">{{__('website.menu_explore')}}</a>
                     </blockquote>
                   </div>
                   <!-- <iframe src="//player.vimeo.com/video/121023414?title=0&amp;byline=0&amp;badge=0&amp;portrait=0&amp;color=59a1de&amp;autoplay=1&amp;loop=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
@@ -45,8 +45,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="section-title text-center wow bounceInDown">
-                <h3 class="small-space" style="font-size:3.7em; color:#777; font-weight:lighter;">Bütün Çözümler İçin Tek Platform</h3>
-                <p class="lead lighter" style="font-size:1.7em; color:black; font-weight:lighter;">Şirketinizin ihtiyacı olan çözüm müşteri etkileşimini arttırmak, satış etkinliğini yükseltmek, daha iyi elemanlar işe almak veya baskı maliyetlerini düşürmek olabilir. Bu çözümlerin hepsini ve daha fazlasını Galepress'in çevik yapısı sayesinde çok kısa bir sürede hayata geçirebileceksiniz. Kiralama modeli sayesinde mobil çözümler departmanınız için personel, daha geniş bir ofis ve danışmanlık gibi masraflarınız da olmayacak. Mobil dünya artık parmaklarınızın ucunda.</p>
+                <h3 class="small-space" style="font-size:3.7em; color:#777; font-weight:lighter;">{{__('website.home_intro_title')}}</h3>
+                <p class="lead lighter" style="font-size:1.7em; color:black; font-weight:lighter;">{{__('website.home_intro_text')}}</p>
               </div>
             </div>
           </div>
@@ -56,34 +56,34 @@
         <div id="charts-wrapper" class="section-shade sep-top-3x sep-bottom-3x">
           <div class="container">
             <div data-wow-delay="1s" class="section-title sep-bottom-md text-center wow bounceInDown">
-              <h1 class="light" style="letter-spacing:5px; font-weight:200;">İstediğiniz Her Alanda</h1>
+              <h1 class="light" style="letter-spacing:5px; font-weight:200;">{{__('website.home_sectors_title')}}</h1>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="row">
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                    <a href="/tr/cozumler-dijital-yayincilik"><img src="/website/img/sectors/new/dijital.png" data-wow-delay="0.7s" class="wow fadeInUp"></a>
-                    <a href="/tr/cozumler-dijital-yayincilik"><p data-wow-delay="0.7s" class="lead x2 wow fadeInLeft" style="max-height:30px;">Dijital Yayıncılık</p></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_digitalpublishing')}}"><img src="/website/img/sectors/new/dijital.png" data-wow-delay="0.7s" class="wow fadeInUp"></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_digitalpublishing')}}"><p data-wow-delay="0.7s" class="lead x2 wow fadeInLeft" style="max-height:30px;">{{__('website.home_sectors_digitalpublishing')}}</p></a>
                   </div>
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                    <a href="/tr/cozumler-insan-kaynaklari"><img src="/website/img/sectors/new/ik.png" data-wow-delay="0.9s" class="wow fadeInUp"></a>
-                    <a href="/tr/cozumler-insan-kaynaklari"><p data-wow-delay="0.9s" class="lead x2 wow fadeInLeft">İK</p></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_humanresources')}}"><img src="/website/img/sectors/new/ik.png" data-wow-delay="0.9s" class="wow fadeInUp"></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_humanresources')}}"><p data-wow-delay="0.9s" class="lead x2 wow fadeInLeft">{{__('website.home_sectors_hr')}}</p></a>
                   </div>
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                    <a href="/tr/cozumler-egitim"><img src="/website/img/sectors/new/egitim.png" data-wow-delay="1.1s" class="wow fadeInUp"></a>
-                    <a href="/tr/cozumler-egitim"><p data-wow-delay="1.1s" class="lead x2 wow fadeInLeft">Eğitim</p></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_education')}}"><img src="/website/img/sectors/new/egitim.png" data-wow-delay="1.1s" class="wow fadeInUp"></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_education')}}"><p data-wow-delay="1.1s" class="lead x2 wow fadeInLeft">{{__('website.home_sectors_education')}}</p></a>
                   </div>
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                    <a href="/tr/cozumler-gayrimenkul"><img src="/website/img/sectors/new/gayrimenkul.png" data-wow-delay="1.3s" class="wow fadeInUp"></a>
-                    <a href="/tr/cozumler-gayrimenkul"><p data-wow-delay="1.3s" class="lead x2 wow fadeInLeft">Gayrimenkul</p></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_realty')}}"><img src="/website/img/sectors/new/gayrimenkul.png" data-wow-delay="1.3s" class="wow fadeInUp"></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_realty')}}"><p data-wow-delay="1.3s" class="lead x2 wow fadeInLeft">{{__('website.home_sectors_realestate')}}</p></a>
                   </div>
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                    <a href="/tr/cozumler-ilac"><img src="/website/img/sectors/new/medikal.png" data-wow-delay="1.5s" class="wow fadeInUp"></a>
-                    <a href="/tr/cozumler-ilac"><p data-wow-delay="1.5s" class="lead x2 wow fadeInLeft">İlaç</p></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_medicine')}}"><img src="/website/img/sectors/new/medikal.png" data-wow-delay="1.5s" class="wow fadeInUp"></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_medicine')}}"><p data-wow-delay="1.5s" class="lead x2 wow fadeInLeft">{{__('website.home_sectors_pharmaceutical')}}</p></a>
                   </div>
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                    <a href="/tr/cozumler-perakende"><img src="/website/img/sectors/new/perakende.png" data-wow-delay="1.7s" class="wow fadeInUp"></a>
-                    <a href="/tr/cozumler-perakende"><p data-wow-delay="1.7s" class="lead x2 wow fadeInLeft">Perakende</p></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_retail')}}"><img src="/website/img/sectors/new/perakende.png" data-wow-delay="1.7s" class="wow fadeInUp"></a>
+                    <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_retail')}}"><p data-wow-delay="1.7s" class="lead x2 wow fadeInLeft">{{__('website.home_sectors_retail')}}</p></a>
                   </div>
                 </div>
               </div>
@@ -96,7 +96,7 @@
       <!-- Start Clients section-->
       <section class="sep-top-md sep-bottom-2x">
         <div class="container">
-          <div data-auto-play="true" data-items="4" data-auto-height="false" class="home-showcase owl-carousel owl-theme">
+          <div data-auto-play="false" data-items="4" data-auto-height="false" class="home-showcase owl-carousel owl-theme">
             <div class="item">
               <div class="col-md-12">
                 <div class="sep-top-xs sep-bottom-sm item-ipad">
@@ -115,9 +115,9 @@
                   </div>
                 </div>
                 <div class="team-name">
-                  <h5 class="upper">CarrefourSA</h5><span>Yönetim</span>
+                  <h5 class="upper">CarrefourSA</h5><span>{{__('website.home_stars_carrefour_subtitle')}}</span>
                 </div>
-                <em>Galepress bizim için bir maliyet değil gelir kalemi oldu. Baskı maliyetlerinden ettiğimiz tasarruf kiralama modeli ile edindiğimiz bu platformun maliyetlerini çoktan dengeledi.</em>
+                <em>{{__('website.home_stars_carrefour')}}</em>
               </div>
             </div>
             <div class="item">
@@ -138,9 +138,9 @@
                   </div>
                 </div>
                 <div class="team-name">
-                  <h5 class="upper">Zen Diamond</h5><span>Yönetim</span>
+                  <h5 class="upper">Zen Diamond</h5><span>{{__('website.home_stars_zen_subtitle')}}</span>
                 </div>
-                <em>Bütün markalar için ulaşması zor olan VIP kitleye erişimimiz Galepress sayesinde farklı bir rotaya girdi. Galepress bizim gözümüzle "dijital dünyanın pırlantası"</em>
+                <em>{{__('website.home_stars_zen')}}</em>
               </div>
             </div><div class="item">
               <div class="col-md-12">
@@ -160,9 +160,9 @@
                   </div>
                 </div>
                 <div class="team-name">
-                  <h5 class="upper">Renovia</h5><span>Yönetim</span>
+                  <h5 class="upper">Renovia</h5><span>{{__('website.home_stars_renovia_subtitle')}}</span>
                 </div>
-                <em>Rakiplerimiz uygulama geliştiriclerle ardı arkası gelmeyen toplantılar yapıp zaman kaybederken Galepress ile 2 hafta içerisinde mobil dünyaya girip müşterilerimize aplikasyonumuzu yükletmeye başladık.</em>
+                <em>{{__('website.home_stars_renovia')}}</em>
               </div>
             </div><div class="item">
               <div class="col-md-12">
@@ -182,9 +182,9 @@
                   </div>
                 </div>
                 <div class="team-name">
-                  <h5 class="upper">Pleon Sportivo</h5><span>Yönetim</span>
+                  <h5 class="upper">Pleon Sportivo</h5><span>{{__('website.home_stars_pleon_subtitle')}}</span>
                 </div>
-                <em>Aradığı bilgileri mobil aplikasyonumuzda bulabilen müşterilerimiz bizi telefonla arayıp bilgi almaktan vazgeçti. Galepress ile kaybedildikten sonra yerine konulamayan tek kaynaktan tasarruf ettik: Zaman.</em>
+                <em>{{__('website.home_stars_pleon')}}</em>
               </div>
             </div><div class="item">
               <div class="col-md-12">
@@ -204,12 +204,11 @@
                   </div>
                 </div>
                 <div class="team-name">
-                  <h5 class="upper">Mopaş</h5><span>Yönetim</span>
+                  <h5 class="upper">Mopaş</h5><span>{{__('website.home_stars_mopas_subtitle')}}</span>
                 </div>
-                <em>Müşterilerimize her zaman en iyi kaliteyi en uygun fiyata tedarik etme prensibimizi paylaşan bir platform ile çalıştığımız için çok memnunuz. Müşterilerimizi kampanyalarımızdan daha kolay haberdar Galepress sayesinde bir kazan-kazan modeli oluşturabildik.</em>
+                <em>{{__('website.home_stars_mopas')}}</em>
               </div>
-            </div>         
- 
+            </div>
           </div>
         </div>
       </section>
@@ -220,10 +219,10 @@
             <div class="col-md-4 text-right">
               <div class="sep-top-md sep-bottom-md">
                 <div class="bordered-right section-title">
-                  <h2 class="upper"><span class="light" style="color:white;">İNTERAKTİF</span> TASARLAYICI</h2>
+                  <h2 class="upper"><span class="light" style="color:white;">{{__('website.home_interactive_editor_word1')}}</span> {{__('website.home_interactive_editor_word2')}}</h2>
                 </div>
-                <p class="lead">Dokümanınızın içeriğini hareketli ve sesli görsellerle zenginleştirin.</p>
-                <div class="sep-top-xs"><a href="/tr/deneyin" data-wow-delay=".5s" class="btn btn-light btn-bordered btn-lg wow bounceInLeft animated" style="visibility: visible; -webkit-animation-delay: 0.5s;">DENEYİN</a></div>
+                <p class="lead">{{__('website.home_interactive_editor_description')}}</p>
+                <div class="sep-top-xs"><a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}" data-wow-delay=".5s" class="btn btn-light btn-bordered btn-lg wow bounceInLeft animated" style="visibility: visible; -webkit-animation-delay: 0.5s;">{{__('website.menu_tryit')}}</a></div>
               </div>
             </div>
             <div class="col-md-8 col-xs-12 intAnimeFrame">
@@ -270,8 +269,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/1.png">
                 <div class="icon-box-content">
-                  <h5 class="upper">İNTERAKTİF TASARLAYICI</h5>
-                  <p>Dökümanlarınıza interaktif öğeler eklemek hiç bu kadar kolay olmamıştı. İstediğiniz özelliği sürükle bırak metoduyla dökümanınıza taşıyın, dökümanlarınız yeni bir boyut kazansın.</p>
+                  <h5 class="upper">{{__('website.home_interactive_editor')}}</h5>
+                  <p>{{__('website.home_interactive_editor_text')}}</p>
                 </div>
               </div>
             </div>
@@ -279,8 +278,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/2.png">
                 <div class="icon-box-content">
-                  <h5 class="upper" style="color:#0986c2;">İNTERAKTİF ÖGELER</h5>
-                  <p>Yazılı içeriğinizi fotoğraf galerileri, ses dosyaları, videolar ve animasyonlar ile süsleyerek müşterilerinizin dikkat eğrisinin düşmesini engelleyin, dökümanlarınız dijital gürültüden sıyrılarak öne çıksın.</p>
+                  <h5 class="upper" style="color:#0986c2;">{{__('website.home_interactive_compenents')}}</h5>
+                  <p>{{__('website.home_interactive_compenents_text')}}</p>
                 </div>
               </div>
             </div>
@@ -288,8 +287,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/3.png">
                 <div class="icon-box-content">
-                  <h5 class="upper" style="color:#0986c2;">PUSH NOTIFICATION</h5>
-                  <p>Yeni kampanyalarınızı ve gelişmeleri müşterilerinize anlatırken sesinizi duyuramamaktan şikayetçiyseniz  çözüm Galepress'in "push notification" özelliğinde. Mesajlarınızın farkedilmeme riskini ortadan kaldırın, müşterilerinize doğrudan ulaşın ve kampanyalarınız daha başarılı olsun.</p>
+                  <h5 class="upper" style="color:#0986c2;">{{__('website.home_push_notification')}}</h5>
+                  <p>{{__('website.home_push_notification_text')}}</p>
                 </div>
               </div>
             </div>
@@ -297,8 +296,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/6.png"></i>
                 <div class="icon-box-content">
-                  <h5 class="upper" style="color:#0986c2;">RAPORLAMA</h5>
-                  <p>Dijital iletişiminizin sonuçlarını analiz edememekten mi şikayetçisiniz? Galepress'in gelişmiş raporlama arayüzü sayesinde lokasyon, sayfada geçirilen zaman ve daha bir çok kritik veri ile pazarlama hamlenize doping yapabileceksiniz.</p>
+                  <h5 class="upper" style="color:#0986c2;">{{__('website.home_reports')}}</h5>
+                  <p>{{__('website.home_reports_text')}}</p>
                 </div>
               </div>
             </div>
@@ -308,8 +307,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/4.png">
                 <div class="icon-box-content">
-                  <h5 class="upper" style="color:#0986c2;">GÜVENLİK</h5>
-                  <p>Mobil aplikasyonunuz ile hassas verilerin aktarımını mı yapacaksınız? Artık güvenlik konusunda kaygılanmanıza gerek yok. Bulut sunucuları ve şifreleme özelliği ile istediğiniz  hassas bilgileri iş ortaklarınıza aktarabileceksiniz.</p>
+                  <h5 class="upper" style="color:#0986c2;">{{__('website.home_security')}}</h5>
+                  <p>{{__('website.home_security_text')}}</p>
                 </div>
               </div>
             </div>
@@ -317,8 +316,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/7.png">
                 <div class="icon-box-content">
-                  <h5 class="upper" style="color:#0986c2;">HIZ</h5>
-                  <p>İçeriğinizi güncellemek hızınızı kesmesin. Stratejik güncellemeleriniz Galepress'in hız odaklı sistemi sayesinde dijital çağın güncelleme hızına ayak uydursun</p>
+                  <h5 class="upper" style="color:#0986c2;">{{__('website.home_speed')}}</h5>
+                  <p>{{__('website.home_speed_text')}}</p>
                 </div>
               </div>
             </div>
@@ -326,8 +325,8 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <img src="/website/img/infographic/gray/5.png">
                 <div class="icon-box-content">
-                  <h5 class="upper" style="color:#0986c2;">BÜTÜN DÜNYAYA ERİŞİM</h5>
-                  <p>Galepress sayesinde giriş yapacağınız aplikasyon pazarları ile rekabet ortamınızın sınırlarını kaldırın. Yeni pazarlar sayesinde yeni fırsatlar ve satışlar elde edin.</p>
+                  <h5 class="upper" style="color:#0986c2;">{{__('website.home_speed_theworldisyours')}}</h5>
+                  <p>{{__('website.home_speed_theworldisyours_text')}}</p>
                 </div>
               </div>
             </div>

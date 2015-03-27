@@ -13,34 +13,34 @@
       </form>
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="/tr/" class="navbar-brand"><img src="/website/img/logo-white.png" alt="" class="logo-white"><img src="/website/img/logo-dark.png" alt="" class="logo-dark"></a>
+          <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="/{{ Session::get('language') }}" class="navbar-brand"><img src="/website/img/logo-white.png" alt="" class="logo-white"><img src="/website/img/logo-dark.png" alt="" class="logo-dark"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right service-nav">
             <li>
-              <a href="/tr/deneyin">DENEYİN</a>
+              <a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}">{{__('website.menu_tryit')}}</a>
             </li>
             <li>
-              <a href="/tr/giris"><i class="fa fa-mobile fa-lg"></i>&nbsp;<span class="badge">GİRİŞ</span></a>
+              <a href="/{{ Session::get('language') }}/{{__('route.login')}}"><i class="fa fa-mobile fa-lg"></i>&nbsp;<span class="badge">{{__('website.menu_login')}}</span></a>
             </li>
-            <li class="dropdown"><a href="/tr" title="Language" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Portfolio" data-ref="#" class="dropdown-toggle"><img src="/website/img/flags/trFlag.png" /><span class="caret"></span></a>
+            <li class="dropdown languageChange"><a href="/tr" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Portfolio" data-ref="#" class="dropdown-toggle"><img src="/website/img/flags/trFlag.png" /><span class="caret"></span></a>
               <ul aria-labelledby="menu_item_Portfolio" class="dropdown-menu" style="min-width:52px !important;width:52px !important;">
-                <li class="noTouch"><a href="#" title="English" data-ref="#"><img src="/website/img/flags/enFlagPassive.png" /></a></li>
-                <li class="noTouch"><a href="#" title="Deutsch" data-ref="#"><img src="/website/img/flags/deFlagPassive.png" /></a></li>
+                <li><a href="/en" data-ref="#"><img src="/website/img/flags/enFlag.png" class="noTouch"/></a></li>
+                <li class="noTouch"><a href="/de" data-ref="#"><img src="/website/img/flags/deFlagPassive.png" /></a></li>
               </ul>
             </li>
           </ul>
           <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
           <ul class="nav yamm navbar-nav navbar-left main-nav">
-              <li><a href="/tr/nasil-calisir" title="Nasıl çalışır?" id="menu_item_Home" data-ref="#">NASIL ÇALIŞIR?</a></li>
+              <li><a href="/{{ Session::get('language') }}/{{__('route.website_why_galepress')}}" title="{{__('website.menu_howitworks')}}" id="menu_item_Home" data-ref="#">{{__('website.menu_howitworks')}}</a></li>
 
-              <li><a href="/tr/cozumler" title="Çözümler" id="menu_item_Pages" data-ref="#">ÇÖZÜMLER</a></li>
+              <li><a href="/{{ Session::get('language') }}/{{__('route.website_sectors')}}" title="{{__('website.menu_solutions')}}" id="menu_item_Pages" data-ref="#">{{__('website.menu_solutions')}}</a></li>
 
-              <li><a href="/tr/referanslar" title="Showcase" id="menu_item_features-grid" data-ref="features-grid">REFERANSLAR</a></li>
+              <li><a href="/{{ Session::get('language') }}/{{__('route.website_showcase')}}" title="{{__('website.menu_showcase')}}" id="menu_item_features-grid" data-ref="features-grid">{{__('website.menu_showcase')}}</a></li>
 
-              <li><a href="/tr/iletisim" title="İLETİŞİM" id="menu_item_Contactus" data-ref="#">İLETİŞİM</a></li>
+              <li><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}" title="{{__('website.contact')}}" id="menu_item_Contactus" data-ref="#">{{__('website.contact')}}</a></li>
 
-              <li><a href="/tr/blog" title="Blog" id="menu_item_Blog" data-ref="#">BLOG</a></li>
+              <li><a href="/{{ Session::get('language') }}/{{__('route.website_blog')}}" title="Blog" id="menu_item_Blog" data-ref="#">BLOG</a></li>
 
               <!-- <li><a href="http://shop.galepress.com/" target="_blank" title="Shop" id="menu_item_Shop" data-ref="#">SHOP</a></li> -->
           </ul>

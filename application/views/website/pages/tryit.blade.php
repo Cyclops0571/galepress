@@ -66,85 +66,85 @@
               <form name="form" ng-submit="submitForm()" ng-controller="FormController" class="tryit-form" novalidate>
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h3 class="panel-title">Uygulama Oluştur <small>Ücretsiz!</small></h3>
+                    <h3 class="panel-title">{{__('website.tryit_form_title')}} <small>{{__('website.tryit_form_subtitle')}}</small></h3>
                   </div>
                   <div class="panel-transparent-row"></div>
                   <div class="panel-body">
                     <div class="row">                   
                       <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                          <label for="name">Ad</label>
-                          <input type="text" id="name" name="name" ng-model="formData.name" ng-class="{'ng-invalid ng-invalid-required formError' : errorName}" required class="form-control input-sm" placeholder="Adınız...">
+                          <label for="name">{{__('website.tryit_form_name')}}</label>
+                          <input type="text" id="name" name="name" ng-model="formData.name" ng-class="{'ng-invalid ng-invalid-required formError' : errorName}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_name_placeholder')}}">
                           <div ng-show="form.$submitted || form.name.$touched">
-                            <em ng-show="form.name.$error.required">Adınızı girin.</em>
+                            <em ng-show="form.name.$error.required">{{__('website.tryit_form_name_placeholder')}}</em>
                           </div>
                         </div>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                          <label for="last_name">Soyad</label>
-                          <input type="text" id="last_name" name="last_name" ng-model="formData.last_name" ng-class="{'ng-invalid ng-invalid-required formError' : errorLastName}" required class="form-control input-sm" placeholder="Soyadınız...">
+                          <label for="last_name">{{__('website.tryit_form_lastname')}}</label>
+                          <input type="text" id="last_name" name="last_name" ng-model="formData.last_name" ng-class="{'ng-invalid ng-invalid-required formError' : errorLastName}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_lastname_placeholder')}}">
                           <div ng-show="form.$submitted || form.last_name.$touched">
-                            <em ng-show="form.last_name.$error.required">Soyadınızı girin.</em>
+                            <em ng-show="form.last_name.$error.required">{{__('website.tryit_form_lastname_placeholder')}}</em>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label for="inputEmail">Email</label>
-                      <input id="inputEmail" type="email" name="email" ng-model="formData.email" ng-class="{'ng-invalid ng-invalid-required formError' : errorEmail}" required class="form-control input-sm" placeholder="Email adresinizi girin...">
+                      <label for="inputEmail">{{__('website.tryit_form_email')}}</label>
+                      <input id="inputEmail" type="email" name="email" ng-model="formData.email" ng-class="{'ng-invalid ng-invalid-required formError' : errorEmail}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_email_placeholder')}}">
                       <div ng-show="form.$submitted || form.email.$touched">
-                        <em ng-show="form.email.$error.required">Email adresinizi girin.</em>
-                        <em ng-show="form.email.$error.email">Geçerli bir email adresi girin.</em>
-                        <em ng-show="emailExist">Email adresi mevcut.</em>
+                        <em ng-show="form.email.$error.required">{{__('website.tryit_form_email_placeholder')}}</em>
+                        <em ng-show="form.email.$error.email">{{__('website.tryit_form_error_email')}}</em>
+                        <em ng-show="emailExist">{{__('website.tryit_form_error2_email')}}</em>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label for="app_name">Uygulama Adı</label>
-                      <input type="text" id="app_name" name="app_name" ng-model="formData.app_name" ng-class="{'ng-invalid ng-invalid-required formError' : errorAppName}" required class="form-control input-sm" placeholder="Uygulama adınız...">
+                      <label for="app_name">{{__('website.tryit_form_appname')}}</label>
+                      <input type="text" id="app_name" name="app_name" ng-model="formData.app_name" ng-class="{'ng-invalid ng-invalid-required formError' : errorAppName}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_appname_placeholder')}}">
                       <div ng-show="form.$submitted || form.app_name.$touched">
-                        <em ng-show="form.app_name.$error.required">Uygulamanızın adını girin.</em>
+                        <em ng-show="form.app_name.$error.required">{{__('website.tryit_form_appname_placeholder')}}</em>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label for="user_name">Kullanıcı Adı</label>
-                      <input type="text"id="user_name" name="user_name" ng-model="formData.user_name" ng-class="{'ng-invalid ng-invalid-required formError' : errorUserName}" required class="form-control input-sm" placeholder="Kullanıcı adınız...">
+                      <label for="user_name">{{__('website.tryit_form_username')}}</label>
+                      <input type="text"id="user_name" name="user_name" ng-model="formData.user_name" ng-class="{'ng-invalid ng-invalid-required formError' : errorUserName}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_username_placeholder')}}">
                       <div ng-show="form.$submitted || form.user_name.$touched">
-                        <em ng-show="form.user_name.$error.required">Kullanıcı adınızı girin.</em>
+                        <em ng-show="form.user_name.$error.required">{{__('website.tryit_form_username_placeholder')}}</em>
                       </div>
                       <div ng-show="userExist">
-                        <em>Kullanıcı adı mevcut.</em>
+                        <em>{{__('website.tryit_form_error_user')}}</em>
                       </div>
                     </div>
 
                     <div class="row">
                       <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                          <label for="password">Şifre</label>
-                          <input type="password" id="password" name="password" ng-model="formData.password" ng-class="{'ng-invalid ng-invalid-required formError' : errorPassword}" required class="form-control input-sm" placeholder="Şifreniz...">
-                          <em class="col-xs-12 col-sm-12 col-md-12" ng-show="errorPasswordVerify">Şifreler uyuşmuyor.</em>
+                          <label for="password">{{__('website.tryit_form_pass')}}</label>
+                          <input type="password" id="password" name="password" ng-model="formData.password" ng-class="{'ng-invalid ng-invalid-required formError' : errorPassword}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_pass_placeholder')}}">
+                          <em class="col-xs-12 col-sm-12 col-md-12" ng-show="errorPasswordVerify">{{__('website.tryit_form_error_pass')}}</em>
                         </div>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                          <label for="password_verify">Şifrenizi Tekrar Girin</label>
-                          <input type="password" id="password_verify" name="password_verify" ng-model="formData.password_verify" nx-equal="formData.password" ng-class="{'ng-invalid ng-invalid-required formError' : errorPasswordVerify}" required class="form-control input-sm" placeholder="Şifrenizi tekrar girin...">
-                          <em class="col-xs-12 col-sm-12 col-md-12" ng-show="errorPasswordVerify">Şifreler uyuşmuyor.</em>
-                          <span ng-show="form.password_verify.$error.nxEqual">Şifreler uyuşmuyor.</span>
+                          <label for="password_verify">{{__('website.tryit_form_pass2')}}</label>
+                          <input type="password" id="password_verify" name="password_verify" ng-model="formData.password_verify" nx-equal="formData.password" ng-class="{'ng-invalid ng-invalid-required formError' : errorPasswordVerify}" required class="form-control input-sm" placeholder="{{__('website.tryit_form_pass2_placeholder')}}">
+                          <em class="col-xs-12 col-sm-12 col-md-12" ng-show="errorPasswordVerify">{{__('website.tryit_form_error_pass')}}</em>
+                          <span ng-show="form.password_verify.$error.nxEqual">{{__('website.tryit_form_error_pass')}}</span>
                         </div>
                       </div> 
                     </div>
                     <div class="row">
                       <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                          <label for="captcha">Güvenlik Kodu</label>
-                          <input class="captchainput form-control input-sm" placeholder="Resimdeki kodu girin..." id="captcha" name="captcha" ng-model="formData.captcha" ng-class="{'ng-invalid ng-invalid-required formError' : errorCaptcha}" required type="text">
+                          <label for="captcha">{{__('website.tryit_form_securitycode')}}</label>
+                          <input class="captchainput form-control input-sm" placeholder="{{__('website.tryit_form_securitycode_placeholder')}}" id="captcha" name="captcha" ng-model="formData.captcha" ng-class="{'ng-invalid ng-invalid-required formError' : errorCaptcha}" required type="text">
                           <div ng-show="form.$submitted || form.captcha.$touched">
-                            <em ng-show="form.captcha.$error.required">Resimdeki kodu girin.</em>
-                            <em ng-show="errorCaptchaInvalid">Girilen kod geçerli değil.</em>
+                            <em ng-show="form.captcha.$error.required">{{__('website.tryit_form_securitycode_placeholder')}}</em>
+                            <em ng-show="errorCaptchaInvalid">{{__('website.tryit_form_error_securitycode')}}</em>
                           </div>
                         </div>
                       </div>
@@ -170,10 +170,10 @@
                   </div> -->
                   <div class="panel-heading" style="display:-webkit-box !important; height:80px;">
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                      <input type="submit" value="Uygulama Oluştur" class="btn btn-primary btn-block" style="outline:none;">
+                      <input type="submit" value="{{__('website.tryit_form_submit')}}" class="btn btn-primary btn-block" style="outline:none;">
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                      <a href="/tr/giris" class="btn btn-bordered btn-block">Giriş Ekranına Dön</a>
+                      <a href="/{{ Session::get('language') }}/{{__('route.login')}}" class="btn btn-bordered btn-block">{{__('website.tryit_form_return')}}</a>
                     </div>
                   </div>
                 </div>
@@ -201,7 +201,7 @@
             require: 'ngModel',
             link: function (scope, elem, attrs, model) {
                 if (!attrs.nxEqual) {
-                    console.error('nxEqual expects a model as an argument!');
+                    //console.error('nxEqual expects a model as an argument!');
                     return;
                 }
                 scope.$watch(attrs.nxEqual, function (value) {
@@ -241,7 +241,7 @@
       $scope.submitForm = function() {
         $http({
         method : 'POST',
-        url : 'deneyin',
+        url : "{{__('website.website_tryit')}}",
         data : param($scope.formData), // pass in data as strings
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' } // set the headers so angular passing info as form data (not request payload)
       })
@@ -261,10 +261,9 @@
           $scope.errorCaptcha = data.errors.captcha;
           $scope.errorCaptchaInvalid = data.errors.captcha_invalid;
 
-          console.log(data);
+          //console.log(data);
 
           }else {
-            console.log("basarili",data);
             $scope.userExist=false;
             //$scope.reset($scope.form);
 
@@ -272,7 +271,7 @@
               //window.location.href = '/tr/giris';
               //alert("Mail adresinize iletilen linke tıklayarak hesabınızı aktifleştiriniz.");
             },750);
-            alert("Mail adresinize iletilen linke tıklayarak hesabınızı aktifleştiriniz.");
+            alert("{{__('website.tryit_form_message_mail')}}");
           }
         });
       };

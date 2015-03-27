@@ -5,16 +5,16 @@
         <div class="sep-top-3x sep-bottom-3x">
           <div class="container">
             <div class="section-title upper text-center light sep-top-md sep-bottom-md">
-              <h2 class="small-space">Referanslar</h2>
+              <h2 class="small-space">{{__('website.menu_showcase')}}</h2>
             </div>
             <div id="filters" class="button-group">
-              <button data-filter="*" class="button is-checked">Tümünü Göster</button>
-              <button data-filter=".retail" class="button">Perakende</button>
-              <button data-filter=".hr" class="button">İK</button>
-              <button data-filter=".education" class="button">Eğitim</button>
-              <button data-filter=".realestate" class="button">Gayrimenkul</button>
-              <button data-filter=".medicine" class="button">İlaç</button>
-              <button data-filter=".digitalpublishing" class="button">Dijital Yayıncılık</button>
+              <button data-filter="*" class="button is-checked">{{__('website.showcase_filters_all')}}</button>
+              <button data-filter=".retail" class="button">{{__('website.showcase_filters_retail')}}</button>
+              <button data-filter=".hr" class="button">{{__('website.showcase_filters_hr')}}</button>
+              <button data-filter=".education" class="button">{{__('website.showcase_filters_education')}}</button>
+              <button data-filter=".realestate" class="button">{{__('website.showcase_filters_realestate')}}</button>
+              <button data-filter=".medicine" class="button">{{__('website.showcase_filters_medicine')}}</button>
+              <button data-filter=".digitalpublishing" class="button">{{__('website.showcase_filters_digitalpublishing')}}</button>
             </div>
           </div>
         </div>

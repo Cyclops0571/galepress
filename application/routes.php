@@ -53,7 +53,7 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_galepress')->get($currentLanguage), array('as' => 'website_galepress_get', 'uses' => 'website@galepress'));
 	Route::get(__('route.website_products')->get($currentLanguage), array('as' => 'website_products_get', 'uses' => 'website@products'));
 	Route::get(__('route.website_advantages')->get($currentLanguage), array('as' => 'website_advantages_get', 'uses' => 'website@advantages'));
-	Route::get(__('route.website_customers')->get($currentLanguage), array('as' => 'website_customers_get', 'uses' => 'website@customers'));
+	Route::get(__('route.website_showcase')->get($currentLanguage), array('as' => 'website_showcase_get', 'uses' => 'website@customers'));
 	Route::get(__('route.website_tutorials')->get($currentLanguage), array('as' => 'website_tutorials_get', 'uses' => 'website@tutorials'));
 	Route::get(__('route.website_contact')->get($currentLanguage), array('as' => 'website_contact_get', 'uses' => 'website@contact'));
 	Route::get(__('route.website_sitemap')->get($currentLanguage), array('as' => 'website_sitemap_get', 'uses' => 'website@sitemap'));
@@ -71,9 +71,6 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.website_tryit')->get($currentLanguage), array('as' => 'website_tryit_post', 'uses' => 'website@tryit'));
 	Route::get(__('route.website_captcha')->get($currentLanguage), array('as' => 'website_captcha_get', 'uses' => 'website@captcha_iframe'));
 	Route::get(__('route.confirmemail')->get($currentLanguage), array('as' => 'common_confirmemail_get', 'uses' => 'common@confirmemail'));
-
-
-
 
 	Route::get(__('route.website_article_workflow')->get($currentLanguage), array('as' => 'website_article_workflow_get', 'uses' => 'website@article_workflow'));
 	Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));

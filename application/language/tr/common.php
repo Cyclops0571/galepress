@@ -417,7 +417,6 @@ return array(
 	'reports_columns_report1302' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "Sayfa", "Kullanıcı Sayısı", "Süre (Saniye)"),
 
 	'task_subject' => 'Galepress.com görevi esnasında hata oluştu',
-	'task_subject' => 'Galepress.com görevi durumu',
 	'task_status' => 'Galepress.com görevi durumu',
 	'task_message' => "".
 						"Sayın yetkili, \n\n".
@@ -461,6 +460,7 @@ return array(
 	'month_names' => array('', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'),
 	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">Kullanıcı izin vermedi</span>',
 
+	'confirm_email_title' => 'Hesabınızı Oluşturun',
 	'confirm_email_message' => "".
 							"Sayın :firstname :lastname, \n\n".
 							"Hesabınızı onaylamak için aşağıdaki linke tıklayabilirsiniz. Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n".
@@ -468,5 +468,5 @@ return array(
 							"Saygılarımızla, \n".
 							"Galepress",
 	'login_accounthasbeenconfirmed' => 'Hesabınız başarıyla onaylandı.',
-	'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!',
+	'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!'
 );
