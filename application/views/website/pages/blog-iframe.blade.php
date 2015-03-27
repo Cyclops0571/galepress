@@ -7,7 +7,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12" id="blog-frame">
-              <iframe src="http://www.galepress.com/blog/" id="blogIframe" scrolling="no" frameborder="0" style="width:100% !important; height:100% !important; overflow:hidden;"></iframe>
+              <iframe src="http://www.galepress.com/blog/" id="blogIframe" scrolling="no" frameborder="0" style="width:100% !important; height:100% !important; min-height:1200px; overflow:hidden;"></iframe>
             </div>
           </div>
         </div>
