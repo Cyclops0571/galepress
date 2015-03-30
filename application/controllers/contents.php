@@ -81,13 +81,17 @@ class Contents_Controller extends Base_Controller
 						'o.PublishDate, '.
 						'o.UnpublishDate, '.
 						'(CASE o.Blocked WHEN 1 THEN \''.__('common.contents_list_blocked1').'\' ELSE \''.__('common.contents_list_blocked0').'\' END) AS Blocked, '.
-						'(CASE o.Status WHEN 1 THEN \''.__('common.contents_list_status1').'\' ELSE \''.__('common.contents_list_status0').'\' END) AS Status, '.
+						'(CASE WHEN ('
+							. 'o.Status = 1 AND '
+							. '(o.PublishDate = \'0000-00-00 00:00:00\' OR o.PublishDate <= CURDATE()) AND '
+							. '(o.IsUnpublishActive = 0 OR o.UnpublishDate > CURDATE())) '
+							. 'THEN \''.__('common.contents_list_status1').'\' ' .
+						'ELSE \''.__('common.contents_list_status0').'\' END) AS Status, '.
 						'o.ContentID '.
 					'FROM `Customer` AS c '.
 						'INNER JOIN `Application` AS a ON a.CustomerID=c.CustomerID AND a.StatusID=1 '.
 						'INNER JOIN `Content` AS o ON o.ApplicationID=a.ApplicationID AND o.StatusID=1 '.
 					'WHERE c.StatusID=1';
-			
 			$rs = DB::table(DB::raw('('.$sql.') t'))
 				->where(function($query) use($currentUser, $applicationID, $search)
 				{
@@ -160,7 +164,6 @@ class Contents_Controller extends Base_Controller
 				->get();
 					
 			$rows = Paginator::make($results, $count, $rowcount);
-
 
 
 
