@@ -116,12 +116,18 @@
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
         }
 
-        $('.dropdown.languageChange ul li').click(function(e){
-
-            //$('.dropdown.languageChange a').attr('href',$(this).);
-            $('.dropdown.languageChange a img').attr('src',$(e.target).find('img').attr('src'));
-
-        })
+        $('.dropdown.languageChange ul li').click(function(event){
+            var target = $( event.target );
+            if(target.is('a')){
+                $('.dropdown.languageChange > a img').attr('src',$(event.target).find('img').attr('src'));
+                if("{{ Session::get('language') }}"=="tr"){
+                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
+                }
+                else{
+                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
+                }
+            }
+        });
 
         // if($('#blogIframe').length>0)
         // {
