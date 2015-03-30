@@ -153,3 +153,6 @@ define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
 define("APP_VER", 1);
+define("NORMAL_IMAGE_FILE", 1101);
+define("SMALL_IMAGE_FILE", 1102);
+define("PDF_FILE", 1001);

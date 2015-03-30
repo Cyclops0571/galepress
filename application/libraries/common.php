@@ -387,8 +387,9 @@ class Common {
 			$r->ApplicationID = $ApplicationID;
 			$r->ContentID = $ContentID;
 			$r->ContentFileID = $ContentFileID;
-			if ($ContentCoverImageFileID > 0)
+			if ($ContentCoverImageFileID > 0) {
 				$r->ContentCoverImageFileID = $ContentCoverImageFileID;
+			}
 			$r->RequestDate = new DateTime();
 			$r->IP = Request::ip(); //getenv("REMOTE_ADDR")
 			$r->DeviceType = $_SERVER['HTTP_USER_AGENT']; //Holmes::get_device();

@@ -632,7 +632,7 @@
 							<h2 class="header" style="text-align:center;">{{ __('common.contents_coverimage') }}</h2>
 						</div>
 						<div class="form-row" style="text-align:center;">
-							<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=1101&ContentID={{ $ContentID }}" width="200" />
+							<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}" width="200" />
 						</div>
 						<blockquote style="border-left:none; font-size:16px;">
 							<p class="reportSubtitle">{{ __('common.contents_tooltip_coverimage') }}</p>

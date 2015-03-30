@@ -69,11 +69,6 @@
         {{ HTML::script('js/jqplot/jqplot.dateAxisRenderer.min.js'); }}
         {{ HTML::script('js/jqplot/jqplot.categoryAxisRenderer.min.js'); }}
 
-        <!--
-        @if(URI::current() != __("route.reports")->get()."/101" && URI::current() != __("route.reports")->get()."/201" && URI::current() != __("route.reports")->get()."/301" && URI::current() != __("route.reports")->get()."/302" && URI::current() != __("route.reports")->get()."/1101" && URI::current() != __("route.reports")->get()."/1201" && URI::current() != __("route.reports")->get()."/1301" && URI::current() != __("route.reports")->get()."/1302")
-        <script type="text/javascript" src="https://galepress.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e/en_US-x8m41o-1988229788/6210/8/1.4.3/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=488f7392"></script>
-        @endif
-        -->
         <!-- Begin pngfix-->
         <!--[if lt IE 7]>
         {{ HTML::script('js/DD_belatedPNG_0.0.8a.js'); }}

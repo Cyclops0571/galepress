@@ -14,6 +14,7 @@ class Orders_Controller extends Base_Controller
 	
 	public function __construct()
 	{
+		parent::__construct();
 		$this->page = 'orders';
 		$this->route = __('route.'.$this->page);
 		$this->table = 'Order';

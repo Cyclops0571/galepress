@@ -14,6 +14,7 @@ class Customers_Controller extends Base_Controller
 	
 	public function __construct()
 	{
+		parent::__construct();
 		$this->page = 'customers';
 		$this->route = __('route.'.$this->page);
 		$this->table = 'Customer';

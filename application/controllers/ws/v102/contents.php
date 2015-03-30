@@ -1,6 +1,6 @@
 <?php
 
-class Ws_v100_Contents_Controller extends Base_Controller
+class Ws_v102_Contents_Controller extends Base_Controller
 {
 	public $restful = true;
 	
@@ -39,6 +39,8 @@ class Ws_v100_Contents_Controller extends Base_Controller
 				'ContentPrice' => $content->Price,
 				'ContentCurrency' => $content->Currency(1),
 				'ContentIdentifier' => $content->Identifier,
+				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),
+				'ContentOrientation' => (int)$content->Orientation,
 				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),
 				'ContentBlocked' => ((int)$content->Blocked == 1 ? true : false),
 				'ContentStatus' => ((int)$content->Status == 1 ? true : false),
@@ -53,13 +55,18 @@ class Ws_v100_Contents_Controller extends Base_Controller
 	{
 		return Ws::render(function() use ($contentID)
 		{
+
+			$height = (int)Input::get('height', '0');
+			$width = (int)Input::get('width', '0');
 			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? SMALL_IMAGE_FILE : NORMAL_IMAGE_FILE;
 			$content = Ws::getContent($contentID);
+			$urlPatern = "http://www.galepress.com/tr/icerikler/talep?H=%s&W=%s&RequestTypeID=%s&ContentID=%s";
+			$url = sprintf($urlPatern, $height, $width, $requestTypeID, (int)$content->ContentID);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
-				'Url' => "http://www.galepress.com/tr/icerikler/talep?RequestTypeID=".$requestTypeID."&ContentID=".(int)$content->ContentID
+				'Url' => $url
 			));
 		});
 	}

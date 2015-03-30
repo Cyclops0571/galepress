@@ -10,6 +10,7 @@ class Reports_Controller extends Base_Controller
 	
 	public function __construct()
 	{
+		parent::__construct();
 		$this->page = 'reports';
 		$this->route = __('route.'.$this->page);
 		$this->caption = __('common.reports_caption');

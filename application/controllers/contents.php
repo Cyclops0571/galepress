@@ -13,6 +13,7 @@ class Contents_Controller extends Base_Controller
 	
 	public function __construct()
 	{
+		parent::__construct();
 		$this->page = 'contents';
 		$this->route = __('route.'.$this->page);
 		$this->table = 'Content';
@@ -252,17 +253,7 @@ class Contents_Controller extends Base_Controller
 		//http://localhost/tr/icerikler/talep?RequestTypeID=203&ApplicationID=1&ContentID=1187&Password=
 		try
 		{
-			//Eski talep numaralari yenisiyle degistirildi!!!
-			if($RequestTypeID == 202)
-			{
-				$RequestTypeID == 1101;
-			}
-			else if($RequestTypeID == 203)
-			{
-				$RequestTypeID == 1001;
-			}
-			
-			if($RequestTypeID == 1001)
+			if($RequestTypeID == NORMAL_IMAGE_FILE)
 			{
 				//get file
 				$oCustomerID = 0;
@@ -274,7 +265,7 @@ class Contents_Controller extends Base_Controller
 				Common::getContentDetail($ContentID, $Password, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentFilePath, $oContentFileName);
 				Common::download($RequestTypeID, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, 0, $oContentFilePath, $oContentFileName);
 			}
-			else if($RequestTypeID == 1101)
+			else if($RequestTypeID == NORMAL_IMAGE_FILE)
 			{
 				//get cover image
 				$oCustomerID = 0;
@@ -290,7 +281,7 @@ class Contents_Controller extends Base_Controller
 				Common::getContentDetailWithCoverImage($ContentID, $Password, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentFilePath, $oContentFileName, $oContentCoverImageFileID, $oContentCoverImageFilePath, $oContentCoverImageFileName, $oContentCoverImageFileName2);
 				Common::download($RequestTypeID, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentCoverImageFileID, $oContentCoverImageFilePath, $oContentCoverImageFileName);
 			}
-			else if($RequestTypeID == 1102)
+			else if($RequestTypeID == SMALL_IMAGE_FILE)
 			{
 				//get mini cover image
 				$oCustomerID = 0;
