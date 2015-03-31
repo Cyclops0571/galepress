@@ -349,3 +349,7 @@ body{
 .upperNone{
   text-transform: none;
 }
+
+div.sectors a > img:hover{
+  background: url('/website/img/sectors/shadow.png') no-repeat center center;
+}
