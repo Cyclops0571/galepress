@@ -222,16 +222,17 @@ class Contents_Controller extends Base_Controller {
 	}
 
 	public function get_request() {
+		//"http://www.galepress.com/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
 		$RequestTypeID = (int) Input::get('RequestTypeID', 0);
 		$ContentID = (int) Input::get('ContentID', 0);
-		$ApplicationID = (int) Input::get('ApplicationID', 0);
-		$ApplicationToken = Input::get('ApplicationToken', '');
-		$DeviceToken = Input::get('DeviceToken', '');
 		$Password = Input::get('Password', '');
+		$Width = (int)Input::get('W', 0);
+		$Height = (int)Input::get('H', 0);
+				
 
 		//http://localhost/tr/icerikler/talep?RequestTypeID=203&ApplicationID=1&ContentID=1187&Password=
 		try {
-			if ($RequestTypeID == NORMAL_IMAGE_FILE) {
+			if ($RequestTypeID == PDF_FILE) {
 				//get file
 				$oCustomerID = 0;
 				$oApplicationID = 0;
@@ -241,36 +242,9 @@ class Contents_Controller extends Base_Controller {
 				$oContentFileName = '';
 				Common::getContentDetail($ContentID, $Password, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentFilePath, $oContentFileName);
 				Common::download($RequestTypeID, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, 0, $oContentFilePath, $oContentFileName);
-			} else if ($RequestTypeID == NORMAL_IMAGE_FILE) {
-				//get cover image
-				$oCustomerID = 0;
-				$oApplicationID = 0;
-				$oContentID = 0;
-				$oContentFileID = 0;
-				$oContentFilePath = '';
-				$oContentFileName = '';
-				$oContentCoverImageFileID = 0;
-				$oContentCoverImageFilePath = '';
-				$oContentCoverImageFileName = '';
-				$oContentCoverImageFileName2 = '';
-				Common::getContentDetailWithCoverImage($ContentID, $Password, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentFilePath, $oContentFileName, $oContentCoverImageFileID, $oContentCoverImageFilePath, $oContentCoverImageFileName, $oContentCoverImageFileName2);
-				Common::download($RequestTypeID, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentCoverImageFileID, $oContentCoverImageFilePath, $oContentCoverImageFileName);
-			} else if ($RequestTypeID == SMALL_IMAGE_FILE) {
-				//get mini cover image
-				$oCustomerID = 0;
-				$oApplicationID = 0;
-				$oContentID = 0;
-				$oContentFileID = 0;
-				$oContentFilePath = '';
-				$oContentFileName = '';
-				$oContentCoverImageFileID = 0;
-				$oContentCoverImageFilePath = '';
-				$oContentCoverImageFileName = '';
-				$oContentCoverImageFileName2 = '';
-				Common::getContentDetailWithCoverImage($ContentID, $Password, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentFilePath, $oContentFileName, $oContentCoverImageFileID, $oContentCoverImageFilePath, $oContentCoverImageFileName, $oContentCoverImageFileName2);
-				Common::download($RequestTypeID, $oCustomerID, $oApplicationID, $oContentID, $oContentFileID, $oContentCoverImageFileID, $oContentCoverImageFilePath, $oContentCoverImageFileName2);
 			} else {
-				throw new Exception('Not implemented', '102');
+				//get image
+				Common::downloadImage($ContentID, $RequestTypeID, $Width, $Height);
 			}
 		} catch (Exception $e) {
 			$r = '';
@@ -593,15 +567,11 @@ class Contents_Controller extends Base_Controller {
 						$targetRealPath = path('public') . $targetFilePath;
 						$targetFileNameFull = $targetRealPath . '/' . $targetFileName;
 
-						$targetMainFileName = $currentUser->UserID . '_' . date("YmdHis") . '_' . $sourceFileName . '_main.jpg';
-						$targetMainFilePath = $targetFilePath;
-						$targetMainRealPath = $targetRealPath;
-						$targetMainFileNameFull = $targetMainRealPath . '/' . $targetMainFileName;
+						$targetMainFileName = $targetFileName . '_main.jpg';
+						$targetMainFileNameFull = $targetRealPath . '/' . $targetFileName . '_main.jpg';
 
 						$targetThumbFileName = $targetFileName . '_thumb.jpg';
-						$targetThumbFilePath = $targetFilePath;
-						$targetThumbRealPath = $targetRealPath;
-						$targetThumbFileNameFull = $targetThumbRealPath . '/' . $targetThumbFileName;
+						$targetThumbFileNameFull = $targetRealPath . '/' . $targetFileName . '_thumb.jpg';
 
 						if (File::exists($sourceFileNameFull) && is_file($sourceFileNameFull)) {
 							if (!File::exists($targetRealPath)) {
@@ -609,51 +579,35 @@ class Contents_Controller extends Base_Controller {
 							}
 
 							File::move($sourceFileNameFull, $targetFileNameFull);
-							//------------------------------------------------------
-							$im = new imagick($targetFileNameFull);
-							$im->setImageFormat("jpg");
-							$width = 110;
-							$height = 157; //146
+							$pictureInfoSet = array();
+							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imagePath" => $targetThumbFileNameFull);
+							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imagePath" => $targetMainFileNameFull);
+							foreach($pictureInfoSet as $pictureInfo) {
+								$im = new imagick($targetFileNameFull);
+								$im->setImageFormat("jpg");
+								$width = $pictureInfo["width"];
+								$height = $pictureInfo["height"];
 
-							$geo = $im->getImageGeometry();
+								$geo = $im->getImageGeometry();
 
-							if (($geo['width'] / $width) < ($geo['height'] / $height)) {
-
-								$im->cropImage($geo['width'], floor($height * $geo['width'] / $width), 0, (($geo['height'] - ($height * $geo['width'] / $width)) / 2));
-							} else {
-								$im->cropImage(ceil($width * $geo['height'] / $height), $geo['height'], (($geo['width'] - ($width * $geo['height'] / $height)) / 2), 0);
+								if (($geo['width'] / $width) < ($geo['height'] / $height)) {
+									$im->cropImage($geo['width'], floor($height * $geo['width'] / $width), 0, (($geo['height'] - ($height * $geo['width'] / $width)) / 2));
+								} else {
+									$im->cropImage(ceil($width * $geo['height'] / $height), $geo['height'], (($geo['width'] - ($width * $geo['height'] / $height)) / 2), 0);
+								}
+								$im->ThumbnailImage($width, $height, true);
+								$im->writeImages($pictureInfo["imagePath"], true);
+								$im->clear();
+								$im->destroy();
+								unset($im);
 							}
-							$im->ThumbnailImage($width, $height, true);
-							$im->writeImages($targetThumbFileNameFull, true);
-							$im->clear();
-							$im->destroy();
-							unset($im);
-							//------------------------------------------------------
-							$im = new imagick($targetFileNameFull);
-							$im->setImageFormat("jpg");
-							//$width = 936;
-							//$height = 1334;
-							$width = 468;
-							$height = 667;
-
-							$geo = $im->getImageGeometry();
-
-							if (($geo['width'] / $width) < ($geo['height'] / $height)) {
-
-								$im->cropImage($geo['width'], floor($height * $geo['width'] / $width), 0, (($geo['height'] - ($height * $geo['width'] / $width)) / 2));
-							} else {
-								$im->cropImage(ceil($width * $geo['height'] / $height), $geo['height'], (($geo['width'] - ($width * $geo['height'] / $height)) / 2), 0);
-							}
-							$im->ThumbnailImage($width, $height, true);
-							$im->writeImages($targetMainFileNameFull, true);
-							$im->clear();
-							$im->destroy();
-							unset($im);
+							
 							//------------------------------------------------------
 							$c = new ContentCoverImageFile();
 							$c->ContentFileID = $contentFileID;
 							$c->DateAdded = new DateTime();
 							$c->FilePath = $targetFilePath;
+							$c->SourceFileName = $targetFileName;
 							$c->FileName = $targetMainFileName;
 							$c->FileName2 = $targetThumbFileName;
 							$c->FileSize = File::size($targetMainFileNameFull);

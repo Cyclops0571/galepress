@@ -60,7 +60,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 			$width = (int)Input::get('width', '0');
 			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? SMALL_IMAGE_FILE : NORMAL_IMAGE_FILE;
 			$content = Ws::getContent($contentID);
-			$urlPatern = "http://www.galepress.com/tr/icerikler/talep?H=%s&W=%s&RequestTypeID=%s&ContentID=%s";
+			$urlPatern = "http://www.galepress.com/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
 			$url = sprintf($urlPatern, $height, $width, $requestTypeID, (int)$content->ContentID);
 			return Response::json(array(
 				'status' => 0,

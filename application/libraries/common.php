@@ -279,7 +279,8 @@ class Common {
 		}
 	}
 
-	public static function getContentDetailWithCoverImage($ContentID, $Password, &$oCustomerID, &$oApplicationID, &$oContentID, &$oContentFileID, &$oContentFilePath, &$oContentFileName, &$oContentCoverImageFileID, &$oContentCoverImageFilePath, &$oContentCoverImageFileName, &$oContentCoverImageFileName2) {
+	public static function getContentDetailWithCoverImage(
+	$ContentID, &$oCustomerID, &$oApplicationID, &$oContentID, &$oContentFileID, &$oContentFilePath, &$oContentFileName, &$oContentCoverImageFileID, &$oContentCoverImageFilePath, &$oContentCoverImageFileName, &$oContentCoverImageFileName2) {
 		$oCustomerID = 0;
 		$oApplicationID = 0;
 		$oContentID = 0;
@@ -307,23 +308,6 @@ class Common {
 			$oCustomerID = (int) $c->CustomerID;
 			$oApplicationID = (int) $c->ApplicationID;
 			$oContentID = (int) $c->ContentID;
-			/*
-			  $IsProtected = (int)$c->IsProtected;
-			  if($IsProtected == 1)
-			  {
-			  $checkPass = DB::table('Content')
-			  ->where('ContentID', '=', $oContentID)
-			  ->where('StatusID', '=', eStatus::Active)
-			  ->first();
-			  if($checkPass)
-			  {
-			  if(!Hash::check($Password, $checkPass->Password))
-			  {
-			  throw new Exception(__('common.contents_wrongpassword'), "101");
-			  }
-			  }
-			  }
-			 */
 
 			$cf = DB::table('ContentFile')
 					->where('ContentID', '=', $oContentID)
@@ -370,12 +354,12 @@ class Common {
 		}
 	}
 
-	public static function download($RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
+	public static function download(
+		$RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
 		$file = path('public') . $filepath . '/' . $filename;
 
 		if (file_exists($file) && is_file($file)) {
 			$fileSize = File::size($file);
-
 			//throw new Exception($fileSize);
 
 			$dataTransferred = 0;
@@ -453,37 +437,146 @@ class Common {
 				$r->ProcessDate = new DateTime();
 				$r->ProcessTypeID = eProcessTypes::Update;
 				$r->save();
-
-				// sleep one second
-				//sleep(1);
 			}
-			/*
-			  $dataTransferred = ftell($fc);
-			  $percentage = ($dataTransferred * 100) / $fileSize;
-
-			  $r = Requestt::find($requestID);
-			  $r->DataTransferred = $dataTransferred;
-			  $r->Percentage = $percentage;
-			  $r->ProcessUserID = 0;
-			  $r->ProcessDate = new DateTime();
-			  $r->ProcessTypeID = eProcessTypes::Update;
-			  $r->save();
-			 */
 
 			// close file stream
 			fclose($fc);
-			/*
-			  $r = Requestt::find($requestID);
-			  $r->DataTransferred = $fileSize;
-			  $r->Percentage = 100;
-			  $r->ProcessUserID = 0;
-			  $r->ProcessDate = new DateTime();
-			  $r->ProcessTypeID = eProcessTypes::Update;
-			  $r->save();
-			 */
 		} else {
 			throw new Exception(__('common.file_notfound'), "102");
 		}
+	}
+
+	public static function downloadImage($ContentID, $RequestTypeID, $Width, $Height) {
+		$content = DB::table('Customer AS c')
+				->join('Application AS a', function($join) {
+					$join->on('a.CustomerID', '=', 'c.CustomerID');
+					$join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+				})
+				->join('Content AS o', function($join) use ($ContentID) {
+					$join->on('o.ContentID', '=', DB::raw($ContentID));
+					$join->on('o.ApplicationID', '=', 'a.ApplicationID');
+					$join->on('o.StatusID', '=', DB::raw(eStatus::Active));
+				})
+				->where('c.StatusID', '=', eStatus::Active)
+				->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
+		if(!$content) {
+			throw new Exception(__('common.list_norecord'), "102");
+		}
+		$contentFile = DB::table('ContentFile')
+				->where('ContentID', '=', $ContentID)
+				->where('StatusID', '=', eStatus::Active)
+				->order_by('ContentFileID', 'DESC')
+				->first();
+
+		if(!$contentFile) {
+			throw new Exception(__('common.list_norecord'), "102");
+		}
+		$contentCoverImageFile = DB::table('ContentCoverImageFile')
+				->where('ContentFileID', '=', $contentFile->ContentFileID)
+				->where('StatusID', '=', eStatus::Active)
+				->order_by('ContentCoverImageFileID', 'DESC')
+				->first();
+		if(!$contentCoverImageFile) {
+			throw new Exception(__('common.list_norecord'), "102");
+		}
+		
+		if($Width > 0 && $Height > 0) {
+			//image var mi kontrol edip yok ise olusturup, ismini set edelim;
+			$originalImage =  path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
+			$pathInfoOI = pathinfo($originalImage);
+			$fileName = $pathInfoOI["filename"] . "_" . $Width . "x" . $Height . ".jpg";
+			if(!is_file($pathInfoOI["dirname"] . "/" . $fileName)) {
+				//resize original image to new path and then save it.
+				if(!is_file($originalImage)) {
+					throw new Exception(__('common.file_notfound'), "102");
+				}
+				$im = new Imagick($originalImage);
+				$im->resizeImage($Width,$Height,Imagick::FILTER_LANCZOS,1, TRUE);
+				$im->writeImage($pathInfoOI["dirname"] . "/" . $fileName);
+				$im->destroy();
+			}
+		} else {
+			switch ($RequestTypeID) {
+				case SMALL_IMAGE_FILE:
+					$fileName = $contentCoverImageFile->FileName2;
+					break;
+				case NORMAL_IMAGE_FILE:
+					$fileName = $contentCoverImageFile->FileName2;
+					break;
+				default:
+					throw new Exception('Not implemented', '102');
+			}
+		}
+		
+		
+		$file = path('public') . $contentCoverImageFile->FilePath . '/' . $fileName;
+		if(!is_file($file)) {
+			throw new Exception(__('common.file_notfound'), "102");
+		}
+		$fileSize = File::size($file);
+		$dataTransferred = 0;
+		$percentage = 0;
+		$r = new Requestt();
+		$r->RequestTypeID = $RequestTypeID;
+		$r->CustomerID = (int) $content->CustomerID;
+		$r->ApplicationID = (int) $content->ApplicationID;
+		$r->ContentID = $ContentID;
+		$r->ContentFileID = (int) $contentFile->ContentFileID;
+		$r->ContentCoverImageFileID = $contentCoverImageFile->ContentCoverImageFileID;
+		$r->RequestDate = new DateTime();
+		$r->IP = Request::ip();
+		$r->DeviceType = $_SERVER['HTTP_USER_AGENT']; //Holmes::get_device();
+		$r->FileSize = $fileSize;
+		$r->DataTransferred = 0;
+		$r->Percentage = 0;
+		$r->StatusID = eStatus::Active;
+		$r->CreatorUserID = 0;
+		$r->DateCreated = new DateTime();
+		$r->ProcessUserID = 0;
+		$r->ProcessDate = new DateTime();
+		$r->ProcessTypeID = eProcessTypes::Insert;
+		$r->save();
+		
+		$requestID = $r->RequestID;
+
+		// set the download rate limit (=> 200,0 kb/s)
+		$download_rate = 200.0;
+
+		// send headers
+		ob_end_clean();
+		set_time_limit(0);
+		header("Cache-Control: no-store, no-cache, must-revalidate");
+		header("Cache-Control: post-check=0, pre-check=0", FALSE);
+		header("Pragma: no-cache");
+		header("Expires: " . GMDATE("D, d M Y H:i:s", MKTIME(DATE("H") + 2, DATE("i"), DATE("s"), DATE("m"), DATE("d"), DATE("Y"))) . " GMT");
+		header("Last-Modified: " . GMDATE("D, d M Y H:i:s") . " GMT");
+		header("Content-Type: application/octet-stream");
+		header("Content-Length: " . $fileSize);
+		header('Content-Disposition: inline; filename="' . str_replace(" ", "_", $fileName) . '"'); //dosya isminde bosluk varsa problem oluyor!!!
+		header("Content-Transfer-Encoding: binary\n");
+		// open file stream
+		$fc = fopen($file, "r");
+		while (!feof($fc) && connection_status() == 0) {
+			//echo fread($fc, round($download_rate * 1024));
+			print fread($fc, round($download_rate * 1024));
+
+			// flush the content to the browser
+			flush();
+
+			//$dataTransferred = $dataTransferred + round($download_rate * 1024);
+			//$dataTransferred = $dataTransferred + strlen($contents);
+			$dataTransferred = ftell($fc);
+			$percentage = ($dataTransferred * 100) / $fileSize;
+
+			$r = Requestt::find($requestID);
+			$r->DataTransferred = $dataTransferred;
+			$r->Percentage = $percentage;
+			$r->ProcessUserID = 0;
+			$r->ProcessDate = new DateTime();
+			$r->ProcessTypeID = eProcessTypes::Update;
+			$r->save();
+		}
+		fclose($fc);
 	}
 
 	/**
@@ -504,7 +597,7 @@ class Common {
 			});
 		}
 	}
-	
+
 	public static function sendStatusMail($msg) {
 		$toEmailSet = Config::get('custom.admin_email_set');
 		$subject = __('common.task_status');
