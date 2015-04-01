@@ -26,7 +26,6 @@
 <ul class="breadcrumbFilter">
 	<li>{{ HTML::link(__('route.home'), __('common.home')) }}</li>
     @if(isset($detailcaption))
-	<?php echo "zzzzz";	var_dump($route); exit; ?>
     <li>{{ HTML::link($route, $caption) }}</li> 
     <li class="active">{{ $detailcaption }}</li>
     @else 
