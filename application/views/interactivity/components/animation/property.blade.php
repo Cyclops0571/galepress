@@ -111,7 +111,7 @@ if(isset($Properties))
     	
         <div class="properties component-panel{{ ($fileSelected == 0 ? ' hide' : '') }}">
             <div class="file-header">
-                <h4>{{ $filename }}</h4>
+                <h4>{{ Str::limit($filename, 26) }}</h4>
                 <span>{{ $fileSize }}</span>
                 <a href="javascript:void(0);" class="delete" title="{{ __('interactivity.delete') }}"><i class="icon-remove"></i></a>
             </div>

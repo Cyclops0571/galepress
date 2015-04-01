@@ -762,10 +762,17 @@
 							
 							if(data.getValue("success") == "true")
 							{
+								var shortenFileName = "";
+								if(data.getValue("filename").length>26){
+									shortenFileName = data.getValue("filename").substring(0,26)+'...';
+								}
+								else {
+									shortenFileName = data.getValue("filename");
+								}
 								$("#prop-" + id + " div.upload").addClass("hide");
 								
 								$("#prop-" + id + " input#comp-" + id + "-filename").val(data.getValue("filename"));
-								$("#prop-" + id + " div.settings div.properties div.file-header h4").html(data.getValue("filename"));
+								$("#prop-" + id + " div.settings div.properties div.file-header h4").html(shortenFileName);
 								$("#prop-" + id + " div.settings div.properties div.file-header span").html((file.size / (1024 * 1024)).toFixed(1) + " MB");
 								$("#prop-" + id + " div.upload div.progress").addClass("hide");
 								$("#prop-" + id + " div.settings div.properties").removeClass("hide");
@@ -867,10 +874,17 @@
 						{
 							if(data.textStatus == 'success')
 							{
+								var shortenFileName = "";
+								if(data.result['comp-' + id + '-file'][0].name.length>26){
+									shortenFileName = data.result['comp-' + id + '-file'][0].name.substring(0,26)+'...';
+								}
+								else {
+									shortenFileName = data.result['comp-' + id + '-file'][0].name;
+								}
 								$("#prop-" + id + " div.upload").addClass("hide");
 								
 								$("#prop-" + id + " input#comp-" + id + "-filename").val(data.result['comp-' + id + '-file'][0].name);
-								$("#prop-" + id + " div.settings div.properties div.file-header h4").html(data.result['comp-' + id + '-file'][0].name);
+								$("#prop-" + id + " div.settings div.properties div.file-header h4").html(shortenFileName);
 								$("#prop-" + id + " div.settings div.properties div.file-header span").html((data.result['comp-' + id + '-file'][0].size / (1024 * 1024)).toFixed(1) + " MB");
 								$("#prop-" + id + " div.upload div.progress").addClass("hide");
 								$("#prop-" + id + " div.settings div.properties").removeClass("hide");
