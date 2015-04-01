@@ -179,7 +179,6 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Custom Helpers

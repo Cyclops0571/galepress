@@ -66,7 +66,6 @@ class Contents_Controller extends Base_Controller {
 					'a.ApplicationID, ' .
 					'a.Name AS ApplicationName, ' .
 					'o.Name, ' .
-					//'(CASE o.CategoryID WHEN 0 THEN \''.__('common.contents_category_list_general').'\' ELSE (SELECT Name FROM `Category` WHERE CategoryID=o.CategoryID) END) AS CategoryName, '.
 					'(' .
 					'CASE WHEN (SELECT COUNT(*) FROM `ContentCategory` WHERE ContentID = o.ContentID AND CategoryID = 0) > 0 ' .
 					'THEN CONCAT(\'' . __('common.contents_category_list_general') . ', \', ' . $sqlCat . ') ' .
@@ -95,25 +94,18 @@ class Contents_Controller extends Base_Controller {
 							}
 
 							if (strlen(trim($search)) > 0) {
-								$query->where('CustomerName', 'LIKE', '%' . $search . '%');
-								$query->or_where('ApplicationName', 'LIKE', '%' . $search . '%');
-								$query->or_where('Name', 'LIKE', '%' . $search . '%');
-								$query->or_where('Blocked', 'LIKE', '%' . $search . '%');
-								$query->or_where('Status', 'LIKE', '%' . $search . '%');
-								$query->or_where('ContentID', 'LIKE', '%' . $search . '%');
+								$query->where(function($q) use ($search) {
+									$q->where('CustomerName', 'LIKE', '%' . $search . '%');
+									$q->or_where('ApplicationName', 'LIKE', '%' . $search . '%');
+									$q->or_where('Blocked', 'LIKE', '%' . $search . '%');
+									$q->or_where('Status', 'LIKE', '%' . $search . '%');
+									$q->or_where('ContentID', 'LIKE', '%' . $search . '%');
+								});
 							}
 						} elseif ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
 							if (Common::CheckApplicationOwnership($applicationID)) {
 								if (strlen(trim($search)) > 0) {
 									$query->where('ApplicationID', '=', $applicationID);
-									/*
-									  $query->or_where('Name', 'LIKE', '%'.$search.'%');
-									  $query->or_where('CategoryName', 'LIKE', '%'.$search.'%');
-									  $query->or_where('PublishDate', 'LIKE', '%'.$search.'%');
-									  $query->or_where('Blocked', 'LIKE', '%'.$search.'%');
-									  $query->or_where('Status', 'LIKE', '%'.$search.'%');
-									  $query->or_where('ContentID', 'LIKE', '%'.$search.'%');
-									 */
 									$query->where(function($q) use ($search) {
 										$q->where('Name', 'LIKE', '%' . $search . '%');
 										$q->or_where('CategoryName', 'LIKE', '%' . $search . '%');
@@ -131,26 +123,23 @@ class Contents_Controller extends Base_Controller {
 						}
 					})
 					->order_by($sort, $sort_dir);
-
 			if ($option == 1) {
 				$data = array(
 					'rows' => $rs->get()
 				);
 				return View::make('pages.' . Str::lower($this->table) . 'optionlist', $data);
 			}
-
+			
 			$count = $rs->count();
 			$results = $rs
 					->for_page($p, $rowcount)
 					->get();
 
+
 			$rows = Paginator::make($results, $count, $rowcount);
-
-
-
+			
 
 			/* START SQL FOR TEMPLATE-CHOOSER */
-
 			$sqlTemlateChooser = '' .
 					'SELECT ' .
 					'a.Name AS ApplicationName, ' .
@@ -168,7 +157,10 @@ class Contents_Controller extends Base_Controller {
 					'WHERE a.ApplicationID=' . $applicationID;
 
 			$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-
+			if(empty($templateResults)) {
+				$templateResults[0] = (object)array("FilePath" => "", "FileName" => "", "ApplicationName" => "", "ContentID" => NULL);
+			}
+			
 			//dd($templateResults);
 			/* END SQL FOR TEMPLATE-CHOOSER */
 
@@ -212,12 +204,15 @@ class Contents_Controller extends Base_Controller {
 									->nest('commandbar', 'sections.commandbar', $data);
 				}
 			}
-			return View::make('pages.' . Str::lower($this->table) . 'list', $data)
+			
+			return $html = View::make('pages.' . Str::lower($this->table) . 'list', $data)
 							->nest('filterbar', 'sections.filterbar', $data)
 							->nest('commandbar', 'sections.commandbar', $data);
+			
 		} catch (Exception $e) {
-			//throw new Exception($e->getMessage());
-			return Redirect::to(__('route.home'));
+			echo "burasi"; exit;
+			throw new Exception($e->getMessage());
+			//return Redirect::to(__('route.home'));
 		}
 	}
 

@@ -1,6 +1,12 @@
 @layout('layouts.master')
 
 @section('content')
+<?php 
+$appLink = (int)Input::get('applicationID', 0) > 0 ? '&applicationID='.Input::get('applicationID', 0) : '';
+$searchLink = '&search='.$search;
+$sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
+	?>
+
     <!--<form id="list">--> 
     <div class="col-md-12">
         <div class="block bg-light-ltr" >
@@ -13,16 +19,20 @@
                         <table id="DataTables_Table_1" cellpadding="0" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
-									@foreach($fields as $field)
-										<th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('applicationID', 0) > 0 ? '&applicationID='.Input::get('applicationID', 0) : '').'&search='.$search.'&sort='.$field[1].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $field[0], ($sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
-									@endforeach
+									<?php foreach($fields as $field): ?>
+									<?php $sortLink = '&sort='.$field[1]; ?>
+									<?php $sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array(); ?>
+										<th scope="col">{{ HTML::link($route.'?page=1'. $appLink  . $searchLink . $sortLink . $sortDirLink, $field[0], $sort) }}</th>
+									<?php endforeach; ?>
                                 </tr>
                             </thead>
                             <tfoot class="hidden">
                                 <tr>
-									@foreach($fields as $field)
-										<th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('applicationID', 0) > 0 ? '&applicationID='.Input::get('applicationID', 0) : '').'&search='.$search.'&sort='.$field[1].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $field[0], ($sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
-									@endforeach
+									<?php foreach($fields as $field): ?>
+										<?php $sortLink = '&sort='.$field[1]; ?>
+										<?php $sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array(); ?>
+										<th scope="col">{{ HTML::link($route.'?page=1'. $appLink . $searchLink . $sortLink . $sortDirLink, $field[0], $sort) }}</th>
+									<?php endforeach; ?>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -30,7 +40,11 @@
                                     @if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
                                         <tr class="{{ HTML::oddeven($page) }}">
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->CustomerName) }}</td>
-
+                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->ApplicationName) }}</td>
+                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
+											<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Blocked) }}</td>
+                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->Status) }}</td>
+                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->ContentID) }}</td>
                                         </tr>
                                     @elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
                                         <tr class="{{ HTML::oddeven($page) }}">

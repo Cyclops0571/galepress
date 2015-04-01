@@ -19,7 +19,9 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-		echo '1111111111';
+		$path_info = pathinfo('/foo/bar/baz.bill');
+		var_dump($path_info);
+		exit;
 		$token = Token::where('ApplicationID', '=', '96')
 						->where('UDID', '=', '1bb7a359cc0b62d5')
 //						->where('UDID', '=', $UDID)

@@ -40,6 +40,11 @@ function dd($value)
 	die;
 }
 
+function dj($value) {
+	echo json_encode($value);
+	die;
+}
+
 /**
  * Get an item from an array using "dot" notation.
  *
