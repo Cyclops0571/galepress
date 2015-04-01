@@ -57,12 +57,11 @@ else : // HTTP Request ?>
   </head>
   <body>
     <p>
-    <?php
-      if ( $success == 'success') :
-        echo "<p>Thanks for sending your message! We'll get back to you shortly.</p>";
-      else :
-        echo "<p>There was a problem sending your message. Please try again.</p>";
-      endif;
+    <?php if ( $success == 'success') : ?>
+      <p>Thanks for sending your message! We'll get back to you shortly.</p>
+      <?php else : ?>
+        <p>There was a problem sending your message. Please try again.</p>
+      <?php endif; ?>
     ?>
     </p>
     <p>Click your browser's Back button to return to the page.</p>

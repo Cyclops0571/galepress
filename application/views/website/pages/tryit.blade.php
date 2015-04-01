@@ -241,7 +241,7 @@
       $scope.submitForm = function() {
         $http({
         method : 'POST',
-        url : "{{__('website.website_tryit')}}",
+        url : "{{__('route.website_tryit')}}",
         data : param($scope.formData), // pass in data as strings
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' } // set the headers so angular passing info as form data (not request payload)
       })
@@ -272,6 +272,20 @@
               //alert("Mail adresinize iletilen linke tıklayarak hesabınızı aktifleştiriniz.");
             },750);
             alert("{{__('website.tryit_form_message_mail')}}");
+
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+              var fbds = document.createElement('script');
+              fbds.async = true;
+              fbds.src = '//connect.facebook.net/en_US/fbds.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(fbds, s);
+              _fbq.loaded = true;
+            }
+
+            window._fbq = window._fbq || [];
+            window._fbq.push(['track', '6022106543310', {'value':'0.00','currency':'USD'}]);
+
           }
         });
       };
