@@ -77,7 +77,7 @@ class Contents_Controller extends Base_Controller {
 					'(CASE o.Blocked WHEN 1 THEN \'' . __('common.contents_list_blocked1') . '\' ELSE \'' . __('common.contents_list_blocked0') . '\' END) AS Blocked, ' .
 					'(CASE WHEN ('
 					. 'o.Status = 1 AND '
-					. '(o.PublishDate = \'0000-00-00 00:00:00\' OR o.PublishDate <= CURDATE()) AND '
+					. '(o.PublishDate <= CURDATE()) AND '
 					. '(o.IsUnpublishActive = 0 OR o.UnpublishDate > CURDATE())) '
 					. 'THEN \'' . __('common.contents_list_status1') . '\' ' .
 					'ELSE \'' . __('common.contents_list_status0') . '\' END) AS Status, ' .
@@ -157,9 +157,6 @@ class Contents_Controller extends Base_Controller {
 					'WHERE a.ApplicationID=' . $applicationID;
 
 			$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-			if(empty($templateResults)) {
-				$templateResults[0] = (object)array("FilePath" => "", "FileName" => "", "ApplicationName" => "", "ContentID" => NULL);
-			}
 			
 			//dd($templateResults);
 			/* END SQL FOR TEMPLATE-CHOOSER */
@@ -210,9 +207,8 @@ class Contents_Controller extends Base_Controller {
 							->nest('commandbar', 'sections.commandbar', $data);
 			
 		} catch (Exception $e) {
-			echo "burasi"; exit;
-			throw new Exception($e->getMessage());
-			//return Redirect::to(__('route.home'));
+//			throw new Exception($e->getMessage());
+			return Redirect::to(__('route.home'));
 		}
 	}
 
