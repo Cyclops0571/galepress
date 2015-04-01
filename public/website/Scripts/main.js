@@ -858,13 +858,14 @@ $(document).ready(function() {
     if (!Ottavio.isMobile.iOS()) {
         new WOW().init();
     }
-    $( ".sectors" ).hover(
-      function() {
-        $(this).find('img').before("<img src='/website/img/sectors/shadow.png' class='sectorsImgShadow'>");
-      }, function() {
-        $(this).find('img.sectorsImgShadow').remove();
-      }
-    );
+    
+    // $( ".sectors" ).hover(
+    //   function() {
+    //     $(this).find('img').before("<img src='/website/img/sectors/shadow.png' class='sectorsImgShadow'>");
+    //   }, function() {
+    //     $(this).find('img.sectorsImgShadow').remove();
+    //   }
+    // );
 
     $('body').on('click', function(e) {
         if(e.target.id=="videoSlide"){
