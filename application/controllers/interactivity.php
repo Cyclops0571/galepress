@@ -15,16 +15,9 @@ class Interactivity_Controller extends Base_Controller {
 		if ($c > 0) {
 			$ids = Input::get('compid');
 			if ($ids !== null) {
-				/*
-				  $data = array(
-				  'preview' => true,
-				  'baseDirectory' => 'http://www.galepress.com/files/components/'.$componentName.'/',
-				  'id' => ''
-				  );
-				 */
 				$data = array(
 					'preview' => true,
-					'baseDirectory' => 'http://' . $_SERVER['HTTP_HOST'] . '/files/components/' . $componentName . '/',
+					'baseDirectory' => Config::get("custom.url") . '/files/components/' . $componentName . '/',
 					'id' => ''
 				);
 

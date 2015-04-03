@@ -43,8 +43,8 @@ Route::get('(:any)/(:any)', array('do' => function(){
 
 
 Route::get('/', function() { return View::make('website.pages.home'); });
-Route::get("mytest", "test@index");
-Route::get("mytest/(:any)", "test@index");
+Route::get("test", "test@index");
+Route::get("test/image", "test@image");
 $languages = Config::get('application.languages', array());
 
 foreach($languages as $currentLanguage) {
