@@ -71,6 +71,7 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.website_tryit')->get($currentLanguage), array('as' => 'website_tryit_post', 'uses' => 'website@tryit'));
 	Route::get(__('route.website_captcha')->get($currentLanguage), array('as' => 'website_captcha_get', 'uses' => 'website@captcha_iframe'));
 	Route::get(__('route.confirmemail')->get($currentLanguage), array('as' => 'common_confirmemail_get', 'uses' => 'common@confirmemail'));
+	Route::get(__('appcreatewithface')->get($currentLanguage), array('as' => 'appcreatewithface', 'uses' => 'website@app_create_face'));
 
 	Route::get(__('route.website_article_workflow')->get($currentLanguage), array('as' => 'website_article_workflow_get', 'uses' => 'website@article_workflow'));
 	Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));

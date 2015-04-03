@@ -326,4 +326,8 @@ class Website_Controller extends Base_Controller
 		}
 		
 	}
+	public function get_app_create_face()
+	{
+		return View::make('website.pages.appcreatewithface');
+	}
 }
