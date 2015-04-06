@@ -107,7 +107,10 @@ return array(
 	'website_sectors_medicine' => 'cozumler-ilac',
 	'website_sectors_digitalpublishing' => 'cozumler-dijital-yayincilik',
 	'website_tryit' => 'deneyin',
+	'website_tryit_test' => 'deneyin-test',
 	'website_captcha' => 'mecaptcha',
 	'website_why_galepress' => 'nasil-calisir',
-	'confirmemail' => 'hesabi-onayla'
+	'confirmemail' => 'hesabi-onayla',
+
+	'website_appcreatewithface' => 'appcreatewithface'
 );
