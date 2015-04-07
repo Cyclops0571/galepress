@@ -41,7 +41,7 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
                                         <tr class="{{ HTML::oddeven($page) }}">
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->CustomerName) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->ApplicationName) }}</td>
-                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
+                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 											<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Blocked) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->Status) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->ContentID) }}</td>

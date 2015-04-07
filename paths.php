@@ -156,3 +156,4 @@ define("APP_VER", 3);
 define("NORMAL_IMAGE_FILE", 1101);
 define("SMALL_IMAGE_FILE", 1102);
 define("PDF_FILE", 1001);
+define("CROPPED_IMAGE_NAME", "cropped_image");

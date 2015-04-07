@@ -312,3 +312,6 @@ margin-left: 20px;
   z-index: 99;
 }
 /*END JQUERY UPLOAD*/
+
+.qualitySufficient{ background: url("/images/true-false.png") no-repeat 0 0; width: 26px; height: 26px; float: left;}
+.qualityInsufficient{ background: url("/images/true-false.png") no-repeat -28px 0; width: 26px; height: 26px; float: left;}
