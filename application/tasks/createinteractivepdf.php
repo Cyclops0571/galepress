@@ -164,36 +164,37 @@ class CreateInteractivePDF_Task {
 								->order_by('PageComponentPropertyID', 'ASC')
 								->get();
 						foreach ($pcp as $cp) {
-							if ($cp->Name == 'trigger-x')
+							if ($cp->Name == 'trigger-x') {
 								$trigger_x = (int) $cp->Value;
-							elseif ($cp->Name == 'trigger-y')
+							} elseif ($cp->Name == 'trigger-y') {
 								$trigger_y = (int) $cp->Value;
-							elseif ($cp->Name == 'x')
+							} elseif ($cp->Name == 'x') {
 								$x = (int) $cp->Value;
-							elseif ($cp->Name == 'y')
+							} elseif ($cp->Name == 'y') {
 								$y = (int) $cp->Value;
-							elseif ($cp->Name == 'w')
+							} elseif ($cp->Name == 'w') {
 								$w = (int) $cp->Value;
-							elseif ($cp->Name == 'h')
+							} elseif ($cp->Name == 'h') {
 								$h = (int) $cp->Value;
-							elseif ($cp->Name == 'import')
+							} elseif ($cp->Name == 'import') {
 								$propertyImport = (int) $cp->Value;
-							elseif ($cp->Name == 'modal')
+							} elseif ($cp->Name == 'modal') {
 								$propertyModal = (int) $cp->Value;
-							elseif ($cp->Name == 'type')
+							} elseif ($cp->Name == 'type') {
 								$propertyType = (int) $cp->Value;
-							elseif ($cp->Name == 'url')
+							} elseif ($cp->Name == 'url') {
 								$propertyUrl = $cp->Value;
-							elseif ($cp->Name == 'page')
+							} elseif ($cp->Name == 'page') {
 								$propertyPage = (int) $cp->Value;
-							elseif ($cp->Name == 'text')
+							} elseif ($cp->Name == 'text') {
 								$propertyText = $cp->Value;
-							elseif ($cp->Name == 'lat')
+							} elseif ($cp->Name == 'lat') {
 								$propertyLat = $cp->Value;
-							elseif ($cp->Name == 'lon')
+							} elseif ($cp->Name == 'lon') {
 								$propertyLon = $cp->Value;
-							elseif ($cp->Name == 'zoom')
+							} elseif ($cp->Name == 'zoom') {
 								$propertyZoom = (float) $cp->Value;
+							}
 
 
 							/*
