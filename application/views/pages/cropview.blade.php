@@ -94,14 +94,7 @@ if (FALSE) {
 					<input type="hidden" id="widthSet<?php echo $i ?>" name="widthSet[]" />
 					<input type="hidden" id="heightSet<?php echo $i ?>" name="heightSet[]" />
 					<div class="col-md-6">
-						<button class="btn bmy-btn-success btn-block" id="button<?php echo $i ?>"
-								onclick="setSelection([0, 0, '<?php echo $cropImageWidth ?>',
-	                                        '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>',
-	                                            '<?php echo $i ?>', '<?php echo $crop->Width ?>');
-	                                    this.blur();" 
-								>
-									<?php echo $crop->Description; ?>
-						</button>
+					</div>
 
 						<script type="text/javascript">
 							 $(function () { 
@@ -111,7 +104,6 @@ if (FALSE) {
 								 }, 300);
 							});
 						</script>
-					</div>
 					<div class="col-md-2">
 						<div id="quality<?php echo $i ?>" class=""></div>
 					</div>
