@@ -58,6 +58,42 @@ class Eloquent extends Driver {
 		return false;
 	}
 
+	public function facebookAttempt($arguments = array())
+	{
+
+		$user = $this->model()->where(function($query) use($arguments)
+		{
+
+			$username = Config::get('auth.username');
+			$fbemail = Config::get('auth.fbemail');
+			
+			$query->where($username, '=', $arguments['username']);
+			$query->where($fbemail, '=', $arguments['fbemail']);
+
+			// $query->where($username->FbEmail, '=', $arguments['fbemail']);
+			// $query->where($username->FbEmail, '=', $arguments['username']);
+
+			foreach(array_except($arguments, array('username', 'fbemail')) as $column => $val)
+			{
+			    $query->where($column, '=', $val);
+			}
+		})->first();
+
+		// If the credentials match what is in the database we will just
+		// log the user into the application and remember them if asked.
+
+
+		// $password = $arguments['password'];
+		// $password_field = Config::get('auth.password', 'password');
+
+		if ( ! is_null($user))
+		{
+			return $this->login($user->get_key(), array_get($arguments, 'remember'));
+		}
+
+		return false;
+	}
+
 	/**
 	 * Get a fresh model instance.
 	 *

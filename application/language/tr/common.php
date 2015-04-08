@@ -464,5 +464,11 @@ return array(
 							"Saygılarımızla, \n".
 							"Galepress",
 	'login_accounthasbeenconfirmed' => 'Hesabınız başarıyla onaylandı.',
-	'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!'
+	'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!',
+
+	'login_facebook' => 'Facebook ile Oturum Aç',
+	'signup_facebook_title' => 'Facebook hesabınız ile hemen bir uygulama oluşturabilirsiniz!',
+	'signup_facebook' => 'Facebook ile Uygulama Oluştur',
+	'or' => 'veya',
+	'thanku' => 'Teşekkürler',
 );

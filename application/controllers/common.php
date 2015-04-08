@@ -528,4 +528,168 @@ class Common_Controller extends Base_Controller
 			return "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.detailpage_validation'));
 		}
 	}
+
+	public function post_facebookAttempt()
+	{
+		$facebookData = Input::get('formData', '');
+		$faceUserObj = json_decode($facebookData);
+		$accessToken = Input::get('accessToken', '');
+
+
+		$userEmailControl = DB::table('User')
+				->where('Email', '=', $faceUserObj->email)
+				->where('StatusID', '=', eStatus::Active)
+				->first();
+
+		if($userEmailControl){
+
+			$s = User::find($userEmailControl->UserID);
+				$s->FbUsername = $faceUserObj->id;
+				$s->FbEmail = $faceUserObj->email;
+				$s->FbAccessToken = $accessToken;
+				$s->PWRecoveryDate = new DateTime();
+				$s->ProcessUserID = $userEmailControl->UserID;
+				$s->ProcessDate = new DateTime();
+				$s->ProcessTypeID = eProcessTypes::Update;
+				$s->save();
+		}
+
+		$user = DB::table('User')
+				->where('FbUsername', '=', $faceUserObj->id)
+				// ->where('FbEmail', '=', $faceUserObj->email)
+				//->where('Password', '=', Hash::make($password))
+				->where('StatusID', '=', eStatus::Active)
+				->first();
+
+		if(!$user){
+
+			$lastCustomerNo = DB::table('Customer')
+					->order_by('CustomerID', 'DESC')
+					->take(1)
+					->only('CustomerNo');
+		
+			preg_match('!\d+!', $lastCustomerNo, $matches);
+			$matches=intval($matches[0]);
+			$matches++;
+			$data['success'] = true;
+
+			$today = new DateTime();
+			$todayAddWeek = Date("Y-m-d", strtotime("+7 days"));
+
+			$s = new Customer();
+			$s->CustomerNo = "m0".$matches;
+			$s->CustomerName = $faceUserObj->first_name." ".$faceUserObj->last_name;
+			$s->Email = $faceUserObj->email;
+			$s->StatusID = eStatus::Active;
+			$s->CreatorUserID = -1;
+			$s->DateCreated = new DateTime();
+			$s->ProcessUserID = -1;
+			$s->ProcessDate = new DateTime();
+			$s->ProcessTypeID = eProcessTypes::Insert;
+			$s->save();
+
+			$lastCustomerID = DB::table('Customer')
+				->order_by('CustomerID', 'DESC')
+				->take(1)
+				->only('CustomerID');
+
+
+			$s = new Application();
+			$s->CustomerID = $lastCustomerID;
+			$s->Name = $faceUserObj->first_name.$faceUserObj->last_name;
+			$s->StartDate = $today;
+			$s->ExpirationDate = $todayAddWeek;
+			$s->ApplicationStatusID = 151;
+			$s->PackageID = 5;
+			$s->Blocked = 0;
+			$s->Status = 1;
+			$s->Version = 1;
+			$s->StatusID = eStatus::Active;
+			$s->CreatorUserID = -1;
+			$s->DateCreated = new DateTime();
+			$s->ProcessUserID = -1;
+			$s->ProcessDate = new DateTime();
+			$s->ProcessTypeID = eProcessTypes::Insert;
+			$s->save();
+
+			$s = new User();
+			
+			$s->UserTypeID = 111;
+			$s->CustomerID = $lastCustomerID;
+			$s->Username = $faceUserObj->id;
+			$s->FbUsername = $faceUserObj->id;
+			//$s->Password = Hash::make("TestPassword");
+			$s->FirstName = $faceUserObj->first_name;
+			$s->LastName = $faceUserObj->last_name;
+			$s->Email = $faceUserObj->email;
+			$s->FbEmail = $faceUserObj->email;
+			$s->FbAccessToken = $accessToken;
+			$s->StatusID = eStatus::Active;
+			$s->CreatorUserID = -1;
+			$s->DateCreated = new DateTime();
+			$s->ProcessUserID = -1;
+			$s->ProcessDate = new DateTime();
+			$s->ProcessTypeID = eProcessTypes::Insert;
+			//$s->ConfirmCode = $confirmCode;
+			$s->save();
+
+			$user = DB::table('User')
+					->where('Username', '=', $faceUserObj->id)
+					->where('FbEmail', '=', $faceUserObj->email)
+					//->where('Password', '=', Hash::make($password))
+					->where('StatusID', '=', eStatus::Active)
+					->first();
+			//var_dump(Hash::check(NULL, $user->Password));
+			if(Auth::facebookAttempt(array('username' => $user->Username, 'fbemail' => $user->FbEmail, 'StatusID' => eStatus::Active)))
+			{
+			
+				$user = Auth::User();
+				$s = new Sessionn;
+				$s->UserID = $user->UserID;
+				$s->IP = Request::ip(); //getenv("REMOTE_ADDR");
+				$s->Session = Session::instance()->session['id'];
+				$s->LoginDate = new DateTime();
+				$s->StatusID = eStatus::Active;
+				$s->CreatorUserID = $user->UserID;
+				$s->DateCreated = new DateTime();
+				$s->ProcessUserID = $user->UserID;
+				$s->ProcessDate = new DateTime();
+				$s->ProcessTypeID = eProcessTypes::Insert;
+				$s->save();
+				
+				Cookie::forever('DSCATALOG_USERNAME', $user->Username);
+							
+				setcookie("loggedin", "true", time() + 3600, "/");
+
+				return "success=".base64_encode("true")."&msg=".base64_encode(__('common.login_success_redirect'));
+			}
+
+		}
+		else {
+
+			if(Auth::facebookAttempt(array('username' => $user->Username, 'fbemail' => $user->FbEmail, 'StatusID' => eStatus::Active)))
+			{
+			
+				$user = Auth::User();
+				$s = new Sessionn;
+				$s->UserID = $user->UserID;
+				$s->IP = Request::ip(); //getenv("REMOTE_ADDR");
+				$s->Session = Session::instance()->session['id'];
+				$s->LoginDate = new DateTime();
+				$s->StatusID = eStatus::Active;
+				$s->CreatorUserID = $user->UserID;
+				$s->DateCreated = new DateTime();
+				$s->ProcessUserID = $user->UserID;
+				$s->ProcessDate = new DateTime();
+				$s->ProcessTypeID = eProcessTypes::Insert;
+				$s->save();
+				
+				Cookie::forever('DSCATALOG_USERNAME', '');
+							
+				setcookie("loggedin", "true", time() + 3600, "/");
+
+				return "success=".base64_encode("true")."&msg=".base64_encode(__('common.login_success_redirect'));
+			}
+		}
+	}
 }

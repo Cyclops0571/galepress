@@ -459,4 +459,11 @@ return array(
 
 	'month_names' => array('', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'),	
 	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">Benutzer war es nicht möglich</span>',
+
+	'login_facebook' => 'Verbinden mit Facebook',
+	'signup_facebook_title' => 'Sie können eine Anwendung schnell erstellen mit Ihrem Facebook!',
+	'signup_facebook' => 'Registrieren mit Facebook',
+	'or' => 'oder',
+	'thanku' => 'Danke shon',
+
 );

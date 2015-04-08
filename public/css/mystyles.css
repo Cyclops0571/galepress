@@ -315,3 +315,13 @@ margin-left: 20px;
 
 .qualitySufficient{ background: url("/images/true-false.png") no-repeat 0 0; width: 26px; height: 26px; float: left;}
 .qualityInsufficient{ background: url("/images/true-false.png") no-repeat -28px 0; width: 26px; height: 26px; float: left;}
+
+.noTouch{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+}

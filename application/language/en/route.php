@@ -95,9 +95,6 @@ return array(
 	'website_sitemap' => 'sitemap',
 	'website_search' => 'search',
 	'website_blog' => 'blog',
-	'website_article_workflow' => 'blog/article-work-flow',
-	'website_article_brandvalue' => 'blog/article-brand-value',
-	'website_article_whymobile' => 'blog/article-why-mobile',
 	'website_sectors' => 'solutions',
 	'website_showcase' => 'showcase',
 	'website_sectors_retail' => 'solutions-retail',
@@ -112,4 +109,6 @@ return array(
 	'confirmemail' => 'confirm-account',
 	
 	'crop_image' => 'crop/image',
+
+	'facebook_attempt' => 'login-facebook',
 );

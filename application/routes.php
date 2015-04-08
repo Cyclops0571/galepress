@@ -71,8 +71,7 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_why_galepress')->get($currentLanguage), array('as' => 'website_why_galepress_get', 'uses' => 'website@why_galepress'));
 	Route::get(__('route.website_tryit')->get($currentLanguage), array('as' => 'website_tryit_get', 'uses' => 'website@tryit'));
 	Route::post(__('route.website_tryit')->get($currentLanguage), array('as' => 'website_tryit_post', 'uses' => 'website@tryit'));
-	Route::get(__('route.website_tryit_test')->get($currentLanguage), array('as' => 'website_tryit_test_get', 'uses' => 'website@tryit_test'));
-	Route::post(__('route.website_tryit_test')->get($currentLanguage), array('as' => 'website_tryit_test_post', 'uses' => 'website@tryit_test'));
+	Route::post(__('route.facebook_attempt')->get($currentLanguage), array('as' => 'website_facebook_attempt_post', 'uses' => 'common@facebookAttempt'));
 	Route::get(__('route.website_captcha')->get($currentLanguage), array('as' => 'website_captcha_get', 'uses' => 'website@captcha_iframe'));
 	// </editor-fold>
 

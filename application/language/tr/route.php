@@ -95,9 +95,6 @@ return array(
 	'website_sitemap' => 'site-haritasi',
 	'website_search' => 'arama',
 	'website_blog' => 'blog',
-	'website_article_workflow' => 'blog/makale-is-akisi',
-	'website_article_brandvalue' => 'blog/makale-marka-degeri',
-	'website_article_whymobile' => 'blog/makale-neden-mobil',
 	'website_sectors' => 'cozumler',
 	'website_showcase' => 'referanslar',
 	'website_sectors_retail' => 'cozumler-perakende',
@@ -107,12 +104,11 @@ return array(
 	'website_sectors_medicine' => 'cozumler-ilac',
 	'website_sectors_digitalpublishing' => 'cozumler-dijital-yayincilik',
 	'website_tryit' => 'deneyin',
-	'website_tryit_test' => 'deneyin-test',
 	'website_captcha' => 'mecaptcha',
 	'website_why_galepress' => 'nasil-calisir',
 	'confirmemail' => 'hesabi-onayla',
-
-	'website_appcreatewithface' => 'appcreatewithface',
 	
 	'crop_image' => 'crop/image',
+
+	'facebook_attempt' => 'giris-facebook',
 );

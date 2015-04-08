@@ -4,62 +4,125 @@
 
 <style type="text/css">
 
-.centered-form{
-  margin-top: 60px;
-}
-.centered-form .panel{
-  /*background: rgba(255, 255, 255, 0.8);
-  box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;*/
-  background: transparent;
-}
-.btn-info{
-  background-color: #608FE0;
-  border-color: black;
-}
-.tryit-form .reset {
-  background-color: transparent;
-}
-.tryit-form .panel-transparent-row{
-  background: transparent;
-  height: 10px;
-}
-.tryit-form .panel-heading{
-  background-color: rgba(222,222,222,0.80);
-}
-.tryit-form .panel-footing{
-  background-color: rgba(222,222,222,0.80);
-}
-.tryit-form .panel-body{
-  background-color: rgba(222,222,222,0.80);
-}
-.tryit-form .panel-title{
-  font-size: 25px;
-  text-align: center;
-}
-#tryit-form label{
-  color: dimgrey;
-}
-.tryit-form .form-control{
-  color: #555;
-}
-.tryit-form .formError{
-  background-color: #F7B7BA;
-}
-.tryit-form .ng-dirty.ng-invalid {
-  background-color: #F7B7BA;
-}
-.tryit-form .ng-valid {
-  background-color: #86E091;
-}
-.tryit-form em{
-  color:#CF1A1A;
-}
+  body{
+    color: #777;
+  }
+
+  .centered-form{
+    margin-top: 60px;
+  }
+  .centered-form .panel{
+    /*background: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;*/
+    background: transparent;
+  }
+  .btn-info{
+    background-color: #608FE0;
+    border-color: black;
+  }
+  .tryit-form .reset {
+    background-color: transparent;
+  }
+  .tryit-form .panel-transparent-row{
+    background: transparent;
+    height: 10px;
+  }
+  .tryit-form .panel-heading{
+    background-color: rgba(222,222,222,0.80);
+  }
+  .tryit-form .panel-footing{
+    background-color: rgba(222,222,222,0.80);
+  }
+  .tryit-form .panel-footing input{
+    margin-top: 19px !important;
+  }
+  .tryit-form .panel-footing a{
+    margin-top: 19px !important;
+  }
+  .tryit-form .panel-body{
+    background-color: rgba(222,222,222,0.80);
+  }
+  .tryit-form .panel-title{
+    font-size: 25px;
+    text-align: center;
+  }
+  #tryit-form label{
+    color: dimgrey;
+  }
+  .tryit-form .form-control{
+    color: #555;
+  }
+  .tryit-form .formError{
+    background-color: #F7B7BA;
+  }
+  .tryit-form .ng-dirty.ng-invalid {
+    background-color: #F7B7BA;
+  }
+  .tryit-form .ng-valid {
+    background-color: #86E091;
+  }
+  .tryit-form em{
+    color:#CF1A1A;
+  }
+  .noTouch{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .social-media *{
+    /*margin-top: 22px;*/
+    /*border:1px solid;*/
+    outline: none !important;
+  }
+  .social-media .btn{
+    /*margin-top: 22px;*/
+    border:1px solid;
+  }
+  .g-button{
+    background: #dd4b39 !important;
+    color: white !important;
+  }
+  .g-button i{
+    font-size: 1.4em;
+  }
+  .fb-button{
+    background: #3b5998 !important;
+    color: white !important;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif; 
+    /*margin-top: 22px;*/
+  }
+  .fb-button i{
+    font-size: 1.4em;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 530px) {
+
+    .social-media button:first-child{
+      width: 40px !important;
+    }
+    .social-media button:last-child{
+      width: 180px;
+      padding: 11.3px 0;
+      font-size: 12px;
+    }
+    .tryit-form .panel-footing input,a{
+      font-size: 11px !important;
+      padding: 8px 0px !important;
+    }
+
+  }
 
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
 
-    <section id="tryit" class="sep-top-3x sep-bottom-3x" style="background-image: url(/website/img/sectors/backgroundBlur.jpg);" class="header-section">
+    <section id="tryit" class="sep-top-3x sep-bottom-3x" style="background-image: url(/website/img/sectors/backgroundBlur.jpg); background-repeat:no-repeat; background-size:cover;" class="header-section">
       <div class="container">
         <div class="row centered-form">
           <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" ng-app="websiteApp">
@@ -69,8 +132,112 @@
                     <h3 class="panel-title">{{__('website.tryit_form_title')}} <small>{{__('website.tryit_form_subtitle')}}</small></h3>
                   </div>
                   <div class="panel-transparent-row"></div>
-                  <div class="panel-body">
-                    <div class="row">                   
+                 <div class="panel-body">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group text-center hide" style="line-height:35px; border-bottom: 1px solid #B5B5B5;">
+                            <script>
+                            // This is called with the results from from FB.getLoginStatus().
+                            function statusChangeCallback(response) {
+                              // console.log('statusChangeCallback');
+                              //console.log(response);
+                              // The response object is returned with a status field that lets the
+                              // app know the current login status of the person.
+                              // Full docs on the response object can be found in the documentation
+                              // for FB.getLoginStatus().
+                              if (response.status === 'connected') {
+                                // Logged into your app and Facebook.
+                                testAPI(response.authResponse.accessToken);
+                              } else if (response.status === 'not_authorized') {
+                                // The person is logged into Facebook, but not your app.
+                                // document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
+                              } else {
+                                // The person is not logged into Facebook, so we're not sure if
+                                // they are logged into this app or not.
+                                // document.getElementById('status').innerHTML = 'Please log ' +'into Facebook.';
+                              }
+                            }
+
+                            // This function is called when someone finishes with the Login
+                            // Button.  See the onlogin handler attached to it in the sample
+                            // code below.
+                            function checkLoginState() {
+                              FB.getLoginStatus(function(response) {
+                                statusChangeCallback(response);
+                              });
+                            }
+
+                            window.fbAsyncInit = function() {
+                            FB.init({
+                              appId      : '583822921756369',
+                              cookie     : true,  // enable cookies to allow the server to access 
+                                                  // the session
+                              xfbml      : true,  // parse social plugins on this page
+                              version    : 'v2.2' // use version 2.2
+                            });
+
+                            };
+
+                            // Load the SDK asynchronously
+                            (function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "//connect.facebook.net/tr_TR/sdk.js";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+
+                            // Here we run a very simple test of the Graph API after login is
+                            // successful.  See statusChangeCallback() for when this call is made.
+
+
+                            function testAPI(accessToken) {
+                              // console.log('Welcome!  Fetching your information.... ');
+                              FB.api('/me', function(response) {
+                                // console.log('Successful login for: ' + response.name);
+                                document.getElementById('status').innerHTML =
+                                  '{{__("common.thanku")}}, ' + response.name + '!';
+                                  // console.log(JSON.stringify(response));
+
+                                  $.ajax({
+                                      type: "POST",
+                                      url: "{{__('route.facebook_attempt')}}",
+                                      data: {
+                                          formData: JSON.stringify(response),
+                                          accessToken: accessToken
+                                      }
+                                  }).success(function(msg) {
+                                    // console.log(msg)
+                                    document.location.href = "{{__('route.home')}}";
+                                  }).fail(function(msg) {
+                                      //console.log(f);
+                                    // console.log(msg)
+                                  })
+                              });
+                            }
+                          </script>
+                        
+                          <label for="name">{{__('common.signup_facebook_title')}}</label>
+
+
+                          <div class="btn-group social-media">
+                            <button type="button" name="glogin" id="glogin" class="btn fb-button noTouch" style="width:60px; height:42px; padding:0;"><i class="fa fa-facebook"></i></button>
+                            <button type="button" name="fblogin" id="fblogin" class="btn fb-button" onclick="checkLoginState();">{{__('common.signup_facebook')}}</button>
+                          </div>
+
+                          <!-- <a href="#" class="btn fb-button" name="fblogin" id="fblogin"><i class="icon-facebook"></i> <div class="btn-insent-border"></div> Facebook ile Oturum Aç</a> -->
+                        
+                          <!-- <fb:login-button scope="public_profile,email" data-size="large" onlogin="checkLoginState();" style="margin-top:15px;">Facebook ile Oturum Aç</fb:login-button> -->
+
+                          <div id="status"></div>
+                          <div id="fb-root"></div>
+                          <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+                          <div id="status"></div>
+                          <div id="fb-root"></div> -->
+                          <label style="display:block;">{{__('common.or')}}</label>
+                        </div>
+                      </div>                   
                       <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                           <label for="name">{{__('website.tryit_form_name')}}</label>
@@ -168,7 +335,7 @@
                       </div>
                     </div>
                   </div> -->
-                  <div class="panel-heading" style="display:-webkit-box !important; height:80px;">
+                  <div class="panel-footing" style="display:-webkit-box !important; height:80px;">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                       <input type="submit" value="{{__('website.tryit_form_submit')}}" class="btn btn-primary btn-block" style="outline:none;">
                     </div>

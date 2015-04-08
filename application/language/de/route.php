@@ -95,10 +95,21 @@ return array(
 	'website_sitemap' => 'sitemap',
 	'website_search' => 'suchen',
 	'website_blog' => 'blog',
-	'website_article_workflow' => 'blog/article-work-flow',
-	'website_article_brandvalue' => 'blog/article-markenwert',
-	'website_article_whymobile' => 'blog/article-warum-mobile',
+	'website_sectors' => 'solutions',
+	'website_showcase' => 'showcase',
+	'website_sectors_retail' => 'solutions-retail',
+	'website_sectors_humanresources' => 'solutions-human-resources',
+	'website_sectors_education' => 'solutions-education',
+	'website_sectors_realty' => 'solutions-real-estate',
+	'website_sectors_medicine' => 'solutions-pharmaceutical',
+	'website_sectors_digitalpublishing' => 'solutions-digital-publishing',
+	'website_tryit' => 'tryit',
+	'website_captcha' => 'mecaptcha',
+	'website_why_galepress' => 'how-it-works',
+	'confirmemail' => 'confirm-account',
 	
 	'crop_image' => 'crop/image',
+
+	'facebook_attempt' => 'login-facebook',
 	
 );

@@ -20,6 +20,7 @@ if (FALSE) {
                 onSelect: updateCoords,
                 allowSelect: false
             });
+            $("#saveBtn").removeClass('noTouch');
         };
 
         function setSelection(arr, cropID, id, wantedWidth2) {
@@ -99,6 +100,7 @@ if (FALSE) {
 						<script type="text/javascript">
 							$(document).load(function(){
 								setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
+
 							});
 						</script>
 					<div class="col-md-2">
@@ -160,7 +162,7 @@ if (FALSE) {
 
 			<div class="row">
 				<div class="col-md-6">
-					<input class="btn my-btn-success btn- btn-block" type="submit" onclick="this.form.submit()" value="Kaydet" class="imageCropSaveButton" />
+					<input class="btn my-btn-success btn-block noTouch" id="saveBtn" type="submit" onclick="this.form.submit()" value="Kaydet" class="imageCropSaveButton" />
 				</div>
 			</div>
 			<div class="row">

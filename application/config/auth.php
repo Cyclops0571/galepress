@@ -70,4 +70,6 @@ return array(
 
 	'table' => 'User',
 
+	'fbemail' => 'FbEmail',
+
 );
