@@ -5,8 +5,10 @@ class imageInfoEx {
 	public $height = 0;
 	public $type = "";
 	public $attr = "";
+	public $dir = "";
 	public $absolutePath = "";
 	public $webUrl = "";
+	public $webDir = "";
 	private $_isValid = FALSE;
 
 	/**
@@ -20,7 +22,9 @@ class imageInfoEx {
 			$this->type = $imageSize[2];
 			$this->attr = $imageSize[3];
 			$this->absolutePath = path('public') . $inputFile;
+			$this->dir = pathinfo($this->absolutePath, PATHINFO_DIRNAME);
 			$this->webUrl = "/" . $inputFile;
+			$this->webDir = pathinfo($this->webUrl, PATHINFO_DIRNAME);
 		}
 	}
 
