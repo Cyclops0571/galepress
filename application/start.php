@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| PHP Display Errors Configuration
+| PHP Display Errors Configuration 
 |--------------------------------------------------------------------------
 |
 | Since Laravel intercepts and displays all errors with a detailed stack

@@ -50,8 +50,6 @@ class Crop_Controller extends Base_Controller {
 		$widthSet = Input::get("widthSet");
 		$cropIDSet = Input::get("cropIDSet");
 		$contentID = (int)Input::get("contentID", 0);
-		$contentID = 1893;
-
 		$contentFile = DB::table('ContentFile')
 					->where('ContentID', '=', $contentID)
 					->where('StatusID', '=', eStatus::Active)
