@@ -112,5 +112,7 @@ return array(
 	'website_why_galepress' => 'nasil-calisir',
 	'confirmemail' => 'hesabi-onayla',
 
-	'website_appcreatewithface' => 'appcreatewithface'
+	'website_appcreatewithface' => 'appcreatewithface',
+	
+	'crop_image' => 'crop/image',
 );

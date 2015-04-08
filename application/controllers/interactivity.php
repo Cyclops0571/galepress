@@ -302,42 +302,15 @@ class Interactivity_Controller extends Base_Controller {
 						$imageFile = File::name($pdfFileNameFull) . '_' . ($i + 1) . '.jpg';
 
 						//Create page snapshots
-						//echo getenv('PATH'); // /usr/local/bin:/usr/bin:/bin
-						//putenv(getenv('PATH').':/usr/bin');
-
-
-						/*
-						  $im = new imagick($filePath.'/'.$tempFile.'[0]');
-						  $im->setOption('pdf:use-cropbox', 'true');
-						  $im->setImageFormat('jpg');
-						  $width = 400;
-						  $height = 524;
-						  $geo = $im->getImageGeometry();
-
-						  if(($geo['width'] / $width) < ($geo['height'] / $height))
-						  {
-						  $im->cropImage($geo['width'], floor($height*$geo['width']/$width), 0, (($geo['height']-($height*$geo['width']/$width))/2));
-						  }
-						  else
-						  {
-						  $im->cropImage(ceil($width*$geo['height']/$height), $geo['height'], (($geo['width']-($width*$geo['height']/$height))/2), 0);
-						  }
-						  $im->ThumbnailImage($width, $height, true);
-						  $im->writeImages($filePath.'/'.$imageFile, true);
-						 */
+						
 						$im = new imagick();
 						//TODO:postscript delegate failed hatasi vermesine neden oluyor!!!!!!
 						$im->setOption('pdf:use-cropbox', 'true');
-						//$im->setResourceLimit(Imagick::RESOURCETYPE_MEMORY, 32);
-						//$im->setResourceLimit(Imagick::RESOURCETYPE_MAP, 32);
-						//$im->setResourceLimit(6, 2);
 						$im->setResolution(150, 150);
 						$im->readImage($pdfFileNameFull . "[" . $i . "]");
 						$im->resampleImage(72, 72, Imagick::FILTER_BOX, 1);
-						//$im->setImageColorspace(255);
 						$im->setCompression(Imagick::COMPRESSION_JPEG);
 						$im->setCompressionQuality(80);
-						//$im->setImageFormat('jpeg');
 						$im->setImageFormat('jpg');
 						$im->writeImage($pdfRealPath . '/' . $imageFile);
 						$im->clear();

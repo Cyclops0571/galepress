@@ -97,5 +97,8 @@ return array(
 	'website_blog' => 'blog',
 	'website_article_workflow' => 'blog/article-work-flow',
 	'website_article_brandvalue' => 'blog/article-markenwert',
-	'website_article_whymobile' => 'blog/article-warum-mobile'
+	'website_article_whymobile' => 'blog/article-warum-mobile',
+	
+	'crop_image' => 'crop/image',
+	
 );

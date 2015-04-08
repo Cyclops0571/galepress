@@ -23,6 +23,7 @@ class Uploader
 			
 			//create snapshot
 			$imageFile = $tempFile.'.jpg';
+			$imageFileOriginal = $tempFile . IMAGE_ORJ_EXTENSION;
 
 			$im = new imagick();
 			//TODO:postscript delegate failed hatasi vermesine neden oluyor!!!!!!
@@ -65,6 +66,7 @@ class Uploader
 			$im->setCompressionQuality(80);
 			//$im->setImageFormat('jpeg');
 			$im->setImageFormat('jpg');
+			$im->writeImage($filePath.'/'.$imageFileOriginal);
 
 			$width = 400;
 			$height = 524;
@@ -83,24 +85,6 @@ class Uploader
 			$im->clear();
 			$im->destroy();
 			unset($im);
-
-			//$imageFile = $fileName.'_'.$rnd.'.jpg';
-			//$im = new imagick($filePath.'/'.$tempFile.'[0]');
-			//$im->setOption('pdf:use-cropbox', 'true');
-			//$im->setImageFormat('jpg');
-			//$width = 400;
-			//$height = 524;
-			//$geo = $im->getImageGeometry();
-			//if(($geo['width'] / $width) < ($geo['height'] / $height))
-			//{
-			//	$im->cropImage($geo['width'], floor($height*$geo['width']/$width), 0, (($geo['height']-($height*$geo['width']/$width))/2));
-			//}
-			//else
-			//{
-			//	$im->cropImage(ceil($width*$geo['height']/$height), $geo['height'], (($geo['width']-($width*$geo['height']/$height))/2), 0);
-			//}
-			//$im->ThumbnailImage($width, $height, true);
-			//$im->writeImages($filePath.'/'.$imageFile, true);
 
 			//delete pdf file
 			File::delete($filePath.'/'.$tempFile);

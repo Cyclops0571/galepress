@@ -1,48 +1,34 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of test
- *
- * @author Detay
- */
-class Test_Controller extends Base_Controller{
+class Crop_Controller extends Base_Controller {
 	public $restful = true;
-	
+	private $errorPage = '';
 	public function __construct() {
 		parent::__construct();
-	}
-
-	public function get_index() {
-		$tmp = __('route.crop_image')->get("tr");
-		echo $tmp;
-		//return View::make('test.googlemaps');
 	}
 	
 	public function get_image() {
 		$cropSet = Crop::get();
 		$cropSet instanceof Crop;
-//		foreach($cropSet as $crop) {
-//			echo $crop->CropID; 
-//		}
-//		$applicationID = (int) Input::get('applicationID', 20);
-//		$app = Application::find($applicationID);
 		$contentID = (int)Input::get("contentID" , 0);
-		$contentID = 1893;
+		
 		$contentFile = DB::table('ContentFile')
 					->where('ContentID', '=', $contentID)
 					->where('StatusID', '=', eStatus::Active)
 					->order_by('ContentFileID', 'DESC')->first();
+		
+		if(!$contentFile) {
+			return Redirect::to($this->errorPage);
+		}
+		
 		$contentFile instanceof ContentFile;
 		$ccif = DB::table('ContentCoverImageFile')
 				->where('ContentFileID', '=', $contentFile->ContentFileID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('ContentCoverImageFileID', 'DESC')->first();
+		if(!$ccif) {
+			return Redirect::to($this->errorPage);
+		}
 		$ccif instanceof ContentCoverImageFile;
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
@@ -51,12 +37,11 @@ class Test_Controller extends Base_Controller{
 		$data = array();
 		$data['cropSet'] = $cropSet;
 		$data['imageInfo'] = $imageInfo;
-		return View::make('test.image', $data);
+		return View::make('pages.cropview', $data);
 	}
 	
 	public function post_image() {
-//		var_dump($_POST);
-//		exit;
+
 		
 		
 		$xCoordinateSet = Input::get("xCoordinateSet");
@@ -71,15 +56,25 @@ class Test_Controller extends Base_Controller{
 					->where('ContentID', '=', $contentID)
 					->where('StatusID', '=', eStatus::Active)
 					->order_by('ContentFileID', 'DESC')->first();
+		if(!$contentFile) {
+			return Redirect::to($this->errorPage);
+		}
 		$contentFile instanceof ContentFile;
 		$ccif = DB::table('ContentCoverImageFile')
 				->where('ContentFileID', '=', $contentFile->ContentFileID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('ContentCoverImageFileID', 'DESC')->first();
+		if(!$ccif) {
+			return Redirect::to($this->errorPage);
+		}
 		$ccif instanceof ContentCoverImageFile;
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
-		$sourceImagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
+		$sourceImagePath = $contentFile->FilePath . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
+		if(!File::exists($sourceImagePath)) {
+			//old pdf files dont have an original.jpg
+			$sourceImagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
+		}
 		$imageInfo = new imageInfoEx($sourceImagePath);
 		
 		
@@ -95,5 +90,6 @@ class Test_Controller extends Base_Controller{
 			$im->writeImage(path('public') .  $contentFile->FilePath . "/" . IMAGE_CROPPED_NAME . "_" . $crop->Width . "x" . $crop->Height . ".jpg" );
 			$im->destroy();
 		}
+		return Redirect::to(__('route.contents') . '/' . $contentID);
 	}
 }

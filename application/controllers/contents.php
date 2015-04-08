@@ -321,6 +321,7 @@ class Contents_Controller extends Base_Controller {
 
 	//POST
 	public function post_save() {
+		$goto = "";
 		$currentUser = Auth::User();
 
 		$id = (int) Input::get($this->pk, '0');
@@ -337,7 +338,7 @@ class Contents_Controller extends Base_Controller {
 			}
 
 			try {
-				DB::transaction(function() use ($currentUser, $id, $applicationID) {
+				DB::transaction(function() use ($currentUser, $id, $applicationID, &$goto) {
 					$hasModified = false;
 					$current = Content::find($id);
 					if ($current) {
@@ -515,15 +516,18 @@ class Contents_Controller extends Base_Controller {
 
 						$targetFileName = $currentUser->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
 						$targetFilePath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID;
-						$targetRealPath = path('public') . $targetFilePath;
-						$targetFileNameFull = $targetRealPath . '/' . $targetFileName;
+						$destinationFolder = path('public') . $targetFilePath;
+						$targetFileNameFull = $destinationFolder . '/' . $targetFileName;
 
 						if (File::exists($sourceFileNameFull)) {
-							if (!File::exists($targetRealPath)) {
-								File::mkdir($targetRealPath);
+							if (!File::exists($destinationFolder)) {
+								File::mkdir($destinationFolder);
 							}
-
+							
+							$originalImageFileName = pathinfo($sourceFileNameFull, PATHINFO_FILENAME) . IMAGE_ORJ_EXTENSION;
+							
 							File::move($sourceFileNameFull, $targetFileNameFull);
+							File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
 
 							$f = new ContentFile();
 							$f->ContentID = $contentID;
@@ -555,53 +559,42 @@ class Contents_Controller extends Base_Controller {
 
 						$targetFileName = $currentUser->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
 						$targetFilePath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID;
-						$targetRealPath = path('public') . $targetFilePath;
-						$targetFileNameFull = $targetRealPath . '/' . $targetFileName;
+						$destinationFolder = path('public') . $targetFilePath;
+						$targetFileNameFull = $destinationFolder . '/' . $targetFileName;
 
-						$targetMainFileName = $targetFileName . '_main.jpg';
-						$targetMainFileNameFull = $targetRealPath . '/' . $targetFileName . '_main.jpg';
-
-						$targetThumbFileName = $targetFileName . '_thumb.jpg';
-						$targetThumbFileNameFull = $targetRealPath . '/' . $targetFileName . '_thumb.jpg';
+						$targetMainFileName = $targetFileName . '_main';
+						$targetThumbFileName = $targetFileName . '_thumb';
 
 						if (File::exists($sourceFileNameFull) && is_file($sourceFileNameFull)) {
-							if (!File::exists($targetRealPath)) {
-								File::mkdir($targetRealPath);
+							if (!File::exists($destinationFolder)) {
+								File::mkdir($destinationFolder);
 							}
 
 							File::move($sourceFileNameFull, $targetFileNameFull);
 							$pictureInfoSet = array();
-							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imagePath" => $targetThumbFileNameFull);
-							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imagePath" => $targetMainFileNameFull);
-							foreach($pictureInfoSet as $pictureInfo) {
-								$im = new imagick($targetFileNameFull);
-								$im->setImageFormat("jpg");
-								$width = $pictureInfo["width"];
-								$height = $pictureInfo["height"];
-
-								$geo = $im->getImageGeometry();
-
-								if (($geo['width'] / $width) < ($geo['height'] / $height)) {
-									$im->cropImage($geo['width'], floor($height * $geo['width'] / $width), 0, (($geo['height'] - ($height * $geo['width'] / $width)) / 2));
-								} else {
-									$im->cropImage(ceil($width * $geo['height'] / $height), $geo['height'], (($geo['width'] - ($width * $geo['height'] / $height)) / 2), 0);
-								}
-								$im->ThumbnailImage($width, $height, true);
-								$im->writeImages($pictureInfo["imagePath"], true);
-								$im->clear();
-								$im->destroy();
-								unset($im);
+							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
+							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imageName" => $targetThumbFileName);
+							foreach($pictureInfoSet as $pInfo) {
+								imageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
 							}
 							
+							$cropSet = Crop::get();
+							$cropSet instanceof  Crop;
+							$sourceFile = $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
+							foreach($cropSet as $crop) {
+								//create neccessary image versions
+								imageClass::cropImage($sourceFile, $destinationFolder, $crop->Width, $crop->Height);
+							}
+
 							//------------------------------------------------------
 							$c = new ContentCoverImageFile();
 							$c->ContentFileID = $contentFileID;
 							$c->DateAdded = new DateTime();
 							$c->FilePath = $targetFilePath;
 							$c->SourceFileName = $targetFileName;
-							$c->FileName = $targetMainFileName;
-							$c->FileName2 = $targetThumbFileName;
-							$c->FileSize = File::size($targetMainFileNameFull);
+							$c->FileName = $targetMainFileName . IMAGE_EXTENSION;
+							$c->FileName2 = $targetThumbFileName . IMAGE_EXTENSION;
+							$c->FileSize = File::size($destinationFolder . "/" . $targetMainFileName . ".jpg");
 							$c->StatusID = eStatus::Active;
 							$c->CreatorUserID = $currentUser->UserID;
 							$c->DateCreated = new DateTime();
@@ -609,13 +602,17 @@ class Contents_Controller extends Base_Controller {
 							$c->ProcessDate = new DateTime();
 							$c->ProcessTypeID = eProcessTypes::Insert;
 							$c->save();
+//							if($contentID == 1893) {
+//								echo "zzzzzz";
+//							}
+							$goto = "&goto=" . base64_encode(__('route.crop_image') . "?contentID=" . $contentID);
 						}
 					}
 				});
 			} catch (Exception $e) {
 				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 			}
-			return "success=" . base64_encode("true");
+			return "success=" . base64_encode("true") . $goto;
 		} else {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
@@ -689,8 +686,9 @@ class Contents_Controller extends Base_Controller {
 		);
 		$upload_handler = new UploadHandler($options);
 
-		if (!Request::ajax())
+		if (!Request::ajax()) {
 			return;
+		}
 
 		$upload_handler->post(false);
 
@@ -701,7 +699,6 @@ class Contents_Controller extends Base_Controller {
 		$arr = $json[$element];
 		$obj = $arr[0];
 		$tempFile = $obj->name;
-		//var_dump($obj->name);
 		$ret = Uploader::ContentsUploadFile($tempFile);
 		return Response::json($ret);
 	}
@@ -720,8 +717,9 @@ class Contents_Controller extends Base_Controller {
 		);
 		$upload_handler = new UploadHandler($options);
 
-		if (!Request::ajax())
+		if (!Request::ajax()) {
 			return;
+		}
 
 		$upload_handler->post(false);
 

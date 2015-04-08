@@ -482,9 +482,12 @@ class Common {
 		
 		if($Width > 0 && $Height > 0) {
 			//image var mi kontrol edip yok ise olusturup, ismini set edelim;
-			$originalImage =  path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
+			$originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION;
+			if(!is_file($originalImage)) {
+				$originalImage =  path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
+			}
 			$pathInfoOI = pathinfo($originalImage);
-			$fileName = $pathInfoOI["filename"] . "_" . $Width . "x" . $Height . ".jpg";
+			$fileName = IMAGE_CROPPED_NAME . "_" . $Width . "x" . $Height . ".jpg";
 			if(!is_file($pathInfoOI["dirname"] . "/" . $fileName)) {
 				//resize original image to new path and then save it.
 				if(!is_file($originalImage)) {

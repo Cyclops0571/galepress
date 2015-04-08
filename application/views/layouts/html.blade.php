@@ -55,12 +55,12 @@
         {{ HTML::script('js/chosen_v1.0.0/chosen.jquery.min.js'); }}
         {{ HTML::script('js/jquery.base64.decode.js'); }}
         {{ HTML::script('js/jquery.qtip.js'); }}
-        {{ HTML::script('js/jquery.cookie.js'); }}
-        {{ HTML::script('js/gurus.common.js'); }}
-        {{ HTML::script('js/gurus.string.js'); }}
-        {{ HTML::script('js/gurus.date.js'); }}
-        {{ HTML::script('js/gurus.projectcore.js'); }}
-        {{ HTML::script('js/session-check.js'); }}
+        {{ HTML::script('js/jquery.cookie.js?v=' . APP_VER); }}
+        {{ HTML::script('js/gurus.common.js?v=' . APP_VER); }}
+        {{ HTML::script('js/gurus.string.js?v=' . APP_VER); }}
+        {{ HTML::script('js/gurus.date.js?v=' . APP_VER); }}
+        {{ HTML::script('js/gurus.projectcore.js?v=' . APP_VER); }}
+        {{ HTML::script('js/session-check.js?v=' . APP_VER); }}
         {{ HTML::script('js/lib.js?v=' . APP_VER); }}
 
         {{ HTML::script('js/jqplot/jquery.jqplot.min.js'); }}

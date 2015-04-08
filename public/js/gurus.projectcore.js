@@ -674,297 +674,294 @@ var cApplication = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // CONTENT
 var cContent = new function () {
-
-	var _self = this;
-
+    var _self = this;
     this.objectName = "contents";
-
-	this.doRequest = function (t, u, d, funcError) {
+    this.doRequest = function (t, u, d, funcError) {
 		return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    }
+    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
-    }
+    };
 	
-	this.loadContentOptionList = function () {
+    this.loadContentOptionList = function () {
+        var t = 'GET';
+        var u = '/' + $('#currentlanguage').val() + '/' + route["contents"];
+        var d = "applicationID=" + $("#ddlApplication").val() + "&option=1";
+        cContent.doAsyncRequest(t ,u ,d, function (ret) {
+                $("#ddlContent").html(ret);
+                $('#ddlContent').trigger('chosen:updated');
+        });
+    };
 
-		var t = 'GET';
-		var u = '/' + $('#currentlanguage').val() + '/' + route["contents"];
-		var d = "applicationID=" + $("#ddlApplication").val() + "&option=1";
-		cContent.doAsyncRequest(t ,u ,d, function (ret) {
-			$("#ddlContent").html(ret);
-			$('#ddlContent').trigger('chosen:updated');
-		});
-    }
-
-	this.ContentOnChange = function(obj) {
-		cReport.OnChange(obj);
-	}
+    this.ContentOnChange = function(obj) {
+            cReport.OnChange(obj);
+    };
 	
-	this.save = function (refresh) {
-
-		refresh = refresh ? refresh : false;
-		
-		//HAKAN START
-		if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')){
-			console.log('IsProtected-checked');
-			var t = 'GET';
-			var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
-			var d = "contentID=" + $("#ContentID").val() + '&type=qty';
-			var ret = cContent.doRequest(t ,u ,d);
-			//console.log(ret);
-			if(parseInt(ret) > 0)
-				$("#Password").removeClass("required");
-			else
-				$("#Password").addClass("required");
-		}
-
-		if(!$('#CategoryID_chosen ul.chosen-choices li').hasClass('search-choice'))
-	    {
-	    	$('#dialog-category-warning').modal('show');
-	    	return;
-	    }
-		//HAKAN END
-
-		var fSuccess;
-        if(refresh) {
-        	fSuccess = function (ret) {
-				//alert(ret);
-				//$("input.btn").removeAttr("disabled");
-
-				cNotification.success();
-				
-				document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + $("#ContentID").val();	
-	        };
+    this.save = function (refresh) {
+        refresh = refresh ? refresh : false;
+        //HAKAN START
+        if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')){
+            console.log('IsProtected-checked');
+            var t = 'GET';
+            var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
+            var d = "contentID=" + $("#ContentID").val() + '&type=qty';
+            var ret = cContent.doRequest(t ,u ,d);
+            //console.log(ret);
+            if(parseInt(ret) > 0) {
+                $("#Password").removeClass("required");
+            } else {
+                $("#Password").addClass("required");
+            }
         }
-		cCommon.save(this.objectName, fSuccess);
-    }
-	
-	this.erase = function () {
-		
-		cCommon.erase(this.objectName);
-	}
-	
-	this.selectFile = function () {
-		
-		$('#File').click();
-		return false;
-	}
-	
-	this.selectCoverImage = function () {
-		
-		$('#CoverImageFile').click();
-		return false;
-	}
-	
-	this.openInteractiveIDE = function (cfID) {
-		
-		//$(".loader").removeClass("hidden");
-		cNotification.loader();
-		$('#btn_interactive').addClass('on');
-		/*
-		var src = '/' + $("#currentlanguage").val() + '/' + route["interactivity"] + '/' + cfID;
-		$("html").css("overflow", "hidden");
-		
-		$("iframe#interactivity")
-			.attr("src", src)
-			.width($(window).width())
-			.height($(window).height())
-			.css("display", "block")
-			.load(function(){
-				$(".loader").addClass("hidden");
-			});
-		*/
-	}
 
-	// Bu fonks. explorer 10 da iframe kapattığı için interactivity->html.blade body tagından kaldırıldı.
-	this.closeInteractiveIDE = function () {
-		var iframe = $("iframe#interactivity");
-		if(iframe.css("display") == "block") {
+        if(!$('#CategoryID_chosen ul.chosen-choices li').hasClass('search-choice')) {
+            $('#dialog-category-warning').modal('show');
+            return;
+        }
+        //HAKAN END
+        var fSuccess;
+         if(refresh) {
+            fSuccess = function (ret) {
+                cNotification.success();
+                $gotoUrl = ret.getValue("goto");
+                if($gotoUrl.length > 0) {
+                    document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                } else {
+                    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + $("#ContentID").val();
+                }
+            };
+         } else {
+            fSuccess = function (ret) {
+                cNotification.success();
+                $gotoUrl = ret.getValue("goto");
+                if($gotoUrl.length > 0) {
+                    console.log($gotoUrl);
+                    document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                } else {
+                    var qs = cCommon.getQS();
+                    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;	
+                }
+            };
+        };
+        
+        
+        cCommon.save(this.objectName, fSuccess);
+    };
+	
+    this.erase = function () {
+        cCommon.erase(this.objectName);
+    };
+	
+    this.selectFile = function () {
+            $('#File').click();
+            return false;
+    };
+	
+    this.selectCoverImage = function () {
+            $('#CoverImageFile').click();
+            return false;
+    };
+	
+    this.openInteractiveIDE = function (cfID) {
+            //$(".loader").removeClass("hidden");
+            cNotification.loader();
+            $('#btn_interactive').addClass('on');
+            /*
+            var src = '/' + $("#currentlanguage").val() + '/' + route["interactivity"] + '/' + cfID;
+            $("html").css("overflow", "hidden");
 
-			$(".loader").addClass("hidden");
-		
-			$("html").css("overflow", "scroll");
-			
-			iframe
-				.attr("src", "")
-				.css("display", "none");
+            $("iframe#interactivity")
+                    .attr("src", src)
+                    .width($(window).width())
+                    .height($(window).height())
+                    .css("display", "block")
+                    .load(function(){
+                            $(".loader").addClass("hidden");
+                    });
+            */
+    };
 
-			if(getFullscreenStatus())
-			{
-				exitFullscreen();	
-			}
+    // Bu fonks. explorer 10 da iframe kapattığı için interactivity->html.blade body tagından kaldırıldı.
+    this.closeInteractiveIDE = function () {
+        var iframe = $("iframe#interactivity");
+        if(iframe.css("display") == "block") {
+            $(".loader").addClass("hidden");
+            $("html").css("overflow", "scroll");
+            iframe
+                    .attr("src", "")
+                    .css("display", "none");
 
-			setTimeout(function() {
-			    $('#btn_interactive').removeClass('on');
-			}, 2000);
-		}
-	}
-	
-	//Content category
-	this.CategoryOnChange = function(obj) {
-		if(obj.val() == "-1") {
-			$("div.list_container").removeClass("hidden");
-			$("div.cta_container").removeClass("hidden");
-			$("div.form_container").addClass("hidden");
-			cContent.loadCategoryList();
-			$("#dialog-category-form").removeClass("hidden");
-			$('#dialog-category-form').modal('show');
-			//$("#dialog-category-form").dialog("open");
-		}
-	}
-	
-	this.showCategoryList = function() {
-		$("div.list_container").removeClass("hidden");
-		$("div.cta_container").removeClass("hidden");
-		$("div.form_container").addClass("hidden");
-		cContent.loadCategoryList();
-		$("#dialog-category-form").removeClass("hidden");
-		$('#dialog-category-form').modal('show');
-		//$("#dialog-category-form").dialog("open");
-	}
-	
-	this.loadCategoryList = function () {
-		var t = 'GET';
-		var u = '/' + $('#currentlanguage').val() + '/' + route["categories"];
-		var d = "appID=" + $("#ApplicationID").val();
-		cContent.doAsyncRequest(t ,u ,d, function (ret) {
-			$("#dialog-category-form table tbody").html(ret);
-		});
-    }
-	
-	this.loadCategoryOptionList = function () {
-		var t = 'GET';
-		var u = '/' + $('#currentlanguage').val() + '/' + route["categories"];
-		var d = "appID=" + $("#ApplicationID").val() + '&contentID=' + $("#ContentID").val() + '&type=options';
-		cContent.doAsyncRequest(t ,u ,d, function (ret) {
-			$("#CategoryID").html(ret);
-			//$("ul.contentcategory").html(ret);
-			//$("#CategoryID").trigger("liszt:updated");
-			$("#CategoryID").trigger("chosen:updated");
-		});
-    }
-	
-	this.addNewCategory = function() {
-		var appID = $("#ApplicationID").val();
-		$("#CategoryCategoryID").val("0");
-		$("#CategoryApplicationID").val(appID);
-		$("#CategoryName").val("");
-		$("div.list_container").addClass("hidden");
-		$("div.cta_container").addClass("hidden");
-		$("div.form_container").removeClass("hidden");
-	}
-	
-	this.selectCategory = function(id) {
-		$("#CategoryID").val(id);
-		$("#dialog-category-form").dialog("close");
-	}
-	
-	this.modifyCategory = function(id) {
-		var appID = $("#ApplicationID").val();
-		var name = $("#category" + id + " td:eq(0)").html();
-		$("#CategoryCategoryID").val(id);
-		$("#CategoryApplicationID").val(appID);
-		$("#CategoryName").val(name);
-		$("div.list_container").addClass("hidden");
-		$("div.cta_container").addClass("hidden");
-		$("div.form_container").removeClass("hidden");
-	}
-	
-	this.deleteCategory = function(id) {
-		//if(confirm("Silmek istediğinize emin misiniz?") == true) {
+            if(getFullscreenStatus()) {
+                exitFullscreen();	
+            }
 
-			var t = 'POST';
-			var u = '/' + $('#currentlanguage').val() + '/' + route["categories_delete"];
-			var d = "CategoryID=" + id;
-			cContent.doAsyncRequest(t ,u ,d, function (ret) {
-				cContent.loadCategoryList();					
-				cContent.loadCategoryOptionList();
-			});
-		//}
-	}
+            setTimeout(function() {
+                $('#btn_interactive').removeClass('on');
+            }, 2000);
+        }
+    };
 	
-	this.saveCategory = function () {
-		cNotification.hide();
-		var frm = $("#dialog-category-form form:first");
-		var validate = cForm.validate(frm);
-		if (validate) {
-			cNotification.loader();
-			var t = 'POST';
-			var u = '/' + $('#currentlanguage').val() + '/' + route["categories_save"];
-			var d = cForm.serialize(frm);
-			cContent.doAsyncRequest(t ,u ,d, function (ret) {
-				$("div.list_container").removeClass("hidden");
-				$("div.cta_container").removeClass("hidden");
-				$("div.form_container").addClass("hidden");
-				cContent.loadCategoryList();
-				cContent.loadCategoryOptionList();
-				cNotification.hide();
-			});
-		}
-		else {
-			cNotification.validation();
-		}
-    }
+    //Content category
+    this.CategoryOnChange = function(obj) {
+        if(obj.val() == "-1") {
+            $("div.list_container").removeClass("hidden");
+            $("div.cta_container").removeClass("hidden");
+            $("div.form_container").addClass("hidden");
+            cContent.loadCategoryList();
+            $("#dialog-category-form").removeClass("hidden");
+            $('#dialog-category-form').modal('show');
+            //$("#dialog-category-form").dialog("open");
+        }
+    };
+	
+    this.showCategoryList = function() {
+        $("div.list_container").removeClass("hidden");
+        $("div.cta_container").removeClass("hidden");
+        $("div.form_container").addClass("hidden");
+        cContent.loadCategoryList();
+        $("#dialog-category-form").removeClass("hidden");
+        $('#dialog-category-form').modal('show');
+        //$("#dialog-category-form").dialog("open");
+    };
+	
+    this.loadCategoryList = function () {
+        var t = 'GET';
+        var u = '/' + $('#currentlanguage').val() + '/' + route["categories"];
+        var d = "appID=" + $("#ApplicationID").val();
+        cContent.doAsyncRequest(t ,u ,d, function (ret) {
+                $("#dialog-category-form table tbody").html(ret);
+        });
+    };
+	
+    this.loadCategoryOptionList = function () {
+        var t = 'GET';
+        var u = '/' + $('#currentlanguage').val() + '/' + route["categories"];
+        var d = "appID=" + $("#ApplicationID").val() + '&contentID=' + $("#ContentID").val() + '&type=options';
+        cContent.doAsyncRequest(t ,u ,d, function (ret) {
+            $("#CategoryID").html(ret);
+            //$("ul.contentcategory").html(ret);
+            //$("#CategoryID").trigger("liszt:updated");
+            $("#CategoryID").trigger("chosen:updated");
+        });
+    };
+	
+    this.addNewCategory = function() {
+        var appID = $("#ApplicationID").val();
+        $("#CategoryCategoryID").val("0");
+        $("#CategoryApplicationID").val(appID);
+        $("#CategoryName").val("");
+        $("div.list_container").addClass("hidden");
+        $("div.cta_container").addClass("hidden");
+        $("div.form_container").removeClass("hidden");
+    };
+	
+    this.selectCategory = function(id) {
+        $("#CategoryID").val(id);
+        $("#dialog-category-form").dialog("close");
+    };
+	
+    this.modifyCategory = function(id) {
+        var appID = $("#ApplicationID").val();
+        var name = $("#category" + id + " td:eq(0)").html();
+        $("#CategoryCategoryID").val(id);
+        $("#CategoryApplicationID").val(appID);
+        $("#CategoryName").val(name);
+        $("div.list_container").addClass("hidden");
+        $("div.cta_container").addClass("hidden");
+        $("div.form_container").removeClass("hidden");
+    };
+	
+    this.deleteCategory = function(id) {
+        //if(confirm("Silmek istediğinize emin misiniz?") == true) {
+            var t = 'POST';
+            var u = '/' + $('#currentlanguage').val() + '/' + route["categories_delete"];
+            var d = "CategoryID=" + id;
+            cContent.doAsyncRequest(t ,u ,d, function (ret) {
+                    cContent.loadCategoryList();					
+                    cContent.loadCategoryOptionList();
+            });
+        //}
+    };
+	
+    this.saveCategory = function () {
+        cNotification.hide();
+        var frm = $("#dialog-category-form form:first");
+        var validate = cForm.validate(frm);
+        if (validate) {
+            cNotification.loader();
+            var t = 'POST';
+            var u = '/' + $('#currentlanguage').val() + '/' + route["categories_save"];
+            var d = cForm.serialize(frm);
+            cContent.doAsyncRequest(t ,u ,d, function (ret) {
+                $("div.list_container").removeClass("hidden");
+                $("div.cta_container").removeClass("hidden");
+                $("div.form_container").addClass("hidden");
+                cContent.loadCategoryList();
+                cContent.loadCategoryOptionList();
+                cNotification.hide();
+            });
+        } else {
+                cNotification.validation();
+        }
+    };
 
     //Content password
-	this.showPasswordList = function() {
-		$("div.list_container").removeClass("hidden");
-		$("div.cta_container").removeClass("hidden");
-		$("div.form_container").addClass("hidden");
-		cContent.loadPasswordList();
-		$("#dialog-password-form").removeClass("hidden");
-		$('#dialog-password-form').modal('show');
-		//$("#dialog-password-form").dialog("open");
-	}
+    this.showPasswordList = function() {
+        $("div.list_container").removeClass("hidden");
+        $("div.cta_container").removeClass("hidden");
+        $("div.form_container").addClass("hidden");
+        cContent.loadPasswordList();
+        $("#dialog-password-form").removeClass("hidden");
+        $('#dialog-password-form').modal('show');
+        //$("#dialog-password-form").dialog("open");
+    };
 	
-	this.loadPasswordList = function () {
-		var t = 'GET';
-		var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
-		var d = "contentID=" + $("#ContentID").val();
-		cContent.doAsyncRequest(t ,u ,d, function (ret) {
-			$("#dialog-password-form table tbody").html(ret);
-		});
-    }
+    this.loadPasswordList = function () {
+        var t = 'GET';
+        var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
+        var d = "contentID=" + $("#ContentID").val();
+        cContent.doAsyncRequest(t ,u ,d, function (ret) {
+            $("#dialog-password-form table tbody").html(ret);
+        });
+    };
 	
-	this.addNewPassword = function() {
-		var contentID = $("#ContentID").val();
-		$("#ContentPasswordID").val("0");
-		$("#ContentPasswordContentID").val(contentID);
-		$("#ContentPasswordName").val("");
-		$("#ContentPasswordPassword").val("");
-		$("#ContentPasswordQty").val("1");
-		$("div.list_container").addClass("hidden");
-		$("div.cta_container").addClass("hidden");
-		$("div.form_container").removeClass("hidden");
-	}
+    this.addNewPassword = function() {
+        var contentID = $("#ContentID").val();
+        $("#ContentPasswordID").val("0");
+        $("#ContentPasswordContentID").val(contentID);
+        $("#ContentPasswordName").val("");
+        $("#ContentPasswordPassword").val("");
+        $("#ContentPasswordQty").val("1");
+        $("div.list_container").addClass("hidden");
+        $("div.cta_container").addClass("hidden");
+        $("div.form_container").removeClass("hidden");
+    };
 	
-	this.modifyPassword = function(id) {
-		var contentID = $("#ContentID").val();
-		var name = $("#contentpassword" + id + " td:eq(0)").html();
-		var qty = $("#contentpassword" + id + " td:eq(1)").html();
-		$("#ContentPasswordID").val(id);
-		$("#ContentPasswordContentID").val(contentID);
-		$("#ContentPasswordName").val(name);
-		$("#ContentPasswordPassword").val("");
-		$("#ContentPasswordQty").val(qty);
-		$("div.list_container").addClass("hidden");
-		$("div.cta_container").addClass("hidden");
-		$("div.form_container").removeClass("hidden");
-	}
+    this.modifyPassword = function(id) {
+        var contentID = $("#ContentID").val();
+        var name = $("#contentpassword" + id + " td:eq(0)").html();
+        var qty = $("#contentpassword" + id + " td:eq(1)").html();
+        $("#ContentPasswordID").val(id);
+        $("#ContentPasswordContentID").val(contentID);
+        $("#ContentPasswordName").val(name);
+        $("#ContentPasswordPassword").val("");
+        $("#ContentPasswordQty").val(qty);
+        $("div.list_container").addClass("hidden");
+        $("div.cta_container").addClass("hidden");
+        $("div.form_container").removeClass("hidden");
+    };
 	
-	this.deletePassword = function(id) {
-		//if(confirm("Silmek istediğinize emin misiniz?") == true) {
-
-			var t = 'POST';
-			var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords_delete"];
-			var d = "ContentPasswordID=" + id;
-			cContent.doAsyncRequest(t ,u ,d, function (ret) {
-				cContent.loadPasswordList();
-			});
-		//}
-	}
+    this.deletePassword = function(id) {
+        //if(confirm("Silmek istediğinize emin misiniz?") == true) {
+            var t = 'POST';
+            var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords_delete"];
+            var d = "ContentPasswordID=" + id;
+            cContent.doAsyncRequest(t ,u ,d, function (ret) {
+                    cContent.loadPasswordList();
+            });
+        //}
+    };
 	
 	this.savePassword = function () {
 		cNotification.hide();
@@ -1140,43 +1137,30 @@ var cCommon = new function () {
         cAjax.doAsyncRequest(t, u, d, funcSuccess, funcError, true);
     }
 	
-	this.save = function (param, fSuccess) {
-
-		//goToList = goToList ? goToList : true;
-		if(typeof fSuccess !== 'function') {
-			fSuccess = function (ret) {
-				//alert(ret);
-				//$("input.btn").removeAttr("disabled");
-
-				cNotification.success();
-				
-				var qs = cCommon.getQS();
-				document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;	
+    this.save = function (param, fSuccess) {
+        //goToList = goToList ? goToList : true;
+        if(typeof fSuccess !== 'function') {
+            fSuccess = function (ret) {
+                cNotification.success();
+                var qs = cCommon.getQS();
+                document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;	
             };
-		}
+        }
 
-		cNotification.hide();
-		//$("input.btn").attr("disabled", "disabled");
-
+        cNotification.hide();
         var frm = $("form:first");
         var validate = cForm.validate(frm);
         if (validate) {
-			
-			cNotification.loader();
-			
-			var t = 'POST';
-			var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
-			var d = cForm.serialize(frm);
-            cCommon.doAsyncRequest(t, u, d, fSuccess);
+            cNotification.loader();
 
-            //Error
-            //$("input.btn").removeAttr("disabled");
+            var t = 'POST';
+            var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
+            var d = cForm.serialize(frm);
+            cCommon.doAsyncRequest(t, u, d, fSuccess);
+        } else {
+            cNotification.validation();
         }
-		else {
-			//$("input.btn").removeAttr("disabled");
-			cNotification.validation();
-		}
-    }
+    };
 	
 	this.erase = function (param) {
 		

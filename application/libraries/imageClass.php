@@ -173,6 +173,31 @@ class imageClass {
 		return $imageSourceSet[2] . '/' . $imageSourceSet[3] . '/' . $imageSourceSet[4] . '/';
 	}
 
-}
+	public static function cropImage($sourceFile, $destinationFolder, $width, $height, $outputImageName = IMAGE_CROPPED_NAME, $addHeightWidth = TRUE) {
+		$im = new imagick($sourceFile);
+		$im->setImageFormat("jpg");
+		$geo = $im->getImageGeometry();
 
-?>
+		if (($geo['width'] / $width) < ($geo['height'] / $height)) {
+			$im->cropImage($geo['width'], floor($height * $geo['width'] / $width), 0, (($geo['height'] - ($height * $geo['width'] / $width)) / 2));
+		} else {
+			$im->cropImage(ceil($width * $geo['height'] / $height), $geo['height'], (($geo['width'] - ($width * $geo['height'] / $height)) / 2), 0);
+		}
+		$im->ThumbnailImage($width, $height, true);
+		
+		if(substr($destinationFolder, -1) != "/") {
+			$destinationFolder = $destinationFolder . "/";
+		}
+		
+		if($addHeightWidth) {
+			$imageAbsolutePath = $destinationFolder . $outputImageName . "_" . $width . "x" . $height . IMAGE_EXTENSION;
+		} else {
+			$imageAbsolutePath = $destinationFolder . $outputImageName . IMAGE_EXTENSION;
+		}
+		
+		$im->writeImages($imageAbsolutePath, true);
+		$im->clear();
+		$im->destroy();
+		unset($im);
+	}
+}

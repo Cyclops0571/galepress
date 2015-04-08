@@ -109,5 +109,7 @@ return array(
 	'website_tryit' => 'tryit',
 	'website_captcha' => 'mecaptcha',
 	'website_why_galepress' => 'how-it-works',
-	'confirmemail' => 'confirm-account'
+	'confirmemail' => 'confirm-account',
+	
+	'crop_image' => 'crop/image',
 );
