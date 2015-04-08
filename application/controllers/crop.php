@@ -32,8 +32,12 @@ class Crop_Controller extends Base_Controller {
 		$ccif instanceof ContentCoverImageFile;
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
-		$imagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
+		$imagePath =  $contentFile->FilePath . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
 		$imageInfo = new imageInfoEx($imagePath);
+		if(!$imageInfo->isValid()) {
+			$imagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
+			$imageInfo = new imageInfoEx($imagePath);
+		}
 		$data = array();
 		$data['cropSet'] = $cropSet;
 		$data['imageInfo'] = $imageInfo;

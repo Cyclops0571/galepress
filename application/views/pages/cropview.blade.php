@@ -67,7 +67,7 @@ if (FALSE) {
 		<?php //burada resmin sınırlarının dışına hiç çıkılamasın....    ?>
 		<div class="col-md-4" style="min-width: 500px; background: rgba(0,0,0,0.5);">
 			<div class="row">
-				<img width="<?php echo $displayedWidth ?>" src="<?php echo $imageInfo->webUrl; ?>" id="cropbox" alt="" />
+				<img width="<?php echo $displayedWidth ?>" src="<?php echo $imageInfo->webUrl . "?" . time(); ?>" id="cropbox" alt="" />
 			</div>
 		</div>
 		<div class="col-md-3 ">
@@ -97,11 +97,8 @@ if (FALSE) {
 					</div>
 
 						<script type="text/javascript">
-							 $(function () { 
-								 setTimeout(function(){
-									setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
-									$("#button1").blur();
-								 }, 300);
+							$(document).load(function(){
+								setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
 							});
 						</script>
 					<div class="col-md-2">
@@ -109,7 +106,7 @@ if (FALSE) {
 					</div>
 					<?php if (@fopen($imageInfo->dir . "/cropped_image_1536x2048.jpg", "r")): ?>
 						<div class="col-md-4" >
-							<img height="50px;" src="<?php echo $imageInfo->webDir . "/cropped_image_1536x2048.jpg"; ?>"/>
+							<img height="50px;" src="<?php echo $imageInfo->webDir . "/cropped_image_1536x2048.jpg?" . time(); ?>"/>
 						</div>
 					<?php endif; ?>
 				</div>

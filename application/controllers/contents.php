@@ -571,6 +571,7 @@ class Contents_Controller extends Base_Controller {
 							}
 
 							File::move($sourceFileNameFull, $targetFileNameFull);
+							File::copy($targetFileNameFull, $destinationFolder . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION);
 							$pictureInfoSet = array();
 							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
 							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imageName" => $targetThumbFileName);
@@ -602,9 +603,6 @@ class Contents_Controller extends Base_Controller {
 							$c->ProcessDate = new DateTime();
 							$c->ProcessTypeID = eProcessTypes::Insert;
 							$c->save();
-//							if($contentID == 1893) {
-//								echo "zzzzzz";
-//							}
 							$goto = "&goto=" . base64_encode(__('route.crop_image') . "?contentID=" . $contentID);
 						}
 					}
