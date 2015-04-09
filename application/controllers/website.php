@@ -98,6 +98,10 @@ class Website_Controller extends Base_Controller
 	{
 		return View::make('website.pages.tryit');
 	}
+	public function get_tryit_test()
+	{
+		return View::make('website.pages.tryit-test');
+	}
 
 	public function get_why_galepress()
 	{
