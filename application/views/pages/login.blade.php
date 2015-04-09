@@ -49,33 +49,66 @@
                                 <input type="button" class="btn btn-mini" name="login" id="login" value="{{ __('common.login_button') }}" onclick="cUser.login();" />
                             </div>
                         </div>
-                        <div class="form-row" style=""><!-- border-bottom:1px solid #202020; height:35px; -->
+                        <div class="form-row"  style="margin-bottom:0;"><!-- border-bottom:1px solid #202020; height:35px; -->
                             <div class="col-md-12">
                                 <div style="text-align:center"><u><a href="{{URL::to(__('route.forgotmypassword'))}}">{{ __('common.login_forgotmypassword') }}</a></u></div>
                             </div>      
                         </div>
-                        <div class="form-row hide" style="  border-top: 1px solid #525050; margin-top: -10px;">
+                        <div class="form-row">
+
+                          <style type="text/css">
+                          .faceDivider{
+                            border-top: 1px solid #202020;
+                            border-bottom: 1px solid #525050;
+                            margin-bottom: 2px;
+                            /*202020*/
+                          }
+
+                          </style>
+                          
+                            <div class="col-xs-5 col-sm-5 col-md-5"><hr class="faceDivider"></div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 text-center">{{__('common.or')}}</div>
+                            <div class="col-xs-5 col-sm-5 col-md-5"><hr class="faceDivider"></div>
+                          
+                        </div>
+                        <div class="form-row">
                             <div class="col-md-12 text-center">
-                                <script>
+                              <script>
                                 // This is called with the results from from FB.getLoginStatus().
                                 function statusChangeCallback(response) {
-                                  if (response.status === 'connected') {
-                                    // Logged into your app and Facebook.
-                                    testAPI(response.authResponse.accessToken);
-                                  } else if (response.status === 'not_authorized') {
-                                    // The person is logged into Facebook, but not your app.
-                                    //document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
-                                  } else {
-                                    // The person is not logged into Facebook, so we're not sure if
-                                    // they are logged into this app or not.
-                                    //document.getElementById('status').innerHTML = 'Please log ' +'into Facebook.';
-                                  }
+                                  // console.log('statusChangeCallback');
+                                  //console.log(response);
+                                  // The response object is returned with a status field that lets the
+                                  // app know the current login status of the person.
+                                  // Full docs on the response object can be found in the documentation
+                                  // Logged into your app and Facebook.
+                                  FB.login(function (response) {
+                                    if (response.status === "connected") {
+                                        var uID = response.authResponse.userID;
+                                        testAPI(response.authResponse.accessToken);
+                                      }
+                                      else if (response.status === 'not_authorized') {
+                                      // The person is logged into Facebook, but not your app.
+                                         //document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
+                                      } else {
+                                        // The person is not logged into Facebook, so we're not sure if
+                                        // they are logged into this app or not.
+                                         //document.getElementById('status').innerHTML = 'Please log ' +'into Facebook.';
+                                      }
+                                    },
+                                    {
+                                      scope: 'email'
+                                    }
+                                  );
                                 }
 
+                                // This function is called when someone finishes with the Login
+                                // Button.  See the onlogin handler attached to it in the sample
+                                // code below.
                                 function checkLoginState() {
+
                                   FB.getLoginStatus(function(response) {
                                     statusChangeCallback(response);
-
                                   });
                                 }
 
@@ -90,14 +123,17 @@
 
                                 };
 
-
+                                // Load the SDK asynchronously
                                 (function(d, s, id) {
                                   var js, fjs = d.getElementsByTagName(s)[0];
                                   if (d.getElementById(id)) return;
                                   js = d.createElement(s); js.id = id;
-                                  js.src = "http://connect.facebook.net/tr_TR/sdk.js";
+                                  js.src = "//connect.facebook.net/tr_TR/sdk.js";
                                   fjs.parentNode.insertBefore(js, fjs);
                                 }(document, 'script', 'facebook-jssdk'));
+
+                                // Here we run a very simple test of the Graph API after login is
+                                // successful.  See statusChangeCallback() for when this call is made.
 
 
                                 function testAPI(accessToken) {
@@ -106,6 +142,7 @@
                                     // console.log('Successful login for: ' + response.name);
                                     document.getElementById('status').innerHTML =
                                       '{{__("common.thanku")}}, ' + response.name + '!';
+                                       // console.log(JSON.stringify(response));
 
                                       $.ajax({
                                           type: "POST",
@@ -115,11 +152,11 @@
                                               accessToken: accessToken
                                           }
                                       }).success(function(msg) {
-
+                                        // console.log(msg)
                                         document.location.href = "{{__('route.home')}}";
                                       }).fail(function(msg) {
-
-                                        // console.log("basarisiz");
+                                          //console.log(f);
+                                        // console.log(msg)
                                       })
                                   });
                                 }
@@ -158,7 +195,7 @@
 
                               </style>
 
-                                <label style="display:block;">{{__('common.or')}}</label>
+                                <!-- <label style="display:block;">{{__('common.or')}}</label> -->
 
                                 <div class="btn-group social-media">
                                   <button type="button" name="glogin" id="glogin" class="btn fb-button noTouch"><i class="icon-facebook"></i></button>

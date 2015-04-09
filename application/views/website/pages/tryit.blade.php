@@ -135,8 +135,8 @@
                  <div class="panel-body">
                     <div class="row">
                       <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group text-center hide" style="line-height:35px; border-bottom: 1px solid #B5B5B5;">
-                            <script>
+                        <div class="form-group text-center" style="line-height:35px; border-bottom: 1px solid #B5B5B5;">
+                          <script>
                             // This is called with the results from from FB.getLoginStatus().
                             function statusChangeCallback(response) {
                               // console.log('statusChangeCallback');
@@ -144,24 +144,32 @@
                               // The response object is returned with a status field that lets the
                               // app know the current login status of the person.
                               // Full docs on the response object can be found in the documentation
-                              // for FB.getLoginStatus().
-                              if (response.status === 'connected') {
-                                // Logged into your app and Facebook.
-                                testAPI(response.authResponse.accessToken);
-                              } else if (response.status === 'not_authorized') {
-                                // The person is logged into Facebook, but not your app.
-                                // document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
-                              } else {
-                                // The person is not logged into Facebook, so we're not sure if
-                                // they are logged into this app or not.
-                                // document.getElementById('status').innerHTML = 'Please log ' +'into Facebook.';
-                              }
+                              // Logged into your app and Facebook.
+                              FB.login(function (response) {
+                                if (response.status === "connected") {
+                                    var uID = response.authResponse.userID;
+                                    testAPI(response.authResponse.accessToken);
+                                  }
+                                  else if (response.status === 'not_authorized') {
+                                  // The person is logged into Facebook, but not your app.
+                                     //document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
+                                  } else {
+                                    // The person is not logged into Facebook, so we're not sure if
+                                    // they are logged into this app or not.
+                                     //document.getElementById('status').innerHTML = 'Please log ' +'into Facebook.';
+                                  }
+                                },
+                                {
+                                  scope: 'email'
+                                }
+                              );
                             }
 
                             // This function is called when someone finishes with the Login
                             // Button.  See the onlogin handler attached to it in the sample
                             // code below.
                             function checkLoginState() {
+
                               FB.getLoginStatus(function(response) {
                                 statusChangeCallback(response);
                               });
@@ -197,7 +205,7 @@
                                 // console.log('Successful login for: ' + response.name);
                                 document.getElementById('status').innerHTML =
                                   '{{__("common.thanku")}}, ' + response.name + '!';
-                                  // console.log(JSON.stringify(response));
+                                   // console.log(JSON.stringify(response));
 
                                   $.ajax({
                                       type: "POST",
@@ -351,112 +359,112 @@
     </section>
 
     <script>
-    function changeCaptcha() {
-      // var captchaUrl=document.getElementById("captcha").src;
-      // var captchaPrevParam=captchaUrl.substr(0,captchaUrl.indexOf("?"));
-      // captchaNextParam = parseInt(captchaUrl.substr(captchaUrl.indexOf("?")+1))+1;
-      // document.getElementById("captcha").src = captchaPrevParam+"?"+captchaNextParam;
-      location.reload();
-    }
-    // creating Angular Module
-    var websiteApp = angular.module('websiteApp', []);
-    // create angular controller and pass in $scope and $http
+      function changeCaptcha() {
+        // var captchaUrl=document.getElementById("captcha").src;
+        // var captchaPrevParam=captchaUrl.substr(0,captchaUrl.indexOf("?"));
+        // captchaNextParam = parseInt(captchaUrl.substr(captchaUrl.indexOf("?")+1))+1;
+        // document.getElementById("captcha").src = captchaPrevParam+"?"+captchaNextParam;
+        location.reload();
+      }
+      // creating Angular Module
+      var websiteApp = angular.module('websiteApp', []);
+      // create angular controller and pass in $scope and $http
 
-    //FOR PASSWORDS MATCH
-    websiteApp.directive('nxEqual', function() {
-        return {
-            require: 'ngModel',
-            link: function (scope, elem, attrs, model) {
-                if (!attrs.nxEqual) {
-                    //console.error('nxEqual expects a model as an argument!');
-                    return;
-                }
-                scope.$watch(attrs.nxEqual, function (value) {
-                    model.$setValidity('nxEqual', value === model.$viewValue);
-                });
-                model.$parsers.push(function (value) {
-                    var isValid = value === scope.$eval(attrs.nxEqual);
-                    model.$setValidity('nxEqual', isValid);
-                    return isValid ? value : undefined;
-                });
-            }
-        };
-    });
-    websiteApp.controller('FormController',function($scope, $http) {
-      //$scope will allow this to pass between controller and view
-      $scope.master = {};
+      //FOR PASSWORDS MATCH
+      websiteApp.directive('nxEqual', function() {
+          return {
+              require: 'ngModel',
+              link: function (scope, elem, attrs, model) {
+                  if (!attrs.nxEqual) {
+                      //console.error('nxEqual expects a model as an argument!');
+                      return;
+                  }
+                  scope.$watch(attrs.nxEqual, function (value) {
+                      model.$setValidity('nxEqual', value === model.$viewValue);
+                  });
+                  model.$parsers.push(function (value) {
+                      var isValid = value === scope.$eval(attrs.nxEqual);
+                      model.$setValidity('nxEqual', isValid);
+                      return isValid ? value : undefined;
+                  });
+              }
+          };
+      });
+      websiteApp.controller('FormController',function($scope, $http) {
+        //$scope will allow this to pass between controller and view
+        $scope.master = {};
 
-      $scope.reset = function(form) {
-        if (form) {
-          form.$setPristine();
-          form.$setUntouched();
-        }
-        $scope.formData = angular.copy($scope.master);
-      };
-
-
-
-      var param = function(data) {
-            var returnString = '';
-            for (d in data){
-                if (data.hasOwnProperty(d))
-                   returnString += d + '=' + data[d] + '&';
-            }
-            // Remove last ampersand and return
-            return returnString.slice( 0, returnString.length - 1 );
-      };
-      $scope.submitForm = function() {
-        $http({
-        method : 'POST',
-        url : "{{__('route.website_tryit')}}",
-        data : param($scope.formData), // pass in data as strings
-        headers : { 'Content-Type': 'application/x-www-form-urlencoded' } // set the headers so angular passing info as form data (not request payload)
-      })
-        .success(function(data) {
-          if (!data.success) {
-           // if not successful, bind errors to error variables
-           //console.log("hakan",data.errors.name);
-          $scope.errorName = data.errors.name;
-          $scope.errorLastName = data.errors.last_name;
-          $scope.errorEmail = data.errors.email;
-          $scope.errorUserName = data.errors.user_name
-          $scope.errorAppName = data.errors.app_name;
-          $scope.userExist = data.errors.user_name_exist;
-          $scope.emailExist = data.errors.email_exist;
-          $scope.errorPassword = data.errors.password;
-          $scope.errorPasswordVerify = data.errors.password_verify;
-          $scope.errorCaptcha = data.errors.captcha;
-          $scope.errorCaptchaInvalid = data.errors.captcha_invalid;
-
-          //console.log(data);
-
-          }else {
-            $scope.userExist=false;
-            //$scope.reset($scope.form);
-
-            setTimeout(function(){
-              //window.location.href = '/tr/giris';
-              //alert("Mail adresinize iletilen linke tıklayarak hesabınızı aktifleştiriniz.");
-            },750);
-            alert("{{__('website.tryit_form_message_mail')}}");
-
-
-            /*Google Code for Website Conversion Galepress Conversion*/
-            /* <![CDATA[ */
-            var google_conversion_id = 980149592;
-            var google_conversion_language = "en";
-            var google_conversion_format = "3";
-            var google_conversion_color = "ffffff";
-            var google_conversion_label = "vsCnCMHg-VoQ2Mqv0wM";
-            var google_conversion_value = 50.00;
-            var google_conversion_currency = "TRY";
-            var google_remarketing_only = false;
-            /* ]]> */
-
+        $scope.reset = function(form) {
+          if (form) {
+            form.$setPristine();
+            form.$setUntouched();
           }
-        });
-      };
-    });
+          $scope.formData = angular.copy($scope.master);
+        };
+
+
+
+        var param = function(data) {
+              var returnString = '';
+              for (d in data){
+                  if (data.hasOwnProperty(d))
+                     returnString += d + '=' + data[d] + '&';
+              }
+              // Remove last ampersand and return
+              return returnString.slice( 0, returnString.length - 1 );
+        };
+        $scope.submitForm = function() {
+          $http({
+          method : 'POST',
+          url : "{{__('route.website_tryit')}}",
+          data : param($scope.formData), // pass in data as strings
+          headers : { 'Content-Type': 'application/x-www-form-urlencoded' } // set the headers so angular passing info as form data (not request payload)
+        })
+          .success(function(data) {
+            if (!data.success) {
+             // if not successful, bind errors to error variables
+             //console.log("hakan",data.errors.name);
+            $scope.errorName = data.errors.name;
+            $scope.errorLastName = data.errors.last_name;
+            $scope.errorEmail = data.errors.email;
+            $scope.errorUserName = data.errors.user_name
+            $scope.errorAppName = data.errors.app_name;
+            $scope.userExist = data.errors.user_name_exist;
+            $scope.emailExist = data.errors.email_exist;
+            $scope.errorPassword = data.errors.password;
+            $scope.errorPasswordVerify = data.errors.password_verify;
+            $scope.errorCaptcha = data.errors.captcha;
+            $scope.errorCaptchaInvalid = data.errors.captcha_invalid;
+
+            //console.log(data);
+
+            }else {
+              $scope.userExist=false;
+              //$scope.reset($scope.form);
+
+              setTimeout(function(){
+                //window.location.href = '/tr/giris';
+                //alert("Mail adresinize iletilen linke tıklayarak hesabınızı aktifleştiriniz.");
+              },750);
+              alert("{{__('website.tryit_form_message_mail')}}");
+
+
+              /*Google Code for Website Conversion Galepress Conversion*/
+              /* <![CDATA[ */
+              var google_conversion_id = 980149592;
+              var google_conversion_language = "en";
+              var google_conversion_format = "3";
+              var google_conversion_color = "ffffff";
+              var google_conversion_label = "vsCnCMHg-VoQ2Mqv0wM";
+              var google_conversion_value = 50.00;
+              var google_conversion_currency = "TRY";
+              var google_remarketing_only = false;
+              /* ]]> */
+
+            }
+          });
+        };
+      });
     </script>
     <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
     <noscript>

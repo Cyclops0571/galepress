@@ -227,7 +227,7 @@
 
                           <!-- <a href="#" class="btn fb-button" name="fblogin" id="fblogin"><i class="icon-facebook"></i> <div class="btn-insent-border"></div> Facebook ile Oturum Aç</a> -->
                         
-                          <!-- <fb:login-button scope="public_profile,email" data-size="large" onlogin="checkLoginState();" style="margin-top:15px;">Facebook ile Oturum Aç</fb:login-button> -->
+                           <fb:login-button scope="public_profile,email" data-size="large" onlogin="checkLoginState();" style="margin-top:15px;">Facebook ile Oturum Aç</fb:login-button>
 
                           <div id="status"></div>
                           <div id="fb-root"></div>

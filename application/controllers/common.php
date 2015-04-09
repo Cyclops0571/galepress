@@ -535,23 +535,28 @@ class Common_Controller extends Base_Controller
 		$faceUserObj = json_decode($facebookData);
 		$accessToken = Input::get('accessToken', '');
 
+		if(isset($faceUserObj->email)){
 
-		$userEmailControl = DB::table('User')
+			$userEmailControl = DB::table('User')
 				->where('Email', '=', $faceUserObj->email)
 				->where('StatusID', '=', eStatus::Active)
+				->or_where('FbUsername', '=', $faceUserObj->id)
 				->first();
 
-		if($userEmailControl){
-
-			$s = User::find($userEmailControl->UserID);
-				$s->FbUsername = $faceUserObj->id;
-				$s->FbEmail = $faceUserObj->email;
-				$s->FbAccessToken = $accessToken;
-				$s->PWRecoveryDate = new DateTime();
-				$s->ProcessUserID = $userEmailControl->UserID;
-				$s->ProcessDate = new DateTime();
-				$s->ProcessTypeID = eProcessTypes::Update;
-				$s->save();
+			if($userEmailControl){
+				$s = User::find($userEmailControl->UserID);
+					$s->FbUsername = $faceUserObj->id;
+					$s->FbEmail = $faceUserObj->email;
+					$s->FbAccessToken = $accessToken;
+					$s->PWRecoveryDate = new DateTime();
+					$s->ProcessUserID = $userEmailControl->UserID;
+					$s->ProcessDate = new DateTime();
+					$s->ProcessTypeID = eProcessTypes::Update;
+					$s->save();
+			}
+		}
+		else{
+			$faceUserObj->email="";
 		}
 
 		$user = DB::table('User')
