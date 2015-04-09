@@ -82,7 +82,7 @@
                                   // app know the current login status of the person.
                                   // Full docs on the response object can be found in the documentation
                                   // Logged into your app and Facebook.
-                                  FB.login(function (response) {
+                                 
                                     if (response.status === "connected") {
                                         var uID = response.authResponse.userID;
                                         testAPI(response.authResponse.accessToken);
@@ -95,11 +95,6 @@
                                         // they are logged into this app or not.
                                          //document.getElementById('status').innerHTML = 'Please log ' +'into Facebook.';
                                       }
-                                    },
-                                    {
-                                      scope: 'email'
-                                    }
-                                  );
                                 }
 
                                 // This function is called when someone finishes with the Login
@@ -107,8 +102,11 @@
                                 // code below.
                                 function checkLoginState() {
 
-                                  FB.getLoginStatus(function(response) {
+                                  FB.login(function(response) {
                                     statusChangeCallback(response);
+                                  },
+                                  {
+                                    scope: 'email'
                                   });
                                 }
 
