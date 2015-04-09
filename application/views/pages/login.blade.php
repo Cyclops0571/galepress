@@ -35,7 +35,7 @@
                                         <span class="icon-key" id="login-icon-key"></span>
                                     </div>
                                     <input type="password" class="form-control txt required" id="Password" name="Password" onKeyPress="return cUser.loginEvent(event, cUser.login);" placeholder="{{ __('common.users_password') }}"/>
-        							{{ $errors->first('Password', '<p class="error">:message</p>') }}
+                                    {{ $errors->first('Password', '<p class="error">:message</p>') }}
                                 </div>
                             </div>
                         </div>                        
@@ -67,7 +67,7 @@
                           </style>
                           
                             <div class="col-xs-5 col-sm-5 col-md-5"><hr class="faceDivider"></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 text-center">{{__('common.or')}}</div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 text-center" style="padding-top:2px;">{{__('common.or')}}</div>
                             <div class="col-xs-5 col-sm-5 col-md-5"><hr class="faceDivider"></div>
                           
                         </div>
