@@ -78,7 +78,13 @@ class Crop_Controller extends Base_Controller {
 			$sourceImagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
 		}
 		$imageInfo = new imageInfoEx($sourceImagePath);
-		
+		$fileSet = scandir(path("public") .$contentFile->FilePath . "/");
+		$length = strlen(IMAGE_CROPPED_NAME);
+		foreach($fileSet as $fileName) {
+			if(substr($fileName, 0, $length) === IMAGE_CROPPED_NAME){
+				unlink(path("public") . $contentFile->FilePath . "/" . $fileName);
+			}
+		}
 		
 		for($i = 0; $i < count($xCoordinateSet); $i++) {
 			$crop = Crop::find($cropIDSet[$i]);

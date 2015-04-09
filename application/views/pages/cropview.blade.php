@@ -6,7 +6,30 @@ if (FALSE) {
 	$cropSet = new Crop();
 	$imageInfo = new imageInfoEx(null);
 }
+
+if (!$imageInfo->isValid() || count($cropSet) == 0) {
+	//TODO: think for more respectfull way
+	echo 'Resme ulaşılamıyor. Yüklediğiniz Resim Imaj Serverlara gönderilememiş.';
+	exit;
+}
+$imageRatio = $imageInfo->width / $imageInfo->height;
+$displayedWidth = 500;
+$displayedHeight = $imageInfo->height * $displayedWidth / $imageInfo->width;
+$crop = $cropSet[0];
+//seçimde gösterilecek width ve heighti ayarlayalım...
+$wantedRatio = $crop->Width / $crop->Height;
+$cropImageWidth = $displayedWidth;
+$cropImageHeight = $displayedHeight;
+
+if ($wantedRatio > $imageRatio) {
+	//wanted width is bigger than uploaded image width so width will be the max value and the shownImageHeight will be calculated respectively.
+	$cropImageHeight = $cropImageWidth / $wantedRatio;
+} else {
+	$cropImageWidth = $cropImageHeight * $wantedRatio;
+}
+$i = 1; 
 ?>
+
 {{ HTML::style('js/jcrop/jquery.Jcrop.css?v=' . APP_VER); }}
 {{ HTML::script('js/jcrop/jquery.Jcrop.min.js?v=' . APP_VER); }}
 <div class="col-md-12">
@@ -20,7 +43,8 @@ if (FALSE) {
                 onSelect: updateCoords,
                 allowSelect: false
             });
-            $("#saveBtn").removeClass('noTouch');
+			setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
+			$("#saveBtn").removeClass('noTouch');
         };
 
         function setSelection(arr, cropID, id, wantedWidth2) {
@@ -55,14 +79,7 @@ if (FALSE) {
         }
 	</script>
 	<?php
-	if (!$imageInfo->isValid()) {
-		//TODO: think for more respectfull way
-		echo 'Resme ulaşılamıyor. Yüklediğiniz Resim Imaj Serverlara gönderilememiş.';
-		exit;
-	}
-	$imageRatio = $imageInfo->width / $imageInfo->height;
-	$displayedWidth = 500;
-	$displayedHeight = $imageInfo->height * $displayedWidth / $imageInfo->width;
+
 	?>
 	<form onsubmit="return false" action="" method="post">
 		<?php //burada resmin sınırlarının dışına hiç çıkılamasın....    ?>
@@ -73,22 +90,8 @@ if (FALSE) {
 		</div>
 		<div class="col-md-3 ">
 			<?php if (count($cropSet) == 1): ?>
-				<?php $crop = $cropSet[0]; ?>
 				<div class="row">
-					<?php
-					//seçimde gösterilecek width ve heighti ayarlayalım...
-					$wantedRatio = $crop->Width / $crop->Height;
-					$cropImageWidth = $displayedWidth;
-					$cropImageHeight = $displayedHeight;
 
-					if ($wantedRatio > $imageRatio) {
-						//wanted width is bigger than uploaded image width so width will be the max value and the shownImageHeight will be calculated respectively.
-						$cropImageHeight = $cropImageWidth / $wantedRatio;
-					} else {
-						$cropImageWidth = $cropImageHeight * $wantedRatio;
-					}
-					?>
-					<?php $i = 1; ?>
 					<input type="hidden" id="cropIDSet<?php echo $i ?>" name="cropIDSet[]" />
 					<input type="hidden" id="xCoordinateSet<?php echo $i ?>" name="xCoordinateSet[]" />
 					<input type="hidden" id="yCoordinateSet<?php echo $i ?>" name="yCoordinateSet[]" />
@@ -96,19 +99,12 @@ if (FALSE) {
 					<input type="hidden" id="heightSet<?php echo $i ?>" name="heightSet[]" />
 					<div class="col-md-6">
 					</div>
-
-						<script type="text/javascript">
-							$(document).load(function(){
-								setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
-
-							});
-						</script>
 					<div class="col-md-2">
 						<div id="quality<?php echo $i ?>" class=""></div>
 					</div>
-					<?php if (@fopen($imageInfo->dir . "/cropped_image_1536x2048.jpg", "r")): ?>
+					<?php if (@fopen($imageInfo->dir . "/" . IMAGE_CROPPED_2048, "r")): ?>
 						<div class="col-md-4" >
-							<img height="50px;" src="<?php echo $imageInfo->webDir . "/cropped_image_1536x2048.jpg?" . time(); ?>"/>
+							<img height="50px;" src="<?php echo $imageInfo->webDir . "/" . IMAGE_CROPPED_2048 . "?" . time(); ?>"/>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -150,9 +146,9 @@ if (FALSE) {
 							<div class="col-md-2">
 								<div id="quality<?php echo $i ?>" class=""></div>
 							</div>
-							<?php if (@fopen($imageInfo->dir . "/cropped_image_1536x2048.jpg", "r")): ?>
+							<?php if (@fopen($imageInfo->dir . "/" . IMAGE_CROPPED_2048, "r")): ?>
 								<div class="col-md-4" >
-									<img height="50px;" src="<?php echo $imageInfo->webDir . "/cropped_image_1536x2048.jpg?" . time(); ?>"/>
+									<img height="50px;" src="<?php echo $imageInfo->webDir . "/" . IMAGE_CROPPED_2048 . "?" . time(); ?>"/>
 								</div>
 							<?php endif; ?>
 						</div>

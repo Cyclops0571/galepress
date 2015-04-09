@@ -157,6 +157,7 @@ define("NORMAL_IMAGE_FILE", 1101);
 define("SMALL_IMAGE_FILE", 1102);
 define("PDF_FILE", 1001);
 define("IMAGE_CROPPED_NAME", "cropped_image");
+define("IMAGE_CROPPED_2048", "cropped_image_1536x2048.jpg");
 define("IMAGE_ORJ_EXTENSION", "_org.jpg");
 define("IMAGE_ORIGINAL", "original");
 define("IMAGE_EXTENSION", ".jpg");

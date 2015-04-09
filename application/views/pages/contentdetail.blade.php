@@ -633,12 +633,9 @@
 						</div>
 						<div class="form-row" style="text-align:center;">
 							<a href="<?php echo "/" . Session::get('language') . '/' . __('route.crop_image') . "?contentID=" . $ContentID;?>" >
-								<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}" width="200" />
+								<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
 							</a>
 						</div>
-						<blockquote style="border-left:none; font-size:16px;">
-							<p class="reportSubtitle">{{ __('common.contents_tooltip_coverimage') }}</p>
-						</blockquote>
 						<div class="fileupload_container">
 							<div class="input-group file" style="margin: 0 auto;"> 
 								<input type="file" name="CoverImageFile" id="CoverImageFile" class="hidden" />

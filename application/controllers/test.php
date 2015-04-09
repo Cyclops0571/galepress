@@ -19,31 +19,44 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-		$tmp = __('route.crop_image')->get("tr");
-		echo $tmp;
-		//return View::make('test.googlemaps');
+		$path = "/home/admin/public_html/public/files/customer_178/application_187/content_1912/cropped_image";
+		$matches = glob($path . "*");
+		$dir = "/home/admin/public_html/public/files/customer_178/application_187/content_1912/";
+		$fileSet = scandir($dir);
+		$length = strlen(IMAGE_CROPPED_NAME);
+		foreach($fileSet as $fileName) {
+			if(substr($fileName, 0, $length) === IMAGE_CROPPED_NAME){
+				unlink($dir . $fileName);
+			}
+		}
+		exit;
+		
+		
+//		return View::make('test.googlemaps');
 	}
 	
 	public function get_image() {
 		$cropSet = Crop::get();
-		$cropSet instanceof Crop;
-//		foreach($cropSet as $crop) {
-//			echo $crop->CropID; 
-//		}
+		foreach($cropSet as $crop) {
+            /** @var Crop $crop */
+			echo $crop->CropID;
+
+		}
 //		$applicationID = (int) Input::get('applicationID', 20);
 //		$app = Application::find($applicationID);
 		$contentID = (int)Input::get("contentID" , 0);
 		$contentID = 1893;
+        /** @var ContentFile $contentFile */
 		$contentFile = DB::table('ContentFile')
 					->where('ContentID', '=', $contentID)
 					->where('StatusID', '=', eStatus::Active)
 					->order_by('ContentFileID', 'DESC')->first();
-		$contentFile instanceof ContentFile;
+		/** @var ContentCoverImageFile $ccif */
+		/** @var ContentCoverImageFile Description **/
 		$ccif = DB::table('ContentCoverImageFile')
 				->where('ContentFileID', '=', $contentFile->ContentFileID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('ContentCoverImageFileID', 'DESC')->first();
-		$ccif instanceof ContentCoverImageFile;
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
 		$imagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
@@ -55,10 +68,7 @@ class Test_Controller extends Base_Controller{
 	}
 	
 	public function post_image() {
-//		var_dump($_POST);
-//		exit;
-		
-		
+
 		$xCoordinateSet = Input::get("xCoordinateSet");
 		$yCoordinateSet = Input::get("yCoordinateSet");
 		$heightSet = Input::get("heightSet");
@@ -66,17 +76,16 @@ class Test_Controller extends Base_Controller{
 		$cropIDSet = Input::get("cropIDSet");
 		$contentID = (int)Input::get("contentID", 0);
 		$contentID = 1893;
-
+        /** @var ContentFile $contentFile */
 		$contentFile = DB::table('ContentFile')
 					->where('ContentID', '=', $contentID)
 					->where('StatusID', '=', eStatus::Active)
 					->order_by('ContentFileID', 'DESC')->first();
-		$contentFile instanceof ContentFile;
+		/** @var ContentCoverImageFile $ccif */
 		$ccif = DB::table('ContentCoverImageFile')
 				->where('ContentFileID', '=', $contentFile->ContentFileID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('ContentCoverImageFileID', 'DESC')->first();
-		$ccif instanceof ContentCoverImageFile;
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
 		$sourceImagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
@@ -84,11 +93,11 @@ class Test_Controller extends Base_Controller{
 		
 		
 		for($i = 0; $i < count($xCoordinateSet); $i++) {
+            /** @var Crop $crop */
 			$crop = Crop::find($cropIDSet[$i]);
 			if(!$crop) {
 				continue;
 			}
-			$crop instanceof Crop;
 			$im = new Imagick($imageInfo->absolutePath);
 			$im->cropimage($widthSet[$i], $heightSet[$i], $xCoordinateSet[$i], $yCoordinateSet[$i]);
 			$im->resizeImage($crop->Width,$crop->Height,Imagick::FILTER_LANCZOS,1, TRUE);

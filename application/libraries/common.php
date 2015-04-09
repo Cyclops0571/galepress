@@ -482,7 +482,7 @@ class Common {
 		
 		if($Width > 0 && $Height > 0) {
 			//image var mi kontrol edip yok ise olusturup, ismini set edelim;
-			$originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION;
+			$originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . IMAGE_CROPPED_2048;
 			if(!is_file($originalImage)) {
 				$originalImage =  path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
 			}
