@@ -38,6 +38,7 @@ class Ws_v102_Applications_Controller extends Base_Controller
 			*/
 
 			$application = Ws::getApplication($applicationID);
+			$application instanceof Application;
 			$customer = Ws::getCustomer($application->CustomerID);
 
 			//INFO:Save token method come from get_contents
@@ -51,6 +52,8 @@ class Ws_v102_Applications_Controller extends Base_Controller
 				'ApplicationID' => (int)$application->ApplicationID,
 				'ApplicationName' => $application->Name,
 				'ApplicationDetail' => $application->Detail,
+				'ThemeBackground' => $application->ThemeBackground,
+				'ThemeForeground' => $application->ThemeForeground,
 				'ApplicationExpirationDate' => $application->ExpirationDate,
 				'IOSVersion' => $application->IOSVersion,
 				'IOSLink' => $application->IOSLink,
