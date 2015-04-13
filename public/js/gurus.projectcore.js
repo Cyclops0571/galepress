@@ -726,7 +726,9 @@ var cContent = new function () {
                 cNotification.success();
                 $gotoUrl = ret.getValue("goto");
                 if($gotoUrl.length > 0) {
-                    document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                	// window.location.reload();
+                	$('#dialog-cover-image').modal('show');
+                    //document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
                 } else {
                     document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + $("#ContentID").val();
                 }
@@ -737,7 +739,8 @@ var cContent = new function () {
                 $gotoUrl = ret.getValue("goto");
                 if($gotoUrl.length > 0) {
                     console.log($gotoUrl);
-                    document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                    // document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                    $('#dialog-cover-image').modal('show');
                 } else {
                     var qs = cCommon.getQS();
                     document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;	

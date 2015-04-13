@@ -632,7 +632,7 @@
 							<h2 class="header" style="text-align:center;">{{ __('common.contents_coverimage') }}</h2>
 						</div>
 						<div class="form-row" style="text-align:center;">
-							<a href="<?php echo "/" . Session::get('language') . '/' . __('route.crop_image') . "?contentID=" . $ContentID;?>" >
+							<a href="#dialog-cover-image" data-toggle="modal">
 								<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
 							</a>
 						</div>
@@ -933,6 +933,41 @@
                 <div class="modal-footer">
 					<button type="button" class="btn btn-default btn-clean" data-dismiss="modal" onclick="cContent.erase();" style="background:#9d0000;">{{ __('common.detailpage_delete') }}</button>				
                     <button type="button" class="btn btn-default btn-clean" data-dismiss="modal">{{ __('common.contents_category_button_giveup') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+    #dialog-cover-image .modal-dialog{
+    	/*width: 50%;*/
+    	min-width: 516px;
+    	margin-top: 0;
+    	padding: 28px 0;
+    }
+    #dialog-cover-image .modal-dialog .modal-body{
+    	
+    	padding: 0;
+    }
+    </style>
+    <script type="text/javascript">
+	    $(function(){
+	    	$('#coverImageIframe').load(function(){
+	    		// console.log($('#coverImageIframe').contents().find('.jcrop-holder').height());
+	    		$('#dialog-cover-image .modal-dialog .modal-body').css('height',$('#coverImageIframe').contents().find('.jcrop-holder').height()+35+'px');
+	    	})
+	    })
+    </script>
+
+    <div class="modal" id="dialog-cover-image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-left"><span class="icon-crop" style="color:#1681bf; font-size:18px;"></span> Kapak Resminizi Ayarlayın</h4>
+                </div>
+                <div class="modal-body">
+                	<iframe id="coverImageIframe" src="<?php echo "/" . Session::get('language') . '/' . __('route.crop_image') . "?contentID=" . $ContentID;?>" scrolling="no" frameborder="0" style="width:100% !important; height:100% !important; overflow:hidden;"></iframe>
                 </div>
             </div>
         </div>

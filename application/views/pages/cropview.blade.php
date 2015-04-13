@@ -1,173 +1,228 @@
-@layout('layouts.master')
+@layout('layouts.html')
 
-@section('content')
-<?php
-if (FALSE) {
-	$cropSet = new Crop();
-	$imageInfo = new imageInfoEx(null);
+@section('head')
+    @parent
+@endsection
+
+@section('body')
+<style type="text/css">
+body{
+	border-left:7px solid #2D2D2D;
+	border-right:7px solid #2D2D2D;
+
+	-webkit-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.75);
+	box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.75);
 }
-
-if (!$imageInfo->isValid() || count($cropSet) == 0) {
-	//TODO: think for more respectfull way
-	echo 'Resme ulaşılamıyor. Yüklediğiniz Resim Imaj Serverlara gönderilememiş.';
-	exit;
+ .rightPanel .btn-clean{
+	margin:0;
 }
-$imageRatio = $imageInfo->width / $imageInfo->height;
-$displayedWidth = 500;
-$displayedHeight = $imageInfo->height * $displayedWidth / $imageInfo->width;
-$crop = $cropSet[0];
-//seçimde gösterilecek width ve heighti ayarlayalım...
-$wantedRatio = $crop->Width / $crop->Height;
-$cropImageWidth = $displayedWidth;
-$cropImageHeight = $displayedHeight;
-
-if ($wantedRatio > $imageRatio) {
-	//wanted width is bigger than uploaded image width so width will be the max value and the shownImageHeight will be calculated respectively.
-	$cropImageHeight = $cropImageWidth / $wantedRatio;
-} else {
-	$cropImageWidth = $cropImageHeight * $wantedRatio;
+.jcrop-holder{
+  background-color: black;
+  background-image: repeating-linear-gradient(41deg, rgba(102, 102, 102, 1), rgba(102, 102, 102, 1) 6px, rgba(42, 42, 42, 1) 10px, rgba(42, 42, 42, 1) 10px);
 }
-$i = 1; 
-?>
+.jcrop-vline
+{
+	opacity: 1 !important;
+}
+.jcrop-hline
+{
+	opacity: 1 !important;
+}
+.jcrop-handle{
+	border: 1px #1681bf solid !important;
+}
+</style>
+<body class="bg-img-num1">
+    <div class="container content-list" style="width:500px;">
+        <div class="row">
 
-{{ HTML::style('js/jcrop/jquery.Jcrop.css?v=' . APP_VER); }}
-{{ HTML::script('js/jcrop/jquery.Jcrop.min.js?v=' . APP_VER); }}
-<div class="col-md-12">
-	<script type="text/javascript" language="Javascript">
-        var api, current_id;
-        var wantedWidth;
+        <?php
+			if (FALSE) {
+				$cropSet = new Crop();
+				$imageInfo = new imageInfoEx(null);
+			}
 
-        window.onload = function () {
-            api = $.Jcrop('#cropbox', {
-                setSelect: [0, 0, 2000, 2000],
-                onSelect: updateCoords,
-                allowSelect: false
-            });
-			setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
-			$("#saveBtn").removeClass('noTouch');
-        };
+			if (!$imageInfo->isValid() || count($cropSet) == 0) {
+				//TODO: think for more respectfull way
+				echo 'Resme ulaşılamıyor. Yüklediğiniz Resim Imaj Serverlara gönderilememiş.';
+				exit;
+			}
+			$imageRatio = $imageInfo->width / $imageInfo->height;
+			$displayedWidth = 500;
+			$displayedHeight = $imageInfo->height * $displayedWidth / $imageInfo->width;
+			$crop = $cropSet[0];
+			//seçimde gösterilecek width ve heighti ayarlayalım...
+			$wantedRatio = $crop->Width / $crop->Height;
+			$cropImageWidth = $displayedWidth;
+			$cropImageHeight = $displayedHeight;
 
-        function setSelection(arr, cropID, id, wantedWidth2) {
-            current_id = id;
-            wantedWidth = wantedWidth2;
-            $("#cropIDSet" + id).val(cropID);
-            $("button").removeClass("active");
-            $("#button" + id).addClass("active");
-            $("#button" + id).removeClass("my-btn-success");
-            $("#button" + id).addClass("btn-success");
-            api.setOptions({
-                keepRatio: true,
-                aspectRatio: arr[2] / arr[3]
-                        //minSize: [arr[2], arr[3]]
-            });
-            api.setSelect(arr);
-            c = api.tellSelect();
-            updateCoords(c);
-        }
+			if ($wantedRatio > $imageRatio) {
+				//wanted width is bigger than uploaded image width so width will be the max value and the shownImageHeight will be calculated respectively.
+				$cropImageHeight = $cropImageWidth / $wantedRatio;
+			} else {
+				$cropImageWidth = $cropImageHeight * $wantedRatio;
+			}
+			$i = 1; 
+			?>
 
-        function updateCoords(c) {
-            $("#xCoordinateSet" + current_id).val(c.x);
-            $("#yCoordinateSet" + current_id).val(c.y);
-            $("#widthSet" + current_id).val(c.w);
-            $("#heightSet" + current_id).val(c.h);
-        }
-        ;
+			{{ HTML::style('js/jcrop/jquery.Jcrop.css?v=' . APP_VER); }}
+			{{ HTML::script('js/jcrop/jquery.Jcrop.min.js?v=' . APP_VER); }}
+			
+				<script type="text/javascript" language="Javascript">
+			        var api, current_id;
+			        var wantedWidth;
 
-        function reload_page() {
-            if (confirm("Seçimleri sıfırlamak istediğinizden emin misiniz?"))
-                window.location.reload();
-        }
-	</script>
-	<?php
+			        window.onload = function () {
+			            api = $.Jcrop('#cropbox', {
+			                setSelect: [0, 0, 2000, 2000],
+			                onSelect: updateCoords,
+			                allowSelect: false
+			            });
+						setSelection([0, 0, '<?php echo $cropImageWidth ?>', '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>', '<?php echo $i ?>', '<?php echo $crop->Width ?>');
+						$("#saveBtn").removeClass('noTouch');
+			        };
 
-	?>
-	<form onsubmit="return false" action="" method="post">
-		<?php //burada resmin sınırlarının dışına hiç çıkılamasın....    ?>
-		<div class="col-md-4" style="min-width: 500px; background: rgba(0,0,0,0.5);">
-			<div class="row">
-				<img width="<?php echo $displayedWidth ?>" src="<?php echo $imageInfo->webUrl . "?" . time(); ?>" id="cropbox" alt="" />
-			</div>
-		</div>
-		<div class="col-md-3 ">
-			<?php if (count($cropSet) == 1): ?>
-				<div class="row">
+			        function setSelection(arr, cropID, id, wantedWidth2) {
+			            current_id = id;
+			            wantedWidth = wantedWidth2;
+			            $("#cropIDSet" + id).val(cropID);
+			            $("button").removeClass("active");
+			            $("#button" + id).addClass("active");
+			            $("#button" + id).removeClass("my-btn-success");
+			            $("#button" + id).addClass("btn-success");
+			            api.setOptions({
+			                keepRatio: true,
+			                aspectRatio: arr[2] / arr[3]
+			                        //minSize: [arr[2], arr[3]]
+			            });
+			            api.setSelect(arr);
+			            c = api.tellSelect();
+			            updateCoords(c);
+			        }
 
-					<input type="hidden" id="cropIDSet<?php echo $i ?>" name="cropIDSet[]" />
-					<input type="hidden" id="xCoordinateSet<?php echo $i ?>" name="xCoordinateSet[]" />
-					<input type="hidden" id="yCoordinateSet<?php echo $i ?>" name="yCoordinateSet[]" />
-					<input type="hidden" id="widthSet<?php echo $i ?>" name="widthSet[]" />
-					<input type="hidden" id="heightSet<?php echo $i ?>" name="heightSet[]" />
-					<div class="col-md-6">
-					</div>
-					<div class="col-md-2">
-						<div id="quality<?php echo $i ?>" class=""></div>
-					</div>
-					<?php if (@fopen($imageInfo->dir . "/" . IMAGE_CROPPED_2048, "r")): ?>
-						<div class="col-md-4" >
-							<img height="50px;" src="<?php echo $imageInfo->webDir . "/" . IMAGE_CROPPED_2048 . "?" . time(); ?>"/>
+			        function updateCoords(c) {
+			            $("#xCoordinateSet" + current_id).val(c.x);
+			            $("#yCoordinateSet" + current_id).val(c.y);
+			            $("#widthSet" + current_id).val(c.w);
+			            $("#heightSet" + current_id).val(c.h);
+			        }
+			        ;
+
+			        function reload_page() {
+			            if (confirm("Seçimleri sıfırlamak istediğinizden emin misiniz?"))
+			                window.location.reload();
+			        }
+
+			        function dissmiss_iframe(form){
+
+			        	$('body', window.parent.document).removeClass('modal-open').addClass('noTouch');
+			        	$('#dialog-cover-image', window.parent.document).addClass('hide');
+			        	$('.modal-backdrop', window.parent.document).remove();
+			        	form.submit();
+			        	// parent.location.reload();
+			        }
+			        // Bind the event.
+				  	$(document).ready(function() {
+					    if(window.location.hash === "#saved")
+					    {
+					        parent.location.reload();
+					    }
+					});
+					 //your code
+				</script>
+				<?php
+
+				?>
+				<form onsubmit="return false" action="" method="post">
+					<div class="row">
+						<div class="col-md-12 text-center" style="margin:0;">
+							<div class="btn-group">
+	                          <button type="button" class="btn my-btn-send" onclick="reload_page()">Geri Al</button>
+	                          <!-- <button type="button" class="btn my-btn-info" onclick="dissmiss_iframe()">Kapat</button> -->
+	                          <button type="button" class="btn my-btn-success noTouch" id="saveBtn" type="submit" onclick="dissmiss_iframe(this.form)">Kaydet</button>
+	                        </div>
 						</div>
-					<?php endif; ?>
-				</div>
+						
+					</div>
+					<?php //burada resmin sınırlarının dışına hiç çıkılamasın....    ?>
+					<div class="row">
+						<img width="<?php echo $displayedWidth ?>" src="<?php echo $imageInfo->webUrl . "?" . time(); ?>" id="cropbox" alt="" />
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" id="rightPanel" style="padding:0;background:rgba(0,0,0,0.5);width:118px;height:<?php echo $displayedHeight.'px'; ?>">
+						<?php if (count($cropSet) == 1): ?>
+							<div class="row text-center">
 
-			<?php else: ?>
-				<?php $i = 0; ?>
-				<?php foreach ($cropSet as $crop): ?>
-					<?php if ($crop->ParentID == 0): ?>
-						<div class="row">
-							<?php
-							//seçimde gösterilecek width ve heighti ayarlayalım...
-							$wantedRatio = $crop->Width / $crop->Height;
-							$cropImageWidth = $displayedWidth;
-							$cropImageHeight = $displayedHeight;
-
-							if ($wantedRatio > $imageRatio) {
-								//wanted width is bigger than uploaded image width so width will be the max value and the shownImageHeight will be calculated respectively.
-								$cropImageHeight = $cropImageWidth / $wantedRatio;
-							} else {
-								$cropImageWidth = $cropImageHeight * $wantedRatio;
-							}
-							?>
-							<?php $i++; ?>
-							<input type="hidden" id="cropIDSet<?php echo $i ?>" name="cropIDSet[]" />
-							<input type="hidden" id="xCoordinateSet<?php echo $i ?>" name="xCoordinateSet[]" />
-							<input type="hidden" id="yCoordinateSet<?php echo $i ?>" name="yCoordinateSet[]" />
-							<input type="hidden" id="widthSet<?php echo $i ?>" name="widthSet[]" />
-							<input type="hidden" id="heightSet<?php echo $i ?>" name="heightSet[]" />
-							<div class="col-md-6">
-								<button class="btn bmy-btn-success btn-block" id="button<?php echo $i ?>"
-										onclick="setSelection([0, 0, '<?php echo $cropImageWidth ?>',
-			                                        '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>',
-			                                            '<?php echo $i ?>', '<?php echo $crop->Width ?>');
-			                                    this.blur();" 
-										>
-											<?php echo $crop->Description; ?>
-								</button>
-							</div>
-							<div class="col-md-2">
-								<div id="quality<?php echo $i ?>" class=""></div>
-							</div>
-							<?php if (@fopen($imageInfo->dir . "/" . IMAGE_CROPPED_2048, "r")): ?>
-								<div class="col-md-4" >
-									<img height="50px;" src="<?php echo $imageInfo->webDir . "/" . IMAGE_CROPPED_2048 . "?" . time(); ?>"/>
+								<input type="hidden" id="cropIDSet<?php echo $i ?>" name="cropIDSet[]" />
+								<input type="hidden" id="xCoordinateSet<?php echo $i ?>" name="xCoordinateSet[]" />
+								<input type="hidden" id="yCoordinateSet<?php echo $i ?>" name="yCoordinateSet[]" />
+								<input type="hidden" id="widthSet<?php echo $i ?>" name="widthSet[]" />
+								<input type="hidden" id="heightSet<?php echo $i ?>" name="heightSet[]" />
+								<div class="col-md-6">
 								</div>
-							<?php endif; ?>
-						</div>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
+								<div class="col-md-2">
+									<div id="quality<?php echo $i ?>" class=""></div>
+								</div>
+								
+							</div>
 
-			<div class="row">
-				<div class="col-md-6">
-					<input class="btn my-btn-success btn-block noTouch" id="saveBtn" type="submit" onclick="this.form.submit()" value="Kaydet" class="imageCropSaveButton" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<input class="btn my-btn-success btn-block" type="reset" onclick="reload_page()" value="Seçimleri Sıfırla" class="imageCropOtherButton" />
-				</div>
-			</div>
-		</div>
+						<?php else: ?>
+							<?php $i = 0; ?>
+							<?php foreach ($cropSet as $crop): ?>
+								<?php if ($crop->ParentID == 0): ?>
+									<div class="row">
+										<?php
+										//seçimde gösterilecek width ve heighti ayarlayalım...
+										$wantedRatio = $crop->Width / $crop->Height;
+										$cropImageWidth = $displayedWidth;
+										$cropImageHeight = $displayedHeight;
 
-	</form>
-</div>
+										if ($wantedRatio > $imageRatio) {
+											//wanted width is bigger than uploaded image width so width will be the max value and the shownImageHeight will be calculated respectively.
+											$cropImageHeight = $cropImageWidth / $wantedRatio;
+										} else {
+											$cropImageWidth = $cropImageHeight * $wantedRatio;
+										}
+										?>
+										<?php $i++; ?>
+										<input type="hidden" id="cropIDSet<?php echo $i ?>" name="cropIDSet[]" />
+										<input type="hidden" id="xCoordinateSet<?php echo $i ?>" name="xCoordinateSet[]" />
+										<input type="hidden" id="yCoordinateSet<?php echo $i ?>" name="yCoordinateSet[]" />
+										<input type="hidden" id="widthSet<?php echo $i ?>" name="widthSet[]" />
+										<input type="hidden" id="heightSet<?php echo $i ?>" name="heightSet[]" />
+										<div class="col-md-6">
+											<button class="btn bmy-btn-success btn-block" id="button<?php echo $i ?>"
+													onclick="setSelection([0, 0, '<?php echo $cropImageWidth ?>',
+						                                        '<?php echo $cropImageHeight ?>'], '<?php echo $crop->CropID ?>',
+						                                            '<?php echo $i ?>', '<?php echo $crop->Width ?>');
+						                                    this.blur();">
+														<?php echo $crop->Description; ?>
+											</button>
+										</div>
+										<div class="col-md-2">
+											<div id="quality<?php echo $i ?>" class=""></div>
+										</div>
+										
+									</div>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
+						<!-- <div class="row rightPanel">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<div class="btn-group">
+									<button type="button" class="btn my-btn-send" onclick="reload_page()" class="imageCropOtherButton">Seçimleri Sıfırla</button>
+									<button type="button" class="btn my-btn-success noTouch" id="saveBtn" type="submit" onclick="this.form.submit()" class="imageCropSaveButton">Kaydet</button>
+								</div>
+								<button type="button" class="btn btn-block my-btn-success btn-clean noTouch" id="saveBtn" type="submit" onclick="this.form.submit()" class="imageCropSaveButton">Kaydet</button>
+								<button type="button" class="btn btn-block my-btn-send btn-clean" onclick="reload_page()" class="imageCropOtherButton">Seçimleri Sıfırla</button>
+								<button type="button" class="btn btn-block my-btn-info btn-clean">Kapat</button>
+							</div>
+
+						</div> -->
+					</div>
+
+				</form>              
+        </div>
+    </div>
+</body>
 @endsection
