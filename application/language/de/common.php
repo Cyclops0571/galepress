@@ -466,4 +466,9 @@ return array(
 	'or' => 'oder',
 	'thanku' => 'Danke shon',
 
+	'crop_coverimage_title' => 'Ändern Sie die Größe Ihrer Umschlag',
+	'crop_coverimage_error' => 'Keine Bilder gefunden. Ihr Bild hat den Server nicht erreichen.',
+	'undo' => 'Rückgängig Machen',
+	'undo_alert' => 'Sind Sie sicher, Sie wollen, um die Auswahl zurücksetzen?',
+
 );

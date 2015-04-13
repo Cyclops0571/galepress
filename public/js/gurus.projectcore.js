@@ -702,7 +702,6 @@ var cContent = new function () {
         refresh = refresh ? refresh : false;
         //HAKAN START
         if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')){
-            console.log('IsProtected-checked');
             var t = 'GET';
             var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
             var d = "contentID=" + $("#ContentID").val() + '&type=qty';
@@ -724,11 +723,16 @@ var cContent = new function () {
          if(refresh) {
             fSuccess = function (ret) {
                 cNotification.success();
-                $gotoUrl = ret.getValue("goto");
-                if($gotoUrl.length > 0) {
+                gotoUrl = ret.getValue("goto");
+                contentID = ret.getValue("contentID");
+                if(gotoUrl.length > 0) {
                 	// window.location.reload();
                 	$('#dialog-cover-image').modal('show');
-                    //document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                	$('#dialog-cover-image #coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + gotoUrl);
+                	$('#dialog-cover-image #coverImageIframe').attr("iframeContentID",contentID);
+
+                	
+                    //document.location.href = '/' + $('#currentlanguage').val() + '/' + gotoUrl;
                 } else {
                     document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + $("#ContentID").val();
                 }
@@ -736,11 +740,14 @@ var cContent = new function () {
          } else {
             fSuccess = function (ret) {
                 cNotification.success();
-                $gotoUrl = ret.getValue("goto");
-                if($gotoUrl.length > 0) {
-                    console.log($gotoUrl);
-                    // document.location.href = '/' + $('#currentlanguage').val() + '/' + $gotoUrl;
+                gotoUrl = ret.getValue("goto");
+                contentID = ret.getValue("contentID");
+                if(gotoUrl.length > 0) {
+                    // document.location.href = '/' + $('#currentlanguage').val() + '/' + gotoUrl;
                     $('#dialog-cover-image').modal('show');
+                    $('#dialog-cover-image #coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + gotoUrl);
+                    $('#dialog-cover-image #coverImageIframe').attr("iframeContentID",contentID);
+                    
                 } else {
                     var qs = cCommon.getQS();
                     document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;	

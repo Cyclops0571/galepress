@@ -471,4 +471,9 @@ return array(
 	'signup_facebook' => 'Sign Up with Facebook',
 	'or' => 'or',
 	'thanku' => 'Thank you',
+
+	'crop_coverimage_title' => 'Resize Your Cover Image',
+	'crop_coverimage_error' => 'No images found. Your picture did not reach the server.',
+	'undo' => 'Undo',
+	'undo_alert' => 'Are you sure you want to reset the selections?',
 );

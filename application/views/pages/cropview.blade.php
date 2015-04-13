@@ -34,6 +34,7 @@ body{
 }
 </style>
 <body class="bg-img-num1">
+	<input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
     <div class="container content-list" style="width:500px;">
         <div class="row">
 
@@ -45,7 +46,7 @@ body{
 
 			if (!$imageInfo->isValid() || count($cropSet) == 0) {
 				//TODO: think for more respectfull way
-				echo 'Resme ulaşılamıyor. Yüklediğiniz Resim Imaj Serverlara gönderilememiş.';
+				echo '{{ __("common.crop_coverimage_error") }}';
 				exit;
 			}
 			$imageRatio = $imageInfo->width / $imageInfo->height;
@@ -110,7 +111,7 @@ body{
 			        ;
 
 			        function reload_page() {
-			            if (confirm("Seçimleri sıfırlamak istediğinizden emin misiniz?"))
+			            if (confirm("{{ __('common.undo_alert') }}"))
 			                window.location.reload();
 			        }
 
@@ -122,14 +123,21 @@ body{
 			        	form.submit();
 			        	// parent.location.reload();
 			        }
-			        // Bind the event.
 				  	$(document).ready(function() {
+				  		$.urlParam = function(name){
+						    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+						    if (results==null){
+						       return null;
+						    }
+						    else{
+						       return results[1] || 0;
+						    }
+						}
 					    if(window.location.hash === "#saved")
 					    {
-					        parent.location.reload();
+					        parent.location='/' + $('#currentlanguage').val() + '/' + route["contents"] + '/' + $.urlParam('contentID');
 					    }
 					});
-					 //your code
 				</script>
 				<?php
 
@@ -138,16 +146,16 @@ body{
 					<div class="row">
 						<div class="col-md-12 text-center" style="margin:0;">
 							<div class="btn-group">
-	                          <button type="button" class="btn my-btn-send" onclick="reload_page()">Geri Al</button>
+	                          <button type="button" class="btn my-btn-send" onclick="reload_page()">{{ __('common.undo') }}</button>
 	                          <!-- <button type="button" class="btn my-btn-info" onclick="dissmiss_iframe()">Kapat</button> -->
-	                          <button type="button" class="btn my-btn-success noTouch" id="saveBtn" type="submit" onclick="dissmiss_iframe(this.form)">Kaydet</button>
+	                          <button type="button" class="btn my-btn-success noTouch" id="saveBtn" type="submit" onclick="dissmiss_iframe(this.form)">{{ __('common.detailpage_save') }}</button>
 	                        </div>
 						</div>
 						
 					</div>
 					<?php //burada resmin sınırlarının dışına hiç çıkılamasın....    ?>
 					<div class="row">
-						<img width="<?php echo $displayedWidth ?>" src="<?php echo $imageInfo->webUrl . "?" . time(); ?>" id="cropbox" alt="" />
+						<img width="<?php echo $displayedWidth ?>" src="<?php echo $imageInfo->webUrl . "?" . time(); ?>" id="cropbox" alt="" style="opacity:0.4 !important;"/>
 					</div>
 					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" id="rightPanel" style="padding:0;background:rgba(0,0,0,0.5);width:118px;height:<?php echo $displayedHeight.'px'; ?>">
 						<?php if (count($cropSet) == 1): ?>
@@ -207,20 +215,7 @@ body{
 								<?php endif; ?>
 							<?php endforeach; ?>
 						<?php endif; ?>
-						<!-- <div class="row rightPanel">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<div class="btn-group">
-									<button type="button" class="btn my-btn-send" onclick="reload_page()" class="imageCropOtherButton">Seçimleri Sıfırla</button>
-									<button type="button" class="btn my-btn-success noTouch" id="saveBtn" type="submit" onclick="this.form.submit()" class="imageCropSaveButton">Kaydet</button>
-								</div>
-								<button type="button" class="btn btn-block my-btn-success btn-clean noTouch" id="saveBtn" type="submit" onclick="this.form.submit()" class="imageCropSaveButton">Kaydet</button>
-								<button type="button" class="btn btn-block my-btn-send btn-clean" onclick="reload_page()" class="imageCropOtherButton">Seçimleri Sıfırla</button>
-								<button type="button" class="btn btn-block my-btn-info btn-clean">Kapat</button>
-							</div>
-
-						</div> -->
 					</div>
-
 				</form>              
         </div>
     </div>

@@ -45,9 +45,7 @@ class Crop_Controller extends Base_Controller {
 	}
 	
 	public function post_image() {
-
-		
-		
+	
 		$xCoordinateSet = Input::get("xCoordinateSet");
 		$yCoordinateSet = Input::get("yCoordinateSet");
 		$heightSet = Input::get("heightSet");
