@@ -98,6 +98,7 @@ return array(
 	'detailpage_success' => 'İşlem başarıyla yapıldı.',
 	'detailpage_fail' => 'İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz.',
 	'detailpage_validation' => 'Doldurulması gereken alanlar var!',
+	'detailpage_incorrect_input' => 'Doldurulması gereken alanlar var!',
 	
 	'mydetail' => 'Kullanıcı Bilgilerim',
 	'pushnotify_caption' => 'BİLDİRİM GÖNDER',
@@ -471,4 +472,14 @@ return array(
 	'signup_facebook' => 'Facebook ile Uygulama Oluştur',
 	'or' => 'veya',
 	'thanku' => 'Teşekkürler',
+	
+	'maps_list_application' => 'Uygulama',
+	'maps_list_customer' => 'Müşteri',
+	'maps_caption' => 'Adresler',
+	'maps_list_name' => 'İsim',
+	'maps_list_address' => 'Adres',
+	'maps_list_description' => 'Tarif',
+	'maps_list_latitude' => 'Enlem',
+	'maps_list_longitude' => 'Boylam',
+	'maps_list_google_map_id' => 'ID',
 );

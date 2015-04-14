@@ -111,4 +111,11 @@ return array(
 	'crop_image' => 'crop/image',
 
 	'facebook_attempt' => 'login-facebook',
+
+	'maps' => 'maps',
+	'maps_show' => 'maps/(:num)',
+	'maps_new' => 'maps/new',
+	'maps_save' => 'maps/save',
+	'maps_location' => 'maps/location/(:num)',
+
 );

@@ -105,9 +105,10 @@
             </div>
         </div>
     </div>
-	@if(Request::route()->action['as'] == 'contents')
+	@if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
 		{{ View::make('sections.templatechooser', array("templateResults" => $templateResults)); }}
 	@endif
     {{ View::make('sections.sessionmodal') }}
 </body>
+
 @endsection

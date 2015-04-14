@@ -98,6 +98,7 @@ return array(
 	'detailpage_success' => 'Operation is successful.',
 	'detailpage_fail' => 'An error occurred while performing the operation.',
 	'detailpage_validation' => 'Required fields!',
+	'detailpage_incorrect_input' => 'Incorrect input submitted!',
 	
 	'mydetail' => 'My user information',
 	'pushnotify_caption' => 'PUSH NOTIFICATION',
@@ -471,4 +472,14 @@ return array(
 	'signup_facebook' => 'Sign Up with Facebook',
 	'or' => 'or',
 	'thanku' => 'Thank you',
+	
+	'maps_list_customer' => 'Customer',
+	'maps_list_application' => 'Application',
+	'maps_caption' => 'Address List',
+	'maps_list_name' => 'Name',
+	'maps_list_address' => 'Address',
+	'maps_list_description' => 'Description',
+	'maps_list_latitude' => 'Latitude',
+	'maps_list_longitude' => 'Longitude',
+	'maps_list_google_map_id' => 'ID',
 );

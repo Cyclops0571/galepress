@@ -423,8 +423,16 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.crop_image')->get($currentLanguage), array('as' => 'crop_image', 'before' => 'auth', 'uses' => 'crop@image'));
 	// </editor-fold>
 
+	// <editor-fold defaultstate="collapsed" desc="maps">
+	Route::get(__('route.maps')->get($currentLanguage), array('as' => 'maps_list', 'before'=>'auth', 'uses'=>'maps@index'));
+	Route::get(__('route.maps_show')->get($currentLanguage), array('as' => 'maps_show', 'before'=>'auth', 'uses'=>'maps@show'));
+	Route::get(__('route.maps_new')->get($currentLanguage), array('before'=>'auth', 'uses'=>'maps@new'));
+	Route::post(__('route.maps_save')->get($currentLanguage), array('as' => 'maps_save', 'before'=>'crsf|auth', 'uses'=>'maps@save'));
+	Route::get(__('route.maps_location')->get($currentLanguage), array('as' => 'maps_location', 'before'=>'auth', 'uses'=>'maps@location'));
+	// </editor-fold>
 }
 
+Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));
 

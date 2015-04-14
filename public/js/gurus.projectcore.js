@@ -617,11 +617,11 @@ var cApplication = new function () {
 
 	this.doRequest = function (t, u, d, funcError) {
 		return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    }
+    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
-    }
+    };
 
 	this.loadApplicationOptionList = function () {
 
@@ -668,8 +668,9 @@ var cApplication = new function () {
 		else {
 			cNotification.validation();
 		}
-	}
-}
+	};
+        
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // CONTENT
@@ -1143,7 +1144,8 @@ var cCommon = new function () {
             fSuccess = function (ret) {
                 cNotification.success();
                 var qs = cCommon.getQS();
-                document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;	
+                console.log('/' + $('#currentlanguage').val() + '/' + route[param] + qs);
+                //document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;	
             };
         }
 
@@ -1367,7 +1369,7 @@ var cAjax = new function () {
             data: d,
             error: funcError
         }).responseText;
-    }
+    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError, checkIfUserLoggedIn) {
     	
@@ -1426,29 +1428,21 @@ var cAjax = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // FORM
 var cForm = new function () {
-
     this.validate = function (formObj) {
-
         var ret = true;
-
         formObj.each(function () {
-
             $("div.error", $(this)).removeClass("error");
-
-			$(".required", $(this)).each(function () {
-
-				//if ($(this).val().length == 0) {
-				if (!$(this).val()) {
-
-					ret = false;
-					
-					$(this).prev().addClass("error");
-					$(this).parent().prev().addClass("error");
-				}
-			});
+            $(".required", $(this)).each(function () {
+                //if ($(this).val().length == 0) {
+                if (!$(this).val()) {
+                    ret = false;
+                    $(this).prev().addClass("error");
+                    $(this).parent().prev().addClass("error");
+                }
+            });
         });
         return ret;
-    }
+    };
 
     this.serialize = function (formObj) {
 
@@ -1528,5 +1522,17 @@ var modalform = new function () {
     this.close = function () {
         this.modalForm.addClass("hidden");
         $(".ui-widget-overlay").addClass("hidden");
-    }
-}
+    };
+};
+
+var cGoogleMap = new  function() {
+    this.objectName = "maps";
+    this.doRequest = function (t, u, d, funcError) {
+	return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
+    };
+    
+    this.save = function(refresh) {
+        refresh = refresh ? refresh : false;
+        cCommon.save(this.objectName);
+    };
+};

@@ -305,9 +305,14 @@ class Applications_Controller extends Base_Controller {
 				$hasModified = false;
 				$current = Application::find($id);
 				if ($current) {
-					if ((int) $current->CustomerID != (int) Input::get('CustomerID') || $current->Name != Input::get('Name') || $current->Detail != Input::get('Detail') || new DateTime($current->ExpirationDate) != new DateTime(Common::dateWrite(Input::get('ExpirationDate'))) || (int) $current->ApplicationStatusID != (int) Input::get('ApplicationStatusID') || (int) $current->PackageID != (int) Input::get('PackageID') || (int) $current->Blocked != (int) Input::get('Blocked') || (int) $current->Status != (int) Input::get('Status')) {
-						$hasModified = true;
-					}
+					$hasModified = (int) $current->CustomerID != (int) Input::get('CustomerID');
+					$hasModified = $hasModified || $current->Name != Input::get('Name');
+					$hasModified = $hasModified || $current->Detail != Input::get('Detail');
+					$hasModified = $hasModified || new DateTime($current->ExpirationDate) != new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
+					$hasModified = $hasModified || (int) $current->ApplicationStatusID != (int) Input::get('ApplicationStatusID');
+					$hasModified = $hasModified || (int) $current->PackageID != (int) Input::get('PackageID');
+					$hasModified = $hasModified || (int) $current->Blocked != (int) Input::get('Blocked');
+					$hasModified = $hasModified || (int) $current->Status != (int) Input::get('Status');
 				}
 
 				if ($id == 0) {

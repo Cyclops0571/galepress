@@ -63,7 +63,8 @@ class Ws_v102_Applications_Controller extends Base_Controller
 				'ApplicationBlocked' => ((int)$application->Blocked == 1 ? true : false),
 				'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
 				'ApplicationVersion' => (int)$application->Version,
-				'Force' => (int)$application->Force
+				'Force' => (int)$application->Force,
+				'MapService' => '/maps/webview/' . (int)$application->ApplicationID,
 			));
 		});
 	}

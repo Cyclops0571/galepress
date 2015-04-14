@@ -98,6 +98,7 @@ return array(
 	'detailpage_success' => 'Erfolgreich durchgeführt.',
 	'detailpage_fail' => 'Ein Fehler ist aufgetreten, versuchen Sie es bitte später noch einmal.',
 	'detailpage_validation' => 'Es gibt Pflichtfelder!',
+	'detailpage_incorrect_input' => 'Incorrect input submitted!',
 	
 	'mydetail' => 'Meine Benutzerdaten',
 	'pushnotify_caption' => 'PUSH BENACHRICHTIGUNGEN',
@@ -466,4 +467,13 @@ return array(
 	'or' => 'oder',
 	'thanku' => 'Danke shon',
 
+	'maps_list_customer' => 'Kunde',
+	'maps_list_application' => 'Applikation',
+	'maps_caption' => 'Address List',
+	'maps_list_name' => 'Name',
+	'maps_list_address' => 'Address',
+	'maps_list_description' => 'Description',
+	'maps_list_latitude' => 'Latitude',
+	'maps_list_longitude' => 'Longitude',
+	'maps_list_google_map_id' => 'ID',
 );

@@ -111,4 +111,10 @@ return array(
 	'crop_image' => 'crop/image',
 
 	'facebook_attempt' => 'giris-facebook',
+	
+	'maps' => 'harita',
+	'maps_show' => 'harita/(:num)',
+	'maps_new' => 'harita/yeni',
+	'maps_save' => 'harita/kaydet',
+	'maps_location' => 'harita/konum/(:num)',
 );
