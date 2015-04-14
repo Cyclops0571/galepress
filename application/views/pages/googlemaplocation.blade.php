@@ -1,6 +1,10 @@
-@layout('layouts.master')
+@layout('layouts.html')
 
-@section('content')
+@section('head')
+    @parent
+@endsection
+
+@section('body')
 <?php
 if (FALSE) {
 	$googleMapSet = new GoogleMap();
@@ -8,7 +12,27 @@ if (FALSE) {
 ?>
 <style type="text/css">
 	#map_canvas { height:100%; width:100%; position: fixed !important; }
-	#zoomBtn {position: fixed; z-index: 9000000;}
+	#zoomBtn {    
+        position: fixed;
+        z-index: 9000000;
+        top: 96px;
+        width: 30px;
+        height: 30px;
+        left: 2%;
+        font-size: 18px;
+        line-height: 11px;
+        color: rgb(127, 127, 127);
+    }
+    #zoomBtn.widget-icon.widget-icon-circle{
+        background-color: #FFFFFF !important;
+        webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+        
+    }
+     #zoomBtn span{
+        line-height: 11px !important;
+    }
 </style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
@@ -121,6 +145,9 @@ if (FALSE) {
         initialize();
     })
 </script>
-<div id="map_canvas" style="float: left; "></div>
-<input type="button" id="zoomBtn" value="goToCurrentLocation" />
+<body class="bg-img-num1">
+    <input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
+    <div id="map_canvas"></div>
+    <a href="#" id="zoomBtn" class="widget-icon widget-icon-large widget-icon-circle"><span class="icon-location-arrow"></span></a>
+</body>
 @endsection

@@ -428,7 +428,8 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.maps_show')->get($currentLanguage), array('as' => 'maps_show', 'before'=>'auth', 'uses'=>'maps@show'));
 	Route::get(__('route.maps_new')->get($currentLanguage), array('before'=>'auth', 'uses'=>'maps@new'));
 	Route::post(__('route.maps_save')->get($currentLanguage), array('as' => 'maps_save', 'before'=>'crsf|auth', 'uses'=>'maps@save'));
-	Route::get(__('route.maps_location')->get($currentLanguage), array('as' => 'maps_location', 'before'=>'auth', 'uses'=>'maps@location'));
+	Route::get(__('route.maps_location')->get($currentLanguage) . "(:num)", array('as' => 'maps_location', 'before'=>'auth', 'uses'=>'maps@location'));
+	// echo __('route.maps_location')->get($currentLanguage) . "(:num)"; exit;
 	// </editor-fold>
 }
 

@@ -329,3 +329,19 @@ margin-left: 20px;
 .coverImage:hover{
 	opacity: 0.7;
 }
+
+#modalMapsList .modal-content{
+    position: relative;
+    background: transparent !important;
+    background-color: none !important;
+    border: none !important;
+    border-radius: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    background-clip: none !important;
+    outline: none !important;
+}
+
+#modalMapsList .modal-content .modal-body{
+    border: inherit !important;
+}

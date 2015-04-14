@@ -24,6 +24,7 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 									<?php $sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array(); ?>
 									<th scope="col">{{ HTML::link($route.'?page=1'. $appLink  . $searchLink . $sortLink . $sortDirLink, $field[0], $sort) }}</th>
 								<?php endforeach; ?>
+								<th scope="col" class="text-center">{{ __('common.detailpage_delete') }}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -36,6 +37,7 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 								<td>{{ HTML::link($route.'/'.$row->GoogleMapID, $row->Latitude) }}</td>
 								<td>{{ HTML::link($route.'/'.$row->GoogleMapID, $row->Longitude) }}</td>
 								<td>{{ HTML::link($route.'/'.$row->GoogleMapID, $row->GoogleMapID) }}</td>
+								<td class="text-center"><a href="#"><span class="icon-remove-sign"></span></a></td>
 							</tr>
 							@elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 							<tr class="{{ HTML::oddeven($page) }}">
@@ -45,6 +47,7 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 								<td>{{ HTML::link($route.'/'.$row->GoogleMapID, $row->Latitude) }}</td>
 								<td>{{ HTML::link($route.'/'.$row->GoogleMapID, $row->Longitude) }}</td>
 								<td>{{ HTML::link($route.'/'.$row->GoogleMapID, $row->GoogleMapID) }}</td>
+								<td class="text-center"><a href="#"><span class="icon-remove-sign"></span></a></td>
 							</tr>
 							@endif
 							@empty

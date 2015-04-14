@@ -116,5 +116,5 @@ return array(
 	'maps_show' => 'harita/(:num)',
 	'maps_new' => 'harita/yeni',
 	'maps_save' => 'harita/kaydet',
-	'maps_location' => 'harita/konum/(:num)',
+	'maps_location' => 'harita/konum/',
 );

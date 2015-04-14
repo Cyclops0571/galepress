@@ -116,6 +116,6 @@ return array(
 	'maps_show' => 'maps/(:num)',
 	'maps_new' => 'maps/new',
 	'maps_save' => 'maps/save',
-	'maps_location' => 'maps/location/(:num)',
+	'maps_location' => 'maps/location/',
 
 );

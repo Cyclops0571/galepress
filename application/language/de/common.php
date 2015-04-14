@@ -481,5 +481,15 @@ return array(
 	'maps_list_latitude' => 'Breite',
 	'maps_list_longitude' => 'Länge',
 	'maps_list_google_map_id' => 'ID',
+	'map_title' => 'Karte',
+	'map_preview' => 'Vorschau',
+	'map_form_name' => 'Name',
+	'map_form_address' => 'Anschrift',
+	'map_form_desc' => 'Beschreibung',
+	'map_form_latitude' => 'Breite',
+	'map_form_longitude' => 'Länge',
+	'map_form_return' => 'Zurück zur Liste',
+	'map_form_location' => 'Mein Ort',
+	'map_form_save' => 'Speichern',
 
 );
