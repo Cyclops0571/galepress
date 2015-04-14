@@ -473,6 +473,11 @@ return array(
 	'or' => 'veya',
 	'thanku' => 'Teşekkürler',
 	
+	'crop_coverimage_title' => 'Kapak Resminizi Ayarlayın',
+	'crop_coverimage_error' => 'Resim bulunamadı. Yüklediğiniz resim sunucuya gönderilememiş.',
+	'undo' => 'Geri Al',
+	'undo_alert' => 'Seçimleri sıfırlamak istediğinizden emin misiniz?',
+	
 	'maps_list_application' => 'Uygulama',
 	'maps_list_customer' => 'Müşteri',
 	'maps_caption' => 'Adresler',

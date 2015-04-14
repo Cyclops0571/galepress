@@ -473,6 +473,11 @@ return array(
 	'or' => 'or',
 	'thanku' => 'Thank you',
 	
+	'crop_coverimage_title' => 'Resize Your Cover Image',
+	'crop_coverimage_error' => 'No images found. Your picture did not reach the server.',
+	'undo' => 'Undo',
+	'undo_alert' => 'Are you sure you want to reset the selections?',
+	
 	'maps_list_customer' => 'Customer',
 	'maps_list_application' => 'Application',
 	'maps_caption' => 'Address List',

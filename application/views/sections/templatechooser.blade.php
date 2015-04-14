@@ -165,12 +165,12 @@
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label><div class="radio"><input type="radio" class="templateBackgroundChange" name="radio_ex1" value="0"></div>Krem Havası<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;"></label>
+                                            <label><div class="radio"><input type="radio" class="templateBackgroundChange" name="radio_ex1" value="1"></div>Krem Havası<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label><div class="radio"><input type="radio" class="templateBackgroundChange" name="radio_ex1" value="1" checked></div>Koyu Kahve<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
+                                            <label><div class="radio"><input type="radio" class="templateBackgroundChange" name="radio_ex1" value="2" checked></div>Koyu Kahve<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                 </div>
@@ -193,32 +193,32 @@
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label style="color:#2185C5;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="0" checked></div>Gece Mavisi<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;"></label>
+                                            <label style="color:#2185C5;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="1" checked></div>Gece Mavisi<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label style="color:#6D6D6D;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="1"></div>Bataklık Grisi<img src="/img/template-chooser/color-picker-gray.png" width="15" style="margin-left:10px;"></label>
+                                            <label style="color:#6D6D6D;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="2"></div>Bataklık Grisi<img src="/img/template-chooser/color-picker-gray.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label style="color:#049604;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="2"></div>Çimen Yeşili<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;"></label>
+                                            <label style="color:#049604;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="3"></div>Çimen Yeşili<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label style="color:#FF5500;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="3"></div>Portakal Turuncusu<img src="/img/template-chooser/color-picker-orange.png" width="15" style="margin-left:10px;"></label>
+                                            <label style="color:#FF5500;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="4"></div>Portakal Turuncusu<img src="/img/template-chooser/color-picker-orange.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label style="color:#B9121B;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="4"></div>Kiraz Kırmızısı<img src="/img/template-chooser/color-picker-red.png" width="15" style="margin-left:10px;"></label>
+                                            <label style="color:#B9121B;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="5"></div>Kiraz Kırmızısı<img src="/img/template-chooser/color-picker-red.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="radiobox-inline">
-                                            <label style="color:#FFCE00;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="5"></div>Güneş Sarısı<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;"></label>
+                                            <label style="color:#FFCE00;"><div class="radio"><input type="radio" class="templateForegroundChange" name="radio_ex2" value="6"></div>Güneş Sarısı<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;"></label>
                                         </div>
                                     </div>
                                 </div>

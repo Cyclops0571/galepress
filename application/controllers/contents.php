@@ -322,6 +322,7 @@ class Contents_Controller extends Base_Controller {
 	//POST
 	public function post_save() {
 		$goto = "";
+		$contentID=0;
 		$currentUser = Auth::User();
 
 		$id = (int) Input::get($this->pk, '0');
@@ -338,7 +339,7 @@ class Contents_Controller extends Base_Controller {
 			}
 
 			try {
-				DB::transaction(function() use ($currentUser, $id, $applicationID, &$goto) {
+				DB::transaction(function() use ($currentUser, $id, $applicationID, &$goto, &$contentID) {
 					$hasModified = false;
 					$current = Content::find($id);
 					if ($current) {
@@ -610,7 +611,8 @@ class Contents_Controller extends Base_Controller {
 			} catch (Exception $e) {
 				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 			}
-			return "success=" . base64_encode("true") . $goto;
+			$contentLink =  $contentID > 0 ? "&contentID=" . base64_encode($contentID) : ("");
+			return "success=" . base64_encode("true") . $goto . $contentLink;
 		} else {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}

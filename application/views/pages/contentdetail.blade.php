@@ -631,9 +631,9 @@
 						<div class="header">
 							<h2 class="header" style="text-align:center;">{{ __('common.contents_coverimage') }}</h2>
 						</div>
-						<div class="form-row" style="text-align:center;">
-							<a href="<?php echo "/" . Session::get('language') . '/' . __('route.crop_image') . "?contentID=" . $ContentID;?>" >
-								<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
+						<div class="form-row" id="areaCoverImg" style="text-align:center;">
+							<a href="#dialog-cover-image" data-toggle="modal">
+								<img class="coverImage" id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
 							</a>
 						</div>
 						<div class="fileupload_container">
@@ -691,6 +691,11 @@
 													$('#hdnCoverImageFileName').val(fileName);
 													$('#imgPreview').attr("src", "/files/temp/" + fileName);
 													$("[for='CoverImageFile']").addClass("hide");
+
+													//auto save
+													if(parseInt($("#ContentID").val()) > 0) {
+														cContent.save(true);
+													}
 												}
 											},
 											'onCancel': function(file) {
@@ -745,6 +750,11 @@
 													$('#hdnCoverImageFileName').val(fileName);
 													$('#imgPreview').attr("src", "/files/temp/" + fileName);
 													$("[for='CoverImageFile']").addClass("hide");
+
+													//auto save
+													if(parseInt($("#ContentID").val()) > 0) {
+														cContent.save(true);
+													}
 												}
 											},
 											fail: function(e, data)
@@ -935,6 +945,102 @@
                     <button type="button" class="btn btn-default btn-clean" data-dismiss="modal">{{ __('common.contents_category_button_giveup') }}</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+    #dialog-cover-image .modal-dialog{
+    	/*width: 50%;*/
+    	min-width: 516px;
+    	margin-top: 0;
+    	padding: 28px 0;
+    }
+    #dialog-cover-image .modal-dialog .modal-body{
+    	
+    	padding: 0;
+    }
+
+    /* entire container, keeps perspective */
+	.flip-container {
+		perspective: 1000;
+		transform-style: preserve-3d;
+	}
+		/*  UPDATED! flip the pane when hovered */
+		/*.flip-container:hover .front {
+		    transform: rotateY(180deg);
+		}*/
+
+	.flip-container, .front{
+		width: 516px;
+		height: auto;
+	}
+
+	/* flip speed goes here */
+	.flipper {
+		transition: 0.6s;
+		transform-style: preserve-3d;
+
+		position: relative;
+	}
+
+	/* hide back of pane during swap */
+	.front {
+		backface-visibility: hidden;
+		transition: 0.6s;
+		transform-style: preserve-3d;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	</style>
+    <script type="text/javascript">
+	    $(function(){
+	    	if(parseInt($("#ContentID").val()) == 0) {
+	    		$('#areaCoverImg').addClass('noTouch');
+	    	}
+	    	$('#coverImageIframe').load(function(){
+	    		// console.log($('#coverImageIframe').contents().find('.jcrop-holder').height());
+	    		$('#dialog-cover-image .modal-dialog .modal-body').css('height',$('#coverImageIframe').contents().find('.jcrop-holder').height()+35+'px');
+	    	});
+
+	    	$('#dialog-cover-image .modal-dialog .modal-body').on('resize',function(){
+	    		if($(this).height()>200){
+	    			$('#dialog-cover-image').show();
+		    		$('#dialog-cover-image .front').css('transform','rotateY(360deg)');
+	    		}
+    		})
+
+	    	$('#dialog-cover-image').on('hidden.bs.modal', function (e) {
+	    		$('#dialog-cover-image').hide();
+			  	$(this).find('#coverImageIframe').attr('src','');
+	    		$('#dialog-cover-image .front').css('transform','rotateY(90deg)');
+			});
+			$('#dialog-cover-image').on('shown.bs.modal', function (e) {
+				// $('#dialog-cover-image .modal-dialog').animate({width:516},{duration:1500});
+				if(parseInt($("#ContentID").val()) > 0) {
+					$('#coverImageIframe').attr('iframeContentID',parseInt($("#ContentID").val()));					
+				}
+			  	$(this).find('#coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + route["crop_image"] + "?contentID=" + $('#coverImageIframe').attr('iframeContentID') );
+			});
+	    })
+    </script>
+
+    <div class="modal" id="dialog-cover-image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true" style="display:none;">
+        <div class="modal-dialog flip-container">
+        	<div class="flip-container">
+        		<div class="front" style="transform: rotateY(90deg);">
+					<div class="modal-content">
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                    <h4 class="modal-title text-left"><span class="icon-crop" style="color:#1681bf; font-size:18px;"></span> {{ __('common.crop_coverimage_title') }}</h4>
+		                </div>
+		                <div class="modal-body">
+		                	<iframe id="coverImageIframe" src="" scrolling="no" frameborder="0" style="width:100% !important; height:100% !important; overflow:hidden;"></iframe>
+		                </div>
+		            </div>
+				</div>
+        	</div>
         </div>
     </div>
 @endsection

@@ -45,9 +45,7 @@ class Crop_Controller extends Base_Controller {
 	}
 	
 	public function post_image() {
-
-		
-		
+	
 		$xCoordinateSet = Input::get("xCoordinateSet");
 		$yCoordinateSet = Input::get("yCoordinateSet");
 		$heightSet = Input::get("heightSet");
@@ -98,6 +96,6 @@ class Crop_Controller extends Base_Controller {
 			$im->writeImage(path('public') .  $contentFile->FilePath . "/" . IMAGE_CROPPED_NAME . "_" . $crop->Width . "x" . $crop->Height . ".jpg" );
 			$im->destroy();
 		}
-		return Redirect::to(__('route.contents') . '/' . $contentID);
+		return Redirect::to($this->route.'#saved');
 	}
 }
