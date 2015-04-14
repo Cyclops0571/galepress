@@ -633,7 +633,7 @@
 						</div>
 						<div class="form-row" id="areaCoverImg" style="text-align:center;">
 							<a href="#dialog-cover-image" data-toggle="modal">
-								<img id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
+								<img class="coverImage" id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
 							</a>
 						</div>
 						<div class="fileupload_container">
