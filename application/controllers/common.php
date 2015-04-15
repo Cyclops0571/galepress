@@ -608,8 +608,10 @@ class Common_Controller extends Base_Controller
 			$s->PackageID = 5;
 			$s->Blocked = 0;
 			$s->Status = 1;
+			$s->Trail = 1;
 			$s->Version = 1;
 			$s->StatusID = eStatus::Active;
+			$s->Trail = 1;
 			$s->CreatorUserID = -1;
 			$s->DateCreated = new DateTime();
 			$s->ProcessUserID = -1;

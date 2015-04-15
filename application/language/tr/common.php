@@ -497,4 +497,8 @@ return array(
 	'map_form_return' => 'Listeye Dön',
 	'map_form_location' => 'Konumum',
 	'map_form_save' => 'Kaydet',
+
+	'applications_trail_title' => 'Müşteri/Deneme',
+	'applications_trail_customer' => 'Müşteri',
+	'applications_trail_demo' => "<span style=\"font-style:italic; color:#BFC75D;\">Deneme</span>",
 );

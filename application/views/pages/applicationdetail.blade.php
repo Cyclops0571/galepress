@@ -17,6 +17,7 @@
 		$PackageID = 0;
 		$Blocked = 0;
 		$Status = 0;
+		$Trail = 0;
 		$Version = 0;
 		$NotificationText = '';
 		$CkPem = '';
@@ -37,6 +38,7 @@
 			$PackageID = (int)$row->PackageID;
 			$Blocked = (int)$row->Blocked;
 			$Status = (int)$row->Status;
+			$Trail = (int)$row->Trail;
 			$Version = (int)$row->Version;
 			$NotificationText = $row->NotificationText;
 			$CkPem = $row->CkPem;
@@ -311,6 +313,15 @@
 							<div class="checkbox-inline">
 								<input type="checkbox" name="Status" id="Status" value="1"{{ ((int)$Status == 1 ? ' checked="checked"' : '') }} />
 							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-3">Trail?</div>
+						<div class="col-md-9">
+							<select class="form-control select2 required" style="width: 100%;" tabindex="-1" id="Trail" name="Trail">
+								<option value="2"{{ ($Trail == 2 ? ' selected="selected"' : '') }}>Müşterimiz</option>
+								<option value="1"{{ ($Trail == 1 ? ' selected="selected"' : '') }}>Deneme Sürümü</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-row">

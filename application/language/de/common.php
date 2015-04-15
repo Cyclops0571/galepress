@@ -492,4 +492,8 @@ return array(
 	'map_form_location' => 'Mein Ort',
 	'map_form_save' => 'Speichern',
 
+	'applications_trail_title' => 'Customer/Trail',
+	'applications_trail_customer' => 'Customer',
+	'applications_trail_demo' => '<span style="font-style:italic; color:#BFC75D;">Trail</span>',
+
 );
