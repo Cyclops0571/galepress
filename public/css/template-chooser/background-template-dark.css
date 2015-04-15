@@ -30,3 +30,23 @@
 .templateContentScreen .thumbnails{
     background: rgba(30,30,32,0.9) !important;
 }
+.templateExtrasScreen{
+    background: rgba(30,30,32,0.9) !important;
+}
+/*.templateExtrasScreen .container{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.templateExtrasScreen .container .form-row{
+    position: absolute;
+    height: 100%;
+    right: 0;
+}
+.templateExtrasScreen .social-icons{
+    background: url(/img/template-chooser/social-icons-blue.png) center top;
+    background-size: 60% auto !important;
+    background-repeat: no-repeat !important;
+    height: 100%;
+}*/

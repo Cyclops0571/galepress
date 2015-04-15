@@ -1,5 +1,6 @@
 	
 @if(Auth::User()->UserTypeID != eUserTypes::Manager)
+	
 <div class="modal in" id="modalTemplateChooser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; overflow:hidden;">
 	<div class="modal-dialog" style="width:40%; margin-top:0 !important; padding-top:0 !important;">
 		<div class="modal-content">
@@ -25,9 +26,9 @@
 													<div class="header-categories"></div>
 												</div>
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
+                                                    <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
 													<div class="header-extras" style="cursor:pointer;"></div>
-												</div>
+                                                    </div> -->
 											</div>
 											<div class="container">
 												<div class="form-row">
@@ -52,6 +53,7 @@
 														<div class="content-bar">
 															<div class="col-md-12">{{$detail}}</div>
 															<div class="col-md-12">{{$name}}</div>
+<div class="col-md-12">Sayı 16</div>
 														</div>
 													</div>
 												<?php endfor; ?>
@@ -66,34 +68,85 @@
 												</div>
 											</div>
 										</div>
-										<div class="templateExtrasScreen hide" style="opacity:0;">
-											<img src="/img/template-chooser/extras-panel.jpg" width="100%" height="100%">
+                                            <div class="templateExtrasScreen hide" style="opacity:0; background:#ab2626;">
 											<div class="container">
 												<div class="form-row">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 social-icons"></div>
+                                                        <div class="col-md-12"><img src="/img/template-chooser/logo.png" width="100%"></div>
+                                                    </div>
+                                                    <div class="form-row" style="margin-top:17px;">
+                                                        <div class="col-md-12">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><span class="icon-search"></span></div>
+                                                                <input type="text" class="form-control" placeholder="Ara...">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row" style="background:white; margin-top:10px;">
+                                                        <div class="col-md-2">
+                                                            <img src="/img/template-chooser/left_menu_category_icon2.png" width="12">
+                                                        </div>
+                                                        <div class="col-md-8" style="color:#ab2626;">
+                                                            Kategoriler
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <img src="/img/template-chooser/left_menu_down2.png" width="12">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-md-12">
+                                                            <ul style="list-style:none;">
+                                                                <li><span class="category-disable"></span><span> Genel</span></li>
+                                                                <li><span class="category-disable"></span><span> Broşürler</span></li>
+                                                                <li><span class="category-active"></span><span> Kataloglar</span></li>
+                                                                <li><span class="category-disable"></span><span> Kitaplar</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row" style="background:white;">
+                                                        <div class="col-md-2">
+                                                            <img src="/img/template-chooser/left_menu_link2.png" width="12">
+                                                        </div>
+                                                        <div class="col-md-8" style="color:#ab2626;">
+                                                            Bağlantılar
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <img src="/img/template-chooser/left_menu_down2.png" width="12">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-md-12">
+                                                            <ul style="list-style:none;">
+                                                                <li><span class="links links-web"></span> Web</li>
+                                                                <li><span class="links links-face"></span> Facebook</li>
+                                                                <li><span class="links links-twitter"></span> Twitter</li>
+                                                                <li><span class="links links-instagram"></span> Instagram</li>
+                                                                <li><span class="links links-linkedin"></span> Linkedin</li>
+                                                                <li><span class="links links-mail"></span> Mail</li>
+                                                            </ul>
+                                                        </div>
 												</div>
 											</div>
 										</div>
 										@if(count($templateResults)>0 && $templateResults[0]->ContentID!=null)
-										<div class="templateReadScreen hide" style="opacity:0;">
+                                            <div class="templateReadScreen hide" style="opacity:0; background:red;">
 											<div class="loading"></div>
-											<div id="loading-text">95%</div>
+                                                <div id="loading-text"><i class="icon-remove"></i> %82</div>
 											<div class="container">
-												<div class="form-row">
-													<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-														<p style="overflow:hidden;">{{$templateResults[0]->Detail}}</p>
-														<p style="overflow:hidden;">{{$templateResults[0]->Name}}</p>
-														<p style="overflow:hidden; width:90%;">{{$templateResults[0]->MonthlyName}}</p>
+                                                    <div class="form-row" style="height:55px;">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-15px;">
+                                                            <p style="overflow:hidden;">&nbsp;{{$templateResults[0]->Detail}}</p>
+                                                            <p style="overflow:hidden;">&nbsp;{{$templateResults[0]->Name}}</p>
+                                                            <p style="overflow:hidden; width:90%;">&nbsp;{{$templateResults[0]->MonthlyName}}</p>
 													</div>
-													<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 														<div class="form-row">
 															<div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-																<input type="button" class="btn" id="templateBtnUpdate" value="Güncelle" style="cursor:default;">
+                                                                    <input type="button" class="btn" id="templateBtnUpdate" value="Güncelle" style="cursor:default; margin-top:-15px;">
 															</div>
 														</div>
 														<div class="form-row">
 															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-																<input type="button" class="btn" id="templateBtnRead" value="Oku" style="margin-left:-10px;">
+                                                                    <input type="button" class="btn" id="templateBtnRead" value="Oku" style="margin-left:-6px;">
 															</div>
 															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
 																<input type="button" class="btn" id="templateBtnDelete" value="Sil" style="cursor:default;">
@@ -111,9 +164,12 @@
 
 										<div class="templateContentScreen hide" style="opacity:0;">
 											<div class="header clearfix">
-												<div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-													<div class="col-md-2"><i class="app-buttons icon-reorder"></i></div>
+                                                        <div class="header-table-of-contents"></div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
+                                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
+                                                        <div class="header-share"></div>
 												</div>
 											</div>
 											<div class="content-page">
@@ -130,7 +186,7 @@
 											</div>
 											<div class="footer text-center">
 												<div class="footer-buttons">
-													<div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
+                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
 													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
 													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
 													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
@@ -149,7 +205,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="block block-drop-shadow bg-light-rtl" id="templateChooserBox" style="position:fixed; z-index:9999; display:none;">
 	<!-- Tema seçici için sayfanın sağında çıkan filtrelemeyle ilgili açılır kapanır bölüm. -->
 	<div class="site-settings" style="display:block;">

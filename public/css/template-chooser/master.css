@@ -16,9 +16,10 @@
     height: 28px;
 }
 .templateScreen .header .header-categories{
-    background: url(/img/template-chooser/header-categories-blue.png) center left;
+    background: url(/img/template-chooser/menu1.png) center left;
     background-size: 60% auto !important;
     background-repeat: no-repeat !important; height:22px;
+    cursor: pointer;
 }
 .templateScreen .header .header-extras{
     background: url(/img/template-chooser/header-extras-blue.png) center right;
@@ -66,18 +67,18 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 20%;
+    height: 30%;
     color: #2185C5;
-    background: rgba(30,30,32,0.7);
+    background: rgba(30,30,32,0.85);
     overflow: hidden;
 }
-.templateScreen .container .content-bar [class*="col-"]:last-child {
+.templateScreen .container .content-bar [class*="col-"]:nth-child(2){
     font-weight: bold;
     font-size:1.2em;
 }
 .templateScreen > .container .content-bar [class*="col-"]{
     text-align: left;
-    height:50%; left:5%; overflow:hidden;
+    height:33%; left:5%; overflow:hidden;
 }
 .templateScreen .footer{
     background: rgba(30,30,32,0.9);
@@ -88,28 +89,28 @@
     bottom: 0;
 }
 .templateScreen .footer .footer-home{
-    background: url(/img/template-chooser/footer-home-blue.png) center center;
-    background-size: 75% auto !important;
-    background-repeat: no-repeat !important; height:28px;
+    background: url(/img/template-chooser/home_selected1.png) center center;
+    background-size: 46% auto !important;
+    background-repeat: no-repeat !important; height:100%;
     cursor: pointer !important;
 }
 .templateScreen .footer .footer-library{
-    background: url(/img/template-chooser/footer-library-blue.png) center center;
-    background-size: 75% auto !important;
-    background-repeat: no-repeat !important; height:28px;
+    background: url(/img/template-chooser/library_selected1.png) center center;
+    background-size: 44% auto !important;
+    background-repeat: no-repeat !important; height:100%;
 }
 .templateScreen .footer .footer-download{
-    background: url(/img/template-chooser/footer-download-blue.png) center center;
-    background-size: 75% auto !important;
-    background-repeat: no-repeat !important; height:28px;
+    background: url(/img/template-chooser/download_selected1.png) center center;
+    background-size: 48% auto !important;
+    background-repeat: no-repeat !important; height:100%;
 }
 .templateScreen .footer .footer-info{
-    background: url(/img/template-chooser/footer-info-blue.png) center center;
-    background-size: 75% auto !important;
-    background-repeat: no-repeat !important; height:28px;
+    background: url(/img/template-chooser/info_selected1.png) center center;
+    background-size: 13% auto !important;
+    background-repeat: no-repeat !important; height:100%;
 }
 .templateScreen > .footer [class*="col-"]{
-    margin: 0 8px;
+    margin: 0 10px;
 }
 .templateScreen .app-name{
     color:#2185C5;
@@ -119,11 +120,8 @@
 }
 .templateScreen .footer-buttons{
     display: inline-block;
-    width: 60%;
+    width: 75%;
     height: 28px;
-}
-.templateScreen .footer-buttons .app-buttons{
-    padding: 0px 10px;
 }
 .templateScreen .app-buttons{
     font-size: 1.5em;
@@ -159,14 +157,15 @@
 }
 .templateReadScreen .content-buttons input{
     width: 100%;
-    font-size: 0.8em;
+    font-size: 0.65em;
     padding: 0;
-    height: 22px;
-    line-height: 22px;
+    height: 23px;
+    line-height: 23px;
     background: transparent;
     border: 1px solid #2185C5;
     color: #2185C5;
-    border-radius: 2px;
+    border-radius: 5px;
+    margin-top: -11px;
 }
 
 .templateReadScreen .content-buttons input:hover{
@@ -200,10 +199,13 @@
     background: #2185C5;
 }
 .templateReadScreen #loading-text{
-    float: right;
-    margin-right: 5px;
+    float: left;
+    margin-left: 3px;
     margin-top: -10px;
     font-size: 0.8em;
+}
+.templateReadScreen #loading-text i{
+    font-size: 12px;
 }
 /********************************************************/
 .templateContentScreen div{
@@ -222,6 +224,16 @@
     top: 0;
     width: 100%;
 }
+.templateContentScreen .header .header-table-of-contents{
+    background: url(/img/template-chooser/reader_menu1.png) left center;
+    background-size: 70% auto !important;
+    background-repeat: no-repeat !important; height:30px;
+}
+.templateContentScreen .header .header-share{
+    background: url(/img/template-chooser/reader_share1.png) right center;
+    background-size: 44% auto !important;
+    background-repeat: no-repeat !important; height:30px;
+}
 .templateContentScreen .content-page{
     position: absolute;
     top: 0;
@@ -237,6 +249,9 @@
     height: 28px;
     background: rgba(30,30,32,0.9);
 }
+.templateContentScreen > .footer [class*="col-"]{
+    margin: 0 10px;
+}
 .templateContentScreen .footer img{
     vertical-align: middle;
     cursor: pointer;
@@ -248,6 +263,11 @@
     position: absolute;
     bottom: 28px;
     overflow: hidden;
+}
+.templateContentScreen .footer-buttons{
+    display: inline-block;
+    width: 75%;
+    height: 28px;
 }
 .templateContentScreen .thumbnails img{
     width: 100%;
@@ -275,28 +295,29 @@
 }
 .templateContentScreen .footer-buttons{
     display: inline-block;
-    width: 60%;
+      width: 75%;
+      height: 28px;
 }
 .templateContentScreen .footer .footer-home{
-    background: url(/img/template-chooser/footer-home-blue.png) center center;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:29px;
+    background: url(/img/template-chooser/home_selected1.png) center center;
+    background-size: 46% auto !important;
+    background-repeat: no-repeat !important; height:100%;
     cursor: pointer !important;
 }
 .templateContentScreen .footer .footer-library{
-    background: url(/img/template-chooser/footer-library-blue.png) center center;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:29px;
+    background: url(/img/template-chooser/library_selected1.png) center center;
+    background-size: 44% auto !important;
+    background-repeat: no-repeat !important; height:100%;
 }
 .templateContentScreen .footer .footer-download{
-    background: url(/img/template-chooser/footer-download-blue.png) center center;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:29px;
+    background: url(/img/template-chooser/download_selected1.png) center center;
+    background-size: 48% auto !important;
+    background-repeat: no-repeat !important; height:100%;
 }
 .templateContentScreen .footer .footer-info{
-    background: url(/img/template-chooser/footer-info-blue.png) center center;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:29px;
+    background: url(/img/template-chooser/info_selected1.png) center center;
+    background-size: 13% auto !important;
+    background-repeat: no-repeat !important; height:100%;
 }
 .templateContentScreen .app-buttons{
     font-size: 1.2em;
@@ -351,24 +372,107 @@
 .templateExtrasScreen{
     position: absolute;
     top: 0;
-    right: 0;
-    width: 20%;
+    left: 0;
+    width: 75%;
     height: 100%;
+}
+.templateExtrasScreen div{
+    text-shadow: none !important;
 }
 .templateExtrasScreen .container{
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-y:scroll; 
 }
-.templateExtrasScreen .container .form-row{
-    position: absolute;
-    height: 100%;
-    right: 0;
+.templateExtrasScreen .container ul{
+    padding: 0; 
 }
-.templateExtrasScreen .social-icons{
+.templateExtrasScreen > .container .form-row [class*="col-md-8"]{
+    padding: 0;
+}
+.templateExtrasScreen .container input{
+    border-radius: 40px;
+}
+.templateExtrasScreen li .category-active{
+    background: url(/img/template-chooser/category_select_light.png) center 5px;
+    background-size: 60% auto !important;
+    background-repeat: no-repeat !important;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.templateExtrasScreen li .category-active + span{
+   opacity: 0.65;
+}
+.templateExtrasScreen li .category-disable{
+    background: none;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.templateExtrasScreen li .category-disable + span{
+   opacity: 1;
+}
+.templateExtrasScreen .links{
+    background-size: 60% auto !important;
+    background-repeat: no-repeat !important;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.templateExtrasScreen .links.links-web{
+    background: url(/img/template-chooser/web.png) center 5px;
+}
+.templateExtrasScreen .links.links-face{
+    background: url(/img/template-chooser/facebook_light.png) center 5px;
+}
+.templateExtrasScreen .links.links-twitter{
+    background: url(/img/template-chooser/twitter.png) center 5px;
+}
+.templateExtrasScreen .links.links-instagram{
+    background: url(/img/template-chooser/instagram_light.png) center 5px;
+}
+.templateExtrasScreen .links.links-linkedin{
+    background: url(/img/template-chooser/linkedin_light.png) center 5px;
+}
+.templateExtrasScreen .links.links-mail{
+    background: url(/img/template-chooser/mail_light.png) center 5px;
+}
+.templateExtrasScreen .container .input-group-addon{
+    background: rgba(0,0,0,0.2);
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+.templateExtrasScreen .container .form-control::-webkit-input-placeholder {
+   color: white !important;
+   opacity: 1 !important;
+}
+
+.templateExtrasScreen .container form-control:-moz-placeholder { /* Firefox 18- */
+   color: white !important;
+   opacity: 1 !important;  
+}
+
+.templateExtrasScreen .container form-control::-moz-placeholder {  /* Firefox 19+ */
+   color: white !important;
+   opacity: 1 !important;  
+}
+
+.templateExtrasScreen .container form-control:-ms-input-placeholder {  
+   color: white !important;
+   opacity: 1 !important;  
+}
+
+/*.templateExtrasScreen .social-icons{
     background: url(/img/template-chooser/social-icons-blue.png) center top;
     background-size: 60% auto !important;
     background-repeat: no-repeat !important;
     height: 100%;
-}
+}*/

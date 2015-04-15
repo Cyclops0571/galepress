@@ -18,7 +18,7 @@
                     </a>
                 @endif
 
-                <!--<a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a> -->
+                <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
           
         @else
             <a href="{{URL::to(__('route.'.$page.'_new'))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle"><span class="icon-plus"></span></a>
