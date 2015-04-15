@@ -239,7 +239,7 @@ var cInteractivity = new function () {
         img.src = src;
     };
 
-    this.clearPage = function ()     {
+    this.clearPage = function () {
         $("#pdf-container .tooltip-trigger").remove();
         $("#pdf-container .modal-component").remove();
 
@@ -353,7 +353,7 @@ var cInteractivity = new function () {
 // USER
 var cUser = new function () {
     this.objectName = "users";
-    
+
     this.doRequest = function (t, u, d, funcError) {
         return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
     };
@@ -1039,22 +1039,27 @@ var cCommon = new function () {
         cAjax.doAsyncRequest(t, u, d, funcSuccess, funcError, true);
     };
 
-    this.save = function (param, fSuccess) {
+    this.save = function (param, fSuccess, formID) {
         if (typeof fSuccess !== 'function') {
             fSuccess = function (ret) {
                 cNotification.success();
                 var qs = cCommon.getQS();
-                console.log('/' + $('#currentlanguage').val() + '/' + route[param] + qs);
             };
         }
 
         cNotification.hide();
-        var frm = $("form:first");
+        var frm = null;
+        if (typeof formID !== 'undefined') {
+            frm = $("#" + formID);
+        } else {
+            frm = $("form:first");
+        }
         var validate = cForm.validate(frm);
         if (validate) {
             cNotification.loader();
 
             var t = 'POST';
+            console.log(param + "_save");
             var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
             var d = cForm.serialize(frm);
             cCommon.doAsyncRequest(t, u, d, fSuccess);
@@ -1261,7 +1266,7 @@ var cAjax = new function () {
             };
         }
         checkIfUserLoggedIn = (typeof checkIfUserLoggedIn === "undefined") ? true : false;
-        $.ajax ({
+        $.ajax({
             type: t,
             url: u,
             data: d,
@@ -1382,8 +1387,148 @@ var cGoogleMap = new function () {
         return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
     };
 
-    this.save = function (refresh) {
-        refresh = refresh ? refresh : false;
+    this.save = function () {
         cCommon.save(this.objectName);
+    };
+};
+
+var cTemplate = new function () {
+    var background = 1;
+    var foreground = 1;
+    this.newbackground = 1;
+    this.newforeground = 1;
+    this.objectName = "contents_template";
+    this.doRequest = function (t, u, d, funcError) {
+        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
+    };
+
+    this.save = function () {
+        var fsuccess = function(ret) {
+            background = $('.templateBackgroundChange:checked').val();
+            foreground = $('.templateForegroundChange:checked').val();
+            cNotification.success();
+        };
+        cCommon.save(this.objectName, fsuccess, "templateForm");
+    };
+
+    this.initialize = function(bg, fg) {
+        background = bg;
+        foreground = fg;
+        $(".templateScreen").click(function (event) {
+            $(".templateReadScreen img").attr('src', event.target.src);
+        });
+
+        $('.templateBackgroundChange').on('change', function (e) {
+            $('.app-background-templates').remove();
+            if (this.value == 1) {
+                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
+            } else if(this.value == 2){
+                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
+            }
+        });
+
+        $('.templateForegroundChange').on('change', function (e) {
+            $('.app-foreground-templates').remove();
+            if (this.value == 1) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');
+            } else if (this.value == 2) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-gray.css" type="text/css" />');
+            } else if (this.value == 3) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-green.css" type="text/css" />');
+            } else if (this.value == 4) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-orange.css" type="text/css" />');
+            } else if (this.value == 5) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
+            } else {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
+            }
+        });
+
+        $('#modalTemplateChooser').on('shown.bs.modal', function () {
+            $('.container.content-list').addClass('blurred');
+            $('#templateChooserBox').show(500);
+            $('#templateChooserBox .site-settings').addClass('active');
+            $('.templateSplashScreen').removeClass('hide').fadeTo("slow", 1, function () {
+                setTimeout(function () {
+                    $('.templateSplashScreen').fadeTo("slow", 0, function () {
+                        $('.templateSplashScreen').addClass("hide");
+                        $('.templateScreen').removeClass('hide').fadeTo("slow", 1);
+                    });
+                }, 1000);
+            });
+
+            $(".templateScreen .container [class*='col-']").click(function () {
+                $('.templateScreen').fadeTo("slow", 0.5, function () {
+                    $('.templateReadScreen').removeClass('hide').fadeTo("slow", 1);
+                });
+            });
+
+            $("#templateBtnRead").click(function () {
+                $('.templateScreen, .templateReadScreen').fadeTo("slow", 0, function () {
+                    $('.templateContentScreen').removeClass('hide').fadeTo("slow", 1);
+                });
+            });
+
+            $(".footerBtnHome").click(function () {
+                $('.templateContentScreen, .templateScreen, .templateReadScreen').fadeTo("slow", 0, function () {
+                    $('.templateScreen, .templateReadScreen, .templateContentScreen').addClass('hide');
+                    $('.templateScreen').removeClass('hide').fadeTo("slow", 1);
+                });
+            });
+            setSelected();
+        });
+
+        $('#modalTemplateChooser').on('hidden.bs.modal', function (e) {
+            $('.templateSplashScreen, .templateScreen, .templateReadScreen, .templateContentScreen').addClass('hide');
+            $('.container.content-list').removeClass('blurred');
+            $('#templateChooserBox').hide(500);
+            $('#templateChooserBox .site-settings').removeClass('active');
+            $('.templateExtrasScreen').addClass('hide').fadeTo("fast", 0);
+            $('.templateScreen').css('margin-left', '0');
+            $('.templateScreen .footer').css('right', '0');
+        });
+
+        $('#templateChooserClose').click(function () {
+            $('#modalTemplateChooser').modal('hide');
+        });
+
+        $('.header-extras').click(function () {
+            if ($('.templateExtrasScreen').hasClass('hide')) {
+                $('.templateExtrasScreen').removeClass('hide').fadeTo("fast", 1);
+                $('.templateScreen').css('margin-left', '-20%');
+                $('.templateScreen .footer').css('right', '20%');
+            }
+            else {
+                $('.templateExtrasScreen').addClass('hide').fadeTo("fast", 0);
+                $('.templateScreen').css('margin-left', '0');
+                $('.templateScreen .footer').css('right', '0');
+            }
+        });
+    };
+    
+    function setSelected () {
+        var elemBackSet = $('.templateBackgroundChange');
+        var elemForeSet = $('.templateForegroundChange');
+        for (var i = 0; i < elemBackSet.length; i++) {
+            var jQueryElem = $(elemBackSet[i]);
+            if (jQueryElem.val() == background) {
+                jQueryElem.parent().addClass('checked');
+                jQueryElem.attr('checked', 'checked');
+            } else {
+                jQueryElem.attr('checked', '');
+                jQueryElem.parent().removeClass('checked');
+            }
+        }
+
+        for (var j = 0; j < elemForeSet.length; j++) {
+            var jQueryElem = $(elemForeSet[j]);
+            if (jQueryElem.val() == foreground) {
+                jQueryElem.parent().addClass('checked');
+                jQueryElem.attr('checked', 'checked');
+            } else {
+                jQueryElem.attr('checked', '');
+                jQueryElem.parent().removeClass('checked');
+            }
+        }
     };
 };

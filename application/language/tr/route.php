@@ -43,6 +43,7 @@ return array(
 	'contents_show' => 'icerikler/(:num)',
 	'contents_save' => 'icerikler/kaydet',
 	'contents_delete' => 'icerikler/sil',
+	'contents_template_save' => 'icerikler/tema-kaydet',
 	'contents_uploadfile' => 'icerikler/dosya-yukle',
 	'contents_uploadfile2' => 'icerikler/dosya-yukle2',
 	'contents_uploadcoverimage' => 'icerikler/kapakresmi-yukle',

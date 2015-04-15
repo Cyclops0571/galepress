@@ -43,6 +43,7 @@ return array(
 	'contents_show' => 'inhalte/(:num)',
 	'contents_save' => 'inhalte/speichern',
 	'contents_delete' => 'inhalte/loschen',
+	'contents_template_save' => 'inhalte/vorlage-speichern',
 	'contents_uploadfile' => 'inhalte/datei-hochladen',
 	'contents_uploadfile2' => 'inhalte/datei-hochladen2',
 	'contents_uploadcoverimage' => 'deckblatt-hochladen',

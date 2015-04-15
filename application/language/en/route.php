@@ -43,6 +43,7 @@ return array(
 	'contents_show' => 'contents/(:num)',
 	'contents_save' => 'contents/save',
 	'contents_delete' => 'contents/delete',
+	'contents_template_save' => 'contents/save-template',
 	'contents_uploadfile' => 'contents/load-file',
 	'contents_uploadfile2' => 'contents/load-file2',
 	'contents_uploadcoverimage' => 'contents/load-coverart',

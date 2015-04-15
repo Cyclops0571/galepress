@@ -129,7 +129,7 @@ class Contents_Controller extends Base_Controller {
 				);
 				return View::make('pages.' . Str::lower($this->table) . 'optionlist', $data);
 			}
-			
+
 			$count = $rs->count();
 			$results = $rs
 					->for_page($p, $rowcount)
@@ -137,12 +137,14 @@ class Contents_Controller extends Base_Controller {
 
 
 			$rows = Paginator::make($results, $count, $rowcount);
-			
+
 
 			/* START SQL FOR TEMPLATE-CHOOSER */
 			$sqlTemlateChooser = '' .
 					'SELECT ' .
 					'a.Name AS ApplicationName, ' .
+					'a.ThemeBackground,' .
+					'a.ThemeForeground,' .
 					'c.ContentID, ' .
 					'c.Name, ' .
 					'c.Detail, ' .
@@ -154,18 +156,10 @@ class Contents_Controller extends Base_Controller {
 					'LEFT JOIN  `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 ' .
 					'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID ' .
 					'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID ' .
-					'WHERE a.ApplicationID=' . $applicationID;
+					'WHERE a.ApplicationID=' . $applicationID . ' '
+					. 'LIMIT 9';
 
 			$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-			
-			//dd($templateResults);
-			/* END SQL FOR TEMPLATE-CHOOSER */
-
-			// if(count($templateResults)==0){
-			// 	$app = Application::find($applicationID);
-			// 	$templateResults = array('appName' => $app->Name);
-			// 	//var_dump($templateResults); exit();
-			// }
 
 			$data = array(
 				'page' => $this->page,
@@ -201,11 +195,10 @@ class Contents_Controller extends Base_Controller {
 									->nest('commandbar', 'sections.commandbar', $data);
 				}
 			}
-			
+
 			return $html = View::make('pages.' . Str::lower($this->table) . 'list', $data)
-							->nest('filterbar', 'sections.filterbar', $data)
-							->nest('commandbar', 'sections.commandbar', $data);
-			
+					->nest('filterbar', 'sections.filterbar', $data)
+					->nest('commandbar', 'sections.commandbar', $data);
 		} catch (Exception $e) {
 //			throw new Exception($e->getMessage());
 			return Redirect::to(__('route.home'));
@@ -217,9 +210,9 @@ class Contents_Controller extends Base_Controller {
 		$RequestTypeID = (int) Input::get('RequestTypeID', 0);
 		$ContentID = (int) Input::get('ContentID', 0);
 		$Password = Input::get('Password', '');
-		$Width = (int)Input::get('W', 0);
-		$Height = (int)Input::get('H', 0);
-				
+		$Width = (int) Input::get('W', 0);
+		$Height = (int) Input::get('H', 0);
+
 
 		//http://localhost/tr/icerikler/talep?RequestTypeID=203&ApplicationID=1&ContentID=1187&Password=
 		try {
@@ -322,7 +315,7 @@ class Contents_Controller extends Base_Controller {
 	//POST
 	public function post_save() {
 		$goto = "";
-		$contentID=0;
+		$contentID = 0;
 		$currentUser = Auth::User();
 
 		$id = (int) Input::get($this->pk, '0');
@@ -524,9 +517,9 @@ class Contents_Controller extends Base_Controller {
 							if (!File::exists($destinationFolder)) {
 								File::mkdir($destinationFolder);
 							}
-							
+
 							$originalImageFileName = pathinfo($sourceFileNameFull, PATHINFO_FILENAME) . IMAGE_ORJ_EXTENSION;
-							
+
 							File::move($sourceFileNameFull, $targetFileNameFull);
 							File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
 
@@ -576,14 +569,14 @@ class Contents_Controller extends Base_Controller {
 							$pictureInfoSet = array();
 							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
 							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imageName" => $targetThumbFileName);
-							foreach($pictureInfoSet as $pInfo) {
+							foreach ($pictureInfoSet as $pInfo) {
 								imageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
 							}
-							
+
 							$cropSet = Crop::get();
-							$cropSet instanceof  Crop;
+							$cropSet instanceof Crop;
 							$sourceFile = $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
-							foreach($cropSet as $crop) {
+							foreach ($cropSet as $crop) {
 								//create neccessary image versions
 								imageClass::cropImage($sourceFile, $destinationFolder, $crop->Width, $crop->Height);
 							}
@@ -611,7 +604,7 @@ class Contents_Controller extends Base_Controller {
 			} catch (Exception $e) {
 				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 			}
-			$contentLink =  $contentID > 0 ? "&contentID=" . base64_encode($contentID) : ("");
+			$contentLink = $contentID > 0 ? "&contentID=" . base64_encode($contentID) : ("");
 			return "success=" . base64_encode("true") . $goto . $contentLink;
 		} else {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
@@ -650,27 +643,6 @@ class Contents_Controller extends Base_Controller {
 		}
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	}
-
-	/*
-	  public function post_uploadfile_backup()
-	  {
-	  $element = Input::get('element');
-
-	  $options = array(
-	  //'script_url' => URL::to_route('contents_uploadcoverimage'),
-	  'upload_dir' => path('public').'files/temp/',
-	  'upload_url' => URL::base().'/files/temp/',
-	  'param_name' => $element,
-	  'accept_file_types' => '/\.(pdf)$/i'
-	  );
-	  $upload_handler = new UploadHandler($options);
-
-	  if (!Request::ajax())
-	  return;
-
-	  $upload_handler->post("");
-	  }
-	 */
 
 	public function post_uploadfile() {
 		ob_start();
@@ -734,5 +706,30 @@ class Contents_Controller extends Base_Controller {
 		$ret = Uploader::ContentsUploadCoverImage($tempFile);
 		return Response::json($ret);
 	}
+
+	public function post_template_save() {
+		$applicationID = Input::get("applicationID");
+		$ThemeBackground = Input::get("templateBackground");
+		$ThemeForeground = Input::get("templateForeground");
+		$chk = Common::CheckApplicationOwnership($applicationID);
+		$rules = array(
+			'applicationID' => 'required|integer|min:1',
+			'templateBackground' => 'required|integer|min:1',
+			'templateForeground' => 'required|integer|min:1',
+		);
+		$v = Validator::make(Input::all(), $rules);
+		if (!$v->passes() || !$chk) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		}
+		
+		$application = Application::find($applicationID);
+		$application instanceof Application;
+		
+		$application->ThemeBackground = $ThemeBackground;
+		$application->ThemeForeground = $ThemeForeground;
+		$application->save();
+		return "success=" . base64_encode("true");
+	}
+
 
 }

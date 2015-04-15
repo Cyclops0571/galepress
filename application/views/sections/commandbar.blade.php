@@ -6,13 +6,10 @@
             
                 <a href="{{URL::to(__('route.'.$page.'_new').'?applicationID='.Input::get('applicationID', 0))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle" style="margin-left:5px;"><span class="icon-plus"></span></a>
             
-            
                 <a href="#modalPushNotification" title="Push Notification" data-toggle="modal" data-target="#modalPushNotification" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-bullhorn"></span></a>
-            
            
                 <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook" class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span class="icon-book"></span></a>
 
-                <!--<a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a> -->
           
         @else
             <a href="{{URL::to(__('route.'.$page.'_new'))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle"><span class="icon-plus"></span></a>
