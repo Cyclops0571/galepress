@@ -244,6 +244,7 @@ class Website_Controller extends Base_Controller
 			$s->PackageID = 5;
 			$s->Blocked = 0;
 			$s->Status = 1;
+			$s->Trail = 1;
 			$s->Version = 1;
 			$s->StatusID = eStatus::Active;
 			$s->CreatorUserID = -1;

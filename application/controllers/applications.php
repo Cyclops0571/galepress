@@ -31,8 +31,9 @@ class Applications_Controller extends Base_Controller {
 			5 => array('75px', __('common.applications_list_column6'), 'PackageName'),
 			6 => array('75px', __('common.applications_list_column7'), 'Blocked'),
 			7 => array('100px', __('common.applications_list_column8'), 'Status'),
-			8 => array('90px', __('common.applications_list_column9'), 'ExpirationDate'),
-			9 => array('75px', __('common.applications_list_column10'), 'ApplicationID')
+			8 => array('100px', __('common.applications_trail_title'), 'Trail'),
+			9 => array('90px', __('common.applications_list_column9'), 'ExpirationDate'),
+			10 => array('75px', __('common.applications_list_column10'), 'ApplicationID')
 		);
 	}
 
@@ -59,6 +60,7 @@ class Applications_Controller extends Base_Controller {
 						'IFNULL((SELECT Name FROM `Package` WHERE PackageID=a.PackageID), \'\') AS PackageName, ' .
 						'(CASE a.Blocked WHEN 1 THEN \'' . __('common.applications_list_blocked1') . '\' ELSE \'' . __('common.applications_list_blocked0') . '\' END) AS Blocked, ' .
 						'(CASE a.Status WHEN 1 THEN \'' . __('common.applications_list_status1') . '\' ELSE \'' . __('common.applications_list_status0') . '\' END) AS Status, ' .
+						'(CASE a.Trail WHEN 2 THEN \'' . __('common.applications_trail_customer') . '\' ELSE \'' . __('common.applications_trail_demo') . '\' END) AS Trail, ' .
 						'a.ExpirationDate, ' .
 						'a.ApplicationID ' .
 						'FROM `Customer` AS c ' .
@@ -313,6 +315,7 @@ class Applications_Controller extends Base_Controller {
 					$hasModified = $hasModified || (int) $current->PackageID != (int) Input::get('PackageID');
 					$hasModified = $hasModified || (int) $current->Blocked != (int) Input::get('Blocked');
 					$hasModified = $hasModified || (int) $current->Status != (int) Input::get('Status');
+					$hasModified = $hasModified || (int) $current->Trail != (int) Input::get('Trail');
 				}
 
 				if ($id == 0) {
@@ -333,6 +336,8 @@ class Applications_Controller extends Base_Controller {
 				$s->PackageID = (int) Input::get('PackageID');
 				$s->Blocked = (int) Input::get('Blocked');
 				$s->Status = (int) Input::get('Status');
+				$s->Trail = (int) Input::get('Trail');
+
 				if ($id == 0) {
 					$s->Version = 1;
 				} else {

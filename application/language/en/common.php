@@ -487,4 +487,18 @@ return array(
 	'maps_list_latitude' => 'Latitude',
 	'maps_list_longitude' => 'Longitude',
 	'maps_list_google_map_id' => 'ID',
+	'map_title' => 'Map',
+	'map_preview' => 'Preview',
+	'map_form_name' => 'Name',
+	'map_form_address' => 'Address',
+	'map_form_desc' => 'Description',
+	'map_form_latitude' => 'Latitude',
+	'map_form_longitude' => 'Longitude',
+	'map_form_return' => 'Return To List',
+	'map_form_location' => 'My Location',
+	'map_form_save' => 'Save',
+
+	'applications_trail_title' => 'Customer/Trail',
+	'applications_trail_customer' => 'Customer',
+	'applications_trail_demo' => '<span style="font-style:italic; color:#BFC75D;">Trail</span>',
 );

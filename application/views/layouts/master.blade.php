@@ -108,6 +108,9 @@
 	@if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
 		{{ View::make('sections.templatechooser', array("templateResults" => $templateResults)); }}
 	@endif
+    @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'maps_list')
+        {{ View::make('sections.mapslist') }}
+    @endif
     {{ View::make('sections.sessionmodal') }}
 </body>
 
