@@ -17,9 +17,6 @@
     background: #1E1E20 !important;
     border-bottom: 10px solid #1E1E20 !important;
 }
-.templateReadScreen .content-buttons input:hover{
-    background: #000 !important;
-}
 /********************************************************/
 .templateContentScreen .header{
     background: rgba(30,30,32,0.9) !important;
@@ -30,23 +27,52 @@
 .templateContentScreen .thumbnails{
     background: rgba(30,30,32,0.9) !important;
 }
-.templateExtrasScreen{
-    background: rgba(30,30,32,0.9) !important;
+/********************************************************/
+.templateExtrasScreen .container .form-control::-webkit-input-placeholder {
+   color: #333333 !important;
 }
-/*.templateExtrasScreen .container{
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
+
+.templateExtrasScreen .container form-control:-moz-placeholder { /* Firefox 18- */
+   color: #333333 !important;  
 }
-.templateExtrasScreen .container .form-row{
-    position: absolute;
-    height: 100%;
-    right: 0;
+
+.templateExtrasScreen .container form-control::-moz-placeholder {  /* Firefox 19+ */
+   color: #333333 !important;  
 }
-.templateExtrasScreen .social-icons{
-    background: url(/img/template-chooser/social-icons-blue.png) center top;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important;
-    height: 100%;
-}*/
+
+.templateExtrasScreen .container form-control:-ms-input-placeholder {  
+   color: #333333 !important;
+}
+.templateExtrasScreen .container .form-row span.icon-search{
+    color:rgba(30,30,32,0.9) !important;;
+}
+.templateExtrasScreen .container .form-row.extrasBar{
+    background: #333333 !important;
+}
+.templateExtrasScreen .container .form-row input{
+    color: #333333 !important;
+}
+.templateExtrasScreen .container .form-row ul li span,li{
+    color: #333333 !important;
+}
+.templateExtrasScreen li .category-active{
+    background: url(/img/template-chooser/category_select_dark.png) center 5px;
+}
+.templateExtrasScreen .links.links-web{
+    background: url(/img/template-chooser/web_dark.png) center 5px;
+}
+.templateExtrasScreen .links.links-face{
+    background: url(/img/template-chooser/facebook_dark.png) center 5px;
+}
+.templateExtrasScreen .links.links-twitter{
+    background: url(/img/template-chooser/twitter_dark.png) center 5px;
+}
+.templateExtrasScreen .links.links-instagram{
+    background: url(/img/template-chooser/instagram_dark.png) center 5px;
+}
+.templateExtrasScreen .links.links-linkedin{
+    background: url(/img/template-chooser/linkedin_dark.png) center 5px;
+}
+.templateExtrasScreen .links.links-mail{
+    background: url(/img/template-chooser/mail_dark.png) center 5px;
+}

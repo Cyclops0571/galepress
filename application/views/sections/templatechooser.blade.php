@@ -26,9 +26,6 @@
 													<div class="header-categories"></div>
 												</div>
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
-                                                    <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-													<div class="header-extras" style="cursor:pointer;"></div>
-                                                    </div> -->
 											</div>
 											<div class="container">
 												<div class="form-row">
@@ -53,7 +50,7 @@
 														<div class="content-bar">
 															<div class="col-md-12">{{$detail}}</div>
 															<div class="col-md-12">{{$name}}</div>
-<div class="col-md-12">Sayı 16</div>
+															<div class="col-md-12">Sayı 16</div>
 														</div>
 													</div>
 												<?php endfor; ?>
@@ -68,75 +65,75 @@
 												</div>
 											</div>
 										</div>
-                                            <div class="templateExtrasScreen hide" style="opacity:0; background:#ab2626;">
+                                        <div class="templateExtrasScreen hide" style="opacity:0;">
 											<div class="container">
 												<div class="form-row">
-                                                        <div class="col-md-12"><img src="/img/template-chooser/logo.png" width="100%"></div>
-                                                    </div>
-                                                    <div class="form-row" style="margin-top:17px;">
-                                                        <div class="col-md-12">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon"><span class="icon-search"></span></div>
-                                                                <input type="text" class="form-control" placeholder="Ara...">
-                                                            </div>
+                                                    <div class="col-md-12"><img src="/img/template-chooser/logo.png" width="100%"></div>
+                                                </div>
+                                                <div class="form-row" style="margin-top:17px;">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon"><span class="icon-search"></span></div>
+                                                            <input type="text" class="form-control" placeholder="Ara...">
                                                         </div>
                                                     </div>
-                                                    <div class="form-row" style="background:white; margin-top:10px;">
-                                                        <div class="col-md-2">
-                                                            <img src="/img/template-chooser/left_menu_category_icon2.png" width="12">
-                                                        </div>
-                                                        <div class="col-md-8" style="color:#ab2626;">
-                                                            Kategoriler
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <img src="/img/template-chooser/left_menu_down2.png" width="12">
-                                                        </div>
+                                                </div>
+                                                <div class="form-row extrasBar categories" style="margin-top:10px;">
+                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="extra-bar-icon"></div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="col-md-12">
-                                                            <ul style="list-style:none;">
-                                                                <li><span class="category-disable"></span><span> Genel</span></li>
-                                                                <li><span class="category-disable"></span><span> Broşürler</span></li>
-                                                                <li><span class="category-active"></span><span> Kataloglar</span></li>
-                                                                <li><span class="category-disable"></span><span> Kitaplar</span></li>
-                                                            </ul>
-                                                        </div>
+                                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 title">
+                                                        Kategoriler
                                                     </div>
-                                                    <div class="form-row" style="background:white;">
-                                                        <div class="col-md-2">
-                                                            <img src="/img/template-chooser/left_menu_link2.png" width="12">
-                                                        </div>
-                                                        <div class="col-md-8" style="color:#ab2626;">
-                                                            Bağlantılar
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <img src="/img/template-chooser/left_menu_down2.png" width="12">
-                                                        </div>
+                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="title-drop"></div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="col-md-12">
-                                                            <ul style="list-style:none;">
-                                                                <li><span class="links links-web"></span> Web</li>
-                                                                <li><span class="links links-face"></span> Facebook</li>
-                                                                <li><span class="links links-twitter"></span> Twitter</li>
-                                                                <li><span class="links links-instagram"></span> Instagram</li>
-                                                                <li><span class="links links-linkedin"></span> Linkedin</li>
-                                                                <li><span class="links links-mail"></span> Mail</li>
-                                                            </ul>
-                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-12">
+                                                        <ul style="list-style:none;">
+                                                            <li><span class="category-disable"></span><span> Genel</span></li>
+                                                            <li><span class="category-disable"></span><span> Broşürler</span></li>
+                                                            <li><span class="category-active"></span><span> Kataloglar</span></li>
+                                                            <li><span class="category-disable"></span><span> Kitaplar</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row extrasBar barLinks">
+                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="extra-bar-icon"></div>
+                                                    </div>
+                                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 title">
+                                                        Bağlantılar
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="title-drop"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-12">
+                                                        <ul style="list-style:none;">
+                                                            <li><span class="links links-web"></span> Web</li>
+                                                            <li><span class="links links-face"></span> Facebook</li>
+                                                            <li><span class="links links-twitter"></span> Twitter</li>
+                                                            <li><span class="links links-instagram"></span> Instagram</li>
+                                                            <li><span class="links links-linkedin"></span> Linkedin</li>
+                                                            <li><span class="links links-mail"></span> Mail</li>
+                                                        </ul>
+                                                    </div>
 												</div>
 											</div>
 										</div>
 										@if(count($templateResults)>0 && $templateResults[0]->ContentID!=null)
-                                            <div class="templateReadScreen hide" style="opacity:0; background:red;">
+                                            <div class="templateReadScreen hide" style="opacity:0;">
 											<div class="loading"></div>
                                                 <div id="loading-text"><i class="icon-remove"></i> %82</div>
 											<div class="container">
                                                     <div class="form-row" style="height:55px;">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-15px;">
-                                                            <p style="overflow:hidden;">&nbsp;{{$templateResults[0]->Detail}}</p>
-                                                            <p style="overflow:hidden;">&nbsp;{{$templateResults[0]->Name}}</p>
-                                                            <p style="overflow:hidden; width:90%;">&nbsp;{{$templateResults[0]->MonthlyName}}</p>
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-8px;">
+                                                            <p style="overflow:hidden; height:10px;">{{$templateResults[0]->Detail}}</p>
+                                                            <p style="overflow:hidden;">{{$templateResults[0]->Name}}</p>
+                                                            <p style="overflow:hidden; width:90%; height:10px;">{{$templateResults[0]->MonthlyName}}</p>
 													</div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 														<div class="form-row">
@@ -165,11 +162,11 @@
 										<div class="templateContentScreen hide" style="opacity:0;">
 											<div class="header clearfix">
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-                                                        <div class="header-table-of-contents"></div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
-                                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-                                                        <div class="header-share"></div>
+                                                    <div class="header-table-of-contents"></div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
+                                                  	<div class="header-share"></div>
 												</div>
 											</div>
 											<div class="content-page">
@@ -233,15 +230,15 @@
 									<div class="radiobox-inline">
 										<label>
 											<div class="radio"><input type="radio" class="templateBackgroundChange" name="templateBackground" value="1"></div>
-											Krem Havası<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;">
-										</label>
+											Koyu Kahve<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
 										<label>
 											<div class="radio"><input type="radio" class="templateBackgroundChange" name="templateBackground" value="2"></div>
-											Koyu Kahve<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
+											Krem Havası<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;">
+										</label>
 									</div>
 								</div>
 							</div>
@@ -264,49 +261,41 @@
 							<div class="form-row">
 								<div class="col-md-12">
 									<div class="radiobox-inline">
-										<label style="color:#2185C5;">
+										<label style="color:#00A388;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="1"></div>
-											Gece Mavisi<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;">
+											Yeşil<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
-										<label style="color:#6D6D6D;">
+										<label style="color:#E2B705;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="2"></div>
-											Bataklık Grisi<img src="/img/template-chooser/color-picker-gray.png" width="15" style="margin-left:10px;">
+											Sarı<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
-										<label style="color:#049604;">
+										<label style="color:#2980B9;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="3"></div>
-											Çimen Yeşili<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;">
+											Mavi<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
-										<label style="color:#FF5500;">
+										<label style="color:#AB2626;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="4"></div>
-											Portakal Turuncusu<img src="/img/template-chooser/color-picker-orange.png" width="15" style="margin-left:10px;">
+											Kırmızı<img src="/img/template-chooser/color-picker-red.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
-										<label style="color:#B9121B;">
+										<label style="color:#E74C3C;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="5"></div>
-											Kiraz Kırmızısı<img src="/img/template-chooser/color-picker-red.png" width="15" style="margin-left:10px;">
-										</label>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="radiobox-inline">
-										<label style="color:#FFCE00;">
-											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="6"></div>
-											Güneş Sarısı<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;">
+											Turuncu<img src="/img/template-chooser/color-picker-orange.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>

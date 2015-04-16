@@ -18,7 +18,7 @@
 .templateScreen .header .header-categories{
     background: url(/img/template-chooser/menu1.png) center left;
     background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:22px;
+    background-repeat: no-repeat !important; height:21px;
     cursor: pointer;
 }
 .templateScreen .header .header-extras{
@@ -169,7 +169,7 @@
 }
 
 .templateReadScreen .content-buttons input:hover{
-    background: #000;
+    background: rgba(0,0,0,0.2) !important;
 }
 
 .templateReadScreen .container > .form-row{
@@ -202,7 +202,7 @@
     float: left;
     margin-left: 3px;
     margin-top: -10px;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 .templateReadScreen #loading-text i{
     font-size: 12px;
@@ -469,10 +469,22 @@
    color: white !important;
    opacity: 1 !important;  
 }
-
-/*.templateExtrasScreen .social-icons{
-    background: url(/img/template-chooser/social-icons-blue.png) center top;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important;
-    height: 100%;
-}*/
+.templateExtrasScreen .container .form-row ul li span,li{
+    cursor: pointer;
+}
+.templateExtrasScreen .container .form-row.extrasBar.categories .extra-bar-icon{
+    background: url(/img/template-chooser/left_menu_category_icon1.png) left center;
+    background-size: 74% auto !important;
+    background-repeat: no-repeat !important; height:30px;
+}
+.templateExtrasScreen .container .form-row.extrasBar .title-drop{
+    background: url(/img/template-chooser/left_menu_down1.png) right center;
+    background-size: 74% auto !important;
+    background-repeat: no-repeat !important; height:30px;
+    cursor: pointer;
+}
+.templateExtrasScreen .container .form-row.extrasBar.barLinks .extra-bar-icon{
+    background: url(/img/template-chooser/left_menu_link1.png) left center;
+    background-size: 74% auto !important;
+    background-repeat: no-repeat !important; height:30px;
+}

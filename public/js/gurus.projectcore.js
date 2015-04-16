@@ -1421,26 +1421,24 @@ var cTemplate = new function () {
         $('.templateBackgroundChange').on('change', function (e) {
             $('.app-background-templates').remove();
             if (this.value == 1) {
-                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
-            } else if(this.value == 2){
                 $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
+            } else if(this.value == 2){
+                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
             }
         });
 
         $('.templateForegroundChange').on('change', function (e) {
             $('.app-foreground-templates').remove();
             if (this.value == 1) {
-                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');
-            } else if (this.value == 2) {
-                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-gray.css" type="text/css" />');
-            } else if (this.value == 3) {
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-green.css" type="text/css" />');
-            } else if (this.value == 4) {
-                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-orange.css" type="text/css" />');
-            } else if (this.value == 5) {
-                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
-            } else {
+            } else if (this.value == 2) {
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
+            } else if (this.value == 3) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');
+            } else if (this.value == 4) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
+            } else if (this.value == 5) {
+                $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-orange.css" type="text/css" />');
             }
         });
 
@@ -1492,18 +1490,19 @@ var cTemplate = new function () {
             $('#modalTemplateChooser').modal('hide');
         });
 
-        $('.header-extras').click(function () {
-            if ($('.templateExtrasScreen').hasClass('hide')) {
-                $('.templateExtrasScreen').removeClass('hide').fadeTo("fast", 1);
-                $('.templateScreen').css('margin-left', '-20%');
-                $('.templateScreen .footer').css('right', '20%');
+        $('.header-categories').click(function(){
+            if($('.templateExtrasScreen').hasClass('hide')){
+                $('.templateExtrasScreen').removeClass('hide').fadeTo( "fast" , 1);
+                $('.templateScreen').css('margin-left','75%'); 
+                $('.templateScreen .footer').css('left','75%');
             }
-            else {
-                $('.templateExtrasScreen').addClass('hide').fadeTo("fast", 0);
-                $('.templateScreen').css('margin-left', '0');
-                $('.templateScreen .footer').css('right', '0');
+            else{
+                $('.templateExtrasScreen').addClass('hide').fadeTo( "fast" , 0);
+                $('.templateScreen').css('margin-left','0');
+                $('.templateScreen .footer').css('left','0');
             }
         });
+
     };
     
     function setSelected () {
