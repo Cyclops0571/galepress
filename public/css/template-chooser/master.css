@@ -90,27 +90,24 @@
 }
 .templateScreen .footer .footer-home{
     background: url(/img/template-chooser/home_selected1.png) center center;
-    background-size: 46% auto !important;
+    background-size: 35% auto !important;
     background-repeat: no-repeat !important; height:100%;
     cursor: pointer !important;
 }
 .templateScreen .footer .footer-library{
     background: url(/img/template-chooser/library_selected1.png) center center;
-    background-size: 44% auto !important;
+    background-size: 35% auto !important;
     background-repeat: no-repeat !important; height:100%;
 }
 .templateScreen .footer .footer-download{
     background: url(/img/template-chooser/download_selected1.png) center center;
-    background-size: 48% auto !important;
+    background-size: 35% auto !important;
     background-repeat: no-repeat !important; height:100%;
 }
 .templateScreen .footer .footer-info{
     background: url(/img/template-chooser/info_selected1.png) center center;
-    background-size: 13% auto !important;
+    background-size: 10% auto !important;
     background-repeat: no-repeat !important; height:100%;
-}
-.templateScreen > .footer [class*="col-"]{
-    margin: 0 10px;
 }
 .templateScreen .app-name{
     color:#2185C5;
@@ -249,9 +246,6 @@
     height: 28px;
     background: rgba(30,30,32,0.9);
 }
-.templateContentScreen > .footer [class*="col-"]{
-    margin: 0 10px;
-}
 .templateContentScreen .footer img{
     vertical-align: middle;
     cursor: pointer;
@@ -300,23 +294,23 @@
 }
 .templateContentScreen .footer .footer-home{
     background: url(/img/template-chooser/home_selected1.png) center center;
-    background-size: 46% auto !important;
+    background-size: 35% auto !important;
     background-repeat: no-repeat !important; height:100%;
     cursor: pointer !important;
 }
 .templateContentScreen .footer .footer-library{
     background: url(/img/template-chooser/library_selected1.png) center center;
-    background-size: 44% auto !important;
+    background-size: 35% auto !important;
     background-repeat: no-repeat !important; height:100%;
 }
 .templateContentScreen .footer .footer-download{
     background: url(/img/template-chooser/download_selected1.png) center center;
-    background-size: 48% auto !important;
+    background-size: 35% auto !important;
     background-repeat: no-repeat !important; height:100%;
 }
 .templateContentScreen .footer .footer-info{
     background: url(/img/template-chooser/info_selected1.png) center center;
-    background-size: 13% auto !important;
+    background-size: 10% auto !important;
     background-repeat: no-repeat !important; height:100%;
 }
 .templateContentScreen .app-buttons{
@@ -487,4 +481,18 @@
     background: url(/img/template-chooser/left_menu_link1.png) left center;
     background-size: 74% auto !important;
     background-repeat: no-repeat !important; height:30px;
+}
+/**************************************/
+@media (max-width: 767px) {
+   .templateScreen .footer .col-xs-offset-2{
+    margin-left: 15%;
+   }
+   .templateContentScreen .footer .col-xs-offset-2{
+    margin-left: 15%;
+   }
+}
+/**************************************/
+.panelClose{
+    height: 1px;
+    overflow: hidden;
 }

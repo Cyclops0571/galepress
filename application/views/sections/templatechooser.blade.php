@@ -47,7 +47,7 @@
 														<img src="{{$imageSrc}}" width="95%">
 
 
-														<div class="content-bar">
+														<div class="content-bar noTouch">
 															<div class="col-md-12">{{$detail}}</div>
 															<div class="col-md-12">{{$name}}</div>
 															<div class="col-md-12">Sayı 16</div>
@@ -57,12 +57,10 @@
 												</div>
 											</div>
 											<div class="footer text-center">
-												<div class="footer-buttons">
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
-												</div>
+												<div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
 											</div>
 										</div>
                                         <div class="templateExtrasScreen hide" style="opacity:0;">
@@ -131,9 +129,9 @@
 											<div class="container">
                                                     <div class="form-row" style="height:55px;">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-8px;">
-                                                            <p style="overflow:hidden; height:10px;">{{$templateResults[0]->Detail}}</p>
-                                                            <p style="overflow:hidden;">{{$templateResults[0]->Name}}</p>
-                                                            <p style="overflow:hidden; width:90%; height:10px;">{{$templateResults[0]->MonthlyName}}</p>
+                                                            <p style="overflow:hidden; height:12px;">{{$templateResults[0]->Detail}}</p>
+                                                            <p style="overflow:hidden; margin-bottom:4px;">{{$templateResults[0]->Name}}</p>
+                                                            <p style="overflow:hidden; width:90%; height:12px;">{{$templateResults[0]->MonthlyName}}</p>
 													</div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 														<div class="form-row">
@@ -174,20 +172,18 @@
 											</div>
 											<div class="thumbnails">
 												<div class="triangle"><span>283</span></div>
-												<div class="col-md-2"><img src="/img/template-chooser/content-pages/file_1.jpg"></div>
-												<div class="col-md-2"><img src="/img/template-chooser/content-pages/file_2.jpg"></div>
-												<div class="col-md-2"><img src="/img/template-chooser/content-pages/file_3.jpg"></div>
-												<div class="col-md-2"><img src="/img/template-chooser/content-pages/file_4.jpg"></div>
-												<div class="col-md-2"><img src="/img/template-chooser/content-pages/file_5.jpg"></div>
-												<div class="col-md-2"><img src="/img/template-chooser/content-pages/file_6.jpg"></div>
+												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_1.jpg"></div>
+												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_2.jpg"></div>
+												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_3.jpg"></div>
+												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_4.jpg"></div>
+												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_5.jpg"></div>
+												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_6.jpg"></div>
 											</div>
 											<div class="footer text-center">
-												<div class="footer-buttons">
-                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
-													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
-												</div>
+												<div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
 											</div>
 										</div>
 										@endif
@@ -230,14 +226,14 @@
 									<div class="radiobox-inline">
 										<label>
 											<div class="radio"><input type="radio" class="templateBackgroundChange" name="templateBackground" value="1"></div>
-											Koyu Kahve<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
+											Koyu<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
 										<label>
 											<div class="radio"><input type="radio" class="templateBackgroundChange" name="templateBackground" value="2"></div>
-											Krem Havası<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;">
+											Açık<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>

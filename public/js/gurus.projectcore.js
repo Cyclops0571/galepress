@@ -1416,7 +1416,13 @@ var cTemplate = new function () {
         foreground = fg;
 
         $(".templateScreen").click(function (event) {
-            $(".templateReadScreen img").attr('src', event.target.src);
+            if($(event.target).is('img'))
+            {
+                $(".templateReadScreen img").attr('src', event.target.src);
+                $(".templateReadScreen .form-row p:nth-child(1)").text(event.target.nextElementSibling.children[0].innerText);
+                $(".templateReadScreen .form-row p:nth-child(2)").text(event.target.nextElementSibling.children[1].innerText);
+                $(".templateReadScreen .form-row p:nth-child(3)").text(event.target.nextElementSibling.children[2].innerText);
+            }
         });
 
         $('.templateBackgroundChange').on('change', function (e) {
@@ -1496,6 +1502,10 @@ var cTemplate = new function () {
             $('.templateExtrasScreen').addClass('hide').fadeTo("fast", 0);
             $('.templateScreen').css('margin-left', '0');
             $('.templateScreen .footer').css('right', '0');
+        });
+
+        $('.templateExtrasScreen. .title-drop').click(function () {
+            $(this).parent().parent().next().toggleClass('panelClose');
         });
 
         $('#templateChooserClose').click(function () {
