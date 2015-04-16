@@ -501,4 +501,18 @@ return array(
 	'applications_trail_title' => 'Müşteri/Deneme',
 	'applications_trail_customer' => 'Müşteri',
 	'applications_trail_demo' => "<span style=\"font-style:italic; color:#BFC75D;\">Deneme</span>",
+
+	'template_chooser_title' => 'Uygulama Teması Değiştir',
+	'template_chooser_background' => 'Arkaplan',
+	'template_chooser_foreground' => 'Fontlar, Butonlar',
+	'template_chooser_backcolor1' => 'Koyu',
+	'template_chooser_backcolor2' => 'Açık',
+	'template_chooser_frontcolor1' => 'Yeşil',
+	'template_chooser_frontcolor2' => 'Sarı',
+	'template_chooser_frontcolor3' => 'Mavi',
+	'template_chooser_frontcolor4' => 'Kırmızı',
+	'template_chooser_frontcolor5' => 'Turuncu',
+	'template_chooser_close' => 'Kapat',
+	'template_chooser_use' => 'Temayı Kullan',
+
 );

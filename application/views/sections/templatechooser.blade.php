@@ -129,9 +129,9 @@
 											<div class="container">
                                                     <div class="form-row" style="height:55px;">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-8px;">
-                                                            <p style="overflow:hidden; height:12px;">{{$templateResults[0]->Detail}}</p>
-                                                            <p style="overflow:hidden; margin-bottom:4px;">{{$templateResults[0]->Name}}</p>
-                                                            <p style="overflow:hidden; width:90%; height:12px;">{{$templateResults[0]->MonthlyName}}</p>
+                                                            <p style="overflow:hidden; height:13px;">{{$templateResults[0]->Detail}}</p>
+                                                            <p style="overflow:hidden; margin-bottom:7px; font-family: Avenir Medium !important;">{{$templateResults[0]->Name}}</p>
+                                                            <p style="overflow:hidden; width:90%; height:13px;">{{$templateResults[0]->MonthlyName}}</p>
 													</div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 														<div class="form-row">
@@ -205,13 +205,13 @@
 		<div class="site-settings-content">
 			<div class="block block-transparent nm filterBlock">                
 				<div class="header" style="height:35px; line-height:35px; border-bottom:1px solid black;">
-					<h2>Uygulama Teması Değiştir</h2>
+					<h2 style="text-transform: capitalize;">{{ __('common.template_chooser_title') }}</h2>
 				</div>
 				<div class="content controls reportSubtitle">
 					<form id="templateForm" method="get">
 						<input type="hidden" name="applicationID" value="<?php echo Input::get("applicationID", 0)?>" />
 						<div class="form-row">
-							<div class="col-md-12">Arkaplan:</div>
+							<div class="col-md-12">{{ __('common.template_chooser_background') }}:</div>
 							<!-- <div class="col-md-12">
 								<div class="input-group">
 									<div class="input-group-addon"><span class="icon-dropbox"></span></div>
@@ -226,21 +226,21 @@
 									<div class="radiobox-inline">
 										<label>
 											<div class="radio"><input type="radio" class="templateBackgroundChange" name="templateBackground" value="1"></div>
-											Koyu<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
+											{{ __('common.template_chooser_backcolor1') }}<img src="/img/template-chooser/color-picker-dark.png" width="15" style="margin-left:10px;"></label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="radiobox-inline">
 										<label>
 											<div class="radio"><input type="radio" class="templateBackgroundChange" name="templateBackground" value="2"></div>
-											Açık<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_backcolor2') }}<img src="/img/template-chooser/color-picker-light.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-row" style="border-bottom:1px solid black; padding-bottom:10px;">
-							<div class="col-md-12">Fontlar, Butonlar:</div>
+							<div class="col-md-12">{{ __('common.template_chooser_foreground') }}:</div>
 							<!-- <div class="col-md-12">
 								<div class="input-group">
 									<div class="input-group-addon"><span class="icon-cloud"></span></div>
@@ -259,7 +259,7 @@
 									<div class="radiobox-inline">
 										<label style="color:#00A388;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="1"></div>
-											Yeşil<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_frontcolor1') }}<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
@@ -267,7 +267,7 @@
 									<div class="radiobox-inline">
 										<label style="color:#E2B705;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="2"></div>
-											Sarı<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_frontcolor2') }}<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
@@ -275,7 +275,7 @@
 									<div class="radiobox-inline">
 										<label style="color:#2980B9;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="3"></div>
-											Mavi<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_frontcolor3') }}<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
@@ -283,7 +283,7 @@
 									<div class="radiobox-inline">
 										<label style="color:#AB2626;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="4"></div>
-											Kırmızı<img src="/img/template-chooser/color-picker-red.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_frontcolor4') }}<img src="/img/template-chooser/color-picker-red.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
@@ -291,7 +291,7 @@
 									<div class="radiobox-inline">
 										<label style="color:#E74C3C;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="5"></div>
-											Turuncu<img src="/img/template-chooser/color-picker-orange.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_frontcolor5') }}<img src="/img/template-chooser/color-picker-orange.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
@@ -299,10 +299,10 @@
 						</div>
 						<div class="form-row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">  
-								<input id="templateChooserClose" class="btn btn-mini" value="Kapat">
+								<input id="templateChooserClose" class="btn btn-mini" value="{{ __('common.template_chooser_close') }}">
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">  
-								<input class="btn my-btn-success" type="button" onclick="cTemplate.save();" value="Temayı Kullan">
+								<input class="btn my-btn-success" type="button" onclick="cTemplate.save();" value="{{ __('common.template_chooser_use') }}">
 							</div> 
 						</div>
 					</form>

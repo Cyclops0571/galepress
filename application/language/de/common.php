@@ -496,4 +496,17 @@ return array(
 	'applications_trail_customer' => 'Customer',
 	'applications_trail_demo' => '<span style="font-style:italic; color:#BFC75D;">Trail</span>',
 
+	'template_chooser_title' => 'Ändern Anwendung Theme',
+	'template_chooser_background' => 'Hintergrund',
+	'template_chooser_foreground' => 'Schriftarten, Buttons',
+	'template_chooser_backcolor1' => 'Dunkelheit',
+	'template_chooser_backcolor2' => 'Licht',
+	'template_chooser_frontcolor1' => 'Grün',
+	'template_chooser_frontcolor2' => 'Gelb',
+	'template_chooser_frontcolor3' => 'Blau',
+	'template_chooser_frontcolor4' => 'Rote',
+	'template_chooser_frontcolor5' => 'Orange',
+	'template_chooser_close' => 'In der Nähe',
+	'template_chooser_use' => 'Verwenden Theme',
+
 );

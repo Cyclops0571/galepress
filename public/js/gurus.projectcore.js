@@ -1494,6 +1494,15 @@ var cTemplate = new function () {
             $('.templateForegroundChange').trigger("change");
         });
 
+        $('#modalTemplateChooser .templateScreen').click(function (event) {
+            if(!$('.templateReadScreen').hasClass('hide')){
+                 $('.templateContentScreen, .templateScreen, .templateReadScreen').fadeTo("slow", 0, function () {
+                    $('.templateScreen, .templateReadScreen, .templateContentScreen').addClass('hide');
+                    $('.templateScreen').removeClass('hide').fadeTo("slow", 1);
+                });
+            }
+        });
+
         $('#modalTemplateChooser').on('hidden.bs.modal', function (e) {
             $('.templateSplashScreen, .templateScreen, .templateReadScreen, .templateContentScreen').addClass('hide');
             $('.container.content-list').removeClass('blurred');
