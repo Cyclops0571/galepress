@@ -1414,31 +1414,43 @@ var cTemplate = new function () {
     this.initialize = function(bg, fg) {
         background = bg;
         foreground = fg;
+
         $(".templateScreen").click(function (event) {
             $(".templateReadScreen img").attr('src', event.target.src);
         });
 
         $('.templateBackgroundChange').on('change', function (e) {
             $('.app-background-templates').remove();
-            if (this.value == 1) {
-                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
-            } else if(this.value == 2){
-                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
+            switch(parseInt($('.templateBackgroundChange:checked').val())) {
+                case 1:
+                    $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
+                    break;
+                case 2:
+                    $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
+                    break;
             }
         });
 
         $('.templateForegroundChange').on('change', function (e) {
             $('.app-foreground-templates').remove();
-            if (this.value == 1) {
+            
+            console.log($('.templateForegroundChange:checked').val());
+            switch(parseInt($('.templateForegroundChange:checked').val())) {
+                case 1:
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-green.css" type="text/css" />');
-            } else if (this.value == 2) {
+                    break;
+                case 2:
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
-            } else if (this.value == 3) {
+                    break;
+                case 3:
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');
-            } else if (this.value == 4) {
+                    break;
+                case 4:
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
-            } else if (this.value == 5) {
+                    break;
+                case 5:
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-orange.css" type="text/css" />');
+                    break;
             }
         });
 
@@ -1474,6 +1486,8 @@ var cTemplate = new function () {
                 });
             });
             setSelected();
+            $('.templateBackgroundChange').trigger("change");
+            $('.templateForegroundChange').trigger("change");
         });
 
         $('#modalTemplateChooser').on('hidden.bs.modal', function (e) {
@@ -1514,7 +1528,7 @@ var cTemplate = new function () {
                 jQueryElem.parent().addClass('checked');
                 jQueryElem.attr('checked', 'checked');
             } else {
-                jQueryElem.attr('checked', '');
+                jQueryElem.removeAttr("checked");
                 jQueryElem.parent().removeClass('checked');
             }
         }
@@ -1525,7 +1539,7 @@ var cTemplate = new function () {
                 jQueryElem.parent().addClass('checked');
                 jQueryElem.attr('checked', 'checked');
             } else {
-                jQueryElem.attr('checked', '');
+                jQueryElem.removeAttr("checked");
                 jQueryElem.parent().removeClass('checked');
             }
         }
