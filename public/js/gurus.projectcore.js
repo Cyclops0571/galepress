@@ -1431,10 +1431,8 @@ var cTemplate = new function () {
             }
         });
 
-        $('.templateForegroundChange').on('change', function (e) {
+        $('.templateForegroundChange').on('change', '', function (e) {
             $('.app-foreground-templates').remove();
-            
-            console.log($('.templateForegroundChange:checked').val());
             switch(parseInt($('.templateForegroundChange:checked').val())) {
                 case 1:
                 $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-green.css" type="text/css" />');
