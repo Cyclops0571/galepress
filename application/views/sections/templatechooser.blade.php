@@ -34,6 +34,7 @@
 													$imageSrc = "/img/template-chooser/defaultCover-" . ($i + 1) . IMAGE_EXTENSION;
 													$name = "";
 													$detail = "";
+													$sayı = "";
 													if(isset($templateResults[$i])) {
 														$imageSrcTmp = $templateResults[$i]->FilePath.'/'.$templateResults[$i]->FileName;
 														if(is_file(path("public") . $imageSrcTmp)) {
@@ -41,6 +42,7 @@
 														}
 														$name = $templateResults[$i]->Name;
 														$detail = $templateResults[$i]->Detail;
+														$Sayi = $templateResults[$i]->MonthlyName;
 													}
 													?>
 													<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -50,7 +52,7 @@
 														<div class="content-bar noTouch">
 															<div class="col-md-12">{{$detail}}</div>
 															<div class="col-md-12">{{$name}}</div>
-															<div class="col-md-12">Sayı 16</div>
+															<div class="col-md-12">{{$Sayi}}</div>
 														</div>
 													</div>
 												<?php endfor; ?>
@@ -90,10 +92,15 @@
                                                 <div class="form-row">
                                                     <div class="col-md-12">
                                                         <ul style="list-style:none;">
-                                                            <li><span class="category-disable"></span><span> Genel</span></li>
-                                                            <li><span class="category-disable"></span><span> Broşürler</span></li>
-                                                            <li><span class="category-active"></span><span> Kataloglar</span></li>
-                                                            <li><span class="category-disable"></span><span> Kitaplar</span></li>
+															<?php if(empty($categorySet)): ?>
+																<li><span class="category-active"></span><span> Genel</span></li>
+															<?php else: ?>
+																<?php $categoryClass = "category-active"; ?>
+																<?php foreach($categorySet as $category): ?>
+																<li><span class="<?php echo $categoryClass; ?>"></span><span>{{$category->Name;}}</span></li>
+																<?php $categoryClass = "category-disable"; ?>
+																<?php endforeach; ?>
+															<?php endif; ?>
                                                         </ul>
                                                     </div>
                                                 </div>

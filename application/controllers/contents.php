@@ -157,10 +157,11 @@ class Contents_Controller extends Base_Controller {
 					'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID ' .
 					'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID ' .
 					'WHERE a.ApplicationID=' . $applicationID . ' '
+					. 'group by c.ContentID '
 					. 'LIMIT 9';
 
 			$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-
+			$categorySet = Category::where('ApplicationID', '=', $applicationID)->where("statusID", "=", eStatus::Active)->get();
 			$data = array(
 				'page' => $this->page,
 				'route' => $this->route,
@@ -171,7 +172,8 @@ class Contents_Controller extends Base_Controller {
 				'sort' => $sort,
 				'sort_dir' => $sort_dir,
 				'rows' => $rows,
-				'templateResults' => $templateResults
+				'templateResults' => $templateResults,
+				'categorySet' => $categorySet
 			);
 
 			if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
@@ -731,5 +733,38 @@ class Contents_Controller extends Base_Controller {
 		return "success=" . base64_encode("true");
 	}
 
+	public function get_order($applicationID) {
+		$chk = Common::CheckApplicationOwnership($applicationID);
+		if(!$chk) {
+			return Redirect::to($this->route);
+		}
+		DB::table("Customer")
+				->join("Application", "Application.CustomerID", "=", "Customer.CustomerID")
+				->join("Content", "Content.ApplicationID", "=", "Application.ApplicationID")
+				->where("Customer.StutusID", "=", eStatus::Active)
+				->where("Application.StutusID", "=", eStatus::Active)
+				->where("Content.StutusID", "=", eStatus::Active)
+				->order_by("Content.MonthlyName", "DESC")->get();
+		
+		
+	}
+	
+	public function post_order() {
+		//ajax ile buraya gelecek...
+		$applicationID = Input::get("applicationID");
+		$ThemeBackground = Input::get("templateBackground");
+		$ThemeForeground = Input::get("templateForeground");
+		$chk = Common::CheckApplicationOwnership($applicationID);
+		$rules = array(
+			'applicationID' => 'required|integer|min:1',
+			'templateBackground' => 'required|integer|min:1',
+			'templateForeground' => 'required|integer|min:1',
+		);
+		$v = Validator::make(Input::all(), $rules);
+		if (!$v->passes() || !$chk) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		}
+		
+	}
 
 }
