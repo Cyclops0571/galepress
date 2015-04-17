@@ -140,26 +140,20 @@ class Contents_Controller extends Base_Controller {
 
 
 			/* START SQL FOR TEMPLATE-CHOOSER */
-			$sqlTemlateChooser = '' .
-					'SELECT ' .
-					'a.Name AS ApplicationName, ' .
-					'a.ThemeBackground,' .
-					'a.ThemeForeground,' .
-					'c.ContentID, ' .
-					'c.Name, ' .
-					'c.Detail, ' .
-					'cf.FilePath, ' .
-					'c.MonthlyName, ' .
-					'cf.InteractiveFilePath, ' .
-					'ccf.FileName ' .
-					'FROM `Application` AS a ' .
-					'LEFT JOIN  `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 ' .
-					'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID ' .
-					'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID ' .
-					'WHERE a.ApplicationID=' . $applicationID . ' '
-					. 'group by c.ContentID '
+			$sqlTemlateChooser = 'SELECT * FROM ('
+					. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
+					. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
+					. 'ccf.ContentCoverImageFileID, ccf.FileName '
+					. 'FROM `Application` AS a '
+					. 'LEFT JOIN `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '
+					. 'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '
+					. 'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '
+					. 'WHERE a.ApplicationID= ' . $applicationID . ' '
+					. 'order by  c.ContentID DESC, cf.ContentFileID DESC, ccf.ContentCoverImageFileID DESC) as innerTable '
+					. 'group by innerTable.ContentID '
+					. 'order by innerTable.ContentID DESC '
 					. 'LIMIT 9';
-
+					
 			$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
 			$categorySet = Category::where('ApplicationID', '=', $applicationID)->where("statusID", "=", eStatus::Active)->get();
 			$data = array(
