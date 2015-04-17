@@ -304,13 +304,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">  
-								<input id="templateChooserClose" class="btn btn-mini" value="{{ __('common.template_chooser_close') }}">
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">  
-								<input class="btn my-btn-success" type="button" onclick="cTemplate.save();" value="{{ __('common.template_chooser_use') }}">
-							</div> 
+						<div class="form-row text-center">
+							<div class="btn-group">
+		                      <button type="button" id="templateChooserClose" class="btn">{{ __('common.template_chooser_close') }}</button>
+		                      <button type="button" class="btn my-btn-success" onclick="cTemplate.save();">{{ __('common.template_chooser_use') }}</button>
+		                    </div>
 						</div>
 					</form>
 				</div>                 

@@ -1517,6 +1517,12 @@ var cTemplate = new function () {
             $(this).parent().parent().next().toggleClass('panelClose');
         });
 
+        $('.templateContentScreen. .content-page').click(function () {
+            $('.templateContentScreen .header').toggleClass('hide');
+            $('.templateContentScreen .thumbnails').toggleClass('hide');
+            $('.templateContentScreen .footer').toggleClass('hide');
+        });
+
         $('#templateChooserClose').click(function () {
             $('#modalTemplateChooser').modal('hide');
         });
