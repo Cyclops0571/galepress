@@ -264,8 +264,16 @@
 							<div class="form-row">
 								<div class="col-md-12">
 									<div class="radiobox-inline">
-										<label style="color:#00A388;">
+										<label style="color:#2980B9;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="1"></div>
+											{{ __('common.template_chooser_frontcolor3') }}<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;">
+										</label>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="radiobox-inline">
+										<label style="color:#00A388;">
+											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="2"></div>
 											{{ __('common.template_chooser_frontcolor1') }}<img src="/img/template-chooser/color-picker-green.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
@@ -273,16 +281,8 @@
 								<div class="col-md-12">
 									<div class="radiobox-inline">
 										<label style="color:#E2B705;">
-											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="2"></div>
-											{{ __('common.template_chooser_frontcolor2') }}<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;">
-										</label>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="radiobox-inline">
-										<label style="color:#2980B9;">
 											<div class="radio"><input type="radio" class="templateForegroundChange" name="templateForeground" value="3"></div>
-											{{ __('common.template_chooser_frontcolor3') }}<img src="/img/template-chooser/color-picker-blue.png" width="15" style="margin-left:10px;">
+											{{ __('common.template_chooser_frontcolor2') }}<img src="/img/template-chooser/color-picker-yellow.png" width="15" style="margin-left:10px;">
 										</label>
 									</div>
 								</div>
