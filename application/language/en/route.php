@@ -96,6 +96,7 @@ return array(
 	'website_sitemap' => 'sitemap',
 	'website_search' => 'search',
 	'website_blog' => 'blog',
+	'website_blog_news' => 'blog-news',
 	'website_sectors' => 'solutions',
 	'website_showcase' => 'showcase',
 	'website_sectors_retail' => 'solutions-retail',

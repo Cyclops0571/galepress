@@ -446,6 +446,8 @@ return array(
 	'tryit_form_error_required_passmatch' => 'Passwords must be matched.',
 	'tryit_form_error_required_securitycode' => 'The security code is required.',
 	'tryit_form_error_required_invalidcaptcha' => 'The security code is not valid.',
-	'tryit_form_error_required_checkfields' => 'Please check the red fields.'
+	'tryit_form_error_required_checkfields' => 'Please check the red fields.',
+
+	'blog_news' => 'News and Activities',
 
 );

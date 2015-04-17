@@ -96,6 +96,7 @@ return array(
 	'website_sitemap' => 'site-haritasi',
 	'website_search' => 'arama',
 	'website_blog' => 'blog',
+	'website_blog_news' => 'blog-haberler',
 	'website_sectors' => 'cozumler',
 	'website_showcase' => 'referanslar',
 	'website_sectors_retail' => 'cozumler-perakende',

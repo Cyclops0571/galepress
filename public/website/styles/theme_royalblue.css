@@ -730,6 +730,7 @@ fieldset[disabled] .btn-default.btn-bordered.active {
   color: #ffffff;
   background-color: #0986c2;
   border-color: #0986c2;
+  outline: none !important;
 }
 #filters .btn-primary:hover,
 .btn-primary:hover,

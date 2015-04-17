@@ -444,6 +444,8 @@ return array(
 	'tryit_form_error_required_passmatch' => 'Şifrelerin eşleşmesi gerekiyor.',
 	'tryit_form_error_required_securitycode' => 'Güvenlik kodu gerekiyor.',
 	'tryit_form_error_required_invalidcaptcha' => 'Güvenlik kodu doğru değil.',
-	'tryit_form_error_required_checkfields' => 'Lütfen kırmızı alanları kontrol edin.'
+	'tryit_form_error_required_checkfields' => 'Lütfen kırmızı alanları kontrol edin.',
+
+	'blog_news' => 'Haberler ve Aktiviteler',
 
 );

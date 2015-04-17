@@ -244,7 +244,9 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 		<p>Behind the success of strong brands, lie their strong brand equity and the increase of these brands in the market compared to their competitors. Brand awareness and bringing in diversity and innovation are among factors that increase brand equity. </p>
 		<p>Today we live in a digital age, and companies which develop mobile apps and interact with their customers through them stand out among their competitors. For mobile users, two-way communication is much more important and it is possible to achieve this through mobile. There are more than 1 billion websites and the number of mobile apps is only 2.5 millions; this shows that there are many websites and companies have not yet entered the mobile app world. Now, if you go mobile today, you can start interacting with your customers and furthermore you can create a difference and stand out in the market. Besides, after this adaptation to the mobile world your brand equity would increase. </p>
 		<p>Many brands have started developing their own apps to catch the increasing mobile app trend. With Galepress you can start being part of the trend and increase both your brand equity and awareness. Moreover, you don’t need to be a millionaire to develop apps for your brand; with different options and solutions matching your company’s needs you can develop the perfect mobile app.</p>
-		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>'
+		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>',
+
+	'blog_news' => 'News and Activities',
 
 
 

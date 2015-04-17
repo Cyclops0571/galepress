@@ -154,6 +154,31 @@
                 }, 500, "resizeMyIframe");
             });
         }
+        if($('#blogIframeNews').length>0)
+        {
+            var waitForFinalEvent = (function () {
+                var timers = {};
+                return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                  uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                  clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+                };
+            })();
+
+            $('#blogIframeNews').load(function(){
+            $('#blogIframeNews').css('min-height',$('#blogIframeNews').contents().find('body').height()+50);
+            });
+
+            $(window).resize(function(){
+                waitForFinalEvent(function(){
+                    $('#blogIframeNews').css('min-height',$('#blogIframeNews').contents().find('body').height()+50);
+                }, 500, "resizeMyIframe");
+            });
+        }
     })
     </script>
     <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6022106543310&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
