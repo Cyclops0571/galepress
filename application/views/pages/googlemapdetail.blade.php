@@ -143,7 +143,7 @@ if ($googleMap) {
 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
     <div id="map_canvas"></div>
 </div>
-<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="  position: absolute;right: 0;z-index: 9999;width: 289px;">
 
     <div class="block block-drop-shadow">
         <div class="header text-center">
@@ -200,7 +200,7 @@ if ($googleMap) {
                 <a href="#" class="list-item" style="padding:10px;">
 
                     <div class="btn-group">
-                      <button type="button" style="max-width:96px;" class="btn" onclick="javascript:location.href='{{ URL::to(__('route.maps').'?applicationID='.$ApplicationID) }}'">{{__('common.map_form_return')}}</button>
+                      <button type="button" style="max-width:95px;" class="btn" onclick="javascript:location.href='{{ URL::to(__('route.maps').'?applicationID='.$ApplicationID) }}'">{{__('common.map_form_return')}}</button>
                       <button type="button" class="btn my-btn-send" id="zoomBtn">{{__('common.map_form_location')}}</button>
                       <button type="button" style="max-width:76px;" class="btn my-btn-success" onclick="cGoogleMap.save();">{{__('common.map_form_save')}}</button>
                     </div>

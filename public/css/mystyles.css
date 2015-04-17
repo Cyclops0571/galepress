@@ -345,3 +345,15 @@ margin-left: 20px;
 #modalMapsList .modal-content .modal-body{
     border: inherit !important;
 }
+
+.location-icon-map-stacked{
+    margin-left: -5px;
+    font-size: 14px;
+}
+
+.location-icon-plus-stacked{
+    position: absolute;
+    margin-left: 1px;
+    font-size: 10px;
+    margin-top: -4px;
+}
