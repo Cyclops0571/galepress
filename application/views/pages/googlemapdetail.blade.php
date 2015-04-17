@@ -140,12 +140,12 @@ if ($googleMap) {
         initialize();
     })
 </script>
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+<div class="col-xs-12 col-sm-7 col-md-9 col-lg-9">
     <div id="map_canvas"></div>
 </div>
-<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="  position: absolute;right: 0;z-index: 9999;width: 289px;">
+<div class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
 
-    <div class="block block-drop-shadow">
+    <div class="block block-drop-shadow" style="min-width:264px;">
         <div class="header text-center">
             <span class="icon-map-marker" style="font-size:18px;"></span>
         </div>
@@ -197,7 +197,7 @@ if ($googleMap) {
                         </div>
                     </div>                                
                 </a>
-                <a href="#" class="list-item" style="padding:10px;">
+                <a href="#" class="list-item text-center" style="padding:10px;">
 
                     <div class="btn-group">
                       <button type="button" style="max-width:95px;" class="btn" onclick="javascript:location.href='{{ URL::to(__('route.maps').'?applicationID='.$ApplicationID) }}'">{{__('common.map_form_return')}}</button>
