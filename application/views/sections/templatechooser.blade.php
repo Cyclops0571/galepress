@@ -65,7 +65,7 @@
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
 											</div>
 										</div>
-                                        <div class="templateExtrasScreen hide" style="opacity:0;">
+                                        <div class="templateExtrasScreen hide" style="opacity:0; overflow:hidden;">
 											<div class="container">
 												<div class="form-row">
                                                     <div class="col-md-12"><img src="/img/template-chooser/logo.png" width="100%"></div>
