@@ -97,6 +97,7 @@ return array(
 	'website_search' => 'arama',
 	'website_blog' => 'blog',
 	'website_blog_news' => 'blog-haberler',
+	'website_blog_tutorials' => 'blog-egitim-videolari',
 	'website_sectors' => 'cozumler',
 	'website_showcase' => 'referanslar',
 	'website_sectors_retail' => 'cozumler-perakende',

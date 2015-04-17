@@ -212,7 +212,7 @@ Ottavio.scrollController = function() {
     // adds 'opaque' class to navigation when scrolling down
     if ($mainNavigation.length > 0) {
 
-        if ($('#contactForm').length > 0 || $('.form-horizontal').length > 0 || $('#blog-frame').length > 0 || $('#tryit').length > 0 || $('#blog-frame-news').length > 0)
+        if ($('#contactForm').length > 0 || $('.form-horizontal').length > 0 || $('#blog-frame').length > 0 || $('#tryit').length > 0 || $('#blog-frame-news').length > 0 || $('#blog-frame-tutorials').length > 0)
             $mainNavigation.addClass('opaque');
         else
         {

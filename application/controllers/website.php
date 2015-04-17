@@ -62,6 +62,10 @@ class Website_Controller extends Base_Controller
 	{
 		return View::make('website.pages.blog-iframe-news');
 	}
+	public function get_blogTutorials()
+	{
+		return View::make('website.pages.blog-iframe-tutorials');
+	}
 
 	public function get_sectors()
 	{

@@ -449,5 +449,6 @@ return array(
 	'tryit_form_error_required_checkfields' => 'Please check the red fields.',
 
 	'blog_news' => 'News and Activities',
+	'blog_tutorials' => 'Tutorials',
 
 );

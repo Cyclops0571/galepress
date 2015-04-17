@@ -247,6 +247,7 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>',
 
 	'blog_news' => 'News and Activities',
+	'blog_tutorials' => 'Tutorials',
 
 
 

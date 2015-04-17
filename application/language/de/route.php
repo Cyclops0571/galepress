@@ -97,6 +97,7 @@ return array(
 	'website_search' => 'suchen',
 	'website_blog' => 'blog',
 	'website_blog_news' => 'blog-news',
+	'website_blog_tutorials' => 'blog-tutorials',
 	'website_sectors' => 'solutions',
 	'website_showcase' => 'showcase',
 	'website_sectors_retail' => 'solutions-retail',

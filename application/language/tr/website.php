@@ -447,5 +447,6 @@ return array(
 	'tryit_form_error_required_checkfields' => 'Lütfen kırmızı alanları kontrol edin.',
 
 	'blog_news' => 'Haberler ve Aktiviteler',
+	'blog_tutorials' => 'Eğitim Videoları',
 
 );
