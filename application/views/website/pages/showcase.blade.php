@@ -8,7 +8,7 @@
               <h2 class="small-space">{{__('website.menu_showcase')}}</h2>
             </div>
             <div id="filters" class="button-group">
-              <button data-filter="all" class="button is-checked">{{__('website.showcase_filters_all')}}</button>
+              <button data-filter=".all" class="button is-checked">{{__('website.showcase_filters_all')}}</button>
               <button data-filter=".retail" class="button">{{__('website.showcase_filters_retail')}}</button>
               <button data-filter=".hr" class="button">{{__('website.showcase_filters_hr')}}</button>
               <button data-filter=".education" class="button">{{__('website.showcase_filters_education')}}</button>
