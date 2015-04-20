@@ -52,8 +52,6 @@ class Ws_v102_Applications_Controller extends Base_Controller
 				'ApplicationID' => (int)$application->ApplicationID,
 				'ApplicationName' => $application->Name,
 				'ApplicationDetail' => $application->Detail,
-				'ThemeBackground' => $application->ThemeBackground,
-				'ThemeForeground' => $application->ThemeForeground,
 				'ApplicationExpirationDate' => $application->ExpirationDate,
 				'IOSVersion' => $application->IOSVersion,
 				'IOSLink' => $application->IOSLink,
@@ -111,11 +109,30 @@ class Ws_v102_Applications_Controller extends Base_Controller
 			Ws::checkUserCredential($customer->CustomerID);
 			//INFO:Save token method moved to get_detail
 			//Ws::saveToken($customer->CustomerID, $applicationID);
-
+			switch ($application->ThemeForeground) {
+				case 2:
+					$hexadecimalColorCode = "#00A388";
+					break;
+				case 3:
+					$hexadecimalColorCode = "#E2B705";
+					break;
+				case 4:
+					$hexadecimalColorCode = "#AB2626";
+					break;
+				case 5:
+					$hexadecimalColorCode = "#E74C3C";
+					break;
+				default:
+					$hexadecimalColorCode = "#2980B9";
+					
+			}
+			
 			$contents = Ws::getApplicationContents($applicationID);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
+				'ThemeBackground' => $application->ThemeBackground,
+				'ThemeForeground' => $hexadecimalColorCode,
 				'Contents' => $contents
 			));
 		});
