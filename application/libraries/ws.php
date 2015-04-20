@@ -76,6 +76,7 @@ class Ws
 			$rs = Content::where('ApplicationID', '=', $applicationID)
 				->where('ContentID', 'IN', DB::raw('(SELECT ContentID FROM ContentCategory WHERE CategoryID='.(int)$categoryID.')'))
 				->where('StatusID', '=', eStatus::Active)
+				->order_by('OrderNo', 'DESC')
 				->order_by('MonthlyName', 'ASC')
 				->order_by('Name', 'ASC')
 				->get();
@@ -97,7 +98,8 @@ class Ws
 						'ContentOrientation' => (int)$r->Orientation,
 						'ContentBlocked' => ((int)$r->Blocked == 1 ? true : false),
 						'ContentStatus' => ((int)$r->Status == 1 ? true : false),
-						'ContentVersion' => (int)$r->Version
+						'ContentVersion' => (int)$r->Version,
+						'ContentOrderNo' => (int) $r->OrderNo
 					));
 				}
 			}

@@ -1,5 +1,38 @@
 <?php
-
+/**
+ * @property int $ContentID Description
+ * @property int $ApplicationID Description
+ * @property int $OrderNo Description
+ * @property int $Name Description
+ * @property int $Detail Description
+ * @property int $MonthlyName Description
+ * @property int $PublishDate Description
+ * @property int $UnpublishDate Description
+ * @property int $IsUnpublishActive Description
+ * @property int $CategoryID Description
+ * @property int $IsProtected Description
+ * @property int $Password Description
+ * @property int $IsBuyable Description
+ * @property int $Price Description
+ * @property int $CurrencyID Description
+ * @property int $IsMaster Description
+ * @property int $Orientation Description
+ * @property int $Identifier Description
+ * @property int $AutoDownload Description
+ * @property int $Approval Description
+ * @property int $Blocked Description
+ * @property int $Status Description
+ * @property int $Version Description
+ * @property int $PdfVersion Description
+ * @property int $CoverImageVersion Description
+ * @property int $TotalFileSize Description
+ * @property int $StatusID Description
+ * @property int $CreatorUserID Description
+ * @property int $DateCreated Description
+ * @property int $ProcessUserID Description
+ * @property int $ProcessDate Description
+ * @property int $ProcessTypeID Description
+ */
 class Content extends Eloquent
 {
 	public static $timestamps = false;

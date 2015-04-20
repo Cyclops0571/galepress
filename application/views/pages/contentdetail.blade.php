@@ -1000,7 +1000,6 @@
 	    		$('#areaCoverImg').addClass('noTouch');
 	    	}
 	    	$('#coverImageIframe').load(function(){
-	    		// console.log($('#coverImageIframe').contents().find('.jcrop-holder').height());
 	    		$('#dialog-cover-image .modal-dialog .modal-body').css('height',$('#coverImageIframe').contents().find('.jcrop-holder').height()+35+'px');
 	    	});
 

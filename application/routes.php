@@ -172,6 +172,8 @@ foreach($languages as $currentLanguage) {
 	// </editor-fold>
 
 	// <editor-fold defaultstate="collapsed" desc="Contents">
+	Route::get("contents/order/(:num)", array('as' => 'contents_order', 'before' => 'auth', 'uses' => 'contents@order'));
+	Route::post("contents/order/(:num)", array('as' => 'contents_order', 'before' => 'auth', 'uses' => 'contents@order'));
 	Route::get(__('route.contents')->get($currentLanguage), array('as' => 'contents', 'before' => 'auth', 'uses' => 'contents@index'));
 	Route::get(__('route.contents_request')->get($currentLanguage), array('as' => 'contents_request', 'uses' => 'contents@request'));
 	Route::get(__('route.contents_new')->get($currentLanguage), array('as' => 'contents_new', 'before' => 'auth', 'uses' => 'contents@new'));

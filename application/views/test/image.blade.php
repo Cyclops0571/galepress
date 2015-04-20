@@ -53,7 +53,6 @@ if (FALSE) {
         }
 
         function updateCoords(c) {
-			console.log(c);
             if (wantedWidth != 1) {
                 if (c.w >= wantedWidth * 0.9) {
                     //kesilen resim yeterince kaliteli.

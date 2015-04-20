@@ -389,9 +389,6 @@
                   // function validate_website(website_url)
                   // {
                   //   var websiteReg =/[a-zA-Z0-9-]/;
-
-                  //   console.log(websiteReg.test(website_url));
-
                   //   if (!websiteReg.test(website_url) || $("#Website").val().length<4)
                   //   {
                   //     $('#myModal').find('.modal-title').text('Website');
@@ -651,52 +648,46 @@
                     url: '/' + $('#currentlanguage').val() + '/' + route["orders_save"],
                     data: $("form").serialize(),
                     success: function(data, textStatus) {
-                      if(data.getValue("success") == "true")
-                      {
+                      if(data.getValue("success") == "true") {
+							$('#hdnImage1024x1024Selected').val(0);
+							$('#hdnImage640x960Selected').val(0);
+							$('#hdnImage640x1136Selected').val(0);
+							$('#hdnImage1536x2048Selected').val(0);
+							$('#hdnImage2048x1536Selected').val(0);
+							$('#hdnPdfSelected').val(0);
 
-                        $('#hdnImage1024x1024Selected').val(0);
-                        $('#hdnImage640x960Selected').val(0);
-                        $('#hdnImage640x1136Selected').val(0);
-                        $('#hdnImage1536x2048Selected').val(0);
-                        $('#hdnImage2048x1536Selected').val(0);
-                        $('#hdnPdfSelected').val(0);
+							$('#hdnImage1024x1024Name').val("");
+							$('#hdnImage640x960Name').val("");
+							$('#hdnImage640x1136Name').val("");
+							$('#hdnImage1536x2048Name').val("");
+							$('#hdnImage2048x1536Name').val("");
+							$('#hdnPdfName').val("");
 
-                        $('#hdnImage1024x1024Name').val("");
-                        $('#hdnImage640x960Name').val("");
-                        $('#hdnImage640x1136Name').val("");
-                        $('#hdnImage1536x2048Name').val("");
-                        $('#hdnImage2048x1536Name').val("");
-                        $('#hdnPdfName').val("");
+							$( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
+							  $( "#stage3" ).addClass('hide');
+								$('#stage4').css('margin-top','-800px').removeClass('hide');
+								$( "#stage4" ).animate({
+								  marginTop: "0"
+								}, 1000);
+							});
+							$( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
 
-                        $( "#stage3" ).animate( {marginTop: "-1000"}, 500, function() {
-                          $( "#stage3" ).addClass('hide');
-                            $('#stage4').css('margin-top','-800px').removeClass('hide');
-                            $( "#stage4" ).animate({
-                              marginTop: "0"
-                            }, 1000);
-                        });
-                        $( ".appimg #launcImages" ).fadeTo( 'slow' , 0);
+							$( "a#thirdListItem").removeClass().addClass('appListSuccess');
+							$( "a#thirdListItem").find('i').css('opacity','1');
+							$( "a#thirdListItem").find('i').css('color','rgb(0, 202, 16);');
 
-                        $( "a#thirdListItem").removeClass().addClass('appListSuccess');
-                        $( "a#thirdListItem").find('i').css('opacity','1');
-                        $( "a#thirdListItem").find('i').css('color','rgb(0, 202, 16);');
+							$('#appSubmitButton').fadeOut();
+							$('#appBackButton').fadeOut();
 
-                        $('#appSubmitButton').fadeOut();
-                        $('#appBackButton').fadeOut();
+							$( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
+								$('#detailStage').text('{{ __("common.orders_submitted_form") }}');
+								$( "#detailStage" ).animate( {marginLeft: "0"},500);
+							});
 
-                        $( "#detailStage" ).animate( {marginLeft: "100"}, 500, function() {
-                            $('#detailStage').text('{{ __("common.orders_submitted_form") }}');
-                            $( "#detailStage" ).animate( {marginLeft: "0"},500);
-                        });
-
-                        $('ul li:nth-child(2)').prev().parent().removeClass('ulDisabled');
-                        $('ul li:nth-child(2)').prev().removeClass();
-                        $('ul li:nth-child(2)').removeClass();
-                        $('ul li:nth-child(3)').removeClass();
-                        //console.log(data);
-                        }
-                        else {
-                          //console.log("şoqq",data);
+							$('ul li:nth-child(2)').prev().parent().removeClass('ulDisabled');
+							$('ul li:nth-child(2)').prev().removeClass();
+							$('ul li:nth-child(2)').removeClass();
+							$('ul li:nth-child(3)').removeClass();
                         }
                     },
                     error: function (resp) {
@@ -770,7 +761,6 @@
                                   $('#hdnImage1024x1024Selected').val("0");
                                   $('#hdnImage1024x1024Name').val("");
                                   $("[for='Image1024x1024']").addClass("hide");
-                                  //console.log(errorMsg, errorString);
                                 }
                               });
                             }
@@ -826,7 +816,6 @@
                                   $('#hdnImage1024x1024Name').val("");
                                   $("[for='Image1024x1024']").addClass("hide");
 
-                                  //console.log(data);
                                 }
                               });
                               

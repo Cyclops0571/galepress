@@ -76,8 +76,6 @@
                               <script>
                                 // This is called with the results from from FB.getLoginStatus().
                                 function statusChangeCallback(response) {
-                                  // console.log('statusChangeCallback');
-                                  //console.log(response);
                                   // The response object is returned with a status field that lets the
                                   // app know the current login status of the person.
                                   // Full docs on the response object can be found in the documentation
@@ -135,12 +133,9 @@
 
 
                                 function testAPI(accessToken) {
-                                  // console.log('Welcome!  Fetching your information.... ');
                                   FB.api('/me', function(response) {
-                                    // console.log('Successful login for: ' + response.name);
                                     document.getElementById('status').innerHTML =
                                       '{{__("common.thanku")}}, ' + response.name + '!';
-                                       // console.log(JSON.stringify(response));
 
                                       $.ajax({
                                           type: "POST",
@@ -153,9 +148,8 @@
                                         // console.log(msg)
                                         document.location.href = "{{__('route.home')}}";
                                       }).fail(function(msg) {
-                                          //console.log(f);
-                                        // console.log(msg)
-                                      })
+										  ;
+                                      });
                                   });
                                 }
                               </script>

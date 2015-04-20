@@ -10,7 +10,9 @@ class Contents_Controller extends Base_Controller {
 	public $caption = '';
 	public $detailcaption = '';
 	public $fields;
-
+	
+	private $defaultSort = "OrderNo";
+	
 	public function __construct() {
 		parent::__construct();
 		$this->page = 'contents';
@@ -47,7 +49,7 @@ class Contents_Controller extends Base_Controller {
 		try {
 			$applicationID = (int) Input::get('applicationID', 0);
 			$search = Input::get('search', '');
-			$sort = Input::get('sort', $this->pk);
+			$sort = Input::get('sort', $this->defaultSort);
 			$sort_dir = Input::get('sort_dir', 'DESC');
 			$rowcount = (int) Config::get('custom.rowcount');
 			$p = Input::get('page', 1);
@@ -62,7 +64,8 @@ class Contents_Controller extends Base_Controller {
 			$sql = '' .
 					'SELECT ' .
 					'c.CustomerID, ' .
-					'c.CustomerName, ' .
+					'c.CustomerName, '
+					. 'o.OrderNo,' .
 					'a.ApplicationID, ' .
 					'a.Name AS ApplicationName, ' .
 					'o.Name, ' .
@@ -196,8 +199,8 @@ class Contents_Controller extends Base_Controller {
 					->nest('filterbar', 'sections.filterbar', $data)
 					->nest('commandbar', 'sections.commandbar', $data);
 		} catch (Exception $e) {
-//			throw new Exception($e->getMessage());
-			return Redirect::to(__('route.home'));
+			throw new Exception($e->getMessage());
+//			return Redirect::to(__('route.home'));
 		}
 	}
 
@@ -376,7 +379,9 @@ class Contents_Controller extends Base_Controller {
 					}
 
 					if ($id == 0) {
+						$maxID = DB::table("Content")->where("ApplicationID", "=", $applicationID)->max('OrderNo');
 						$s = new Content();
+						$s->OrderNo = $maxID + 1;
 					} else {
 						$chk = Common::CheckContentOwnership($id);
 						if (!$chk) {
@@ -728,37 +733,36 @@ class Contents_Controller extends Base_Controller {
 	}
 
 	public function get_order($applicationID) {
-		$chk = Common::CheckApplicationOwnership($applicationID);
-		if(!$chk) {
-			return Redirect::to($this->route);
+		//bu tamam bu calisiyor...
+		$contentSet = Content::get();
+		foreach($contentSet as $content) {
+			$content instanceof Content;
+			$result = array();
+			preg_match("/[0-9]+/", $content->MonthlyName, $result);
+			$content->OrderNo = !empty($result) ? $result[0] : 0;
+			$content->save();
+			
 		}
-		DB::table("Customer")
-				->join("Application", "Application.CustomerID", "=", "Customer.CustomerID")
-				->join("Content", "Content.ApplicationID", "=", "Application.ApplicationID")
-				->where("Customer.StutusID", "=", eStatus::Active)
-				->where("Application.StutusID", "=", eStatus::Active)
-				->where("Content.StutusID", "=", eStatus::Active)
-				->order_by("Content.MonthlyName", "DESC")->get();
-		
-		
 	}
 	
-	public function post_order() {
-		//ajax ile buraya gelecek...
-		$applicationID = Input::get("applicationID");
-		$ThemeBackground = Input::get("templateBackground");
-		$ThemeForeground = Input::get("templateForeground");
+	public function post_order($applicationID) {
 		$chk = Common::CheckApplicationOwnership($applicationID);
-		$rules = array(
-			'applicationID' => 'required|integer|min:1',
-			'templateBackground' => 'required|integer|min:1',
-			'templateForeground' => 'required|integer|min:1',
-		);
-		$v = Validator::make(Input::all(), $rules);
-		if (!$v->passes() || !$chk) {
+		if (!$chk) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		
+		$maxID = DB::table("Content")->where("ApplicationID", "=", $applicationID)->max('OrderNo');
+		$contentIDDescSet = Input::get("contentIDSet", array());
+		$i = $maxID + 1;
+		$contentIDSet = array_reverse($contentIDDescSet);
+		foreach($contentIDSet as $contentID) {
+			$content = Content::where("ApplicationID", "=", $applicationID)->find($contentID);
+			if($content) {
+				$content instanceof Content;
+				$content->OrderNo = $i++;
+				$content->save();
+			}
+		}
+		return "success=" . base64_encode("true");
 	}
 
 }
