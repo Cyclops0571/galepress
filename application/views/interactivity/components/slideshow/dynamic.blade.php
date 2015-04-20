@@ -232,6 +232,10 @@ foreach($files as $file)
 					e.preventDefault();
 				}
 			);
+			var length = $('.rsSlide').children().length;
+			if(length==1){
+				$('.rsDefaultInv .rsBullet').css('display','none');
+			}
 		});
 	</script>
 </body>
