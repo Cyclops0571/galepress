@@ -139,6 +139,16 @@ foreach($files as $file)
 			border: none !important;
 		}
 
+		.noTouch{
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			pointer-events: none;
+		}
+
 	</style>
 </head>
 <body>
@@ -235,6 +245,7 @@ foreach($files as $file)
 			var length = $('.rsSlide').children().length;
 			if(length==1){
 				$('.rsDefaultInv .rsBullet').css('display','none');
+				$('.royalSlider').addClass('noTouch');
 			}
 		});
 	</script>
