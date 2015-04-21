@@ -1059,7 +1059,6 @@ var cCommon = new function () {
             cNotification.loader();
 
             var t = 'POST';
-            console.log(param + "_save");
             var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
             var d = cForm.serialize(frm);
             cCommon.doAsyncRequest(t, u, d, fSuccess);
@@ -1213,7 +1212,6 @@ var cNotification = new function () {
     };
 
     this.show = function () {
-        console.log("this.show");
         if (!(this.element.hasClass("statusbar-loader") || this.element.hasClass("statusbar-success") || this.element.hasClass("statusbar-danger")) && this.element.find('#galeSpinner').length > 0) {
             this.element.find("#galeSpinner").remove();
         }
