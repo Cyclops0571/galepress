@@ -10,7 +10,7 @@
 						<div class="form-row">                       
 							<div class="col-md-12">
 								<div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
-								  <div class="device" style="max-width:535px !important;">
+								  <div class="device" style="min-width:276px !important; max-width:535px !important; min-height:353px !important;">
 									<div class="screen">
 										<div class="templateSplashScreen hide" style="opacity:0; height:100%;">
 											<?php $fileSplash=path('public').dirname($templateResults[0]->FilePath)."/splash.jpg";?>
@@ -34,7 +34,6 @@
 													$imageSrc = "/img/template-chooser/defaultCover-" . ($i + 1) . IMAGE_EXTENSION;
 													$name = "";
 													$detail = "";
-													$sayı = "";
 													if(isset($templateResults[$i])) {
 														$imageSrcTmp = $templateResults[$i]->FilePath.'/'.$templateResults[$i]->FileName;
 														if(is_file(path("public") . $imageSrcTmp)) {
@@ -43,6 +42,9 @@
 														$name = $templateResults[$i]->Name;
 														$detail = $templateResults[$i]->Detail;
 														$Sayi = $templateResults[$i]->MonthlyName;
+													}
+													if($i==0 || $i==3 || $i==6){
+														echo "<div class=form-row>";
 													}
 													?>
 													<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -55,6 +57,11 @@
 															<div class="col-md-12">{{$Sayi}}</div>
 														</div>
 													</div>
+													<?php 
+													if($i==2 || $i==5 || $i==8){
+														echo "</div>";
+													}
+													?>
 												<?php endfor; ?>
 												</div>
 											</div>

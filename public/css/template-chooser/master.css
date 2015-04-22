@@ -33,13 +33,13 @@
 .templateScreen .header .header-categories{
     background: url(/img/template-chooser/menu1.png) center left;
     background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:21px;
+    background-repeat: no-repeat !important; min-width: 25px; max-width:35px; height:20px;
     cursor: pointer;
 }
 .templateScreen .header .header-extras{
     background: url(/img/template-chooser/header-extras-blue.png) center right;
     background-size: 60% auto !important;
-    background-repeat: no-repeat !important; height:22px;
+    background-repeat: no-repeat !important; min-width: 25px; max-width:35px; height:22px;
 }
 .templateScreen > .container{
     height: 100%;
@@ -394,7 +394,8 @@
     height: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    overflow-y:scroll; 
+    overflow-y:scroll;
+    overflow-x: hidden;
 }
 .templateExtrasScreen .container ul{
     padding: 0; 
@@ -488,20 +489,42 @@
 .templateExtrasScreen .container .form-row.extrasBar.categories .extra-bar-icon{
     background: url(/img/template-chooser/left_menu_category_icon1.png) left center;
     background-size: 65% auto !important;
-    background-repeat: no-repeat !important; height:30px;
+    background-repeat: no-repeat !important; min-width: 20px; height:30px;
 }
 .templateExtrasScreen .container .form-row.extrasBar .title-drop{
-    background: url(/img/template-chooser/left_menu_down1.png) right center;
+    background: url(/img/template-chooser/left_menu_down1.png) left center;
     background-size: 65% auto !important;
-    background-repeat: no-repeat !important; height:30px;
+    background-repeat: no-repeat !important; min-width: 20px; height:30px;
     cursor: pointer;
 }
 .templateExtrasScreen .container .form-row.extrasBar.barLinks .extra-bar-icon{
     background: url(/img/template-chooser/left_menu_link1.png) left center;
     background-size: 65% auto !important;
-    background-repeat: no-repeat !important; height:30px;
+    background-repeat: no-repeat !important; min-width: 20px; height:30px;
 }
 /**************************************/
+.panelClose{
+    height: 1px;
+    overflow: hidden;
+}
+/********************MEDIA QUERIES*******************************/
+@media (max-width: 1270px) {
+   .templateExtrasScreen .container{
+    width: 111%;
+   }
+    .templateExtrasScreen .container .form-row.extrasBar div.title{
+    padding-left: 10px;
+   }
+}
+@media (max-width: 1000px) {
+    .templateScreen .container .content-bar [class*="col-"]:nth-child(2){
+    font-size:1em;
+    height: 38%;
+    }
+       .templateReadScreen p:nth-child(2) {
+    font-size: 0.6em;
+    }
+}
 @media (max-width: 767px) {
    .templateScreen .footer .col-xs-offset-2{
     margin-left: 15%;
@@ -509,12 +532,7 @@
    .templateContentScreen .footer .col-xs-offset-2{
     margin-left: 15%;
    }
-}
-/**************************************/
-.panelClose{
-    height: 1px;
-    overflow: hidden;
-}
-.btn {
-    background-image: linear-gradient(to bottom, #3a3a3a, #1e1e1e);
+   .templateExtrasScreen .container .form-row.extrasBar div.title{
+    padding-left: 20px;
+   }
 }
