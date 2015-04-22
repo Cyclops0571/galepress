@@ -357,3 +357,22 @@ margin-left: 20px;
     font-size: 8px;
     margin-top: -4px;
 }
+/* Chrome, Safari, Opera */
+@-webkit-keyframes dragLi {
+    0%   {margin-top:0px;}
+    25%  {margin-top:-5px;}
+    50%  {margin-top:5px;}
+    75%  {margin-top:0px;}
+}
+
+/* Standard syntax */
+@keyframes dragLi {
+    0%   {margin-top:0px;}
+    25%  {margin-top:-5px;}
+    50%  {margin-top:5px;}
+    75%  {margin-top:0px;}
+}
+.list-draggable-icon{
+	position: absolute;
+	cursor: pointer;
+}

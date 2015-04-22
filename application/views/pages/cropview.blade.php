@@ -32,6 +32,11 @@ body{
 .jcrop-handle{
 	border: 1px #1681bf solid !important;
 }
+img[width="500"] {
+	-webkit-box-shadow: 0px 0px 50 0px rgba(2, 81, 130, 1);
+  	-moz-box-shadow: 0px 0px 50 0px rgba(2, 81, 130, 1);
+  	box-shadow: 0px 0px 50px 0px rgba(2, 81, 130, 1);
+}
 </style>
 <body class="bg-img-num1">
 	<input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />

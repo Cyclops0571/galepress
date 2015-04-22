@@ -951,7 +951,7 @@
     <style type="text/css">
     #dialog-cover-image .modal-dialog{
     	/*width: 50%;*/
-    	min-width: 516px;
+    	min-width: 590px;
     	margin-top: 0;
     	padding: 28px 0;
     }
@@ -971,7 +971,7 @@
 		}*/
 
 	.flip-container, .front{
-		width: 516px;
+		width: 590px;
 		height: auto;
 	}
 

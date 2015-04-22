@@ -71,7 +71,7 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 										@elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 											<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
 												<?php if($page < 2): ?>
-													<td><span class="icon-resize-vertical"></span></td>
+													<td class="hakan" style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
 												<?php endif; ?>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
@@ -105,6 +105,14 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
             <script type="text/javascript">
                 $(function() {
                     $("div.pagination ul").addClass("pagination");
+
+					$( "#DataTables_Table_1 tbody tr td" ).hover(
+					  function() {
+					   	$(this).find('.list-draggable-icon').css('-webkit-animation-name','dragLi').css('-webkit-animation-duration','1s').css('animation-name','dragLi').css('animation-duration','1s');
+					  }, function() {
+					    $(this).find('.list-draggable-icon').css('-webkit-animation-name','').css('-webkit-animation-duration','').css('animation-name','').css('animation-duration','');
+					  }
+					);
                 });
             </script>
             <!-- end select-->
