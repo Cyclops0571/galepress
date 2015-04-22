@@ -2,15 +2,17 @@
 
 @section('content')
 <?php 
+$currentPageNo = (int)Input::get('page', 0);
 $applicationID = (int)Input::get('applicationID', 0);
 $appLink = $applicationID > 0 ? '&applicationID=' . $applicationID : '';
 $searchLink = '&search='.$search;
 $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 	?>
 	<script>
+	var currentPageNo = <?php echo (int)$currentPageNo ; ?>;
 	var appID = <?php echo $applicationID ?>;
 	$(function() {
-		if(appID) {
+		if(appID && currentPageNo < 2) {
 		  $( "#DataTables_Table_1 tbody" ).sortable({
 			  axis:'y',
 			  update: function() {
@@ -44,7 +46,9 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
                         <table id="DataTables_Table_1" cellpadding="0" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
+									@if($currentPageNo < 2 && (int)Auth::User()->UserTypeID == eUserTypes::Customer)
 									<th><span class="icon-move"></span></th>
+									@endif
 									<?php foreach($fields as $field): ?>
 									<?php $sortLink = '&sort='.$field[1]; ?>
 									<?php $sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array(); ?>
@@ -52,30 +56,23 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 									<?php endforeach; ?>
                                 </tr>
                             </thead>
-                            <tfoot class="hidden">
-                                <tr>
-									<?php foreach($fields as $field): ?>
-										<?php $sortLink = '&sort='.$field[1]; ?>
-										<?php $sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array(); ?>
-										<th scope="col">{{ HTML::link($route.'?page=1'. $appLink . $searchLink . $sortLink . $sortDirLink, $field[0], $sort) }}</th>
-									<?php endforeach; ?>
-                                </tr>
-                            </tfoot>
                             <tbody>
 								<form id="contentOrderForm">
 									@forelse($rows->results as $row)
 										@if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
 											<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
-												<td><span class="icon-resize-vertical"></span></td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->CustomerName) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->ApplicationName) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Blocked) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Status) }}</td>
+												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->ContentID) }}</td>
 											</tr>
 										@elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 											<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
-												<td><span class="icon-resize-vertical"></span></td>
+												<?php if($page < 2): ?>
+													<td><span class="icon-resize-vertical"></span></td>
+												<?php endif; ?>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, Common::dateRead($row->PublishDate, 'dd.MM.yyyy')) }}</td>

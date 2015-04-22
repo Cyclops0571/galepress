@@ -23,7 +23,7 @@
                 @endif
 
                 @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
-                    <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
+                    <!-- <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a> -->
                 @endif
           
         @else
