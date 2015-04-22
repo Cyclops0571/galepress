@@ -390,7 +390,7 @@
 .templateExtrasScreen .container{
     position: absolute;
     top: 0;
-    width: 107%;
+    width: 100%;
     height: 100%;
     padding-left: 0px;
     padding-right: 0px;
@@ -520,9 +520,9 @@
 }
 /********************MEDIA QUERIES*******************************/
 @media (max-width: 1270px) {
-   .templateExtrasScreen .container{
+   /*.templateExtrasScreen .container{
     width: 111%;
-   }
+   }*/
     .templateExtrasScreen .container .form-row.extrasBar div.title{
     padding-left: 10px;
    }
