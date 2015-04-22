@@ -10,7 +10,7 @@
 						<div class="form-row">                       
 							<div class="col-md-12">
 								<div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
-								  <div class="device">
+								  <div class="device" style="max-width:535px !important;">
 									<div class="screen">
 										<div class="templateSplashScreen hide" style="opacity:0; height:100%;">
 											<?php $fileSplash=path('public').dirname($templateResults[0]->FilePath)."/splash.jpg";?>
@@ -207,10 +207,10 @@
 </div>
 <div class="block block-drop-shadow bg-light-rtl" id="templateChooserBox" style="position:fixed; z-index:9999; display:none;">
 	<!-- Tema seçici için sayfanın sağında çıkan filtrelemeyle ilgili açılır kapanır bölüm. -->
-	<div class="site-settings" style="display:block;">
+	<div class="site-settings" style="display:inline-block;">
 		<!-- <div class="site-settings-button"><span class="icon-tablet" style="font-size:30px; line-height:39px;"></span></div> -->
 		<div class="site-settings-content">
-			<div class="block block-transparent nm filterBlock">                
+			<div class="block block-transparent bg-light nm filterBlock">                
 				<div class="header" style="height:35px; line-height:35px; border-bottom:1px solid black;">
 					<h2 style="text-transform: capitalize;">{{ __('common.template_chooser_title') }}</h2>
 				</div>

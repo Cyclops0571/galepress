@@ -8,7 +8,7 @@
 @font-face {
     font-family: 'Avenir Medium';
     src: url('/css/fonts/avenir/Avenir-Medium.otf') format('opentype');
-    font-weight: normal;
+    font-weight: 100 !important;
     font-style: normal;
 }
 #modalTemplateChooser .screen{
@@ -88,7 +88,7 @@
     overflow: hidden;
 }
 .templateScreen .container .content-bar [class*="col-"]:nth-child(2){
-    font-weight: bold;
+    font-weight: 100;
     font-size:1.2em;
 }
 .templateScreen > .container .content-bar [class*="col-"]{
@@ -162,7 +162,7 @@
 }
 .templateReadScreen p:nth-child(2){
     font-size: 0.9em;
-    font-weight: bold;
+    font-weight: 100;
 }
 .templateReadScreen .content-buttons{
     padding: 0;
@@ -222,7 +222,7 @@
 /********************************************************/
 .templateContentScreen div{
     color: #2185C5;
-    font-weight: bold;
+    font-weight: 100;
     text-shadow:none !important;
 
 }
@@ -243,7 +243,7 @@
 }
 .templateContentScreen .header .header-share{
     background: url(/img/template-chooser/reader_share1.png) right center;
-    background-size: 44% auto !important;
+    background-size: 84% auto !important;
     background-repeat: no-repeat !important; height:30px;
 }
 .templateContentScreen .content-page{
@@ -514,4 +514,7 @@
 .panelClose{
     height: 1px;
     overflow: hidden;
+}
+.btn {
+    background-image: linear-gradient(to bottom, #3a3a3a, #1e1e1e);
 }
