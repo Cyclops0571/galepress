@@ -1461,6 +1461,7 @@ var cTemplate = new function () {
             $('.container.content-list').addClass('blurred');
             $('#templateChooserBox').show(500);
             $('#templateChooserBox .site-settings').addClass('active');
+            $('.templateScreen .footer').css('left','0');
             $('.templateSplashScreen').removeClass('hide').fadeTo("slow", 1, function () {
                 setTimeout(function () {
                     $('.templateSplashScreen').fadeTo("slow", 0, function () {
