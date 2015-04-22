@@ -239,12 +239,12 @@
 .templateContentScreen .header .header-table-of-contents{
     background: url(/img/template-chooser/reader_menu1.png) left center;
     background-size: 70% auto !important;
-    background-repeat: no-repeat !important; height:30px;
+    background-repeat: no-repeat !important; min-width: 28px; height:30px;
 }
 .templateContentScreen .header .header-share{
     background: url(/img/template-chooser/reader_share1.png) right center;
     background-size: 84% auto !important;
-    background-repeat: no-repeat !important; height:30px;
+    background-repeat: no-repeat !important; min-width: 22px; height:30px;
 }
 .templateContentScreen .content-page{
     position: absolute;
@@ -506,6 +506,17 @@
 .panelClose{
     height: 1px;
     overflow: hidden;
+}
+.site-settings#templateChooserBox{
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 155px;
+    z-index: 10;
+    font-size: 11px;
+    width: 220px;
+    height: 387px;
+    z-index: 9999;
 }
 /********************MEDIA QUERIES*******************************/
 @media (max-width: 1270px) {
