@@ -520,7 +520,6 @@ class Contents_Controller extends Base_Controller {
 							}
 
 							$originalImageFileName = pathinfo($sourceFileNameFull, PATHINFO_FILENAME) . IMAGE_ORJ_EXTENSION;
-
 							File::move($sourceFileNameFull, $targetFileNameFull);
 							File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
 
@@ -566,7 +565,9 @@ class Contents_Controller extends Base_Controller {
 							}
 
 							File::move($sourceFileNameFull, $targetFileNameFull);
-							File::copy($targetFileNameFull, $destinationFolder . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION);
+							if((int)Input::get('hdnFileSelected', 0) == 0) {
+								File::copy($targetFileNameFull, $destinationFolder . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION);
+							}
 							$pictureInfoSet = array();
 							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
 							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imageName" => $targetThumbFileName);
@@ -647,9 +648,7 @@ class Contents_Controller extends Base_Controller {
 
 	public function post_uploadfile() {
 		ob_start();
-
 		$element = Input::get('element');
-
 		$options = array(
 			//'script_url' => URL::to_route('contents_uploadcoverimage'),
 			'upload_dir' => path('public') . 'files/temp/',
