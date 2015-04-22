@@ -71,7 +71,7 @@ class Crop_Controller extends Base_Controller {
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
 		$sourceImagePath = $contentFile->FilePath . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
-		if(!File::exists($sourceImagePath)) {
+		if(!File::exists(path("public") . $sourceImagePath)) {
 			//old pdf files dont have an original.jpg
 			$sourceImagePath = $contentFile->FilePath . "/" . $ccif->SourceFileName;
 		}
@@ -90,6 +90,7 @@ class Crop_Controller extends Base_Controller {
 				continue;
 			}
 			$crop instanceof Crop;
+			
 			$im = new Imagick($imageInfo->absolutePath);
 			$im->cropimage($widthSet[$i], $heightSet[$i], $xCoordinateSet[$i], $yCoordinateSet[$i]);
 			$im->resizeImage($crop->Width,$crop->Height,Imagick::FILTER_LANCZOS,1, TRUE);
