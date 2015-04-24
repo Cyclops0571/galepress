@@ -234,8 +234,8 @@ $rgb = array($r, $g, $b);
 			@if($option==1)
 				var imgWidth=30;
 				var calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
-				var imgWidth=30;
-				var calcHeight=(imgWidth/bodyHeightFromTasarlayici)*100;
+				var imgHeight=30;
+				var calcHeight=(imgHeight/bodyHeightFromTasarlayici)*100;
 			
 				$('#image').css('height',calcHeight+'%');
 				
