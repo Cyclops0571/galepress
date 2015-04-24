@@ -74,6 +74,17 @@ $rgb = array($r, $g, $b);
 	<link rel="stylesheet" href="{{ $baseDirectory }}comp_{{ $id }}/css/layout.css" type="text/css" />
 	<link rel="stylesheet" href="{{ $baseDirectory }}comp_{{ $id }}/css/hotspot.css" type="text/css" />
 	<style type="text/css">
+	body{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	#hotspot{
+		position: absolute;
+	}
+	.hs-spot-object{
+		{{($init == 'right' || $init == 'bottom' ? 'top:0; left:0;' : ($init == 'left' ? 'top:0; right:0;' : ($init == 'top' ? 'bottom:0; left:0;' : '')))}};
+	}
 	@if($option == 2)
 	.hs-spot-object{
 		background-image: url("{{$vFile}}");
@@ -100,26 +111,37 @@ $rgb = array($r, $g, $b);
 		border-bottom: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 	}
 	@endif
-
 	.hs-tooltip{
 		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
+		padding: 0;
+		padding-left: 10px;
+  		padding-right: 10px;
+  		@if($option==1)
+		margin: auto 1px;
+		@endif
 	}
-	.hsmap-image{
-		display: none !important;
+	.hs-tooltip-wrap{
+		padding: 0 !important;
+		/*top: 0 !important;*/
+		{{($init == 'right' ? 'top:0 !important;' : ($init == 'left' ? 'top:0 !important;' : ($init == 'top' ? 'left:0 !important;' : '')))}};
 	}
 	*{
 		-webkit-tap-highlight-color: transparent !important;
 	}
 	#myScrollableDiv{
-		word-wrap: break-word;
+		padding-top: 5px;
 	}
-	/**/
+	#myScrollableDiv p{
+		word-wrap: break-word;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
 	</style>
 </head>
-<body style="width:100%;height:100%;">
-	<div id="hotspot" class="hs-wrap hs-loading" style="position: absolute; {{($init == 'right' || $init == 'bottom' ? 'top:12px; left:12px;' : ($init == 'left' ? 'top:12px; right:32px;' : ($init == 'top' ? 'bottom:32px; left:12px;' : '')))}}">
+<body>
+	<div id="hotspot" class="hs-wrap hs-loading">
 		@if( $option==1)
-		<div class="hs-spot-object" data-type="spot" data-width="30" data-height="30" data-popup-position="{{ $init }}" data-visible="visible">
+		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="visible">
 			<div id="myScrollableDiv">
 				{{ $content }}
 			</div>
@@ -127,7 +149,7 @@ $rgb = array($r, $g, $b);
 		</div>
 		@endif
 		@if( $option==2)
-		<div class="hs-spot-object" data-type="spot" data-width="{{$iconwidth}}" data-height="{{$iconheight}}" data-popup-position="{{ $init }}" data-visible="invisible">
+		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="invisible">
 			<div id="myScrollableDiv">
     			{{ $content }}
     		</div>
@@ -140,10 +162,8 @@ $rgb = array($r, $g, $b);
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/js/hotspot.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#hotspot').hide();
 			$('#hotspot').hotspot({ "show_on" : "click" });
 			@if( $option==1)
-			<?php $iconwidth=49;?>
 			function opacityAnimate(){
 				$('.hs-spot-shape').animate({ opacity: 0.25 }, function(){ 
 					$(this).animate({ opacity: 0.15 },opacityAnimate())
@@ -151,49 +171,6 @@ $rgb = array($r, $g, $b);
 			}
 			opacityAnimate();
 			@endif
-			setTimeout(function(){
-				var heightCalc=$(document).height()-77;
-				if({{$iconheight}}>0 && {{$option}}==2)
-				{
-					heightCalc-={{$iconheight}};
-				}
-				$('#hotspot').fadeIn(500);
-				$('.hs-tooltip').css("height",heightCalc);
-				$('.hs-tooltip #myScrollableDiv').css("height",heightCalc).css("overflow-y","scroll");
-				$('.hs-tooltip-wrap').css('width',$(document).width()-{{$iconwidth}}-35);
-				@if( $option==2 && $init=='left')
-				$('#hotspot').css('right',{{$iconwidth}}+1);
-				$('.hs-tooltip-wrap').css('width',$(document).width()-{{$iconwidth}}-17);
-				@endif
-				@if( $option==2 && $init=='right')
-				$('.hs-tooltip').css("height",heightCalc+{{$iconheight}});
-				$('.hs-tooltip #myScrollableDiv').css("height",heightCalc+{{$iconheight}});
-				@endif
-				@if( $option==2 && $init=='top')
-				$('#hotspot').css('bottom',{{$iconheight}});
-				$('.hs-tooltip').css("height",heightCalc);
-				$('.hs-tooltip #myScrollableDiv').css("height",heightCalc);
-				$('.hs-tooltip-wrap').css('width',$(document).width()-35);
-				@endif
-				@if( $option==2 && $init=='bottom')
-				$('#hotspot').css('top',1).css('left',1);
-				$('.hs-tooltip').css("height",heightCalc);
-				$('.hs-tooltip #myScrollableDiv').css("height",heightCalc);
-				$('.hs-tooltip-wrap').css('width',$(document).width()-35);
-				@endif
-				@if( $option==1 && $init=='top')
-				$('#hotspot').css('bottom',31);
-				$('.hs-tooltip').css("height",heightCalc);
-				$('.hs-tooltip #myScrollableDiv').css("height",heightCalc);
-				$('.hs-tooltip-wrap').css('width',$(document).width()-35);
-				@endif
-				@if( $option==1 && $init=='bottom')
-				$('#hotspot').css('top',1).css('left',1);
-				$('.hs-tooltip').css("height",heightCalc);
-				$('.hs-tooltip #myScrollableDiv').css("height",heightCalc);
-				$('.hs-tooltip-wrap').css('width',$(document).width()-15);
-				@endif
-			},200);
 			@if($option==2)
 			var focused=false;
 			$('#hotspot').click(function(){
@@ -207,7 +184,80 @@ $rgb = array($r, $g, $b);
 					$('.hs-spot-object').css('background-image','url("' + <?php echo json_encode($vFile) ?> + '")');
 					focused=false;
 				}
-			})
+			});
+			@endif
+
+			var bodyHeight=$(window).height();
+			var bodyWidth=$(window).width();
+
+			var bodyWidthFromTasarlayici={{$w}};
+			var bodyHeightFromTasarlayici={{$h}};
+
+			var calcBodyWidth=(bodyWidthFromTasarlayici/bodyWidth)*100;
+			var calcBodyHeight=(bodyHeightFromTasarlayici/bodyHeight)*100;
+
+			$('#hotspot').css('width',calcBodyWidth+'%').css('height',calcBodyHeight+'%');
+			
+			@if($option==2)
+			var image = new Image();
+			image.src = "{{$vFile}}";
+			image.onload = function() {
+				var imgWidth=this.width;
+				var calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
+				var imgHeight=this.height;
+				var calcHeight=(imgHeight/bodyHeightFromTasarlayici)*100;
+
+				$('#image').css('height',calcHeight+'%');
+				
+				$('.hs-spot-object').css('width',calcWidth+'%').css('height',calcHeight+'%').css('position','fixed');
+				$('.hs-spot-object').css('background-size','100% 100%');
+
+				var diffIconWidth = (calcWidth * bodyWidthFromTasarlayici)/100;
+				var diffIconHeight = (calcHeight * bodyHeightFromTasarlayici)/100;
+				$('.hs-tooltip-wrap').css('width',(bodyWidth-diffIconWidth)+'px');
+				$('.hs-tooltip').css('height',bodyHeight+'px');
+				$('#myScrollableDiv p').css('height',bodyHeight+'px');
+
+				@if($init=="top")
+				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
+				$('.hs-tooltip').css('top','0').css('position','fixed');
+				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				@endif
+
+				@if($init=="bottom")
+				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
+				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				@endif
+			};
+			@endif
+			/**********img.load fonksiyonu sebebiyle kodlarin tekrarlanmasi lazim**********/
+			@if($option==1)
+				var imgWidth=30;
+				var calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
+				var imgWidth=30;
+				var calcHeight=(imgWidth/bodyHeightFromTasarlayici)*100;
+			
+				$('#image').css('height',calcHeight+'%');
+				
+				$('.hs-spot-object').css('width',calcWidth+'%').css('height',calcHeight+'%').css('position','fixed');
+				$('.hs-spot-object').css('background-size','100% 100%');
+
+				var diffIconWidth = (calcWidth * bodyWidthFromTasarlayici)/100;
+				var diffIconHeight = (calcHeight * bodyHeightFromTasarlayici)/100;
+				$('.hs-tooltip-wrap').css('width',(bodyWidth-diffIconWidth)+'px');
+				$('.hs-tooltip').css('height',bodyHeight+'px');
+				$('#myScrollableDiv p').css('height',bodyHeight+'px');
+
+				@if($init=="top")
+				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
+				$('.hs-tooltip').css('top','0').css('position','fixed');
+				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				@endif
+				
+				@if($init=="bottom")
+				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
+				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				@endif
 			@endif
 		});
 	</script>
