@@ -105,14 +105,6 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
             <script type="text/javascript">
                 $(function() {
                     $("div.pagination ul").addClass("pagination");
-
-					$( "#DataTables_Table_1 tbody tr td" ).hover(
-					  function() {
-					   	$(this).find('.list-draggable-icon').css('-webkit-animation-name','dragLi').css('-webkit-animation-duration','1s').css('animation-name','dragLi').css('animation-duration','1s');
-					  }, function() {
-					    $(this).find('.list-draggable-icon').css('-webkit-animation-name','').css('-webkit-animation-duration','').css('animation-name','').css('animation-duration','');
-					  }
-					);
                 });
             </script>
             <!-- end select-->

@@ -376,3 +376,9 @@ margin-left: 20px;
 	position: absolute;
 	cursor: pointer;
 }
+td:hover .list-draggable-icon{
+	animation-name:dragLi;
+	animation-duration:1s;
+	-webkit-animation-name: dragLi;
+	-webkit-animation-duration:1s;
+}
