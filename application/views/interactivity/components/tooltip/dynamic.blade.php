@@ -148,13 +148,13 @@ $rgb = array($r, $g, $b);
 </head>
 <body>
 	<div id="hotspot" class="hs-wrap hs-loading">
-		@if( $option==1)
+		@if($option==1)
 		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="visible">
-		@elseif ( $option==2)
+		@elseif ($option==2)
 		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="invisible">
 		@endif
 			<div id="myScrollableDiv">
-				{{ $content }}
+				{{$content}}
 			</div>
     		<br />
 		</div>
@@ -231,6 +231,7 @@ $rgb = array($r, $g, $b);
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
 				// $('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
+				$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
 			};
 			@endif
 			/**********img.load fonksiyonu sebebiyle kodlarin tekrarlanmasi lazim**********/
@@ -261,9 +262,8 @@ $rgb = array($r, $g, $b);
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
 				// $('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
+				$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
 			@endif
-
-			$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
 		});
 	</script>
 </body>
