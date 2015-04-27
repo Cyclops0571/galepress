@@ -16,8 +16,8 @@
             c = !1 == b(this).data("tooltip-auto-width") ?
                 b(this).data("tooltip-width") + "px" : "auto";
             h = b(this).data("popup-position");
-            a += '<div class="' + d + " " + g + " " + h + ' hs-spot-object" style="left: ' + e + "px; top: " + f + "px; width: " + b(this).data("width") + "px; height: " + b(this).data("height") + 'px;">';
-            a += '\t<div class="hs-spot-shape"></div><div class="hs-spot-shape-inner"></div><div class="hs-spot-shape-inner-two"></div>';
+            a += '<div class="' + d + " " + g + " " + h + ' hs-spot-object">';
+            a += '\t<div class="hs-spot-shape"></div><div class="hs-spot-shape-inner"></div>';
             a += '\t<div class="hs-spot-tooltip-outer">';
             a += '\t\t<div class="hs-tooltip-buffer"></div>';
             a += '\t\t<div class="hs-tooltip-wrap" style="width: ' +

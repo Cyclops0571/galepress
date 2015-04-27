@@ -407,7 +407,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 	top: 28px;
 	left: 0;
 	z-index: 2004;
-	position: absolute;
+	position: fixed !important;
 	width: 200px;
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -418,6 +418,13 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 	line-height: 21px;
 	padding: 10px;
 }
+
+@-moz-document url-prefix() { 
+  .redactor_dropdown {
+    position: absolute !important;
+  }
+}
+
 .redactor_separator_drop {
 	border-top: 1px solid #ddd;
 	padding: 0 !important;
