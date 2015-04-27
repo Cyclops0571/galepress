@@ -132,10 +132,12 @@ $rgb = array($r, $g, $b);
 	*{
 		-webkit-tap-highlight-color: transparent !important;
 	}
-	#myScrollableDiv p{
+	#myScrollableDiv{
 		word-wrap: break-word;
 		overflow-y: scroll;
 		overflow-x: hidden;
+	}
+	#myScrollableDiv p{
 		padding-top: 4.5%;
 	}
 	.hs-spot.visible .hs-spot-shape{
@@ -148,20 +150,14 @@ $rgb = array($r, $g, $b);
 	<div id="hotspot" class="hs-wrap hs-loading">
 		@if( $option==1)
 		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="visible">
+		@elseif ( $option==2)
+		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="invisible">
+		@endif
 			<div id="myScrollableDiv">
 				{{ $content }}
 			</div>
-    		<br>
+    		<br />
 		</div>
-		@endif
-		@if( $option==2)
-		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="invisible">
-			<div id="myScrollableDiv">
-    			{{ $content }}
-    		</div>
-    		<br>
-		</div>
-		@endif
 	</div>
 
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/js/lib/jquery-1.7.1.min.js"></script>
@@ -203,7 +199,7 @@ $rgb = array($r, $g, $b);
 			var calcBodyHeight=(bodyHeightFromTasarlayici/bodyHeight)*100;
 
 			$('#hotspot').css('width',calcBodyWidth+'%').css('height',calcBodyHeight+'%');
-			$('#myScrollableDiv p').css('height',bodyHeight+'px');
+			// $('#myScrollableDiv p').css('height',bodyHeight+'px');
 
 			@if($option==2)
 			var image = new Image();
@@ -228,12 +224,12 @@ $rgb = array($r, $g, $b);
 				@if($init=="top")
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
 				$('.hs-tooltip').css('top','0').css('position','fixed');
-				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				// $('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
 
 				@if($init=="bottom")
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
-				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				// $('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
 			};
 			@endif
@@ -258,16 +254,16 @@ $rgb = array($r, $g, $b);
 				@if($init=="top")
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
 				$('.hs-tooltip').css('top','0').css('position','fixed');
-				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				// $('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
 				
 				@if($init=="bottom")
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
-				$('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
+				// $('#myScrollableDiv p').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
 			@endif
 
-			$('#myScrollableDiv p').css('height',($('.hs-tooltip').height()-15)+'px');
+			$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
 		});
 	</script>
 </body>

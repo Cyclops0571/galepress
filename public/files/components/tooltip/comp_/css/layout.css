@@ -2,7 +2,7 @@
 
 body {
 	font-size: 62.5%; /* Causes base font size to be ~10px */
-	background: url('../images/builder_bg.png') repeat;
+	/*background: url('../images/builder_bg.png') repeat;*/
 }
 #shell {
 	margin: 40px;
