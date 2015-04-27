@@ -109,7 +109,7 @@ $rgb = array($r, $g, $b);
 		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 		padding: 0;
 		padding-left: 10px;
-  		padding-right: 10px;
+  		padding-right: 0px;
   		@if($option==1)
 		margin: auto 1px;
 		@endif
