@@ -536,9 +536,14 @@ class Contents_Controller extends Base_Controller {
 			if($content) {
 				$content instanceof Content;
 				$content->OrderNo = $i++;
+				$content->Version++;
 				$content->save();
 			}
 		}
+		$application = Application::find($applicationID);
+		$application instanceof Application;
+		$application->Version++;
+		$application->save();
 		return "success=" . base64_encode("true");
 	}
 
