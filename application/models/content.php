@@ -81,6 +81,7 @@ class Content extends Eloquent {
 		return $this->has_many('ContentTag', $this->key());
 	}
 
+	public function ifModifiedDoNeccessarySettings($selectedCategories) {
 		$currentCategories = array();
 		$rows = $this->getCategoryIDSet();
 		foreach ($rows as $row) {
@@ -186,6 +187,7 @@ class Content extends Eloquent {
 			$originalImageFileName = pathinfo($sourceFileNameFull, PATHINFO_FILENAME) . IMAGE_ORJ_EXTENSION;
 			File::move($sourceFileNameFull, $targetFileNameFull);
 			File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
+
 			$f = new ContentFile();
 			$f->ContentID = $this->ContentID;
 			$f->DateAdded = new DateTime();
