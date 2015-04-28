@@ -161,3 +161,5 @@ define("IMAGE_CROPPED_2048", "cropped_image_1536x2048.jpg");
 define("IMAGE_ORJ_EXTENSION", "_org.jpg");
 define("IMAGE_ORIGINAL", "original");
 define("IMAGE_EXTENSION", ".jpg");
+define("CATEGORY_GENEL_ID", 1);
+define("SHOW_IMAGE_CROP", "showImageCrop");

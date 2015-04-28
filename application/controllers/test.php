@@ -19,17 +19,35 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-		$path = "/home/admin/public_html/public/files/customer_178/application_187/content_1912/cropped_image";
-		$matches = glob($path . "*");
-		$dir = "/home/admin/public_html/public/files/customer_178/application_187/content_1912/";
-		$fileSet = scandir($dir);
-		$length = strlen(IMAGE_CROPPED_NAME);
-		foreach($fileSet as $fileName) {
-			if(substr($fileName, 0, $length) === IMAGE_CROPPED_NAME){
-				unlink($dir . $fileName);
-			}
-		}
-		exit;
+//		Cookie::put(SHOW_IMAGE_CROP, SHOW_IMAGE_CROP);
+		echo Cookie::get(SHOW_IMAGE_CROP, 0);
+		return;
+//		exit;
+//		
+//		$content = Content::find(1965);
+//		$content instanceof Content;
+//		var_dump($content->dirty());
+//		$content->Name = "zzzzzzz";
+//		var_dump($content->dirty());
+//		exit;
+//		$currentCategories = array();
+//		var_dump($currentCategories);
+//		$currentCategories = array_merge($currentCategories, array(""));
+//		echo "---------------------";
+//		var_dump($currentCategories);
+//		exit;
+//		
+//		$path = "/home/admin/public_html/public/files/customer_178/application_187/content_1912/cropped_image";
+//		$matches = glob($path . "*");
+//		$dir = "/home/admin/public_html/public/files/customer_178/application_187/content_1912/";
+//		$fileSet = scandir($dir);
+//		$length = strlen(IMAGE_CROPPED_NAME);
+//		foreach($fileSet as $fileName) {
+//			if(substr($fileName, 0, $length) === IMAGE_CROPPED_NAME){
+//				unlink($dir . $fileName);
+//			}
+//		}
+//		exit;
 		
 		
 //		return View::make('test.googlemaps');

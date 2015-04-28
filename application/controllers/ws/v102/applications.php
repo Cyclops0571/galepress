@@ -87,8 +87,8 @@ class Ws_v102_Applications_Controller extends Base_Controller
 	{
 		return Ws::render(function() use ($applicationID, $categoryID)
 		{
-			$application = Ws::getApplication($applicationID);
-			$customer = Ws::getCustomer($application->CustomerID);
+			Ws::getApplication($applicationID);
+			Ws::getCustomer($application->CustomerID);
 			$category = Ws::getApplicationCategoryDetail($applicationID, $categoryID);
 			return Response::json(array(
 				'status' => 0,

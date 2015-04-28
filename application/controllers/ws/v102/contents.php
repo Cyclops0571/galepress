@@ -30,6 +30,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
+				'ContentOrderNo' => (int)$content->OrderNo,
 				'ContentName' => $content->Name,
 				'ContentDetail' => $content->Detail,
 				'ContentCategories' => $categories,
