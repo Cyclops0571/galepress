@@ -172,7 +172,7 @@ $rgb = array($r, $g, $b);
 			@if($option==1)
 
 				function opacityAnimate(){
-					$('.hs-spot-shape').animate({ opacity: 0.25 }, function(){ 
+					$('.hs-spot-shape').animate({ opacity: 0.40 }, function(){ 
 						$(this).animate({ opacity: 0.15 },opacityAnimate())
 					});
 				}
