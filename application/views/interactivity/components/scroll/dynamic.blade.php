@@ -16,12 +16,20 @@
 			overflow-y: scroll;
 			overflow-x: hidden;
 		}
-		
+
 	</style>
 </head>
 <body>
 	<div class="overview">
      	{{$content}}
-	</div>	
+	</div>
+	<script type="text/javascript">
+     	var ua = navigator.userAgent.toLowerCase();
+		var isAndroid = ua.indexOf("android") > -1;
+		var isMobile = ua.indexOf("mobile") > -1;
+		if(isAndroid && isMobile) {
+			document.body.style.fontSize = "50%";
+		}
+     </script>
 </body>
 </html>

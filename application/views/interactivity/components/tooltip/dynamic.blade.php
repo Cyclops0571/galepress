@@ -109,7 +109,7 @@ $rgb = array($r, $g, $b);
 		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
 		padding: 0;
 		padding-left: 10px;
-  		padding-right: 0px;
+  		padding-right: 2px;
   		@if($option==1)
 		margin: auto 1px;
 		@endif
@@ -225,6 +225,12 @@ $rgb = array($r, $g, $b);
 				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
 				@endif
 				$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
+			}
+			var ua = navigator.userAgent.toLowerCase();
+			var isAndroid = ua.indexOf("android") > -1;
+			var isMobile = ua.indexOf("mobile") > -1;
+			if(isAndroid && isMobile) {
+				$('#myScrollableDiv *').css('font-size','50%');
 			}
 		});
 	</script>
