@@ -627,8 +627,7 @@ var cContent = new function () {
         cReport.OnChange(obj);
     };
 
-    this.save = function (refresh) {
-        refresh = refresh ? refresh : false;
+    this.save = function () {
         if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')) {
             var t = 'GET';
             var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
@@ -647,35 +646,11 @@ var cContent = new function () {
         }
 
         var fSuccess;
-        if (refresh) {
-            fSuccess = function (ret) {
-                cNotification.success();
-                gotoUrl = ret.getValue("goto");
-                contentID = ret.getValue("contentID");
-                if (gotoUrl.length > 0) {
-                    $('#dialog-cover-image').modal('show');
-                    $('#dialog-cover-image #coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + gotoUrl);
-                    $('#dialog-cover-image #coverImageIframe').attr("iframeContentID", contentID);
-                } else {
-                    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + $("#ContentID").val();
-                }
-            };
-        } else {
-            fSuccess = function (ret) {
-                cNotification.success();
-                gotoUrl = ret.getValue("goto");
-                contentID = ret.getValue("contentID");
-                if (gotoUrl.length > 0) {
-                    $('#dialog-cover-image').modal('show');
-                    $('#dialog-cover-image #coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + gotoUrl);
-                    $('#dialog-cover-image #coverImageIframe').attr("iframeContentID", contentID);
-
-                } else {
-                    var qs = cCommon.getQS();
-                    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;
-                }
-            };
-        }
+        fSuccess = function (ret) {
+            contentID = ret.getValue("contentID");
+            cNotification.success();
+            document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + contentID;
+        };
 
         cCommon.save(this.objectName, fSuccess);
     };
@@ -896,6 +871,218 @@ var cContent = new function () {
         $("div.list_container").removeClass("hidden");
         $("div.cta_container").removeClass("hidden");
         $("div.form_container").addClass("hidden");
+    };
+    
+    this.addFileUpload = function() {
+        if($("html").hasClass("lt-ie10")) {
+        $("#File").uploadify({
+                'swf': '/uploadify/uploadify.swf',
+                'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadfile2"],
+                'cancelImg': '/uploadify/uploadify-cancel.png',
+                'fileTypeDesc': 'PDF Files',
+                'fileTypeExts': '*.pdf',
+                'buttonText': "{{ __('common.contents_file_select') }}",
+                'multi': false,
+                'auto': true,
+                'successTimeout': 300,
+                'onSelect': function (file) {
+                        $('#hdnFileSelected').val("1");
+                        $("[for='File']").removeClass("hide");
+                },
+                'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                        var progress = totalBytesUploaded / totalBytesTotal * 100;
+                        if(progress > 99) {
+                                progress = 100;
+                        }
+                        $("[for='File'] label").html(progress.toFixed(0) + '%');
+                        $("[for='File'] div.scale").css('width', progress.toFixed(0) + '%');
+                },
+                'onUploadSuccess': function (file, data, response) {
+                        if(data.getValue("success") == "true") {
+                                var fileName = data.getValue("filename");
+
+                                $('#hdnFileName').val(fileName);
+                                $("[for='File']").addClass("hide");
+
+                                $('#hdnCoverImageFileSelected').val("1");
+                                $('#hdnCoverImageFileName').val(data.getValue("coverimagefilename"));
+                                $('#imgPreview').attr("src", "/files/temp/" + data.getValue("coverimagefilename"));
+
+                                $("div.rightbar").removeClass("hidden");
+
+                                //auto save
+                                if(parseInt($("#ContentID").val()) > 0) {
+                                        cContent.save();
+                                }
+                        }
+                },
+                'onCancel': function(file) {
+                        $("[for='File']").addClass("hide");
+                }
+        });
+        } else {
+            $("#File").fileupload({
+                    url: '/' + $('#currentlanguage').val() + '/' + route["contents_uploadfile"],
+                    dataType: 'json',
+                    sequentialUploads: true,
+                    formData: { 
+                            'element': 'File'
+                    },
+                    add: function(e, data) {
+                            if(/\.(pdf)$/i.test(data.files[0].name)) {
+                                    $('#hdnFileSelected').val("1");
+                                    $("[for='File']").removeClass("hide");
+
+                                    data.context = $("[for='File']");
+                                    data.context.find('a').click(function(e){
+                                            e.preventDefault();
+                                            var template = $("[for='File']");
+                                            data = template.data('data') || {};
+                                            if(data.jqXHR) {
+                                                    data.jqXHR.abort();
+                                            }
+                                    });
+                                    var xhr = data.submit();
+                                    data.context.data('data', { jqXHR: xhr });
+                            }
+                    },
+                    progressall: function(e, data) {
+                            var progress = data.loaded / data.total * 100;
+
+                            $("[for='File'] label").html(progress.toFixed(0) + '%');
+                            $("[for='File'] div.scale").css('width', progress.toFixed(0) + '%');
+                    },
+                    done: function(e, data) {
+                            if(data.textStatus == 'success') {
+                                    var fileName = data.result.fileName;
+                                    var imageFile = data.result.imageFile;
+
+                                    $('#hdnFileName').val(fileName);
+                                    $("[for='File']").addClass("hide");
+
+                                    $('#hdnCoverImageFileSelected').val("1");
+                                    $('#hdnCoverImageFileName').val(imageFile);
+                                    $('#imgPreview').attr("src", "/files/temp/" + imageFile);
+
+                                    $("div.rightbar").removeClass("hidden");
+
+                                    //auto save
+                                    if(parseInt($("#ContentID").val()) > 0) {
+                                            cContent.save();
+                                    }
+                            }
+                    },
+                    fail: function(e, data) {
+                            $("[for='File']").addClass("hide");
+                    }
+            });
+
+            //select file
+            $("#FileButton").removeClass("hide").click(function(){
+                    $("#File").click();
+            });
+        }
+    };
+    
+    this.addImageUpload = function() {
+        if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8")) {
+            $("#CoverImageFile").uploadify({
+                    'swf': '/uploadify/uploadify.swf',
+                    'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage2"],
+                    'cancelImg': '/uploadify/uploadify-cancel.png',
+                    'fileTypeDesc': 'Image Files',
+                    'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
+                    'buttonText': "{{ __('common.contents_coverimage_select') }}",
+                    'multi': false,
+                    'auto': true,
+                    'successTimeout': 300,
+                    'onSelect': function (file) {
+                            $('#hdnCoverImageFileSelected').val("1");
+                            $("[for='CoverImageFile']").removeClass("hide");
+                    },
+                    'onUploadProgress': function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                            var progress = totalBytesUploaded / totalBytesTotal * 100;
+                            $("[for='CoverImageFile'] label").html(progress.toFixed(0) + '%');
+                            $("[for='CoverImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
+                    },
+                    'onUploadSuccess': function (file, data, response) {
+
+                            if(data.getValue("success") == "true") {
+                                    var fileName = data.getValue("filename");
+
+                                    $('#hdnCoverImageFileName').val(fileName);
+                                    $('#imgPreview').attr("src", "/files/temp/" + fileName);
+                                    $("[for='CoverImageFile']").addClass("hide");
+
+                                    //auto save
+                                    if(parseInt($("#ContentID").val()) > 0) {
+                                            cContent.save();
+                                    }
+                            }
+                    },
+                    'onCancel': function(file) {
+                            $("[for='CoverImageFile']").addClass("hide");
+                    }
+            });
+        } else {
+            $("#CoverImageFile").fileupload({
+                    url: '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage"],
+                    dataType: 'json',
+                    sequentialUploads: true,
+                    formData: { 
+                            'element': 'CoverImageFile'
+                    },
+                    add: function(e, data) {
+                            if(/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name)) {
+                                    $('#hdnCoverImageFileSelected').val("1");
+                                    $("[for='CoverImageFile']").removeClass("hide");
+
+                                    data.context = $("[for='CoverImageFile']");
+                                    data.context.find('a').click(function(e){
+                                            e.preventDefault();
+                                            var template = $("[for='CoverImageFile']");
+                                            data = template.data('data') || {};
+                                            if(data.jqXHR)
+                                            {
+                                                    data.jqXHR.abort();
+                                            }
+                                    });
+                                    var xhr = data.submit();
+                                    data.context.data('data', { jqXHR: xhr });
+                            }
+                    },
+                    progressall: function(e, data) {
+                            var progress = data.loaded / data.total * 100;
+
+                            $("[for='CoverImageFile'] label").html(progress.toFixed(0) + '%');
+                            $("[for='CoverImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
+                    },
+                    done: function(e, data) {
+                            if(data.textStatus == 'success')
+                            {
+                                    //var fileName = data.result['CoverImageFile'][0].name;
+                                    var fileName = data.result.fileName;
+
+                                    $('#hdnCoverImageFileName').val(fileName);
+                                    $('#imgPreview').attr("src", "/files/temp/" + fileName);
+                                    $("[for='CoverImageFile']").addClass("hide");
+
+                                    //auto save
+                                    if(parseInt($("#ContentID").val()) > 0) {
+                                            cContent.save();
+                                    }
+                            }
+                    },
+                    fail: function(e, data) {
+                            $("[for='CoverImageFile']").addClass("hide");
+                    }
+            });
+
+            //select file
+            $("#CoverImageFileButton").removeClass("hide").click(function(){
+                    $("#CoverImageFile").click();
+            });
+        }
     };
 };
 

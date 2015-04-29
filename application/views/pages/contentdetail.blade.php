@@ -30,8 +30,7 @@
 	$Transferable = false;
 	$Transferred = false;
 	
-	if(isset($row))
-	{
+	if(isset($row)) {
 		$ContentID = (int)$row->ContentID;
 		$ApplicationID = (int)$row->ApplicationID;
 		$Name = e($row->Name);
@@ -76,26 +75,7 @@
 			$IsProtected = 0;
 			$Password = '';
 		}
-		/*
-		$oldContentFileInteractivity = (int)DB::table('ContentFile')
-				->where('ContentID', '=', $ContentID)
-				->where('StatusID', '=', eStatus::Active)
-				->order_by('ContentFileID', 'DESC')
-				->take(1)
-				->only('Interactivity');
-		$Transferable = (int)$oldContentFileInteractivity == 1;
-
-		$oldContentFileTransferred = (int)DB::table('ContentFile')
-				->where('ContentID', '=', $ContentID)
-				->where('StatusID', '=', eStatus::Active)
-				->order_by('ContentFileID', 'DESC')
-				->take(1)
-				->only('Transferred');		
-		$Transferred = (int)$oldContentFileTransferred == 1;
-		*/
-	}
-	else 
-	{
+	} else  {
 		$ApplicationID = (int)Input::get('applicationID', 0);
 	}
 
@@ -272,135 +252,6 @@
 					        
 	                        <input type="hidden" name="hdnFileSelected" id="hdnFileSelected" value="0"/>
 	                        <input type="hidden" name="hdnFileName" id="hdnFileName"{{ $ContentID == 0 ? ' class="required"' : '' }} />
-	                        <script type="text/javascript">
-								<!--
-								$(function(){
-
-									if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-									{
-										$("#File").uploadify({
-											'swf': '/uploadify/uploadify.swf',
-											'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadfile2"],
-											'cancelImg': '/uploadify/uploadify-cancel.png',
-											'fileTypeDesc': 'PDF Files',
-											'fileTypeExts': '*.pdf',
-											'buttonText': "{{ __('common.contents_file_select') }}",
-											'multi': false,
-											'auto': true,
-											'successTimeout': 300,
-											'onSelect': function (file) {
-												$('#hdnFileSelected').val("1");
-												$("[for='File']").removeClass("hide");
-											},
-											'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-												var progress = totalBytesUploaded / totalBytesTotal * 100;
-												if(progress > 99) {
-													progress = 100;
-												}
-												$("[for='File'] label").html(progress.toFixed(0) + '%');
-												$("[for='File'] div.scale").css('width', progress.toFixed(0) + '%');
-											},
-											'onUploadSuccess': function (file, data, response) {
-
-												if(data.getValue("success") == "true")
-												{
-													var fileName = data.getValue("filename");
-
-													$('#hdnFileName').val(fileName);
-													$("[for='File']").addClass("hide");
-													
-													$('#hdnCoverImageFileSelected').val("1");
-													$('#hdnCoverImageFileName').val(data.getValue("coverimagefilename"));
-													$('#imgPreview').attr("src", "/files/temp/" + data.getValue("coverimagefilename"));
-													
-													$("div.rightbar").removeClass("hidden");
-
-													//auto save
-													if(parseInt($("#ContentID").val()) > 0) {
-														cContent.save(true);
-													}
-												}
-											},
-											'onCancel': function(file) {
-												$("[for='File']").addClass("hide");
-											}
-										});
-									}
-									else
-									{
-										$("#File").fileupload({
-											url: '/' + $('#currentlanguage').val() + '/' + route["contents_uploadfile"],
-											dataType: 'json',
-											sequentialUploads: true,
-											formData: { 
-												'element': 'File'
-											},
-											add: function(e, data)
-											{
-												if(/\.(pdf)$/i.test(data.files[0].name))
-												{
-													$('#hdnFileSelected').val("1");
-													$("[for='File']").removeClass("hide");
-													
-													data.context = $("[for='File']");
-													data.context.find('a').click(function(e){
-														e.preventDefault();
-														var template = $("[for='File']");
-														data = template.data('data') || {};
-														if(data.jqXHR)
-														{
-															data.jqXHR.abort();
-														}
-													});
-													var xhr = data.submit();
-													data.context.data('data', { jqXHR: xhr });
-												}
-											},
-											progressall: function(e, data)
-											{
-												var progress = data.loaded / data.total * 100;
-												
-												$("[for='File'] label").html(progress.toFixed(0) + '%');
-												$("[for='File'] div.scale").css('width', progress.toFixed(0) + '%');
-											},
-											done: function(e, data)
-											{
-												if(data.textStatus == 'success')
-												{
-													var fileName = data.result.fileName;
-													var imageFile = data.result.imageFile;
-
-													$('#hdnFileName').val(fileName);
-													$("[for='File']").addClass("hide");
-													
-													$('#hdnCoverImageFileSelected').val("1");
-													$('#hdnCoverImageFileName').val(imageFile);
-													$('#imgPreview').attr("src", "/files/temp/" + imageFile);
-													
-													$("div.rightbar").removeClass("hidden");
-
-													//auto save
-													if(parseInt($("#ContentID").val()) > 0) {
-														cContent.save(true);
-													}
-												}
-											},
-											fail: function(e, data)
-											{
-												$("[for='File']").addClass("hide");
-											}
-										});
-										
-										//select file
-										$("#FileButton").removeClass("hide").click(function(){
-											
-											$("#File").click();
-										});
-									}
-
-								});
-								// -->
-							</script>
 						</div>
 						<div class="col-md-6" style="padding-left:30px; padding-top:2px;">
 							@if($ContentID > 0 && $ContentFileID > 0 && $authInteractivity && $Transferable)
@@ -610,7 +461,9 @@
 					    <span class="command">
 					        @if($ContentID == 0)
 							<div class="col-md-2"></div>
-					        <div class="col-md-2"><input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_save') }}" onclick="cContent.save();" /></div>
+					        <div class="col-md-2">
+								<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_save') }}" onclick="cContent.save();" />
+							</div>
 					        @else
 					        <div class="col-md-2">
 					        	<a href="#modal_default_10" class="btn delete expand remove" style="width:100%;" data-toggle="modal">{{ __('common.detailpage_delete') }}</a>
@@ -657,122 +510,6 @@
 							</div>
 							<input type="hidden" name="hdnCoverImageFileSelected" id="hdnCoverImageFileSelected" value="0" />
 							<input type="hidden" name="hdnCoverImageFileName" id="hdnCoverImageFileName" value="" />
-							<script type="text/javascript">
-								<!--
-								$(function(){
-
-									if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-									{
-										$("#CoverImageFile").uploadify({
-											'swf': '/uploadify/uploadify.swf',
-											'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage2"],
-											'cancelImg': '/uploadify/uploadify-cancel.png',
-											'fileTypeDesc': 'Image Files',
-											'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
-											'buttonText': "{{ __('common.contents_coverimage_select') }}",
-											'multi': false,
-											'auto': true,
-											'successTimeout': 300,
-											'onSelect': function (file) {
-												$('#hdnCoverImageFileSelected').val("1");
-												$("[for='CoverImageFile']").removeClass("hide");
-											},
-											'onUploadProgress': function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-												var progress = totalBytesUploaded / totalBytesTotal * 100;
-												$("[for='CoverImageFile'] label").html(progress.toFixed(0) + '%');
-												$("[for='CoverImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
-											},
-											'onUploadSuccess': function (file, data, response) {
-
-												if(data.getValue("success") == "true")
-												{
-													var fileName = data.getValue("filename");
-
-													$('#hdnCoverImageFileName').val(fileName);
-													$('#imgPreview').attr("src", "/files/temp/" + fileName);
-													$("[for='CoverImageFile']").addClass("hide");
-
-													//auto save
-													if(parseInt($("#ContentID").val()) > 0) {
-														cContent.save(true);
-													}
-												}
-											},
-											'onCancel': function(file) {
-												$("[for='CoverImageFile']").addClass("hide");
-											}
-										});
-									}
-									else
-									{
-										$("#CoverImageFile").fileupload({
-											url: '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage"],
-											dataType: 'json',
-											sequentialUploads: true,
-											formData: { 
-												'element': 'CoverImageFile'
-											},
-											add: function(e, data)
-											{
-												if(/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name))
-												{
-													$('#hdnCoverImageFileSelected').val("1");
-													$("[for='CoverImageFile']").removeClass("hide");
-
-													data.context = $("[for='CoverImageFile']");
-													data.context.find('a').click(function(e){
-														e.preventDefault();
-														var template = $("[for='CoverImageFile']");
-														data = template.data('data') || {};
-														if(data.jqXHR)
-														{
-															data.jqXHR.abort();
-														}
-													});
-													var xhr = data.submit();
-													data.context.data('data', { jqXHR: xhr });
-												}
-											},
-											progressall: function(e, data)
-											{
-												var progress = data.loaded / data.total * 100;
-												
-												$("[for='CoverImageFile'] label").html(progress.toFixed(0) + '%');
-												$("[for='CoverImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
-											},
-											done: function(e, data)
-											{
-												if(data.textStatus == 'success')
-												{
-													//var fileName = data.result['CoverImageFile'][0].name;
-													var fileName = data.result.fileName;
-
-													$('#hdnCoverImageFileName').val(fileName);
-													$('#imgPreview').attr("src", "/files/temp/" + fileName);
-													$("[for='CoverImageFile']").addClass("hide");
-
-													//auto save
-													if(parseInt($("#ContentID").val()) > 0) {
-														cContent.save(true);
-													}
-												}
-											},
-											fail: function(e, data)
-											{
-												$("[for='CoverImageFile']").addClass("hide");
-											}
-										});
-										
-										//select file
-										$("#CoverImageFileButton").removeClass("hide").click(function(){
-											
-											$("#CoverImageFile").click();
-										});
-									}
-
-								});
-								// -->
-							</script>
 						</div>
 					</div>
 				</div>
@@ -994,37 +731,6 @@
 		left: 0;
 	}
 	</style>
-    <script type="text/javascript">
-	    $(function(){
-	    	if(parseInt($("#ContentID").val()) == 0) {
-	    		$('#areaCoverImg').addClass('noTouch');
-	    	}
-	    	$('#coverImageIframe').load(function(){
-	    		$('#dialog-cover-image .modal-dialog .modal-body').css('height',$('#coverImageIframe').contents().find('.jcrop-holder').height()+35+'px');
-	    	});
-
-	    	$('#dialog-cover-image .modal-dialog .modal-body').on('resize',function(){
-	    		if($(this).height()>200){
-	    			$('#dialog-cover-image').show();
-		    		$('#dialog-cover-image .front').css('transform','rotateY(360deg)');
-	    		}
-    		})
-
-	    	$('#dialog-cover-image').on('hidden.bs.modal', function (e) {
-	    		$('#dialog-cover-image').hide();
-			  	$(this).find('#coverImageIframe').attr('src','');
-	    		$('#dialog-cover-image .front').css('transform','rotateY(90deg)');
-			});
-			$('#dialog-cover-image').on('shown.bs.modal', function (e) {
-				// $('#dialog-cover-image .modal-dialog').animate({width:516},{duration:1500});
-				if(parseInt($("#ContentID").val()) > 0) {
-					$('#coverImageIframe').attr('iframeContentID',parseInt($("#ContentID").val()));					
-				}
-			  	$(this).find('#coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + route["crop_image"] + "?contentID=" + $('#coverImageIframe').attr('iframeContentID') );
-			});
-	    })
-    </script>
-
     <div class="modal" id="dialog-cover-image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true" style="display:none;">
         <div class="modal-dialog flip-container">
         	<div class="flip-container">
@@ -1042,4 +748,47 @@
         	</div>
         </div>
     </div>
+	
+	<script type="text/javascript">
+		var showCropPage = <?php echo json_encode($showCropPage); ?>;
+		var ContentID = <?php echo $ContentID; ?>;
+	    $(function(){
+			cContent.addFileUpload();
+			cContent.addImageUpload();
+			
+	    	if(parseInt($("#ContentID").val()) == 0) {
+	    		$('#areaCoverImg').addClass('noTouch');
+	    	}
+	    	$('#coverImageIframe').load(function(){
+	    		$('#dialog-cover-image .modal-dialog .modal-body').css('height',$('#coverImageIframe').contents().find('.jcrop-holder').height()+35+'px');
+	    	});
+
+	    	$('#dialog-cover-image .modal-dialog .modal-body').on('resize',function(){
+	    		if($(this).height()>200){
+	    			$('#dialog-cover-image').show();
+		    		$('#dialog-cover-image .front').css('transform','rotateY(360deg)');
+	    		}
+    		});
+
+	    	$('#dialog-cover-image').on('hidden.bs.modal', function (e) {
+	    		$('#dialog-cover-image').hide();
+			  	$(this).find('#coverImageIframe').attr('src','');
+	    		$('#dialog-cover-image .front').css('transform','rotateY(90deg)');
+			});
+			$('#dialog-cover-image').on('shown.bs.modal', function (e) {
+				// $('#dialog-cover-image .modal-dialog').animate({width:516},{duration:1500});
+				if(parseInt($("#ContentID").val()) > 0) {
+					$('#coverImageIframe').attr('iframeContentID',parseInt($("#ContentID").val()));					
+				}
+			  	$(this).find('#coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + route["crop_image"] + "?contentID=" + $('#coverImageIframe').attr('iframeContentID') );
+			});
+			
+			if(showCropPage == 'showImageCrop') {
+				$('#dialog-cover-image').modal('show');
+				$('#dialog-cover-image #coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/crop/image?contentID=' + ContentID);
+				$('#dialog-cover-image #coverImageIframe').attr("iframeContentID", ContentID);
+			}
+			
+	    })
+    </script>
 @endsection

@@ -240,15 +240,14 @@ class Contents_Controller extends Base_Controller {
 	}
 
 	public function get_new() {
-		$currentUser = Auth::User();
-
 		$this->route = __('route.' . $this->page) . '?applicationID=' . Input::get('applicationID', '0');
 
 		$data = array(
 			'page' => $this->page,
 			'route' => $this->route,
 			'caption' => $this->caption,
-			'detailcaption' => $this->detailcaption
+			'detailcaption' => $this->detailcaption,
+			'showCropPage' => 0,
 		);
 		$applicationID = Input::get('applicationID', '0');
 		$appCount = DB::table('Application')
@@ -275,7 +274,8 @@ class Contents_Controller extends Base_Controller {
 
 	public function get_show($id) {
 		$currentUser = Auth::User();
-
+		$showCropPage = Cookie::get(SHOW_IMAGE_CROP, 0);
+		Cookie::put(SHOW_IMAGE_CROP, 0);
 		$row = Content::find($id);
 		if ($row) {
 			if (Common::CheckContentOwnership($id)) {
@@ -286,7 +286,8 @@ class Contents_Controller extends Base_Controller {
 					'route' => $this->route,
 					'caption' => $this->caption,
 					'detailcaption' => $this->detailcaption,
-					'row' => $row
+					'row' => $row,
+					'showCropPage' => $showCropPage,
 				);
 
 				if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
@@ -313,7 +314,6 @@ class Contents_Controller extends Base_Controller {
 
 	//POST
 	public function post_save() {
-		$goto = "";
 		$contentID = 0;
 		$currentUser = Auth::User();
 
@@ -331,283 +331,74 @@ class Contents_Controller extends Base_Controller {
 			}
 
 			try {
-				DB::transaction(function() use ($currentUser, $id, $applicationID, &$goto, &$contentID) {
-					$hasModified = false;
-					$current = Content::find($id);
-					if ($current) {
-						$selectedCategories = Input::get('chkCategoryID');
-						$currentCategories = array();
-						$cnt = DB::table('ContentCategory')->where('ContentID', '=', $current->ContentID)->where('CategoryID', '=', 0)->count();
-						if ($cnt > 0) {
-							$currentCategories = array_merge($currentCategories, array(""));
-						}
-						$rows = DB::table('ContentCategory AS cc')
-								->left_join('Category AS c', 'c.CategoryID', '=', 'cc.CategoryID')
-								->where('cc.ContentID', '=', $current->ContentID)
-								->where('c.ApplicationID', '=', $applicationID)
-								->where('c.StatusID', '=', eStatus::Active)
-								->order_by('Name', 'ASC')
-								->get();
-						foreach ($rows as $row) {
-							$currentCategories = array_merge($currentCategories, array($row->CategoryID));
-						}
-						if ((int) $current->ApplicationID != (int) $applicationID ||
-								$current->Name != Input::get('Name') ||
-								$current->Detail != Input::get('Detail') ||
-								$current->MonthlyName != Input::get('MonthlyName') ||
-								new DateTime($current->PublishDate) != new DateTime(Common::dateWrite(Input::get('PublishDate'))) ||
-								//new DateTime(Common::dateWrite(Date::forge($current->PublishDate)->format('%d.%m.%Y'))) != new DateTime(Common::dateWrite(Input::get('PublishDate'))) || 
-								(int) $current->CategoryID != (int) Input::get('CategoryID') ||
-								(int) $current->IsProtected != (int) Input::get('IsProtected') ||
-								//$currentPassword != $cPassword || 
-								(int) $current->IsBuyable != (int) Input::get('IsBuyable') ||
-								(float) $current->Price != (float) Input::get('Price') ||
-								(int) $current->CurrencyID != (int) Input::get('CurrencyID') ||
-								$current->Identifier != Input::get('Identifier') ||
-								(int) $current->Orientation != (int) Input::get('Orientation') ||
-								(int) $current->IsMaster != (int) Input::get('IsMaster') ||
-								(int) $current->AutoDownload != (int) Input::get('AutoDownload') ||
-								//(int)$current->Approval != (int)Input::get('Approval') ||
-								(int) $current->Blocked != (int) Input::get('Blocked') ||
-								(int) $current->Status != (int) Input::get('Status') ||
-								(int) Input::get('hdnFileSelected', 0) == 1 ||
-								(int) Input::get('hdnCoverImageFileSelected', 0) == 1 ||
-								$currentCategories != $selectedCategories
-						) {
-							$hasModified = true;
-						}
-					}
+				DB::transaction(function() use ($currentUser, $id, $applicationID, &$contentID) {
+					$content = Content::find($id);
+					$content instanceof Content;
+					$selectedCategories = Input::get('chkCategoryID', array());
+					
 
-					if ($id == 0) {
+					if (!$content) {
 						$maxID = DB::table("Content")->where("ApplicationID", "=", $applicationID)->max('OrderNo');
-						$s = new Content();
-						$s->OrderNo = $maxID + 1;
-					} else {
-						$chk = Common::CheckContentOwnership($id);
-						if (!$chk) {
+						$content = new Content();
+						$content->OrderNo = $maxID + 1;
+					} else if(!Common::CheckContentOwnership($id)){
 							throw new Exception("Unauthorized user attempt");
-							//return "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.detailpage_validation'));
-						}
-						$s = Content::find($id);
 					}
-					$s->ApplicationID = $applicationID;
-					$s->Name = Input::get('Name');
-					$s->Detail = Input::get('Detail');
-					$s->MonthlyName = Input::get('MonthlyName');
-					$s->PublishDate = new DateTime(Common::dateWrite(Input::get('PublishDate')));
-					$s->IsUnpublishActive = (int) Input::get('IsUnpublishActive');
-					$s->UnpublishDate = new DateTime(Common::dateWrite(Input::get('UnpublishDate')));
-					//$s->CategoryID = (int)Input::get('CategoryID');
-					$s->IsProtected = (int) Input::get('IsProtected');
-					if (strlen(trim(Input::get('Password'))) > 0) {
-						$s->Password = Hash::make(Input::get('Password'));
-					}
-					$s->IsBuyable = (int) Input::get('IsBuyable');
-					$s->Price = (float) Input::get('Price');
-					$s->CurrencyID = (int) Input::get('CurrencyID');
-					$s->Identifier = Input::get('Identifier');
-					$s->Orientation = (int) Input::get('Orientation');
-					$s->IsMaster = (int) Input::get('IsMaster');
+					$content->ApplicationID = $applicationID;
+					$content->Name = Input::get('Name');
+					$content->Detail = Input::get('Detail');
+					$content->MonthlyName = Input::get('MonthlyName');
+					$content->PublishDate = new DateTime(Common::dateWrite(Input::get('PublishDate')));
+					$content->IsUnpublishActive = (int) Input::get('IsUnpublishActive');
+					$content->UnpublishDate = new DateTime(Common::dateWrite(Input::get('UnpublishDate')));
+					$content->IsProtected = (int) Input::get('IsProtected');
+					$content->IsBuyable = (int) Input::get('IsBuyable');
+					$content->Price = (float) Input::get('Price');
+					$content->CurrencyID = (int) Input::get('CurrencyID');
+					$content->Identifier = Input::get('Identifier');
+					$content->Orientation = (int) Input::get('Orientation');
+					$content->setPassword(Input::get('Password'));
+					$content->setMaster((int) Input::get('IsMaster'));
+					$content->AutoDownload = (int) Input::get('AutoDownload');
+					$content->Status = (int) Input::get('Status');
+					$content->ProcessUserID = $currentUser->UserID;
+					$content->ProcessDate = new DateTime();
 
-					if ((int) $s->IsMaster == 1) {
-
-						//Unset IsProtected & password field due to https://github.com/galepress/gp/issues/7
-						$s->IsProtected = 0;
-						$s->Password = '';
-
-						$contents = DB::table('Content')->where('ApplicationID', '=', $applicationID)->get();
-						foreach ($contents as $content) {
-							//INFO:Added due to https://github.com/galepress/gp/issues/18
-							if ((int) $id !== (int) $content->ContentID) {
-								$a = Content::find($content->ContentID);
-								$a->IsMaster = 0;
-								$a->Version = (int) $a->Version + 1;
-								$a->ProcessUserID = $currentUser->UserID;
-								$a->ProcessDate = new DateTime();
-								$a->ProcessTypeID = eProcessTypes::Update;
-								$a->save();
-							}
-						}
-					}
-
-					$s->AutoDownload = (int) Input::get('AutoDownload');
 					if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
-						$s->Approval = (int) Input::get('Approval');
-						$s->Blocked = (int) Input::get('Blocked');
+						$content->Approval = (int) Input::get('Approval');
+						$content->Blocked = (int) Input::get('Blocked');
 					}
-					$s->Status = (int) Input::get('Status');
+					$content->ifModifiedDoNeccessarySettings($selectedCategories);
+					
+					
 					if ($id == 0) {
-						$s->Version = 1;
-					} else {
-						if ($hasModified) {
-							$s->Version = (int) $s->Version + 1;
-						}
-					}
-					if ($id == 0) {
-						$s->PdfVersion = 1;
-					} else {
-						if ((int) Input::get('hdnFileSelected', 0) == 1) {
-							$s->PdfVersion = (int) $s->PdfVersion + 1;
-						}
-					}
-					if ($id == 0) {
-						$s->CoverImageVersion = 1;
-					} else {
-						if ((int) Input::get('hdnCoverImageFileSelected', 0) == 1) {
-							$s->CoverImageVersion = (int) $s->CoverImageVersion + 1;
-						}
-					}
-					if ($id == 0) {
-						$s->StatusID = eStatus::Active;
-						$s->CreatorUserID = $currentUser->UserID;
-						$s->DateCreated = new DateTime();
-					}
-					$s->ProcessUserID = $currentUser->UserID;
-					$s->ProcessDate = new DateTime();
-					if ($id == 0) {
-						$s->ProcessTypeID = eProcessTypes::Insert;
-					} else {
-						$s->ProcessTypeID = eProcessTypes::Update;
-					}
-					$s->save();
+						$content->Version = 1;
+						$content->PdfVersion = 1;
+						$content->CoverImageVersion = 1;
+						$content->StatusID = eStatus::Active;
+						$content->CreatorUserID = $currentUser->UserID;
+						$content->DateCreated = new DateTime();
+						$content->ProcessTypeID = eProcessTypes::Insert;
 
-					//content categories
-					DB::table('ContentCategory')->where('ContentID', '=', $s->ContentID)->delete();
-
-					$selectedCategories = Input::get('chkCategoryID');
-					if (is_array($selectedCategories)) {
-						foreach ($selectedCategories as $value) {
-							//add category
-							$cat = new ContentCategory();
-							$cat->ContentID = $s->ContentID;
-							$cat->CategoryID = (int) $value;
-							$cat->save();
-						}
+					} else {
+						$content->ProcessTypeID = eProcessTypes::Update;
 					}
-
-					if ($id == 0 || $hasModified) {
-						$a = Application::find($applicationID);
-						$a->Version = (int) $a->Version + 1;
-						$a->ProcessUserID = $currentUser->UserID;
-						$a->ProcessDate = new DateTime();
-						$a->ProcessTypeID = eProcessTypes::Update;
-						$a->save();
-					}
+					
+					$content->updateApplicationVersion();
+					$content->save();
+					$content->setCategory($selectedCategories);
 
 					$customerID = Application::find($applicationID)->CustomerID;
-					//$applicationID
-					$contentID = $s->ContentID;
-					$contentFileID = (int) DB::table('ContentFile')
-									->where('ContentID', '=', $contentID)
-									->where('StatusID', '=', eStatus::Active)
-									->max('ContentFileID');
+					$contentID = $content->ContentID;
+					$contentFileID = $content->processPdf($customerID);
+					$content->processImage($customerID, $contentFileID);
 
-					//File
-					if ((int) Input::get('hdnFileSelected', 0) == 1) {
-						$sourceFileName = Input::get('hdnFileName');
-						$sourceFilePath = 'files/temp';
-						$sourceRealPath = path('public') . $sourceFilePath;
-						$sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
-
-						$targetFileName = $currentUser->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
-						$targetFilePath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID;
-						$destinationFolder = path('public') . $targetFilePath;
-						$targetFileNameFull = $destinationFolder . '/' . $targetFileName;
-
-						if (File::exists($sourceFileNameFull)) {
-							if (!File::exists($destinationFolder)) {
-								File::mkdir($destinationFolder);
-							}
-
-							$originalImageFileName = pathinfo($sourceFileNameFull, PATHINFO_FILENAME) . IMAGE_ORJ_EXTENSION;
-							File::move($sourceFileNameFull, $targetFileNameFull);
-							File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
-
-							$f = new ContentFile();
-							$f->ContentID = $contentID;
-							$f->DateAdded = new DateTime();
-							//$f->FilePath = '/'.$targetFilePath;
-							$f->FilePath = $targetFilePath;
-							$f->FileName = $targetFileName;
-							//$f->FileName2 = '';
-							$f->FileSize = File::size($targetFileNameFull);
-							$f->Transferred = (int) Input::get('Transferred', '0');
-							$f->StatusID = eStatus::Active;
-							$f->CreatorUserID = $currentUser->UserID;
-							$f->DateCreated = new DateTime();
-							$f->ProcessUserID = $currentUser->UserID;
-							$f->ProcessDate = new DateTime();
-							$f->ProcessTypeID = eProcessTypes::Insert;
-							$f->save();
-
-							$contentFileID = $f->ContentFileID;
-						}
-					}
-
-					//Cover Image
-					if ((int) Input::get('hdnCoverImageFileSelected', 0) == 1) {
-						$sourceFileName = Input::get('hdnCoverImageFileName');
-						$sourceFilePath = 'files/temp';
-						$sourceRealPath = path('public') . $sourceFilePath;
-						$sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
-
-						$targetFileName = $currentUser->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
-						$targetFilePath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID;
-						$destinationFolder = path('public') . $targetFilePath;
-						$targetFileNameFull = $destinationFolder . '/' . $targetFileName;
-
-						$targetMainFileName = $targetFileName . '_main';
-						$targetThumbFileName = $targetFileName . '_thumb';
-
-						if (File::exists($sourceFileNameFull) && is_file($sourceFileNameFull)) {
-							if (!File::exists($destinationFolder)) {
-								File::mkdir($destinationFolder);
-							}
-
-							File::move($sourceFileNameFull, $targetFileNameFull);
-							if((int)Input::get('hdnFileSelected', 0) == 0) {
-								File::copy($targetFileNameFull, $destinationFolder . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION);
-							}
-							$pictureInfoSet = array();
-							$pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
-							$pictureInfoSet[] = array("width" => 468, "height" => 667, "imageName" => $targetThumbFileName);
-							foreach ($pictureInfoSet as $pInfo) {
-								imageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
-							}
-
-							$cropSet = Crop::get();
-							$cropSet instanceof Crop;
-							$sourceFile = $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
-							foreach ($cropSet as $crop) {
-								//create neccessary image versions
-								imageClass::cropImage($sourceFile, $destinationFolder, $crop->Width, $crop->Height);
-							}
-
-							//------------------------------------------------------
-							$c = new ContentCoverImageFile();
-							$c->ContentFileID = $contentFileID;
-							$c->DateAdded = new DateTime();
-							$c->FilePath = $targetFilePath;
-							$c->SourceFileName = $targetFileName;
-							$c->FileName = $targetMainFileName . IMAGE_EXTENSION;
-							$c->FileName2 = $targetThumbFileName . IMAGE_EXTENSION;
-							$c->FileSize = File::size($destinationFolder . "/" . $targetMainFileName . ".jpg");
-							$c->StatusID = eStatus::Active;
-							$c->CreatorUserID = $currentUser->UserID;
-							$c->DateCreated = new DateTime();
-							$c->ProcessUserID = $currentUser->UserID;
-							$c->ProcessDate = new DateTime();
-							$c->ProcessTypeID = eProcessTypes::Insert;
-							$c->save();
-							$goto = "&goto=" . base64_encode(__('route.crop_image') . "?contentID=" . $contentID);
-						}
-					}
 				});
 			} catch (Exception $e) {
 				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 			}
 			$contentLink = $contentID > 0 ? "&contentID=" . base64_encode($contentID) : ("");
-			return "success=" . base64_encode("true") . $goto . $contentLink;
+			return "success=" . base64_encode("true") . $contentLink;
 		} else {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
@@ -731,19 +522,6 @@ class Contents_Controller extends Base_Controller {
 		return "success=" . base64_encode("true");
 	}
 
-	public function get_order($applicationID) {
-		//bu tamam bu calisiyor...
-		$contentSet = Content::get();
-		foreach($contentSet as $content) {
-			$content instanceof Content;
-			$result = array();
-			preg_match("/[0-9]+/", $content->MonthlyName, $result);
-			$content->OrderNo = !empty($result) ? $result[0] : 0;
-			$content->save();
-			
-		}
-	}
-	
 	public function post_order($applicationID) {
 		$chk = Common::CheckApplicationOwnership($applicationID);
 		if (!$chk) {
@@ -758,9 +536,14 @@ class Contents_Controller extends Base_Controller {
 			if($content) {
 				$content instanceof Content;
 				$content->OrderNo = $i++;
+				$content->Version++;
 				$content->save();
 			}
 		}
+		$application = Application::find($applicationID);
+		$application instanceof Application;
+		$application->Version++;
+		$application->save();
 		return "success=" . base64_encode("true");
 	}
 
