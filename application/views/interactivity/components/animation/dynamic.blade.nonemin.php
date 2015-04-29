@@ -50,6 +50,10 @@ else
 	var animationDelay={{ $animedelay }};
 	var animeinterval = {{ $animeinterval }};
 
+	var reverse = {{ (int)$reverse }};
+	var loop = {{ (int)$loop }};
+	var unvisibleStart = {{ (int)$unvisibleStart }};
+
 	var image = new Image();
 	image.src = $("#image").attr("src");
 	image.onload = function() {
@@ -93,11 +97,11 @@ else
     {
 		$("#image").animate({left:finalX2,top:finalY2},{queue:false,duration:parseInt(speed),
             complete: function() {
-               	if( {{ (int)$reverse }} == 1 )
+               	if( reverse == 1 )
                 {
                     imgAnimateReverse();
                 }
-                else if( {{ (int)$loop }} == 1 ) 
+                else if( loop == 1 ) 
                 {
                 	if(animeinterval>0)
                 	{
@@ -115,7 +119,7 @@ else
     {
         $("#image").animate({left:finalX1,top:finalY1},{queue:false,duration:parseInt(speed),
         complete: function() {
-            if( {{ (int)$loop }} == 1 ) 
+            if( loop == 1 ) 
             {
             	if(animeinterval>0)
             	{
@@ -132,7 +136,7 @@ else
         $("#image").css({"left":finalX1+"px","top":finalY1+"px"});
         imgAnimate();
     }
-	if( {{ (int)$unvisibleStart }} == 1 )
+	if( unvisibleStart == 1 )
 		$("#image").css({"left":finalX1+"px","top":finalY1+"px","opacity":"0"});
 	else
 		$("#image").css({"left":finalX1+"px","top":finalY1+"px","opacity":"1"});
@@ -149,7 +153,7 @@ else
       		var reverseCompleted=false;
 			function AnimateRotate(d){
 				var img = $("#image");
-				if( {{ (int)$reverse }} == 1 ){
+				if( reverse == 1 ){
 					if (!rotateStatus){
 	                  	rotateVal=d;
 	                  	d=0;
@@ -175,13 +179,13 @@ else
 						});
 					},
 	                complete: function(){
-	                	if( {{ (int)$reverse }} == 1 && {{ (int)$loop }} == 0 ) 
+	                	if( reverse == 1 && loop == 0 ) 
                         {
                         	if(reverseCompleted)
                         		return;
                         	AnimateRotate(rotate);
                         }
-                        else if( {{ (int)$reverse }} == 0 && {{ (int)$loop }} == 1 ) 
+                        else if( reverse == 0 && loop == 1 ) 
                         {
                         	if(animeinterval>0){
 								setTimeout(function()
@@ -191,7 +195,7 @@ else
                         		AnimateRotate(rotate);
                         	}
                         }
-                        else if( {{ (int)$reverse }} == 1 && {{ (int)$loop }} == 1)
+                        else if( reverse == 1 && loop == 1)
                         {    
                             if(animeinterval>0 && reverseCompleted==true)
 	                        {
@@ -217,10 +221,10 @@ else
   			var aralikTamamlandi = 0;
 			runEffect();
 			function runEffect() {
-				if( {{ (int)$reverse }} == 1 )
+				var imgOpacity = parseInt($('#image').css('opacity'));
+				if( reverse == 1 )
 				{
-					var imgOpacity = parseInt($('#image').css('opacity'));
-					if(fadeCount==0 && {{ (int)$loop }} == 0){
+					if(fadeCount==0 && loop == 0){
 						fadeCount++;
 						$('#image').animate({
 							queue:false,
@@ -234,7 +238,7 @@ else
 							opacity: imgOpacity == 0 ? 1 : 0						        
 						}, parseInt(speed), runEffect);
 					}
-					else if({{ (int)$loop }} == 1){
+					else if(loop == 1){
 
 						if(aralikTamamlandi==2 && animeinterval>0)
 						{
@@ -258,9 +262,9 @@ else
 					else
 						return;
 				}
-				else if( {{ (int)$loop }} == 1 ) 
+				else if( loop == 1 ) 
 				{
-					if( {{ (int)$unvisibleStart }} == 1 ){
+					if( unvisibleStart == 1 ){
 						if(aralikTamamlandi==1 && animeinterval>0)
 						{
 							setTimeout(function() {
@@ -305,7 +309,7 @@ else
 				else
 				{
 					$('#image').animate({queue:false,
-						opacity: "0"
+						opacity: imgOpacity == 0 ? 1 : 0
 					}, parseInt(speed));
 				}
         	}; 
