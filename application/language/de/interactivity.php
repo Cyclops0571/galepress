@@ -58,6 +58,7 @@ return array(
 	'video_upload_text' => 'Klicken sie um hochzuladen.',
 	'video_uploading' => 'Wird hochgeladen.',
 	'video_upload_error' => 'In der gewählten URL gibt es keine gültige Videodatei. Bitte geben Sie eine neue URL ein.',
+	'video_upload_error_max_size' => 'Die Größe Ihrer Datei muss maximal 250 MB sein!',
 	'video_playerpreferences' => 'Player-Einstellungen',
 	'video_playerpreferences_tooltip' => 'Definieren Sie das Aussehen und die weiteren Eigenschaften des Videoplayers in Ihrer PDF.',
 	'video_select1' => 'Wenn Sie auf Start klicken.',

@@ -58,6 +58,7 @@ return array(
 	'video_upload_text' => 'Dosya yüklemek için tıklayın',
 	'video_uploading' => 'Yükleniyor',
 	'video_upload_error' => 'Seçtiğiniz adreste geçerli bir video dosyası bulunmamaktadır. Yeni bir adres girin.',
+	'video_upload_error_max_size' => 'Dosyanızın boyutu en fazla 250 mb olmalıdır!',
 	'video_playerpreferences' => 'Oynatıcı Ayarları',
 	'video_playerpreferences_tooltip' => 'PDF\'e eklediğiniz video oynatıcısının  görünümünü ve diğer özelliklerini tanımlayın.',
 	'video_select1' => 'Başlat\'a Tıklanınca',

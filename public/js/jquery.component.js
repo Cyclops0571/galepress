@@ -869,6 +869,7 @@
 							
 							$("#prop-" + id + " div.upload div.progress label").html(interactivity["video_uploading"] + ' ' + progress.toFixed(0) + '%');
 							$("#prop-" + id + " div.upload div.progress div.scale").css('width', progress.toFixed(0) + '%');
+							$("#prop-" + id + " div.upload span.error").addClass("hide");
 						},
 						done: function(e, data)
 						{
@@ -895,13 +896,17 @@
 							if(data.textStatus == "abort")
 							{
 								$("#prop-" + id + " div.upload div.local").removeClass("hide");
-								$("#prop-" + id + " div.upload div.progress").addClass("hide");
 								$("#prop-" + id + " input#comp-" + id + "-fileselected").val("0");
 							}
 							else
 							{
-								$("#prop-" + id + " div.upload span.error").removeClass("hide");	
+								$("#prop-" + id + " div.upload span.error").removeClass("hide");
+								if((data.files[0].size/1024)/1024>250){
+									$("#prop-" + id + " div.upload span.error").addClass("hide");
+									$("#prop-" + id + " div.upload span.error.max-size").removeClass("hide");
+								}
 							}
+							$("#prop-" + id + " div.upload div.progress").addClass("hide");
 						}
 					});
 					

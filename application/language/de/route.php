@@ -107,6 +107,7 @@ return array(
 	'website_sectors_medicine' => 'solutions-pharmaceutical',
 	'website_sectors_digitalpublishing' => 'solutions-digital-publishing',
 	'website_tryit' => 'tryit',
+	'website_landing_page_realty' => 'grundbesitz',
 	'website_captcha' => 'mecaptcha',
 	'website_why_galepress' => 'how-it-works',
 	'confirmemail' => 'confirm-account',
