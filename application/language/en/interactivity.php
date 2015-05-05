@@ -58,7 +58,7 @@ return array(
 	'video_upload_text' => 'Click here to upload a file',
 	'video_uploading' => 'Uploading',
 	'video_upload_error' => 'A valid video file was not found in the address you entered. Please enter a new address.',
-	'video_upload_error_max_size' => 'The size of your file must be maximum 250 MB!',
+	'file_upload_error_max_size' => 'The size of your file must be maximum 250 MB!',
 	'video_playerpreferences' => 'Player Settings',
 	'video_playerpreferences_tooltip' => 'Add to the appearance of the video players and other features define.',
 	'video_select1' => 'When you click Start',

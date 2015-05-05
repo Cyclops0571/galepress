@@ -81,6 +81,7 @@ if(isset($Properties))
         <!-- end progress --> 
         
         <span class="error hide"><i class="icon-exclamation-sign"></i>{{ __('interactivity.audio_upload_error') }}</span>
+        <span class="error max-size hide"><i class="icon-exclamation-sign"></i>{{ __('interactivity.file_upload_error_max_size') }}</span>
     </div>
     <!-- end upload -->
     
