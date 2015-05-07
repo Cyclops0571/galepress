@@ -144,10 +144,25 @@
     left: 0 !important;
     top:0 !important;
   }
+  .agents{
+    margin-top: 15px;
+  }
+  .agents div span{
+    display: inline-block;
+    margin-top: 4px;
+  }
   @media (max-width: 767px) {
     #formContainer{
       margin-top: 15px;
       right: 0;
+    }
+    .landing-realty .swiper-container{
+      margin: 0 !important;
+    }
+  }
+  @media (max-width: 380px) {
+    .swiper-slide{
+      width: 315px;
     }
   }
 
@@ -160,48 +175,51 @@
         <div class="sep-top-3x sep-bottom-2x">
           <div class="container">
             <div class="row">
-              <div class="col-md-6">
-                <iframe src="https://www.youtube.com/embed/N4YpdTi84NM" width="500" height="281" allowfullscreen="allowfullscreen"></iframe>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <iframe src="https://www.youtube.com/embed/UVWCW2S-VrA" width="500" height="281" allowfullscreen="allowfullscreen"></iframe>
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <!--Start icon box-->
-                <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay=".5s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.5s; width:40px;"><div class="icons">1</div></div>
-                  <div class="icon-box-content">
-                    <p>Kendi mobil uygulamanız ile artık kontrol sizde.</p>
+              
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="row agents">
+                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                      <div class="icons">1</div>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
+                      <span>Kendi mobil uygulamanız ile artık kontrol sizde.</span>
+                    </div>
                   </div>
-                </div>
-                <!--End icon box-->
-                <!--Start icon box-->
-                <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay=".7s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.7s; width:40px;"><div class="icons">2</div></div>
-                  <div class="icon-box-content">
-                    <p>Hiç bir kodlama bilgisine gerek yok, anahtar teslim çözüm.</p>
+                  <div class="row agents">
+                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                      <div class="icons">2</div>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
+                      <span>Hiç bir kodlama bilgisine gerek yok, anahtar teslim çözüm.</span>
+                    </div>
                   </div>
-                </div>
-                <!--End icon box-->
-                <!--Start icon box-->
-                <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay=".9s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.9s; width:40px;"><div class="icons">3</div></div>
-                  <div class="icon-box-content">
-                    <p>Müşterilerinize en hızlı çözümü siz getirin: anlık push notification.</p>
+                  <div class="row agents">
+                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                      <div class="icons">3</div>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
+                      <span>Müşterilerinize en hızlı çözümü siz getirin: anlık push notification.</span>
+                    </div>
                   </div>
-                </div>
-                <!--End icon box-->
-                <!--Start icon box-->
-                <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay="1.1s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 1.1s; width:40px;"><div class="icons">4</div></div>
-                  <div class="icon-box-content">
-                    <p>Veri toplayarak portföyünüze nereden ne zaman erişildiğini tespit edin.</p>
+                  <div class="row agents">
+                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                      <div class="icons">4</div>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
+                      <span>Veri toplayarak portföyünüze nereden ne zaman erişildiğini tespit edin.</span>
+                    </div>
                   </div>
-                </div>
-                <!--End icon box-->
-                <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay="1.1s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 1.3s; width:40px;"><div class="icons">5</div></div>
-                  <div class="icon-box-content">
-                    <p>Uygulamanızda yer alacak "Beni ara" butonu ile sürekli telefonunuz çalsın.</p>
+                  <div class="row agents">
+                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                      <div class="icons">5</div>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
+                      <span>Uygulamanızda yer alacak "Beni ara" butonu ile sürekli telefonunuz çalsın.</span>
+                    </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
@@ -284,7 +302,7 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-offset-0 col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-7 col-md-5 col-lg-offset-7 col-lg-5">
-                <p class="lead x2 light wow bounceInLeft" style="font-size:1.3em;">Kaygının tedavisi hareket halinde olmaktır.</p>
+                <p class="lead x2 light wow bounceInLeft" style="font-size:1.7em;">Kaygının tedavisi hareket halinde olmaktır.</p>
               </div>
             </div>
           </div>
