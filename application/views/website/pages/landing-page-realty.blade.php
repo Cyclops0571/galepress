@@ -176,7 +176,7 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <iframe src="https://www.youtube.com/embed/UVWCW2S-VrA" width="500" height="281" allowfullscreen="allowfullscreen"></iframe>
+                <iframe src="https://www.youtube.com/embed/UVWCW2S-VrA?rel=0" width="500" height="281" allowfullscreen="allowfullscreen"></iframe>
               </div>
               
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
