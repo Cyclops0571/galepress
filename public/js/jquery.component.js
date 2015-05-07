@@ -447,7 +447,7 @@
 				var fileTypeExt = '*.jpg;*.png;*.gif;*.jpeg';
 				var formData = 'uploadimage';
 
-				if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+				if($("html").hasClass("lt-ie10"))
 				{
 					$("#prop-" + id + " a.uploadmodalicon").addClass("hide");
 
@@ -580,8 +580,7 @@
 					$("#prop-" + id + " div.selectfromfile").removeClass("hide").removeClass("hidden");
 					$("#prop-" + id + " div.selectfromfile a.uploadmodalicon").removeClass("hide");
 
-					if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-					{
+					if($("html").hasClass("lt-ie10")) {
 						$("#prop-" + id + " div.selectfromfile a.uploadmodalicon").addClass("hide");
 					}
 
@@ -731,8 +730,7 @@
 					formData = 'uploadimage';
 				}
 
-				if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-				{
+				if($("html").hasClass("lt-ie10")) {
 					$("#prop-" + id + " a.uploadfile").addClass("hide");
 
 					$("#prop-" + id + " div.upload input[type='file']").uploadify({
@@ -996,8 +994,7 @@
 				});
 				
 				//assign upload event for poster image
-				if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-				{
+				if($("html").hasClass("lt-ie10")) {
 					$("#prop-" + id + " a.uploadposterimage").addClass("hide");
 					
 					$("#prop-" + id + " div.properties input[type='file']#comp-" + id + "-posterimage").uploadify({
@@ -1304,8 +1301,7 @@
 					$("#prop-" + id + " div.icon1").removeClass("hide");
 					$("#prop-" + id + " div.icon1 a.uploadfile").removeClass("hide");
 
-					if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-					{
+					if($("html").hasClass("lt-ie10")) {
 						$("#prop-" + id + " div.upload-icon1").addClass("hide");
 					}
 
@@ -1323,8 +1319,7 @@
 				var formData = 'uploadimage';
 
 
-				if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-				{
+				if($("html").hasClass("lt-ie10")) {
 					$("#prop-" + id + " a.uploadfile").addClass("hide");
 
 					$("#prop-" + id + " div.icon1 input[type='file']").uploadify({
@@ -1456,8 +1451,7 @@
 					$("#prop-" + id + " div.icon2").removeClass("hide");
 					$("#prop-" + id + " div.icon2 a.uploadfile2").removeClass("hide");
 
-					if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-					{
+					if($("html").hasClass("lt-ie10")) {
 						$("#prop-" + id + " div.upload-icon2").addClass("hide");
 					}
 
@@ -1476,8 +1470,7 @@
 				var formData2 = 'uploadimage';
 
 
-				if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-				{
+				if($("html").hasClass("lt-ie10")) {
 					$("#prop-" + id + " a.uploadfile2").addClass("hide");
 
 					$("#prop-" + id + " div.icon2 input[type='file']").uploadify({
@@ -1668,164 +1661,143 @@
 				}); 
 
 				//assign upload event for images
-				if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
-				{
-					$('#prop-' + id + ' div.drop-area').addClass("hide");
-					
-					$("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").uploadify({
-						'swf': '/uploadify/uploadify.swf',
-						'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
-						'cancelImg': '/uploadify/uploadify-cancel.png',
-						'fileTypeDesc': 'Image Files',
-						'fileTypeExt': '*.jpg;*.png;*.gif;*.jpeg',
-						'buttonText': interactivity["slideshow_upload"],
-						'multi': true,
-						'auto': true,
-						'onSelect': function (file) {
-							$('#comp-' + id + '-fileselected').val("1");
-							$('#prop-' + id + ' div.fromfile div.progress').removeClass("hide");
-						},
-						'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-							var progress = totalBytesUploaded / totalBytesTotal * 100;
-							
-							$("#prop-" + id + " div.fromfile div.progress label").html(interactivity["video_uploading"] + ' ' + progress.toFixed(0) + '%');
-							$("#prop-" + id + " div.fromfile div.progress div.scale").css('width', progress.toFixed(0) + '%');
-							$("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent', progress.toFixed(0));
-						},
-						'onUploadSuccess': function (file, data, response) {
-							
-							if(data.getValue("success") == "true")
-							{
-								var progressPercent = parseInt($("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent'));
+				if($("html").hasClass("lt-ie10")) {
+                                    $('#prop-' + id + ' div.drop-area').addClass("hide");
+                                    $("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").uploadify({
+                                            'swf': '/uploadify/uploadify.swf',
+                                            'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+                                            'cancelImg': '/uploadify/uploadify-cancel.png',
+                                            'fileTypeDesc': 'Image Files',
+                                            'fileTypeExt': '*.jpg;*.png;*.gif;*.jpeg',
+                                            'buttonText': interactivity["slideshow_upload"],
+                                            'multi': true,
+                                            'auto': true,
+                                            'onSelect': function (file) {
+                                                    $('#comp-' + id + '-fileselected').val("1");
+                                                    $('#prop-' + id + ' div.fromfile div.progress').removeClass("hide");
+                                            },
+                                            'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                                                    var progress = totalBytesUploaded / totalBytesTotal * 100;
 
-								if(progressPercent > 99)
-								{
-									$("#prop-" + id + " div.fromfile div.progress").addClass("hide");
-								}
-								
-								if($("#prop-" + id + " ul.file-rack").hasClass("ui-sortable"))
-								{
-									$("#prop-" + id + " ul.file-rack").sortable("destroy");	
-								}
-								$("#prop-" + id + " ul.file-rack").sortable();
-								
-								var size = $("#prop-" + id + " ul.file-rack li").size() + 1;
-									
-								var li = '<li>' + (size > 9 ? "" + size: "0" + size) + ' - ' + data.getValue("filename") + '<input type="hidden" name="comp-' + id + '-filename[]" class="required" value="' + data.getValue("filename") + '" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
-								
-								$("#prop-" + id + " ul.file-rack").append(li);
-							}
-						},
-						'onCancel': function(file) {
-							$('#prop-' + id + ' div.fromfile div.progress').addClass("hide");
-						}
-					});
-					
-					/*
-					$('#prop-' + id + ' div.progress a').click(function(){
-						
-						$("#prop-" + id + " input[type='file']").uploadify('cancel', '*');
-					});
-					*/
-				}
-				else
-				{
-					$("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").fileupload({
-						url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
-						dataType: 'json',
-						sequentialUploads: true,
-						formData: { 
-							'type': 'uploadimage',
-							'element': 'comp-' + id + '-file'
-						},
-						dropZone: $("#prop-" + id + " div.drop-area"),
-						add: function(e, data)
-						{
-							var passed = true;
-							
-							$.each(data.files, function (index, file)
-							{
-								if(!(/\.(gif|jpg|jpeg|tiff|png)$/i).test(file.name))
-								{
-									passed = false;
-								}
-							});
-							if(passed)
-							{
-								$("#prop-" + id + " div.fromfile div.progress").removeClass("hide");
-								$("#prop-" + id + " input#comp-" + id + "-fileselected").val("1");
-								
-								data.context = $("#prop-" + id + " div.fromfile div.progress");
-								data.context.find('a').click(function(e){
-									e.preventDefault();
-									var template = $("#prop-" + id + " div.fromfile div.progress");
-									data = template.data('data') || {};
-									if(data.jqXHR)
-									{
-										data.jqXHR.abort();
-									}
-								});
-								var xhr = data.submit();
-								data.context.data('data', { jqXHR: xhr });
-							}
-						},
-						progressall: function(e, data)
-						{
-							var progress = data.loaded / data.total * 100;
+                                                    $("#prop-" + id + " div.fromfile div.progress label").html(interactivity["video_uploading"] + ' ' + progress.toFixed(0) + '%');
+                                                    $("#prop-" + id + " div.fromfile div.progress div.scale").css('width', progress.toFixed(0) + '%');
+                                                    $("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent', progress.toFixed(0));
+                                            },
+                                            'onUploadSuccess': function (file, data, response) {
 
-							$("#prop-" + id + " div.fromfile div.progress label").html(interactivity["video_uploading"] + ' ' + progress.toFixed(0) + '%');
-							$("#prop-" + id + " div.fromfile div.progress div.scale").css('width', progress.toFixed(0) + '%');
-							$("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent', progress.toFixed(0));
-						},
-						done: function(e, data)
-						{
-							if(data.textStatus == 'success')
-							{
-								var progressPercent = parseInt($("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent'));
+                                                    if(data.getValue("success") == "true")
+                                                    {
+                                                            var progressPercent = parseInt($("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent'));
 
-								if(progressPercent > 99)
-								{
-									$("#prop-" + id + " div.fromfile div.progress").addClass("hide");
-								}
-								
-								if($("#prop-" + id + " ul.file-rack").hasClass("ui-sortable"))
-								{
-									$("#prop-" + id + " ul.file-rack").sortable("destroy");	
-								}
-								$("#prop-" + id + " ul.file-rack").sortable();
-								
-								$.each(data.result['comp-' + id + '-file'], function (index, file)
-								{
-									var size = $("#prop-" + id + " ul.file-rack li").size() + 1;
-									
-									var li = '<li>' + (size > 9 ? "" + size: "0" + size) + ' - ' + file.name + '<input type="hidden" name="comp-' + id + '-filename[]" class="required" value="' + file.name + '" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
-									
-									$("#prop-" + id + " ul.file-rack").append(li);
-								});
-							}
-						},
-						fail: function(e, data)
-						{
-							if(data.textStatus == "abort")
-							{
-								$("#prop-" + id + " div.fromfile div.progress").addClass("hide");
-								$("#prop-" + id + " input#comp-" + id + "-fileselected").val("0");
-							}
-							else
-							{
-								$("#prop-" + id + " span.error").removeClass("hide");
-							}
-						}
-					});	
-				}
+                                                            if(progressPercent > 99)
+                                                            {
+                                                                    $("#prop-" + id + " div.fromfile div.progress").addClass("hide");
+                                                            }
+
+                                                            if($("#prop-" + id + " ul.file-rack").hasClass("ui-sortable"))
+                                                            {
+                                                                    $("#prop-" + id + " ul.file-rack").sortable("destroy");	
+                                                            }
+                                                            $("#prop-" + id + " ul.file-rack").sortable();
+
+                                                            var size = $("#prop-" + id + " ul.file-rack li").size() + 1;
+
+                                                            var li = '<li>' + (size > 9 ? "" + size: "0" + size) + ' - ' + data.getValue("filename") + '<input type="hidden" name="comp-' + id + '-filename[]" class="required" value="' + data.getValue("filename") + '" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
+
+                                                            $("#prop-" + id + " ul.file-rack").append(li);
+                                                    }
+                                            },
+                                            'onCancel': function(file) {
+                                                    $('#prop-' + id + ' div.fromfile div.progress').addClass("hide");
+                                            }
+                                    });
+
+                                    /*
+                                    $('#prop-' + id + ' div.progress a').click(function(){
+
+                                            $("#prop-" + id + " input[type='file']").uploadify('cancel', '*');
+                                    });
+                                    */
+                            } else {
+                                $("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").fileupload({
+                                    url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+                                    dataType: 'json',
+                                    sequentialUploads: true,
+                                    formData: { 
+                                        'type': 'uploadimage',
+                                        'element': 'comp-' + id + '-file'
+                                    },
+                                    dropZone: $("#prop-" + id + " div.drop-area"),
+                                    add: function(e, data) {
+                                        var passed = true;
+                                        $.each(data.files, function (index, file)
+                                        {
+                                            if(!(/\.(gif|jpg|jpeg|tiff|png)$/i).test(file.name))
+                                            {
+                                                passed = false;
+                                            }
+                                        });
+                                        if(passed) {
+                                            $("#prop-" + id + " div.fromfile div.progress").removeClass("hide");
+                                            $("#prop-" + id + " input#comp-" + id + "-fileselected").val("1");
+
+                                            data.context = $("#prop-" + id + " div.fromfile div.progress");
+                                            data.context.find('a').click(function(e){
+                                                e.preventDefault();
+                                                var template = $("#prop-" + id + " div.fromfile div.progress");
+                                                data = template.data('data') || {};
+                                                if(data.jqXHR)
+                                                {
+                                                    data.jqXHR.abort();
+                                                }
+                                            });
+                                            var xhr = data.submit();
+                                            data.context.data('data', { jqXHR: xhr });
+                                        }
+                                    },
+                                    progressall: function(e, data) {
+                                        var progress = data.loaded / data.total * 100;
+
+                                        $("#prop-" + id + " div.fromfile div.progress label").html(interactivity["video_uploading"] + ' ' + progress.toFixed(0) + '%');
+                                        $("#prop-" + id + " div.fromfile div.progress div.scale").css('width', progress.toFixed(0) + '%');
+                                        $("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent', progress.toFixed(0));
+                                    },
+                                    done: function(e, data) {
+                                        if(data.textStatus == 'success') {
+                                            var progressPercent = parseInt($("#prop-" + id + " div.fromfile div.progress div.scale").attr('percent'));
+
+                                            if(progressPercent > 99) {
+                                                $("#prop-" + id + " div.fromfile div.progress").addClass("hide");
+                                            }
+
+                                            if($("#prop-" + id + " ul.file-rack").hasClass("ui-sortable")) {
+                                                $("#prop-" + id + " ul.file-rack").sortable("destroy");	
+                                            }
+                                            $("#prop-" + id + " ul.file-rack").sortable();
+
+                                            $.each(data.result['comp-' + id + '-file'], function (index, file) {
+                                                var size = $("#prop-" + id + " ul.file-rack li").size() + 1;
+                                                var li = '<li>' + (size > 9 ? "" + size: "0" + size) + ' - ' + file.name + '<input type="hidden" name="comp-' + id + '-filename[]" class="required" value="' + file.name + '" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
+                                                $("#prop-" + id + " ul.file-rack").append(li);
+                                            });
+                                        }
+                                    },
+                                    fail: function(e, data) {
+                                        if(data.textStatus == "abort") {
+                                            $("#prop-" + id + " div.fromfile div.progress").addClass("hide");
+                                            $("#prop-" + id + " input#comp-" + id + "-fileselected").val("0");
+                                        } else {
+                                            $("#prop-" + id + " span.error").removeClass("hide");
+                                        }
+                                    }
+                                });	
+                            }
 				
-				//select poster image
-				$("#prop-" + id + " div.drop-area a").click(function(){
-					$("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").click();
-				});
-			}
-			else if(componentName == "bookmark")
-			{
+                            //select poster image
+                            $("#prop-" + id + " div.drop-area a").click(function(){
+                                    $("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").click();
+                            });
+			} else if(componentName == "bookmark") {
 				//bookmark
 			}
 			///////////////////////////////////////////////////////////////////////////////////////////////
