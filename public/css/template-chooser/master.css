@@ -370,7 +370,7 @@
 #templateChooserBox .site-settings{
     top:75px;
 }
-.device-mockup[data-device="ipad"] > .device > .screen, .device-mockup[data-device="ipad"][data-orientation="portrait"] > .device > .screen {
+#modalTemplateChooser .device-mockup[data-device="ipad"] > .device > .screen, .device-mockup[data-device="ipad"][data-orientation="portrait"] > .device > .screen {
   top: 11.37% !important;
   bottom: 11.4% !important;
   left: 13.6% !important;

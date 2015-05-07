@@ -96,6 +96,10 @@
     margin: 0 !important;
     color: white;
   }
+  .landing-realty .icon-box-content p{
+    text-align: left !important;
+    margin: 3px !important;
+  }
   .landing-realty .panel{
     background: transparent;
   }
@@ -108,6 +112,7 @@
 
   .landing-realty .blog-preview .info-text{
     width: 60%;
+    color: #337ab7;
   }
 
   .landing-realty .swiper-container{
@@ -123,7 +128,7 @@
   }
   .landing-realty .icons{
     display:inline-block; 
-    background-image:url('/img/landing/icons.png'); 
+    background-image:url('/website/img/landing/icons.png'); 
     width:30px; height:30px; 
     background-size:100% 100%;
     text-align: center;
@@ -161,36 +166,42 @@
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <!--Start icon box-->
                 <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay=".5s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.5s;"><div class="icons">1</div></div>
+                  <div class="pull-left" data-wow-delay=".5s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.5s; width:40px;"><div class="icons">1</div></div>
                   <div class="icon-box-content">
-                    <p>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </p>
+                    <p>Kendi mobil uygulamanız ile artık kontrol sizde.</p>
                   </div>
                 </div>
                 <!--End icon box-->
                 <!--Start icon box-->
                 <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay=".7s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.7s;"><div class="icons">2</div></div>
+                  <div class="pull-left" data-wow-delay=".7s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.7s; width:40px;"><div class="icons">2</div></div>
                   <div class="icon-box-content">
-                    <p>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </p>
+                    <p>Hiç bir kodlama bilgisine gerek yok, anahtar teslim çözüm.</p>
                   </div>
                 </div>
                 <!--End icon box-->
                 <!--Start icon box-->
                 <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay=".9s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.9s;"><div class="icons">3</div></div>
+                  <div class="pull-left" data-wow-delay=".9s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 0.9s; width:40px;"><div class="icons">3</div></div>
                   <div class="icon-box-content">
-                    <p>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </p>
+                    <p>Müşterilerinize en hızlı çözümü siz getirin: anlık push notification.</p>
                   </div>
                 </div>
                 <!--End icon box-->
                 <!--Start icon box-->
                 <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
-                  <div class="pull-left" data-wow-delay="1.1s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 1.1s;"><div class="icons">4</div></div>
+                  <div class="pull-left" data-wow-delay="1.1s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 1.1s; width:40px;"><div class="icons">4</div></div>
                   <div class="icon-box-content">
-                    <p>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </p>
+                    <p>Veri toplayarak portföyünüze nereden ne zaman erişildiğini tespit edin.</p>
                   </div>
                 </div>
                 <!--End icon box-->
+                <div class="icon-box icon-xs sep-bottom-xs icon-gradient">
+                  <div class="pull-left" data-wow-delay="1.1s" class="img-circle wow flipInX animated" style="visibility: visible; -webkit-animation-delay: 1.3s; width:40px;"><div class="icons">5</div></div>
+                  <div class="icon-box-content">
+                    <p>Uygulamanızda yer alacak "Beni ara" butonu ile sürekli telefonunuz çalsın.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -202,7 +213,7 @@
           <div class="row">
             <!-- BOOTSTRAP PULL-PUSH ILE DE COLUMN SIRALARI DEGISTIRILEBILIR -->
             <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 hidden-xs" style="margin-bottom:-145px;">
-              <img src="/website/img/devices/ipad_port_white.png" width="100%"/>
+              <img src="/website/img/landing/realty/remax.png" width="100%"/>
             </div>
             <div class="col-xs-12 col-sm-5 col-sm-offset-2 col-md-4 col-md-offset-3 col-lg-4" id="formContainer" ng-app="websiteApp">
               <form name="form" ng-submit="submitForm()" ng-controller="FormController" class="tryit-form" novalidate>
@@ -265,7 +276,7 @@
             </div>
             <!-- BOOTSTRAP PULL-PUSH ILE DE COLUMN SIRALARI DEGISTIRILEBILIR -->
             <div class="col-xs-12 visible-xs-block">
-              <img src="/website/img/devices/ipad_port_white.png" width="100%"/>
+              <img src="/website/img/landing/realty/remax.png" width="100%"/>
             </div>
           </div>
         </div>
@@ -273,7 +284,7 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-offset-0 col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-7 col-md-5 col-lg-offset-7 col-lg-5">
-                <p class="lead x2 light wow bounceInLeft" style="font-size:1.3em;">Satışa hazır konutlarınız ve rezidanslarınızın pazarlamasını mobile taşıyın.</p>
+                <p class="lead x2 light wow bounceInLeft" style="font-size:1.3em;">Kaygının tedavisi hareket halinde olmaktır.</p>
               </div>
             </div>
           </div>
@@ -284,15 +295,15 @@
         <div class="blog-preview swiper-container">
           <div class="swiper-wrapper">
             <article class="swiper-slide">
-              <div class="post-info text-center"><a href="blog-detail-single.html"><img src="/img/team/realty/4.jpg" alt="Michelle White" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Michelle White<small><a href="blog-detail-single.html">Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </a></small></span></div><a href="blog-detail-single.html"></a>
+              <div class="post-info text-center"><a><img src="/website/img/team/realty/1.jpg" alt="Ahmet Uğur" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Ahmet Uğur<small><a>Galepress ile hiç bir rakibim beni yakalayamıyor. Her zaman müşterilerimin cebinde, rakiplerimin bir adım önündeyim.</a></small></span></div><a></a>
             </article>
 
             <article class="swiper-slide">
-              <div class="post-info text-center"><a href="blog-detail-single.html"><img src="/img/team/realty/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail-single.html">Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </a></small></span></div><a href="blog-detail-single.html"></a>
+              <div class="post-info text-center"><a><img src="/website/img/team/realty/2.jpg" alt="Mustafa Yerdemir" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Mustafa Yerdemir<small><a>Mobil portföyümü güncellerken emlak portallarıma harcadığım zamanında yarısından azını harcıyorum.</a></small></span></div><a></a>
               
             </article>
             <article class="swiper-slide">
-              <div class="post-info text-center"><a href="blog-detail-single.html"><img src="/img/team/realty/4.jpg" alt="Michelle White" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Michelle White<small><a href="blog-detail-single.html">Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. </a></small></span></div><a href="blog-detail-single.html"></a>
+              <div class="post-info text-center"><a><img src="/website/img/team/realty/3.jpg" alt="İrem Pehlivanoğlu" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">İrem Pehlivanoğlu<small><a>Emlak danışmanlığı konusunda aldığım ödüllerde mobil pazarlamaya önem vermemin payı büyük. Teşekkürler Galepress!</a></small></span></div><a></a>
             </article>
           </div>
         </div>
