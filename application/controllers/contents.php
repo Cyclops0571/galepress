@@ -305,7 +305,6 @@ class Contents_Controller extends Base_Controller {
 		}
 	}
 
-	//POST
 	public function post_save() {
 		$contentID = 0;
 		$currentUser = Auth::User();
@@ -354,29 +353,12 @@ class Contents_Controller extends Base_Controller {
 					$content->setMaster((int) Input::get('IsMaster'));
 					$content->AutoDownload = (int) Input::get('AutoDownload');
 					$content->Status = (int) Input::get('Status');
-					$content->ProcessUserID = $currentUser->UserID;
-					$content->ProcessDate = new DateTime();
 
 					if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 						$content->Approval = (int) Input::get('Approval');
 						$content->Blocked = (int) Input::get('Blocked');
 					}
 					$content->ifModifiedDoNeccessarySettings($selectedCategories);
-
-
-					if ($id == 0) {
-						$content->Version = 1;
-						$content->PdfVersion = 1;
-						$content->CoverImageVersion = 1;
-						$content->StatusID = eStatus::Active;
-						$content->CreatorUserID = $currentUser->UserID;
-						$content->DateCreated = new DateTime();
-						$content->ProcessTypeID = eProcessTypes::Insert;
-					} else {
-						$content->ProcessTypeID = eProcessTypes::Update;
-					}
-
-					$content->updateApplicationVersion();
 					$content->save();
 					$content->setCategory($selectedCategories);
 
@@ -396,36 +378,27 @@ class Contents_Controller extends Base_Controller {
 	}
 
 	public function post_delete() {
-		$currentUser = Auth::User();
-
 		$id = (int) Input::get($this->pk, '0');
-
 		$chk = Common::CheckContentOwnership($id);
-		if ($chk) {
-			try {
-				DB::transaction(function() use ($currentUser, $id) {
-					$s = Content::find($id);
-					if ($s) {
-						$s->StatusID = eStatus::Deleted;
-						$s->ProcessUserID = $currentUser->UserID;
-						$s->ProcessDate = new DateTime();
-						$s->ProcessTypeID = eProcessTypes::Update;
-						$s->save();
-
-						$a = Application::find($s->ApplicationID);
-						$a->Version = (int) $a->Version + 1;
-						$a->ProcessUserID = $currentUser->UserID;
-						$a->ProcessDate = new DateTime();
-						$a->ProcessTypeID = eProcessTypes::Update;
-						$a->save();
-					}
-				});
-				return "success=" . base64_encode("true");
-			} catch (Exception $e) {
-				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
-			}
+		if (!$chk) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		
+		try {
+			DB::transaction(function() use ($id) {
+				$s = Content::find($id);
+				if ($s) {
+					$s->StatusID = eStatus::Deleted;
+					$s->ProcessUserID = Auth::User()->UserID;
+					$s->ProcessDate = new DateTime();
+					$s->ProcessTypeID = eProcessTypes::Update;
+					$s->save();
+				}
+			});
+			return "success=" . base64_encode("true");
+		} catch (Exception $e) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
+		}
 	}
 
 	public function post_uploadfile() {
@@ -525,14 +498,15 @@ class Contents_Controller extends Base_Controller {
 			if ($content) {
 				$content instanceof Content;
 				$content->OrderNo = $i++;
-				$content->Version++;
-				$content->save();
+				$content->save(FALSE);
+				//appversionu altte tek bir kere artiracagim icin burada artirmiyorum.
 			}
 		}
+		
 		$application = Application::find($applicationID);
-		$application instanceof Application;
-		$application->Version++;
-		$application->save();
+		if($application) {
+			$application->incrementAppVersion();
+		}
 		return "success=" . base64_encode("true");
 	}
 

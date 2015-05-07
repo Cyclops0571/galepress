@@ -113,4 +113,33 @@ class Application extends Eloquent
 			return false;
 		}
 	}
+	
+	public function save() {
+		if(!$this->dirty()) {
+			return true;
+		}
+		
+		$userID = -1;
+		if(Auth::User()) {
+			$userID = Auth::User()->UserID;
+		}
+		
+		if((int)$this->ApplicationID == 0) {
+			$this->DateCreated = new DateTime();
+			$this->ProcessTypeID = eProcessTypes::Insert;
+			$this->CreatorUserID = $userID;
+			$this->StatusID = eStatus::Active;
+		} else {
+			$this->ProcessTypeID = eProcessTypes::Update;
+		}
+		$this->ProcessUserID = $userID;
+		$this->Version = (int)$this->Version + 1;
+		$this->ProcessDate = new DateTime();
+		parent::save();
+	}
+	
+	public function incrementAppVersion() {
+		$this->Version++;
+		parent::save();
+	}
 }

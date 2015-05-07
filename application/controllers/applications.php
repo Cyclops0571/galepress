@@ -116,8 +116,8 @@ class Applications_Controller extends Base_Controller {
 								->nest('filterbar', 'sections.filterbar', $data)
 								->nest('commandbar', 'sections.commandbar', $data);
 			} catch (Exception $e) {
-				//throw new Exception($e->getMessage());
-				return Redirect::to(__('route.home'));
+				throw new Exception($e->getMessage());
+//				return Redirect::to(__('route.home'));
 			}
 		} else {
 			$option = (int) Input::get('option', 0);
@@ -182,8 +182,8 @@ class Applications_Controller extends Base_Controller {
 
 			$chk = Common::CheckApplicationOwnership($id);
 			if (!$chk) {
-				throw new Exception("Unauthorized user attempt");
-				//throw new Exception(__('error.unauthorized_user_attempt'));
+//				throw new Exception("Unauthorized user attempt");
+				throw new Exception(__('error.unauthorized_user_attempt'));
 			}
 
 			$currentUser = Auth::User();
@@ -197,27 +197,6 @@ class Applications_Controller extends Base_Controller {
 					$customerID = (int) $app->CustomerID;
 					$applicationID = (int) $app->ApplicationID;
 				}
-
-				//Update Application
-				//$s = Application::find($id);
-				/*
-				  if($id == 0)
-				  {
-				  $s->Version = 1;
-				  }
-				  else
-				  {
-				  if($hasModified)
-				  {
-				  $s->Version = (int)$s->Version + 1;
-				  }
-				  }
-				 */
-				//$s->NotificationText = Input::get('NotificationText');
-				//$s->ProcessUserID = $currentUser->UserID;
-				//$s->ProcessDate = new DateTime();
-				//$s->ProcessTypeID = eProcessTypes::Update;
-				//$s->save();
 
 				$s = new PushNotification();
 				$s->CustomerID = (int) $customerID;
@@ -304,20 +283,6 @@ class Applications_Controller extends Base_Controller {
 					$targetFileName = $sourceFileName;
 				}
 
-				$hasModified = false;
-				$current = Application::find($id);
-				if ($current) {
-					$hasModified = (int) $current->CustomerID != (int) Input::get('CustomerID');
-					$hasModified = $hasModified || $current->Name != Input::get('Name');
-					$hasModified = $hasModified || $current->Detail != Input::get('Detail');
-					$hasModified = $hasModified || new DateTime($current->ExpirationDate) != new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
-					$hasModified = $hasModified || (int) $current->ApplicationStatusID != (int) Input::get('ApplicationStatusID');
-					$hasModified = $hasModified || (int) $current->PackageID != (int) Input::get('PackageID');
-					$hasModified = $hasModified || (int) $current->Blocked != (int) Input::get('Blocked');
-					$hasModified = $hasModified || (int) $current->Status != (int) Input::get('Status');
-					$hasModified = $hasModified || (int) $current->Trail != (int) Input::get('Trail');
-				}
-
 				if ($id == 0) {
 					$s = new Application();
 				} else {
@@ -337,28 +302,8 @@ class Applications_Controller extends Base_Controller {
 				$s->Blocked = (int) Input::get('Blocked');
 				$s->Status = (int) Input::get('Status');
 				$s->Trail = (int) Input::get('Trail');
-
-				if ($id == 0) {
-					$s->Version = 1;
-				} else {
-					if ($hasModified) {
-						$s->Version = (int) $s->Version + 1;
-					}
-				}
 				$s->NotificationText = Input::get('NotificationText');
 				$s->CkPem = $targetFileName;
-				if ($id == 0) {
-					$s->StatusID = eStatus::Active;
-					$s->CreatorUserID = $currentUser->UserID;
-					$s->DateCreated = new DateTime();
-				}
-				$s->ProcessUserID = $currentUser->UserID;
-				$s->ProcessDate = new DateTime();
-				if ($id == 0) {
-					$s->ProcessTypeID = eProcessTypes::Insert;
-				} else {
-					$s->ProcessTypeID = eProcessTypes::Update;
-				}
 				$s->save();
 
 				if ((int) Input::get('hdnCkPemSelected', 0) == 1 && File::exists($sourceFileNameFull)) {
@@ -387,22 +332,17 @@ class Applications_Controller extends Base_Controller {
 
 	public function post_delete() {
 		$currentUser = Auth::User();
+		$id = (int) Input::get($this->pk, '0');
+		$s = Application::find($id);
 
-		if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
-			$id = (int) Input::get($this->pk, '0');
-
-			$s = Application::find($id);
-			if ($s) {
-				$s->Version = (int) $s->Version + 1;
-				$s->StatusID = eStatus::Deleted;
-				$s->ProcessUserID = $currentUser->UserID;
-				$s->ProcessDate = new DateTime();
-				$s->ProcessTypeID = eProcessTypes::Update;
-				$s->save();
-			}
-			return "success=" . base64_encode("true");
+		if ((int) $currentUser->UserTypeID != eUserTypes::Manager || !$s) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		
+		$s->StatusID = eStatus::Deleted;
+		$s->save();
+		return "success=" . base64_encode("true");
+
 	}
 
 	public function post_uploadfile() {

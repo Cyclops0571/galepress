@@ -19,6 +19,10 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
+		var_dump(Auth::User());
+		exit;
+		echo Auth::User()->UserID;
+		exit;
 		$e = new Exception("asdfasdf");
 		throw new Exception($e->getMessage());
 //		$content = Content::find(1989);

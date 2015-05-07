@@ -117,17 +117,6 @@ class Categories_Controller extends Base_Controller
 				$s->ProcessTypeID = eProcessTypes::Update;
 			}
 			$s->save();
-			
-			/*
-			//Increment application version
-			$a = Application::find($applicationID);
-			$a->Version = (int)$a->Version + 1;	
-			$a->ProcessUserID = $currentUser->UserID;
-			$a->ProcessDate = new DateTime();
-			$a->ProcessTypeID = eProcessTypes::Update;
-			$a->save();
-			*/
-			
 			return "success=".base64_encode("true");
 		}
 		else
@@ -153,16 +142,6 @@ class Categories_Controller extends Base_Controller
 				$s->ProcessDate = new DateTime();
 				$s->ProcessTypeID = eProcessTypes::Update;
 				$s->save();
-				
-				/*
-				//Increment application version
-				$a = Application::find($s->ApplicationID);
-				$a->Version = (int)$a->Version + 1;	
-				$a->ProcessUserID = $currentUser->UserID;
-				$a->ProcessDate = new DateTime();
-				$a->ProcessTypeID = eProcessTypes::Update;
-				$a->save();
-				*/
 			}
 			return "success=".base64_encode("true");
 		}

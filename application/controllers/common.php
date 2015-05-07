@@ -509,28 +509,19 @@ class Common_Controller extends Base_Controller {
 					->only('CustomerID');
 
 
-			$s = new Application();
-			$s->CustomerID = $lastCustomerID;
-			$s->Name = $faceUserObj->first_name . $faceUserObj->last_name;
-			$s->StartDate = $today;
-			$s->ExpirationDate = $todayAddWeek;
-			$s->ApplicationStatusID = 151;
-			$s->PackageID = 5;
-			$s->Blocked = 0;
-			$s->Status = 1;
-			$s->Trail = 1;
-			$s->Version = 1;
-			$s->StatusID = eStatus::Active;
-			$s->Trail = 1;
-			$s->CreatorUserID = -1;
-			$s->DateCreated = new DateTime();
-			$s->ProcessUserID = -1;
-			$s->ProcessDate = new DateTime();
-			$s->ProcessTypeID = eProcessTypes::Insert;
+			$app = new Application();
+			$app->CustomerID = $lastCustomerID;
+			$app->Name = $faceUserObj->first_name . $faceUserObj->last_name;
+			$app->StartDate = $today;
+			$app->ExpirationDate = $todayAddWeek;
+			$app->ApplicationStatusID = 151;
+			$app->PackageID = 5;
+			$app->Blocked = 0;
+			$app->Status = 1;
+			$app->Trail = 1;
 			$s->save();
 
 			$s = new User();
-
 			$s->UserTypeID = 111;
 			$s->CustomerID = $lastCustomerID;
 			$s->Username = $faceUserObj->id;

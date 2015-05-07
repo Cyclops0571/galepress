@@ -253,13 +253,6 @@ class Website_Controller extends Base_Controller
 			$s->Blocked = 0;
 			$s->Status = 1;
 			$s->Trail = 1;
-			$s->Version = 1;
-			$s->StatusID = eStatus::Active;
-			$s->CreatorUserID = -1;
-			$s->DateCreated = new DateTime();
-			$s->ProcessUserID = -1;
-			$s->ProcessDate = new DateTime();
-			$s->ProcessTypeID = eProcessTypes::Insert;
 			$s->save();
 
 			// $data['bugun'] = $today;
@@ -269,7 +262,6 @@ class Website_Controller extends Base_Controller
 			$confirmCode=rand(10000,99999);
 
 			$s = new User();
-			
 			$s->UserTypeID = 111;
 			$s->CustomerID = $lastCustomerID;
 			$s->Username = $userName;
@@ -444,13 +436,6 @@ class Website_Controller extends Base_Controller
 			$s->Blocked = 0;
 			$s->Status = 1;
 			$s->Trail = 1;
-			$s->Version = 1;
-			$s->StatusID = eStatus::Active;
-			$s->CreatorUserID = -1;
-			$s->DateCreated = new DateTime();
-			$s->ProcessUserID = -1;
-			$s->ProcessDate = new DateTime();
-			$s->ProcessTypeID = eProcessTypes::Insert;
 			$s->save();
 
 			// $data['bugun'] = $today;

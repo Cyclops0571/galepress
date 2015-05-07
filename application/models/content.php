@@ -93,9 +93,7 @@ class Content extends Eloquent {
 		$imageUploaded = (int) Input::get('hdnCoverImageFileSelected', 0);
 		if ($this->dirty() || $pdfUploaded || $imageUploaded || $currentCategories != $selectedCategories) {
 			$this->Version = (int) $this->Version + 1;
-			return TRUE;
 		}
-		return FALSE;
 	}
 
 	public function getCategoryIDSet() {
@@ -128,19 +126,6 @@ class Content extends Eloquent {
 					$a->ProcessTypeID = eProcessTypes::Update;
 					$a->save();
 				}
-			}
-		}
-	}
-
-	public function updateApplicationVersion() {
-		if ($this->dirty()) {
-			$a = Application::find($this->ApplicationID);
-			if ($a) {
-				$a->Version = (int) $a->Version + 1;
-				$a->ProcessUserID = Auth::User()->UserID;
-				$a->ProcessDate = new DateTime();
-				$a->ProcessTypeID = eProcessTypes::Update;
-				$a->save();
 			}
 		}
 	}
@@ -232,7 +217,6 @@ class Content extends Eloquent {
 			if (!File::exists($destinationFolder)) {
 				File::mkdir($destinationFolder);
 			}
-			sleep(5);
 			File::move($sourceFileNameFull, $targetFileNameFull);
 			if ((int) Input::get('hdnFileSelected', 0) == 0) {
 				File::copy($targetFileNameFull, $destinationFolder . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION);
@@ -272,5 +256,37 @@ class Content extends Eloquent {
 			$c->save();
 			Cookie::put(SHOW_IMAGE_CROP, SHOW_IMAGE_CROP);
 		}
+	}
+	
+	public function save($updateAppVersion = TRUE) {
+		if(!$this->dirty()) {
+			return true;
+		}
+		$userID = -1;
+		if(Auth::User()) {
+			$userID = Auth::User()->UserID;
+		}
+		
+		if((int)$this->ContentID == 0) {
+			$this->DateCreated = new DateTime();
+			$this->ProcessTypeID = eProcessTypes::Insert;
+			$this->CreatorUserID = $userID;
+			$this->StatusID = eStatus::Active;
+			$this->PdfVersion = 1;
+			$this->CoverImageVersion = 1;
+		} else {
+			$this->ProcessTypeID = eProcessTypes::Update;
+		}
+		
+		$this->ProcessUserID = $userID;
+		$this->Version = (int)$this->Version + 1;
+		$this->ProcessDate = new DateTime();
+		if($updateAppVersion) {
+			$contentApp = Application::find($this->ApplicationID);
+			if($contentApp) {
+				$contentApp->incrementAppVersion();
+			}
+		}
+		parent::save();
 	}
 }
