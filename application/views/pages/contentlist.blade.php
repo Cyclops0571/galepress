@@ -71,7 +71,7 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 										@elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 											<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
 												<?php if($page < 2): ?>
-													<td class="hakan" style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
+													<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
 												<?php endif; ?>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
