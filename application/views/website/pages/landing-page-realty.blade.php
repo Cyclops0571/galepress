@@ -114,11 +114,6 @@
     width: 60%;
     color: #337ab7;
   }
-
-  .landing-realty .swiper-container{
-    margin: 0px 7%;
-  }
-
   .landing-realty .form-control{
     border: 1px solid rgb(154, 154, 154);
   }
@@ -156,13 +151,10 @@
       margin-top: 15px;
       right: 0;
     }
-    .landing-realty .swiper-container{
-      margin: 0 !important;
-    }
   }
   @media (max-width: 380px) {
     .swiper-slide{
-      width: 315px;
+      width: 285px;
     }
   }
 
@@ -310,21 +302,27 @@
       </section>
 
       <section id="blog" class="landing-realty">
-        <div class="blog-preview swiper-container">
-          <div class="swiper-wrapper">
-            <article class="swiper-slide">
-              <div class="post-info text-center"><a><img src="/website/img/team/realty/1.jpg" alt="Ahmet Uğur" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Ahmet Uğur<small><a>Galepress ile hiç bir rakibim beni yakalayamıyor. Her zaman müşterilerimin cebinde, rakiplerimin bir adım önündeyim.</a></small></span></div><a></a>
-            </article>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="blog-preview swiper-container">
+                  <div class="swiper-wrapper">
+                    <article class="swiper-slide">
+                      <div class="post-info text-center"><a><img src="/website/img/team/realty/1.jpg" alt="Ahmet Uğur" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Ahmet Uğur<small><a>Galepress ile hiç bir rakibim beni yakalayamıyor. Her zaman müşterilerimin cebinde, rakiplerimin bir adım önündeyim.</a></small></span></div><a></a>
+                    </article>
 
-            <article class="swiper-slide">
-              <div class="post-info text-center"><a><img src="/website/img/team/realty/2.jpg" alt="Mustafa Yerdemir" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Mustafa Yerdemir<small><a>Mobil portföyümü güncellerken emlak portallarıma harcadığım zamanında yarısından azını harcıyorum.</a></small></span></div><a></a>
-              
-            </article>
-            <article class="swiper-slide">
-              <div class="post-info text-center"><a><img src="/website/img/team/realty/3.jpg" alt="İrem Pehlivanoğlu" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">İrem Pehlivanoğlu<small><a>Emlak danışmanlığı konusunda aldığım ödüllerde mobil pazarlamaya önem vermemin payı büyük. Teşekkürler Galepress!</a></small></span></div><a></a>
-            </article>
+                    <article class="swiper-slide">
+                      <div class="post-info text-center"><a><img src="/website/img/team/realty/2.jpg" alt="Mustafa Yerdemir" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Mustafa Yerdemir<small><a>Mobil portföyümü güncellerken emlak portallarıma harcadığım zamanında yarısından azını harcıyorum.</a></small></span></div><a></a>
+                      
+                    </article>
+                    <article class="swiper-slide">
+                      <div class="post-info text-center"><a><img src="/website/img/team/realty/3.jpg" alt="İrem Pehlivanoğlu" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">İrem Pehlivanoğlu<small><a>Emlak danışmanlığı konusunda aldığım ödüllerde mobil pazarlamaya önem vermemin payı büyük. Teşekkürler Galepress!</a></small></span></div><a></a>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
       </section>
 
     <script>
