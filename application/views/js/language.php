@@ -1,12 +1,12 @@
 <script type="text/javascript">
 	<!--
+	var route = new Array();
 	<?php
 	// For language cache
 	$langRoute = __('route.login')->get();
 	$langNotification = __('notification.success')->get();
 	$langNotification = __('interactivity.ok')->get();
 	
-	echo 'var route = new Array();'."\n";
 	$keys = Lang::$lines["application"][Session::get('language')]["route"];
 	foreach($keys as $key => $val) {
 		

@@ -1757,6 +1757,8 @@ var cTemplate = new function () {
 };
 
 var cBanner = new function () {
+    this.objectName = "banners";
+    
     this.addImageUpload = function() {
         if($("html").hasClass("lt-ie10")) {
             $("#ImageFile").uploadify({
@@ -1855,15 +1857,6 @@ var cBanner = new function () {
     };
     
     this.save = function () {
-        cCommon.save(
-	    this.objectName, 
-	    function (ret) {
-		primaryKeyID = ret.getValue("primaryKeyID");
-		cNotification.success();
-		 var goto = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + primaryKeyID;
-		 console.log(goto);
-//		 document.location.href = goto;
-	    }
-	);
+        cCommon.save(this.objectName);
     };
 };
