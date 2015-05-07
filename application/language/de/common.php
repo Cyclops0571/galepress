@@ -490,7 +490,6 @@ return array(
 	'map_form_longitude' => 'Länge',
 	'map_form_return' => 'Zurück zur Liste',
 	'map_form_location' => 'Mein Ort',
-	'map_form_save' => 'Speichern',
 
 	'applications_trail_title' => 'Customer/Trail',
 	'applications_trail_customer' => 'Customer',

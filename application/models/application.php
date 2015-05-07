@@ -74,4 +74,43 @@ class Application extends Eloquent
 	{
 		return $this->has_many('ApplicationTag', $this->key());
 	}
+	
+	/**
+	 * 
+	 * @return Content
+	 */
+	public function getContentSet() {
+		return Content::where('ApplicationID', '=', $this->ApplicationID)
+			->where('StatusID', '=', eStatus::Active)
+			->order_by('Name', 'ASC')
+			->get();
+	}
+	
+	/**
+	 * 
+	 * @param int $applicationID
+	 * @return Application
+	 */
+	public static function find($applicationID, $columns = array('*')) {
+		return Application::where(self::$key, "=", $applicationID)->first($columns);
+	}
+	
+	public function CheckOwnership() {
+		$currentUser = Auth::User();
+		if ((int) $currentUser->UserTypeID == eUserTypes::Manager)  {
+			return true;
+		}
+		
+		if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+			if ((int) $this->StatusID == eStatus::Active) {
+				$c = $this->Customer();
+				if ((int) $c->StatusID == eStatus::Active) {
+					if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
 }

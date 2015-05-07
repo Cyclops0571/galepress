@@ -496,7 +496,6 @@ return array(
 	'map_form_longitude' => 'Boylam',
 	'map_form_return' => 'Listeye Dön',
 	'map_form_location' => 'Konumum',
-	'map_form_save' => 'Kaydet',
 
 	'applications_trail_title' => 'Müşteri/Deneme',
 	'applications_trail_customer' => 'Müşteri',
@@ -515,4 +514,18 @@ return array(
 	'template_chooser_close' => 'Kapat',
 	'template_chooser_use' => 'Temayı Kullan',
 
+	'banner_form_name' => 'Banner',
+	'banner_form_target_url' => 'Hedef Url:',
+	'banner_form_target_content' => 'Hedef İçerik:',
+	'banners_caption' => 'İçerikler',
+	'banners_caption_detail' => 'İçerik Detayı',
+	'banners_list_status1' => 'Yayında',
+	'banners_list_status0' => 'Yayında değil',
+	'banners_caption_detail' => 'İçerik Detayı',
+	'banners_select_content' => 'Hedef içerik seçebilirsiniz...',
+	'banners_original_image' => 'Yüklenilen resim:',
+	'banners_image' => 'Resim Önizleme:',
+	
+	
+	'image_select' => 'Resim seç...',
 );

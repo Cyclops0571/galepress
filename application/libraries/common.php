@@ -119,7 +119,10 @@ class Common {
 
 	public static function CheckApplicationOwnership($applicationID) {
 		$currentUser = Auth::User();
-
+		if ((int) $currentUser->UserTypeID == eUserTypes::Manager)  {
+			return true;
+		}
+		
 		if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
 			$a = Application::find($applicationID);
 			if ($a) {
@@ -132,10 +135,8 @@ class Common {
 					}
 				}
 			}
-			return false;
-		} else {
-			return true;
 		}
+		return false;
 	}
 
 	public static function CheckContentOwnership($contentID) {

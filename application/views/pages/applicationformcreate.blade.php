@@ -712,7 +712,7 @@
                           <input type="hidden" name="hdnImage1024x1024Name" id="hdnImage1024x1024Name" value="" />
                           <script type="text/javascript">
                           $(function(){
-                            if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                            if($("html").hasClass("lt-ie10"))
                             {
                               $("#Image1024x1024").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
@@ -839,7 +839,7 @@
                             <script type="text/javascript">
                             $(function(){
 
-                              if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                              if($("html").hasClass("lt-ie10"))
                               {
                                 $("#Pdf").uploadify({
                                   'swf': '/uploadify/uploadify.swf',
@@ -986,7 +986,7 @@
                           <script type="text/javascript">
                           $(function(){
 
-                            if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                            if($("html").hasClass("lt-ie10"))
                             {
                               $("#Image640x960").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
@@ -1113,7 +1113,7 @@
                           <script type="text/javascript">
                           $(function(){
 
-                            if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                            if($("html").hasClass("lt-ie10"))
                             {
                               $("#Image640x1136").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
@@ -1242,7 +1242,7 @@
                           <script type="text/javascript">
                           $(function(){
 
-                            if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                            if($("html").hasClass("lt-ie10"))
                             {
                               $("#Image1536x2048").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
@@ -1368,7 +1368,7 @@
                           <script type="text/javascript">
                           $(function(){
 
-                            if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+                            if($("html").hasClass("lt-ie10"))
                             {
                               $("#Image2048x1536").uploadify({
                                 'swf': '/uploadify/uploadify.swf',

@@ -778,17 +778,8 @@ class UploadHandler
 				'',
 				$_SERVER['HTTP_CONTENT_DISPOSITION']
 			)) : null;	
-		/*
-		if(strlen($sFileName) == 0)
-		{
-			
-		}
-		else
-		{
-			$file_name = $sFileName;
-		}
-		*/
-        // Parse the Content-Range header, which has the following form:
+
+		// Parse the Content-Range header, which has the following form:
         // Content-Range: bytes 0-524287/2000000
         $content_range = isset($_SERVER['HTTP_CONTENT_RANGE']) ?
             preg_split('/[^0-9]+/', $_SERVER['HTTP_CONTENT_RANGE']) : null;

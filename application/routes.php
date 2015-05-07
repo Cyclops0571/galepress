@@ -252,7 +252,7 @@ foreach($languages as $currentLanguage) {
 
 				if($success) 
 				{
-					$ret = Uploader::ContentsUploadCoverImage($tempFile);
+					$ret = Uploader::UploadImage($tempFile);
 					return "success=".base64_encode("true")."&filename=".base64_encode($ret['fileName']);
 				}
 				return "success=".base64_encode("false")."&errmsg=".base64_encode('');
@@ -438,6 +438,19 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.maps_location')->get($currentLanguage) . "(:num)", array('as' => 'maps_location', 'before'=>'auth', 'uses'=>'maps@location'));
 	// echo __('route.maps_location')->get($currentLanguage) . "(:num)"; exit;
 	// </editor-fold>
+	
+	// <editor-fold defaultstate="collapsed" desc="Banners">
+	Route::get(__('route.banners')->get($currentLanguage), array('as' => 'banners_list', 'before'=>'auth', 'uses'=>'banners@index'));
+	Route::get(__('route.banners_show')->get($currentLanguage), array('as' => 'banners_show', 'before'=>'auth', 'uses'=>'banners@show'));
+	Route::get(__('route.banners_new')->get($currentLanguage), array('before'=>'auth', 'uses'=>'banners@new'));
+	Route::post(__('route.banners_save')->get($currentLanguage), array('as' => 'banners_save', 'before'=>'crsf|auth', 'uses'=>'banners@save'));
+	Route::get(__('route.banners_delete')->get($currentLanguage) . "(:num)", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
+	Route::get(__('route.banners_order')->get($currentLanguage) . "(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));
+	
+	// </editor-fold>
+	
+	Route::post('/common/imageupload_ltie10', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload_ltie10'));
+	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }
 
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));

@@ -446,7 +446,6 @@ class Orders_Controller extends Base_Controller
 		if($type == 'uploadpdf')
 		{
 			$options = array(
-				//'script_url' => URL::to_route('contents_uploadcoverimage'),
 				'upload_dir' => path('public').'files/temp/',
 				'upload_url' => URL::base().'/files/temp/',
 				'param_name' => $element,
@@ -456,7 +455,6 @@ class Orders_Controller extends Base_Controller
 		else if($type == 'uploadpng1024x1024' || $type == 'uploadpng640x960' || $type == 'uploadpng640x1136' || $type == 'uploadpng1536x2048' || $type == 'uploadpng2048x1536')
 		{
 			$options = array(
-				//'script_url' => URL::to_route('contents_uploadcoverimage'),
 				'upload_dir' => path('public').'files/temp/',
 				'upload_url' => URL::base().'/files/temp/',
 				'param_name' => $element,

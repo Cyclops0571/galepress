@@ -273,5 +273,4 @@ class Content extends Eloquent {
 			Cookie::put(SHOW_IMAGE_CROP, SHOW_IMAGE_CROP);
 		}
 	}
-
 }

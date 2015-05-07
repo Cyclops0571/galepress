@@ -121,4 +121,11 @@ return array(
 	'maps_new' => 'harita/yeni',
 	'maps_save' => 'harita/kaydet',
 	'maps_location' => 'harita/konum/',
+	
+	'banners' => 'banners',
+	'banners_show' => 'banners/(:num)',
+	'banners_new' => 'banners/yeni',
+	'banners_save' => 'banners/kaydet',
+	'banners_delete' => 'banners/konum/',
+	'banners_order' => 'banners/konum/',
 );

@@ -97,8 +97,7 @@ class Uploader
 		);
 	}
 
-	public static function ContentsUploadCoverImage($tempFile)
-	{
+	public static function UploadImage($tempFile) {
 		$filePath = path('public').'files/temp/';
 
 		$im = new imagick();
@@ -137,7 +136,7 @@ class Uploader
 			'fileName' => $tempFile
 		);
 	}
-
+	
 	public static function OrdersUploadFile($tempFile, $type)
 	{
 		$filePath = path('public').'files/temp/';

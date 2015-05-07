@@ -496,7 +496,6 @@ return array(
 	'map_form_longitude' => 'Longitude',
 	'map_form_return' => 'Return To List',
 	'map_form_location' => 'My Location',
-	'map_form_save' => 'Save',
 
 	'applications_trail_title' => 'Customer/Trail',
 	'applications_trail_customer' => 'Customer',

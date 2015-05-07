@@ -153,7 +153,7 @@
 							<script type="text/javascript">
 							$(function(){
 
-								if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8"))
+								if($("html").hasClass("lt-ie10"))
 								{
 									$("#CkPem").uploadify({
 										'swf': '/uploadify/uploadify.swf',

@@ -10,9 +10,8 @@ class Contents_Controller extends Base_Controller {
 	public $caption = '';
 	public $detailcaption = '';
 	public $fields;
-	
 	private $defaultSort = "OrderNo";
-	
+
 	public function __construct() {
 		parent::__construct();
 		$this->page = 'contents';
@@ -45,163 +44,157 @@ class Contents_Controller extends Base_Controller {
 
 	public function get_index() {
 		$currentUser = Auth::User();
+		$applicationID = (int) Input::get('applicationID', 0);
+		$search = Input::get('search', '');
+		$sort = Input::get('sort', $this->defaultSort);
+		$sort_dir = Input::get('sort_dir', 'DESC');
+		$rowcount = (int) Config::get('custom.rowcount');
+		$p = Input::get('page', 1);
+		$option = (int) Input::get('option', 0);
 
-		try {
-			$applicationID = (int) Input::get('applicationID', 0);
-			$search = Input::get('search', '');
-			$sort = Input::get('sort', $this->defaultSort);
-			$sort_dir = Input::get('sort_dir', 'DESC');
-			$rowcount = (int) Config::get('custom.rowcount');
-			$p = Input::get('page', 1);
-			$option = (int) Input::get('option', 0);
+		if (!Common::CheckApplicationOwnership($applicationID)) {
+			return Redirect::to(__('route.home'));
+		}
 
-			if (!Common::CheckApplicationOwnership($applicationID)) {
-				return Redirect::to(__('route.home'));
-			}
+		$sqlCat = '(IFNULL((SELECT GROUP_CONCAT(`Name` ORDER BY `Name` SEPARATOR \', \') FROM `Category` WHERE ApplicationID=a.ApplicationID AND CategoryID IN (SELECT CategoryID FROM `ContentCategory` WHERE ContentID = o.ContentID) AND StatusID = 1), \'\'))';
 
-			$sqlCat = '(IFNULL((SELECT GROUP_CONCAT(`Name` ORDER BY `Name` SEPARATOR \', \') FROM `Category` WHERE ApplicationID=a.ApplicationID AND CategoryID IN (SELECT CategoryID FROM `ContentCategory` WHERE ContentID = o.ContentID) AND StatusID = 1), \'\'))';
+		$sql = '' .
+				'SELECT ' .
+				'c.CustomerID, ' .
+				'c.CustomerName, '
+				. 'o.OrderNo,' .
+				'a.ApplicationID, ' .
+				'a.Name AS ApplicationName, ' .
+				'o.Name, ' .
+				'(' .
+				'CASE WHEN (SELECT COUNT(*) FROM `ContentCategory` WHERE ContentID = o.ContentID AND CategoryID = 0) > 0 ' .
+				'THEN CONCAT(\'' . __('common.contents_category_list_general') . ', \', ' . $sqlCat . ') ' .
+				'ELSE ' . $sqlCat . ' ' .
+				'END' .
+				') AS CategoryName, ' .
+				'o.PublishDate, ' .
+				'o.UnpublishDate, ' .
+				'(CASE o.Blocked WHEN 1 THEN \'' . __('common.contents_list_blocked1') . '\' ELSE \'' . __('common.contents_list_blocked0') . '\' END) AS Blocked, ' .
+				'(CASE WHEN ('
+				. 'o.Status = 1 AND '
+				. '(o.PublishDate <= CURDATE()) AND '
+				. '(o.IsUnpublishActive = 0 OR o.UnpublishDate > CURDATE())) '
+				. 'THEN \'' . __('common.contents_list_status1') . '\' ' .
+				'ELSE \'' . __('common.contents_list_status0') . '\' END) AS Status, ' .
+				'o.ContentID ' .
+				'FROM `Customer` AS c ' .
+				'INNER JOIN `Application` AS a ON a.CustomerID=c.CustomerID AND a.StatusID=1 ' .
+				'INNER JOIN `Content` AS o ON o.ApplicationID=a.ApplicationID AND o.StatusID=1 ' .
+				'WHERE c.StatusID=1';
+		$rs = DB::table(DB::raw('(' . $sql . ') t'))
+				->where(function($query) use($currentUser, $applicationID, $search) {
+					if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
+						if ($applicationID > 0) {
+							$query->where('ApplicationID', '=', $applicationID);
+						}
 
-			$sql = '' .
-					'SELECT ' .
-					'c.CustomerID, ' .
-					'c.CustomerName, '
-					. 'o.OrderNo,' .
-					'a.ApplicationID, ' .
-					'a.Name AS ApplicationName, ' .
-					'o.Name, ' .
-					'(' .
-					'CASE WHEN (SELECT COUNT(*) FROM `ContentCategory` WHERE ContentID = o.ContentID AND CategoryID = 0) > 0 ' .
-					'THEN CONCAT(\'' . __('common.contents_category_list_general') . ', \', ' . $sqlCat . ') ' .
-					'ELSE ' . $sqlCat . ' ' .
-					'END' .
-					') AS CategoryName, ' .
-					'o.PublishDate, ' .
-					'o.UnpublishDate, ' .
-					'(CASE o.Blocked WHEN 1 THEN \'' . __('common.contents_list_blocked1') . '\' ELSE \'' . __('common.contents_list_blocked0') . '\' END) AS Blocked, ' .
-					'(CASE WHEN ('
-					. 'o.Status = 1 AND '
-					. '(o.PublishDate <= CURDATE()) AND '
-					. '(o.IsUnpublishActive = 0 OR o.UnpublishDate > CURDATE())) '
-					. 'THEN \'' . __('common.contents_list_status1') . '\' ' .
-					'ELSE \'' . __('common.contents_list_status0') . '\' END) AS Status, ' .
-					'o.ContentID ' .
-					'FROM `Customer` AS c ' .
-					'INNER JOIN `Application` AS a ON a.CustomerID=c.CustomerID AND a.StatusID=1 ' .
-					'INNER JOIN `Content` AS o ON o.ApplicationID=a.ApplicationID AND o.StatusID=1 ' .
-					'WHERE c.StatusID=1';
-			$rs = DB::table(DB::raw('(' . $sql . ') t'))
-					->where(function($query) use($currentUser, $applicationID, $search) {
-						if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
-							if ($applicationID > 0) {
-								$query->where('ApplicationID', '=', $applicationID);
-							}
-
+						if (strlen(trim($search)) > 0) {
+							$query->where(function($q) use ($search) {
+								$q->where('CustomerName', 'LIKE', '%' . $search . '%');
+								$q->or_where('ApplicationName', 'LIKE', '%' . $search . '%');
+								$q->or_where('Blocked', 'LIKE', '%' . $search . '%');
+								$q->or_where('Status', 'LIKE', '%' . $search . '%');
+								$q->or_where('ContentID', 'LIKE', '%' . $search . '%');
+							});
+						}
+					} elseif ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+						if (Common::CheckApplicationOwnership($applicationID)) {
 							if (strlen(trim($search)) > 0) {
+								$query->where('ApplicationID', '=', $applicationID);
 								$query->where(function($q) use ($search) {
-									$q->where('CustomerName', 'LIKE', '%' . $search . '%');
-									$q->or_where('ApplicationName', 'LIKE', '%' . $search . '%');
+									$q->where('Name', 'LIKE', '%' . $search . '%');
+									$q->or_where('CategoryName', 'LIKE', '%' . $search . '%');
+									$q->or_where('PublishDate', 'LIKE', '%' . $search . '%');
 									$q->or_where('Blocked', 'LIKE', '%' . $search . '%');
 									$q->or_where('Status', 'LIKE', '%' . $search . '%');
 									$q->or_where('ContentID', 'LIKE', '%' . $search . '%');
 								});
-							}
-						} elseif ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-							if (Common::CheckApplicationOwnership($applicationID)) {
-								if (strlen(trim($search)) > 0) {
-									$query->where('ApplicationID', '=', $applicationID);
-									$query->where(function($q) use ($search) {
-										$q->where('Name', 'LIKE', '%' . $search . '%');
-										$q->or_where('CategoryName', 'LIKE', '%' . $search . '%');
-										$q->or_where('PublishDate', 'LIKE', '%' . $search . '%');
-										$q->or_where('Blocked', 'LIKE', '%' . $search . '%');
-										$q->or_where('Status', 'LIKE', '%' . $search . '%');
-										$q->or_where('ContentID', 'LIKE', '%' . $search . '%');
-									});
-								} else {
-									$query->where('ApplicationID', '=', $applicationID);
-								}
 							} else {
-								$query->where('ApplicationID', '=', -1);
+								$query->where('ApplicationID', '=', $applicationID);
 							}
+						} else {
+							$query->where('ApplicationID', '=', -1);
 						}
-					})
-					->order_by($sort, $sort_dir);
-			if ($option == 1) {
-				$data = array(
-					'rows' => $rs->get()
-				);
-				return View::make('pages.' . Str::lower($this->table) . 'optionlist', $data);
-			}
-
-			$count = $rs->count();
-			$results = $rs
-					->for_page($p, $rowcount)
-					->get();
-
-
-			$rows = Paginator::make($results, $count, $rowcount);
-
-
-			/* START SQL FOR TEMPLATE-CHOOSER */
-			$sqlTemlateChooser = 'SELECT * FROM ('
-					. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
-					. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
-					. 'ccf.ContentCoverImageFileID, ccf.FileName '
-					. 'FROM `Application` AS a '
-					. 'LEFT JOIN `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '
-					. 'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '
-					. 'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '
-					. 'WHERE a.ApplicationID= ' . $applicationID . ' '
-					. 'order by  c.ContentID DESC, cf.ContentFileID DESC, ccf.ContentCoverImageFileID DESC) as innerTable '
-					. 'group by innerTable.ContentID '
-					. 'order by innerTable.ContentID DESC '
-					. 'LIMIT 9';
-					
-			$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-			$categorySet = Category::where('ApplicationID', '=', $applicationID)->where("statusID", "=", eStatus::Active)->get();
-			$data = array(
-				'page' => $this->page,
-				'route' => $this->route,
-				'caption' => $this->caption,
-				'pk' => $this->pk,
-				'fields' => $this->fields,
-				'search' => $search,
-				'sort' => $sort,
-				'sort_dir' => $sort_dir,
-				'rows' => $rows,
-				'templateResults' => $templateResults,
-				'categorySet' => $categorySet
-			);
-
-			if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
-				$appCount = DB::table('Application')
-						->where('CustomerID', '=', Auth::User()->CustomerID)
-						->where('ApplicationID', '=', $applicationID)
-						->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
-						->count();
-
-				if ($appCount == 0) {
-
-					$app = Application::find($applicationID);
-					if (!$app) {
-						return Redirect::to(__('route.home'));
 					}
-
-					$data = array_merge($data, array('appName' => $app->Name));
-
-					return View::make('pages.expiredpage', $data)
-									->nest('filterbar', 'sections.filterbar', $data)
-									->nest('commandbar', 'sections.commandbar', $data);
-				}
-			}
-
-			return $html = View::make('pages.' . Str::lower($this->table) . 'list', $data)
-					->nest('filterbar', 'sections.filterbar', $data)
-					->nest('commandbar', 'sections.commandbar', $data);
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
-//			return Redirect::to(__('route.home'));
+				})
+				->order_by($sort, $sort_dir);
+		if ($option == 1) {
+			$data = array(
+				'rows' => $rs->get()
+			);
+			return View::make('pages.' . Str::lower($this->table) . 'optionlist', $data);
 		}
+
+		$count = $rs->count();
+		$results = $rs
+				->for_page($p, $rowcount)
+				->get();
+
+
+		$rows = Paginator::make($results, $count, $rowcount);
+
+
+		/* START SQL FOR TEMPLATE-CHOOSER */
+		$sqlTemlateChooser = 'SELECT * FROM ('
+				. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
+				. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
+				. 'ccf.ContentCoverImageFileID, ccf.FileName '
+				. 'FROM `Application` AS a '
+				. 'LEFT JOIN `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '
+				. 'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '
+				. 'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '
+				. 'WHERE a.ApplicationID= ' . $applicationID . ' '
+				. 'order by  c.ContentID DESC, cf.ContentFileID DESC, ccf.ContentCoverImageFileID DESC) as innerTable '
+				. 'group by innerTable.ContentID '
+				. 'order by innerTable.ContentID DESC '
+				. 'LIMIT 9';
+
+		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
+		$categorySet = Category::where('ApplicationID', '=', $applicationID)->where("statusID", "=", eStatus::Active)->get();
+		$data = array(
+			'page' => $this->page,
+			'route' => $this->route,
+			'caption' => $this->caption,
+			'pk' => $this->pk,
+			'fields' => $this->fields,
+			'search' => $search,
+			'sort' => $sort,
+			'sort_dir' => $sort_dir,
+			'rows' => $rows,
+			'templateResults' => $templateResults,
+			'categorySet' => $categorySet
+		);
+
+		if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
+			$appCount = DB::table('Application')
+					->where('CustomerID', '=', Auth::User()->CustomerID)
+					->where('ApplicationID', '=', $applicationID)
+					->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
+					->count();
+
+			if ($appCount == 0) {
+
+				$app = Application::find($applicationID);
+				if (!$app) {
+					return Redirect::to(__('route.home'));
+				}
+
+				$data = array_merge($data, array('appName' => $app->Name));
+
+				return View::make('pages.expiredpage', $data)
+								->nest('filterbar', 'sections.filterbar', $data)
+								->nest('commandbar', 'sections.commandbar', $data);
+			}
+		}
+
+		return $html = View::make('pages.' . Str::lower($this->table) . 'list', $data)
+				->nest('filterbar', 'sections.filterbar', $data)
+				->nest('commandbar', 'sections.commandbar', $data);
 	}
 
 	public function get_request() {
@@ -335,14 +328,14 @@ class Contents_Controller extends Base_Controller {
 					$content = Content::find($id);
 					$content instanceof Content;
 					$selectedCategories = Input::get('chkCategoryID', array());
-					
+
 
 					if (!$content) {
 						$maxID = DB::table("Content")->where("ApplicationID", "=", $applicationID)->max('OrderNo');
 						$content = new Content();
 						$content->OrderNo = $maxID + 1;
-					} else if(!Common::CheckContentOwnership($id)){
-							throw new Exception("Unauthorized user attempt");
+					} else if (!Common::CheckContentOwnership($id)) {
+						throw new Exception("Unauthorized user attempt");
 					}
 					$content->ApplicationID = $applicationID;
 					$content->Name = Input::get('Name');
@@ -369,8 +362,8 @@ class Contents_Controller extends Base_Controller {
 						$content->Blocked = (int) Input::get('Blocked');
 					}
 					$content->ifModifiedDoNeccessarySettings($selectedCategories);
-					
-					
+
+
 					if ($id == 0) {
 						$content->Version = 1;
 						$content->PdfVersion = 1;
@@ -379,11 +372,10 @@ class Contents_Controller extends Base_Controller {
 						$content->CreatorUserID = $currentUser->UserID;
 						$content->DateCreated = new DateTime();
 						$content->ProcessTypeID = eProcessTypes::Insert;
-
 					} else {
 						$content->ProcessTypeID = eProcessTypes::Update;
 					}
-					
+
 					$content->updateApplicationVersion();
 					$content->save();
 					$content->setCategory($selectedCategories);
@@ -392,7 +384,6 @@ class Contents_Controller extends Base_Controller {
 					$contentID = $content->ContentID;
 					$contentFileID = $content->processPdf($customerID);
 					$content->processImage($customerID, $contentFileID);
-
 				});
 			} catch (Exception $e) {
 				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
@@ -441,7 +432,6 @@ class Contents_Controller extends Base_Controller {
 		ob_start();
 		$element = Input::get('element');
 		$options = array(
-			//'script_url' => URL::to_route('contents_uploadcoverimage'),
 			'upload_dir' => path('public') . 'files/temp/',
 			'upload_url' => URL::base() . '/files/temp/',
 			'param_name' => $element,
@@ -472,7 +462,6 @@ class Contents_Controller extends Base_Controller {
 		$element = Input::get('element');
 
 		$options = array(
-			//'script_url' => URL::to_route('contents_uploadcoverimage'),
 			'upload_dir' => path('public') . 'files/temp/',
 			'upload_url' => URL::base() . '/files/temp/',
 			'param_name' => $element,
@@ -494,7 +483,7 @@ class Contents_Controller extends Base_Controller {
 		$obj = $arr[0];
 		$tempFile = $obj->name;
 		//var_dump($obj->name);
-		$ret = Uploader::ContentsUploadCoverImage($tempFile);
+		$ret = Uploader::UploadImage($tempFile);
 		return Response::json($ret);
 	}
 
@@ -512,10 +501,10 @@ class Contents_Controller extends Base_Controller {
 		if (!$v->passes() || !$chk) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		
+
 		$application = Application::find($applicationID);
 		$application instanceof Application;
-		
+
 		$application->ThemeBackground = $ThemeBackground;
 		$application->ThemeForeground = $ThemeForeground;
 		$application->save();
@@ -531,9 +520,9 @@ class Contents_Controller extends Base_Controller {
 		$contentIDDescSet = Input::get("contentIDSet", array());
 		$i = $maxID + 1;
 		$contentIDSet = array_reverse($contentIDDescSet);
-		foreach($contentIDSet as $contentID) {
+		foreach ($contentIDSet as $contentID) {
 			$content = Content::where("ApplicationID", "=", $applicationID)->find($contentID);
-			if($content) {
+			if ($content) {
 				$content instanceof Content;
 				$content->OrderNo = $i++;
 				$content->Version++;

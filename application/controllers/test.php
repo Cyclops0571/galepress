@@ -19,15 +19,17 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-		$content = Content::find(1989);
-		$content instanceof Content;
-		echo $content->Version;
-		$content->Version++;
-		echo "-----" . $content->Version;
-		return;
+		$e = new Exception("asdfasdf");
+		throw new Exception($e->getMessage());
+//		$content = Content::find(1989);
+//		$content instanceof Content;
+//		echo $content->Version;
+//		$content->Version++;
+//		echo "-----" . $content->Version;
+//		return;
 //		Cookie::put(SHOW_IMAGE_CROP, SHOW_IMAGE_CROP);
-		echo Cookie::get(SHOW_IMAGE_CROP, 0);
-		return;
+//		echo Cookie::get(SHOW_IMAGE_CROP, 0);
+//		return;
 //		exit;
 //		
 //		$content = Content::find(1965);

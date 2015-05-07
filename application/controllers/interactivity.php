@@ -1279,7 +1279,6 @@ class Interactivity_Controller extends Base_Controller {
 		$options = array();
 		if ($type == 'uploadvideofile') {
 			$options = array(
-				//'script_url' => URL::to_route('contents_uploadcoverimage'),
 				'upload_dir' => path('public') . 'files/temp/',
 				'upload_url' => URL::base() . '/files/temp/',
 				'param_name' => $element,
@@ -1287,7 +1286,6 @@ class Interactivity_Controller extends Base_Controller {
 			);
 		} else if ($type == 'uploadaudiofile') {
 			$options = array(
-				//'script_url' => URL::to_route('contents_uploadcoverimage'),
 				'upload_dir' => path('public') . 'files/temp/',
 				'upload_url' => URL::base() . '/files/temp/',
 				'param_name' => $element,
@@ -1295,7 +1293,6 @@ class Interactivity_Controller extends Base_Controller {
 			);
 		} else if ($type == 'uploadimage') {
 			$options = array(
-				//'script_url' => URL::to_route('contents_uploadcoverimage'),
 				'upload_dir' => path('public') . 'files/temp/',
 				'upload_url' => URL::base() . '/files/temp/',
 				'param_name' => $element,

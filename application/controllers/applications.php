@@ -409,7 +409,6 @@ class Applications_Controller extends Base_Controller {
 		$element = Input::get('element');
 
 		$options = array(
-			//'script_url' => URL::to_route('contents_uploadcoverimage'),
 			'upload_dir' => path('public') . 'files/temp/',
 			'upload_url' => URL::base() . '/files/temp/',
 			'param_name' => $element,

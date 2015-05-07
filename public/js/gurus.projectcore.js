@@ -645,14 +645,14 @@ var cContent = new function () {
             return;
         }
 
-        var fSuccess;
-        fSuccess = function (ret) {
-            contentID = ret.getValue("contentID");
-            cNotification.success();
-            document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + contentID;
-        };
-
-        cCommon.save(this.objectName, fSuccess);
+        cCommon.save(
+	    this.objectName, 
+	    function (ret) {
+		contentID = ret.getValue("contentID");
+		cNotification.success();
+		document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + contentID;
+	    }
+	);
     };
 
     this.erase = function () {
@@ -985,14 +985,14 @@ var cContent = new function () {
     };
     
     this.addImageUpload = function() {
-        if($("html").hasClass("lt-ie10") || $("html").hasClass("lt-ie9") || $("html").hasClass("lt-ie8")) {
+        if($("html").hasClass("lt-ie10")) {
             $("#CoverImageFile").uploadify({
                     'swf': '/uploadify/uploadify.swf',
                     'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage2"],
                     'cancelImg': '/uploadify/uploadify-cancel.png',
                     'fileTypeDesc': 'Image Files',
                     'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
-                    'buttonText': "{{ __('common.contents_coverimage_select') }}",
+                    'buttonText': "Choose Image...",
                     'multi': false,
                     'auto': true,
                     'successTimeout': 300,
@@ -1753,5 +1753,117 @@ var cTemplate = new function () {
                 jQueryElem.parent().removeClass('checked');
             }
         }
+    };
+};
+
+var cBanner = new function () {
+    this.addImageUpload = function() {
+        if($("html").hasClass("lt-ie10")) {
+            $("#ImageFile").uploadify({
+                'swf': '/uploadify/uploadify.swf',
+                'uploader': '/' + $('#currentlanguage').val() + '/common/imageupload_ltie10' ,
+                'cancelImg': '/uploadify/uploadify-cancel.png',
+                'fileTypeDesc': 'Image Files',
+                'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
+                'buttonText': "Choose Image...",
+                'multi': false,
+                'auto': true,
+                'successTimeout': 300,
+                'onSelect': function (file) {
+                    $('#hdnImageFileSelected').val("1");
+                    $("[for='ImageFile']").removeClass("hide");
+                },
+                'onUploadProgress': function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                    var progress = totalBytesUploaded / totalBytesTotal * 100;
+                    $("[for='ImageFile'] label").html(progress.toFixed(0) + '%');
+                    $("[for='ImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
+                },
+                'onUploadSuccess': function (file, data, response) {
+
+                    if(data.getValue("success") == "true") {
+                        var fileName = data.getValue("filename");
+
+                        $('#hdnImageFileName').val(fileName);
+                        $('#imgPreview').attr("src", "/files/temp/" + fileName);
+                        $("[for='ImageFile']").addClass("hide");
+
+                        //auto save
+                        if(parseInt($("#ContentID").val()) > 0) {
+                            cContent.save();
+                        }
+                    }
+                },
+                'onCancel': function(file) {
+                    $("[for='ImageFile']").addClass("hide");
+                }
+            });
+        } else {
+            $("#ImageFile").fileupload({
+                url: '/' + $('#currentlanguage').val() + '/common/imageupload',
+                dataType: 'json',
+                sequentialUploads: true,
+                formData: { 
+                    'element': 'ImageFile'
+                },
+                add: function(e, data) {
+                    if(/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name)) {
+                        $('#hdnImageFileSelected').val("1");
+                        $("[for='ImageFile']").removeClass("hide");
+
+                        data.context = $("[for='ImageFile']");
+                        data.context.find('a').click(function(e){
+                            e.preventDefault();
+                            var template = $("[for='ImageFile']");
+                            data = template.data('data') || {};
+                            if(data.jqXHR) {
+                                    data.jqXHR.abort();
+                            }
+                        });
+                        var xhr = data.submit();
+                        data.context.data('data', { jqXHR: xhr });
+                    }
+                },
+                progressall: function(e, data) {
+                    var progress = data.loaded / data.total * 100;
+
+                    $("[for='ImageFile'] label").html(progress.toFixed(0) + '%');
+                    $("[for='ImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
+                },
+                done: function(e, data) {
+                    if(data.textStatus == 'success') {
+                        var fileName = data.result.fileName;
+                        $('#hdnImageFileName').val(fileName);
+                        $('#imgPreview').attr("src", "/files/temp/" + fileName);
+                        $("[for='ImageFile']").addClass("hide");
+
+                        //auto save
+                        if(parseInt($("#ContentID").val()) > 0) {
+                            cContent.save();
+                        }
+                    }
+                },
+                fail: function(e, data) {
+                        $("[for='ImageFile']").addClass("hide");
+                }
+            });
+
+            //select file
+            $("#ImageFileButton").removeClass("hide").click(function(){
+                    $("#ImageFile").click();
+            });
+        }
+    };
+    
+    this.save = function () {
+        cCommon.save(
+	    this.objectName, 
+	    function (ret) {
+		primaryKeyID = ret.getValue("primaryKeyID");
+		cNotification.success();
+		 var goto = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + primaryKeyID;
+		 console.log(goto);
+//		 document.location.href = goto;
+	    }
+	);
     };
 };

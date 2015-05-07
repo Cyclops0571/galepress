@@ -506,7 +506,6 @@
 						                <div class="scale" style="width: 0%"></div>
 						            </div>
 						        </div>
-
 							</div>
 							<input type="hidden" name="hdnCoverImageFileSelected" id="hdnCoverImageFileSelected" value="0" />
 							<input type="hidden" name="hdnCoverImageFileName" id="hdnCoverImageFileName" value="" />

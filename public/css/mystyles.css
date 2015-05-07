@@ -330,6 +330,10 @@ margin-left: 20px;
 	opacity: 0.7;
 }
 
+.ImagePreview:hover{
+	opacity: 0.7;
+}
+
 #modalMapsList .modal-content{
     position: relative;
     background: transparent !important;
