@@ -27,6 +27,15 @@ if ($banner) {
 	$TargetContent = '';
 }
 ?>
+    <!--BANNER SLIDER-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="/css/masterslider/style/masterslider.css" />
+    <link href="/css/masterslider/skins/default/style.css" rel='stylesheet' type='text/css'>
+    <link href='/css/masterslider/ms-partialview.css' rel='stylesheet' type='text/css'>
+    <!--<script src="js/masterslider/jquery-1.10.2.min.js"></script>-->
+    <script src="/js/masterslider/jquery.easing.min.js"></script>
+    <script src="/js/masterslider/masterslider.min.js"></script>
+    <!--BANNER SLIDER-->
 	<style type="text/css">
 	.text-center.app-name{
 		font-size:1em !important;
@@ -38,8 +47,17 @@ if ($banner) {
 	  height: 11px !important;
 	}
 	.header,.footer,.footer div{
-		height: 20px !important;
+		height: 22px !important;
 		background-position: top center !important;
+	}
+	.ms-skin-default .ms-nav-prev{
+		left: 0;
+	}
+	.ms-skin-default .ms-nav-next{
+		right: 0;
+	}
+	.ms-bullets.ms-dir-h{
+		bottom: 0;
 	}
 	</style>
 
@@ -87,7 +105,7 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">Önizleme</div>
                         <div class="col-md-8" style="position:relative;">
-                        	<div class="col-md-6" style="width:48%;">
+                        	<div class="col-md-6" style="width:48%; padding:0; margin-left:-9px;">
 	                            <div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
 	                              <div class="device">
 	                                <div class="screen">
@@ -99,6 +117,29 @@ if ($banner) {
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
 											</div>
 											<div class="container">
+												<div class="form-row">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="ms-partialview-template" id="partial-view-1">
+															<div class="master-slider ms-skin-default" id="masterslider">
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+															    </div>
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>     
+															    </div>
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+															    </div>
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>      
+															    </div>
+															     <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/> 
+															    </div>
+															</div>
+														</div>
+													</div>
+												</div>
 												<div class="form-row">
 												<?php for($i = 0; $i < 9; $i++): ?>
 													<?php
@@ -145,12 +186,12 @@ if ($banner) {
 	                              </div>
 	                            </div>
 	                        </div>
-	                        <div class="col-md-6" style="position:absolute;bottom:0;right:0;padding:0;">
+	                        <div class="col-md-6" style="position:absolute;bottom:0;right:0;padding:0;width:52%;">
 	                            <div data-device="ipad" data-orientation="landscape" data-color="white" class="device-mockup">
 	                              <div class="device">
 	                                <div class="screen">
 										<div class="templateScreen">
-											<div class="header clearfix">
+											<div class="header clearfix" style="height:22px !important;">
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" style="padding:0;">
 													<div class="header-categories"></div>
 												</div>
@@ -159,6 +200,25 @@ if ($banner) {
 											<div class="container">
 												<div class="form-row">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="ms-partialview-template" id="partial-view-2">
+															<div class="master-slider ms-skin-default" id="masterslider2">
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+															    </div>
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>     
+															    </div>
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+															    </div>
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>      
+															    </div>
+															     <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/> 
+															    </div>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-row">
@@ -196,7 +256,7 @@ if ($banner) {
 												<?php endfor; ?>
 												</div>
 											</div>
-											<div class="footer text-center">
+											<div class="footer text-center" style="height:19px !important; padding: 4px 7px;">
 												<div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
@@ -261,6 +321,38 @@ if ($banner) {
 	$(function(){
 		cBanner.addImageUpload();
 	});
+</script>
+
+<script type="text/javascript">
+	var slider = new MasterSlider();
+	
+	slider.control('arrows');	
+	slider.control('bullets');
+
+	slider.setup('masterslider' , {
+		width:320,
+		height:138,
+		space:10,
+		view:'basic',
+		layout:'partialview',
+		speed:20
+	});
+
+	var slider2 = new MasterSlider();
+	
+	slider2.control('arrows');	
+	slider2.control('bullets');
+
+	slider2.setup('masterslider2' , {
+		width:150,
+		height:65,
+		space:5,
+		view:'fadeWave',
+		layout:'partialview',
+		speed:20
+	});
+
+
 </script>
 
 @endsection
