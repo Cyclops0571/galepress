@@ -521,11 +521,19 @@ return array(
 	'banners_caption_detail' => 'İçerik Detayı',
 	'banners_list_status1' => 'Yayında',
 	'banners_list_status0' => 'Yayında değil',
-	'banners_caption_detail' => 'İçerik Detayı',
 	'banners_select_content' => 'Hedef içerik seçebilirsiniz...',
 	'banners_original_image' => 'Yüklenilen resim:',
 	'banners_image' => 'Resim Önizleme:',
-	
-	
+	'banners_tooltip_coverimage' => 'Yüklenen PDF\'in ilk sayfası otomatik olarak kapak olur, başka bir png/jpg resim dosyası ile değiştirilebilir. (En iyi görünüm için 740x320 çözünürlük tercih ediniz.)',
+	'banners_autoplay' => 'Otomatik Oyna:',
+	'banners_autoplay_interval' => 'Oynatma Aralığı (Saniye):',
+	'banners_autoplay_speed' => 'Geçiş Hızı (0-100):',
+	'banners_info_target_content' => 'Resme tıklayınca ilgili içeriğin açılmasını sağlar.',
+	'banners_info_target_address' => 'Resme tıklayınca ilgili adrese yönlendirir.',
+	'banners_info_target_desc' => 'Resim üzerinde gözükecek olan yazıyı ifade eder. Üzerinde çalışılmaktadır.',
+	'banners_info_autoplay' => 'Resimler arasında otomatik olarak geçiş yapılır.',
+	'banners_info_interval' => 'Resimler arasındaki geçiş süresini ifade eder.',
+	'banners_info_speed' => 'Resimler arasındaki geçiş hızını ifade eder.',
+	'banners_info_active' => 'Aktif olmayan resimler gösterilmez.',
 	'image_select' => 'Resim seç...',
 );

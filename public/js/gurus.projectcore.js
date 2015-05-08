@@ -1793,6 +1793,7 @@ var cBanner = new function () {
                         if(parseInt($("#ContentID").val()) > 0) {
                             cContent.save();
                         }
+                        $('.my-btn-success').removeClass("noTouch").css('background-color','#2e2e2e').css('background','');
                     }
                 },
                 'onCancel': function(file) {
@@ -1842,6 +1843,7 @@ var cBanner = new function () {
                         if(parseInt($("#ContentID").val()) > 0) {
                             cContent.save();
                         }
+                        $('.my-btn-success').removeClass("noTouch").css('background','');
                     }
                 },
                 fail: function(e, data) {
@@ -1857,6 +1859,15 @@ var cBanner = new function () {
     };
     
     this.save = function () {
+
+        var url = $('#address').val();
+        $("#address + span.error").addClass("hide");
+        if(!isUrlReachable(url))
+        {
+            $("#address + span.error").removeClass("hide");
+            return;
+        }
+
         cCommon.save(this.objectName);
     };
 };
