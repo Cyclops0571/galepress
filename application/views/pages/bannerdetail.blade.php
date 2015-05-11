@@ -62,6 +62,18 @@ if ($banner) {
 	.checkbox-inline{
 		padding-left: 0 !important;
 	}
+	.urlCheck:hover{
+		background-color: #59AD2F !important;
+		color: white !important;
+		border: 1px solid #141414 !important;
+	}
+	.urlCheck:focus,.urlCheck:active{
+		background-color: #2e2e2e !important;
+  		border-color: none !important;
+	}
+	.urlCheck{
+		background-image: none !important;
+	}
 	</style>
 
 		{{ Form::open(__('route.banners_detail'), 'POST') }}
@@ -93,8 +105,13 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">{{__('common.banner_form_target_url')}}</div>
                         <div class="col-md-8">
-                        	<input type="text" id="address" name='address' value="" placeholder="<?php echo "galepress.com"; ?>" />
-                        	<span class="error hide" style="color:red;">{{__('interactivity.link_error')}}</span>
+                        	<div class="input-group file">                                    
+                                <input type="text" id="address" class="form-control" name='address' value="" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary urlCheck" type="button" id="checkUrl" onclick="cBanner.checkUrl();"><span class="icon-ok"></span></button>
+                                </span>
+                            </div>
+                            <span class="error urlError hide" style="color:red;">{{__('interactivity.link_error')}}</span>
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_address') }}"><span class="icon-info-sign"></span></a></div>
                     </div> 
