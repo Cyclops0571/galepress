@@ -1852,12 +1852,8 @@ var cBanner = new function () {
                             $('.my-btn-success').addClass('noTouch').css('background','rgba(52, 52, 52, 0)');
                         }
 
-
-
-                        
-
                         // $.ajax({
-                        //   url: "script.php",
+                        //   url: "http://katalogdosyalari.galepress.com/deneme/index.php",
                         //   method: "POST",
                         //   data: { id : menuId },
                         //   dataType: "html"
@@ -1868,14 +1864,6 @@ var cBanner = new function () {
                         // .fail(function( jqXHR, textStatus ) {
                         //   alert("basarisiz");
                         // });
-
-
-
-
-
-
-
-
 
                     }
                 },

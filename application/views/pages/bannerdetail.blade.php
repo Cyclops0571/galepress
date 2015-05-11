@@ -43,12 +43,14 @@ if ($banner) {
 		line-height:15px !important;
 	}
 	.templateScreen .header .header-categories {
-	  background-size: 40% auto !important;
-	  height: 11px !important;
+	  background-size: 35% auto !important;
+	  height: 12px !important;
+	  cursor: default !important;
 	}
 	.templateScreen .header,.footer,.footer div{
 		height: 22px !important;
 		background-position: top center !important;
+		cursor: default !important;
 	}
 	.templateScreen .ms-skin-default .ms-nav-prev{
 		left: 0;
@@ -73,6 +75,9 @@ if ($banner) {
 	}
 	.urlCheck{
 		background-image: none !important;
+	}
+	.container .form-row [class*="col-"], [class*="col-"] img{
+		cursor: default !important;
 	}
 	</style>
 
@@ -157,7 +162,7 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">{{__('common.banners_image')}}</div>
                         <div class="col-md-8" style="position:relative;">
-                        	<div class="col-md-6" style="width:48%; padding:0; margin-left:-9px;">
+                        	<div class="col-md-6" style="width:46%; padding:0; margin-left:-9px;">
 	                            <div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
 	                              <div class="device">
 	                                <div class="screen">
@@ -238,12 +243,12 @@ if ($banner) {
 	                              </div>
 	                            </div>
 	                        </div>
-	                        <div class="col-md-6" style="position:absolute;bottom:0;right:0;padding:0;width:52%;">
+	                        <div class="col-md-6" style="position:absolute;bottom:0;right:0;padding:0;width:56%;">
 	                            <div data-device="ipad" data-orientation="landscape" data-color="white" class="device-mockup">
 	                              <div class="device">
 	                                <div class="screen">
 										<div class="templateScreen">
-											<div class="header clearfix" style="height:22px !important;">
+											<div class="header clearfix" style="height:21px !important;">
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" style="padding:0;">
 													<div class="header-categories"></div>
 												</div>

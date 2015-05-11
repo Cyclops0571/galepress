@@ -138,7 +138,6 @@ class Banners_Controller extends Base_Controller {
 		
 		$banner->ApplicationID = Input::get("applicationID");
 		
-		
 	}
 	
 	public function post_imageupload(){

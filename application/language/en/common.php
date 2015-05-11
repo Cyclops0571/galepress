@@ -524,7 +524,7 @@ return array(
 	'banners_select_content' => 'You can select the target content...',
 	'banners_original_image' => 'UPLOADED PICTURES:',
 	'banners_image' => 'Image Preview:',
-	'banners_tooltip_coverimage' => 'Loaded PDF\'s first page would automatically cover, another png/jpg file can be replaced the image. (Opt for the best view in 740x320 resolution.)',
+	'banners_tooltip_coverimage' => 'Opt for the best view in 740x320 resolution.',
 	'banners_autoplay' => 'Autoplay:',
 	'banners_autoplay_interval' => 'Playback Range (seconds):',
 	'banners_autoplay_speed' => 'Transition Rate (0-100):',
