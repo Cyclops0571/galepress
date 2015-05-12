@@ -138,14 +138,17 @@ class Banners_Controller extends Base_Controller {
 		}
 		
 		$application = Application::find(Input::get("applicationID"));
-		if(!$application || $application->CheckOwnership()) {
+		if(!$application || !$application->CheckOwnership()) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
 		
 		$banner->ApplicationID = $application->ApplicationID;
-		$banner->TargetContent = (int) Input::get("ddlContent");
-		$banner->TargetUrl = Input::get("address");
-		$banner->Description = Input::get("description");
+		$banner->TargetContent = (int) Input::get("TargetContent");
+		$banner->TargetUrl = Input::get("TargetUrl");
+		$banner->Description = Input::get("Description");
+		$banner->Autoplay = Input::get("Autoplay");
+		$banner->IntervalTime = Input::get("IntervalTime");
+		$banner->TransitionRate = Input::get("TransitionRate");
 		$banner->Status = (int) Input::get('Status');
 		$banner->save();
 		$banner->processImage($application);

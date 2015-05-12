@@ -6,7 +6,6 @@ if (FALSE) {
 	$banner = new Banner();
 }
 if ($banner) {
-	$selectedContentID = $banner->TargetContent;
 	$ApplicationID = $banner->ApplicationID;
 	$bannerID = $banner->BannerID;
 	$orderNo = $banner->OrderNo;
@@ -14,8 +13,12 @@ if ($banner) {
 	$ImageLocalPath = $banner->ImageLocalPath;
 	$TargetUrl = $banner->TargetUrl;
 	$TargetContent = $banner->TargetContent;
+	$Description = $banner->Description;
+	$Autoplay = $banner->Autoplay;
+	$IntervalTime = $banner->IntervalTime;
+	$TransitionRate = $banner->TransitionRate;
+	$Status = $banner->Status;
 } else {
-	$selectedContentID = 0;
 	$ApplicationID = $application->ApplicationID;
 	$bannerID = 0;
 	$orderNo = 0;
@@ -23,6 +26,11 @@ if ($banner) {
 	$ImageLocalPath = '';
 	$TargetUrl = '';
 	$TargetContent = '';
+	$Description = '';
+	$Autoplay = 1;
+	$IntervalTime = 5;
+	$TransitionRate = 20;
+	$Status = 1;
 }
 ?>
     <!--BANNER SLIDER-->
@@ -96,10 +104,10 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">{{ __('common.banners_select_content') }}</div>
                         <div class="col-md-8">
-                            <select class="form-control select2" id="ddlContent" name="ddlContent">
-								<option value=""{{ ($selectedContentID == 0 ? ' selected="selected"' : '') }}>{{ __('common.banners_select_content') }}</option>
+                            <select class="form-control select2" id="TargetContent" name="TargetContent">
+								<option value=""{{ ($TargetContent == 0 ? ' selected="selected"' : '') }}>{{ __('common.banners_select_content') }}</option>
 								<?php foreach($contents as $content): ?>
-								<option value="{{ $content->ContentID }}"{{ ($selectedContentID == (int)$content->ContentID ? ' selected="selected"' : '') }}>{{ $content->Name }}</option>
+								<option value="{{ $content->ContentID }}"{{ ($TargetContent == (int)$content->ContentID ? ' selected="selected"' : '') }}>{{ $content->Name }}</option>
 								<?php endforeach; ?>
 							</select>
                         </div>
@@ -109,7 +117,7 @@ if ($banner) {
                         <div class="col-md-3">{{__('common.banner_form_target_url')}}</div>
                         <div class="col-md-8">
                         	<div class="input-group file">                                    
-                                <input type="text" id="address" class="form-control" name='address' value="" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+                                <input type="text" id="TargetUrl" class="form-control" name='TargetUrl' value="<?php echo $TargetUrl;?>" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary urlCheck" type="button" id="checkUrl" onclick="cBanner.checkUrl();"><span class="icon-ok"></span></button>
                                 </span>
@@ -121,7 +129,7 @@ if ($banner) {
 					<div class="form-row">
                         <div class="col-md-3">{{__('common.map_form_desc')}}</div>
                         <div class="col-md-8">
-                        	<input type="text" id="description" name='description' value="<?php echo ""; ?>" />
+                        	<input type="text" id="Description" name='Description' value="<?php echo $Description; ?>" />
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_desc') }}"><span class="icon-info-sign"></span></a></div>
                     </div>
@@ -129,7 +137,11 @@ if ($banner) {
                         <div class="col-md-3">{{__('common.banners_autoplay')}}</div>
                         <div class="col-md-8">
                         	<div class="checkbox-inline">
-	                           <div class="checker"><span><input type="checkbox" value="1"></span></div>
+	                           <div class="checker">
+								   <span>
+									   <input name="Autoplay" type="checkbox" value="1" <?php echo $Autoplay ? 'checked="checked"' : ''; ?>>
+								   </span>
+							   </div>
 	                       	</div>
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_autoplay') }}"><span class="icon-info-sign"></span></a></div>
@@ -137,14 +149,14 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">{{__('common.banners_autoplay_interval')}}</div>
                         <div class="col-md-8">
-                        	<input type="text" placeholder="5"/>
+                        	<input type="text" name="IntervalTime" value="<?php echo $IntervalTime ?>"/>
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_interval') }}"><span class="icon-info-sign"></span></a></div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-3">{{__('common.banners_autoplay_speed')}}</div>
                         <div class="col-md-8">
-                        	<input type="text" placeholder="20"/>
+                        	<input type="text" name="TransitionRate"  value="<?php echo $TransitionRate; ?>"/>
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_speed') }}"><span class="icon-info-sign"></span></a></div>
                     </div>
@@ -152,7 +164,11 @@ if ($banner) {
                         <div class="col-md-3">{{__('common.contents_status')}}</div>
                         <div class="col-md-8">
                         	<div class="checkbox-inline">
-	                           <div class="checker"><span><input type="checkbox" value="1" checked="checked"></span></div>
+	                           <div class="checker">
+								   <span>
+									   <input name="Status" type="checkbox" value="1" <?php echo $Status ? 'checked="checked"' : "" ?>>
+								   </span>
+							   </div>
 	                       	</div>
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_active') }}"><span class="icon-info-sign"></span></a></div>

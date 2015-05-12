@@ -8,6 +8,10 @@
  * @property int $TargetUrl Description
  * @property int $TargetContent Description
  * @property int $Description Description
+ * @property int $Autoplay Description
+ * @property int $IntervalTime Description
+ * @property int $TransitionRate Description
+ * @property int $Status Description
  * @property int $StatusID Description
  * @property int $created_at Description
  * @property int $updated_at Description
@@ -68,5 +72,16 @@ class Banner extends Eloquent{
 			imageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
 		}
 		
+	}
+	
+	public function save() {
+		if(!$this->dirty()) {
+			return;
+		}
+		
+		if($this->BannerID == 0) {
+			$this->StatusID = eStatus::Active;
+		}
+		parent::save();
 	}
 }

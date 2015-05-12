@@ -1845,7 +1845,7 @@ var cBanner = new function () {
                         }
                         $('.my-btn-success').removeClass("noTouch").css('background','');
                         
-                        var url = $('#address').val();
+                        var url = $('#TargetUrl').val();
                         if(url.length > 0 && !isUrlReachable(url))
                         {
                             $(".input-group + span.urlError").removeClass("hide");
@@ -1880,7 +1880,7 @@ var cBanner = new function () {
     };
     
     this.checkUrl = function () {
-        var url = $('#address').val();
+        var url = $('#TargetUrl').val();
         $(".input-group + span.urlError").addClass("hide");
         $('.my-btn-success').removeClass("noTouch").css('background','');
         if(url.length > 0 && !isUrlReachable(url))
