@@ -1276,8 +1276,7 @@ var cCommon = new function () {
         var url = document.location.href;
 
         //kullanici ve uygulama listesinde customerID olabilir
-        if (url.indexOf(route["users"]) > -1 || url.indexOf(route["applications"]) > -1)
-        {
+        if (url.indexOf(route["users"]) > -1 || url.indexOf(route["applications"]) > -1) {
             customerID = getParameterByName("customerID");
             if (customerID.length > 0) {
                 qs = qs + (qs.length > 0 ? "&" : "?") + "customerID=" + customerID;
@@ -1290,8 +1289,7 @@ var cCommon = new function () {
         }
 
         //icerik listesinde applicationID olabilir
-        if (url.indexOf(route["contents"]) > -1)
-        {
+        if (url.indexOf(route["contents"]) > -1) {
             applicationID = getParameterByName("applicationID");
             if (applicationID.length > 0) {
                 qs = qs + (qs.length > 0 ? "&" : "?") + "applicationID=" + applicationID;
@@ -1894,6 +1892,12 @@ var cBanner = new function () {
     };
 
     this.save = function () {
-        cCommon.save(this.objectName);
+        cCommon.save(this.objectName,
+	function (ret) {
+	    var bannerID = ret.getValue('bannerID');
+	    $("#primaryKeyID").val(bannerID);
+	    cNotification.success();
+	}
+	);
     };
 };

@@ -49,7 +49,6 @@ class Banners_Controller extends Base_Controller {
 		}
 		
 		$rows = Banner::getAppBanner($applicationID);
-		
 		$data = array();
 		$data['route'] = $this->route;
 		$data['caption'] = $this->caption;
@@ -141,6 +140,7 @@ class Banners_Controller extends Base_Controller {
 		if(!$application || !$application->CheckOwnership()) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
+		dd($banner);
 		
 		$banner->ApplicationID = $application->ApplicationID;
 		$banner->TargetContent = (int) Input::get("TargetContent");
