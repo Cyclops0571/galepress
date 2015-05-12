@@ -220,37 +220,27 @@ if ($banner) {
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/1.jpg" alt="lorem ipsum dolor sit"/> 
 															        <img src="/img/bannerSlider/thumbs/1.jpg" alt="thumb-1" class="ms-thumb"/>
-															        <div class="ms-info">
-															        	LOREM IPSUM DOLOR SIT AMET
-															        </div>
+															        <div class="ms-info">LOREM IPSUM DOLOR SIT AMET</div>
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/2.jpg" alt="lorem ipsum dolor sit"/>     
 															         <img src="/img/bannerSlider/thumbs/2.jpg" alt="thumb-2" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	CONSECTETUR ADIPISCING ELIT
-															        </div>
+															         <div class="ms-info">CONSECTETUR ADIPISCING ELIT</div>
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/3.jpg" alt="lorem ipsum dolor sit"/>    
 															          <img src="/img/bannerSlider/thumbs/3.jpg" alt="thumb-3" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	SUSPENDISSE UT PULVINAR MAURIS
-															        </div>   
+															         <div class="ms-info">SUSPENDISSE UT PULVINAR MAURIS</div>   
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/4.jpg" alt="lorem ipsum dolor sit"/>    
 															         <img src="/img/bannerSlider/thumbs/4.jpg" alt="thumb-4" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	SED DAPIBUS SIT AMET FELIS
-															        </div>  
+															         <div class="ms-info">SED DAPIBUS SIT AMET FELIS</div>  
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/5.jpg" alt="lorem ipsum dolor sit"/>    
 															         <img src="/img/bannerSlider/thumbs/5.jpg" alt="thumb-4" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	SED DAPIBUS SIT AMET FELIS
-															        </div>  
+															         <div class="ms-info">SED DAPIBUS SIT AMET FELIS</div>  
 															    </div>
 															</div>
 														</div>
@@ -322,37 +312,27 @@ if ($banner) {
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/1.jpg" alt="lorem ipsum dolor sit"/> 
 															        <img src="/img/bannerSlider/thumbs/1.jpg" alt="thumb-1" class="ms-thumb"/>
-															        <div class="ms-info">
-															        	LOREM IPSUM DOLOR SIT AMET
-															        </div>
+															        <div class="ms-info">LOREM IPSUM DOLOR SIT AMETLOREM IPSUM DOLOR SIT AMET LOREM IPSUM DOLOR SIT AMET</div>
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/2.jpg" alt="lorem ipsum dolor sit"/>     
 															         <img src="/img/bannerSlider/thumbs/2.jpg" alt="thumb-2" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	CONSECTETUR ADIPISCING ELIT
-															        </div>
+															         <div class="ms-info">CONSECTETUR ADIPISCING ELIT</div>
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/3.jpg" alt="lorem ipsum dolor sit"/>    
 															          <img src="/img/bannerSlider/thumbs/3.jpg" alt="thumb-3" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	SUSPENDISSE UT PULVINAR MAURIS
-															        </div>   
+															         <div class="ms-info">SUSPENDISSE UT PULVINAR MAURIS</div>   
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/4.jpg" alt="lorem ipsum dolor sit"/>    
 															         <img src="/img/bannerSlider/thumbs/4.jpg" alt="thumb-4" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	SED DAPIBUS SIT AMET FELIS
-															        </div>  
+															         <div class="ms-info">SED DAPIBUS SIT AMET FELIS</div>  
 															    </div>
 															    <div class="ms-slide">
 															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/5.jpg" alt="lorem ipsum dolor sit"/>    
 															         <img src="/img/bannerSlider/thumbs/5.jpg" alt="thumb-4" class="ms-thumb"/>
-															         <div class="ms-info">
-															        	SED DAPIBUS SIT AMET FELIS
-															        </div>  
+															         <div class="ms-info">SED DAPIBUS SIT AMET FELIS</div>  
 															    </div>
 															</div>
 														</div>
@@ -529,6 +509,14 @@ if ($banner) {
 		else{
 			$( "#ms-gallery-2 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 250);
 		}
+	});
+
+	$( ".ms-info" ).each(function() {
+	  if($(this).text().length>50){
+	  	var infoText = $(this).text();
+	  	infoText = infoText.substring(0, 50);
+	  	$(this).text(infoText+"...");
+	  }
 	});
 
 </script>

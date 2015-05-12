@@ -173,5 +173,13 @@
 			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 250);
 		}
 	});
+
+	$( ".ms-info" ).each(function() {
+	  if($(this).text().length>50){
+	  	var infoText = $(this).text();
+	  	infoText = infoText.substring(0, 50);
+	  	$(this).text(infoText+"...");
+	  }
+	});
 	</script>
 </html>
