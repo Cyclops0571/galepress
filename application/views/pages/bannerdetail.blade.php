@@ -43,12 +43,14 @@ if ($banner) {
 		line-height:15px !important;
 	}
 	.templateScreen .header .header-categories {
-	  background-size: 40% auto !important;
-	  height: 11px !important;
+	  background-size: 35% auto !important;
+	  height: 12px !important;
+	  cursor: default !important;
 	}
 	.templateScreen .header,.footer,.footer div{
 		height: 22px !important;
 		background-position: top center !important;
+		cursor: default !important;
 	}
 	.templateScreen .ms-skin-default .ms-nav-prev{
 		left: 0;
@@ -61,6 +63,21 @@ if ($banner) {
 	}
 	.checkbox-inline{
 		padding-left: 0 !important;
+	}
+	.urlCheck:hover{
+		background-color: #59AD2F !important;
+		color: white !important;
+		border: 1px solid #141414 !important;
+	}
+	.urlCheck:focus,.urlCheck:active{
+		background-color: #2e2e2e !important;
+  		border-color: none !important;
+	}
+	.urlCheck{
+		background-image: none !important;
+	}
+	.container .form-row [class*="col-"], [class*="col-"] img{
+		cursor: default !important;
 	}
 	</style>
 
@@ -93,8 +110,13 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">{{__('common.banner_form_target_url')}}</div>
                         <div class="col-md-8">
-                        	<input type="text" id="address" name='address' value="" placeholder="<?php echo "galepress.com"; ?>" />
-                        	<span class="error hide" style="color:red;">{{__('interactivity.link_error')}}</span>
+                        	<div class="input-group file">                                    
+                                <input type="text" id="address" class="form-control" name='address' value="" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary urlCheck" type="button" id="checkUrl" onclick="cBanner.checkUrl();"><span class="icon-ok"></span></button>
+                                </span>
+                            </div>
+                            <span class="error urlError hide" style="color:red;">{{__('interactivity.link_error')}}</span>
                         </div>
                          <div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_address') }}"><span class="icon-info-sign"></span></a></div>
                     </div> 
@@ -140,7 +162,7 @@ if ($banner) {
                     <div class="form-row">
                         <div class="col-md-3">{{__('common.banners_image')}}</div>
                         <div class="col-md-8" style="position:relative;">
-                        	<div class="col-md-6" style="width:48%; padding:0; margin-left:-9px;">
+                        	<div class="col-md-6" style="width:46%; padding:0; margin-left:-9px;">
 	                            <div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
 	                              <div class="device">
 	                                <div class="screen">
@@ -221,12 +243,12 @@ if ($banner) {
 	                              </div>
 	                            </div>
 	                        </div>
-	                        <div class="col-md-6" style="position:absolute;bottom:0;right:0;padding:0;width:52%;">
+	                        <div class="col-md-6" style="position:absolute;bottom:0;right:0;padding:0;width:56%;">
 	                            <div data-device="ipad" data-orientation="landscape" data-color="white" class="device-mockup">
 	                              <div class="device">
 	                                <div class="screen">
 										<div class="templateScreen">
-											<div class="header clearfix" style="height:22px !important;">
+											<div class="header clearfix" style="height:21px !important;">
 												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" style="padding:0;">
 													<div class="header-categories"></div>
 												</div>

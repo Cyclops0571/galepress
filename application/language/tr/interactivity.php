@@ -124,7 +124,7 @@ return array(
 	'link_option2' => 'Web adresine git',
 	'link_page' => 'PDF Sayfa:',
 	'link_success' => 'Girilen bilgileri gecerli.',
-	'link_error' => 'Girilen bilgileri gecerli degil.',
+	'link_error' => 'Girilen bilgiler gecerli degil.',
 	
 	'webcontent_name' => 'WEB',
 	'webcontent_componentid' => 'Web',

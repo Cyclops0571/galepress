@@ -524,7 +524,7 @@ return array(
 	'banners_select_content' => 'Hedef içerik seçebilirsiniz...',
 	'banners_original_image' => 'Yüklenilen resim:',
 	'banners_image' => 'Resim Önizleme:',
-	'banners_tooltip_coverimage' => 'Yüklenen PDF\'in ilk sayfası otomatik olarak kapak olur, başka bir png/jpg resim dosyası ile değiştirilebilir. (En iyi görünüm için 740x320 çözünürlük tercih ediniz.)',
+	'banners_tooltip_coverimage' => 'En iyi görünüm için 740x320 çözünürlük tercih ediniz.',
 	'banners_autoplay' => 'Otomatik Oyna:',
 	'banners_autoplay_interval' => 'Oynatma Aralığı (Saniye):',
 	'banners_autoplay_speed' => 'Geçiş Hızı (0-100):',

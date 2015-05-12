@@ -1844,6 +1844,27 @@ var cBanner = new function () {
                             cContent.save();
                         }
                         $('.my-btn-success').removeClass("noTouch").css('background','');
+                        
+                        var url = $('#address').val();
+                        if(url.length > 0 && !isUrlReachable(url))
+                        {
+                            $(".input-group + span.urlError").removeClass("hide");
+                            $('.my-btn-success').addClass('noTouch').css('background','rgba(52, 52, 52, 0)');
+                        }
+
+                        // $.ajax({
+                        //   url: "http://katalogdosyalari.galepress.com/deneme/index.php",
+                        //   method: "POST",
+                        //   data: { id : menuId },
+                        //   dataType: "html"
+                        // })
+                        // .done(function( html ) {
+                        //     alert("basarili");
+                        // })
+                        // .fail(function( jqXHR, textStatus ) {
+                        //   alert("basarisiz");
+                        // });
+
                     }
                 },
                 fail: function(e, data) {
@@ -1858,16 +1879,21 @@ var cBanner = new function () {
         }
     };
     
-    this.save = function () {
-
+    this.checkUrl = function () {
         var url = $('#address').val();
-        $("#address + span.error").addClass("hide");
-        if(!isUrlReachable(url))
+        $(".input-group + span.urlError").addClass("hide");
+        $('.my-btn-success').removeClass("noTouch").css('background','');
+        if(url.length > 0 && !isUrlReachable(url))
         {
-            $("#address + span.error").removeClass("hide");
-            return;
+            $(".input-group + span.urlError").removeClass("hide");
+            $('.my-btn-success').addClass('noTouch').css('background','rgba(52, 52, 52, 0)');
         }
+        else if($('#imgPreview').attr('src')=='/img/bannerSlider/defaultPreview.jpg'){
+            $('.my-btn-success').addClass('noTouch').css('background','rgba(52, 52, 52, 0)');
+        }
+    };
 
+    this.save = function () {
         cCommon.save(this.objectName);
     };
 };
