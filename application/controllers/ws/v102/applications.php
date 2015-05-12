@@ -133,7 +133,8 @@ class Ws_v102_Applications_Controller extends Base_Controller
 				'error' => "",
 				'ThemeBackground' => $application->ThemeBackground,
 				'ThemeForeground' => $hexadecimalColorCode,
-				'Contents' => $contents
+				'bannerPage' => "http://www.galepress.com/banners/service_view/" . $applicationID,
+				'Contents' => $contents,
 			));
 		});
 	}

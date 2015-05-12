@@ -149,6 +149,7 @@ function set_path($path, $value)
 	$GLOBALS['laravel_paths'][$path] = $value;
 }
 
+
 define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
@@ -163,3 +164,4 @@ define("IMAGE_ORIGINAL", "original");
 define("IMAGE_EXTENSION", ".jpg");
 define("CATEGORY_GENEL_ID", 1);
 define("SHOW_IMAGE_CROP", "showImageCrop");
+define("PATH_TEMP_FILE", "files/temp");

@@ -172,7 +172,16 @@ class imageClass {
 		}
 		return $imageSourceSet[2] . '/' . $imageSourceSet[3] . '/' . $imageSourceSet[4] . '/';
 	}
-
+	
+	/**
+	 * 
+	 * @param type $sourceFile
+	 * @param string $destinationFolder
+	 * @param type $width
+	 * @param type $height
+	 * @param type $outputImageName
+	 * @param type $addHeightWidth
+	 */
 	public static function cropImage($sourceFile, $destinationFolder, $width, $height, $outputImageName = IMAGE_CROPPED_NAME, $addHeightWidth = TRUE) {
 		$im = new imagick($sourceFile);
 		$im->setImageFormat("jpg");

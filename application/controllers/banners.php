@@ -136,9 +136,19 @@ class Banners_Controller extends Base_Controller {
 			$banner = new Banner();
 		}
 		
-		$banner->ApplicationID = Input::get("applicationID");
+		$application = Application::find(Input::get("applicationID"));
+		if(!$application || $application->CheckOwnership()) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		}
 		
-		
+		$banner->ApplicationID = $application->ApplicationID;
+		$banner->TargetContent = (int) Input::get("ddlContent");
+		$banner->TargetUrl = Input::get("address");
+		$banner->Description = Input::get("description");
+		$banner->Status = (int) Input::get('Status');
+		$banner->save();
+		$banner->processImage($application);
+		return "success=" . base64_encode("true");
 	}
 	
 	public function post_imageupload(){
@@ -173,6 +183,11 @@ class Banners_Controller extends Base_Controller {
 	
 	public function post_imageupload_ltie10(){
 		
+	}
+	
+	public function get_service_view($appID) {
+		$data = array();
+		return View::make("service.banner_service", $data);
 	}
 
 }

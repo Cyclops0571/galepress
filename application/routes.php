@@ -453,6 +453,7 @@ foreach($languages as $currentLanguage) {
 	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }
 
+Route::get("/banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));

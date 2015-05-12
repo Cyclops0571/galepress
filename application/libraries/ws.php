@@ -67,21 +67,19 @@ class Ws
 		return $category;
 	}
 
-	public static function getApplicationContents($applicationID)
-	{
-		$rs = Content::where('ApplicationID', '=', $applicationID)->where('StatusID', '=', eStatus::Active)->order_by('MonthlyName', 'ASC')->order_by('Name', 'ASC')->get();
-		
-		$categoryID = (int)Input::get('categoryID', '-1');
-		if($categoryID !== -1) {
-			$rs = Content::where('ApplicationID', '=', $applicationID)
-				->where('ContentID', 'IN', DB::raw('(SELECT ContentID FROM ContentCategory WHERE CategoryID='.(int)$categoryID.')'))
+	public static function getApplicationContents($applicationID) {
+		$query = Content::where('ApplicationID', '=', $applicationID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('OrderNo', 'DESC')
 				->order_by('MonthlyName', 'ASC')
-				->order_by('Name', 'ASC')
-				->get();
+				->order_by('Name', 'ASC');
+		
+		$categoryID = (int)Input::get('categoryID', '-1');
+		if($categoryID !== -1) {
+			$rs = $query->where('ContentID', 'IN', DB::raw('(SELECT ContentID FROM ContentCategory WHERE CategoryID='.(int)$categoryID.')'));
 		}
 		
+		$rs = $query->get();
 		if($rs) {
 			$contents = array();
 			foreach($rs as $r)
