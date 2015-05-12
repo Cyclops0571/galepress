@@ -130,6 +130,7 @@ class Banners_Controller extends Base_Controller {
 	}
 
 	public function post_save() {
+		
 		$pk = (int) Input::get("primaryKeyID");
 		$banner = Banner::find($pk);
 		if(!$banner) {

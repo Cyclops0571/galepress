@@ -11,6 +11,8 @@
                 <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook" class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span class="icon-book"></span></a>
                 <a href="{{ URL::to(__('route.maps').'?applicationID='.Input::get('applicationID', 0)) }}" title="{{__('common.map_title')}}" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-map-marker" style="font-size:14px;"></span></a>
 
+                <!-- <a href="{{ URL::to(__('route.banners').'?applicationID='.Input::get('applicationID', 0)) }}" title="Banner" class="widget-icon widget-icon-circle" style="margin-left:10px;position:relative;display:inline-block"><img src="/img/slider.png" style="position:absolute;"></a> -->
+
                 @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'maps_list')
                     <script type="text/javascript">
                         $('.commands span.icon-plus').removeClass().addClass('icon-map-marker location-icon-map-stacked').html('<i class="icon-plus .location-icon-plus-stacked"></i>');
@@ -23,7 +25,7 @@
                 @endif
 
                 @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
-                    <!-- <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a> -->
+                    <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
                 @endif
           
         @else

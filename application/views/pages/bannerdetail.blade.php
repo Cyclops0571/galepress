@@ -5,8 +5,6 @@
 if (FALSE) {
 	$banner = new Banner();
 }
-
-
 if ($banner) {
 	$selectedContentID = $banner->TargetContent;
 	$ApplicationID = $banner->ApplicationID;
@@ -328,8 +326,8 @@ if ($banner) {
                     </div>
                     <div class="form-row" style="border-top: 1px solid rgb(34, 34, 34);padding-top: 10px;">
                         <div class="btn-group col-md-3 col-md-offset-8" style="padding-right:9px;">
-							<button type="button" class="btn col-md-7" onclick="javascript:location.href ='{{ URL::to(__('route.banners').'?applicationID='.$ApplicationID) }}'">{{__('common.map_form_return')}}</button>
-							<button type="button" class="btn col-md-5 my-btn-success" onclick="cBanner.save();">{{__('common.detailpage_save')}}</button>
+							<button type="button" class="btn col-md-7" onclick="javascript:location.href ='{{ URL::to(__('route.banners').'?applicationID='.$ApplicationID) }}'" style="cursor:pointer !important;">{{__('common.map_form_return')}}</button>
+							<button type="button" class="btn col-md-5 my-btn-success" onclick="cBanner.save();" style="cursor:pointer !important;">{{__('common.detailpage_save')}}</button>
 	                    </div>
                     </div>
             	</div>

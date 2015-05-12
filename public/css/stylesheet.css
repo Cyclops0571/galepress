@@ -466,7 +466,7 @@ dd{padding: 5px 0px;}
 /* eof modal */
 
 /* statusbar */
-    .statusbar{position: fixed; bottom: 0px; width: 100%; padding: 10px; background: rgba(0,0,0,0.70); }
+    .statusbar{position: fixed; bottom: 0px; width: 100%; padding: 10px; background: rgba(0,0,0,0.70); z-index: 99;}
         .statusbar .statusbar-icon{float: left; margin-right: 10px; padding: 3px 0px;}
             .statusbar .statusbar-icon [class^=icon]{font-size: 20px; line-height: 24px;}
         .statusbar .statusbar-text{font-size: 12px; font-weight: lighter; color: #FFF; float: left; padding-right: 30px; line-height: 30px;}

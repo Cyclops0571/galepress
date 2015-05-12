@@ -386,3 +386,6 @@ td:hover .list-draggable-icon{
 	-webkit-animation-name: dragLi;
 	-webkit-animation-duration:1s;
 }
+.cursorPointer{
+	cursor: pointer !important;
+}
