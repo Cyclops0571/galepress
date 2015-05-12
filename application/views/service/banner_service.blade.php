@@ -21,18 +21,27 @@
 			body{
 				margin:0;
 			}
+			.ms-gallery-template .ms-bullets.ms-dir-h,.ms-bullets.ms-dir-h .ms-bullets-count {
+				right: 3% !important;
+			}
 			.ms-gallery-template .ms-gallery-botcont{
 				position: fixed !important;
 				bottom:0 !important;
 				width: 100% !important;
 				opacity: 0.7;
 			}
-			.ms-gallery-template .ms-bullets.ms-dir-h{
-				right: 50% !important;
-			}
 			.ms-gallery-template .ms-slide-info{
 				padding: 20px 0px !important;
 				font-size: 0.8em !important;
+			}
+			.ms-gallery-template .ms-gal-playbtn{
+				display: none !important;
+			}
+			.ms-gallery-template .ms-gal-thumbtoggle{
+				display: none !important;
+			}
+			.ms-gallery-template .ms-slide-info {
+			  padding: 20px 20px !important;
 			}
 		</style>
 
@@ -153,6 +162,16 @@
 
 	slider.api.addEventListener(MSSliderEvent.CHANGE_END , function(){
 	    $( ".ms-gallery-botcont" ).delay(2500).animate( {opacity: 0}, 2500);
+	});
+
+	$('#ms-gallery-1').click(function(){
+		$( "#ms-gallery-1 .ms-gallery-botcont" ).stop(true);
+		if($( "#ms-gallery-1 .ms-gallery-botcont" ).css('opacity')>0){
+			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0}, 250);
+		}
+		else{
+			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 250);
+		}
 	});
 	</script>
 </html>

@@ -35,12 +35,12 @@ if ($banner) {
 ?>
     <!--BANNER SLIDER-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <link rel="stylesheet" href="/css/masterslider/style/masterslider.css" />
-    <link href="/css/masterslider/skins/default/style.css" rel='stylesheet' type='text/css'>
-    <link href='/css/masterslider/ms-partialview.css' rel='stylesheet' type='text/css'>
-    <!--<script src="js/masterslider/jquery-1.10.2.min.js"></script>-->
-    <script src="/js/masterslider/jquery.easing.min.js"></script>
-    <script src="/js/masterslider/masterslider.min.js"></script>
+	<link rel="stylesheet" href="/css/masterslider/style/masterslider.css" />
+	<link href="/css/masterslider/skins/black-2/style.css" rel='stylesheet' type='text/css'>
+	<link href='/css/masterslider/style/ms-gallery-style.css' rel='stylesheet' type='text/css'>
+
+	<script src="/js/masterslider/jquery.easing.min.js"></script>
+	<script src="/js/masterslider/masterslider.min.js"></script>
     <!--BANNER SLIDER-->
 	<style type="text/css">
 	.templateScreen .text-center.app-name{
@@ -57,15 +57,6 @@ if ($banner) {
 		height: 22px !important;
 		background-position: top center !important;
 		cursor: default !important;
-	}
-	.templateScreen .ms-skin-default .ms-nav-prev{
-		left: 0;
-	}
-	.templateScreen .ms-skin-default .ms-nav-next{
-		right: 0;
-	}
-	.templateScreen .ms-bullets.ms-dir-h{
-		bottom: 0;
 	}
 	.checkbox-inline{
 		padding-left: 0 !important;
@@ -84,6 +75,39 @@ if ($banner) {
 	}
 	.container .form-row [class*="col-"], [class*="col-"] img{
 		cursor: default !important;
+	}
+	#ms-gallery-1{
+		margin:0 auto;
+	}
+	.ms-gallery-template .ms-gallery-botcont{
+		position: absolute !important;
+		bottom:0 !important;
+		width: 100% !important;
+		opacity: 0.7;
+	}
+	.ms-bullets.ms-dir-h,.ms-bullets.ms-dir-h .ms-bullets-count {
+		right: 3% !important;
+	}
+	.ms-gallery-template .ms-gallery-botcont{
+		height: 18px !important;
+	}
+	.ms-gallery-template .ms-bullet{
+		width: 3px !important;
+		height: 3px !important;
+		margin: 2px !important;
+	}
+	.ms-gallery-template .ms-bullets.ms-dir-h{
+		bottom: 5px !important;
+	}
+	.ms-gallery-template .ms-gal-playbtn{
+		display: none !important;
+	}
+	.ms-gallery-template .ms-gal-thumbtoggle{
+		display: none !important;
+	}
+	.ms-gallery-template .ms-slide-info {
+	  padding: 2px 3px !important;
+	  font-size: 0.3em !important;
 	}
 	</style>
 
@@ -190,22 +214,43 @@ if ($banner) {
 											<div class="container">
 												<div class="form-row">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div class="ms-partialview-template" id="partial-view-1">
-															<div class="master-slider ms-skin-default" id="masterslider">
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+														<div class="ms-gallery-template" id="ms-gallery-1">
+															<!-- masterslider -->
+															<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/1.jpg" alt="lorem ipsum dolor sit"/> 
+															        <img src="/img/bannerSlider/thumbs/1.jpg" alt="thumb-1" class="ms-thumb"/>
+															        <div class="ms-info">
+															        	LOREM IPSUM DOLOR SIT AMET
+															        </div>
 															    </div>
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>     
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/2.jpg" alt="lorem ipsum dolor sit"/>     
+															         <img src="/img/bannerSlider/thumbs/2.jpg" alt="thumb-2" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	CONSECTETUR ADIPISCING ELIT
+															        </div>
 															    </div>
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/3.jpg" alt="lorem ipsum dolor sit"/>    
+															          <img src="/img/bannerSlider/thumbs/3.jpg" alt="thumb-3" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	SUSPENDISSE UT PULVINAR MAURIS
+															        </div>   
 															    </div>
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>      
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/4.jpg" alt="lorem ipsum dolor sit"/>    
+															         <img src="/img/bannerSlider/thumbs/4.jpg" alt="thumb-4" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	SED DAPIBUS SIT AMET FELIS
+															        </div>  
 															    </div>
-															     <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/> 
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/5.jpg" alt="lorem ipsum dolor sit"/>    
+															         <img src="/img/bannerSlider/thumbs/5.jpg" alt="thumb-4" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	SED DAPIBUS SIT AMET FELIS
+															        </div>  
 															    </div>
 															</div>
 														</div>
@@ -271,22 +316,43 @@ if ($banner) {
 											<div class="container">
 												<div class="form-row">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div class="ms-partialview-template" id="partial-view-2">
-															<div class="master-slider ms-skin-default" id="masterslider2">
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+														<div class="ms-gallery-template" id="ms-gallery-2">
+															<!-- masterslider -->
+															<div class="master-slider ms-skin-black-2 round-skin" id="masterslider2">
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/1.jpg" alt="lorem ipsum dolor sit"/> 
+															        <img src="/img/bannerSlider/thumbs/1.jpg" alt="thumb-1" class="ms-thumb"/>
+															        <div class="ms-info">
+															        	LOREM IPSUM DOLOR SIT AMET
+															        </div>
 															    </div>
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>     
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/2.jpg" alt="lorem ipsum dolor sit"/>     
+															         <img src="/img/bannerSlider/thumbs/2.jpg" alt="thumb-2" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	CONSECTETUR ADIPISCING ELIT
+															        </div>
 															    </div>
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>    
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/3.jpg" alt="lorem ipsum dolor sit"/>    
+															          <img src="/img/bannerSlider/thumbs/3.jpg" alt="thumb-3" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	SUSPENDISSE UT PULVINAR MAURIS
+															        </div>   
 															    </div>
-															    <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/>      
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/4.jpg" alt="lorem ipsum dolor sit"/>    
+															         <img src="/img/bannerSlider/thumbs/4.jpg" alt="thumb-4" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	SED DAPIBUS SIT AMET FELIS
+															        </div>  
 															    </div>
-															     <div class="ms-slide" data-delay="5">
-															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/default.jpg"/> 
+															    <div class="ms-slide">
+															        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/5.jpg" alt="lorem ipsum dolor sit"/>    
+															         <img src="/img/bannerSlider/thumbs/5.jpg" alt="thumb-4" class="ms-thumb"/>
+															         <div class="ms-info">
+															        	SED DAPIBUS SIT AMET FELIS
+															        </div>  
 															    </div>
 															</div>
 														</div>
@@ -404,33 +470,67 @@ if ($banner) {
 	}
 
 	var slider = new MasterSlider();
-	
-	slider.control('arrows');	
-	slider.control('bullets');
-
 	slider.setup('masterslider' , {
 		width:320,
 		height:138,
-		space:10,
-		autoplay:true,
-		view:'basic',
-		layout:'partialview',
-		speed:20
+		space:0,
+		view:'fadeBasic',
+		layout: 'fillwidth',
+		fillMode: 'stretch',
+		speed: 20
+	});
+
+	var gallery = new MSGallery('ms-gallery-1' , slider);
+	gallery.setup();
+	slider.api.addEventListener(MSSliderEvent.CHANGE_START , function(){
+		$( "#ms-gallery-1 .ms-gallery-botcont" ).stop(true);
+		$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 750);
+	});
+	slider.api.addEventListener(MSSliderEvent.CHANGE_END , function(){
+	    $( "#ms-gallery-1 .ms-gallery-botcont" ).delay(2500).animate( {opacity: 0}, 2500);
+	});
+
+	$('#ms-gallery-1').click(function(){
+		$( "#ms-gallery-1 .ms-gallery-botcont" ).stop(true);
+		if($( "#ms-gallery-1 .ms-gallery-botcont" ).css('opacity')>0){
+			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0}, 250);
+		}
+		else{
+			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 250);
+		}
 	});
 
 	var slider2 = new MasterSlider();
-	
-	slider2.control('arrows');	
-	slider2.control('bullets');
-
 	slider2.setup('masterslider2' , {
 		width:150,
 		height:65,
-		space:5,
-		view:'fadeWave',
-		layout:'partialview',
-		speed:20
+		space:0,
+		view:'fadeBasic',
+		layout: 'partialview',
+		fillMode: 'stretch',
+		speed: 20
 	});
+
+	var gallery2 = new MSGallery('ms-gallery-2' , slider2);
+	gallery2.setup();
+	slider2.api.addEventListener(MSSliderEvent.CHANGE_START , function(){
+		$( "#ms-gallery-2 .ms-gallery-botcont" ).stop(true);
+		$( "#ms-gallery-2 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 750);
+	});
+	slider2.api.addEventListener(MSSliderEvent.CHANGE_END , function(){
+	    $( "#ms-gallery-2 .ms-gallery-botcont" ).delay(2500).animate( {opacity: 0}, 2500);
+	});
+
+	$('#ms-gallery-2').click(function(){
+		$( "#ms-gallery-2 .ms-gallery-botcont" ).stop(true);
+		if($( "#ms-gallery-2 .ms-gallery-botcont" ).css('opacity')>0){
+			$( "#ms-gallery-2 .ms-gallery-botcont" ).animate( {opacity: 0}, 250);
+		}
+		else{
+			$( "#ms-gallery-2 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 250);
+		}
+	});
+
 </script>
 
 @endsection

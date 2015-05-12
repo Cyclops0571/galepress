@@ -1879,14 +1879,19 @@ var cBanner = new function () {
     
     this.checkUrl = function () {
         var url = $('#TargetUrl').val();
+        $('#checkUrl').css('background-color','#2e2e2e');
         $(".input-group + span.urlError").addClass("hide");
-        $('.my-btn-success').removeClass("noTouch").css('background','');
         if(url.length > 0 && !isUrlReachable(url))
         {
             $(".input-group + span.urlError").removeClass("hide");
             $('.my-btn-success').addClass('noTouch').css('background','rgba(52, 52, 52, 0)');
         }
-        else if($('#imgPreview').attr('src')=='/img/bannerSlider/defaultPreview.jpg'){
+        else if(isUrlReachable(url)){
+            $('.my-btn-success').removeClass("noTouch").css('background','');
+            $('#checkUrl').css('background-color','#59AD2F');
+        }
+
+        if($('#imgPreview').attr('src')=='/img/bannerSlider/defaultPreview.jpg'){
             $('.my-btn-success').addClass('noTouch').css('background','rgba(52, 52, 52, 0)');
         }
     };
