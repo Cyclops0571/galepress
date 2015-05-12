@@ -20,19 +20,21 @@ class Banners_Controller extends Base_Controller {
 		$this->caption = __('common.contents_caption');
 		$this->detailcaption = __('common.contents_caption_detail');
 		$this->fields = array();
-		$this->fields[] = array(__('common.banner_list_customer'), 'CustomerName');
-		$this->fields[] = array(__('common.banner_list_application'), 'ApplicationName');
-		$this->fields[] = array(__('common.banner_form_target_url'), 'Target Url');
-		$this->fields[] = array(__('common.banner_form_target_content'), 'Target Content');
-		$this->fields[] = array(__('common.banners_list_status'), 'Status');
-		$this->fields[] = array(__('common.banner_list_banner_id'), 'BannerID');
+		$this->fields[] = __('common.banner_list_customer');
+		$this->fields[] = __('common.banner_list_application');
+		$this->fields[] = __('common.banner_form_target_url');
+		$this->fields[] = __('common.banner_form_target_content');
+		$this->fields[] = __('common.banner_description');
+		$this->fields[] = __('common.banners_list_status');
+		$this->fields[] = __('common.banner_list_banner_id');
 
 		if ((int) Auth::User()->UserTypeID == eUserTypes::Customer) {
 			$this->fields = array();
-			$this->fields[] = array(__('common.banner_form_target_url'), 'Target Url');
-			$this->fields[] = array(__('common.banner_form_target_content'), 'Target Url');
-			$this->fields[] = array(__('common.banners_list_status'), 'Status');
-			$this->fields[] = array(__('common.banner_list_banner_id'), 'BannerID');
+			$this->fields[] = __('common.banner_form_target_url');
+			$this->fields[] = __('common.banner_form_target_content');
+			$this->fields[] = __('common.banner_description');
+			$this->fields[] = __('common.banners_list_status');
+			$this->fields[] = __('common.banner_list_banner_id');
 		}
 		
 	}
@@ -69,7 +71,7 @@ class Banners_Controller extends Base_Controller {
 			return Redirect::to(__('route.home'));
 		}
 
-				/* START SQL FOR TEMPLATE-CHOOSER */
+		/* START SQL FOR TEMPLATE-CHOOSER */
 		$sqlTemlateChooser = 'SELECT * FROM ('
 				. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
 				. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
@@ -89,6 +91,7 @@ class Banners_Controller extends Base_Controller {
 		$data = array();
 		$data["application"] = $application;
 		$data["banner"] = FALSE;
+		$data["bannerSet"] = Banner::getAppBanner($applicationID);
 		$data["contents"] = $application->getContentSet();
 		$data["templateResults"] = $templateResults;
 		return View::make('pages.' . Str::lower($this->table) . 'detail', $data);
@@ -126,7 +129,8 @@ class Banners_Controller extends Base_Controller {
 		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
 		
 		$data = array();
-		$data["applicationID"] = (int) Input::get('applicationID', '0');
+		$data["application"] = Application::find($banner->ApplicationID);
+		$data["bannerSet"] = Banner::getAppBanner($banner->ApplicationID);
 		$data["banner"] = $banner;
 		$data["contents"] = $contents;
 		$data["templateResults"] = $templateResults;
@@ -158,9 +162,9 @@ class Banners_Controller extends Base_Controller {
 		$banner->TargetContent = (int) Input::get("TargetContent");
 		$banner->TargetUrl = Input::get("TargetUrl");
 		$banner->Description = Input::get("Description");
-		$banner->Autoplay = Input::get("Autoplay");
-		$banner->IntervalTime = Input::get("IntervalTime");
-		$banner->TransitionRate = Input::get("TransitionRate");
+		$banner->Autoplay = (int)Input::get("Autoplay");
+		$banner->IntervalTime = (int)Input::get("IntervalTime");
+		$banner->TransitionRate = (int)Input::get("TransitionRate");
 		$banner->Status = (int) Input::get('Status');
 		$banner->save();
 		$banner->processImage($application);

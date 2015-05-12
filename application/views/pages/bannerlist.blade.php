@@ -26,7 +26,7 @@ $appLink = (int) Input::get('applicationID', 0) > 0 ? '&applicationID=' . Input:
 								<th><span class="icon-move"></span></th>
 								@endif
 								<?php foreach ($fields as $field): ?>
-									<th scope="col"><?php echo $field[0] ?></th>
+									<th scope="col"><?php echo $field; ?></th>
 								<?php endforeach; ?>
 							</tr>
 						</thead>
@@ -37,23 +37,20 @@ $appLink = (int) Input::get('applicationID', 0) > 0 ? '&applicationID=' . Input:
 									<tr id="bannerIDSet_<?php echo $row->BannerID ?>" class="{{ HTML::oddeven($page) }}">
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->CustomerName) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->ApplicationName) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Name) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Blocked) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Status) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->ContentID) }}</td>
-									</tr>
-								<?php elseif ((int) Auth::User()->UserTypeID == eUserTypes::Customer): ?>
-									<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
-										<?php if ($page < 2): ?>
-											<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
-										<?php endif; ?>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetUrl) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Description) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, Common::dateRead($row->UnpublishDate, 'dd.MM.yyyy')) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Blocked) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Status) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->ContentID) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->statusText()) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->BannerID) }}</td>
+									</tr>
+								<?php elseif ((int) Auth::User()->UserTypeID == eUserTypes::Customer): ?>
+									<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
+										<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetUrl) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Description) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->statusText()) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->BannerID) }}</td>
 									</tr>
 								<?php endif; ?>
 							<?php endforeach; ?>

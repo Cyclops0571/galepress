@@ -51,11 +51,11 @@ class Banner extends Eloquent{
 			return;
 		}
 		
-		$tmpFileName = Input::get("hdnCoverImageFileName");
+		
+		$tmpFileName = Input::get("hdnImageFileName");
 		$tmpFilePath = path('public') . PATH_TEMP_FILE . '/' . $tmpFileName;
 		$destinationFolder = path('public') . 'files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/';
 		$sourcePicturePath = $destinationFolder . Auth::User()->UserID . '_' . date("YmdHis") . '_' . $tmpFileName;
-		$targetPicturePath = $destinationFolder . $this->BannerID;
 		if(!is_file($tmpFilePath)) {
 			return;
 		}
@@ -67,9 +67,9 @@ class Banner extends Eloquent{
 		File::move($tmpFilePath, $sourcePicturePath);
 		
 		$pictureInfoSet = array();
-		$pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
-		foreach($pictureInfoSet as $pInfo) {			
-			imageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
+		$pictureInfoSet[] = array("width" => 740, "height" => 320, "imageName" => $this->BannerID);
+		foreach($pictureInfoSet as $pInfo) {
+			imageClass::cropImage($sourcePicturePath, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
 		}
 		
 	}
@@ -83,5 +83,13 @@ class Banner extends Eloquent{
 			$this->StatusID = eStatus::Active;
 		}
 		parent::save();
+	}
+	
+	public function statusText() {
+		return __('common.banners_list_status' . $this->Status);
+	}
+	
+	public function getImagePath($application) {
+		return '/files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
 	}
 }

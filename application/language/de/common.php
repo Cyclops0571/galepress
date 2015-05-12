@@ -508,16 +508,11 @@ return array(
 	'template_chooser_close' => 'In der Nähe',
 	'template_chooser_use' => 'Verwenden Theme',
 
-	'banner_list_banner_id' => 'Banner ID',
-	'banner_list_customer' => 'Kunde',
-	'banner_list_application' => 'Applikation',
 	'banner_form_name' => 'Banner',
 	'banner_form_target_url' => 'Target Url',
 	'banner_form_target_content' => 'Target İçerik',
 	'banners_caption' => 'Banners',
 	'banners_caption_detail' => 'Banner Detail',
-	'banners_list_status1' => 'Publish',
-	'banners_list_status0' => 'Not Publicationed',
 	'banners_select_content' => 'You can select the target content...',
 	'banners_original_image' => 'UPLOADED PICTURES',
 	'banners_image' => 'Image Preview:',
@@ -532,7 +527,14 @@ return array(
 	'banners_info_interval' => 'It refers to the transition time between pictures.',
 	'banners_info_speed' => 'It refers to the transition speed between images.',
 	'banners_info_active' => 'Inactive files are not shown.',
+	'banner_description' => 'Title',
+	
+	'banner_list_banner_id' => 'Banner ID',
+	'banner_list_customer' => 'Kunde',
+	'banner_list_application' => 'Applikation',
 	'banners_list_status' => 'zustand',	
+	'banners_list_status1' => 'Publish',
+	'banners_list_status0' => 'Not Publicationed',
 	'image_select' => 'Choose Image...',
 
 );
