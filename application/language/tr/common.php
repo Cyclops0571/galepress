@@ -514,6 +514,9 @@ return array(
 	'template_chooser_close' => 'Kapat',
 	'template_chooser_use' => 'Temayı Kullan',
 
+	'banner_list_banner_id' => 'Banner ID',
+	'banner_list_customer' => 'Müşteri',
+	'banner_list_application' => 'Uygulama',
 	'banner_form_name' => 'Banner',
 	'banner_form_target_url' => 'Hedef Url:',
 	'banner_form_target_content' => 'Hedef İçerik:',
@@ -535,5 +538,6 @@ return array(
 	'banners_info_interval' => 'Resimler arasındaki geçiş süresini ifade eder.',
 	'banners_info_speed' => 'Resimler arasındaki geçiş hızını ifade eder.',
 	'banners_info_active' => 'Aktif olmayan resimler gösterilmez.',
+	'banners_list_status' => 'Durum',
 	'image_select' => 'Resim seç...',
 );

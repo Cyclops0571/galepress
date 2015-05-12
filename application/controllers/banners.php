@@ -20,25 +20,21 @@ class Banners_Controller extends Base_Controller {
 		$this->caption = __('common.contents_caption');
 		$this->detailcaption = __('common.contents_caption_detail');
 		$this->fields = array();
-		$this->fields[] = array(__('common.contents_list_customer'), 'CustomerName');
-		$this->fields[] = array(__('common.contents_list_application'), 'ApplicationName');
-		$this->fields[] = array(__('common.contents_list_content_name'), 'Name');
-		$this->fields[] = array(__('common.contents_list_content_bloke'), 'Blocked');
-		$this->fields[] = array(__('common.contents_list_status'), 'Status');
-		$this->fields[] = array(__('common.contents_list_content_id'), 'ContentID');
+		$this->fields[] = array(__('common.banner_list_customer'), 'CustomerName');
+		$this->fields[] = array(__('common.banner_list_application'), 'ApplicationName');
+		$this->fields[] = array(__('common.banner_form_target_url'), 'Target Url');
+		$this->fields[] = array(__('common.banner_form_target_content'), 'Target Content');
+		$this->fields[] = array(__('common.banners_list_status'), 'Status');
+		$this->fields[] = array(__('common.banner_list_banner_id'), 'BannerID');
 
-		if (Auth::check()) {
-			if ((int) Auth::User()->UserTypeID == eUserTypes::Customer) {
-				$this->fields = array();
-				$this->fields[] = array(__('common.contents_list_content_name'), 'Name');
-				$this->fields[] = array(__('common.coCreatorUserIDntents_list_content_category'), 'CategoryName');
-				$this->fields[] = array(__('common.contents_list_content_publishdate'), 'PublishDate');
-				$this->fields[] = array(__('common.contents_list_content_unpublishdate'), 'UnpublishDate');
-				$this->fields[] = array(__('common.contents_list_content_bloke'), 'Blocked');
-				$this->fields[] = array(__('common.contents_list_status'), 'Status');
-				$this->fields[] = array(__('common.contents_list_content_id'), 'ContentID');
-			}
+		if ((int) Auth::User()->UserTypeID == eUserTypes::Customer) {
+			$this->fields = array();
+			$this->fields[] = array(__('common.banner_form_target_url'), 'Target Url');
+			$this->fields[] = array(__('common.banner_form_target_content'), 'Target Url');
+			$this->fields[] = array(__('common.banners_list_status'), 'Status');
+			$this->fields[] = array(__('common.banner_list_banner_id'), 'BannerID');
 		}
+		
 	}
 
 	public function get_index() {
@@ -100,7 +96,6 @@ class Banners_Controller extends Base_Controller {
 
 	public function get_show($bannerID) {
 		$banner = Banner::find($bannerID);
-		$applicationID = (int) Input::get('applicationID', '0');
 		if (!$banner) {
 			return Redirect::to($this->route);
 		}
@@ -108,15 +103,33 @@ class Banners_Controller extends Base_Controller {
 		
 		
 		$contents = DB::table('Content')
-			->where('ApplicationID', '=', $applicationID)
+			->where('ApplicationID', '=', $banner->ApplicationID)
 			->where('StatusID', '=', eStatus::Active)
 			->order_by('Name', 'ASC')
 			->get();
-				
+		
+				/* START SQL FOR TEMPLATE-CHOOSER */
+		$sqlTemlateChooser = 'SELECT * FROM ('
+		. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
+		. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
+		. 'ccf.ContentCoverImageFileID, ccf.FileName '
+		. 'FROM `Application` AS a '
+		. 'LEFT JOIN `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '
+		. 'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '
+		. 'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '
+		. 'WHERE a.ApplicationID= ' . $banner->ApplicationID . ' '
+		. 'order by  c.ContentID DESC, cf.ContentFileID DESC, ccf.ContentCoverImageFileID DESC) as innerTable '
+		. 'group by innerTable.ContentID '
+		. 'order by innerTable.ContentID DESC '
+		. 'LIMIT 9';
+
+		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
+		
 		$data = array();
 		$data["applicationID"] = (int) Input::get('applicationID', '0');
 		$data["banner"] = $banner;
 		$data["contents"] = $contents;
+		$data["templateResults"] = $templateResults;
 		return View::make("pages." . Str::lower($this->table) . "detail", $data);
 	}
 
@@ -140,7 +153,6 @@ class Banners_Controller extends Base_Controller {
 		if(!$application || !$application->CheckOwnership()) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		dd($banner);
 		
 		$banner->ApplicationID = $application->ApplicationID;
 		$banner->TargetContent = (int) Input::get("TargetContent");

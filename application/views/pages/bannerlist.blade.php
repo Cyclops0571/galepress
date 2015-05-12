@@ -8,7 +8,6 @@ if (FALSE) {
 }
 $appLink = (int) Input::get('applicationID', 0) > 0 ? '&applicationID=' . Input::get('applicationID', 0) : '';
 //$searchLink = '&search=' . $search;
-$sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 ?>
 
 <!--<form id="list">--> 
@@ -27,15 +26,13 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 								<th><span class="icon-move"></span></th>
 								@endif
 								<?php foreach ($fields as $field): ?>
-									<?php $sortLink = '&sort=' . $field[1]; ?>
-									<?php $sort == $field[1] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array(); ?>
-									<th scope="col">{{ HTML::link($route.'?' . $appLink  . $searchLink . $sortLink . $sortDirLink, $field[0], $sort) }}</th>
+									<th scope="col"><?php echo $field[0] ?></th>
 								<?php endforeach; ?>
 							</tr>
 						</thead>
 						<tbody>
 						<form id="contentOrderForm">
-							<?php foreach ($rows->results as $row): ?>
+							<?php foreach ($rows as $row): ?>
 								<?php if ((int) Auth::User()->UserTypeID == eUserTypes::Manager): ?>
 									<tr id="bannerIDSet_<?php echo $row->BannerID ?>" class="{{ HTML::oddeven($page) }}">
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->CustomerName) }}</td>
@@ -50,9 +47,9 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 										<?php if ($page < 2): ?>
 											<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
 										<?php endif; ?>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Name) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->CategoryName) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, Common::dateRead($row->PublishDate, 'dd.MM.yyyy')) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetUrl) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>
+										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Description) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, Common::dateRead($row->UnpublishDate, 'dd.MM.yyyy')) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Blocked) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Status) }}</td>
