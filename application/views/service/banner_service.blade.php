@@ -25,7 +25,7 @@
 				position: fixed !important;
 				bottom:0 !important;
 				width: 100% !important;
-				opacity: 0.7 !important;
+				opacity: 0.7;
 			}
 			.ms-gallery-template .ms-bullets.ms-dir-h{
 				right: 50% !important;
