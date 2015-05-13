@@ -8,9 +8,6 @@
  * @property int $TargetUrl Description
  * @property int $TargetContent Description
  * @property int $Description Description
- * @property int $Autoplay Description
- * @property int $IntervalTime Description
- * @property int $TransitionRate Description
  * @property int $Status Description
  * @property int $StatusID Description
  * @property int $created_at Description

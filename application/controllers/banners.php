@@ -131,7 +131,6 @@ class Banners_Controller extends Base_Controller {
 				. 'LIMIT 9';
 
 		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-
 		$data = array();
 		$data["application"] = Application::find($banner->ApplicationID);
 		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $banner->ApplicationID;
@@ -192,12 +191,16 @@ class Banners_Controller extends Base_Controller {
 		$banner->TargetContent = (int) Input::get("TargetContent");
 		$banner->TargetUrl = Input::get("TargetUrl");
 		$banner->Description = Input::get("Description");
-		$banner->Autoplay = (int) Input::get("Autoplay");
-		$banner->IntervalTime = (int) Input::get("IntervalTime");
-		$banner->TransitionRate = (int) Input::get("TransitionRate");
 		$banner->Status = (int) Input::get('Status');
 		$banner->save();
 		$banner->processImage($application);
+		
+		$application->BannerActive = (int) Input::get("BannerActive");
+		$application->BannerAutoplay = (int) Input::get("BannerAutoplay");
+		$application->BannerIntervalTime = (int) Input::get("BannerIntervalTime");
+		$application->BannerTransitionRate = (int) Input::get("BannerTransitionRate");
+		$application->save(FALSE);
+		
 		return "success=" . base64_encode("true") . "&bannerID=" . base64_encode($banner->BannerID);
 	}
 

@@ -26,6 +26,10 @@
  * @property int $ProcessUserID Description
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
+ * @property int $BannerActive Description
+ * @property int $BannerAutoplay Description
+ * @property int $BannerIntervalTime Description
+ * @property int $BannerTransitionRate Description
  */
 class Application extends Eloquent
 {
@@ -114,7 +118,7 @@ class Application extends Eloquent
 		}
 	}
 	
-	public function save() {
+	public function save($IncrementVersion = TRUE) {
 		if(!$this->dirty()) {
 			return true;
 		}
@@ -133,8 +137,10 @@ class Application extends Eloquent
 			$this->ProcessTypeID = eProcessTypes::Update;
 		}
 		$this->ProcessUserID = $userID;
-		$this->Version = (int)$this->Version + 1;
 		$this->ProcessDate = new DateTime();
+		if($IncrementVersion) {
+			$this->Version = (int)$this->Version + 1;
+		}
 		parent::save();
 	}
 	

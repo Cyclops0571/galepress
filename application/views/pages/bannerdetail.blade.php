@@ -8,6 +8,7 @@ if (FALSE) {
 	$application = new Application();
 }
 $ApplicationID = $application->ApplicationID;
+
 $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
 if ($banner) {
 	$bannerID = $banner->BannerID;
@@ -17,9 +18,6 @@ if ($banner) {
 	$TargetUrl = $banner->TargetUrl;
 	$TargetContent = $banner->TargetContent;
 	$Description = $banner->Description;
-	$Autoplay = $banner->Autoplay;
-	$IntervalTime = $banner->IntervalTime;
-	$TransitionRate = $banner->TransitionRate;
 	$Status = $banner->Status;
 } else {
 	$bannerID = 0;
@@ -29,9 +27,6 @@ if ($banner) {
 	$TargetUrl = '';
 	$TargetContent = '';
 	$Description = '';
-	$Autoplay = 1;
-	$IntervalTime = 5;
-	$TransitionRate = 20;
 	$Status = 1;
 }
 ?>
@@ -167,12 +162,25 @@ if ($banner) {
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_desc') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
 			<div class="form-row">
+				<div class="col-md-3">{{__('common.banners_active')}}</div>
+				<div class="col-md-8">
+					<div class="checkbox-inline">
+						<div class="checker">
+							<span>
+								<input name="BannerActive" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked="checked"' : ''; ?>>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_autoplay') }}"><span class="icon-info-sign"></span></a></div>
+			</div>
+			<div class="form-row">
 				<div class="col-md-3">{{__('common.banners_autoplay')}}</div>
 				<div class="col-md-8">
 					<div class="checkbox-inline">
 						<div class="checker">
 							<span>
-								<input name="Autoplay" type="checkbox" value="1" <?php echo $Autoplay ? 'checked="checked"' : ''; ?>>
+								<input name="BannerAutoplay" type="checkbox" value="1" <?php echo $application->BannerAutoplay ? 'checked="checked"' : ''; ?>>
 							</span>
 						</div>
 					</div>
@@ -182,14 +190,14 @@ if ($banner) {
 			<div class="form-row">
 				<div class="col-md-3">{{__('common.banners_autoplay_interval')}}</div>
 				<div class="col-md-8">
-					<input type="text" name="IntervalTime" value="<?php echo $IntervalTime ?>"/>
+					<input type="text" name="BannerIntervalTime" value="<?php echo $application->BannerIntervalTime ?>"/>
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_interval') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
 			<div class="form-row">
 				<div class="col-md-3">{{__('common.banners_autoplay_speed')}}</div>
 				<div class="col-md-8">
-					<input type="text" name="TransitionRate"  value="<?php echo $TransitionRate; ?>"/>
+					<input type="text" name="BannerTransitionRate"  value="<?php echo $application->BannerTransitionRate; ?>"/>
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_speed') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
@@ -227,7 +235,7 @@ if ($banner) {
 														<!-- masterslider -->
 														<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
 															<?php foreach ($bannerSet as $savedBanner): ?>
-																<div class="ms-slide" data-delay="{{$IntervalTime}}">
+																<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
 																	<?php $imgPath = $savedBanner->getImagePath($application); ?>
 																	<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
 																	<div class="ms-info">{{$savedBanner->Description}}</div>
@@ -236,7 +244,7 @@ if ($banner) {
 															<?php endforeach; ?>
 															<?php if (empty($bannerSet)): ?>
 																<?php for ($i = 0; $i < 4; $i++): ?>
-																	<div class="ms-slide" data-delay="{{$IntervalTime}}">
+																	<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
 																		<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}"/> 
 																		<div class="ms-info"></div>
 																		<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
@@ -311,7 +319,7 @@ if ($banner) {
 														<!-- masterslider -->
 														<div class="master-slider ms-skin-black-2 round-skin" id="masterslider2">
 															<?php foreach ($bannerSet as $savedBanner): ?>
-																<div class="ms-slide" data-delay="{{$IntervalTime}}">
+																<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
 																	<?php $imgPath = $savedBanner->getImagePath($application); ?>
 																	<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
 																	<div class="ms-info">{{$savedBanner->Description}}</div>
@@ -320,7 +328,7 @@ if ($banner) {
 															<?php endforeach; ?>
 															<?php if (empty($bannerSet)): ?>
 																<?php for ($i = 0; $i < 4; $i++): ?>
-																	<div class="ms-slide" data-delay="{{$IntervalTime}}">
+																	<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
 																		<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}"/> 
 																		<div class="ms-info"></div>
 																		<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
@@ -433,6 +441,9 @@ if ($banner) {
     var BannerID = <?php echo $bannerID; ?>;
     var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
     var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
+	var Speed = <?php echo $application->BannerAutoplay; ?>;
+	var Autoplay = <?php echo ($application->BannerAutoplay == 1 ? true : false); ?> ;
+	var Speed = <?php echo $application->BannerTransitionRate; ?>;
 	
     $(function () {
 		cBanner.addImageUpload();
@@ -451,8 +462,8 @@ if ($banner) {
 	    view: 'fadeBasic',
 	    layout: 'fillwidth',
 	    fillMode: 'stretch',
-	    speed: {{$TransitionRate}},
-	    autoplay: <?php echo ($Autoplay == 1 ? true : false); ?> 
+	    speed: Speed,
+	    autoplay: Autoplay
     });
     var gallery = new MSGallery('ms-gallery-1', slider);
     gallery.setup();
@@ -480,8 +491,8 @@ if ($banner) {
 	    view: 'fadeBasic',
 	    layout: 'partialview',
 	    fillMode: 'stretch',
-	    speed: {{$TransitionRate}},
-	    autoplay: <?php echo ($Autoplay == 1 ? true : false); ?> 
+	    speed: Speed,
+	    autoplay: Autoplay 
     });
     var gallery2 = new MSGallery('ms-gallery-2', slider2);
     gallery2.setup();
@@ -509,5 +520,4 @@ if ($banner) {
 	    }
     });
 </script>
-
 @endsection
