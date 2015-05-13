@@ -69,7 +69,7 @@ if ($banner) {
 		border: 1px solid #141414 !important;
 	}
 	.urlCheck:focus,.urlCheck:active{
-		background-color: #2e2e2e !important;
+		background-color: #2e2e2e;
 		border-color: none !important;
 	}
 	.urlCheck{
@@ -231,13 +231,15 @@ if ($banner) {
 																	<?php $imgPath = $savedBanner->getImagePath($application); ?>
 																	<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
 																	<div class="ms-info">{{$savedBanner->Description}}</div>
+																	<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
 																</div>
 															<?php endforeach; ?>
 															<?php if (empty($bannerSet)): ?>
 																<?php for ($i = 0; $i < 4; $i++): ?>
 																	<div class="ms-slide" data-delay="{{$IntervalTime}}">
 																		<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}"/> 
-																		<div class="ms-info">LOREM IPSUM DOLOR SIT AMET</div>
+																		<div class="ms-info"></div>
+																		<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
 																	</div>
 																<?php endfor; ?>
 															<?php endif; ?>
@@ -313,13 +315,15 @@ if ($banner) {
 																	<?php $imgPath = $savedBanner->getImagePath($application); ?>
 																	<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
 																	<div class="ms-info">{{$savedBanner->Description}}</div>
+																	<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
 																</div>
 															<?php endforeach; ?>
 															<?php if (empty($bannerSet)): ?>
 																<?php for ($i = 0; $i < 4; $i++): ?>
 																	<div class="ms-slide" data-delay="{{$IntervalTime}}">
 																		<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}"/> 
-																		<div class="ms-info">LOREM IPSUM DOLOR SIT AMET</div>
+																		<div class="ms-info"></div>
+																		<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
 																	</div>
 																<?php endfor; ?>
 															<?php endif; ?>

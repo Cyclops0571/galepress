@@ -1916,7 +1916,7 @@ var cBanner = new function () {
 	}
 	else if (isUrlReachable(url)) {
 	    $('.my-btn-success').removeClass("noTouch").css('background', '');
-	    $('#checkUrl').css('background-color', '#59AD2F');
+	    $('#checkUrl').css('background-color', '#59AD2F !important;');
 	    $('#checkUrl').css('color', '#fff');
 	}
 
@@ -1944,4 +1944,15 @@ var cBanner = new function () {
 	var rowIDPrefix = "bannerIDSet_";
 	cCommon.delete(url, id, rowIDPrefix);
     };
+
+    // this.targetContent = function () {
+	   //  var selectedIndex = $('#TargetContent option:selected').index();
+	   //  console.log(selectedIndex);
+	   //  if(selectedIndex==0){
+	   //  	$('#TargetUrl, #TargetUrl + *').removeClass('noTouch').css('opacity',1);
+	   //  }
+	   //  else {
+	   //  	$('#TargetUrl, #TargetUrl + *').addClass('noTouch').css('opacity',0.5);
+	   //  }
+    // };
 };

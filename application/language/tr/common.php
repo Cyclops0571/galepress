@@ -528,7 +528,7 @@ return array(
 	'banners_autoplay_speed' => 'Geçiş Hızı (0-100):',
 	'banners_info_target_content' => 'Resme tıklayınca ilgili içeriğin açılmasını sağlar.',
 	'banners_info_target_address' => 'Resme tıklayınca ilgili adrese yönlendirir.',
-	'banners_info_target_desc' => 'Resim üzerinde gözükecek olan yazıyı ifade eder. Üzerinde çalışılmaktadır.',
+	'banners_info_target_desc' => 'Resim üzerinde gözükecek olan yazıyı ifade eder.',
 	'banners_info_autoplay' => 'Resimler arasında otomatik olarak geçiş yapılır.',
 	'banners_info_interval' => 'Resimler arasındaki geçiş süresini ifade eder.',
 	'banners_info_speed' => 'Resimler arasındaki geçiş hızını ifade eder.',

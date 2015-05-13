@@ -64,8 +64,9 @@
 			    <?php foreach ($bannerSet as $savedBanner): ?>
 					<div class="ms-slide" data-delay="{{$IntervalTime}}">
 						<?php $imgPath = $savedBanner->getImagePath($application); ?>
-						<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
+						<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" />
 						<div class="ms-info">{{$savedBanner->Description}}</div>
+						<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
 					</div>
 				<?php endforeach; ?>
 			</div>

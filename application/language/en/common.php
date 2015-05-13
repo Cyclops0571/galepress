@@ -528,7 +528,7 @@ return array(
 	'banners_autoplay_speed' => 'Transition Rate (0-100):',
 	'banners_info_target_content' => 'It will open the relevant content when the image is clicked.',
 	'banners_info_target_address' => 'It will open the relevant address when the image is clicked.',
-	'banners_info_target_desc' => 'It refers to the text, which appear on the image. We are working on',
+	'banners_info_target_desc' => 'It refers to the text, which appear on the image.',
 	'banners_info_autoplay' => 'Automatically toggle between the images.',
 	'banners_info_interval' => 'It refers to the transition time between pictures.',
 	'banners_info_speed' => 'It refers to the transition speed between images.',
