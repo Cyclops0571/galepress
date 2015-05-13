@@ -436,7 +436,6 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.maps_new')->get($currentLanguage), array('before'=>'auth', 'uses'=>'maps@new'));
 	Route::post(__('route.maps_save')->get($currentLanguage), array('as' => 'maps_save', 'before'=>'crsf|auth', 'uses'=>'maps@save'));
 	Route::get(__('route.maps_location')->get($currentLanguage) . "(:num)", array('as' => 'maps_location', 'before'=>'auth', 'uses'=>'maps@location'));
-	// echo __('route.maps_location')->get($currentLanguage) . "(:num)"; exit;
 	// </editor-fold>
 	
 	// <editor-fold defaultstate="collapsed" desc="Banners">
@@ -444,8 +443,6 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.banners_show')->get($currentLanguage), array('as' => 'banners_show', 'before'=>'auth', 'uses'=>'banners@show'));
 	Route::get(__('route.banners_new')->get($currentLanguage), array('before'=>'auth', 'uses'=>'banners@new'));
 	Route::post(__('route.banners_save')->get($currentLanguage), array('as' => 'banners_save', 'before'=>'crsf|auth', 'uses'=>'banners@save'));
-	Route::get(__('route.banners_delete')->get($currentLanguage) . "(:num)", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
-	Route::get(__('route.banners_order')->get($currentLanguage) . "(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));
 	
 	// </editor-fold>
 	
@@ -453,7 +450,9 @@ foreach($languages as $currentLanguage) {
 	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }
 
-Route::get("/banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
+Route::get("banners/delete", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
+Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));
+Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));

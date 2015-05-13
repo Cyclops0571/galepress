@@ -20,6 +20,7 @@ class Banners_Controller extends Base_Controller {
 		$this->caption = __('common.banners_caption');
 		$this->detailcaption = __('common.banners_caption_detail');
 		$this->fields = array();
+		$this->fields[] = __('common.image');
 		$this->fields[] = __('common.banner_list_customer');
 		$this->fields[] = __('common.banner_list_application');
 		$this->fields[] = __('common.banner_form_target_url');
@@ -27,25 +28,27 @@ class Banners_Controller extends Base_Controller {
 		$this->fields[] = __('common.banner_description');
 		$this->fields[] = __('common.banners_list_status');
 		$this->fields[] = __('common.banner_list_banner_id');
+		$this->fields[] = __('common.detailpage_delete');
 
 		if ((int) Auth::User()->UserTypeID == eUserTypes::Customer) {
 			$this->fields = array();
+			$this->fields[] = __('common.image');
 			$this->fields[] = __('common.banner_form_target_url');
 			$this->fields[] = __('common.banner_form_target_content');
 			$this->fields[] = __('common.banner_description');
 			$this->fields[] = __('common.banners_list_status');
 			$this->fields[] = __('common.banner_list_banner_id');
+			$this->fields[] = __('common.detailpage_delete');
 		}
-		
 	}
 
 	public function get_index() {
 		$applicationID = (int) Input::get('applicationID', 0);
-
-		if (!Common::CheckApplicationOwnership($applicationID)) {
+		$application = Application::find($applicationID);
+		if (!$application || !$application->CheckOwnership()) {
 			return Redirect::to(__('route.home'));
 		}
-		
+
 		$rows = Banner::getAppBanner($applicationID);
 		$data = array();
 		$data['route'] = $this->route;
@@ -54,7 +57,7 @@ class Banners_Controller extends Base_Controller {
 		$data['page'] = $this->page;
 		$data['fields'] = $this->fields;
 		$data['rows'] = $rows;
-		
+		$data['application'] = $application;
 		return $html = View::make('pages.' . Str::lower($this->table) . 'list', $data)
 				->nest('filterbar', 'sections.filterbar', $data)
 				->nest('commandbar', 'sections.commandbar', $data);
@@ -66,8 +69,8 @@ class Banners_Controller extends Base_Controller {
 		if (!$application) {
 			return Redirect::to(__('route.home'));
 		}
-		
-		if(!$application->CheckOwnership()) {
+
+		if (!$application->CheckOwnership()) {
 			return Redirect::to(__('route.home'));
 		}
 
@@ -87,7 +90,7 @@ class Banners_Controller extends Base_Controller {
 				. 'LIMIT 9';
 
 		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-		
+
 		$data = array();
 		$data["application"] = $application;
 		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . Input::get('applicationID', '0');
@@ -105,30 +108,30 @@ class Banners_Controller extends Base_Controller {
 		if (!$banner) {
 			return Redirect::to($this->route);
 		}
-				
+
 		$contents = DB::table('Content')
-			->where('ApplicationID', '=', $banner->ApplicationID)
-			->where('StatusID', '=', eStatus::Active)
-			->order_by('Name', 'ASC')
-			->get();
-		
-				/* START SQL FOR TEMPLATE-CHOOSER */
+				->where('ApplicationID', '=', $banner->ApplicationID)
+				->where('StatusID', '=', eStatus::Active)
+				->order_by('Name', 'ASC')
+				->get();
+
+		/* START SQL FOR TEMPLATE-CHOOSER */
 		$sqlTemlateChooser = 'SELECT * FROM ('
-		. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
-		. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
-		. 'ccf.ContentCoverImageFileID, ccf.FileName '
-		. 'FROM `Application` AS a '
-		. 'LEFT JOIN `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '
-		. 'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '
-		. 'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '
-		. 'WHERE a.ApplicationID= ' . $banner->ApplicationID . ' '
-		. 'order by  c.ContentID DESC, cf.ContentFileID DESC, ccf.ContentCoverImageFileID DESC) as innerTable '
-		. 'group by innerTable.ContentID '
-		. 'order by innerTable.ContentID DESC '
-		. 'LIMIT 9';
+				. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
+				. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
+				. 'ccf.ContentCoverImageFileID, ccf.FileName '
+				. 'FROM `Application` AS a '
+				. 'LEFT JOIN `Content` AS c ON c.ApplicationID=a.ApplicationID AND c.StatusID=1 '
+				. 'LEFT JOIN `ContentFile` AS cf ON c.ContentID=cf.ContentID '
+				. 'LEFT JOIN `ContentCoverImageFile` AS ccf ON ccf.ContentFileID=cf.ContentFileID '
+				. 'WHERE a.ApplicationID= ' . $banner->ApplicationID . ' '
+				. 'order by  c.ContentID DESC, cf.ContentFileID DESC, ccf.ContentCoverImageFileID DESC) as innerTable '
+				. 'group by innerTable.ContentID '
+				. 'order by innerTable.ContentID DESC '
+				. 'LIMIT 9';
 
 		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
-		
+
 		$data = array();
 		$data["application"] = Application::find($banner->ApplicationID);
 		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $banner->ApplicationID;
@@ -141,41 +144,64 @@ class Banners_Controller extends Base_Controller {
 		return View::make("pages." . Str::lower($this->table) . "detail", $data)->nest('filterbar', 'sections.filterbar', $data);
 	}
 
-	public function post_delete() {
-		
-	}
-
-	public function post_order($applicationID) {
-		
-	}
-
-	public function post_save() {
-		
-		$pk = (int) Input::get("primaryKeyID");
-		$banner = Banner::find($pk);
+	public function get_delete() {
+		$banner = Banner::find((int)Input::get('id'));
 		if(!$banner) {
-			$banner = new Banner();
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		
-		$application = Application::find(Input::get("applicationID"));
+		$application = Application::find($banner->ApplicationID);
 		if(!$application || !$application->CheckOwnership()) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
 		
+		$banner->StatusID = eStatus::Deleted;
+		$banner->save();
+		return "success=" . base64_encode("true");
+	}
+
+	public function post_order($applicationID) {
+		$application = Application::find($applicationID);
+		if(!$application || !$application->CheckOwnership()) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		}
+		$bannerIDSet = Input::get("bannerIDSet");
+		$bannerCount = count($bannerIDSet);
+		for($i = 0; $i < $bannerCount; $i++) {
+			$banner = Banner::find($bannerIDSet[$i]);
+			$banner->OrderNo = $bannerCount - $i;
+			$banner->save();
+		}
+		
+		return "success=" . base64_encode("true");
+	}
+
+	public function post_save() {
+
+		$pk = (int) Input::get("primaryKeyID");
+		$banner = Banner::find($pk);
+		if (!$banner) {
+			$banner = new Banner();
+		}
+
+		$application = Application::find(Input::get("applicationID"));
+		if (!$application || !$application->CheckOwnership()) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		}
+
 		$banner->ApplicationID = $application->ApplicationID;
 		$banner->TargetContent = (int) Input::get("TargetContent");
 		$banner->TargetUrl = Input::get("TargetUrl");
 		$banner->Description = Input::get("Description");
-		$banner->Autoplay = (int)Input::get("Autoplay");
-		$banner->IntervalTime = (int)Input::get("IntervalTime");
-		$banner->TransitionRate = (int)Input::get("TransitionRate");
+		$banner->Autoplay = (int) Input::get("Autoplay");
+		$banner->IntervalTime = (int) Input::get("IntervalTime");
+		$banner->TransitionRate = (int) Input::get("TransitionRate");
 		$banner->Status = (int) Input::get('Status');
 		$banner->save();
 		$banner->processImage($application);
 		return "success=" . base64_encode("true") . "&bannerID=" . base64_encode($banner->BannerID);
 	}
-	
-	public function post_imageupload(){
+
+	public function post_imageupload() {
 		ob_start();
 		$element = Input::get('element');
 
@@ -204,11 +230,11 @@ class Banners_Controller extends Base_Controller {
 		$ret = Uploader::UploadImage($tempFile);
 		return Response::json($ret);
 	}
-	
-	public function post_imageupload_ltie10(){
+
+	public function post_imageupload_ltie10() {
 		
 	}
-	
+
 	public function get_service_view($applicationID) {
 		$data = array();
 		$data['caption'] = $this->caption;

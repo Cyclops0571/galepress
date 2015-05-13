@@ -534,7 +534,6 @@ var cCustomer = new function () {
     };
 
     this.erase = function () {
-
 	cCommon.erase(this.objectName);
     };
 };
@@ -1268,6 +1267,16 @@ var cCommon = new function () {
 	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;
 	});
     };
+    
+    this.delete = function (url, id, rowIDPrefix) {
+	cNotification.hide();
+	cNotification.loader();
+	var d = {id: id};
+	cCommon.doAsyncRequest('GET', url, d, function(ret){
+	    $("#" + rowIDPrefix + id).remove();
+	    cNotification.success();
+	});
+    };
 
     this.getQS = function () {
 	var qs = "";
@@ -1928,5 +1937,11 @@ var cBanner = new function () {
 		    }
 		}
 	);
+    };
+    
+    this.delete = function(id) {
+	var url = "/banners/delete";
+	var rowIDPrefix = "bannerIDSet_";
+	cCommon.delete(url, id, rowIDPrefix);
     };
 };

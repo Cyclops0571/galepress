@@ -541,5 +541,7 @@ return array(
 	'banners_list_status' => 'Durum',
 	'banners_list_status1' => 'Yayında',
 	'banners_list_status0' => 'Yayında değil',
+	
 	'image_select' => 'Resim seç...',
+	'image' => 'Resim',
 );

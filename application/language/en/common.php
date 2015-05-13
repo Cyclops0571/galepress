@@ -542,4 +542,6 @@ return array(
 	'banners_list_status1' => 'Published',
 	'banners_list_status0' => 'Not Publicationed',
 	'image_select' => 'Choose Image...',
+	'image' => 'Image',
+
 );
