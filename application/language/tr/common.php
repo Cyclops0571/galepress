@@ -517,7 +517,7 @@ return array(
 	'banner_form_name' => 'Banner',
 	'banner_form_target_url' => 'Hedef Url:',
 	'banner_form_target_content' => 'Hedef İçerik:',
-	'banners_caption' => 'Banner',
+	'banners_caption' => 'Banner Listesi',
 	'banners_caption_detail' => 'Banner Detayı',
 	'banners_select_content' => 'Hedef içerik seçebilirsiniz...',
 	'banners_original_image' => 'Yüklenilen resim:',

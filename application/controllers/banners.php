@@ -17,8 +17,8 @@ class Banners_Controller extends Base_Controller {
 		$this->route = __('route.' . $this->page);
 		$this->table = 'Banner';
 		$this->pk = 'BannerID';
-		$this->caption = __('common.contents_caption');
-		$this->detailcaption = __('common.contents_caption_detail');
+		$this->caption = __('common.banners_caption');
+		$this->detailcaption = __('common.banners_caption_detail');
 		$this->fields = array();
 		$this->fields[] = __('common.banner_list_customer');
 		$this->fields[] = __('common.banner_list_application');
@@ -90,11 +90,14 @@ class Banners_Controller extends Base_Controller {
 		
 		$data = array();
 		$data["application"] = $application;
+		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . Input::get('applicationID', '0');
+		$data['caption'] = $this->caption;
+		$data['detailcaption'] = __('common.banners_caption_detail');
 		$data["banner"] = FALSE;
 		$data["bannerSet"] = Banner::getAppBanner($applicationID);
 		$data["contents"] = $application->getContentSet();
 		$data["templateResults"] = $templateResults;
-		return View::make('pages.' . Str::lower($this->table) . 'detail', $data);
+		return View::make('pages.' . Str::lower($this->table) . 'detail', $data)->nest('filterbar', 'sections.filterbar', $data);
 	}
 
 	public function get_show($bannerID) {
@@ -102,9 +105,7 @@ class Banners_Controller extends Base_Controller {
 		if (!$banner) {
 			return Redirect::to($this->route);
 		}
-		
-		
-		
+				
 		$contents = DB::table('Content')
 			->where('ApplicationID', '=', $banner->ApplicationID)
 			->where('StatusID', '=', eStatus::Active)
@@ -130,11 +131,14 @@ class Banners_Controller extends Base_Controller {
 		
 		$data = array();
 		$data["application"] = Application::find($banner->ApplicationID);
+		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $banner->ApplicationID;
+		$data['caption'] = $this->caption;
+		$data['detailcaption'] = $this->detailcaption;
 		$data["bannerSet"] = Banner::getAppBanner($banner->ApplicationID);
 		$data["banner"] = $banner;
 		$data["contents"] = $contents;
 		$data["templateResults"] = $templateResults;
-		return View::make("pages." . Str::lower($this->table) . "detail", $data);
+		return View::make("pages." . Str::lower($this->table) . "detail", $data)->nest('filterbar', 'sections.filterbar', $data);
 	}
 
 	public function post_delete() {
@@ -207,7 +211,9 @@ class Banners_Controller extends Base_Controller {
 	
 	public function get_service_view($appID) {
 		$data = array();
-		return View::make("service.banner_service", $data);
+		$data['caption'] = $this->caption;
+		$data['detailcaption'] = $this->detailcaption;
+		return View::make("service.banner_service", $data)->nest('filterbar', 'sections.filterbar', $data);
 	}
 
 }

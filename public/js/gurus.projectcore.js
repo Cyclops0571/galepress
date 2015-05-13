@@ -1921,6 +1921,7 @@ var cBanner = new function () {
 	else if (isUrlReachable(url)) {
 	    $('.my-btn-success').removeClass("noTouch").css('background', '');
 	    $('#checkUrl').css('background-color', '#59AD2F');
+	    $('#checkUrl').css('color', '#fff');
 	}
 
 	if ($('#imgPreview').attr('src') == '/img/bannerSlider/defaultPreview.jpg') {

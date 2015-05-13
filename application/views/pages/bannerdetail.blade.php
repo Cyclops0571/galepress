@@ -111,6 +111,9 @@ if ($banner) {
 		padding: 2px 3px !important;
 		font-size: 0.3em !important;
 	}
+	.ms-timerbar{
+		display: none !important;
+	}
 </style>
 
 {{ Form::open(__('route.banners_detail'), 'POST') }}
@@ -220,7 +223,7 @@ if ($banner) {
 														<!-- masterslider -->
 														<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
 															<?php foreach ($bannerSet as $savedBanner): ?>
-																<div class="ms-slide">
+																<div class="ms-slide" data-delay="{{$IntervalTime}}">
 																	<?php $imgPath = $savedBanner->getImagePath($application); ?>
 																	<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
 																	<div class="ms-info">{{$savedBanner->Description}}</div>
@@ -228,7 +231,7 @@ if ($banner) {
 															<?php endforeach; ?>
 															<?php if (empty($bannerSet)): ?>
 																<?php for ($i = 0; $i < 4; $i++): ?>
-																	<div class="ms-slide">
+																	<div class="ms-slide" data-delay="{{$IntervalTime}}">
 																		<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}"/> 
 																		<div class="ms-info">LOREM IPSUM DOLOR SIT AMET</div>
 																	</div>
@@ -302,7 +305,7 @@ if ($banner) {
 														<!-- masterslider -->
 														<div class="master-slider ms-skin-black-2 round-skin" id="masterslider2">
 															<?php foreach ($bannerSet as $savedBanner): ?>
-																<div class="ms-slide">
+																<div class="ms-slide" data-delay="{{$IntervalTime}}">
 																	<?php $imgPath = $savedBanner->getImagePath($application); ?>
 																	<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
 																	<div class="ms-info">{{$savedBanner->Description}}</div>
@@ -310,7 +313,7 @@ if ($banner) {
 															<?php endforeach; ?>
 															<?php if (empty($bannerSet)): ?>
 																<?php for ($i = 0; $i < 4; $i++): ?>
-																	<div class="ms-slide">
+																	<div class="ms-slide" data-delay="{{$IntervalTime}}">
 																		<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}"/> 
 																		<div class="ms-info">LOREM IPSUM DOLOR SIT AMET</div>
 																	</div>
@@ -419,81 +422,83 @@ if ($banner) {
 {{ Form::close(); }}
 
 <script type="text/javascript">
-	    var BannerID = <?php echo $bannerID; ?>;
-	    var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
-	    var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
-		
-	    $(function () {
-			cBanner.addImageUpload();
-			cTemplate.loadCss(ThemeBackground, ThemeForeground);
-	    });
+    var BannerID = <?php echo $bannerID; ?>;
+    var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
+    var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
+	
+    $(function () {
+		cBanner.addImageUpload();
+		cTemplate.loadCss(ThemeBackground, ThemeForeground);
+    });
 
-	    if ($('#imgPreview').attr('src') == "/img/bannerSlider/defaultPreview.jpg" || $('#imgPreview').attr('src') == "") {
-    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+	if ($('#imgPreview').attr('src') == "/img/bannerSlider/defaultPreview.jpg" || $('#imgPreview').attr('src') == "") {
+    	$('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
     }
 
     var slider = new MasterSlider();
-	    slider.setup('masterslider', {
-	    width: 320,
-		    height: 138,
-		    space: 0,
-		    view: 'fadeBasic',
-		    layout: 'fillwidth',
-		    fillMode: 'stretch',
-		    speed: 20
-	    });
-	    var gallery = new MSGallery('ms-gallery-1', slider);
-	    gallery.setup();
-	    slider.api.addEventListener(MSSliderEvent.CHANGE_START, function () {
-	    $("#ms-gallery-1 .ms-gallery-botcont").stop(true);
-		    $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
-	    });
-	    slider.api.addEventListener(MSSliderEvent.CHANGE_END, function () {
-	    $("#ms-gallery-1 .ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
-	    });
-	    $('#ms-gallery-1').click(function () {
+    slider.setup('masterslider', {
+    	width: 320,
+	    height: 138,
+	    space: 0,
+	    view: 'fadeBasic',
+	    layout: 'fillwidth',
+	    fillMode: 'stretch',
+	    speed: {{$TransitionRate}},
+	    autoplay: <?php echo ($Autoplay == 1 ? true : false); ?> 
+    });
+    var gallery = new MSGallery('ms-gallery-1', slider);
+    gallery.setup();
+    slider.api.addEventListener(MSSliderEvent.CHANGE_START, function () {
     $("#ms-gallery-1 .ms-gallery-botcont").stop(true);
-	    if ($("#ms-gallery-1 .ms-gallery-botcont").css('opacity') > 0) {
-    $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0}, 250);
-    }
-    else {
-    $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
-    }
+	    $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
     });
-	    var slider2 = new MasterSlider();
-	    slider2.setup('masterslider2', {
-	    width: 150,
-		    height: 65,
-		    space: 0,
-		    view: 'fadeBasic',
-		    layout: 'partialview',
-		    fillMode: 'stretch',
-		    speed: 20
-	    });
-	    var gallery2 = new MSGallery('ms-gallery-2', slider2);
-	    gallery2.setup();
-	    slider2.api.addEventListener(MSSliderEvent.CHANGE_START, function () {
-	    $("#ms-gallery-2 .ms-gallery-botcont").stop(true);
-		    $("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
-	    });
-	    slider2.api.addEventListener(MSSliderEvent.CHANGE_END, function () {
-	    $("#ms-gallery-2 .ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
-	    });
-	    $('#ms-gallery-2').click(function () {
+    slider.api.addEventListener(MSSliderEvent.CHANGE_END, function () {
+    	$("#ms-gallery-1 .ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
+    });
+	$('#ms-gallery-1').click(function () {
+	    $("#ms-gallery-1 .ms-gallery-botcont").stop(true);
+		if ($("#ms-gallery-1 .ms-gallery-botcont").css('opacity') > 0) {
+	    	$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0}, 250);
+	    }
+	    else {
+	    	$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
+	    }
+    });
+    var slider2 = new MasterSlider();
+    slider2.setup('masterslider2', {
+    	width: 150,
+	    height: 65,
+	    space: 0,
+	    view: 'fadeBasic',
+	    layout: 'partialview',
+	    fillMode: 'stretch',
+	    speed: {{$TransitionRate}},
+	    autoplay: <?php echo ($Autoplay == 1 ? true : false); ?> 
+    });
+    var gallery2 = new MSGallery('ms-gallery-2', slider2);
+    gallery2.setup();
+    slider2.api.addEventListener(MSSliderEvent.CHANGE_START, function () {
     $("#ms-gallery-2 .ms-gallery-botcont").stop(true);
-	    if ($("#ms-gallery-2 .ms-gallery-botcont").css('opacity') > 0) {
-    $("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0}, 250);
-    }
-    else {
-    $("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
-    }
+	    $("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
     });
-	    $(".ms-info").each(function () {
-    if ($(this).text().length > 50) {
-    var infoText = $(this).text();
-	    infoText = infoText.substring(0, 50);
-	    $(this).text(infoText + "...");
-    }
+    slider2.api.addEventListener(MSSliderEvent.CHANGE_END, function () {
+    	$("#ms-gallery-2 .ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
+    });
+	$('#ms-gallery-2').click(function () {
+	    $("#ms-gallery-2 .ms-gallery-botcont").stop(true);
+		if($("#ms-gallery-2 .ms-gallery-botcont").css('opacity') > 0) {
+	    	$("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0}, 250);
+	    }
+	    else {
+	    	$("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
+	    }
+    });
+	$(".ms-info").each(function () {
+	    if ($(this).text().length > 50) {
+	    var infoText = $(this).text();
+		    infoText = infoText.substring(0, 50);
+		    $(this).text(infoText + "...");
+	    }
     });
 </script>
 

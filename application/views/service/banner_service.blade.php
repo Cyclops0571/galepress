@@ -41,7 +41,10 @@
 				display: none !important;
 			}
 			.ms-gallery-template .ms-slide-info {
-			  padding: 20px 20px !important;
+			  	padding: 20px 20px !important;
+			}
+			.ms-timerbar{
+				display: none !important;
 			}
 		</style>
 
@@ -49,44 +52,15 @@
 
 	<body>
 		<div class="ms-gallery-template" id="ms-gallery-1">
-				<!-- masterslider -->
-				<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
-				    <div class="ms-slide">
-				        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/1.jpg" alt="lorem ipsum dolor sit"/> 
-				        <img src="/img/bannerSlider/thumbs/1.jpg" alt="thumb-1" class="ms-thumb"/>
-				        <div class="ms-info">
-				        	LOREM IPSUM DOLOR SIT AMET
-				        </div>
-				    </div>
-				    <div class="ms-slide">
-				        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/2.jpg" alt="lorem ipsum dolor sit"/>     
-				         <img src="/img/bannerSlider/thumbs/2.jpg" alt="thumb-2" class="ms-thumb"/>
-				         <div class="ms-info">
-				        	CONSECTETUR ADIPISCING ELIT
-				        </div>
-				    </div>
-				    <div class="ms-slide">
-				        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/3.jpg" alt="lorem ipsum dolor sit"/>    
-				          <img src="/img/bannerSlider/thumbs/3.jpg" alt="thumb-3" class="ms-thumb"/>
-				         <div class="ms-info">
-				        	SUSPENDISSE UT PULVINAR MAURIS
-				        </div>   
-				    </div>
-				    <div class="ms-slide">
-				        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/4.jpg" alt="lorem ipsum dolor sit"/>    
-				         <img src="/img/bannerSlider/thumbs/4.jpg" alt="thumb-4" class="ms-thumb"/>
-				         <div class="ms-info">
-				        	SED DAPIBUS SIT AMET FELIS
-				        </div>  
-				    </div>
-				    <div class="ms-slide">
-				        <img src="/img/bannerSlider/blank.gif" data-src="/img/bannerSlider/5.jpg" alt="lorem ipsum dolor sit"/>    
-				         <img src="/img/bannerSlider/thumbs/5.jpg" alt="thumb-4" class="ms-thumb"/>
-				         <div class="ms-info">
-				        	SED DAPIBUS SIT AMET FELIS
-				        </div>  
-				    </div>
-				</div>
+			<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
+			    <?php foreach ($bannerSet as $savedBanner): ?>
+					<div class="ms-slide" data-delay="{{$IntervalTime}}">
+						<?php $imgPath = $savedBanner->getImagePath($application); ?>
+						<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" /> 
+						<div class="ms-info">{{$savedBanner->Description}}</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</body>
 
@@ -105,7 +79,8 @@
 				view:'fadeBasic',
 				layout: 'partialview',
 				fillMode: 'stretch',
-				speed: 20
+				speed: {{$TransitionRate}},
+	    		autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
 			});
 		}
 		else {
@@ -116,7 +91,8 @@
 				view:'fadeBasic',
 				layout: 'fullscreen',
 				fillMode: 'stretch',
-				speed: 20
+				speed: {{$TransitionRate}},
+	    		autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
 			});
 		}
     }
@@ -134,7 +110,8 @@
 					view:'fadeBasic',
 					layout: 'partialview',
 					fillMode: 'stretch',
-					speed: 20
+					speed: {{$TransitionRate}},
+	    			autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
 				});
 			    break; 
 			  default:
@@ -145,7 +122,8 @@
 					view:'fadeBasic',
 					layout: 'fullscreen',
 					fillMode: 'stretch',
-					speed: 20
+					speed: {{$TransitionRate}},
+	    			autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
 				});
 			    break; 
 			}
