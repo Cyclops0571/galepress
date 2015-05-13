@@ -172,7 +172,7 @@ class Banners_Controller extends Base_Controller {
 		$banner->Status = (int) Input::get('Status');
 		$banner->save();
 		$banner->processImage($application);
-		return "success=" . base64_encode("true");
+		return "success=" . base64_encode("true") . "&bannerID=" . base64_encode($banner->BannerID);
 	}
 	
 	public function post_imageupload(){

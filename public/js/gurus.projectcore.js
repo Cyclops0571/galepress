@@ -1787,6 +1787,7 @@ var cTemplate = new function () {
 };
 
 var cBanner = new function () {
+    var _self = this;
     this.objectName = "banners";
 
     this.addImageUpload = function () {
@@ -1881,20 +1882,6 @@ var cBanner = new function () {
 			    $(".input-group + span.urlError").removeClass("hide");
 			    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
 			}
-
-			// $.ajax({
-			//   url: "http://katalogdosyalari.galepress.com/deneme/index.php",
-			//   method: "POST",
-			//   data: { id : menuId },
-			//   dataType: "html"
-			// })
-			// .done(function( html ) {
-			//     alert("basarili");
-			// })
-			// .fail(function( jqXHR, textStatus ) {
-			//   alert("basarisiz");
-			// });
-
 		    }
 		},
 		fail: function (e, data) {
@@ -1933,8 +1920,12 @@ var cBanner = new function () {
 	cCommon.save(this.objectName,
 		function (ret) {
 		    var bannerID = ret.getValue('bannerID');
-		    $("#primaryKeyID").val(bannerID);
+		    var primaryKeyID = $("#primaryKeyID").val();
+		    var hdnImageFileSelected = $("#hdnImageFileSelected").val();
 		    cNotification.success();
+		    if(parseInt(primaryKeyID) == 0 || parseInt(hdnImageFileSelected) == 1) {
+			document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + bannerID;
+		    }
 		}
 	);
     };
