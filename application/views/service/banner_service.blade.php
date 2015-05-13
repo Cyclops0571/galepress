@@ -50,6 +50,14 @@
 
 	</head>
 
+	<?php
+	if(false) {
+		$savedBanner = new Banner();
+	}
+		$Autoplay = 1;
+		$IntervalTime = 5;
+		$TransitionRate = 20;
+	?>
 	<body>
 		<div class="ms-gallery-template" id="ms-gallery-1">
 			<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">

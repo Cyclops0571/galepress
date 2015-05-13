@@ -209,11 +209,13 @@ class Banners_Controller extends Base_Controller {
 		
 	}
 	
-	public function get_service_view($appID) {
+	public function get_service_view($applicationID) {
 		$data = array();
 		$data['caption'] = $this->caption;
 		$data['detailcaption'] = $this->detailcaption;
-		return View::make("service.banner_service", $data)->nest('filterbar', 'sections.filterbar', $data);
+		$data["application"] = Application::find($applicationID);
+		$data['bannerSet'] = Banner::getAppBanner($applicationID);
+		return View::make("service.banner_service", $data);
 	}
 
 }

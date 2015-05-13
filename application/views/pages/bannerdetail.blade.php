@@ -130,7 +130,8 @@ if ($banner) {
 			<h2 style="text-transform:uppercase;">{{ __('common.banner_form_name') }}</h2>
 		</div>
 		<div class="content controls" style="overflow:visible">
-			<div class="form-row">
+			<?php /* 
+			 <div class="form-row">
 				<div class="col-md-3">{{ __('common.banners_select_content') }}</div>
 				<div class="col-md-8">
 					<select class="form-control select2" id="TargetContent" name="TargetContent">
@@ -142,6 +143,9 @@ if ($banner) {
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_content') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
+			*/
+			?>
+			
 			<div class="form-row">
 				<div class="col-md-3">{{__('common.banner_form_target_url')}}</div>
 				<div class="col-md-8">
