@@ -27,7 +27,12 @@ class Ws
 		return $customer;
 	}
 
-	// Application
+	/**
+	 * 
+	 * @param type $applicationID
+	 * @return Application
+	 * @throws Exception
+	 */
 	public static function getApplication($applicationID)
 	{
 		$application = Application::where('ApplicationID', '=', $applicationID)->where('StatusID', '=', eStatus::Active)->first();

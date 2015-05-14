@@ -62,7 +62,6 @@ class Ws_v102_Applications_Controller extends Base_Controller
 				'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
 				'ApplicationVersion' => (int)$application->Version,
 				'Force' => (int)$application->Force,
-				'MapService' => '/maps/webview/' . (int)$application->ApplicationID,
 			));
 		});
 	}
@@ -133,7 +132,9 @@ class Ws_v102_Applications_Controller extends Base_Controller
 				'error' => "",
 				'ThemeBackground' => $application->ThemeBackground,
 				'ThemeForeground' => $hexadecimalColorCode,
-				'bannerPage' => "http://www.galepress.com/banners/service_view/" . $applicationID,
+				'MapService' => '/maps/webview/' . (int)$application->ApplicationID,
+				'BannerActive' => $application->BannerActive,
+				'BannerPage' => "http://www.galepress.com/banners/service_view/" . $applicationID,
 				'Contents' => $contents,
 			));
 		});
