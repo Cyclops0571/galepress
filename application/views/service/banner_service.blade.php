@@ -29,7 +29,7 @@
 				bottom:0 !important;
 				width: 100% !important;
 				opacity: 0.7;
-				height: 7% !important;
+				height: 13% !important;
 			}
 			.ms-gallery-template .ms-slide-info{
 				padding: 0px 20px !important;
