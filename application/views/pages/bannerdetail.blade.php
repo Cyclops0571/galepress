@@ -266,10 +266,14 @@ if ($banner) {
 {{ Form::close(); }}
 <script type="text/javascript">
     var BannerID = <?php echo $bannerID; ?>;
-	var ApplicationID = <?php echo $ApplicationID; ?> 
+	var ApplicationID = <?php echo $ApplicationID; ?>;
+	var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
+    var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
+    var Autoplay = <?php echo json_encode($application->BannerAutoplay == 1 ? true : false); ?>;
+    var Speed = <?php echo $application->BannerTransitionRate; ?>;
     $(function () {
 		cBanner.addImageUpload();
-		cTemplate.show(ApplicationID);
+		cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
     });
 	
 </script>

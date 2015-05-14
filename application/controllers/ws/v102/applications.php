@@ -131,10 +131,14 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 
 	
 	
-	public function get_authorized_application_list() {
+	public function post_authorized_application_list() {
+		dd($_POST);
 		$username = Input::get('username');
 		$password = Input::get('password');
 		$userFacebookID = Input::get('userFacebookID');
 		$userFacebookToken = Input::get('userFacebookToken');
+		if(empty($username) || empty($password)) {
+			;
+		}
 	}
 }

@@ -145,7 +145,6 @@
                                               accessToken: accessToken
                                           }
                                       }).success(function(msg) {
-                                        // console.log(msg)
                                         document.location.href = "{{__('route.home')}}";
                                       }).fail(function(msg) {
 										  ;

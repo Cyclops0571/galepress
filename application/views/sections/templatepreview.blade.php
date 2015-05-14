@@ -171,12 +171,3 @@
 		</div>
 	</div>
 </div>
-
-
-<script type="text/javascript">
-    var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
-    var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
-    var Autoplay = <?php echo json_encode($application->BannerAutoplay == 1 ? true : false); ?>;
-    var Speed = <?php echo $application->BannerTransitionRate; ?>;
-	cTemplate.initMySlider(ThemeBackground, ThemeForeground, Autoplay, Speed);
-</script>

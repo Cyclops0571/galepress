@@ -458,6 +458,7 @@ Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));
 
+// <editor-fold defaultstate="collapsed" desc="WS v1.0.0">
 // WS v1.0.0 -----------------------------------------------------------------------------------------------
 // WS-Applications
 Route::get('ws/v100/applications/(:num)/version', array('uses' => 'ws.v100.applications@version'));
@@ -472,7 +473,9 @@ Route::get('ws/v100/contents/(:num)/cover-image', array('uses' => 'ws.v100.conte
 Route::get('ws/v100/contents/(:num)/file', array('uses' => 'ws.v100.contents@file'));
 // WS-Statistics
 Route::post('ws/v100/statistics', array('uses' => 'ws.v100.statistics@create'));
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="WS v1.0.1">
 // WS v1.0.1 -----------------------------------------------------------------------------------------------
 // WS-Applications
 Route::get('ws/v101/applications/(:num)/version', array('uses' => 'ws.v101.applications@version'));
@@ -487,7 +490,9 @@ Route::get('ws/v101/contents/(:num)/cover-image', array('uses' => 'ws.v101.conte
 Route::get('ws/v101/contents/(:num)/file', array('uses' => 'ws.v101.contents@file'));
 // WS-Statistics
 Route::post('ws/v101/statistics', array('uses' => 'ws.v101.statistics@create'));
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="WS v1.0.2">
 // WS v1.0.2 -----------------------------------------------------------------------------------------------
 // WS-Applications
 Route::get('ws/v102/applications/(:num)/version', array('uses' => 'ws.v102.applications@version'));
@@ -502,6 +507,9 @@ Route::get('ws/v102/contents/(:num)/cover-image', array('uses' => 'ws.v102.conte
 Route::get('ws/v102/contents/(:num)/file', array('uses' => 'ws.v102.contents@file'));
 // WS-Statistics
 Route::post('ws/v102/statistics', array('uses' => 'ws.v102.statistics@create'));
+Route::get('ws/v102/applications/authorized_application_list', array('uses' => 'ws.v102.applications@authorized_application_list'));
+Route::post('ws/v102/applications/authorized_application_list', array('uses' => 'ws.v102.applications@authorized_application_list'));
+// </editor-fold>
 
 /*
 |--------------------------------------------------------------------------

@@ -95,7 +95,6 @@ if (FALSE) {
 		axis: 'y',
 		update: function () {
 		var data = $(this).sortable('serialize');
-		console.log(data);
 		$.ajax({
 			data: data,
 			type: 'POST',

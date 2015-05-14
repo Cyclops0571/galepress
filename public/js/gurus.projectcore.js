@@ -1794,17 +1794,18 @@ var cTemplate = new function () {
     }
     ;
 
-    this.show = function (applicationID) {
+    this.show = function (ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed) {
 	$.ajax({
 	    async: false,
 	    type: 'GET',
-	    url: '/template/' + applicationID,
+	    url: '/template/' + ApplicationID,
 	    success: function (response) {
 		$('#ipadView').html(response);
+		cTemplate.initMySlider(ThemeBackground, ThemeForeground, Autoplay, Speed);
 	    }
 	});
     };
-    this.initMySlider = function (ThemeBackground, ThemeForeground, Speed, Autoplay) {
+    this.initMySlider = function (ThemeBackground, ThemeForeground, Autoplay, Speed) {
 	cTemplate.loadCss(ThemeBackground, ThemeForeground);
 	if ($('#imgPreview').attr('src') == "/img/bannerSlider/defaultPreview.jpg" || $('#imgPreview').attr('src') == "") {
 	    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
