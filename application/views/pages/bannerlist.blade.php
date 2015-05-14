@@ -35,7 +35,7 @@ if (FALSE) {
 								<?php if ((int) Auth::User()->UserTypeID == eUserTypes::Manager): ?>
 									<tr id="bannerIDSet_<?php echo $row->BannerID ?>" class="{{ HTML::oddeven($page) }}">
 										<td>
-											<a href="<?php echo $route . '/' . $row->ContentID ?>">
+											<a href="<?php echo $route . '/' . $row->BannerID ?>">
 												<img src="<?php echo $row->getImagePath($application) ?>" width="80px" height="40px" />
 											</a>
 										</td>
@@ -56,7 +56,7 @@ if (FALSE) {
 									<tr id="bannerIDSet_<?php echo $row->BannerID ?>" class="{{ HTML::oddeven($page) }}">
 										<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
 										<td>
-											<a href="<?php echo $route . '/' . $row->ContentID ?>">
+											<a href="<?php echo $route . '/' . $row->BannerID ?>">
 												<img src="<?php echo $row->getImagePath($application) ?>" width="80px" height="40px" />
 											</a>
 										</td>
