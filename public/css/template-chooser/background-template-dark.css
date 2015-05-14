@@ -52,7 +52,7 @@
 .templateExtrasScreen .container .form-row input{
     color: #333333 !important;
 }
-.templateExtrasScreen .container .form-row ul li span,li{
+.templateExtrasScreen .container .form-row ul li span {
     color: #333333 !important;
 }
 .templateExtrasScreen li .category-active{

@@ -19,6 +19,8 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
+		echo FALSE;
+		exit;
 		var_dump(Auth::User());
 		exit;
 		echo Auth::User()->UserID;
