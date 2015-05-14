@@ -56,7 +56,9 @@ class Contents_Controller extends Base_Controller {
 			return Redirect::to(__('route.home'));
 		}
 
-		$sqlCat = '(IFNULL((SELECT GROUP_CONCAT(`Name` ORDER BY `Name` SEPARATOR \', \') FROM `Category` WHERE ApplicationID=a.ApplicationID AND CategoryID IN (SELECT CategoryID FROM `ContentCategory` WHERE ContentID = o.ContentID) AND StatusID = 1), \'\'))';
+		$sqlCat = '(IFNULL((SELECT GROUP_CONCAT(`Name` ORDER BY `Name` SEPARATOR \', \')'
+				. ' FROM `Category` WHERE ApplicationID=a.ApplicationID AND CategoryID IN '
+				. '(SELECT CategoryID FROM `ContentCategory` WHERE ContentID = o.ContentID) AND StatusID = 1), \'\'))';
 
 		$sql = '' .
 				'SELECT ' .
@@ -123,6 +125,10 @@ class Contents_Controller extends Base_Controller {
 					}
 				})
 				->order_by($sort, $sort_dir);
+				if($sort != $this->defaultSort) {
+					$rs->order_by($this->defaultSort, 'DESC');
+				}
+				
 		if ($option == 1) {
 			$data = array(
 				'rows' => $rs->get()
