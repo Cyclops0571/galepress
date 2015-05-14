@@ -30,7 +30,7 @@ class Banners_Controller extends Base_Controller {
 		$this->fields[] = __('common.banner_list_banner_id');
 		$this->fields[] = __('common.detailpage_delete');
 
-		if ((int) Auth::User()->UserTypeID == eUserTypes::Customer) {
+		if (Auth::User() && (int) Auth::User()->UserTypeID == eUserTypes::Customer) {
 			$this->fields = array();
 			$this->fields[] = __('common.image');
 			$this->fields[] = __('common.banner_form_target_url');

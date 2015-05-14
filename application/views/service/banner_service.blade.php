@@ -53,10 +53,11 @@
 	<?php
 	if(false) {
 		$savedBanner = new Banner();
+		$application = new Application();
 	}
-		$Autoplay = 1;
-		$IntervalTime = 5;
-		$TransitionRate = 20;
+		$Autoplay = $application->BannerAutoplay;
+		$IntervalTime = $application->BannerIntervalTime;
+		$TransitionRate = $application->BannerTransitionRate;
 	?>
 	<body>
 		<div class="ms-gallery-template" id="ms-gallery-1">
