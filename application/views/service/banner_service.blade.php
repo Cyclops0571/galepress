@@ -29,10 +29,19 @@
 				bottom:0 !important;
 				width: 100% !important;
 				opacity: 0.7;
+				height: 7% !important;
 			}
 			.ms-gallery-template .ms-slide-info{
-				padding: 20px 0px !important;
+				padding: 0px 20px !important;
 				font-size: 0.8em !important;
+			}
+			.ms-info{
+				display: table-cell !important;
+				vertical-align: middle !important;
+			}
+			.ms-bullets-count{
+				display: table-cell !important;
+				vertical-align: middle !important;
 			}
 			.ms-gallery-template .ms-gal-playbtn{
 				display: none !important;
@@ -40,11 +49,13 @@
 			.ms-gallery-template .ms-gal-thumbtoggle{
 				display: none !important;
 			}
-			.ms-gallery-template .ms-slide-info {
-			  	padding: 20px 20px !important;
-			}
 			.ms-timerbar{
 				display: none !important;
+			}
+			.ms-slide-info.ms-dir-h,.ms-bullets.ms-dir-h{
+				height: 100% !important;
+				display: table !important;
+				top:0 !important;
 			}
 		</style>
 
@@ -90,7 +101,7 @@
 				layout: 'partialview',
 				fillMode: 'stretch',
 				speed: {{$TransitionRate}},
-	    		autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
+	    		autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
 			});
 		}
 		else {
@@ -102,7 +113,7 @@
 				layout: 'fullscreen',
 				fillMode: 'stretch',
 				speed: {{$TransitionRate}},
-	    		autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
+	    		autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
 			});
 		}
     }
@@ -121,7 +132,7 @@
 					layout: 'partialview',
 					fillMode: 'stretch',
 					speed: {{$TransitionRate}},
-	    			autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
+	    			autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
 				});
 			    break; 
 			  default:
@@ -133,7 +144,7 @@
 					layout: 'fullscreen',
 					fillMode: 'stretch',
 					speed: {{$TransitionRate}},
-	    			autoplay: <?php echo ($Autoplay == 1 ? true : false); ?>
+	    			autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
 				});
 			    break; 
 			}
