@@ -72,9 +72,9 @@ class Ws {
 				->order_by('OrderNo', 'DESC')
 				->order_by('MonthlyName', 'ASC')
 				->order_by('Name', 'ASC');
-		// if($user == NULL) {
-		// 	$query->where('Status', '=', eStatus::Active);
-		// }
+//		if($user == NULL) {
+//		   $query->where('Status', '=', eStatus::Active);
+//		}
 		
 		$categoryID = (int) Input::get('categoryID', '-1');
 		if ($categoryID !== -1) {

@@ -129,16 +129,62 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 				});
 	}
 
-	
-	
 	public function post_authorized_application_list() {
-		dd($_POST);
+		$applicationSet = array();
 		$username = Input::get('username');
 		$password = Input::get('password');
 		$userFacebookID = Input::get('userFacebookID');
 		$userFacebookToken = Input::get('userFacebookToken');
-		if(empty($username) || empty($password)) {
-			;
+		$user = null;
+		$responseSet = array();
+		if (!empty($username) || !empty($password)) {
+			//username ve password login
+			$user = User::where('Username', '=', $username)->where('StatusID', '=', eStatus::Active)->first();
+			if (!$user) {
+				throw new Exception("Hatalı kullanıcı bilgileri.", "140");
+			}
+
+			if (!Hash::check($password, $user->Password)) {
+				throw new Exception("Hatalı kullanıcı bilgileri.", "140");
+			}
+		} else if (!empty($userFacebookID) || !empty($userFacebookToken)) {
+			//facebook login
+			$user = User::where('FbUsername', '=', $userFacebookID)
+							->where("FbAccessToken", "=", $userFacebookToken)
+							->where('StatusID', '=', eStatus::Active)->first();
+			if (!$user) {
+				throw new Exception("Hatalı kullanıcı bilgileri.", "140");
+			}
+		} else {
+			throw new Exception("Hatalı kullanıcı bilgileri.", "140");
 		}
+
+		//We have a user now...
+		if ($user->UserTypeID == eUserTypes::Customer) {
+			if ($user->CustomerID == 0) {
+				//Customer not exist
+				throw new Exception("Hatalı kullanıcı bilgileri.", "140");
+			}
+
+			$applicationSet = Application::where('CustomerID', '=', $user->CustomerID)
+					->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
+					->where('StatusID', '=', eStatus::Active)
+					->get();
+		} else {
+			//admin
+			$applicationSet = Application::where('ExpirationDate', '>=', DB::raw('CURDATE()'))
+					->where('StatusID', '=', eStatus::Active)
+					->get();
+		}
+		
+		foreach($applicationSet as $application) {
+			$application instanceof Application;
+			$responseSet[] = array(
+				'ApplicationID' => $application->ApplicationID,
+				'Name' => $application->Name
+			);
+		}
+		
+		return Response::json($responseSet);
 	}
 }
