@@ -128,11 +128,12 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 					));
 				});
 	}
-
+	
 	public function post_authorized_application_list() {
-		$applicationSet = array();
+		return Ws::render(function() {
 		$username = Input::get('username');
 		$password = Input::get('password');
+		$applicationSet = array();
 		$userFacebookID = Input::get('userFacebookID');
 		$userFacebookToken = Input::get('userFacebookToken');
 		$user = null;
@@ -186,5 +187,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 		}
 		
 		return Response::json($responseSet);
+		});
 	}
+	
 }
