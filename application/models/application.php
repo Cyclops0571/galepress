@@ -37,6 +37,10 @@ class Application extends Eloquent
 	public static $table = 'Application';
 	public static $key = 'ApplicationID';
 	
+	/**
+	 * 
+	 * @return Customer
+	 */
 	public function Customer()
 	{
 		return $this->belongs_to('Customer', 'CustomerID')->first();
