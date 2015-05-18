@@ -239,11 +239,16 @@ class Banners_Controller extends Base_Controller {
 	}
 
 	public function get_service_view($applicationID) {
+		$application = Application::find($applicationID);
+		$bannerSet = Banner::getAppBanner($applicationID);
+		if(!$application || !$bannerSet) {
+			return "";
+		}
 		$data = array();
 		$data['caption'] = $this->caption;
 		$data['detailcaption'] = $this->detailcaption;
-		$data["application"] = Application::find($applicationID);
-		$data['bannerSet'] = Banner::getAppBanner($applicationID);
+		$data["application"] = $application;
+		$data['bannerSet'] = $bannerSet;
 		return View::make("service.banner_service", $data);
 	}
 

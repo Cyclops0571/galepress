@@ -62,18 +62,18 @@
 	</head>
 
 	<?php
-	if(false) {
+	if (false) {
 		$savedBanner = new Banner();
 		$application = new Application();
 	}
-		$Autoplay = $application->BannerAutoplay;
-		$IntervalTime = $application->BannerIntervalTime;
-		$TransitionRate = $application->BannerTransitionRate;
+	$Autoplay = $application->BannerAutoplay;
+	$IntervalTime = $application->BannerIntervalTime;
+	$TransitionRate = $application->BannerTransitionRate;
 	?>
 	<body>
 		<div class="ms-gallery-template" id="ms-gallery-1">
 			<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
-			    <?php foreach ($bannerSet as $savedBanner): ?>
+				<?php foreach ($bannerSet as $savedBanner): ?>
 					<div class="ms-slide" data-delay="{{$IntervalTime}}">
 						<?php $imgPath = $savedBanner->getImagePath($application); ?>
 						<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" />
@@ -87,98 +87,94 @@
 
 	<script type="text/javascript">
 	var slider = new MasterSlider();
-	
 	var ua = navigator.userAgent.toLowerCase();
-    var isAndroid = ua.indexOf("android") > -1; // Detect Android devices
-    if (isAndroid) {
-    	var screenOrientation = (screen.width > screen.height) ? 90 : 0;
-		if (screenOrientation === 90) {
-			slider.setup('masterslider' , {
-				width:740,
+	var isAndroid = ua.indexOf("android") > - 1; // Detect Android devices
+	if (isAndroid) {
+var screenOrientation = (screen.width > screen.height) ? 90 : 0;
+	if (screenOrientation === 90) {
+slider.setup('masterslider', {
+width:740,
+	height:window.innerHeight,
+	space:0,
+	view:'fadeBasic',
+	layout: 'partialview',
+	fillMode: 'stretch',
+	speed: {{$TransitionRate}},
+	autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
+});
+	}
+else {
+slider.setup('masterslider', {
+width:740,
+	height:window.innerHeight,
+	space:0,
+	view:'fadeBasic',
+	layout: 'fullscreen',
+	fillMode: 'stretch',
+	speed: {{$TransitionRate}},
+	autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
+});
+	}
+}
+else {
+function doOnOrientationChange()
+	{
+	switch (window.orientation)
+		{
+		case - 90:
+			case 90:
+			slider.setup('masterslider', {
+			width:740,
 				height:window.innerHeight,
 				space:0,
 				view:'fadeBasic',
 				layout: 'partialview',
 				fillMode: 'stretch',
 				speed: {{$TransitionRate}},
-	    		autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
+				autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
 			});
-		}
-		else {
-		    slider.setup('masterslider' , {
-				width:740,
+			break;
+			default:
+			slider.setup('masterslider', {
+			width:740,
 				height:window.innerHeight,
 				space:0,
 				view:'fadeBasic',
 				layout: 'fullscreen',
 				fillMode: 'stretch',
 				speed: {{$TransitionRate}},
-	    		autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
+				autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
 			});
-		}
-    }
-    else {
-		function doOnOrientationChange()
-		{
-			switch(window.orientation) 
-			{  
-			  case -90:
-			  case 90:			    
-				slider.setup('masterslider' , {
-					width:740,
-					height:window.innerHeight,
-					space:0,
-					view:'fadeBasic',
-					layout: 'partialview',
-					fillMode: 'stretch',
-					speed: {{$TransitionRate}},
-	    			autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
-				});
-			    break; 
-			  default:
-			 	slider.setup('masterslider' , {
-					width:740,
-					height:window.innerHeight,
-					space:0,
-					view:'fadeBasic',
-					layout: 'fullscreen',
-					fillMode: 'stretch',
-					speed: {{$TransitionRate}},
-	    			autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
-				});
-			    break; 
+			break;
 			}
-		}
-		doOnOrientationChange();
-    }
-	// slider.control('arrows');	
-	var gallery = new MSGallery('ms-gallery-1' , slider);
+	}
+doOnOrientationChange();
+	}
+// slider.control('arrows');	
+var gallery = new MSGallery('ms-gallery-1', slider);
 	gallery.setup();
-	slider.api.addEventListener(MSSliderEvent.CHANGE_START , function(){
-		$( ".ms-gallery-botcont" ).stop(true);
-		$( ".ms-gallery-botcont" ).animate( {opacity: 0.7}, 750);
+	slider.api.addEventListener(MSSliderEvent.CHANGE_START, function(){
+	$(".ms-gallery-botcont").stop(true);
+		$(".ms-gallery-botcont").animate({opacity: 0.7}, 750);
 	});
-
-	slider.api.addEventListener(MSSliderEvent.CHANGE_END , function(){
-	    $( ".ms-gallery-botcont" ).delay(2500).animate( {opacity: 0}, 2500);
+	slider.api.addEventListener(MSSliderEvent.CHANGE_END, function(){
+	$(".ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
 	});
-
 	$('#ms-gallery-1').click(function(){
-		$( "#ms-gallery-1 .ms-gallery-botcont" ).stop(true);
-		if($( "#ms-gallery-1 .ms-gallery-botcont" ).css('opacity')>0){
-			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0}, 250);
-		}
-		else{
-			$( "#ms-gallery-1 .ms-gallery-botcont" ).animate( {opacity: 0.7}, 250);
-		}
-	});
-
-	$( ".ms-info" ).each(function() {
-	  if($(this).text().length>50){
-	  	var infoText = $(this).text();
-	  	infoText = infoText.substring(0, 50);
-	  	$(this).text(infoText+"...");
-	  }
-	});
+$("#ms-gallery-1 .ms-gallery-botcont").stop(true);
+	if ($("#ms-gallery-1 .ms-gallery-botcont").css('opacity') > 0){
+$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0}, 250);
+	}
+else{
+$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
+	}
+});
+	$(".ms-info").each(function() {
+if ($(this).text().length > 50){
+var infoText = $(this).text();
+	infoText = infoText.substring(0, 50);
+	$(this).text(infoText + "...");
+	}
+});
 	</script>
 </html>
