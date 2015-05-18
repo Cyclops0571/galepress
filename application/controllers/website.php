@@ -475,4 +475,50 @@ class Website_Controller extends Base_Controller
 		}
 		echo json_encode($data);
 	}
+	public function get_namaz()
+	{
+		return View::make('website.pages.namaz-vakitleri');		
+	}
+	public function post_namaz()
+	{
+		$myLocation = Input::get('location');
+
+		$getDistrictCode = DB::table('Towns')
+				->where('TownName', '=', $myLocation)
+				->first();
+
+		$getDistrictTimes = DB::table('PrayerTimes')
+			->where('TownID', '=', $getDistrictCode->OldID)
+			->where('miladi_tarih', '=', date('Y-m-d'))
+			->first();
+
+		if(empty($getDistrictTimes->id)){
+			$getCityCode = DB::table('Cities')
+				->where('CityID', '=', $getDistrictCode->CityID)
+				->first();
+
+			$getCityTimes = DB::table('PrayerTimes')
+				->where('CityID', '=', $getCityCode->CityID)
+				->where('PlaceName', '=', trim($getCityCode->CityName))
+				->where('miladi_tarih', '=', date('Y-m-d'))
+				->first();
+
+				$data = array();
+				$data['imsak'] = $getCityTimes->imsak_zaman;
+				$data['ogle'] = $getCityTimes->ogle_zaman;
+				$data['ikindi'] = $getCityTimes->ikindi_zaman;
+				$data['aksam'] = $getCityTimes->aksam_zaman;
+				$data['yatsi'] = $getCityTimes->yatsi_zaman;
+				return json_encode($data);
+		}
+		else{
+			$data = array();
+			$data['imsak'] = $getDistrictTimes->imsak_zaman;
+			$data['ogle'] = $getDistrictTimes->ogle_zaman;
+			$data['ikindi'] = $getDistrictTimes->ikindi_zaman;
+			$data['aksam'] = $getDistrictTimes->aksam_zaman;
+			$data['yatsi'] = $getDistrictTimes->yatsi_zaman;
+			return json_encode($data);
+		}		
+	}
 }

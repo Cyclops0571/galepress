@@ -77,6 +77,8 @@ foreach($languages as $currentLanguage) {
 	Route::post('deneyin-test', array('as' => 'website_tryit_test_post', 'uses' => 'website@tryit'));
 	Route::get(__('route.website_landing_page_realty')->get($currentLanguage), array('as' => 'website_landing_page_realty_get', 'uses' => 'website@landing_page_realty'));
 	Route::post(__('route.website_landing_page_realty')->get($currentLanguage), array('as' => 'website_landing_page_realty_post', 'uses' => 'website@landing_page_realty'));
+	Route::get('namaz-vakitleri', array('as' => 'website_namaz-vakitleri_get', 'uses' => 'website@namaz'));
+	Route::post('namaz-vakitleri?(:all)', array('as' => 'website_namaz-vakitleri_post', 'uses' => 'website@namaz'));
 
 
 	Route::post(__('route.facebook_attempt')->get($currentLanguage), array('as' => 'website_facebook_attempt_post', 'uses' => 'common@facebookAttempt'));
