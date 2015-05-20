@@ -104,11 +104,11 @@ class Ws_v101_Applications_Controller extends Base_Controller
 			$application = Ws::getApplication($applicationID);
 			$customer = Ws::getCustomer($application->CustomerID);
 			
-			Ws::checkUserCredential($customer->CustomerID);
+			$user = Ws::checkUserCredential($customer->CustomerID);
 			//INFO:Save token method moved to get_detail
 			//Ws::saveToken($customer->CustomerID, $applicationID);
 
-			$contents = Ws::getApplicationContents($applicationID);
+			$contents = Ws::getApplicationContents($applicationID, $user);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
