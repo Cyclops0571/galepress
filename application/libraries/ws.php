@@ -66,13 +66,13 @@ class Ws {
 		return $category;
 	}
 
-	public static function getApplicationContents($applicationID, $user = NULL) {
+	public static function getApplicationContents($applicationID, $isTest = False) {
 		$query = Content::where('ApplicationID', '=', $applicationID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('OrderNo', 'DESC')
 				->order_by('MonthlyName', 'ASC')
 				->order_by('Name', 'ASC');
-		if($user == NULL) {
+		if(!$isTest) {
 		   $query->where('Status', '=', eStatus::Active);
 		}
 		

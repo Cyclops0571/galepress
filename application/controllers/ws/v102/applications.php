@@ -92,12 +92,9 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 
 	public function get_contents($applicationID) {
 		return Ws::render(function() use ($applicationID) {
+					$isTest = boolval(Input::get('isTest', 0)) ;
 					$application = Ws::getApplication($applicationID);
-					$customer = Ws::getCustomer($application->CustomerID);
 
-					$user = Ws::checkUserCredential($customer->CustomerID);
-					//INFO:Save token method moved to get_detail
-					//Ws::saveToken($customer->CustomerID, $applicationID);
 					switch ($application->ThemeForeground) {
 						case 2:
 							$hexadecimalColorCode = "#00A388";
@@ -115,7 +112,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 							$hexadecimalColorCode = "#2980B9";
 					}
 
-					$contents = Ws::getApplicationContents($applicationID, $user);
+					$contents = Ws::getApplicationContents($applicationID, $isTest);
 					return Response::json(array(
 								'status' => 0,
 								'error' => "",

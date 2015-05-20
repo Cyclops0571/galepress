@@ -69,8 +69,7 @@ class Ws_v100_Applications_Controller extends Base_Controller
 		return Ws::render(function() use ($applicationID, $categoryID)
 		{
 			$application = Ws::getApplication($applicationID);
-			$customer = Ws::getCustomer($application->CustomerID);
-			$category = Ws::getApplicationCategoryDetail($applicationID, $categoryID);
+			$category = Ws::getApplicationCategoryDetail($application->ApplicationID, $categoryID);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
@@ -85,12 +84,7 @@ class Ws_v100_Applications_Controller extends Base_Controller
 		return Ws::render(function() use ($applicationID)
 		{
 			$application = Ws::getApplication($applicationID);
-			$customer = Ws::getCustomer($application->CustomerID);
-			
-			$user = Ws::checkUserCredential($customer->CustomerID);
-			Ws::saveToken($customer->CustomerID, $applicationID);
-
-			$contents = Ws::getApplicationContents($applicationID, $user);
+			$contents = Ws::getApplicationContents($application->ApplicationID, TRUE);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
