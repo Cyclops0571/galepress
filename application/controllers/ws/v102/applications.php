@@ -92,7 +92,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 
 	public function get_contents($applicationID) {
 		return Ws::render(function() use ($applicationID) {
-					$isTest = boolval(Input::get('isTest', 0)) ;
+					$isTest = Input::get('isTest', 0) ? TRUE: FALSE ;
 					$application = Ws::getApplication($applicationID);
 
 					switch ($application->ThemeForeground) {
