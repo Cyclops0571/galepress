@@ -36,6 +36,7 @@ return array(
 	'applications_delete' => 'applications/delete',
 	'applications_uploadfile' => 'applications/load-file',
 	'applications_uploadfile2' => 'applications/load-file2',
+	'applications_usersettings' => 'applications/(:num)/settings',
 
 	'contents' => 'contents',
 	'contents_request' => 'contents/request',

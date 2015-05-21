@@ -1841,8 +1841,8 @@ var cTemplate = new function () {
 	});
 	var slider2 = new MasterSlider();
 	slider2.setup('masterslider2', {
-	    width: 150,
-	    height: 65,
+	    width: 277,
+	    height: 120,
 	    space: 0,
 	    view: 'fadeBasic',
 	    layout: 'partialview',

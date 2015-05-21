@@ -362,4 +362,26 @@ class Applications_Controller extends Base_Controller {
 		$upload_handler->post(false);
 	}
 
+	public function get_userApplicationSettings($id) {
+
+		$this->detailcaption = __('common.application_settings_caption_detail');
+
+		$row = Application::find($id);
+		if ($row) {
+				$data = array(
+					'page' => $this->page,
+					'route' => $this->route,
+					'caption' => $this->caption,
+					'detailcaption' => $this->detailcaption,
+					'row' => $row
+				);
+		
+		return View::make('pages.userapplicationdetail', $data)
+								->nest('filterbar', 'sections.filterbar', $data);
+		}
+		else {
+				return Redirect::to($this->route);
+			}
+	}
+
 }

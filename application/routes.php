@@ -175,6 +175,7 @@ foreach($languages as $currentLanguage) {
 		}
 	}));
 	// </editor-fold>
+	Route::get(__('route.applications_usersettings')->get($currentLanguage), array('as' => 'applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
 
 	// <editor-fold defaultstate="collapsed" desc="Contents">
 	Route::post("contents/order/(:num)", array('as' => 'contents_order', 'before' => 'auth', 'uses' => 'contents@order'));

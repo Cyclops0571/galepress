@@ -36,6 +36,7 @@ return array(
 	'applications_delete' => 'uygulamalar/sil',
 	'applications_uploadfile' => 'uygulamalar/dosya-yukle',
 	'applications_uploadfile2' => 'uygulamalar/dosya-yukle2',
+	'applications_usersettings' => 'uygulamalar/(:num)/ayarlar',
 
 	'contents' => 'icerikler',
 	'contents_request' => 'icerikler/talep',

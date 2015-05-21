@@ -122,14 +122,34 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 			{{ HTML::nav_link(__('route.reports').'?r=1302', __('common.menu_report_1302')) }}
 			@endif
 		</ul>
-	</li>                          
+	</li>
+	@if((int)Auth::User()->UserTypeID == eUserTypes::Manager)                        
 	<li>
-		<a href="#"><span class="icon-cogs"></span> {{ __('common.menu_caption_preferences') }}</a>
+		<a href="#"><span class="icon-user"></span>Kullanıcı Ayarları</a>
 		<ul>
-			@if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
 			{{ HTML::nav_link(__('route.users'), __('common.menu_users')) }}
-			@endif
 			{{ HTML::nav_link(__('route.mydetail'), __('common.menu_mydetail')) }}
 		</ul>
 	</li>
+	@endif
+	@if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+	<li>
+		<a href="{{URL::to(__('route.mydetail'))}}"><span class="icon-user"></span>{{ __('common.menu_mydetail') }}</a>
+	</li>
+	@endif
+	@if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+	<li>
+		<a href="#"><span class="icon-cogs"></span>{{__('common.application_settings_caption_detail')}}</a>
+		<ul>
+			<?php $currentDate = date("Y-m-d"); ?>
+			@foreach(Auth::User()->Customer()->Applications(1) as $app)
+				@if( $app->ExpirationDate < $currentDate )
+				<li style="width:100%;">{{ HTML::link(route('applications_usersettings',10), $app->Name, array('class' => 'expired-app')) }}</li>
+				@else
+				<li style="width:100%;">{{ HTML::link(route('applications_usersettings',10), $app->Name) }}</li>
+				@endif
+			@endforeach
+		</ul>
+	</li>
+	@endif
 </ul> 

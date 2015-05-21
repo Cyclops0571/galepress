@@ -180,6 +180,13 @@ return array(
 	'applications_blocked' => 'Blockiert:',
 	'applications_status' => 'Zustand:',
 	'applications_expired_detail' => 'Bitte wenden Sie sich mit autorisierten Personen.',
+
+	'application_settings_caption_detail' => 'Anwendungs Einstellungen',
+	'application_settings_caption_detail_big' => 'ANWENDUNGS EINSTELLUNGEN',
+	'application_settings_caption_template' => 'Vorlagen Einstellungen',
+	'application_settings_caption_banner' => 'Banner Einstellungen',
+	'application_settings_template_background_tip' => 'Er vertritt Anwendung \'s Hintergrundfarbe.',
+	'application_settings_template_foreground_tip' => 'Er vertritt Anwendung \'s Vordergrundfarbe.',
 	
 	'contents_caption' => 'Inhalt',
 	'contents_caption_detail' => 'Inhaltseinzelheiten',

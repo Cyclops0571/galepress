@@ -36,6 +36,7 @@ return array(
 	'applications_delete' => 'applikationen/loschen',
 	'applications_uploadfile' => 'applikationen/datei-hochladen',
 	'applications_uploadfile2' => 'applikationen/datei-hochladen2',
+	'applications_usersettings' => 'applikationen/(:num)/einstellungen',
 
 	'contents' => 'inhalte',
 	'contents_request' => 'inhalte/Anforderung',

@@ -180,6 +180,13 @@ return array(
 	'applications_blocked' => 'Blocked:',
 	'applications_status' => 'Status:',
 	'applications_expired_detail' => 'Please contact with authorized persons.',
+
+	'application_settings_caption_detail' => 'Application Settings',
+	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
+	'application_settings_caption_template' => 'Template Settings',
+	'application_settings_caption_banner' => 'Banner Settings',
+	'application_settings_template_background_tip' => 'It represents application\'s background color.',
+	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
 	
 	'contents_caption' => 'Contents',
 	'contents_caption_detail' => 'Content Detail',
