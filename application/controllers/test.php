@@ -19,9 +19,39 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
+
+		$subject = __('common.confirm_email_title');
+		$firstname = "hakan";
+		$surname = "sarier";
+		$url = "asasdasdasd";
+		// $msg = __('common.confirm_email_message', array(
+		//   'firstname' => $firstname,
+		//   'lastname' => $surname,
+		//   'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode
+		//   )
+		// );
+		$mailData = array(
+			'name'	=> $firstname,
+			'surname'	=> $surname,
+			'url' => $url,
+		);
+		$msg = View::make('mail-templates.aktivasyon.index')->with($mailData)->render();
+		// Common::sendHtmlEmail("hakan.sarier@detaysoft.com", $firstname.' '.$surname, $subject, $msg);
+		$mailStatus = Common::sendHtmlEmail("hakan.sarier@detaysoft.com", $firstname.' '.$surname, $subject, $msg);
+
+		// $m = new MailLog();
+		// $m->MailID = 1;
+		// $m->UserID = 58;
+		// if(!$mailStatus){
+		// 	$m->Arrived = 0;
+		// }
+		// else {
+		// 	$m->Arrived = 1;
+		// }
+		// $m->StatusID = 1;
+		// $m->save();
 		
-		
-		return View::make('test.compass');
+		return View::make('mail-templates.aktivasyon.index')->with($mailData);
 	}
 	
 	public function get_image() {

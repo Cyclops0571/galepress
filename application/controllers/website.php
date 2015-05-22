@@ -279,15 +279,27 @@ class Website_Controller extends Base_Controller
 			$s->save();
 
             $subject = __('common.confirm_email_title');
-            $msg = __('common.confirm_email_message', array(
-              'firstname' => $s->FirstName,
-              'lastname' => $s->LastName,
-              'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode
-              )
-            );
+            $mailData = array(
+				'name'	=> $s->FirstName,
+				'surname'	=> $s->LastName,
+				'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode,
+			);
+            $msg = View::make('mail-templates.aktivasyon.index')->with($mailData)->render();
+            // Common::sendHtmlEmail("hakan.sarier@detaysoft.com", $s->FirstName.' '.$s->LastName, $subject, $msg)
+            $mailStatus = Common::sendHtmlEmail($s->Email, $s->FirstName.' '.$s->LastName, $subject, $msg);
             
-            Common::sendEmail($s->Email, $s->FirstName.' '.$s->LastName, $subject, $msg);
-		 
+            $m = new MailLog();
+			$m->MailID = 1; //activation
+			$m->UserID = $s->UserID;
+			if(!$mailStatus){
+				$m->Arrived = 0;
+			}
+			else {
+				$m->Arrived = 1;
+			}
+			$m->StatusID = eStatus::Active;
+			$m->save();
+
 		}
 		echo json_encode($data);
 	}
@@ -329,7 +341,6 @@ class Website_Controller extends Base_Controller
 			//throw new Exception($e->getMessage());
 			return Redirect::to(__('route.website_blog'));
 		}
-		
 	}
 	public function get_landing_page_realty(){
 		return View::make('website.pages.landing-page-realty');
@@ -463,14 +474,25 @@ class Website_Controller extends Base_Controller
 			$s->save();
 
             $subject = __('common.confirm_email_title');
-            $msg = __('common.confirm_email_message', array(
-              'firstname' => $s->FirstName,
-              'lastname' => $s->LastName,
-              'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode
-              )
-            );
+            $mailData = array(
+				'name'	=> $s->FirstName,
+				'surname'	=> $s->LastName,
+				'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode,
+			);
+            $msg = View::make('mail-templates.aktivasyon.index')->with($mailData)->render();
+            $mailStatus = Common::sendHtmlEmail($s->Email, $s->FirstName.' '.$s->LastName, $subject, $msg);
             
-            Common::sendEmail($s->Email, $s->FirstName.' '.$s->LastName, $subject, $msg);
+            $m = new MailLog();
+			$m->MailID = 1; //Activation
+			$m->UserID = $s->UserID;
+			if(!$mailStatus){
+				$m->Arrived = 0;
+			}
+			else {
+				$m->Arrived = 1;
+			}
+			$m->StatusID = eStatus::Active;
+			$m->save();
 		 
 		}
 		echo json_encode($data);
