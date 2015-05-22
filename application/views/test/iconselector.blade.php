@@ -11,19 +11,19 @@
 	<a href="#" rel="popover" id="selectedIcon" class="btn" data-popover-content="#myPopover"><img src="/img/app-icons/1.png" /></a>
 	<div id="myPopover" class="hide">
 	  <ul class="iconList">
-	    <li><button type="button" class="btn"><img src="/img/app-icons/1.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/2.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/3.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/4.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/5.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/6.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/7.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/8.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/9.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/10.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/11.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/12.png" /></button></li>
-	    <li><button type="button" class="btn"><img src="/img/app-icons/13.png" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/1.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/2.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/3.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/4.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/5.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/6.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/7.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/8.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/9.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/10.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/11.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/12.png" width="50" /></button></li>
+	    <li><button type="button" class="btn"><img src="/img/app-icons/13.png" width="50" /></button></li>
 	  </ul>
 	</div>
 	<script type="text/javascript">
