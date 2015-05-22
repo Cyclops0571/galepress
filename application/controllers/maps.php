@@ -15,17 +15,17 @@ class Maps_Controller extends Base_Controller {
 		$this->route = __('route.' . $this->page);
 		$this->caption = __('common.maps_caption');
 		$this->fields = array();
-		if ((int) Auth::User()->UserTypeID == eUserTypes::Manager) {
+		$this->fields[] = array(__('common.maps_list_name'), 'Name');
+		$this->fields[] = array(__('common.maps_list_address'), 'Address');
+		$this->fields[] = array(__('common.maps_list_description'), 'Description');
+		$this->fields[] = array(__('common.maps_list_latitude'), 'Latitude');
+		$this->fields[] = array(__('common.maps_list_longitude'), 'Longitude');
+		$this->fields[] = array(__('common.maps_list_google_map_id'), 'GoogleMapID');
+		if (Auth::User() && (int) Auth::User()->UserTypeID == eUserTypes::Manager) {
+			$this->fields = array();
 			$this->fields[] = array(__('common.maps_list_customer'), 'CustomerName');
 			$this->fields[] = array(__('common.maps_list_application'), 'ApplicationName');
 			$this->fields[] = array(__('common.maps_list_name'), 'Name');
-			$this->fields[] = array(__('common.maps_list_latitude'), 'Latitude');
-			$this->fields[] = array(__('common.maps_list_longitude'), 'Longitude');
-			$this->fields[] = array(__('common.maps_list_google_map_id'), 'GoogleMapID');
-		} else {
-			$this->fields[] = array(__('common.maps_list_name'), 'Name');
-			$this->fields[] = array(__('common.maps_list_address'), 'Address');
-			$this->fields[] = array(__('common.maps_list_description'), 'Description');
 			$this->fields[] = array(__('common.maps_list_latitude'), 'Latitude');
 			$this->fields[] = array(__('common.maps_list_longitude'), 'Longitude');
 			$this->fields[] = array(__('common.maps_list_google_map_id'), 'GoogleMapID');

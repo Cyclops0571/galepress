@@ -30,6 +30,7 @@
  * @property int $BannerAutoplay Description
  * @property int $BannerIntervalTime Description
  * @property int $BannerTransitionRate Description
+ * @property int $TabActive Description
  */
 class Application extends Eloquent
 {
@@ -81,6 +82,10 @@ class Application extends Eloquent
 	public function Tags()
 	{
 		return $this->has_many('ApplicationTag', $this->key());
+	}
+	
+	public function Tabs() {
+		return $this->has_many('Tab', $this->key());
 	}
 	
 	/**

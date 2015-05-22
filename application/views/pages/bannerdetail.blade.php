@@ -172,7 +172,7 @@ if ($banner) {
 						</div>
 					</div>
 				</div>
-				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_autoplay') }}"><span class="icon-info-sign"></span></a></div>
+				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
 			<div class="form-row">
 				<div class="col-md-3">{{__('common.banners_autoplay')}}</div>
