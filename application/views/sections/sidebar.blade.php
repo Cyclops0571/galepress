@@ -144,9 +144,9 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 			<?php $currentDate = date("Y-m-d"); ?>
 			@foreach(Auth::User()->Customer()->Applications(1) as $app)
 				@if( $app->ExpirationDate < $currentDate )
-				<li style="width:100%;">{{ HTML::link(route('applications_usersettings',10), $app->Name, array('class' => 'expired-app')) }}</li>
+				<li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name, array('class' => 'expired-app')) }}</li>
 				@else
-				<li style="width:100%;">{{ HTML::link(route('applications_usersettings',10), $app->Name) }}</li>
+				<li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name) }}</li>
 				@endif
 			@endforeach
 		</ul>

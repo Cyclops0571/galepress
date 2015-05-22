@@ -185,6 +185,7 @@ return array(
 	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
 	'application_settings_caption_template' => 'Template Settings',
 	'application_settings_caption_banner' => 'Banner Settings',
+	'application_settings_caption_tab' => 'Tab Settings',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
 	
@@ -538,6 +539,7 @@ return array(
 	'banners_info_target_address' => 'It will open the relevant address when the image is clicked.',
 	'banners_info_target_desc' => 'It refers to the text, which appear on the image.',
 	'banners_info_autoplay' => 'Automatically toggle between the images.',
+	'banners_info_banner_active' => 'Banner will be shown before content list.',
 	'banners_info_interval' => 'It refers to the transition time between pictures.',
 	'banners_info_speed' => 'It refers to the transition speed between images.',
 	'banners_info_active' => 'Inactive files are not shown.',

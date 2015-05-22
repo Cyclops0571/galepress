@@ -338,11 +338,10 @@ class Applications_Controller extends Base_Controller {
 		if ((int) $currentUser->UserTypeID != eUserTypes::Manager || !$s) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-		
+
 		$s->StatusID = eStatus::Deleted;
 		$s->save();
 		return "success=" . base64_encode("true");
-
 	}
 
 	public function post_uploadfile() {
@@ -366,22 +365,20 @@ class Applications_Controller extends Base_Controller {
 
 		$this->detailcaption = __('common.application_settings_caption_detail');
 
-		$row = Application::find($id);
-		if ($row) {
-				$data = array(
-					'page' => $this->page,
-					'route' => $this->route,
-					'caption' => $this->caption,
-					'detailcaption' => $this->detailcaption,
-					'row' => $row
-				);
-		
-		return View::make('pages.userapplicationdetail', $data)
-								->nest('filterbar', 'sections.filterbar', $data);
+		$application = Application::find($id);
+		if ($application) {
+			$data = array(
+				'page' => $this->page,
+				'route' => $this->route,
+				'caption' => $this->caption,
+				'detailcaption' => $this->detailcaption,
+				'application' => $application
+			);
+			return View::make('pages.userapplicationdetail', $data)
+							->nest('filterbar', 'sections.filterbar', $data);
+		} else {
+			return Redirect::to($this->route);
 		}
-		else {
-				return Redirect::to($this->route);
-			}
 	}
 
 }

@@ -165,3 +165,4 @@ define("IMAGE_EXTENSION", ".jpg");
 define("CATEGORY_GENEL_ID", 1);
 define("SHOW_IMAGE_CROP", "showImageCrop");
 define("PATH_TEMP_FILE", "files/temp");
+define("TAB_COUNT", 4);

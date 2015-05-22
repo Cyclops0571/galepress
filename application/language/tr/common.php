@@ -163,6 +163,7 @@ return array(
 	'application_settings_caption_detail_big' => 'UYGULAMA AYARLARI',
 	'application_settings_caption_template' => 'Tema Ayarları',
 	'application_settings_caption_banner' => 'Banner Ayarları',
+	'application_settings_caption_tab' => 'Tab Ayarları',
 	'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
 	'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
 
@@ -539,6 +540,7 @@ return array(
 	'banners_info_target_address' => 'Resme tıklayınca ilgili adrese yönlendirir.',
 	'banners_info_target_desc' => 'Resim üzerinde gözükecek olan yazıyı ifade eder.',
 	'banners_info_autoplay' => 'Resimler arasında otomatik olarak geçiş yapılır.',
+	'banners_info_banner_active' => 'İçeriklerden önce banner görünür.',
 	'banners_info_interval' => 'Resimler arasındaki geçiş süresini ifade eder.',
 	'banners_info_speed' => 'Resimler arasındaki geçiş hızını ifade eder.',
 	'banners_info_active' => 'Aktif olmayan resimler gösterilmez.',
