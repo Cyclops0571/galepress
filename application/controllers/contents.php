@@ -162,6 +162,9 @@ class Contents_Controller extends Base_Controller {
 
 		$templateResults = DB::table(DB::raw('(' . $sqlTemlateChooser . ') t'))->order_by('ContentID', 'Desc')->get();
 		$categorySet = Category::where('ApplicationID', '=', $applicationID)->where("statusID", "=", eStatus::Active)->get();
+
+		$application = Application::find($applicationID);
+
 		$data = array(
 			'page' => $this->page,
 			'route' => $this->route,
@@ -173,7 +176,8 @@ class Contents_Controller extends Base_Controller {
 			'sort_dir' => $sort_dir,
 			'rows' => $rows,
 			'templateResults' => $templateResults,
-			'categorySet' => $categorySet
+			'categorySet' => $categorySet,
+			'application' => $application
 		);
 
 		if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {

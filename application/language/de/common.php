@@ -469,6 +469,18 @@ return array(
 	'month_names' => array('', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'),	
 	'auth_failed' => '<span style="font-style:italic; color:#BFC75D;">Benutzer war es nicht möglich</span>',
 
+	'confirm_email_title' => 'Create Your Account',
+	'confirm_email_message' => "".
+							"Dear :firstname :lastname, \n\n".
+							"To confirm your account, you can click the link below. If you make such a request, please ignore this email.\n\n".
+							":url\n\n".
+							"Best Regards, \n".
+							"Galepress",
+	'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
+	'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
+
+	'welcome_email_title' => 'Willkommen!',
+
 	'login_facebook' => 'Verbinden mit Facebook',
 	'signup_facebook_title' => 'Sie können eine Anwendung schnell erstellen mit Ihrem Facebook!',
 	'signup_facebook' => 'Registrieren mit Facebook',

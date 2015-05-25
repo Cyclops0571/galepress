@@ -1,5 +1,15 @@
 	
 @if(Auth::User()->UserTypeID != eUserTypes::Manager)
+<!--BANNER SLIDER-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="stylesheet" href="/css/masterslider/style/masterslider.css" />
+<link href="/css/masterslider/skins/black-2/style.css" rel='stylesheet' type='text/css'>
+<link href='/css/masterslider/style/ms-gallery-style.css' rel='stylesheet' type='text/css'>
+
+<script src="/js/masterslider/jquery.easing.min.js"></script>
+<script src="/js/masterslider/masterslider.min.js"></script>
+
+<!--BANNER SLIDER-->
 	
 <div class="modal in" id="modalTemplateChooser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; overflow:hidden;">
 	<div class="modal-dialog" style="width:40%; margin-top:0 !important; padding-top:0 !important;">
@@ -7,205 +17,7 @@
 			<div class="modal-body clearfix">
 				<div class="controls">
 					<div class="content controls">
-						<div class="form-row">                       
-							<div class="col-md-12">
-								<div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
-								  <div class="device" style="min-width:276px !important; max-width:535px !important; min-height:353px !important;">
-									<div class="screen">
-										<div class="templateSplashScreen hide" style="opacity:0; height:100%;">
-											<?php $fileSplash=path('public').dirname($templateResults[0]->FilePath)."/splash.jpg";?>
-											@if(!file_exists($fileSplash))
-											<img src="/img/template-chooser/content-pages/empty-splash.jpg" width="100%">
-											@else
-											<img src=<?php echo "/".dirname($templateResults[0]->FilePath)."/splash.jpg";?> width="100%">
-											@endif
-										</div>
-										<div class="templateScreen hide" style="opacity:0;">
-											<div class="header clearfix">
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left">
-													<div class="header-categories"></div>
-												</div>
-												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
-											</div>
-											<div class="container">
-												<div class="form-row">
-												<?php for($i = 0; $i < 9; $i++): ?>
-													<?php
-													$imageSrc = "/img/template-chooser/defaultCover-" . ($i + 1) . IMAGE_EXTENSION;
-													$name = "";
-													$detail = "";
-													if(isset($templateResults[$i])) {
-														$imageSrcTmp = $templateResults[$i]->FilePath.'/'.$templateResults[$i]->FileName;
-														if(is_file(path("public") . $imageSrcTmp)) {
-															$imageSrc = "/" . $imageSrcTmp;
-														}
-														$name = $templateResults[$i]->Name;
-														$detail = $templateResults[$i]->Detail;
-														$Sayi = $templateResults[$i]->MonthlyName;
-													}
-													if($i==0 || $i==3 || $i==6){
-														echo "<div class=form-row>";
-													}
-													?>
-													<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-														<img src="{{$imageSrc}}" width="95%">
-
-
-														<div class="content-bar noTouch">
-															<div class="col-md-12">{{$detail}}</div>
-															<div class="col-md-12">{{$name}}</div>
-															<div class="col-md-12">{{$Sayi}}</div>
-														</div>
-													</div>
-													<?php 
-													if($i==2 || $i==5 || $i==8){
-														echo "</div>";
-													}
-													?>
-												<?php endfor; ?>
-												</div>
-											</div>
-											<div class="footer text-center">
-												<div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
-											</div>
-										</div>
-                                        <div class="templateExtrasScreen hide" style="opacity:0; overflow:hidden;">
-											<div class="container">
-												<div class="form-row">
-                                                    <div class="col-md-12"><img src="/img/template-chooser/logo.png" width="100%"></div>
-                                                </div>
-                                                <div class="form-row" style="margin-top:17px;">
-                                                    <div class="col-md-12">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon"><span class="icon-search"></span></div>
-                                                            <input type="text" class="form-control" placeholder="Ara...">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row extrasBar categories" style="margin-top:10px;">
-                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                        <div class="extra-bar-icon"></div>
-                                                    </div>
-                                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 title">
-                                                        Kategoriler
-                                                    </div>
-                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                        <div class="title-drop"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col-md-12">
-                                                        <ul style="list-style:none;">
-															<?php if(empty($categorySet)): ?>
-																<li><span class="category-active"></span><span> Genel</span></li>
-															<?php else: ?>
-																<?php $categoryClass = "category-active"; ?>
-																<?php foreach($categorySet as $category): ?>
-																<li><span class="<?php echo $categoryClass; ?>"></span><span>{{$category->Name;}}</span></li>
-																<?php $categoryClass = "category-disable"; ?>
-																<?php endforeach; ?>
-															<?php endif; ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row extrasBar barLinks">
-                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                        <div class="extra-bar-icon"></div>
-                                                    </div>
-                                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 title">
-                                                        Bağlantılar
-                                                    </div>
-                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                        <div class="title-drop"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col-md-12">
-                                                        <ul style="list-style:none;">
-                                                            <li><span class="links links-web"></span> Web</li>
-                                                            <li><span class="links links-face"></span> Facebook</li>
-                                                            <li><span class="links links-twitter"></span> Twitter</li>
-                                                            <li><span class="links links-instagram"></span> Instagram</li>
-                                                            <li><span class="links links-linkedin"></span> Linkedin</li>
-                                                            <li><span class="links links-mail"></span> Mail</li>
-                                                        </ul>
-                                                    </div>
-												</div>
-											</div>
-										</div>
-										@if(count($templateResults)>0 && $templateResults[0]->ContentID!=null)
-                                            <div class="templateReadScreen hide" style="opacity:0;">
-											<div class="loading"></div>
-                                                <div id="loading-text"><i class="icon-remove"></i> %82</div>
-											<div class="container">
-                                                    <div class="form-row" style="height:55px;">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-8px;">
-                                                            <p style="overflow:hidden; height:13px;">{{$templateResults[0]->Detail}}</p>
-                                                            <p style="overflow:hidden; margin-bottom:7px; font-family: Avenir Medium !important;">{{$templateResults[0]->Name}}</p>
-                                                            <p style="overflow:hidden; width:90%; height:13px;">{{$templateResults[0]->MonthlyName}}</p>
-													</div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-														<div class="form-row">
-															<div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-                                                                    <input type="button" class="btn" id="templateBtnUpdate" value="Güncelle" style="cursor:default; margin-top:-15px;">
-															</div>
-														</div>
-														<div class="form-row">
-															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-                                                                    <input type="button" class="btn" id="templateBtnRead" value="Oku" style="margin-left:-6px;">
-															</div>
-															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-																<input type="button" class="btn" id="templateBtnDelete" value="Sil" style="cursor:default;">
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="form-row">
-													<div class="col-md-12">
-														<img src="" width="100%"> 
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="templateContentScreen hide" style="opacity:0;">
-											<div class="header clearfix">
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-                                                    <div class="header-table-of-contents"></div>
-                                                </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
-                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-                                                  	<div class="header-share"></div>
-												</div>
-											</div>
-											<div class="content-page">
-												<img src="/img/template-chooser/content-pages/file_1.jpg" width="100%">
-											</div>
-											<div class="thumbnails">
-												<div class="triangle"><span>283</span></div>
-												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_1.jpg"></div>
-												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_2.jpg"></div>
-												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_3.jpg"></div>
-												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_4.jpg"></div>
-												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_5.jpg"></div>
-												<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_6.jpg"></div>
-											</div>
-											<div class="footer text-center">
-												<div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
-												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
-											</div>
-										</div>
-										@endif
-									</div>
-								  </div>
-								</div>
-							</div>
-						</div>
+						<div id="ipadView"></div>
 					</div>
 				</div>
 			</div>
@@ -320,8 +132,13 @@
 	</div>
 </div>                  
 <script type="text/javascript">
-		var background = <?php echo $templateResults[0]->ThemeBackground; ?>;
-		var foreground = <?php echo $templateResults[0]->ThemeForeground; ?>;
-		cTemplate.initialize(background, foreground);
+$(function () {
+    var ApplicationID = <?php echo $application->ApplicationID; ?>;
+    var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
+    var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
+    var Autoplay = <?php echo $application->BannerAutoplay; ?>;
+    var Speed = <?php echo $application->BannerTransitionRate; ?>;
+    cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
+});
 </script>
 @endif   

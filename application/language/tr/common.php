@@ -476,6 +476,8 @@ return array(
 	'login_accounthasbeenconfirmed' => 'Hesabınız başarıyla onaylandı.',
 	'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!',
 
+	'welcome_email_title' => 'Hoşgeldiniz!',
+
 	'login_facebook' => 'Facebook ile Oturum Aç',
 	'signup_facebook_title' => 'Facebook hesabınız ile hemen bir uygulama oluşturabilirsiniz!',
 	'signup_facebook' => 'Facebook ile Uygulama Oluştur',

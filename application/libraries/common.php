@@ -632,6 +632,24 @@ class Common {
 		}
 	}
 
+	public static function sendHtmlEmail($toEmail, $toDisplayName, $subject, $msg) {
+		try {
+			// Bundle::start('messages');
+			Message::send(function($m) use($toEmail, $toDisplayName, $subject, $msg) {
+				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+				//$m->to($toEmail);
+				$m->to($toEmail, $toDisplayName);
+				$m->subject($subject);
+				$m->body($msg);
+				$m->html(true);
+			});
+			return true;
+		} catch (Exception $e) {
+			// return 'Mailer error: ' . $e->getMessage();
+			return false;
+		}
+	}
+
 	public static function generatePassword($length = 6, $level = 2) {
 		list($usec, $sec) = explode(' ', microtime());
 		srand((float) $sec + ((float) $usec * 100000));

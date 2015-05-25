@@ -429,6 +429,27 @@ class Common_Controller extends Base_Controller {
 				// return View::make('pages.login')
 				// ->with('message', "success=".base64_encode("false")."&errmsg=".base64_encode(__('common.login_accounthasbeenconfirmed')));
 
+				$subject = __('common.welcome_email_title');
+	            $mailData = array(
+					'name'	=> $s->FirstName,
+					'surname'	=> $s->LastName,
+					'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/blog',
+				);
+	            $msg = View::make('mail-templates.hosgeldiniz.index')->with($mailData)->render();
+	            $mailStatus = Common::sendHtmlEmail($s->Email, $s->FirstName.' '.$s->LastName, $subject, $msg);
+	            
+	            $m = new MailLog();
+				$m->MailID = 2; //Welcome
+				$m->UserID = $s->UserID;
+				if(!$mailStatus){
+					$m->Arrived = 0;
+				}
+				else {
+					$m->Arrived = 1;
+				}
+				$m->StatusID = eStatus::Active;
+				$m->save();
+
 				return Redirect::to(__('route.login'))
 								->with('confirm', __('common.login_accounthasbeenconfirmed'));
 

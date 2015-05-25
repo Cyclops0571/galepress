@@ -475,6 +475,8 @@ return array(
 	'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
 	'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
 
+	'welcome_email_title' => 'Welcome!',
+
 	'login_facebook' => 'Login with Facebook',
 	'signup_facebook_title' => 'You can quickly create an application with your Facebook account!',
 	'signup_facebook' => 'Sign Up with Facebook',

@@ -39,22 +39,8 @@ if ($banner) {
 <script src="/js/masterslider/jquery.easing.min.js"></script>
 <script src="/js/masterslider/masterslider.min.js"></script>
 <!--BANNER SLIDER-->
+
 <style type="text/css">
-	.templateScreen .text-center.app-name{
-		font-size:1em !important;
-		height:15px !important;
-		line-height:15px !important;
-	}
-	.templateScreen .header .header-categories {
-		background-size: 35% auto !important;
-		height: 12px !important;
-		cursor: default !important;
-	}
-	.templateScreen .header,.footer,.footer div{
-		height: 22px !important;
-		background-position: top center !important;
-		cursor: default !important;
-	}
 	.checkbox-inline{
 		padding-left: 0 !important;
 	}
@@ -70,44 +56,8 @@ if ($banner) {
 	.urlCheck{
 		background-image: none !important;
 	}
-	.container .form-row [class*="col-"], [class*="col-"] img{
-		cursor: default !important;
-	}
-	#ms-gallery-1{
-		margin:0 auto;
-	}
-	.ms-gallery-template .ms-gallery-botcont{
-		position: absolute !important;
-		bottom:0 !important;
-		width: 100% !important;
-		opacity: 0.7;
-	}
-	.ms-bullets.ms-dir-h,.ms-bullets.ms-dir-h .ms-bullets-count {
-		right: 3% !important;
-	}
-	.ms-gallery-template .ms-gallery-botcont{
-		height: 18px !important;
-	}
-	.ms-gallery-template .ms-bullet{
-		width: 3px !important;
-		height: 3px !important;
-		margin: 2px !important;
-	}
-	.ms-gallery-template .ms-bullets.ms-dir-h{
-		bottom: 5px !important;
-	}
-	.ms-gallery-template .ms-gal-playbtn{
-		display: none !important;
-	}
-	.ms-gallery-template .ms-gal-thumbtoggle{
-		display: none !important;
-	}
-	.ms-gallery-template .ms-slide-info {
-		padding: 2px 3px !important;
-		font-size: 0.3em !important;
-	}
-	.ms-timerbar{
-		display: none !important;
+	.screen .footer{
+		padding: 0 !important;
 	}
 </style>
 
@@ -214,7 +164,11 @@ if ($banner) {
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_active') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
-			<div id="ipadView"></div>
+			<div class="form-row">
+				<div class="col-md-7 col-md-offset-3">
+					<div id="ipadView"></div>
+				</div>
+			</div>
 			<div class="form-row" style="border-top: 1px solid rgb(34, 34, 34);padding-top: 10px;">
 				<div class="btn-group col-md-3 col-md-offset-8" style="padding-right:9px;">
 					<button type="button" class="btn col-md-7" onclick="javascript:location.href ='{{ URL::to(__('route.banners').'?applicationID='.$ApplicationID) }}'" style="cursor:pointer !important;">{{__('common.map_form_return')}}</button>
