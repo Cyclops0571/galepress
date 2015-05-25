@@ -418,7 +418,7 @@ class Applications_Controller extends Base_Controller {
 		}
 		
 		$application->save();
-		return "success" . base64_encode("true");
+		return "success=" . base64_encode("true");
 		
 	}
 
