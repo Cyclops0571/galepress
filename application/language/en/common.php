@@ -551,6 +551,19 @@ return array(
 	'banners_list_status' => 'Status',
 	'banners_list_status1' => 'Published',
 	'banners_list_status0' => 'Not Publicationed',
+	
+	'tabs_url' => 'Mobile uyumlu web link',
+	'tabs_inhouse_url' => 'Galepress özelliği',
+	'tabs_icon' => 'İkon',
+	'tabs_active' => 'Tab Active',
+	
+	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır.',
+	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
+	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
+	
+	'tabs_tab_status' => 'Tab Durumu',
+	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün',
+	
 	'image_select' => 'Choose Image...',
 	'image' => 'Image',
 

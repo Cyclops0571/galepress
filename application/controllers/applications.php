@@ -367,18 +367,32 @@ class Applications_Controller extends Base_Controller {
 
 		$application = Application::find($id);
 		if ($application) {
+			$tabs = $application->Tabs();
+			for($i = 0; $i < TAB_COUNT; $i++) {
+				if(!isset($tabs[$i])) {
+					$tabs[] = new Tab();
+				}
+			}
+
+			$galepressTabs = Tab::getGalepresTabs();
 			$data = array(
 				'page' => $this->page,
 				'route' => $this->route,
 				'caption' => $this->caption,
 				'detailcaption' => $this->detailcaption,
-				'application' => $application
+				'application' => $application,
+				'tabs' => $tabs,
+				'galepressTabs' => $galepressTabs
 			);
 			return View::make('pages.userapplicationdetail', $data)
 							->nest('filterbar', 'sections.filterbar', $data);
 		} else {
 			return Redirect::to($this->route);
 		}
+	}
+	
+	public function post_userApplicationSettings() {
+		dd($_POST);
 	}
 
 }

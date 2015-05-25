@@ -597,6 +597,10 @@ var cApplication = new function () {
 	}
     };
 
+    this.saveUserSettings = function () {
+	cCommon.save('application_usersettings');
+    };
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////

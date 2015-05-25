@@ -37,6 +37,7 @@ return array(
 	'applications_uploadfile' => 'applications/load-file',
 	'applications_uploadfile2' => 'applications/load-file2',
 	'applications_usersettings' => 'applications/(:num)/settings',
+	'application_usersettings_save' => 'applications/userApplicationSettings',
 
 	'contents' => 'contents',
 	'contents_request' => 'contents/request',

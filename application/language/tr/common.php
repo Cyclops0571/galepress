@@ -163,7 +163,7 @@ return array(
 	'application_settings_caption_detail_big' => 'UYGULAMA AYARLARI',
 	'application_settings_caption_template' => 'Tema Ayarları',
 	'application_settings_caption_banner' => 'Banner Ayarları',
-	'application_settings_caption_tab' => 'Tab Ayarları',
+	'application_settings_caption_tab' => 'Tab Ayarları (Uygulamanıza en fazla 4 tab ekleyebilirsiniz): ',
 	'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
 	'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
 
@@ -552,6 +552,18 @@ return array(
 	'banners_list_status' => 'Durum',
 	'banners_list_status1' => 'Yayında',
 	'banners_list_status0' => 'Yayında değil',
+	
+	'tabs_url' => 'Web link',
+	'tabs_inhouse_url' => 'Galepress özelliği',
+	'tabs_icon' => 'İkon',
+	'tabs_active' => 'Tab Active',
+	
+	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır.',
+	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
+	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
+	
+	'tabs_tab_status' => 'Tab Durumu',
+	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün',
 	
 	'image_select' => 'Resim seç...',
 	'image' => 'Resim',

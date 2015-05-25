@@ -85,7 +85,7 @@ class Application extends Eloquent
 	}
 	
 	public function Tabs() {
-		return $this->has_many('Tab', $this->key());
+		return $this->has_many('Tab', $this->key())->get();
 	}
 	
 	/**

@@ -37,6 +37,7 @@ return array(
 	'applications_uploadfile' => 'applikationen/datei-hochladen',
 	'applications_uploadfile2' => 'applikationen/datei-hochladen2',
 	'applications_usersettings' => 'applikationen/(:num)/einstellungen',
+	'application_usersettings_save' => 'applications/userApplicationSettings',
 
 	'contents' => 'inhalte',
 	'contents_request' => 'inhalte/Anforderung',

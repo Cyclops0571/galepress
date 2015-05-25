@@ -4,6 +4,7 @@
 <?php
 if (false) {
 	$application = new Application();
+	$tabs = new Tab();
 }
 ?>
 <!--BANNER SLIDER-->
@@ -24,6 +25,7 @@ if (false) {
 		<div class="content controls">
 			{{ Form::open(__('route.applications_save'), 'POST') }}
 			{{ Form::token() }}
+			<input type="hidden" name="ApplicationID" value="<?php echo $application->ApplicationID; ?>"?>
 			<div class="form-row" style="border-bottom: 1px solid #565656;">
 				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">{{ __('common.application_settings_caption_template') }}</div>
 			</div>
@@ -97,44 +99,85 @@ if (false) {
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
+
+
 			<div class="form-row" style="border-bottom: 1px solid #565656;">
 				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">{{ __('common.application_settings_caption_tab') }}</div>
 			</div>
+			<!-- Tab Status -->
+			<div class="form-row">
+				<div class="col-md-3">{{ __('common.tabs_tab_status') }}</div>
+				<div class="col-md-8">
+					<div class="checkbox-inline" style="padding-left:0;">
+						<div class="checker">
+							<span>
+								<input name="Status" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_tab_status') }}"><span class="icon-info-sign"></span></a></div>
+			</div>
+			<?php $tabNo = 1; ?>
+			<?php foreach ($tabs as $tab): ?>
+				<div class="form-row" style="border-bottom: 1px solid #565656;">
+					<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">Tab <?php echo $tabNo; ?></div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-3">{{ __('common.tabs_url') }}</div>
+					<div class="col-md-8">
+						<input type="text" name="Url_<?php echo $tabNo; ?>" value="<?php echo $tab->Url; ?>"/>
+					</div>
+					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_url') }}"><span class="icon-info-sign"></span></a></div>
+				</div>
 
-			<div class="form-row">
-				<div class="col-md-3">Tab Status</div>
-				<div class="col-md-8">
-					<div class="checkbox-inline" style="padding-left:0;">
-						<div class="checker">
-							<span>
-								<input name="Status" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
-							</span>
+				<div class="form-row">
+					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
+					<div class="col-md-8">
+						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2">
+							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>></option>
+							<?php foreach ($galepressTabs as $tabKey => $tabValue): ?>
+								<option value="{{ $tabKey }}"{{ ($tabKey == $tab->InhouseUrl ? ' selected="selected"' : '') }}>{{ $tabValue }}</option>
+							<?php endforeach; ?>
+						</select>
+
+					</div>
+					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_inhouse_url') }}"><span class="icon-info-sign"></span></a></div>
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-3">{{ __('common.tabs_icon') }}</div>
+					<div class="col-md-8">
+						<input type="text" name="IconUrl_<?php echo $tabNo; ?>" value="<?php echo $tab->IconUrl; ?>"/>
+					</div>
+					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_icon') }}"><span class="icon-info-sign"></span></a></div>
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-3">{{ __('common.tabs_active') }}</div>
+					<div class="col-md-8">
+						<div class="checkbox-inline" style="padding-left:0;">
+							<div class="checker">
+								<span>
+									<input name="TabStatus" type="checkbox" value="1" <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?>>
+								</span>
+							</div>
 						</div>
 					</div>
+					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_icon') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
-				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
-			</div>
-			
-			<div class="form-row">
-				<div class="col-md-3">Tab 1</div>
-				<div class="col-md-8">
-					<div class="checkbox-inline" style="padding-left:0;">
-						<div class="checker">
-							<span>
-								<input name="Status" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
-			</div>
+
+				<?php $tabNo++; ?>
+			<?php endforeach; ?>
+
+
 
 			<div class="form-row" style="border-top: 1px solid black;">
 				<div class="col-md-12 text-center" style="border-bottom: 1px solid #565656;"></div>
 			</div>
 			<div class="form-row">
 				<div class="col-md-3 col-md-offset-8">
-					<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" />
+					<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cApplication.saveUserSettings();" />
 				</div>           
 			</div>
 			{{ Form::close() }}
@@ -145,13 +188,13 @@ if (false) {
 	<div id="ipadView"></div>
 </div>
 <script type="text/javascript">
-$(function () {
-    var ApplicationID = <?php echo $application->ApplicationID; ?>;
-    var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
-    var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
-    var Autoplay = <?php echo $application->BannerAutoplay; ?>;
-    var Speed = <?php echo $application->BannerTransitionRate; ?>;
-    cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
-});
+    $(function () {
+	var ApplicationID = <?php echo $application->ApplicationID; ?>;
+	var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
+	var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
+	var Autoplay = <?php echo $application->BannerAutoplay; ?>;
+	var Speed = <?php echo $application->BannerTransitionRate; ?>;
+	cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
+    });
 </script>
 @endsection

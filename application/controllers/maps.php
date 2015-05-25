@@ -162,12 +162,13 @@ class Maps_Controller extends Base_Controller {
 		return View::make("pages." . Str::lower($this->table) . "location", $data);
 	}
 	
-	public function get_webview($appID) {
-		if (!Common::CheckApplicationOwnership($appID)) {
+	public function get_webview($applicationID) {
+		$application = Application::find($applicationID);
+		if (!$application) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
 		
-		$googleMapSet = GoogleMap::where('ApplicationID', '=', $appID)->where("statusID", "=", eStatus::Active)->get();
+		$googleMapSet = GoogleMap::where('ApplicationID', '=', $application->ApplicationID)->where("statusID", "=", eStatus::Active)->get();
 		
 		$data = array();
 		$data["googleMapSet"] = $googleMapSet;

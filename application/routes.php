@@ -453,6 +453,10 @@ foreach($languages as $currentLanguage) {
 	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }
 
+
+
+
+Route::post('applications/userApplicationSettings', array('as' => 'save_applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
 Route::get("/template/(:num)", array('as' => 'template_index', 'before'=>'auth', 'uses'=>'template@index'));
 Route::get("banners/delete", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
 Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));

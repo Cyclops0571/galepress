@@ -92,7 +92,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 
 	public function get_contents($applicationID) {
 		return Ws::render(function() use ($applicationID) {
-					$isTest = Input::get('isTest', 0) ? TRUE: FALSE ;
+					$isTest = Input::get('isTest', 0) ? TRUE : FALSE;
 					$application = Ws::getApplication($applicationID);
 
 					switch ($application->ThemeForeground) {
@@ -111,10 +111,11 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 						default:
 							$hexadecimalColorCode = "#2980B9";
 					}
-					$baseUrl =  "http://www.galepress.com/";
+					$baseUrl = "http://www.galepress.com/";
 					$tabs = array();
-					$tabs[] = array($baseUrl . "img/galeLogo.png", $baseUrl . "maps/webview/" . (int) $application->ApplicationID);
-					$tabs[] = array($baseUrl . "img/bg-drop.png", "http://www.google.com/");
+					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/galeLogo.png", "tabUrl" => $baseUrl . "maps/webview/" . (int) $application->ApplicationID);
+					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/bg-drop.png", "tabUrl" => "http://www.google.com/");
+					
 
 					$contents = Ws::getApplicationContents($applicationID, $isTest);
 					return Response::json(array(
