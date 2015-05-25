@@ -92,7 +92,7 @@ if (false) {
 					<div class="checkbox-inline" style="padding-left:0;">
 						<div class="checker">
 							<span>
-								<input name="Status" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
+								<input name="BannerActive" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
 							</span>
 						</div>
 					</div>
@@ -111,7 +111,7 @@ if (false) {
 					<div class="checkbox-inline" style="padding-left:0;">
 						<div class="checker">
 							<span>
-								<input name="Status" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
+								<input name="TabActive" type="checkbox" value="1" <?php echo $application->TabActive ? 'checked' : ''; ?>>
 							</span>
 						</div>
 					</div>
@@ -148,7 +148,21 @@ if (false) {
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_icon') }}</div>
 					<div class="col-md-8">
-						<input type="text" name="IconUrl_<?php echo $tabNo; ?>" value="<?php echo $tab->IconUrl; ?>"/>
+						<input type="hidden" name="hiddenSelectedIcon_<?php echo $tabNo ?>" value="<?php echo $tab->IconUrl; ?>" />
+						<a href="#" rel="popover" id="selectedIcon_<?php echo $tabNo ?>" class="btn selectedIcon" data-popover-content="#myPopover_<?php echo $tabNo ?>">
+							<?php $imgSrc = !empty($tab->IconUrl) ? $tab->IconUrl : '/img/app-icons/1.png'; ?>
+							<img id="imgSelectedIcon_<?php echo $tabNo; ?>" src="<?php echo $imgSrc; ?>" />
+						</a>
+						<div id="myPopover_<?php echo $tabNo ?>" class="hide">
+							<ul class="iconList myIconClass_<?php echo $tabNo;?>">
+								<?php for ($i = 1; $i < 14; $i++): ?>
+									<li><button type="button" class="btn"><img src="/img/app-icons/<?php echo $i ?>.png" width="50" /></button></li>
+								<?php endfor; ?>
+							</ul>
+						</div>
+						<script type="text/javascript">
+						cApplication.selectedIcon(<?php echo $tabNo; ?>);
+						</script>
 					</div>
 					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_icon') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
@@ -159,7 +173,7 @@ if (false) {
 						<div class="checkbox-inline" style="padding-left:0;">
 							<div class="checker">
 								<span>
-									<input name="TabStatus" type="checkbox" value="1" <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?>>
+									<input name="TabStatus_<?php echo $tabNo; ?>" type="checkbox" value="1" <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?>>
 								</span>
 							</div>
 						</div>
@@ -197,4 +211,13 @@ if (false) {
 	cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
     });
 </script>
+<style type="text/css">
+	.iconList{
+		padding: 0;
+	}
+	.iconList li{
+		display: inline;
+		list-style-type: none;
+	}
+</style>
 @endsection

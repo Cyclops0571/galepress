@@ -368,8 +368,8 @@ class Applications_Controller extends Base_Controller {
 		$application = Application::find($id);
 		if ($application) {
 			$tabs = $application->Tabs();
-			for($i = 0; $i < TAB_COUNT; $i++) {
-				if(!isset($tabs[$i])) {
+			for ($i = 0; $i < TAB_COUNT; $i++) {
+				if (!isset($tabs[$i])) {
 					$tabs[] = new Tab();
 				}
 			}
@@ -390,9 +390,36 @@ class Applications_Controller extends Base_Controller {
 			return Redirect::to($this->route);
 		}
 	}
-	
+
 	public function post_userApplicationSettings() {
-		dd($_POST);
+		$application = Application::find((int) Input::get("ApplicationID", 0));
+		if (!$application || !$application->CheckOwnership()) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('error.unauthorized_user_attempt'));
+		}
+
+		$application->BannerAutoplay = (int) Input::get("BannerAutoplay", 0);
+		$application->BannerIntervalTime = (int) Input::get("BannerIntervalTime", 0);
+		$application->BannerTransitionRate = (int) Input::get("BannerTransitionRate", 0);
+		$application->BannerActive = (int) Input::get("BannerActive", 0);
+		$application->TabActive = (int) Input::get("TabActive", 0);
+		$tabs = $application->Tabs();
+		for ($i = 0; $i < TAB_COUNT; $i++) {
+			if (!isset($tabs[$i])) {
+				$tabs[] = new Tab();
+			}
+			$j = $i + 1;
+			$tabs[$i]->ApplicationID = $application->ApplicationID;
+			$tabs[$i]->Url = Input::get("Url_" . $j, '');
+			$tabs[$i]->InhouseUrl = Input::get("InhouseUrl_" . $j, '');
+			$tabs[$i]->IconUrl = Input::get("hiddenSelectedIcon_" . $j, '');
+			$tabs[$i]->Status = (int)Input::get("TabStatus_" . $j, 0);
+			$tabs[$i]->StatusID = eStatus::Active;
+			$tabs[$i]->save();
+		}
+		
+		$application->save();
+		return "success" . base64_encode("true");
+		
 	}
 
 }
