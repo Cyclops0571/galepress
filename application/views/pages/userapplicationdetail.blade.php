@@ -32,7 +32,7 @@ if (false) {
 			<div class="form-row">
 				<div class="col-md-3">{{ __('common.template_chooser_background') }}</div>
 				<div class="col-md-8">
-					<select class="form-control select2" style="width: 100%;" tabindex="-1">
+					<select name="ThemeBackground" class="form-control select2" style="width: 100%;" tabindex="-1">
 						<option value="1" <?php echo $application->ThemeBackground == 1 ? "selected" : ''; ?> >
 							{{ __('common.template_chooser_backcolor1') }}
 						</option>
@@ -46,7 +46,7 @@ if (false) {
 			<div class="form-row">
 				<div class="col-md-3">{{ __('common.template_chooser_foreground') }}</div>
 				<div class="col-md-8">
-					<select class="form-control select2" style="width: 100%;" tabindex="-1">
+					<select name="ThemeForeground" class="form-control select2" style="width: 100%;" tabindex="-1">
 						<option value="1" <?php echo $application->ThemeForeground == 1 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor3') }}</option>
 						<option value="2" <?php echo $application->ThemeForeground == 2 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor1') }}</option>
 						<option value="3" <?php echo $application->ThemeForeground == 3 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor2') }}</option>
@@ -209,12 +209,12 @@ if (false) {
 </div>
 <script type="text/javascript">
     $(function () {
-	var ApplicationID = <?php echo $application->ApplicationID; ?>;
-	var ThemeBackground = <?php echo $application->ThemeBackground; ?>;
-	var ThemeForeground = <?php echo $application->ThemeForeground; ?>;
-	var Autoplay = <?php echo $application->BannerAutoplay; ?>;
-	var Speed = <?php echo $application->BannerTransitionRate; ?>;
-	cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
+		var ApplicationID = $('input[name=ApplicationID]').val();
+		var ThemeBackground = $('select[name=ThemeBackground] option:selected').val();
+		var ThemeForeground = $('select[name=ThemeForeground] option:selected').val();
+		var Autoplay = $('input[name=BannerAutoplay]').is(':checked');
+		var Speed = $('input[name=BannerTransitionRate]').val();
+		cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
     });
 </script>
 @endsection
