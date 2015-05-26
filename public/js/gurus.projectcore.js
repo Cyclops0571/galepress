@@ -601,6 +601,7 @@ var cApplication = new function () {
 	cCommon.save('application_usersettings',
 		function () {
 		    cNotification.success();
+		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["applications_usersettings"].replace('(:num)', $('input[name=ApplicationID]').val());
 		}
 
 	);

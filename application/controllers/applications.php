@@ -396,7 +396,9 @@ class Applications_Controller extends Base_Controller {
 		if (!$application || !$application->CheckOwnership()) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('error.unauthorized_user_attempt'));
 		}
-
+		
+		$application->ThemeBackground = (int) Input::get("ThemeBackground", 1);
+		$application->ThemeForeground = (int) Input::get("ThemeForeground", 1);
 		$application->BannerAutoplay = (int) Input::get("BannerAutoplay", 0);
 		$application->BannerIntervalTime = (int) Input::get("BannerIntervalTime", 0);
 		$application->BannerTransitionRate = (int) Input::get("BannerTransitionRate", 0);
