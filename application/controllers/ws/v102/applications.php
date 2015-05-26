@@ -111,9 +111,9 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 						default:
 							$hexadecimalColorCode = "#2980B9";
 					}
-					$baseUrl = "http://www.galepress.com/";
+					$baseUrl = Config::get('custom.url');
 					$tabs = array();
-					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/galeLogo.png", "tabUrl" => $baseUrl . "maps/webview/" . (int) $application->ApplicationID);
+					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/galeLogo.png", "tabUrl" => $baseUrl . "/maps/webview/" . (int) $application->ApplicationID);
 					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/bg-drop.png", "tabUrl" => "http://www.google.com/");
 					
 
@@ -124,8 +124,8 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 								'ThemeBackground' => $application->ThemeBackground,
 								'ThemeForeground' => $hexadecimalColorCode,
 								'BannerActive' => $application->BannerActive,
-								'BannerPage' => "http://www.galepress.com/banners/service_view/" . $applicationID,
-								'Tabs' => $tabs,
+								'BannerPage' => $baseUrl . "/banners/service_view/" . $applicationID,
+								'Tabs' => $application->TabsForService(),
 								'Contents' => $contents
 					));
 				});
@@ -156,7 +156,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 										->where('FbEmail', '=', $userFbEmail)
 										->where('StatusID', '=', eStatus::Active)->first();
 						if (!$user) {
-							throw new Exception("http://www.galepress.com adresinden Facebook ile hesap oluşturmalısınız.", "141");
+							throw new Exception(Config::get('custom.url') . " adresinden Facebook ile hesap oluşturmalısınız.", "141");
 						}
 					} else {
 						throw new Exception("Hatalı kullanıcı bilgileri.", "140");

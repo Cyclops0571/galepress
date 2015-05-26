@@ -59,7 +59,7 @@ class Ws_v100_Contents_Controller extends Base_Controller
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
-				'Url' => "http://www.galepress.com/tr/icerikler/talep?RequestTypeID=".$requestTypeID."&ContentID=".(int)$content->ContentID
+				'Url' => Config::get('custom.url') . "/tr/icerikler/talep?RequestTypeID=".$requestTypeID."&ContentID=".(int)$content->ContentID
 			));
 		});
 	}
@@ -73,7 +73,7 @@ class Ws_v100_Contents_Controller extends Base_Controller
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
-				'Url' => "http://www.galepress.com/tr/icerikler/talep?RequestTypeID=1001&ContentID=".(int)$content->ContentID."&Password=".Input::get('password', '')
+				'Url' => Config::get('custom.url') . "/tr/icerikler/talep?RequestTypeID=1001&ContentID=".(int)$content->ContentID."&Password=".Input::get('password', '')
 			));
 		});
 	}

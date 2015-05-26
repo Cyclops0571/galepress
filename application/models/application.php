@@ -84,6 +84,10 @@ class Application extends Eloquent
 		return $this->has_many('ApplicationTag', $this->key());
 	}
 	
+	/**
+	 * 
+	 * @return Tab
+	 */
 	public function Tabs() {
 		return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)->get();
 	}
@@ -156,5 +160,19 @@ class Application extends Eloquent
 	public function incrementAppVersion() {
 		$this->Version++;
 		parent::save();
+	}
+	
+	public function TabsForService() {
+		$tabsForService = array();
+		if(!$this->TabActive) {
+			return $tabsForService;
+		}
+		$tabs = $this->Tabs();
+		foreach($tabs as $tab) {
+			if($tab->Status == eStatus::Active) {
+				$tabsForService[] = array("tabLogoUrl" => Config::get('custom.url') . $tab->IconUrl, "tabUrl" => $tab->urlForService());
+			}
+		}
+		return $tabsForService;
 	}
 }
