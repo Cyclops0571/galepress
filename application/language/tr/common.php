@@ -560,7 +560,7 @@ return array(
 	'tabs_icon' => 'İkon',
 	'tabs_active' => 'Tab Active',
 	
-	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır.',
+	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır. Eğer bu alanı boşaltıp check kutusuna tıklarsanız Galepress özelliği kullanılabilir hale gelir.',
 	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
 	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
 	

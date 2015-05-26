@@ -17,7 +17,7 @@ if (false) {
 <script src="/js/masterslider/masterslider.min.js"></script>
 
 <!--BANNER SLIDER-->
-<div class="col-md-6">    
+<div class="col-md-6" id="userAppSettingsPage">    
 	<div class="block block-drop-shadow bg-light-rtl">
 		<div class="header">
 			<h2>{{ __('common.application_settings_caption_detail_big') }}</h2>
@@ -127,7 +127,7 @@ if (false) {
 					<div class="col-md-3">{{ __('common.tabs_url') }}</div>
 					<div class="col-md-8">
 						<div class="input-group file">                                    
-							<input type="text" id="TargetUrl_<?php echo $tabNo; ?>" class="form-control" name="Url_<?php echo $tabNo; ?>" value="<?php echo $tab->Url; ?>" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+							<input type="text" id="TargetUrl_<?php echo $tabNo; ?>" class="form-control targetUrlCount" name="Url_<?php echo $tabNo; ?>" value="<?php echo $tab->Url; ?>" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
 							<span class="input-group-btn">
 								<button class="btn btn-primary urlCheck" type="button" id="checkUrl_<?php echo $tabNo; ?>" onclick="cApplication.checkUrl(this);"><span class="icon-ok"></span></button>
 							</span>
@@ -140,9 +140,8 @@ if (false) {
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
 					<div class="col-md-8">
-						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2" onchange="cApplication.InhouseUrlChange(this);">
-							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>></option>
-							<option value="0">Seçiniz...</option>
+						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2 inhouseUrl" onchange="cApplication.InhouseUrlChange(this);">
+							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>>Bu özelliği kullanma.</option>
 							<?php foreach ($galepressTabs as $tabKey => $tabValue): ?>
 								<option value="{{ $tabKey }}"{{ ($tabKey == $tab->InhouseUrl ? ' selected="selected"' : '') }}>{{ $tabValue }}</option>
 							<?php endforeach; ?>

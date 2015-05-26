@@ -660,6 +660,23 @@ var cApplication = new function () {
 	    $(e).closest('.form-row').next().find('.col-md-8').removeClass('noTouchOpacity');
 	}
     };
+    $(function(){
+		    if($('#userAppSettingsPage').length > 0){
+		    	$( ".targetUrlCount" ).each(function(index) {
+		    		console.log($(this).val());
+		    		if($(this).val().length>0){
+				  		$(".inhouseUrl:eq("+index+")").closest('.col-md-8').addClass('noTouchOpacity');
+		    		}
+				});
+
+				$( ".inhouseUrl" ).each(function(index) {
+		    		console.log($(this).val());
+		    		if($(this).val()!=0){
+				  		$(".targetUrlCount:eq("+index+")").closest('.col-md-8').addClass('noTouchOpacity');
+		    		}
+				});
+		    }
+	});
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
