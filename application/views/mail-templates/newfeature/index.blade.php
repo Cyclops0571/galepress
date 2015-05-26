@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-	<title>Hogar</title>
+	<title>yeni Özellikler</title>
 	<style type="text/css">
 .ReadMsgBody { width: 100%; background-color: #ffffff; }
 .ExternalClass { width: 100%; background-color: #ffffff; }
@@ -17,7 +17,7 @@ img { display: block !important; over-flow: hidden !important; }
 table td { border-collapse: collapse; }
 .yshortcuts a { border-bottom: none !important; }
 a { color: #1f86c0; text-decoration: none; }
-.textbutton a { font-family: 'open sans', arial, sans-serif !important; color: #ffffff !important; }
+.textbutton a { font-family: Verdana, arial, sans-serif !important; color: #ffffff !important; }
 .menulink a { color: #414a51 !important; }
 .textlink a { color: #414a51 !important; }
 .preferencelink a { text-decoration: underline !important; }
@@ -59,7 +59,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 
 <body>
 	<!--header-->
-	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" background="images/header-bg.png" bgcolor="#1f86c0" style="background-size:cover; background-position:top;">
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" background="http://www.galepress.com/img/mail-templates/newfeature/header-bg.png" bgcolor="#1f86c0" style="background-size:cover; background-position:top;">
 		<tr>
 			<td align="center">
 				<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="table-inner">
@@ -69,7 +69,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 					<!--logo-->
 					<tr>
 						<td align="center" style="line-height: 0px;">
-							<img class="logo" style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/logo.png" width="300"  alt="logo"/>
+							<img class="logo" style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/logo.png" width="300"  alt="logo"/>
 						</td>
 					</tr>
 					<!--end logo-->
@@ -82,7 +82,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 					</tr>
 					<!--Headline-->
 					<tr>
-						<td align="center" style="text-decoration: none; color:#FFFFFF;font-family: 'Century Gothic', Arial, sans-serif;  font-size:30px; font-weight: bold;letter-spacing: 4px;">Yaptığımız işi çok seviyoruz, yeni özellik eklemeden duramıyoruz!</td>
+						<td align="center" style="text-decoration: none; color:#FFFFFF;font-family: Verdana, Arial, sans-serif;  font-size:30px; font-weight: bold;letter-spacing: 4px;">Yaptığımız işi çok seviyoruz, yeni özellik eklemeden duramıyoruz!</td>
 					</tr>
 					<!--end Headline-->
 
@@ -148,7 +148,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--title-->
 											<tr align="left">
-												<td style="font-family: 'Open Sans', Arial, sans-serif; color:#414a51; font-size:22px;">MASTER PDF</td>
+												<td style="font-family: Verdana, Arial, sans-serif; color:#414a51; font-size:22px;">MASTER PDF</td>
 											</tr>
 											<!--end title-->
 											<tr align="left">
@@ -165,7 +165,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--content-->
 											<tr align="left">
-												<td style="font-family: 'Open sans', Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
+												<td style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
 													Seçtiğiniz bir içeriğinizi, uygulama açıldığı anda kütüphane ekranı görünmeden kullanıcılarınıza sunabilirsiniz.
 												</td>
 											</tr>
@@ -175,7 +175,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--link-->
 											<tr>
-												<td align="left" style="font-family: 'Open sans', Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
+												<td align="left" style="font-family: Verdana, Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
 													<a href="#">+ Daha fazlası</a>
 												</td>
 											</tr>
@@ -216,7 +216,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 							<table align="center" class="table-inner" width="550" border="0" cellspacing="0" cellpadding="0">
 								<!--title-->
 								<tr align="left">
-									<td style="font-family: 'Open Sans', Arial, sans-serif; color:#414a51; font-size:22px;">STORE LOCATOR</td>
+									<td style="font-family: Verdana, Arial, sans-serif; color:#414a51; font-size:22px;">STORE LOCATOR</td>
 								</tr>
 								<!--end title-->
 								<tr align="left">
@@ -233,7 +233,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 								</tr>
 								<!--content-->
 								<tr align="left">
-									<td style="font-family: 'Open sans', Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
+									<td style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
 										Bayilerinizin, şubelerinizin veya servislerinizin lokasyonlarını paylaşabilir ve kullanıcılarınızı en yakın lokasyonunuza yönlendirebilirsiniz.
 									</td>
 								</tr>
@@ -243,7 +243,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 								</tr>
 								<!--link-->
 								<tr>
-									<td align="left" style="font-family: 'Open sans', Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
+									<td align="left" style="font-family: Verdana, Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
 										<a href="#">+ Daha fazlası</a>
 									</td>
 								</tr>
@@ -303,7 +303,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--title-->
 											<tr align="left">
-												<td style="font-family: 'Open Sans', Arial, sans-serif; color:#414a51; font-size:22px;">DİKEY ve YATAY KONUM</td>
+												<td style="font-family: Verdana, Arial, sans-serif; color:#414a51; font-size:22px;">DİKEY ve YATAY KONUM</td>
 											</tr>
 											<!--end title-->
 											<tr align="left">
@@ -320,7 +320,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--content-->
 											<tr align="left">
-												<td style="font-family: 'Open sans', Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
+												<td style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
 													İçeriklerinizi ihtiyaçlarınıza göre cihaz ekranını dikey ve yatay kilitleyerek kullanabilirsiniz.
 												</td>
 											</tr>
@@ -330,7 +330,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--link-->
 											<tr>
-												<td align="left" style="font-family: 'Open sans', Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
+												<td align="left" style="font-family: Verdana, Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
 													<a href="#">+ Daha fazlası</a>
 												</td>
 											</tr>
@@ -376,7 +376,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 										<table align="center" class="table-inner" width="225" border="0" cellspacing="0" cellpadding="0">
 											<!--title-->
 											<tr align="left">
-												<td style="font-family: 'Open Sans', Arial, sans-serif; color:#414a51; font-size:22px;">TASARIM</td>
+												<td style="font-family: Verdana, Arial, sans-serif; color:#414a51; font-size:22px;">TASARIM</td>
 											</tr>
 											<!--end title-->
 											<tr align="left">
@@ -393,7 +393,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--content-->
 											<tr align="left">
-												<td style="font-family: 'Open sans', Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
+												<td style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
 													GalePress, artık 2 farklı tema ve 5 farklı renk seçeneğine sahip. Üstelik artık daha çekici. Yeni tasarımımızın nasıl göründüğünü DYS Paneli'nden inceleyebilirsiniz.
 												</td>
 											</tr>
@@ -403,7 +403,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--link-->
 											<tr>
-												<td align="left" style="font-family: 'Open sans', Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
+												<td align="left" style="font-family: Verdana, Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
 													<a href="#">+ Daha fazlası</a>
 												</td>
 											</tr>
@@ -444,7 +444,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 										<table align="center" class="table-inner" width="225" border="0" cellspacing="0" cellpadding="0">
 											<!--title-->
 											<tr align="left">
-												<td style="font-family: 'Open Sans', Arial, sans-serif; color:#414a51; font-size:22px;">İÇERİK ZAMANLAMA</td>
+												<td style="font-family: Verdana, Arial, sans-serif; color:#414a51; font-size:22px;">İÇERİK ZAMANLAMA</td>
 											</tr>
 											<!--end title-->
 											<tr align="left">
@@ -461,7 +461,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--content-->
 											<tr align="left">
-												<td style="font-family: 'Open sans', Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
+												<td style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
 													Süreli yayınlarınızın takibini yapmak artık çok daha kolay. İçeriklerinizi önceden oluşturup, sizin belirlediğiniz bir tarihte yayınlanmasını veya otomatik olarak yayından kalkmasını sağlayabilirsiniz.
 												</td>
 											</tr>
@@ -471,7 +471,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 											</tr>
 											<!--link-->
 											<tr>
-												<td align="left" style="font-family: 'Open sans', Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
+												<td align="left" style="font-family: Verdana, Arial, sans-serif; font-weight: bold;color:#1f86c0; font-size:14px; line-height: 28px;">
 													<a href="#">+ Daha fazlası</a>
 												</td>
 											</tr>
@@ -517,19 +517,19 @@ td[class="contact-button"] { border-top: 0px !important; }
 											<tr>
 												<td align="center" style="line-height: 0px;">
 													<a href="#">
-														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/facebook.png" width="5" height="11" alt="img" />
+														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/facebook.png" width="5" height="11" alt="img" />
 													</a>
 												</td>
 												<td width="10"></td>
 												<td align="center" style="line-height: 0px;">
 													<a href="#">
-														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/twitter.png" width="14" height="11" alt="img" />
+														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/twitter.png" width="14" height="11" alt="img" />
 													</a>
 												</td>
 												<td width="10"></td>
 												<td align="center" style="line-height: 0px;">
 													<a href="#">
-														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/linkedin.png" width="11" height="11" alt="img" />
+														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/linkedin.png" width="11" height="11" alt="img" />
 													</a>
 												</td>
 											</tr>
@@ -554,7 +554,7 @@ td[class="contact-button"] { border-top: 0px !important; }
 							<table class="table-full" border="0" align="left" cellpadding="0" cellspacing="0">
 								<!-- preference -->
 								<tr>
-									<td align="center" valign="top" class="preferencelink" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#ffffff; line-height:28px;font-style: italic;">
+									<td align="center" valign="top" class="preferencelink" style="font-family: Verdana, Arial, sans-serif; font-size:13px; color:#ffffff; line-height:28px;font-style: italic;">
 										Bizimle iletişime geçin;
 										<a href="#">info@galepress.com</a>
 										veya

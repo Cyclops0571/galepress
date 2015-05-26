@@ -634,7 +634,7 @@ class Common {
 
 	public static function sendHtmlEmail($toEmail, $toDisplayName, $subject, $msg) {
 		try {
-			// Bundle::start('messages');
+			Bundle::start('messages');
 			Message::send(function($m) use($toEmail, $toDisplayName, $subject, $msg) {
 				$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
 				//$m->to($toEmail);
