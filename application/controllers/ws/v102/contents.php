@@ -61,7 +61,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 			$width = (int)Input::get('width', '0');
 			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? SMALL_IMAGE_FILE : NORMAL_IMAGE_FILE;
 			$content = Ws::getContent($contentID);
-			$urlPatern = "http://www.galepress.com/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
+			$urlPatern = Config::get('custom.url') . "/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
 			$url = sprintf($urlPatern, $height, $width, $requestTypeID, (int)$content->ContentID);
 			return Response::json(array(
 				'status' => 0,
@@ -81,7 +81,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
-				'Url' => "http://www.galepress.com/tr/icerikler/talep?RequestTypeID=1001&ContentID=".(int)$content->ContentID."&Password=".Input::get('password', '')
+				'Url' => Config::get('custom.url') . "/tr/icerikler/talep?RequestTypeID=1001&ContentID=".(int)$content->ContentID."&Password=".Input::get('password', '')
 			));
 		});
 	}
