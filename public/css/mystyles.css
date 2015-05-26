@@ -389,3 +389,27 @@ td:hover .list-draggable-icon{
 .cursorPointer{
 	cursor: pointer !important;
 }
+.iconList{
+	padding: 0px;
+  	margin: 0px 3px;
+}
+.iconList li{
+	display: inline;
+	list-style-type: none;
+}
+.iconList li button{
+	margin: 2px;
+}
+.popover{
+	max-width: 291px;
+}
+.noTouchOpacity{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	opacity: 0.45;
+}

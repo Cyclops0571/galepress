@@ -23,14 +23,14 @@
                 @endif
 
                 @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
-                    <!-- <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a> -->
+                    <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
                 @endif
           
-                <!-- <a href="{{ URL::to(__('route.banners').'?applicationID='.Input::get('applicationID', 0)) }}" title="Banner" class="widget-icon widget-icon-circle" style="margin-left:10px;">
+                <a href="{{ URL::to(__('route.banners').'?applicationID='.Input::get('applicationID', 0)) }}" title="Banner" class="widget-icon widget-icon-circle" style="margin-left:10px;">
                     <span class="icon-picture" style="font-size:9px; color:white; vertical-align:middle; position:relative; top:-2px;"></span>
                     <span class="icon-angle-left" style="position:absolute; font-size: 8px; margin-left: -16px;"></span>
                     <span class="icon-angle-right" style="position:absolute; font-size: 8px; margin-left: 4px;"></span>
-                </a> -->
+                </a>
         @else
             <a href="{{URL::to(__('route.'.$page.'_new'))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle"><span class="icon-plus"></span></a>
         @endif

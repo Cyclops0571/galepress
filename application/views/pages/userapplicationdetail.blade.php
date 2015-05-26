@@ -126,21 +126,27 @@ if (false) {
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_url') }}</div>
 					<div class="col-md-8">
-						<input type="text" name="Url_<?php echo $tabNo; ?>" value="<?php echo $tab->Url; ?>"/>
+						<div class="input-group file">                                    
+							<input type="text" id="TargetUrl_<?php echo $tabNo; ?>" class="form-control" name="Url_<?php echo $tabNo; ?>" value="<?php echo $tab->Url; ?>" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+							<span class="input-group-btn">
+								<button class="btn btn-primary urlCheck" type="button" id="checkUrl_<?php echo $tabNo; ?>" onclick="cApplication.checkUrl(this);"><span class="icon-ok"></span></button>
+							</span>
+						</div>
+						<span class="error urlError hide" style="color:red;">{{__('interactivity.link_error')}}</span>
 					</div>
-					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_url') }}"><span class="icon-info-sign"></span></a></div>
+					<div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_url') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
 
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
 					<div class="col-md-8">
-						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2">
+						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2" onchange="cApplication.InhouseUrlChange(this);">
 							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>></option>
+							<option value="0">Seçiniz...</option>
 							<?php foreach ($galepressTabs as $tabKey => $tabValue): ?>
 								<option value="{{ $tabKey }}"{{ ($tabKey == $tab->InhouseUrl ? ' selected="selected"' : '') }}>{{ $tabValue }}</option>
 							<?php endforeach; ?>
 						</select>
-
 					</div>
 					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_inhouse_url') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
@@ -151,12 +157,12 @@ if (false) {
 						<input type="hidden" name="hiddenSelectedIcon_<?php echo $tabNo ?>" value="<?php echo $tab->IconUrl; ?>" />
 						<a href="#" rel="popover" id="selectedIcon_<?php echo $tabNo ?>" class="btn selectedIcon" data-popover-content="#myPopover_<?php echo $tabNo ?>">
 							<?php $imgSrc = !empty($tab->IconUrl) ? $tab->IconUrl : '/img/app-icons/1.png'; ?>
-							<img id="imgSelectedIcon_<?php echo $tabNo; ?>" src="<?php echo $imgSrc; ?>" />
+							<img id="imgSelectedIcon_<?php echo $tabNo; ?>" src="<?php echo $imgSrc; ?>" width="30"/>
 						</a>
 						<div id="myPopover_<?php echo $tabNo ?>" class="hide">
 							<ul class="iconList myIconClass_<?php echo $tabNo;?>">
 								<?php for ($i = 1; $i < 14; $i++): ?>
-									<li><button type="button" class="btn"><img src="/img/app-icons/<?php echo $i ?>.png" width="50" /></button></li>
+									<li><button type="button" class="btn"><img src="/img/app-icons/<?php echo $i ?>.png" width="30" /></button></li>
 								<?php endfor; ?>
 							</ul>
 						</div>
@@ -211,13 +217,4 @@ if (false) {
 	cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
     });
 </script>
-<style type="text/css">
-	.iconList{
-		padding: 0;
-	}
-	.iconList li{
-		display: inline;
-		list-style-type: none;
-	}
-</style>
 @endsection

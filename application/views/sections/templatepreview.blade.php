@@ -254,7 +254,6 @@
 							</div>
 						</div>
 					</div>
-					@if(count($templateResults)>0 && $templateResults[0]->ContentID!=null)
                     <div class="templateReadScreen hide" style="opacity:0;">
 						<div class="loading"></div>
                             <div id="loading-text"><i class="icon-remove"></i> %82</div>
@@ -317,7 +316,6 @@
 							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
 						</div>
 					</div>
-					@endif
 				</div>
 			</div>
 		</div>
