@@ -157,12 +157,12 @@ if (false) {
 						<input type="hidden" name="hiddenSelectedIcon_<?php echo $tabNo ?>" value="<?php echo $tab->IconUrl; ?>" />
 						<a href="#" rel="popover" id="selectedIcon_<?php echo $tabNo ?>" class="btn selectedIcon" data-popover-content="#myPopover_<?php echo $tabNo ?>">
 							<?php $imgSrc = !empty($tab->IconUrl) ? $tab->IconUrl : '/img/app-icons/1.png'; ?>
-							<img id="imgSelectedIcon_<?php echo $tabNo; ?>" src="<?php echo $imgSrc; ?>" width="30"/>
+							<img id="imgSelectedIcon_<?php echo $tabNo; ?>" src="<?php echo $imgSrc; ?>" width="25"/>
 						</a>
 						<div id="myPopover_<?php echo $tabNo ?>" class="hide">
 							<ul class="iconList myIconClass_<?php echo $tabNo;?>">
 								<?php for ($i = 1; $i < 14; $i++): ?>
-									<li><button type="button" class="btn"><img src="/img/app-icons/<?php echo $i ?>.png" width="30" /></button></li>
+									<li><button type="button" class="btn"><img src="/img/app-icons/<?php echo $i ?>.png" width="25" /></button></li>
 								<?php endfor; ?>
 							</ul>
 						</div>
