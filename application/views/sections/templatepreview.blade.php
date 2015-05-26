@@ -82,7 +82,7 @@
 	<span class="icon-tablet tabletLandscape"></span>
 </div>
 <div class="form-row" style="margin-top:0;">
-	<div class="col-md-12" style="width:100%; padding:0;">
+	<div class="col-md-12" style="width:100%; padding:0; max-width:655px !important;">
 		<div data-device="ipad" data-orientation="portrait" data-color="white" class="device-mockup">
 			<div class="device">
 				<div class="screen">
