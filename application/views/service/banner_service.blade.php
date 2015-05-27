@@ -57,6 +57,9 @@
 				display: table !important;
 				top:0 !important;
 			}
+			*{
+				-webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+			}
 		</style>
 
 	</head>
