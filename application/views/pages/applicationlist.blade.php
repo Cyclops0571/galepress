@@ -25,6 +25,7 @@
                                     <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[8][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[8][1], ($sort == $fields[8][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
                                     <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[9][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[9][1], ($sort == $fields[9][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
                                     <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[10][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[10][1], ($sort == $fields[10][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
+                                    <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[11][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[11][1], ($sort == $fields[11][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
                                 </tr>
                             </thead>
                             <tfoot class="hidden">
@@ -39,6 +40,7 @@
                                     <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[8][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[8][1], ($sort == $fields[8][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
                                     <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[9][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[9][1], ($sort == $fields[9][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
                                     <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[10][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[10][1], ($sort == $fields[10][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
+                                    <th scope="col">{{ HTML::link($route.'?page=1'.((int)Input::get('customerID', 0) > 0 ? '&customerID='.Input::get('customerID', 0) : '').'&search='.$search.'&sort='.$fields[11][2].'&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC'), $fields[11][1], ($sort == $fields[11][2] ? ($sort_dir == 'ASC' ? array('class' => 'sort_up') : array('class' => 'sort_down')) : array())) }}</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -54,6 +56,7 @@
                                     <td>{{ Common::getFormattedData($row->Trail, $row->Trail) }}</td>
                                     <td>{{ HTML::link($route.'/'.$row->ApplicationID, Common::dateRead($row->ExpirationDate, 'dd.MM.yyyy')) }}</td>
                                     <td>{{ HTML::link($route.'/'.$row->ApplicationID, $row->ApplicationID) }}</td>
+                                    <td>{{ Common::getFormattedData($row->IsExpired, $row->IsExpired) }}</td>
                                 </tr>
                                 @empty
                                 <tr>

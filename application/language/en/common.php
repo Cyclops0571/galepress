@@ -158,6 +158,16 @@ return array(
 	'applications_list_column8' => 'Status',
 	'applications_list_column9' => 'End Date',
 	'applications_list_column10' => 'ID',
+	'applications_list_column11' => 'IsExpired?',
+
+	'application_settings_caption_detail' => 'Application Settings',
+	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
+	'application_settings_caption_template' => 'Template Settings',
+	'application_settings_caption_banner' => 'Banner Settings',
+	'application_settings_caption_tab' => 'Tab Settings',
+	'application_settings_template_background_tip' => 'It represents application\'s background color.',
+	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
+
 	'applications_list_blocked1' => 'Yes',
 	'applications_list_blocked0' => 'No',
 	'applications_list_status1' => 'Active',
@@ -180,14 +190,6 @@ return array(
 	'applications_blocked' => 'Blocked:',
 	'applications_status' => 'Status:',
 	'applications_expired_detail' => 'Please contact with authorized persons.',
-
-	'application_settings_caption_detail' => 'Application Settings',
-	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
-	'application_settings_caption_template' => 'Template Settings',
-	'application_settings_caption_banner' => 'Banner Settings',
-	'application_settings_caption_tab' => 'Tab Settings',
-	'application_settings_template_background_tip' => 'It represents application\'s background color.',
-	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
 	
 	'contents_caption' => 'Contents',
 	'contents_caption_detail' => 'Content Detail',
@@ -509,7 +511,9 @@ return array(
 
 	'applications_trail_title' => 'Customer/Trail',
 	'applications_trail_customer' => 'Customer',
-	'applications_trail_demo' => '<span style="font-style:italic; color:#BFC75D;">Trail</span>',
+	'applications_trail_demo' => "<span style=\"font-style:italic; color:#BFC75D;\">Trail</span>",
+	'applications_isexpired_no' => "<span style=\"font-style:italic; color:#BFC75D;\">Did not Expire</span>",
+	'applications_isexpired_yes' => "<span style=\"font-style:italic; color:#D20707;\">Expired</span>",
 
 	'template_chooser_title' => 'Change Application Theme',
 	'template_chooser_background' => 'Background',

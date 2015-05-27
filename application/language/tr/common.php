@@ -158,6 +158,7 @@ return array(
 	'applications_list_column8' => 'Durum',
 	'applications_list_column9' => 'Bitiş Tarihi',
 	'applications_list_column10' => 'ID',
+	'applications_list_column11' => 'Süresi?',
 
 	'application_settings_caption_detail' => 'Uygulama Ayarları',
 	'application_settings_caption_detail_big' => 'UYGULAMA AYARLARI',
@@ -166,7 +167,6 @@ return array(
 	'application_settings_caption_tab' => 'Tab Ayarları (Uygulamanıza en fazla 4 tab ekleyebilirsiniz): ',
 	'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
 	'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
-
 
 	'applications_list_blocked1' => 'Evet',
 	'applications_list_blocked0' => 'Hayır',
@@ -511,6 +511,8 @@ return array(
 	'applications_trail_title' => 'Müşteri/Deneme',
 	'applications_trail_customer' => 'Müşteri',
 	'applications_trail_demo' => "<span style=\"font-style:italic; color:#BFC75D;\">Deneme</span>",
+	'applications_isexpired_no' => "<span style=\"font-style:italic; color:#BFC75D;\">Dolmadı</span>",
+	'applications_isexpired_yes' => "<span style=\"font-style:italic; color:#D20707;\">Doldu</span>",
 
 	'template_chooser_title' => 'Uygulama Teması Değiştir',
 	'template_chooser_background' => 'Arkaplan',

@@ -33,7 +33,8 @@ class Applications_Controller extends Base_Controller {
 			7 => array('100px', __('common.applications_list_column8'), 'Status'),
 			8 => array('100px', __('common.applications_trail_title'), 'Trail'),
 			9 => array('90px', __('common.applications_list_column9'), 'ExpirationDate'),
-			10 => array('75px', __('common.applications_list_column10'), 'ApplicationID')
+			10 => array('75px', __('common.applications_list_column10'), 'ApplicationID'),
+			11 => array('75px', __('common.applications_list_column11'), 'IsExpired')
 		);
 	}
 
@@ -61,6 +62,7 @@ class Applications_Controller extends Base_Controller {
 						'(CASE a.Blocked WHEN 1 THEN \'' . __('common.applications_list_blocked1') . '\' ELSE \'' . __('common.applications_list_blocked0') . '\' END) AS Blocked, ' .
 						'(CASE a.Status WHEN 1 THEN \'' . __('common.applications_list_status1') . '\' ELSE \'' . __('common.applications_list_status0') . '\' END) AS Status, ' .
 						'(CASE a.Trail WHEN 2 THEN \'' . __('common.applications_trail_customer') . '\' ELSE \'' . __('common.applications_trail_demo') . '\' END) AS Trail, ' .
+						'(CASE WHEN a.ExpirationDate < NOW() THEN \'' . __('common.applications_isexpired_yes') . '\' ELSE \'' . __('common.applications_isexpired_no') . '\' END) AS IsExpired, ' .
 						'a.ExpirationDate, ' .
 						'a.ApplicationID ' .
 						'FROM `Customer` AS c ' .
