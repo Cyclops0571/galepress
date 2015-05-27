@@ -102,7 +102,7 @@
 							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
 						</div>
 						<div class="container">
-							<div class="form-row" style="padding-left:1%; padding-right:1%;">
+							<div class="form-row" style="padding-left:0.5%; padding-right:1%;">
 								<div class="ms-gallery-template" id="ms-gallery-1">
 									<!-- masterslider -->
 									<div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
