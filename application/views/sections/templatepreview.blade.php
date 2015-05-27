@@ -1,3 +1,6 @@
+<?php
+$defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
+?>
 <style>			
 	#ms-gallery-1{
 		margin:0 auto;
