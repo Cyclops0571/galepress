@@ -32,7 +32,7 @@
 }
 .templateScreen .header .header-categories{
     background: url(/img/template-chooser/menu1.png) center left;
-    background-size: 60% auto !important;
+    background-size: 57% auto !important;
     background-repeat: no-repeat !important; min-width: 25px; max-width:35px; height:20px;
     cursor: pointer;
 }
