@@ -122,7 +122,6 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
 												<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
 													<img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}" class="sliderImages"/> 
 													<div class="ms-info"></div>
-													<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
 												</div>
 											<?php endfor; ?>
 										<?php endif; ?>
