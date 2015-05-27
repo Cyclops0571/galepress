@@ -1,4 +1,4 @@
-<div class="col-md-3" style="padding-top:5px; float:left;">
+<div class="col-md-5" style="padding-top:5px; float:left;">
     <div class="input-group commands">
 		@if((int)Input::get('customerID', 0) > 0)
             <a href="{{URL::to(__('route.'.$page.'_new').'?customerID='.Input::get('customerID', 0))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle"><span class="icon-plus"></span></a>
