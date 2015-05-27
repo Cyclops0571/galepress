@@ -17,7 +17,7 @@ if (false) {
 <script src="/js/masterslider/masterslider.min.js"></script>
 
 <!--BANNER SLIDER-->
-<div class="col-md-6" id="userAppSettingsPage">    
+<div class="col-md-6">    
 	<div class="block block-drop-shadow bg-light-rtl">
 		<div class="header">
 			<h2>{{ __('common.application_settings_caption_detail_big') }}</h2>
@@ -214,6 +214,7 @@ if (false) {
 		var Autoplay = $('input[name=BannerAutoplay]').is(':checked');
 		var Speed = $('input[name=BannerTransitionRate]').val();
 		cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
+		cApplication.setSelectInputActive();
     });
 </script>
 @endsection

@@ -660,23 +660,21 @@ var cApplication = new function () {
 	    $(e).closest('.form-row').next().find('.col-md-8').removeClass('noTouchOpacity');
 	}
     };
-    $(function(){
-		    if($('#userAppSettingsPage').length > 0){
-		    	$( ".targetUrlCount" ).each(function(index) {
-		    		console.log($(this).val());
-		    		if($(this).val().length>0){
-				  		$(".inhouseUrl:eq("+index+")").closest('.col-md-8').addClass('noTouchOpacity');
-		    		}
-				});
 
-				$( ".inhouseUrl" ).each(function(index) {
-		    		console.log($(this).val());
-		    		if($(this).val()!=0){
-				  		$(".targetUrlCount:eq("+index+")").closest('.col-md-8').addClass('noTouchOpacity');
-		    		}
-				});
-		    }
+    this.setSelectInputActive = function () {
+	$(".targetUrlCount").each(function (index) {
+	    if ($(this).val().length > 0) {
+		$(".inhouseUrl:eq(" + index + ")").closest('.col-md-8').addClass('noTouchOpacity');
+	    }
 	});
+
+	$(".inhouseUrl").each(function (index) {
+	    if ($(this).val() != 0) {
+		$(".targetUrlCount:eq(" + index + ")").closest('.col-md-8').addClass('noTouchOpacity');
+	    }
+	});
+    };
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1685,8 +1683,12 @@ var cTemplate = new function () {
     };
 
     this.loadCss = function (bg, fg) {
+	console.log(bg);
+	console.log(fg);
 	background = bg;
 	foreground = fg;
+	console.log(typeof(foreground));
+	$('.app-background-templates').remove();
 	switch (background) {
 	    case 1:
 		$('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
@@ -1706,6 +1708,7 @@ var cTemplate = new function () {
 		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
 		break;
 	    case 4:
+		console.log("load 4");
 		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
 		break;
 	    case 5:
@@ -1893,7 +1896,7 @@ var cTemplate = new function () {
 	    url: '/template/' + ApplicationID,
 	    success: function (response) {
 		$('#ipadView').html(response);
-		cTemplate.initMySlider(ThemeBackground, ThemeForeground, Autoplay, Speed);
+		cTemplate.initMySlider(parseInt(ThemeBackground), parseInt(ThemeForeground), parseInt(Autoplay), parseInt(Speed));
 	    }
 	});
     };
