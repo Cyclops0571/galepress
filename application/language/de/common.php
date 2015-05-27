@@ -562,19 +562,20 @@ return array(
 	'banners_list_status1' => 'Publish',
 	'banners_list_status0' => 'Not Publicationed',
 	
-	'tabs_url' => 'Mobile uyumlu web link',
-	'tabs_inhouse_url' => 'Galepress özelliği',
-	'tabs_icon' => 'İkon',
-	'tabs_active' => 'Tab Active',
+	'tabs_url' => 'Mobile kompatible Web-Link',
+	'tabs_inhouse_url' => 'Galepress Funktion',
+	'tabs_icon' => 'Symbol',
+	'tabs_active' => 'Tab Aktiv',
 	
-	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır.',
-	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
-	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
+	'tabs_info_url' => 'Sie können einen Link zur mobilen kompatibel eingeben. Wenn Sie diesen Abschnitt ausfüllen Galepress Funktion ist für diese Registerkarte deaktiviert.',
+	'tabs_info_inhouse_url' => 'Sie können Galepress Feature auswählen (Storelocator vs..)',
+	'tabs_info_icon' => 'Icon wird in Anwendung angezeigt werden',
+	'tabs_dont_use_feature' => 'Dont verwenden Sie diese Funktion',
 	
-	'tabs_tab_status' => 'Tab Durumu',
-	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün',
+	'tabs_tab_status' => 'Tab Status',
+	'tabs_info_tab_status' => 'Tabs erscheint in meiner Anwendung',
 	
-	'image_select' => 'Choose Image...',
-	'image' => 'Image',
+	'image_select' => 'Wählen Sie Bild...',
+	'image' => 'Bild',
 
 );

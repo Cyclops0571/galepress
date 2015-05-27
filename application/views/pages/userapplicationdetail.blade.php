@@ -141,7 +141,7 @@ if (false) {
 					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
 					<div class="col-md-8">
 						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2 inhouseUrl" onchange="cApplication.InhouseUrlChange(this);">
-							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>>Bu özelliği kullanma.</option>
+							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>>{{__('common.tabs_dont_use_feature')}}</option>
 							<?php foreach ($galepressTabs as $tabKey => $tabValue): ?>
 								<option value="{{ $tabKey }}"{{ ($tabKey == $tab->InhouseUrl ? ' selected="selected"' : '') }}>{{ $tabValue }}</option>
 							<?php endforeach; ?>

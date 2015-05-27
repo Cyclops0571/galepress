@@ -558,17 +558,18 @@ return array(
 	'banners_list_status1' => 'Published',
 	'banners_list_status0' => 'Not Publicationed',
 	
-	'tabs_url' => 'Mobile uyumlu web link',
-	'tabs_inhouse_url' => 'Galepress özelliği',
-	'tabs_icon' => 'İkon',
+	'tabs_url' => 'Mobile compatible web link',
+	'tabs_inhouse_url' => 'Galepress feature',
+	'tabs_icon' => 'Icon',
 	'tabs_active' => 'Tab Active',
 	
-	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır.',
-	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
-	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
+	'tabs_info_url' => 'You can set a link to the mobile compatible. When completing this section Galepress feature is disabled for that tab.',
+	'tabs_info_inhouse_url' => 'You can select Galepress feature (Storelocator vs..)',
+	'tabs_info_icon' => 'Icon will be displayed in application',
+	'tabs_dont_use_feature' => 'Dont use this feature',
 	
-	'tabs_tab_status' => 'Tab Durumu',
-	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün',
+	'tabs_tab_status' => 'Tab Status',
+	'tabs_info_tab_status' => 'Tabs appears in my application',
 	
 	'image_select' => 'Choose Image...',
 	'image' => 'Image',

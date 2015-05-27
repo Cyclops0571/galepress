@@ -565,6 +565,7 @@ return array(
 	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz. Bu kısmı doldurduğunuzda Galepress özelliği bu tab için devre dışı kalır. Eğer bu alanı boşaltıp check kutusuna tıklarsanız Galepress özelliği kullanılabilir hale gelir.',
 	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
 	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
+	'tabs_dont_use_feature' => 'Bu özelliği kullanma',
 	
 	'tabs_tab_status' => 'Tab Durumu',
 	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün',
