@@ -6,7 +6,32 @@
     <meta charset="utf-8">
 <style type="text/css">
 	#map_canvas { height:100%; width:100%; position: fixed !important; }
-	#zoomBtn {position: fixed; z-index: 9000000;}
+	#zoomBtn {    
+        position: fixed;
+        z-index: 9000000;
+        top: 6%;
+        width: 30px;
+        height: 30px;
+        right: 1%;
+        font-size: 18px;
+        line-height: 11px;
+        color: rgb(127, 127, 127);
+    }
+    #zoomBtn.widget-icon.widget-icon-circle{
+        background-color: #FFFFFF !important;
+        webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+        
+    }
+     #zoomBtn span{
+        line-height: 11px !important;
+    }
+    @media screen and ( max-height: 500px ){
+    	#zoomBtn {    
+	        top: 15%;
+	    }
+	}
 </style>
         <!-- Begin CSS-->
         {{ HTML::style('css/print.css?v=' . APP_VER, array('media' => 'print')); }}
@@ -144,6 +169,6 @@
   </head>
   <body>
     <div id="map_canvas"></div>
-	<input type="button" id="zoomBtn" value="goToCurrentLocation" />
+	<a href="#" id="zoomBtn" class="widget-icon widget-icon-large widget-icon-circle"><span class="icon-location-arrow"></span></a>
   </body>
 </html>
