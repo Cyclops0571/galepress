@@ -422,6 +422,7 @@ class Applications_Controller extends Base_Controller {
 		}
 		
 		$application->save();
+		$application->incrementAppVersion();
 		return "success=" . base64_encode("true");
 		
 	}

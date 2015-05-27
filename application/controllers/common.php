@@ -81,7 +81,8 @@ class Common_Controller extends Base_Controller {
 				Cookie::forever('DSCATALOG_USERNAME', '');
 			}
 
-			setcookie("loggedin", "true", time() + 3600, "/");
+			Cookie::put("loggedin", "true", 180);
+//			setcookie("loggedin", "true", time() + 3600, "/");
 
 			return "success=" . base64_encode("true") . "&msg=" . base64_encode(__('common.login_success_redirect'));
 		} else {
