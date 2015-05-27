@@ -1683,11 +1683,8 @@ var cTemplate = new function () {
     };
 
     this.loadCss = function (bg, fg) {
-	console.log(bg);
-	console.log(fg);
 	background = bg;
 	foreground = fg;
-	console.log(typeof(foreground));
 	$('.app-background-templates').remove();
 	switch (background) {
 	    case 1:
@@ -1708,7 +1705,6 @@ var cTemplate = new function () {
 		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
 		break;
 	    case 4:
-		console.log("load 4");
 		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
 		break;
 	    case 5:
@@ -1720,7 +1716,6 @@ var cTemplate = new function () {
     this.initialize = function (bg, fg) {
 	background = bg;
 	foreground = fg;
-	// console.log($('.screen').css('width'));
 	function openHomePage() {
 	    $('#templateChooserBox .site-settings').addClass('active');
 	    $('.templateScreen .footer').css('left', '0');
@@ -1776,7 +1771,6 @@ var cTemplate = new function () {
 	});
 
 	$('.templateBackgroundChange').on('change', function (e) {
-	    // console.log("append");
 	    $('.app-background-templates').remove();
 	    switch (parseInt($('.templateBackgroundChange:checked').val())) {
 		case 1:
@@ -1896,7 +1890,7 @@ var cTemplate = new function () {
 	    url: '/template/' + ApplicationID,
 	    success: function (response) {
 		$('#ipadView').html(response);
-		cTemplate.initMySlider(parseInt(ThemeBackground), parseInt(ThemeForeground), parseInt(Autoplay), parseInt(Speed));
+		cTemplate.initMySlider(parseInt(ThemeBackground), parseInt(ThemeForeground), parseInt(+Autoplay), parseInt(Speed));
 	    }
 	});
     };
