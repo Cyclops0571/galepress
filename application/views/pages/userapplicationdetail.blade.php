@@ -111,7 +111,7 @@ if (false) {
 					<div class="checkbox-inline" style="padding-left:0;">
 						<div class="checker">
 							<span>
-								<input name="TabActive" type="checkbox" value="1" <?php echo $application->TabActive ? 'checked' : ''; ?>>
+								<input name="TabActive" id="TabActive" onchange="cApplication.checkTabStatus()" type="checkbox" value="1" <?php echo $application->TabActive ? 'checked' : ''; ?>>
 							</span>
 						</div>
 					</div>
@@ -194,7 +194,7 @@ if (false) {
 			<div class="form-row" style="border-top: 1px solid black;">
 				<div class="col-md-12 text-center" style="border-bottom: 1px solid #565656;"></div>
 			</div>
-			<div class="form-row">
+			<div class="form-row row-save">
 				<div class="col-md-3 col-md-offset-8">
 					<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cApplication.saveUserSettings();" />
 				</div>           
@@ -215,6 +215,7 @@ if (false) {
 		var Speed = $('input[name=BannerTransitionRate]').val();
 		cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
 		cApplication.setSelectInputActive();
+		cApplication.checkTabStatus()
     });
 </script>
 @endsection

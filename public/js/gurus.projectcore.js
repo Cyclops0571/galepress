@@ -668,6 +668,16 @@ var cApplication = new function () {
 	    }
 	});
 
+	this.checkTabStatus = function () {
+	   if ($("#TabActive").is(':checked')) {
+			$("#TabActive").closest('.form-row').nextAll().removeClass('noTouchOpacity');
+	    }
+	    else{
+	    	$("#TabActive").closest('.form-row').nextAll().addClass('noTouchOpacity');
+	    }
+	    $('.row-save').removeClass('noTouchOpacity');
+	};
+
 	$(".inhouseUrl").each(function (index) {
 	    if ($(this).val() != 0) {
 		$(".targetUrlCount:eq(" + index + ")").closest('.col-md-8').addClass('noTouchOpacity');
