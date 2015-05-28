@@ -37,7 +37,7 @@ class Tab extends Eloquent {
 		} else {
 			switch ($this->InhouseUrl) {
 				case "StoreLocator":
-					$url = Config::get('custom.url') .  "maps/webview/" . $this->ApplicationID;
+					$url = Config::get('custom.url') .  "/maps/webview/" . $this->ApplicationID;
 					break;
 				default :
 					$url = Config::get('custom.url');
