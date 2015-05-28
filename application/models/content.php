@@ -68,6 +68,16 @@ class Content extends Eloquent {
 	public function Files($statusID) {
 		return $this->has_many('ContentFile', $this->key())->where('StatusID', '=', $statusID)->get();
 	}
+	
+	/**
+	 * 
+	 * @param type $contentID
+	 * @param type $columns
+	 * @return Content
+	 */
+	public static function find($contentID, $columns = array('*')) {
+		return Content::where(self::$key, "=", $contentID)->first($columns);
+	}
 
 	public function ActiveFile() {
 		return $this->has_many('ContentFile', $this->key())->where('StatusID', '=', eStatus::Active)->first();
