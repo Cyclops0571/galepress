@@ -194,7 +194,6 @@ class Common_Controller extends Base_Controller {
 		}
 	}
 
-	//logout
 	public function get_logout() {
 		if (Auth::check()) {
 			$user = Auth::User();
@@ -223,6 +222,7 @@ class Common_Controller extends Base_Controller {
 
 	//home
 	public function get_home() {
+		
 		if ((int) Auth::User()->UserTypeID == eUserTypes::Manager) {
 			return View::make('pages.homeadmin');
 		}
