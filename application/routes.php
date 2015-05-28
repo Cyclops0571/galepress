@@ -44,6 +44,7 @@ Route::get('(:any)/(:any)', array('do' => function(){
 
 Route::get('/', function() { return View::make('website.pages.home'); });
 Route::get("test", "test@index");
+Route::get("move", "test@moveInteractivite");
 Route::get("test/image", "test@image");
 Route::post("test/image", "test@image");
 $languages = Config::get('application.languages', array());

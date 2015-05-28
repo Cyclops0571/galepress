@@ -20,38 +20,110 @@ class Test_Controller extends Base_Controller{
 
 	public function get_index() {
 
-		$subject = __('common.confirm_email_title');
-		$firstname = "hakan";
-		$surname = "sarier";
-		$url = "asasdasdasd";
-		// $msg = __('common.confirm_email_message', array(
-		//   'firstname' => $firstname,
-		//   'lastname' => $surname,
-		//   'url' => Config::get("custom.url") . '/'.Config::get('application.language').'/'.__('route.confirmemail').'?email='.$s->Email.'&code='.$confirmCode
-		//   )
-		// );
-		$mailData = array(
-			'name'	=> $firstname,
-			'surname'	=> $surname,
-			'url' => $url,
-		);
-		$msg = View::make('mail-templates.aktivasyon.index')->with($mailData)->render();
-		// Common::sendHtmlEmail("hakan.sarier@detaysoft.com", $firstname.' '.$surname, $subject, $msg);
-		$mailStatus = Common::sendHtmlEmail("hakan.sarier@detaysoft.com", $firstname.' '.$surname, $subject, $msg);
+		// //TAŞINACAK CONTENT'IN FILE ID'SINI GIRIN
+		// $contentFilePage = DB::table('ContentFilePage')
+		// 					->where('ContentFileID', '=', 2877)
+		// 					->get();
 
-		// $m = new MailLog();
-		// $m->MailID = 1;
-		// $m->UserID = 58;
-		// if(!$mailStatus){
-		// 	$m->Arrived = 0;
+		// foreach ($contentFilePage as $cfp) {
+
+		// 	$filePageComponent = DB::table('PageComponent')
+		// 					->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+		// 					->get();
+
+		// 	if(sizeof($filePageComponent)==0){
+		// 		continue;
+		// 	}
+
+		// 	//HANGI CONTENT'E TASINACAK
+		// 	$contentFilePageNew = DB::table('ContentFilePage')
+		// 				->where('ContentFileID', '=', 2880)
+		// 				->where('No', '=', $cfp->No)
+		// 				->first();
+
+		// 	foreach ($filePageComponent as $fpc) {
+		// 		$s = new PageComponent();
+		// 		$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
+		// 		$s->ComponentID = $fpc->ComponentID;
+		// 		$s->No = $fpc->No;
+		// 		$s->StatusID = eStatus::Active;
+		// 		$s->DateCreated = new DateTime();
+		// 		$s->ProcessDate = new DateTime();
+		// 		$s->ProcessTypeID = eProcessTypes::Insert;
+		// 		$s->save();
+
+		// 		$filePageComponentProperty = DB::table('PageComponentProperty')
+		// 								->where('PageComponentID', '=', $fpc->PageComponentID)
+		// 								->where('StatusID', '=', eStatus::Active)
+		// 								->get();
+
+		// 		foreach ($filePageComponentProperty as $fpcp) {
+		// 			$p = new PageComponentProperty();
+		// 			$p->PageComponentID = $s->PageComponentID;
+		// 			$p->Name = $fpcp->Name;
+		// 			$p->Value = $fpcp->Value;
+		// 			$p->StatusID = eStatus::Active;
+		// 			$p->DateCreated = new DateTime();
+		// 			$p->ProcessDate = new DateTime();
+		// 			$p->ProcessTypeID = eProcessTypes::Insert;
+		// 			$p->save();
+		// 		}
+		// 	}
 		// }
-		// else {
-		// 	$m->Arrived = 1;
-		// }
-		// $m->StatusID = 1;
-		// $m->save();
-		
-		return View::make('mail-templates.aktivasyon.index')->with($mailData);
+	}
+
+	public function get_moveInteractivite() {
+
+		//TAŞINACAK CONTENT'IN FILE ID'SINI GIRIN
+		$contentFilePage = DB::table('ContentFilePage')
+							->where('ContentFileID', '=', 2877)//*************
+							->get();
+
+		foreach ($contentFilePage as $cfp) {
+
+			$filePageComponent = DB::table('PageComponent')
+							->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+							->get();
+
+			if(sizeof($filePageComponent)==0){
+				continue;
+			}
+
+			//HANGI CONTENT'E TASINACAK
+			$contentFilePageNew = DB::table('ContentFilePage')
+						->where('ContentFileID', '=', 2880)//****************
+						->where('No', '=', $cfp->No)
+						->first();
+
+			foreach ($filePageComponent as $fpc) {
+				$s = new PageComponent();
+				$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
+				$s->ComponentID = $fpc->ComponentID;
+				$s->No = $fpc->No;
+				$s->StatusID = eStatus::Active;
+				$s->DateCreated = new DateTime();
+				$s->ProcessDate = new DateTime();
+				$s->ProcessTypeID = eProcessTypes::Insert;
+				$s->save();
+
+				$filePageComponentProperty = DB::table('PageComponentProperty')
+										->where('PageComponentID', '=', $fpc->PageComponentID)
+										->where('StatusID', '=', eStatus::Active)
+										->get();
+
+				foreach ($filePageComponentProperty as $fpcp) {
+					$p = new PageComponentProperty();
+					$p->PageComponentID = $s->PageComponentID;
+					$p->Name = $fpcp->Name;
+					$p->Value = $fpcp->Value;
+					$p->StatusID = eStatus::Active;
+					$p->DateCreated = new DateTime();
+					$p->ProcessDate = new DateTime();
+					$p->ProcessTypeID = eProcessTypes::Insert;
+					$p->save();
+				}
+			}
+		}
 	}
 	
 	public function get_image() {
