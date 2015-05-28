@@ -489,8 +489,8 @@
 								<img class="coverImage" id="imgPreview" src="/{{ Session::get('language') }}/{{ __('route.contents_request') }}?RequestTypeID=<?php echo NORMAL_IMAGE_FILE ?>&ContentID={{ $ContentID }}&W=768&H=1024" width="200" />
 							</a>
 						</div>
-						<div class="fileupload_container">
-							<div class="input-group file" style="margin: 0 auto;"> 
+						<div class="fileupload_container text-center">
+							<div class="input-group file" style="margin: 0 auto; display:inline-block;"> 
 								<input type="file" name="CoverImageFile" id="CoverImageFile" class="hidden" />
 
 								<div id="CoverImageFileButton" class="uploadify hide" style="height: 30px; width: 120px; opacity: 1;">
