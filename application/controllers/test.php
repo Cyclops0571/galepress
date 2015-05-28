@@ -75,55 +75,57 @@ class Test_Controller extends Base_Controller{
 	public function get_moveInteractivite() {
 
 		//TAŞINACAK CONTENT'IN FILE ID'SINI GIRIN
-		$contentFilePage = DB::table('ContentFilePage')
-							->where('ContentFileID', '=', 2877)//*************
-							->get();
+		// $contentFilePage = DB::table('ContentFilePage')
+		// 					->where('ContentFileID', '=', BURAYA ID GELECEK)//*************
+		// 					->get();
 
-		foreach ($contentFilePage as $cfp) {
+		// foreach ($contentFilePage as $cfp) {
 
-			$filePageComponent = DB::table('PageComponent')
-							->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
-							->get();
+		// 	$filePageComponent = DB::table('PageComponent')
+		// 					->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+		// 					->get();
 
-			if(sizeof($filePageComponent)==0){
-				continue;
-			}
+		// 	if(sizeof($filePageComponent)==0){
+		// 		continue;
+		// 	}
 
-			//HANGI CONTENT'E TASINACAK
-			$contentFilePageNew = DB::table('ContentFilePage')
-						->where('ContentFileID', '=', 2880)//****************
-						->where('No', '=', $cfp->No)
-						->first();
+		// 	//HANGI CONTENT'E TASINACAK
+		// 	$contentFilePageNew = DB::table('ContentFilePage')
+		// 				->where('ContentFileID', '=', BURAYA ID GELECEK)//****************
+		// 				->where('No', '=', $cfp->No)
+		// 				->first();
 
-			foreach ($filePageComponent as $fpc) {
-				$s = new PageComponent();
-				$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
-				$s->ComponentID = $fpc->ComponentID;
-				$s->No = $fpc->No;
-				$s->StatusID = eStatus::Active;
-				$s->DateCreated = new DateTime();
-				$s->ProcessDate = new DateTime();
-				$s->ProcessTypeID = eProcessTypes::Insert;
-				$s->save();
+		// 	foreach ($filePageComponent as $fpc) {
+		// 		$s = new PageComponent();
+		// 		$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
+		// 		$s->ComponentID = $fpc->ComponentID;
+		// 		$s->No = $fpc->No;
+		// 		$s->StatusID = eStatus::Active;
+		// 		$s->DateCreated = new DateTime();
+		// 		$s->ProcessDate = new DateTime();
+		// 		$s->ProcessTypeID = eProcessTypes::Insert;
+		// 		$s->save();
 
-				$filePageComponentProperty = DB::table('PageComponentProperty')
-										->where('PageComponentID', '=', $fpc->PageComponentID)
-										->where('StatusID', '=', eStatus::Active)
-										->get();
+		// 		$filePageComponentProperty = DB::table('PageComponentProperty')
+		// 								->where('PageComponentID', '=', $fpc->PageComponentID)
+		// 								->where('StatusID', '=', eStatus::Active)
+		// 								->get();
 
-				foreach ($filePageComponentProperty as $fpcp) {
-					$p = new PageComponentProperty();
-					$p->PageComponentID = $s->PageComponentID;
-					$p->Name = $fpcp->Name;
-					$p->Value = $fpcp->Value;
-					$p->StatusID = eStatus::Active;
-					$p->DateCreated = new DateTime();
-					$p->ProcessDate = new DateTime();
-					$p->ProcessTypeID = eProcessTypes::Insert;
-					$p->save();
-				}
-			}
-		}
+		// 		foreach ($filePageComponentProperty as $fpcp) {
+		// 			$p = new PageComponentProperty();
+		// 			$p->PageComponentID = $s->PageComponentID;
+		// 			$p->Name = $fpcp->Name;
+		// 			$p->Value = $fpcp->Value;
+		// 			$p->StatusID = eStatus::Active;
+		// 			$p->DateCreated = new DateTime();
+		// 			$p->ProcessDate = new DateTime();
+		// 			$p->ProcessTypeID = eProcessTypes::Insert;
+		// 			$p->save();
+		// 		}
+		// 	}
+		// }
+
+		// İŞİN BİTİNCE PASİFLESTİRMEYİ UNUTMA YOKSA USTUNE YAZAR
 	}
 	
 	public function get_image() {
