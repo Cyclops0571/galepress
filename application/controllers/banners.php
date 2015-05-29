@@ -199,7 +199,7 @@ class Banners_Controller extends Base_Controller {
 		$application->BannerAutoplay = (int) Input::get("BannerAutoplay");
 		$application->BannerIntervalTime = (int) Input::get("BannerIntervalTime");
 		$application->BannerTransitionRate = (int) Input::get("BannerTransitionRate");
-		$application->save(FALSE);
+		$application->save();
 		
 		return "success=" . base64_encode("true") . "&bannerID=" . base64_encode($banner->BannerID);
 	}
