@@ -164,7 +164,7 @@ return array(
 	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
 	'application_settings_caption_template' => 'Template Settings',
 	'application_settings_caption_banner' => 'Banner Settings',
-	'application_settings_caption_tab' => 'Tab Settings',
+	'application_settings_caption_tab' => 'Tab Settings (You can add up to 3 tabs on your application): ',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
 
