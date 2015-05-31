@@ -442,6 +442,7 @@ class Contents_Controller extends Base_Controller {
 			else {
 				$contentFileControl = DB::table('ContentFile')
 								->where('ContentID', '=', $new)
+								->order_by('ContentFileID', 'DESC')
 								->first();
 
 				$contentFilePageControl = DB::table('ContentFilePage')
