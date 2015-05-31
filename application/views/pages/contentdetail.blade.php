@@ -316,6 +316,26 @@
 	                        </div>
 							<div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_interactive') }}"><span class="icon-info-sign"></span></a></div>
 						</div>
+						@if(sizeof($contentList)>0)
+						<div class="form-row">
+		                    <div class="col-md-3">{{ __('common.contents_interactivity_copy_title') }}</div>
+		                    <div class="col-md-4">
+		                    	<select data-placeholder="{{ __('common.contents_interactivity_target') }}" style="width: 100%;" tabindex="-1" id="AppContents" name="AppContents" class="form-control select2">
+		                    		<option value="">{{ __('common.contents_interactivity_target') }}</option>
+		                            @foreach ($contentList as $cList)
+                                    <option value="{{ $cList->ContentID }}">{{ $cList->Name }}</option>
+                                	@endforeach
+		                        </select>
+		                   	</div>
+		                   	<div class="col-md-1">
+		                   		<img src="/img/interactivityCopyArrow.png" />
+		                   	</div>
+		                   	<div class="col-md-3">
+		                   		<input type="button" value="{{ __('common.contents_interactivity_target_copy') }}" class="btn my-btn-send" onclick="cContent.copyInteractivity();" style="max-height:33px; margin-top:-1px;" />
+		                   	</div>
+		                    <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_interactivity_copy_info') }}"><span class="icon-info-sign"></span></a></div>
+		               	</div>
+		               	@endif
                 	@endif
             	</div>
 			</div>
@@ -457,17 +477,18 @@
 			<div class="block">
 				<div class="content controls" style="overflow:visible">
 					<div class="form-row">
-					    <div class="col-md-8"></div>
 					    <span class="command">
 					        @if($ContentID == 0)
-							<div class="col-md-2"></div>
-					        <div class="col-md-2">
+					        <div class="col-md-offset-9 col-md-2">
 								<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_save') }}" onclick="cContent.save();" />
 							</div>
 					        @else
-					        <div class="col-md-2">
+					        <div class="col-md-offset-5 col-md-2">
 					        	<a href="#modal_default_10" class="btn delete expand remove" style="width:100%;" data-toggle="modal">{{ __('common.detailpage_delete') }}</a>
 					        </div>
+					        <div class="col-md-2">
+	                    		<input type="button" value="{{ __('common.contents_copy_btn') }}" class="btn my-btn-send" onclick="cContent.copy();" />
+							</div>
 					        <div class="col-md-2">
 					        	<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cContent.save();" />
 					        </div>
@@ -646,6 +667,25 @@
 					</div>
 					{{ Form::close() }}
 				</div>	
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="dialog-target-content-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><span class="icon-warning-sign" style="color:#ebaf3c;"></span>&nbsp;{{ __('common.contents_interactivity_copy_modal_title') }}</h4>
+                </div>
+                <div class="modal-body">
+	               {{ __('common.contents_interactivity_copy_modal_body') }}
+                </div>
+				<div class="modal-footer">
+					<div class="col-md-5" style="float:right;">
+						<input type="button" value="{{ __('common.contents_category_warning_ok') }}" class="btn my-btn-default" data-dismiss="modal" />
+					</div>
+				</div>
             </div>
         </div>
     </div>

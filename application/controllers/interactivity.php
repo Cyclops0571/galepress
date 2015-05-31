@@ -183,8 +183,8 @@ class Interactivity_Controller extends Base_Controller {
 	}
 
 	public function get_show($contentFileID) {
+		
 		$currentUser = Auth::User();
-
 		$ContentID = (int) ContentFile::find($contentFileID)->ContentID;
 		$ApplicationID = (int) Content::find($ContentID)->ApplicationID;
 

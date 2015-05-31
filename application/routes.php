@@ -185,6 +185,7 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.contents_new')->get($currentLanguage), array('as' => 'contents_new', 'before' => 'auth', 'uses' => 'contents@new'));
 	Route::get(__('route.contents_show')->get($currentLanguage), array('as' => 'contents_show', 'before' => 'auth', 'uses' => 'contents@show'));
 	Route::post(__('route.contents_save')->get($currentLanguage), array('as' => 'contents_save', 'before' => 'auth|csrf', 'uses' => 'contents@save'));
+	Route::get('/copy/(:num)/(:all)', array('as' => 'copy', 'before' => 'auth', 'uses' => 'contents@copy'));
 	Route::post(__('route.contents_delete')->get($currentLanguage), array('as' => 'contents_delete', 'before' => 'auth|csrf', 'uses' => 'contents@delete'));
 	Route::post(__('route.contents_template_save')->get($currentLanguage), array('as' => 'contents_template_save', 'before' => 'auth', 'uses' => 'contents@template_save'));
 	Route::post(__('route.contents_uploadfile')->get($currentLanguage), array('as' => 'contents_uploadfile', 'before' => 'auth', 'uses' => 'contents@uploadfile'));

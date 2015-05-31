@@ -280,6 +280,11 @@ class Contents_Controller extends Base_Controller {
 		$showCropPage = Cookie::get(SHOW_IMAGE_CROP, 0);
 		Cookie::put(SHOW_IMAGE_CROP, 0);
 		$row = Content::find($id);
+		$contentList = DB::table('Content')
+			->where('ApplicationID', '=', $row->ApplicationID)
+			->where('ContentID', '<>', $id)
+			->where('StatusID', '=', eStatus::Active)
+			->get(array('ContentID', 'Name'));
 		if ($row) {
 			if (Common::CheckContentOwnership($id)) {
 				$this->route = __('route.' . $this->page) . '?applicationID=' . $row->ApplicationID;
@@ -291,6 +296,8 @@ class Contents_Controller extends Base_Controller {
 					'detailcaption' => $this->detailcaption,
 					'row' => $row,
 					'showCropPage' => $showCropPage,
+					'contentList' => $contentList,
+
 				);
 
 				if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
@@ -384,6 +391,265 @@ class Contents_Controller extends Base_Controller {
 			return "success=" . base64_encode("true") . $contentLink;
 		} else {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+		}
+	}
+
+	public function get_copy($id, $new) {
+		try {
+			// return Redirect::to(__('route.home'));
+			$sourceContentID = $id;
+			$contentFileControl = null;
+			if($new=="new"){
+
+				$content = DB::table('Content')
+								->where('ContentID', '=', $sourceContentID)
+								->first();
+
+				$c = new Content();
+				$c->ApplicationID = $content->ApplicationID;
+				$c->Name = $content->Name;
+				$c->Detail = $content->Detail;
+				$c->MonthlyName = $content->MonthlyName;
+				$c->PublishDate = $content->PublishDate;
+				$c->IsUnpublishActive = $content->IsUnpublishActive;
+				$c->UnpublishDate = $content->UnpublishDate;
+				$c->CategoryID = $content->CategoryID;
+				$c->IsProtected = $content->IsProtected;
+				$c->Password = $content->Password;
+				$c->IsBuyable = $content->IsBuyable;
+				$c->Price = $content->Price;
+				$c->CurrencyID = $content->CurrencyID;
+				$c->IsMaster = $content->IsMaster;
+				$c->Orientation = $content->Orientation;
+				$c->Identifier = $content->Identifier;
+				$c->AutoDownload = $content->AutoDownload;
+				$c->Approval = $content->Approval;
+				$c->Blocked = $content->Blocked;
+				$c->Status = $content->Status;
+				$c->Version = $content->Version;
+				$c->PdfVersion = $content->PdfVersion;
+				$c->CoverImageVersion = $content->CoverImageVersion;
+				$c->TotalFileSize = $content->TotalFileSize;
+				$c->StatusID = eStatus::Active;
+				$c->CreatorUserID = $content->CreatorUserID;
+				$c->DateCreated = new DateTime();
+				$c->ProcessUserID = $content->ProcessUserID;
+				$c->ProcessDate = new DateTime();
+				$c->ProcessTypeID = eProcessTypes::Insert;
+				$c->OrderNo = $content->OrderNo;
+				$c->save();
+			}
+			else {
+				$contentFileControl = DB::table('ContentFile')
+								->where('ContentID', '=', $new)
+								->first();
+
+				$contentFilePageControl = DB::table('ContentFilePage')
+								->where('ContentFileID', '=', $contentFileControl->ContentFileID)
+								->get();
+			
+				if(sizeof($contentFilePageControl)==0) {
+					Controller::call('interactivity@show', array($contentFileControl->ContentFileID));
+				}
+				$this->get_copyContent(null, $sourceContentID, $contentFileControl->ContentFileID);
+				return;
+			}
+
+			if($contentFileControl==null){
+
+				$customerID = Application::find($c->ApplicationID)->CustomerID;
+
+				$contentFile = DB::table('ContentFile')
+								->where('ContentID', '=', $sourceContentID)
+								->first();
+
+
+				$targetFilePath = 'public/'.$contentFile->FilePath.'/'.$contentFile->FileName;
+
+				$destinationFolder = 'public/files/customer_' . $customerID . '/application_' . $c->ApplicationID . '/content_' . $c->ContentID;
+
+				File::mkdir($destinationFolder);
+				File::copy($targetFilePath, $destinationFolder.'/'.$contentFile->FileName);
+
+				$cf = new ContentFile();
+				$cf->ContentID = $c->ContentID;
+				$cf->DateAdded = $contentFile->DateAdded;
+				$cf->FilePath = 'files/customer_' . $customerID . '/application_' . $c->ApplicationID . '/content_' . $c->ContentID;
+				$cf->FileName = $contentFile->FileName;
+				$cf->FileSize = $contentFile->FileSize;
+				$cf->Transferred = $contentFile->Transferred;
+				$cf->Interactivity = $contentFile->Interactivity;
+				$cf->HasCreated = $contentFile->HasCreated;
+				//$cf->InteractiveFilePath = 'files/customer_' . $customerID . '/application_' . $c->ApplicationID . '/content_' . $c->ContentID;
+				$cf->InteractiveFileName = $contentFile->InteractiveFileName;
+				$cf->InteractiveFileSize = $contentFile->InteractiveFileSize;
+				$cf->Included = $contentFile->Included;
+				$cf->StatusID = $contentFile->StatusID;
+				$cf->CreatorUserID = $contentFile->CreatorUserID;
+				$cf->DateCreated = new DateTime();
+				$cf->ProcessUserID = $content->ProcessUserID;
+				$cf->ProcessDate = new DateTime();
+				$cf->ProcessTypeID = eProcessTypes::Insert;
+				$cf->save();
+
+				$contentCoverImageFile = DB::table('ContentCoverImageFile')
+								->where('ContentFileID', '=', $contentFile->ContentFileID)
+								->first();
+
+
+				$ccif = new ContentCoverImageFile();
+				$ccif->ContentFileID = $cf->ContentFileID;
+				$ccif->DateAdded = $contentCoverImageFile->DateAdded;
+				$ccif->FilePath = $contentCoverImageFile->FilePath;
+				$ccif->SourceFileName = $contentCoverImageFile->SourceFileName;
+				$ccif->FileName = $contentCoverImageFile->FileName;
+				$ccif->FileName2 = $contentCoverImageFile->FileName2;
+				$ccif->FileSize = $contentCoverImageFile->FileSize;
+				$ccif->StatusID = $contentCoverImageFile->StatusID;
+				$ccif->CreatorUserID = $contentCoverImageFile->CreatorUserID;
+				$ccif->DateCreated = new DateTime();
+				$ccif->ProcessUserID = $contentCoverImageFile->ProcessUserID;
+				$ccif->ProcessDate = new DateTime();
+				$ccif->ProcessTypeID = eProcessTypes::Insert;
+				$ccif->save();
+
+
+				$files = glob('public/'.$contentFile->FilePath.'/*.{jpg}', GLOB_BRACE);
+				foreach($files as $file) {
+					// echo nl2br($targetFilePath."\n");
+				  	File::copy('public/'.$contentFile->FilePath.'/'.basename($file), $destinationFolder.'/'.basename($file));
+				}
+
+				$contentCategory = DB::table('ContentCategory')
+								->where('ContentID', '=', $sourceContentID)
+								->get();
+
+				foreach ($contentCategory as $cCategory) {
+					$cc = new ContentCategory();
+					$cc->ContentID = $c->ContentID;
+					$cc->CategoryID = $cCategory->CategoryID;
+					$cc->save();
+				}
+
+				$this->get_copyContent($destinationFolder, $sourceContentID, $cf->ContentFileID);
+			}
+
+		} catch (Exception $e) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
+		}
+	}
+
+	public function get_copyContent($destinationFolder, $sourceContentFileID, $targetContentFileID) {
+		// /***** HEDEF CONTENTIN SAYFALARI OLUSUTURLMUS OLMALI YANI INTERAKTIF TASARLAYICISI ACILMIS OLMALI!!!*****/
+		// TAŞINACAK CONTENT'IN FILE ID'SI
+		try {
+			$contentFile = DB::table('ContentFile')
+								->where('ContentID', '=', $sourceContentFileID)
+								->order_by('ContentFileID', 'DESC')
+								->first();
+
+			$contentFilePage = DB::table('ContentFilePage')
+								->where('ContentFileID', '=', $contentFile->ContentFileID)
+								->get();
+			
+			if(sizeof($contentFilePage)==0) {
+				return;
+			}
+			else {
+				if($destinationFolder !=null) { /* kopyalanacak icerigin sayfalari yok ise olusturur */
+					foreach ($contentFilePage as $ocfp) {
+						$ncfp = new ContentFilePage();
+								$ncfp->ContentFileID = $targetContentFileID;
+								$ncfp->No = $ocfp->No;
+								$ncfp->Width = $ocfp->Width;
+								$ncfp->Height = $ocfp->Height;
+								$ncfp->FilePath = $ocfp->FilePath;
+								$ncfp->FileName = $ocfp->FileName;
+								$ncfp->FileName2 = $ocfp->FileName2;
+								$ncfp->FileSize = $ocfp->FileSize;
+								$ncfp->StatusID = $ocfp->StatusID;
+								$ncfp->CreatorUserID = $ocfp->CreatorUserID;
+								$ncfp->DateCreated = new DateTime();
+								$ncfp->ProcessUserID = $ocfp->CreatorUserID;
+								$ncfp->ProcessDate = new DateTime();
+								$ncfp->ProcessTypeID = eProcessTypes::Insert;
+								$ncfp->save();
+					}
+					if (!File::exists($destinationFolder.'/file_'.$targetContentFileID)) {
+						File::mkdir($destinationFolder.'/file_'.$targetContentFileID);
+					}
+
+					$files = glob('public/'.$contentFile->FilePath.'/file_'.$contentFile->ContentFileID.'/*.{jpg,pdf}', GLOB_BRACE);
+					foreach($files as $file) {
+					  	File::copy('public/'.$contentFile->FilePath.'/file_'.$contentFile->ContentFileID.'/'.basename($file), $destinationFolder.'/file_'.$targetContentFileID.'/'.basename($file));
+					}
+				}
+				
+				foreach ($contentFilePage as $cfp) {
+
+					$filePageComponent = DB::table('PageComponent')
+									->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+									->get();
+
+					if(sizeof($filePageComponent)==0){
+						continue;
+					}
+
+					//HANGI CONTENT'E TASINACAKSA O CONTENT'IN FILE ID'SI
+					$contentFilePageNew = DB::table('ContentFilePage')
+								->where('ContentFileID', '=', $targetContentFileID)//****************
+								->where('No', '=', $cfp->No)
+								->first();
+					if(isset($contentFilePageNew)){
+
+						foreach ($filePageComponent as $fpc) {
+							$s = new PageComponent();
+							$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
+							$s->ComponentID = $fpc->ComponentID;
+							if($destinationFolder==null){
+								$lastComponentNo = DB::table('PageComponent')
+												->where('ContentFilePageID', '=', $contentFilePageNew->ContentFilePageID)
+												->order_by('No', 'DESC')
+												->take(1)
+												->only('No');
+								if ($lastComponentNo == null) {
+									$lastComponentNo = 0;
+								}
+								$s->No = $lastComponentNo + 1;
+							} else {
+								$s->No = $fpc->No;
+							}
+							$s->StatusID = eStatus::Active;
+							$s->DateCreated = new DateTime();
+							$s->ProcessDate = new DateTime();
+							$s->ProcessTypeID = eProcessTypes::Insert;
+							$s->save();
+
+							$filePageComponentProperty = DB::table('PageComponentProperty')
+													->where('PageComponentID', '=', $fpc->PageComponentID)
+													->where('StatusID', '=', eStatus::Active)
+													->get();
+
+							foreach ($filePageComponentProperty as $fpcp) {
+								$p = new PageComponentProperty();
+								$p->PageComponentID = $s->PageComponentID;
+								$p->Name = $fpcp->Name;
+								$p->Value = $fpcp->Value;
+								$p->StatusID = eStatus::Active;
+								$p->DateCreated = new DateTime();
+								$p->ProcessDate = new DateTime();
+								$p->ProcessTypeID = eProcessTypes::Insert;
+								$p->save();
+							}
+						}
+
+					}
+				}
+			}
+			return "success=" . base64_encode("true");
+
+		} catch (Exception $e) {
+			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
 	}
 

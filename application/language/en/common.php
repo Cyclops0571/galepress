@@ -297,7 +297,15 @@ return array(
 	
 	'contents_delete_question' => 'Are you sure you want to delete?',
 	'contents_delete' => 'Delete',
-	
+
+	'contents_copy_btn' => 'Copy',
+	'contents_interactivity_copy_title' => 'Interactive Components Copy',
+	'contents_interactivity_target' => 'Select Target Content...',
+	'contents_interactivity_target_copy' => 'Copy to Target Content',
+	'contents_interactivity_copy_info' => 'Added interactive elements to this content that copy to the selected target content.',
+	'contents_interactivity_copy_modal_title' => 'Target Content Did Not Select!',
+	'contents_interactivity_copy_modal_body' => 'You must choose which content will be moved to the target content in this interactive content.',
+
 	'orders_caption' => 'Orders',
 	'orders_caption_detail' => 'Order Detail',
 	'orders_list_column1' => 'Order No',

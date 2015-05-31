@@ -1171,6 +1171,49 @@ var cContent = new function () {
 	    });
 	}
     };
+
+    this.copy = function () {
+    	cNotification.loader();
+    	setTimeout(function(){
+    		var appID = $("#ApplicationID").val();
+	    	var contentID = $("#ContentID").val();
+			$.ajax({
+			    async: false,
+			    type: 'GET',
+			    url: '/copy/' + contentID + '/' +'new',
+			    success: function (response) {
+			    	// console.log(response);
+			    	cNotification.success();
+			    	document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
+			    }
+			});
+    	},1000);
+    };
+
+    this.copyInteractivity = function () {
+    	cNotification.loader();
+    	setTimeout(function(){
+	    	var appID = $("#ApplicationID").val();
+	    	var contentID = $("#ContentID").val();
+	    	var targetContentID = $( "#AppContents option:selected" ).val();
+	    	if(targetContentID!=""){
+	    		$.ajax({
+				    async: false,
+				    type: 'GET',
+				    url: '/copy/' + contentID + '/' + targetContentID,
+				    success: function (response) {
+				    	// console.log(response);
+				    	cNotification.success();
+				    	document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
+				    }
+				});
+	    	}
+	    	else {
+				$('#dialog-target-content-warning').modal('show');
+				cNotification.hide();
+	    	}
+		},1000);
+    };
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////

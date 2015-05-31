@@ -298,6 +298,14 @@ return array(
 	'contents_delete_question' => 'Möchten Sie wirklich löschen?',
 	'contents_delete' => 'Löschen',
 	
+	'contents_copy_btn' => 'Kopie',
+	'contents_interactivity_copy_title' => 'Interaktive Komponenten Kopieren',
+	'contents_interactivity_target' => 'Wählen Sie Ziel Inhalt...',
+	'contents_interactivity_target_copy' => 'Kopieren Sie zum Inhalt Ziel',
+	'contents_interactivity_copy_info' => 'Hinzugefügt interaktive Elemente auf diese Inhalte, die auf das ausgewählte Ziel Inhalt zu kopieren.',
+	'contents_interactivity_copy_modal_title' => 'Ziel Inhalt nicht ausgewählt haben!',
+	'contents_interactivity_copy_modal_body' => 'Sie müssen entscheiden, welche Inhalte in das Ziel Inhalt dieser interaktiven Inhalten bewegt wird.',
+
 	'orders_caption' => 'Orders',
 	'orders_caption_detail' => 'Order Detail',
 	'orders_list_column1' => 'Order No',

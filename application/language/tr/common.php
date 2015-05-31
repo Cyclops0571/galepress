@@ -297,6 +297,14 @@ return array(
 
 	'contents_delete_question' => 'Silmek istediğinize emin misiniz?',
 	'contents_delete' => 'Sil',
+
+	'contents_copy_btn' => 'Kopyala',
+	'contents_interactivity_copy_title' => 'İnteraktif Ögeleri Kopyala',
+	'contents_interactivity_target' => 'Hedef İçerik Seçiniz...',
+	'contents_interactivity_target_copy' => 'Hedef İçeriğe Kopyala',
+	'contents_interactivity_copy_info' => 'Bu içeriğe eklenmiş interaktif ögeleri seçilen hedef içeriğe kopyalar.',
+	'contents_interactivity_copy_modal_title' => 'Hedef İçerik Seçilmedi!',
+	'contents_interactivity_copy_modal_body' => 'Bu içerikteki interaktif ögelerin hangi hedef içeriğe taşınacağını seçmelisiniz.',
 	
 	'orders_caption' => 'Siparişler',
 	'orders_caption_detail' => 'Sipariş Detayı',
