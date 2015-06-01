@@ -1178,7 +1178,7 @@ var cContent = new function () {
     		var appID = $("#ApplicationID").val();
 	    	var contentID = $("#ContentID").val();
 			$.ajax({
-			    async: false,
+			    async: true,
 			    type: 'GET',
 			    url: '/copy/' + contentID + '/' +'new',
 			    success: function (response) {
@@ -1198,7 +1198,7 @@ var cContent = new function () {
 	    	var targetContentID = $( "#AppContents option:selected" ).val();
 	    	if(targetContentID!=""){
 	    		$.ajax({
-				    async: false,
+				    async: true,
 				    type: 'GET',
 				    url: '/copy/' + contentID + '/' + targetContentID,
 				    success: function (response) {
