@@ -338,13 +338,11 @@ class Contents_Controller extends Base_Controller {
 			if (!Common::AuthMaxPDF($applicationID)) {
 				return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('error.auth_max_pdf'));
 			}
-
 			try {
 				DB::transaction(function() use ($currentUser, $id, $applicationID, &$contentID) {
 					$content = Content::find($id);
 					$content instanceof Content;
 					$selectedCategories = Input::get('chkCategoryID', array());
-
 
 					if (!$content) {
 						$maxID = DB::table("Content")->where("ApplicationID", "=", $applicationID)->max('OrderNo');
@@ -601,6 +599,10 @@ class Contents_Controller extends Base_Controller {
 								->where('ContentFileID', '=', $targetContentFileID)//****************
 								->where('No', '=', $cfp->No)
 								->first();
+					$contentFilePageNewCount = DB::table('ContentFilePage')
+								->where('ContentFileID', '=', $targetContentFileID)//****************
+								->count();
+								
 					if(isset($contentFilePageNew)){
 
 						foreach ($filePageComponent as $fpc) {
@@ -635,7 +637,7 @@ class Contents_Controller extends Base_Controller {
 								$p = new PageComponentProperty();
 								$p->PageComponentID = $s->PageComponentID;
 								$p->Name = $fpcp->Name;
-								$p->Value = $fpcp->Value;
+								$p->Value = ($fpcp->Value > $contentFilePageNewCount && $fpcp->Name == "page" ? 1 : $fpcp->Value);
 								$p->StatusID = eStatus::Active;
 								$p->DateCreated = new DateTime();
 								$p->ProcessDate = new DateTime();
