@@ -164,7 +164,7 @@ return array(
 	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
 	'application_settings_caption_template' => 'Template Settings',
 	'application_settings_caption_banner' => 'Banner Settings',
-	'application_settings_caption_tab' => 'Tab Settings (You can add up to 3 tabs on your application): ',
+	'application_settings_caption_tab' => 'Tab Settings',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
 
@@ -567,17 +567,19 @@ return array(
 	'banners_list_status0' => 'Not Publicationed',
 	
 	'tabs_url' => 'Mobile compatible web link',
-	'tabs_inhouse_url' => 'Galepress feature',
+	'tabs_inhouse_url' => 'Tab Feature',
 	'tabs_icon' => 'Icon',
 	'tabs_active' => 'Tab Active',
 	
-	'tabs_info_url' => 'You can set a link to the mobile compatible. When completing this section Galepress feature is disabled for that tab.',
+	'tabs_info_url' => 'You can set a link to the mobile compatible.',
 	'tabs_info_inhouse_url' => 'You can select Galepress feature (Storelocator vs..)',
 	'tabs_info_icon' => 'Icon will be displayed in application',
 	'tabs_dont_use_feature' => 'Dont use this feature',
 	
 	'tabs_tab_status' => 'Tab Status',
-	'tabs_info_tab_status' => 'Tabs appears in my application',
+	'tabs_info_tab_status' => 'Tabs appears in my application. You can add up to 3 tabs on your application.',
+
+	'tabs_warning_url' => 'a valid web address is not entered.',
 	
 	'image_select' => 'Choose Image...',
 	'image' => 'Image',

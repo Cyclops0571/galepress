@@ -17,17 +17,17 @@ if (false) {
 <script src="/js/masterslider/masterslider.min.js"></script>
 
 <!--BANNER SLIDER-->
-<div class="col-md-6">    
+<div class="col-md-6">
+	{{ Form::open(__('route.applications_save'), 'POST') }}
+	{{ Form::token() }}   
 	<div class="block block-drop-shadow bg-light-rtl">
 		<div class="header">
-			<h2>{{ __('common.application_settings_caption_detail_big') }}</h2>
+			<h2>{{ __('common.application_settings_caption_template') }}</h2>
 		</div>
 		<div class="content controls">
-			{{ Form::open(__('route.applications_save'), 'POST') }}
-			{{ Form::token() }}
 			<input type="hidden" name="ApplicationID" value="<?php echo $application->ApplicationID; ?>"?>
-			<div class="form-row" style="border-bottom: 1px solid #565656;">
-				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">{{ __('common.application_settings_caption_template') }}</div>
+			<div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
+				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
 			</div>
 			<div class="form-row">
 				<div class="col-md-3">{{ __('common.template_chooser_background') }}</div>
@@ -56,8 +56,15 @@ if (false) {
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.application_settings_template_foreground_tip') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
-			<div class="form-row" style="border-bottom: 1px solid #565656;">
-				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">{{ __('common.application_settings_caption_banner') }}</div>
+		</div>
+	</div>
+	<div class="block block-drop-shadow bg-light-rtl">
+		<div class="header">
+			<h2>{{ __('common.application_settings_caption_banner') }}</h2>
+		</div>
+		<div class="content controls">
+			<div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
+				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
 			</div>
 			<div class="form-row">
 				<div class="col-md-3">{{__('common.banners_autoplay')}}</div>
@@ -99,10 +106,15 @@ if (false) {
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
 			</div>
-
-
-			<div class="form-row" style="border-bottom: 1px solid #565656;">
-				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">{{ __('common.application_settings_caption_tab') }}</div>
+		</div>
+	</div>
+	<div class="block block-drop-shadow bg-light-rtl">
+		<div class="header">
+			<h2>{{ __('common.application_settings_caption_tab') }}</h2>
+		</div>
+		<div class="content controls">
+			<div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
+				<div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
 			</div>
 			<!-- Tab Status -->
 			<div class="form-row">
@@ -120,8 +132,26 @@ if (false) {
 			</div>
 			<?php $tabNo = 1; ?>
 			<?php foreach ($tabs as $tab): ?>
-				<div class="form-row" style="border-bottom: 1px solid #565656;">
-					<div class="col-md-12 text-center" style="border-bottom: 1px solid black;">Tab <?php echo $tabNo; ?></div>
+				<div class="form-row">
+					<div class="col-md-5 text-center" style="height:30px; padding-right:0">
+						<hr style="border-top: 1px solid black; border-bottom: 1px solid #565656;">
+					</div>
+					<div class="col-md-2 text-center">Tab <?php echo $tabNo; ?></div>
+					<div class="col-md-5 text-center" style="height:30px; padding-left:0">
+						<hr style="border-top: 1px solid black; border-bottom: 1px solid #565656;">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
+					<div class="col-md-8">
+						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2 inhouseUrl" onchange="cApplication.InhouseUrlChange(this);">
+							<?php foreach ($galepressTabs as $tabKey => $tabValue): ?>
+								<option value="0"{{ (empty($tab->InhouseUrl) ? ' selected="selected"' : '') }}>{{ __('common.tabs_url') }}</option>
+								<option value="{{$tabKey}}"{{ ($tabKey == $tab->InhouseUrl ? ' selected="selected"' : '') }}>{{ $tabValue }}</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_inhouse_url') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_url') }}</div>
@@ -136,20 +166,6 @@ if (false) {
 					</div>
 					<div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_url') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
-
-				<div class="form-row">
-					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
-					<div class="col-md-8">
-						<select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>" name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2 inhouseUrl" onchange="cApplication.InhouseUrlChange(this);">
-							<option value=""<?php echo (empty($tab->InhouseUrl) ? ' selected="selected"' : '') ?>>{{__('common.tabs_dont_use_feature')}}</option>
-							<?php foreach ($galepressTabs as $tabKey => $tabValue): ?>
-								<option value="{{ $tabKey }}"{{ ($tabKey == $tab->InhouseUrl ? ' selected="selected"' : '') }}>{{ $tabValue }}</option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_inhouse_url') }}"><span class="icon-info-sign"></span></a></div>
-				</div>
-
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_icon') }}</div>
 					<div class="col-md-8">
@@ -171,40 +187,54 @@ if (false) {
 					</div>
 					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_icon') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
-
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_active') }}</div>
 					<div class="col-md-8">
 						<div class="checkbox-inline" style="padding-left:0;">
 							<div class="checker">
 								<span>
-									<input name="TabStatus_<?php echo $tabNo; ?>" type="checkbox" value="1" <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?>>
+									<input name="TabStatus_<?php echo $tabNo; ?>" class="tabActiveCheck" type="checkbox" value="1" <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?>>
 								</span>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-1"><a  class="tipr" title="{{ __('common.tabs_info_icon') }}"><span class="icon-info-sign"></span></a></div>
 				</div>
-
 				<?php $tabNo++; ?>
 			<?php endforeach; ?>
-
-
-
-			<div class="form-row" style="border-top: 1px solid black;">
-				<div class="col-md-12 text-center" style="border-bottom: 1px solid #565656;"></div>
-			</div>
+		</div>
+	</div>
+	<div class="block block-drop-shadow">
+		<div class="content controls">
 			<div class="form-row row-save">
 				<div class="col-md-3 col-md-offset-8">
 					<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cApplication.saveUserSettings();" />
 				</div>           
 			</div>
-			{{ Form::close() }}
 		</div>
 	</div>
+	{{ Form::close() }}
 </div>
 <div class="col-md-6">
 	<div id="ipadView"></div>
+</div>
+<div class="modal" id="dialog-tab-active-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="icon-warning-sign" style="color:#ebaf3c;"></span>&nbsp;Web Link Geçerli Değil!</h4>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+			<div class="modal-footer">
+				<div class="col-md-5" style="float:right;">
+					<input type="button" value="{{ __('common.contents_category_warning_ok') }}" class="btn my-btn-default" data-dismiss="modal" />
+				</div>
+			</div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     $(function () {
@@ -215,7 +245,13 @@ if (false) {
 		var Speed = $('input[name=BannerTransitionRate]').val();
 		cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
 		cApplication.setSelectInputActive();
-		cApplication.checkTabStatus()
+		cApplication.checkTabStatus();
+		// cApplication.checkHoverBlock();
+		$('#dialog-tab-active-warning').on('shown.bs.modal', function() {
+			console.log("asd");
+			var text = $('#dialog-tab-active-warning .modal-body').text().replace("[[innerText]]", '{{ __("common.tabs_warning_url")}}');
+			$('#dialog-tab-active-warning .modal-body').text(text);
+	    })
     });
 </script>
 @endsection

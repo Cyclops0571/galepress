@@ -164,7 +164,7 @@ return array(
 	'application_settings_caption_detail_big' => 'ANWENDUNGS EINSTELLUNGEN',
 	'application_settings_caption_template' => 'Vorlagen Einstellungen',
 	'application_settings_caption_banner' => 'Banner Einstellungen',
-	'application_settings_caption_tab' => 'Tab Einstellungen (Sie können bis zu 3 Registerkarten auf Ihre Anwendung hinzufügen) :',
+	'application_settings_caption_tab' => 'Tab Einstellungen',
 	'application_settings_template_background_tip' => 'Er vertritt Anwendung \'s Hintergrundfarbe.',
 	'application_settings_template_foreground_tip' => 'Er vertritt Anwendung \'s Vordergrundfarbe.',
 
@@ -571,17 +571,19 @@ return array(
 	'banners_list_status0' => 'Not Publicationed',
 	
 	'tabs_url' => 'Mobile kompatible Web-Link',
-	'tabs_inhouse_url' => 'Galepress Funktion',
+	'tabs_inhouse_url' => 'Tab Feature',
 	'tabs_icon' => 'Symbol',
 	'tabs_active' => 'Tab Aktiv',
 	
-	'tabs_info_url' => 'Sie können einen Link zur mobilen kompatibel eingeben. Wenn Sie diesen Abschnitt ausfüllen Galepress Funktion ist für diese Registerkarte deaktiviert.',
+	'tabs_info_url' => 'Sie können einen Link zur mobilen kompatibel eingeben.',
 	'tabs_info_inhouse_url' => 'Sie können Galepress Feature auswählen (Storelocator vs..)',
 	'tabs_info_icon' => 'Icon wird in Anwendung angezeigt werden',
 	'tabs_dont_use_feature' => 'Dont verwenden Sie diese Funktion',
 	
 	'tabs_tab_status' => 'Tab Status',
-	'tabs_info_tab_status' => 'Tabs erscheint in meiner Anwendung',
+	'tabs_info_tab_status' => 'Tabs erscheint in meiner Anwendung. Sie können bis zu 3 Registerkarten auf Ihre Anwendung hinzufügen.',
+
+	'tabs_warning_url' => 'eine gültige Internet-Adresse nicht eingetragen ist.',
 	
 	'image_select' => 'Wählen Sie Bild...',
 	'image' => 'Bild',
