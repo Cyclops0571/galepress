@@ -2170,23 +2170,26 @@ var cBanner = new function () {
     };
 
     this.checkUrl = function () {
-	var url = $('#TargetUrl').val();
-	$('#checkUrl').css('background-color', '#2e2e2e');
-	$(".input-group + span.urlError").addClass("hide");
-	if (url.length > 0 && !isUrlReachable(url))
-	{
-	    $(".input-group + span.urlError").removeClass("hide");
-	    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
-	}
-	else if (isUrlReachable(url)) {
-	    $('.my-btn-success').removeClass("noTouch").css('background', '');
-	    $('#checkUrl').css('background-color', '#59AD2F !important;');
-	    $('#checkUrl').css('color', '#fff');
-	}
+		var url = $('#TargetUrl').val();
+		$('#checkUrl').css('background-color', '#2e2e2e');
+		$(".input-group + span.urlError").addClass("hide");
+		if (url.length > 0 && !isUrlReachable(url))
+		{
+		    $(".input-group + span.urlError").removeClass("hide");
+		    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+		}
+		else if (isUrlReachable(url)) {
+		    $('.my-btn-success').removeClass("noTouch").css('background', '');
+		    $('#checkUrl').css('background-color', '#59AD2F !important;');
+		    $('#checkUrl').css('color', '#fff');
+		}
+		else if (url.length == 0){
+			$('.my-btn-success').removeClass("noTouch").css('background', '');
+		}
 
-	if ($('#imgPreview').attr('src') == '/img/bannerSlider/defaultPreview.jpg') {
-	    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
-	}
+		if ($('#imgPreview').attr('src') == '/img/bannerSlider/defaultPreview.jpg') {
+		    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+		}
     };
 
     this.save = function (applicationID) {

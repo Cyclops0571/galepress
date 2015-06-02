@@ -500,6 +500,7 @@ return array(
 	'maps_list_application' => 'Uygulama',
 	'maps_list_customer' => 'Müşteri',
 	'maps_caption' => 'Adresler',
+	'maps_caption_detail' => 'Adres Detayı',
 	'maps_list_name' => 'İsim',
 	'maps_list_address' => 'Adres',
 	'maps_list_description' => 'Tarif',

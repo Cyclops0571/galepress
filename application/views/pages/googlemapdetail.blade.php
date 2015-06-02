@@ -201,7 +201,7 @@ if ($googleMap) {
 
                     <div class="btn-group">
                       <button type="button" style="max-width:95px;" class="btn" onclick="javascript:location.href='{{ URL::to(__('route.maps').'?applicationID='.$ApplicationID) }}'">{{__('common.map_form_return')}}</button>
-                      <button type="button" class="btn my-btn-send" id="zoomBtn">{{__('common.map_form_location')}}</button>
+                      <button type="button" class="btn my-btn-send hide" id="zoomBtn">{{__('common.map_form_location')}}</button>
                       <button type="button" style="max-width:76px;" class="btn my-btn-success" onclick="cGoogleMap.save();">{{__('common.detailpage_save')}}</button>
                     </div>
 

@@ -501,6 +501,7 @@ return array(
 	'maps_list_customer' => 'Customer',
 	'maps_list_application' => 'Application',
 	'maps_caption' => 'Address List',
+	'maps_caption_detail' => 'Address Detail',
 	'maps_list_name' => 'Name',
 	'maps_list_address' => 'Address',
 	'maps_list_description' => 'Description',

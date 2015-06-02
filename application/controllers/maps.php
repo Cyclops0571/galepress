@@ -14,6 +14,7 @@ class Maps_Controller extends Base_Controller {
 		parent::__construct();
 		$this->route = __('route.' . $this->page);
 		$this->caption = __('common.maps_caption');
+		$this->detailcaption = __('common.maps_caption_detail');
 		$this->fields = array();
 		$this->fields[] = array(__('common.maps_list_name'), 'Name');
 		$this->fields[] = array(__('common.maps_list_address'), 'Address');
@@ -97,14 +98,20 @@ class Maps_Controller extends Base_Controller {
 		$data = array();
 		$data["applicationID"] = (int) Input::get('applicationID', '0');
 		$data["googleMap"] = $googleMap;
-		return View::make("pages." . Str::lower($this->table) . "detail", $data);
+		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $googleMap->ApplicationID;
+		$data['caption'] = $this->caption;
+		$data['detailcaption'] = $this->detailcaption;
+		return View::make("pages." . Str::lower($this->table) . "detail", $data)->nest('filterbar', 'sections.filterbar', $data);
 	}
 
 	public function get_new() {
 		$data = array();
 		$data["ApplicationID"] = (int) Input::get('applicationID', '0');
 		$data["googleMap"] = FALSE;
-		return View::make('pages.' . Str::lower($this->table) . 'detail', $data);
+		$data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $data["ApplicationID"];
+		$data['caption'] = $this->caption;
+		$data['detailcaption'] = $this->detailcaption;
+		return View::make('pages.' . Str::lower($this->table) . 'detail', $data)->nest('filterbar', 'sections.filterbar', $data);
 	}
 
 	public function post_save() {
