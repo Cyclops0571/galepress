@@ -11,7 +11,7 @@
                     </div>
                     <p><small>{{__('website.footer_detaysoft_text')}}</small></p>
                     <!--<p><small>Kurulduğu 1999 yılından itibaren başarılı projeler üreten Detaysoft, zamanla sektörünün en deneyimli teknoloji firmaları arasına girdi.</small></p>-->
-                    <p class="pull-right"><small><a href="http://www.detaysoft.com/Content/Text/9/Genel_Tanitim" target="_blank"><u><i>{{__('website.footer_detaysoft_more')}}</i></u></a></small></p>
+                    <p class="pull-right"><small><a href="http://www.detaysoft.com/kurumsal/" target="_blank"><u><i>{{__('website.footer_detaysoft_more')}}</i></u></a></small></p>
                   </div>
                 </div>
               </div>
