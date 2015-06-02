@@ -5,11 +5,19 @@
         @elseif((int)Input::get('applicationID', 0) > 0)
             
                 <a href="{{URL::to(__('route.'.$page.'_new').'?applicationID='.Input::get('applicationID', 0))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle" style="margin-left:5px;"><span class="icon-plus"></span></a>
+
+                @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
+                    <a href="#modalPushNotification" title="Push Notification" data-toggle="modal" data-target="#modalPushNotification" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-bullhorn"></span></a>
+                    <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook" class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span class="icon-book"></span></a>
+                    <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
+                    <a href="{{ URL::to(__('route.maps').'?applicationID='.Input::get('applicationID', 0)) }}" title="{{__('common.map_title')}}" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-map-marker" style="font-size:14px;"></span></a>
+                    <a href="{{ URL::to(__('route.banners').'?applicationID='.Input::get('applicationID', 0)) }}" title="Banner" class="widget-icon widget-icon-circle" style="margin-left:10px; position:relative;">
+                        <span class="icon-picture" style="font-size:9px; color:white; vertical-align:middle; position:relative; top:-2px;"></span>
+                        <span class="icon-angle-left" style="position:absolute; font-size: 8px; left: 2px;"></span>
+                        <span class="icon-angle-right" style="position:absolute; font-size: 8px; right: 2px;"></span>
+                    </a>
+                @endif
             
-                <a href="#modalPushNotification" title="Push Notification" data-toggle="modal" data-target="#modalPushNotification" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-bullhorn"></span></a>
-           
-                <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook" class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span class="icon-book"></span></a>
-                <a href="{{ URL::to(__('route.maps').'?applicationID='.Input::get('applicationID', 0)) }}" title="{{__('common.map_title')}}" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-map-marker" style="font-size:14px;"></span></a>
 
                 @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'maps_list')
                     <script type="text/javascript">
@@ -21,16 +29,7 @@
                         <span class="icon-map-marker" style="position:absolute; font-size: 8px; margin-left: 2px; margin-top:-4px; color:#DB3838;"></span>
                     </a>
                 @endif
-
-                @if(isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents')
-                    <a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
-                @endif
-          
-                <a href="{{ URL::to(__('route.banners').'?applicationID='.Input::get('applicationID', 0)) }}" title="Banner" class="widget-icon widget-icon-circle" style="margin-left:10px; position:relative;">
-                    <span class="icon-picture" style="font-size:9px; color:white; vertical-align:middle; position:relative; top:-2px;"></span>
-                    <span class="icon-angle-left" style="position:absolute; font-size: 8px; left: 2px;"></span>
-                    <span class="icon-angle-right" style="position:absolute; font-size: 8px; right: 2px;"></span>
-                </a>
+                
         @else
             <a href="{{URL::to(__('route.'.$page.'_new'))}}" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle"><span class="icon-plus"></span></a>
         @endif
