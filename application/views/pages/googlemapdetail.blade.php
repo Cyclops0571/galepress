@@ -55,7 +55,7 @@ if ($googleMap) {
                 draggable: true
             });
         }
-        myListener = google.maps.event.addListener(map, 'click', function (event) {
+        myListener = google.maps.event.addListener(map, 'mouseup', function (event) {
             placeMarker(event.latLng);
         });
 
