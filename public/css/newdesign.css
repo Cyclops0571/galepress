@@ -1,11 +1,11 @@
-@import "bootstrap.min.css?v=3";
-@import "jquery-ui.min.css?v=3";
-@import "font-awesome.min.css?v=3";
-@import "select2.css?v=3";
-@import "stylesheet.css?v=3";
-@import "backgrounds.css?v=3";
-@import "themes.css?v=3";
-@import "mystyles.css?v=3";
+@import "bootstrap.min.css?v=4";
+@import "jquery-ui.min.css?v=4";
+@import "font-awesome.min.css?v=4";
+@import "select2.css?v=4";
+@import "stylesheet.css?v=4";
+@import "backgrounds.css?v=4";
+@import "themes.css?v=4";
+@import "mystyles.css?v=4";
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {    
     #imgPreview{width:100px;}
