@@ -430,8 +430,11 @@ class Interactivity_Controller extends Base_Controller {
 									if ($pcosmode == "URI" || $pcosmode == ">>") {
 										//Print the type of the annotation
 										$subtype = $p->pcos_get_string($doc, $annotation_path . "/Subtype");
-
 										$uri_path = $annotation_path . "/A/URI";
+										$objectType = $p->pcos_get_string($doc, "type:" . $uri_path);
+										if($objectType != "string") {
+											continue;
+										}
 										$uri = $p->pcos_get_string($doc, $uri_path);
 
 										//Print the rectangle for the annotation.
@@ -534,15 +537,11 @@ class Interactivity_Controller extends Base_Controller {
 											$pageHeight = $height;
 
 
-											$rectY = $pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[3]");
+											$rectY = abs($pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[3]"));
+											$rectHeight = abs($pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[1]") - $rectY);
 
-											$rectHeight = $pageHeight - (int) $p->pcos_get_number($doc, $rect_path . "[1]") - $rectY;
-											if ($rectHeight < 0) {
-												$rectHeight*=-1;
-											}
-
-											$rectX = $p->pcos_get_number($doc, $rect_path . "[0]");
-											$rectWidth = $p->pcos_get_number($doc, $rect_path . "[2]") - $rectX;
+											$rectX = abs($p->pcos_get_number($doc, $rect_path . "[0]"));
+											$rectWidth = abs($p->pcos_get_number($doc, $rect_path . "[2]") - $rectX);
 
 											$lastComponentNo = DB::table('PageComponent')
 													->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
