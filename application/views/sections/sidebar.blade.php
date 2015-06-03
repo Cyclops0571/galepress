@@ -35,7 +35,24 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 	@elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 	<li>
 		<a href="#"><span class="icon-dropbox"></span>{{ __('common.menu_caption_applications') }}</a>
-		<ul>
+		<ul id="allApps">
+			<script type="text/javascript">
+			$(document).ready(function(){
+				var appID = $( "input[name$='pplicationID']" ).val();
+				$( ".page-navigation ul#allApps li a" ).each(function( index ) {
+				  if(getURLParameter($(this).attr('href'), 'applicationID')==appID){
+				  	$(this).attr('class', 'visited');
+				  	return false;
+				  }
+				});
+				function getURLParameter(url, name) {
+				    return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
+				}
+				if(appID!="" && appID>0){
+					$(".page-navigation ul#allApps").prev().trigger('click');
+				}
+			});
+			</script>
 			<?php $currentDate = date("Y-m-d"); ?>
 			@foreach(Auth::User()->Customer()->Applications(1) as $app)
 			@if( $app->ExpirationDate < $currentDate )
@@ -107,8 +124,10 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 				else if(reportUrlParams[1]=="r=1302")
 					$('ul#allReports li:eq(4) a').attr('class', 'visited');
 
-				if(reportUrlParams[1]=="r=301" || reportUrlParams[1]=="r=302" || reportUrlParams[1]=="r=1001" || reportUrlParams[1]=="r=1301" || reportUrlParams[1]=="r=1302")
+				if(reportUrlParams[1]=="r=301" || reportUrlParams[1]=="r=302" || reportUrlParams[1]=="r=1001" || reportUrlParams[1]=="r=1301" || reportUrlParams[1]=="r=1302"){
 					$(".page-navigation ul#allReports").prev().trigger('click');
+					
+				}
 			});
 			</script>
 			{{-- HTML::nav_link(__('route.reports').'?r=101', __('common.menu_report_101')) --}}

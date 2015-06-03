@@ -87,7 +87,7 @@
                 </div>
             </div>
             <?php if($report == "302") { ?>
-                <div id="chart_div" style="position:absolute; top:0px; left:0px; top:200px; width: 700px; height: 500px; color:#FFF"></div>
+                <div id="chart_div" style="position:absolute; top:0px; left:0px; top:100px; width: 700px; height: 500px; color:#FFF"></div>
                 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
                 <script type="text/javascript">
                     google.load("visualization", "1", {packages:["corechart"]});
