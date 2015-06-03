@@ -618,9 +618,13 @@ var cApplication = new function () {
 					warningText="not";
 					return;
 			    }
+			    else if (!$(this).val().match(/^[a-zA-Z]+:\/\//))
+				{
+				    $(this).val('http://' + $(this).val());
+				}
 			});
 		}
-
+		
 		if(warningText==""){
 			cCommon.save('application_usersettings',
 				function () {
