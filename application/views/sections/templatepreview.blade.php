@@ -114,7 +114,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
 												<?php $imgPath = $savedBanner->getImagePath($application); ?>
 												<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
 												<div class="ms-info">{{$savedBanner->Description}}</div>
-												<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
+												<!-- <a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a> -->
 											</div>
 										<?php endforeach; ?>
 										<?php if (empty($bannerSet)): ?>
@@ -135,7 +135,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
 												<?php $imgPath = $savedBanner->getImagePath($application); ?>
 												<img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
 												<div class="ms-info">{{$savedBanner->Description}}</div>
-												<a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a>
+												<!-- <a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a> -->
 											</div>
 										<?php endforeach; ?>
 										<?php if (empty($bannerSet)): ?>

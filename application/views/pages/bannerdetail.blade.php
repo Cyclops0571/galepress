@@ -91,7 +91,7 @@ if ($banner) {
 			*/
 			?>
 			
-			<div class="form-row">
+			<div class="form-row hide">
 				<div class="col-md-3">{{__('common.banner_form_target_url')}}</div>
 				<div class="col-md-8">
 					<div class="input-group file">                                    
