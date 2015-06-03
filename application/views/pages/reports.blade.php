@@ -69,17 +69,15 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="col-md-9" style="float:right;">              
-                        <div class="col-md-2">  
-                            <input class="btn btn-mini" type="button" onClick="cReport.refreshReport();" value="{{ __('common.reports_refresh') }}">
-                        </div>
-                        <div class="col-md-3">
-                            <input class="btn btn-mini" type="button" onClick="cReport.downloadAsExcel();" value="{{ __('common.reports_excel') }}">
-                        </div>
-                        <div class="col-md-3{{ ($report == "101" || $report == "201" || $report == "301" || $report == "302" || $report == "1001" || $report == "1302" ? ' hidden' : '') }}">
-                            <input class="btn btn-mini" type="button" onClick="cReport.viewOnMap();" value="{{ __('common.reports_viewonmap') }}">
-                        </div>
+                <div class="form-row">             
+                    <div class="col-md-offset-3 col-md-2">  
+                        <input class="btn btn-mini" type="button" onClick="cReport.refreshReport();" value="{{ __('common.reports_refresh') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn btn-mini" type="button" onClick="cReport.downloadAsExcel();" value="{{ __('common.reports_excel') }}">
+                    </div>
+                    <div class="col-md-3{{ ($report == "101" || $report == "201" || $report == "301" || $report == "302" || $report == "1001" || $report == "1302" ? ' hidden' : '') }}">
+                        <input class="btn btn-mini" type="button" onClick="cReport.viewOnMap();" value="{{ __('common.reports_viewonmap') }}">
                     </div>
                 </div>
             </div>
