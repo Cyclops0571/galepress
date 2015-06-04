@@ -15,24 +15,63 @@ if (FALSE) {
 	#zoomBtn {    
         position: fixed;
         z-index: 9000000;
-        top: 96px;
-        width: 30px;
-        height: 30px;
-        left: 2%;
-        font-size: 18px;
+        bottom: 10%;
+        width: 33px;
+        height: 33px;
+        left: 5%;
+        font-size: 19px;
         line-height: 11px;
-        color: rgb(127, 127, 127);
+        color: #2980B9;
+        border: 2px solid #2980B9;
+        background-color: #FFF;
+    }
+    #zoomBtn:hover,#zoomBtn.clicked{ 
+        color: #fff;
+        background-color: #2980B9;
     }
     #zoomBtn.widget-icon.widget-icon-circle{
-        background-color: #FFFFFF !important;
         webkit-box-shadow: none !important;
         -moz-box-shadow: none !important;
-        box-shadow: none !important;
-        
+        box-shadow: none !important;   
     }
      #zoomBtn span{
         line-height: 11px !important;
     }
+    .gm-style-mtc{
+        border: 1px solid #2980B9;
+    }
+    .gm-style-mtc div{
+        padding: 2px 6px !important;
+        height: 20px !important;
+    }
+    .gm-style-mtc *{
+        border: none !important;
+        text-shadow:none !important;
+        color: #2980B9 !important;
+    }
+    .gm-style-mtc[style="float: left;"]:nth-child(1){
+        border-right: 2px solid #2980B9 !important;
+        -webkit-border-top-left-radius: 4px;
+        -webkit-border-bottom-left-radius: 4px;
+        -moz-border-radius-topleft: 4px;
+        -moz-border-radius-bottomleft: 4px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    .gm-style-mtc[style="float: left;"]:nth-child(2){
+        border-left: 0px solid #2980B9 !important;
+        -webkit-border-top-right-radius: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        -moz-border-radius-topright: 4px;
+        -moz-border-radius-bottomright: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+    .gm-style-mtc > div[style*="font-weight"]{
+        background: #2980B9 !important;
+        color: #fff !important;
+    }
+
 </style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
@@ -108,10 +147,20 @@ if (FALSE) {
 		
 		if(browserSupportFlag) {
 			google.maps.event.addDomListener(zoomBtn, 'click', function () {
+                google.maps.event.addListener(map, 'bounds_changed', function () {
+                    $('#zoomBtn').removeClass('clicked');
+                });
 				if (initialLocation) {
 					map.setCenter(initialLocation);
 				}
 				smoothZoom(map, 14, map.getZoom());
+
+                setTimeout(function(){
+                    $('#zoomBtn').addClass('clicked');
+                },1250);
+
+                // zoomBtn.className = zoomBtn.className + " clicked";
+                // console.log(zoomBtn.className);
 			});
 		}
 
