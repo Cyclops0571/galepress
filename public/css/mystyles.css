@@ -412,3 +412,6 @@ td:hover .list-draggable-icon{
 	pointer-events: none;
 	opacity: 0.45;
 }
+.checkbox-inline{
+	padding-left: 0;
+}
