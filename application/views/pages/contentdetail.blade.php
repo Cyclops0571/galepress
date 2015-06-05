@@ -389,7 +389,7 @@
              		</div>
 	            </div>
 	        </div>
-     		<div class="block disabledFields">
+     		<div class="block disabledFields hide">
 	            <div class="content controls" style="overflow:visible">
 	                <div class="form-row">
 	                    <div class="col-md-3">{{ __('common.contents_isbuyable') }}</div>
@@ -428,7 +428,7 @@
 		           	</div>
    				</div>
 			</div>
-			<div class="block disabledFields">
+			<div class="block disabledFields hide">
 			    <div class="content controls" style="overflow:visible">
 			        <div class="form-row">
 			            <div class="col-md-3">{{ __('common.contents_autodownload') }}</div>
