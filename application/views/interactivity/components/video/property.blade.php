@@ -83,7 +83,7 @@ if(isset($Properties))
         
     	<div class="web{{ ($option == 1 ? ' hide' : '') }}">
             <div class="text dark inline-primary">
-                <input type="text" name="comp-{id}-url" id="comp-{id}-url" placeholder="http://www.galepress.com/test.mp4" class="prefix" value="{{ $url }}">
+                <input type="text" name="comp-{id}-url" id="comp-{id}-url" placeholder="Youtube link, embed or .mp4 extensions" class="prefix" value="{{ $url }}">
             </div>
             <div class="inline-secondary">
                 <a href="javascript:void(0);" class="btn btn-primary postfix"><i class="icon-upload-alt"></i></a>

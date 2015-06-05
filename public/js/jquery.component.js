@@ -689,7 +689,6 @@
 				    	}
 				    }
 				}
-				//HAKAN
 
 				$("#prop-" + id + " div.upload div.radiogroup div.js-radio").click(function()
 				{
@@ -925,7 +924,7 @@
 					{
 						if(componentName == "video")
 						{
-							valid = url.endsWith(".mp4") || url.indexOf("www.youtube.com/embed") > -1;
+							valid = url.endsWith(".mp4") || url.indexOf("www.youtube.com/embed") > -1 || url.indexOf("www.youtube.com/watch") > -1;
 						}
 						else if(componentName == "audio")
 						{

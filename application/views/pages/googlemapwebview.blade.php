@@ -4,35 +4,75 @@
     <title>Galepress Map View</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-<style type="text/css">
-	#map_canvas { height:100%; width:100%; position: fixed !important; }
-	#zoomBtn {    
-        position: fixed;
-        z-index: 9000000;
-        top: 6%;
-        width: 30px;
-        height: 30px;
-        right: 1%;
-        font-size: 18px;
-        line-height: 11px;
-        color: rgb(127, 127, 127);
-    }
-    #zoomBtn.widget-icon.widget-icon-circle{
-        background-color: #FFFFFF !important;
-        webkit-box-shadow: none !important;
-        -moz-box-shadow: none !important;
-        box-shadow: none !important;
-        
-    }
-     #zoomBtn span{
-        line-height: 11px !important;
-    }
-    @media screen and ( max-height: 500px ){
-    	#zoomBtn {    
-	        top: 15%;
+
+	<style type="text/css">
+		#map_canvas { height:100%; width:100%; position: fixed !important; }
+		#zoomBtn {    
+	        position: fixed;
+	        z-index: 9000000;
+	        bottom: 10%;
+	        width: 33px;
+	        height: 33px;
+	        left: 5%;
+	        font-size: 19px;
+	        line-height: 11px;
+	        color: #2980B9;
+	        border: 2px solid #2980B9;
+	        background-color: #FFF;
 	    }
-	}
-</style>
+	    #zoomBtn:hover,#zoomBtn.clicked{ 
+	        color: #fff;
+	        background-color: #2980B9;
+	    }
+	    #zoomBtn.widget-icon.widget-icon-circle{
+	        webkit-box-shadow: none !important;
+	        -moz-box-shadow: none !important;
+	        box-shadow: none !important;   
+	    }
+	     #zoomBtn span{
+	        line-height: 11px !important;
+	    }
+	    .gm-style-mtc{
+	        border: 1px solid #2980B9;
+	    }
+	    .gm-style-mtc div{
+	        padding: 2px 6px !important;
+	        height: 20px !important;
+	    }
+	    .gm-style-mtc *{
+	        border: none !important;
+	        text-shadow:none !important;
+	        color: #2980B9 !important;
+	    }
+	    .gm-style-mtc[style="float: left;"]:nth-child(1){
+	        border-right: 2px solid #2980B9 !important;
+	        -webkit-border-top-left-radius: 4px;
+	        -webkit-border-bottom-left-radius: 4px;
+	        -moz-border-radius-topleft: 4px;
+	        -moz-border-radius-bottomleft: 4px;
+	        border-top-left-radius: 4px;
+	        border-bottom-left-radius: 4px;
+	    }
+	    .gm-style-mtc[style="float: left;"]:nth-child(2){
+	        border-left: 0px solid #2980B9 !important;
+	        -webkit-border-top-right-radius: 4px;
+	        -webkit-border-bottom-right-radius: 4px;
+	        -moz-border-radius-topright: 4px;
+	        -moz-border-radius-bottomright: 4px;
+	        border-top-right-radius: 4px;
+	        border-bottom-right-radius: 4px;
+	    }
+	    .gm-style-mtc > div[style*="font-weight"]{
+	        background: #2980B9 !important;
+	        color: #fff !important;
+	    }
+	    @media screen and ( max-height: 500px ){
+	    	#zoomBtn {    
+		        bottom: 15%;
+		    }
+		}
+
+	</style>
         <!-- Begin CSS-->
         {{ HTML::style('css/print.css?v=' . APP_VER, array('media' => 'print')); }}
         {{ HTML::style('css/newdesign.css?v=' . APP_VER, array('media' => 'screen')); }}
@@ -129,10 +169,16 @@
 
 			if(browserSupportFlag) {
 				google.maps.event.addDomListener(zoomBtn, 'click', function () {
+					google.maps.event.addListener(map, 'bounds_changed', function () {
+		                $('#zoomBtn').removeClass('clicked');
+		            });
 					if (initialLocation) {
 						map.setCenter(initialLocation);
 					}
 					smoothZoom(map, 14, map.getZoom());
+					setTimeout(function(){
+	                    $('#zoomBtn').addClass('clicked');
+	                },1250);
 				});
 			}
 

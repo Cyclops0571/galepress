@@ -223,7 +223,7 @@
 								</span>
 							  </div>
 						</div>
-						 <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_publishdate') }}"><span class="icon-info-sign"></span></a></div>
+						 <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_unpublishdate') }}"><span class="icon-info-sign"></span></a></div>
 					</div>
 					<div class="form-row">
                         <div class="col-md-3">{{ __('common.contents_file') }}{{ $ContentID == 0 ? ' <span class="error">*</span>' : '' }}</div>

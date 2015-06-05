@@ -26,6 +26,40 @@ if ($googleMap) {
 ?>
 <style type="text/css">
     #map_canvas { height:600px;}
+            .gm-style-mtc{
+            border: 1px solid #2980B9;
+        }
+    .gm-style-mtc div{
+        padding: 2px 6px !important;
+        height: 20px !important;
+    }
+    .gm-style-mtc *{
+        border: none !important;
+        text-shadow:none !important;
+        color: #2980B9 !important;
+    }
+    .gm-style-mtc[style="float: left;"]:nth-child(1){
+        border-right: 2px solid #2980B9 !important;
+        -webkit-border-top-left-radius: 4px;
+        -webkit-border-bottom-left-radius: 4px;
+        -moz-border-radius-topleft: 4px;
+        -moz-border-radius-bottomleft: 4px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    .gm-style-mtc[style="float: left;"]:nth-child(2){
+        border-left: 0px solid #2980B9 !important;
+        -webkit-border-top-right-radius: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        -moz-border-radius-topright: 4px;
+        -moz-border-radius-bottomright: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+    .gm-style-mtc > div[style*="font-weight"]{
+        background: #2980B9 !important;
+        color: #fff !important;
+    }
 </style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
