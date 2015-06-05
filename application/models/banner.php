@@ -8,6 +8,7 @@
  * @property int $TargetUrl Description
  * @property int $TargetContent Description
  * @property int $Description Description
+ * @property int $Version Version
  * @property int $Status Description
  * @property int $StatusID Description
  * @property int $created_at Description
@@ -71,13 +72,20 @@ class Banner extends Eloquent{
 		
 	}
 	
-	public function save() {
+	public function save($updateAppVersion = TRUE) {
 		if(!$this->dirty()) {
 			return;
 		}
 		
 		if($this->BannerID == 0) {
 			$this->StatusID = eStatus::Active;
+		}
+		$this->Version = (int)$this->Version + 1;
+		if($updateAppVersion) {
+			$App = Application::find($this->ApplicationID);
+			if($App) {
+				$App->incrementAppVersion();
+			}
 		}
 		parent::save();
 	}

@@ -183,6 +183,7 @@ class Interactivity_Controller extends Base_Controller {
 	}
 
 	public function get_show($contentFileID) {
+		set_time_limit(3000);
 		
 		$currentUser = Auth::User();
 		$ContentID = (int) ContentFile::find($contentFileID)->ContentID;

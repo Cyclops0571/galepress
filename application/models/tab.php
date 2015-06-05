@@ -32,7 +32,7 @@ class Tab extends Eloquent {
 	}
 
 	public function urlForService() {
-		if (!empty($this->Url)) {
+		if (!empty($this->Url) && $this->Url != "http://") {
 			$url = $this->Url;
 		} else {
 			switch ($this->InhouseUrl) {
