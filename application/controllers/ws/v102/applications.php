@@ -124,7 +124,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 								'ThemeBackground' => $application->ThemeBackground,
 								'ThemeForeground' => $hexadecimalColorCode,
 								'BannerActive' => $application->BannerActive,
-								'BannerPage' => $baseUrl . "/banners/service_view/" . "?ver=" . $application->Version,
+								'BannerPage' => $baseUrl . "/banners/service_view/" . $application->ApplicationID . "?ver=" . $application->Version,
 								'Tabs' => $application->TabsForService(),
 								'Contents' => $contents
 					));
