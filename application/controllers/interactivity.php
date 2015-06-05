@@ -123,6 +123,12 @@ class Interactivity_Controller extends Base_Controller {
 					if (isset($data['url'])) {
 						$url = $data['url'];
 					}
+					if (!(strpos($url, 'www.youtube.com/watch') === false)) {
+						$parts = parse_url($url);
+						parse_str($parts['query'], $query);
+						$data['url'] = 'http://www.youtube.com/embed/'.$query['v'];
+						return Redirect::to($data['url']);
+					}
 					if (!(strpos($url, 'www.youtube.com/embed') === false)) {
 						return Redirect::to($data['url']);
 					}
