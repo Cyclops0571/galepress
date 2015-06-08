@@ -17,6 +17,7 @@ class Applications_Controller extends Base_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->page = 'applications';
+		
 		$this->route = __('route.' . $this->page);
 		$this->table = 'Application';
 		$this->pk = 'ApplicationID';
