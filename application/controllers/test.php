@@ -19,7 +19,9 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-
+		echo ReportFilter::$applicationID;
+		return;
+		
 		// //TAŞINACAK CONTENT'IN FILE ID'SINI GIRIN
 		// $contentFilePage = DB::table('ContentFilePage')
 		// 					->where('ContentFileID', '=', 2877)
@@ -77,7 +79,7 @@ class Test_Controller extends Base_Controller{
 		/***** HEDEF CONTENTIN SAYFALARI OLUSUTURLMUS OLMALI YANI INTERAKTIF TASARLAYICISI ACILMIS OLMALI!!!*****/
 		// TAŞINACAK CONTENT'IN FILE ID'SINI GIRIN
 		$contentFilePage = DB::table('ContentFilePage')
-							->where('ContentFileID', '=', ...)//*************
+							->where('ContentFileID', '=', "15")//*************
 							->get();
 
 		foreach ($contentFilePage as $cfp) {
@@ -92,7 +94,7 @@ class Test_Controller extends Base_Controller{
 
 			//HANGI CONTENT'E TASINACAK
 			$contentFilePageNew = DB::table('ContentFilePage')
-						->where('ContentFileID', '=', ...)//****************
+						->where('ContentFileID', '=', "15")//****************
 						->where('No', '=', $cfp->No)
 						->first();
 			if(isset($contentFilePageNew)){
