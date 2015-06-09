@@ -86,7 +86,7 @@ $rgb = array($r, $g, $b);
 		border: 2px solid #d2d2d2;
 		background: {{ $iconcolor }};
 		padding: 6%;
-		background-image: url("{{ $baseDirectory }}/plus.png");
+		background-image: url("{{ $baseDirectory }}comp_{{ $id }}/plus.png");
 		background-size: 75% 75%;
 		background-repeat: no-repeat;
 		background-position: center center;
@@ -173,14 +173,14 @@ $rgb = array($r, $g, $b);
 						// $('.slimScrollBar').scrollTop(10);
 					},500);
 					$('#myScrollableDiv,.slimScrollDiv').removeClass('closed').css('display','block');
-					$(this).css('background-image','url("{{ $baseDirectory }}/cross.png")');
+					$(this).css('background-image','url("{{ $baseDirectory }}comp_{{ $id }}/cross.png")');
 					$(this).css('background-size','60% 60%');
 				}	
 				else
 				{
 					checkAndroid();
 					$('#myScrollableDiv,.slimScrollDiv').addClass('closed').css('display','none');;
-					$(this).css('background-image','url("{{ $baseDirectory }}/plus.png")');
+					$(this).css('background-image','url("{{ $baseDirectory }}comp_{{ $id }}/plus.png")');
 					$(this).css('background-size','75% 75%');
 				}
 				render();
