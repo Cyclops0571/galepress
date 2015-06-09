@@ -61,176 +61,187 @@ $rgb = array($r, $g, $b);
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
-	<link rel="stylesheet" href="{{ $baseDirectory }}comp_{{ $id }}/css/hotspot.css" type="text/css" />
+	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
 	<style type="text/css">
 	body{
-		position: absolute;
-		width: 100%;
-		height: 100%;
 		overflow: hidden;
 	}
-	#hotspot{
-		position: absolute;
+	*{
+		margin: 0;
+		padding: 0;
+		-webkit-tap-highlight-color: transparent !important;
 	}
 	.hs-spot-object{
-		position: fixed !important;
-		background-size: 100% 100%;
-		{{($init == 'right' || $init == 'bottom' ? 'top:0; left:0;' : ($init == 'left' ? 'top:0; right:0;' : ($init == 'top' ? 'bottom:0; left:0;' : '')))}};
+		position: fixed;
+		cursor: pointer;
+		z-index:1;
+		@if($option == 1)
+		width: auto;
+		height:auto;
+		border-radius:50%;
+	    -moz-border-radius:50%;
+	    -webkit-border-radius:50%;
+	    -khtml-border-radius: 50%;
+		color: #058ae5;
+		border: 2px solid #d2d2d2;
+		background: {{ $iconcolor }};
+		padding: 6%;
+		background-image: url("{{ $baseDirectory }}/plus.png");
+		background-size: 75% 75%;
+		background-repeat: no-repeat;
+		background-position: center center;
+		@endif
+		{{($init == 'right' || $init == 'bottom' ? 'top:1px; left:1px;' : ($init == 'left' ? 'top:1px; right:1px;' : ($init == 'top' ? 'bottom:1px; left:1px;' : '')))}};
+	}
+	.hs-spot-object .hs-spot-object-inner{
+		background: {{ $iconcolor }} !important;
 	}
 	@if($option == 2)
 	.hs-spot-object{
 		background-image: url("{{$vFile}}");
+		background-size: 100% 100%;
 		background-repeat: no-repeat;
 	}
 	@endif
-	.hs-spot.visible .hs-spot-shape-inner{
-		background: {{ $iconcolor }} !important;
-	}
-	@if( $init == "right")
-	.hs-spot-object.right .hs-tooltip:before{
-		border-right: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-	@elseif( $init == "left")
-	.hs-spot-object.left .hs-tooltip:before{
-		border-left: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-
-	@elseif( $init == "top")
-	.hs-spot-object.top .hs-tooltip:before{
-		border-top: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-		
-	@elseif( $init == "bottom")
-	.hs-spot-object.bottom .hs-tooltip:before{
-		border-bottom: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-	@endif
-	.hs-tooltip{
-		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-		padding: 0;
-		padding-left: 10px;
-  		padding-right: 2px;
-  		@if($option==1)
-		margin: auto 1px;
-		@endif
-	}
-	.hs-tooltip-wrap{
-		z-index: 9999 !important;
-		padding: 0 !important;
-		position: fixed;
-		{{($init == 'right' ? 'top:0 !important; right: 0 !important; left: auto !important' : ($init == 'left' ? 'top:0 !important; left: 0 !important' : ($init == 'top' ? 'left:0 !important; top: 0!important;' : ($init == 'bottom' ? 'left:0 !important; bottom: 0!important;' : ''))))}};
-	}
-	*{
-		-webkit-tap-highlight-color: transparent !important;
-	}
 	#myScrollableDiv{
+		position: fixed;
 		word-wrap: break-word;
 		overflow-y: scroll;
 		overflow-x: hidden;
+		z-index:0;
+		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }});
+		text-align:center;
 	}
-	.hs-spot.visible .hs-spot-shape{
-		top: 0;
-		left: 0;
+	#myScrollableDiv p,#myScrollableDiv div{
+		padding: 2% 4%;
+	}
+	.closed{
+		display: none;
+	}
+	/*SCROLLBAR ADDITIONAL STYLES*/
+	.slimScrollDiv{
+		position: fixed !important;
+		display: none;
+	}
+	.slimScrollBar{
+		background: #058ae5 !important;
+		-webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+		right: 1% !important;
+		width: 6% !important;
+		opacity: 0.75 !important;
+	}
+	.slimScrollRail{
+		right: 2% !important;
+		width: 3% !important;
 	}
 	</style>
 </head>
 <body>
-	<div id="hotspot" class="hs-wrap hs-loading">
-		@if($option==1)
-		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="visible">
-		@elseif ($option==2)
-		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="invisible">
-		@endif
-			<div id="myScrollableDiv">
-				{{$content}}
-			</div>
-		</div>
+	<div class="hs-spot-object" style="display:none;"></div>
+	<div id="myScrollableDiv" class="closed">
+		{{$content}}
 	</div>
-
-	<script src="{{ $baseDirectory }}comp_{{ $id }}/js/lib/jquery-1.7.1.min.js"></script>
-	<script src="{{ $baseDirectory }}comp_{{ $id }}/js/hotspot.js"></script>
+	<script src="{{ $baseDirectory }}comp_{{ $id }}/lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/prettify.js"></script>
+	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.slimscroll.min.js"></script>
 	<script>
 		$(document).ready(function() {
 
-			$('#hotspot').hotspot({ "show_on" : "click" });
-
-			var bodyHeight=$(window).height();
+			$('#myScrollableDiv').slimScroll({
+		      alwaysVisible: true,
+		      railVisible: true
+		  	});
+			
+			var bodyHeight=$(document).height();
 			var bodyWidth=$(document).width();
 
 			var bodyWidthFromTasarlayici={{$w}};
 			var bodyHeightFromTasarlayici={{$h}};
 
-			var calcBodyWidth=(bodyWidthFromTasarlayici/bodyWidth)*100;
-			var calcBodyHeight=(bodyHeightFromTasarlayici/bodyHeight)*100;
-			$('#hotspot').css('width',calcBodyWidth+'%').css('height',calcBodyHeight+'%');
-
-			var imgWidth=30;
-			var calcWidth;
-			var imgHeight=30;
-			var calcHeight;
+			var calcIconWidth=(35/bodyWidthFromTasarlayici)*100;
+			$('.hs-spot-object').css('padding',(calcIconWidth/2)+'%');
+			$('.hs-spot-object').fadeIn(1000);
 
 			@if($option==1)
-
-				function opacityAnimate(){
-					$('.hs-spot-shape').animate({ opacity: 0.40 }, function(){ 
-						$(this).animate({ opacity: 0.15 },opacityAnimate())
-					});
-				}
-				opacityAnimate();
-
-				calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
-				calcHeight=(imgHeight/bodyHeightFromTasarlayici)*100;				
-				renderImg();			
-			@endif
-
-			@if($option==2)
-
-			var focused=false;
-			$('#hotspot').click(function(){
-				if(!focused)
+			$('.hs-spot-object').click(function(){
+				if($('#myScrollableDiv').hasClass('closed'))
 				{
-					$('.hs-spot-object').css('background-image','url("' + <?php echo json_encode($vFile2) ?> + '")');
-					focused=true;
+					setTimeout(function(){
+						$('#myScrollableDiv').slimScroll().attachWheel;
+						// $('.slimScrollBar').scrollTop(10);
+					},500);
+					$('#myScrollableDiv,.slimScrollDiv').removeClass('closed').css('display','block');
+					$(this).css('background-image','url("{{ $baseDirectory }}/cross.png")');
+					$(this).css('background-size','60% 60%');
 				}	
 				else
 				{
-					$('.hs-spot-object').css('background-image','url("' + <?php echo json_encode($vFile) ?> + '")');
-					focused=false;
+					checkAndroid();
+					$('#myScrollableDiv,.slimScrollDiv').addClass('closed').css('display','none');;
+					$(this).css('background-image','url("{{ $baseDirectory }}/plus.png")');
+					$(this).css('background-size','75% 75%');
+				}
+				render();
+			});
+			@endif
+
+			@if($option==2)
+			$('.hs-spot-object').click(function(){
+				if($('#myScrollableDiv').hasClass('closed'))
+				{
+					$(this).css('background-image','url("' + <?php echo json_encode($vFile2) ?> + '")');
+					$('#myScrollableDiv,.slimScrollDiv').removeClass('closed').css('display','block');
+				}	
+				else
+				{
+					checkAndroid();
+					$(this).css('background-image','url("' + <?php echo json_encode($vFile) ?> + '")');
+					$('#myScrollableDiv,.slimScrollDiv').addClass('closed').css('display','none');;
 				}
 			});
 
+			var calcHeight;
+			var calcWidth;
 			var image = new Image();
 			image.src = "{{$vFile}}";
 			image.onload = function() {
-				imgWidth={{$iconwidth}};
+				var imgWidth={{$iconwidth}};
 				calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
-				imgHeight={{$iconheight}};
+				var imgHeight={{$iconheight}};
 				calcHeight=(imgHeight/bodyHeightFromTasarlayici)*100;
-				renderImg();
+				$('.hs-spot-object').css('width',calcWidth+'%').css('height',calcHeight+'%');
+				render();
 			};
 			@endif
 
-			function renderImg(){
-				$('#image').css('height',calcHeight+'%');
-				$('.hs-spot-object').attr('style','width:'+calcWidth+'%;'+' height:'+calcHeight+'%;');
-				diffIconWidth = (calcWidth * bodyWidthFromTasarlayici)/100;
-				diffIconHeight = (calcHeight * bodyHeightFromTasarlayici)/100;
-				$('.hs-tooltip-wrap').css('width',(bodyWidth-diffIconWidth)+'px');
-				$('.hs-tooltip').css('height',bodyHeight+'px');
-				@if($init=="top")
-				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
-				$('.hs-tooltip').css('top','0').css('position','fixed');
+			function render(){
+				var spotWidth = $('.hs-spot-object').outerWidth();
+				var spotHeight = $('.hs-spot-object').outerHeight();
+
+				  ('{{$init}}' == 'right' || '{{$init}}' == 'bottom' ? $('#myScrollableDiv').css('left',spotWidth/2).css('top',spotHeight/2)
+				: ('{{$init}}' == 'left' ? $('#myScrollableDiv').css('right',spotWidth/2).css('top',spotHeight/2)
+				: ('{{$init}}' == 'top' ? $('#myScrollableDiv').css('left',spotWidth/2).css('bottom',spotHeight/2) : '')));
+
+				@if($option==1)
+				  $('#myScrollableDiv').css('width',100-spotWidth/2+'%');
+				  $('#myScrollableDiv').css('height',100-spotHeight/2+'%');
 				@endif
-				@if($init=="bottom")
-				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
+				@if($option==2)
+				  $('#myScrollableDiv').css('width',(100-calcWidth)-10+'%');
+				  $('#myScrollableDiv').css('height',(100-calcHeight)-10+'%');
 				@endif
-				$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
+				$('.slimScrollDiv').attr('style',$('#myScrollableDiv').attr('style'));
 			}
-			var ua = navigator.userAgent.toLowerCase();
-			var isAndroid = ua.indexOf("android") > -1;
-			var isMobile = ua.indexOf("mobile") > -1;
-			if(isAndroid && isMobile) {
-				$('#myScrollableDiv *').css('font-size','50%');
+			function checkAndroid(){
+				var ua = navigator.userAgent.toLowerCase();
+				var isAndroid = ua.indexOf("android") > -1;
+				if(isAndroid) {
+					$('.hs-spot-object').fadeOut( 500, function() {
+				    	window.location.reload();
+				  	});
+				};
 			}
 		});
 	</script>

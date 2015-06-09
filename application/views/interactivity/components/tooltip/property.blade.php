@@ -11,12 +11,11 @@ $fileSize2 = '';
 
 $init = 'right';
 $boxcolor = '#333399';
-$iconcolor = '#666';
 $opacity = 100;
 $content = '';
 $transparent = 0;
-$bgcolor = '#151515';
-$iconcolor = '#f00';
+$bgcolor = '#fff';
+$iconcolor = '#fff';
 $boxopacity = 1;
 
 $iconwidth = 30;
