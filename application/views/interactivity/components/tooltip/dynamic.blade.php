@@ -113,7 +113,7 @@ $rgb = array($r, $g, $b);
 		text-align:center;
 	}
 	#myScrollableDiv p,#myScrollableDiv div{
-		padding: 2% 4%;
+		padding: 8% 15% 8% 1%;
 	}
 	.closed{
 		display: none;
@@ -122,19 +122,23 @@ $rgb = array($r, $g, $b);
 	.slimScrollDiv{
 		position: fixed !important;
 		display: none;
+
 	}
 	.slimScrollBar{
 		background: #058ae5 !important;
 		-webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
 		-moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
 		box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
-		right: 1% !important;
-		width: 4.95% !important;
+		right: 2.5% !important;
+		width: 5% !important;
 		opacity: 0.75 !important;
+		margin: 1.5% 2%;
 	}
 	.slimScrollRail{
-		right: 2% !important;
+		right: 4% !important;
 		width: 3% !important;
+		margin: 1.5% 1.3%;
+		height: 97% !important;
 	}
 	</style>
 </head>

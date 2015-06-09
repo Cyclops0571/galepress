@@ -16,7 +16,7 @@ $content = '';
 $transparent = 0;
 $bgcolor = '#fff';
 $iconcolor = '#fff';
-$boxopacity = 1;
+$boxopacity = 0.8;
 
 $iconwidth = 30;
 $iconheight = 30;
