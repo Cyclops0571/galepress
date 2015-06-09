@@ -113,7 +113,7 @@ $rgb = array($r, $g, $b);
 		text-align:center;
 	}
 	#myScrollableDiv p,#myScrollableDiv div{
-		padding: 9% 12% 9% 2%;
+		padding: 9% 11% 9% 2%;
 	}
 	.closed{
 		display: none;
@@ -237,8 +237,6 @@ $rgb = array($r, $g, $b);
 				  $('#myScrollableDiv').css('height',(100-calcHeight)-10+'%');
 				@endif
 				$('.slimScrollDiv').attr('style',$('#myScrollableDiv').attr('style'));
-				console.log($('.slimScrollDiv').height($('.slimScrollDiv').height()+10));
-				// $('.slimScrollDiv').height($('.slimScrollDiv').height()+11);
 			}
 			function checkAndroid(){
 				var ua = navigator.userAgent.toLowerCase();
