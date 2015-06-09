@@ -137,7 +137,7 @@ $rgb = array($r, $g, $b);
 	.slimScrollRail{
 		right: 4% !important;
 		width: 3% !important;
-		margin: 1.5% 1.3%;
+		margin: 2% 1.3%;
 		height: 97% !important;
 	}
 	</style>
