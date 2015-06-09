@@ -113,7 +113,7 @@ $rgb = array($r, $g, $b);
 		text-align:center;
 	}
 	#myScrollableDiv p,#myScrollableDiv div{
-		padding: 8% 15% 8% 1%;
+		padding: 9% 12% 9% 2%;
 	}
 	.closed{
 		display: none;
@@ -132,7 +132,7 @@ $rgb = array($r, $g, $b);
 		right: 2.5% !important;
 		width: 5% !important;
 		opacity: 0.75 !important;
-		margin: 1.5% 2%;
+		margin: 0 2%;
 	}
 	.slimScrollRail{
 		right: 4% !important;
@@ -237,6 +237,8 @@ $rgb = array($r, $g, $b);
 				  $('#myScrollableDiv').css('height',(100-calcHeight)-10+'%');
 				@endif
 				$('.slimScrollDiv').attr('style',$('#myScrollableDiv').attr('style'));
+				console.log($('.slimScrollDiv').height($('.slimScrollDiv').height()+10));
+				// $('.slimScrollDiv').height($('.slimScrollDiv').height()+11);
 			}
 			function checkAndroid(){
 				var ua = navigator.userAgent.toLowerCase();
