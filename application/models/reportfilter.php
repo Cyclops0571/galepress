@@ -1,7 +1,7 @@
 <?php
 
 class ReportFilter {
-
+	const SqlFolder = "report.sql/";
 	public $reportID = 101;
 	public $startDate = '';
 	public $endDate = '';
@@ -21,7 +21,7 @@ class ReportFilter {
 	 * @return string Sql
 	 */
 	public function getRows() {
-		$sqlPath = "application/report.sql/" . $this->reportID . ($this->map ? "map.sql" : ".sql");
+		$sqlPath = path('app') . self::SqlFolder . $this->reportID . ($this->map ? "map.sql" : ".sql");
 		$sqlTemplate = File::get($sqlPath);
 		$replecements = array(
 			'{SD}' => Common::dateWrite($this->startDate, false),
@@ -47,5 +47,7 @@ class ReportFilter {
 		
 		return DB::table(DB::raw('(' . $sqlTemplate . ') t'))->paginate($this->rowCount);
 	}
+	
+
 
 }

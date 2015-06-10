@@ -259,7 +259,7 @@ class Common_Controller extends Base_Controller {
 		$downloadTotalData = 0;
 		$downloadTodayTotalData = 0;
 		$downloadMonthTotalData = 0;
-		$sql = File::get(path('public') . 'files/report.sql/Dashboard1.sql');
+		$sql = File::get(path('app') . ReportFilter::SqlFolder . 'Dashboard1.sql');
 		$sql = str_replace('{DATE}', $date, $sql);
 		$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? '' . $customerID : 'null'), $sql);
 		$sql = str_replace('{APPLICATIONID}', ($applicationID > 0 ? '' . $applicationID : 'null'), $sql);
@@ -291,7 +291,7 @@ class Common_Controller extends Base_Controller {
 		}
 
 		//indirilme raporu son 5 ay
-		$sql = File::get(path('public') . 'files/report.sql/Dashboard2.sql');
+		$sql = File::get(path('app') . ReportFilter::SqlFolder . 'Dashboard2.sql');
 		$sql = str_replace('{DATE}', $date, $sql);
 		$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? '' . $customerID : 'null'), $sql);
 		$sql = str_replace('{APPLICATIONID}', ($applicationID > 0 ? '' . $applicationID : 'null'), $sql);
@@ -305,7 +305,7 @@ class Common_Controller extends Base_Controller {
 		}
 
 		//cihaz son 5 ay
-		$sql = File::get(path('public') . 'files/report.sql/Dashboard3.sql');
+		$sql = File::get(path('app') . ReportFilter::SqlFolder . 'Dashboard3.sql');
 		$sql = str_replace('{DATE}', $date, $sql);
 		$sql = str_replace('{CUSTOMERID}', ($customerID > 0 ? '' . $customerID : 'null'), $sql);
 		$sql = str_replace('{APPLICATIONID}', ($applicationID > 0 ? '' . $applicationID : 'null'), $sql);

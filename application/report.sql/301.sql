@@ -25,4 +25,4 @@ WHERE
 	cn.`ContentID`= COALESCE({CONTENTID}, cn.`ContentID`) AND 
 	cu.`StatusID`=1
 group by cn.ContentID
-order by cn.ContentID
+order by cn.ContentID DESC
