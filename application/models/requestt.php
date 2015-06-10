@@ -35,19 +35,19 @@ class Requestt extends Eloquent
 	
 	
 	public function save() {
-		if(strpos($haystack, 'iPhone') !== FALSE) {
+		if(strpos($this->DeviceType, 'iPhone') !== FALSE) {
 			$this->DeviceOS = self::IOS;
-		} else if (strpos($haystack, 'iPad') !== FALSE) {
+		} else if (strpos($this->DeviceType, 'iPad') !== FALSE) {
 			$this->DeviceOS = self::IOS;
-		} else if (strpos($haystack, 'iPod') !== FALSE) {
+		} else if (strpos($this->DeviceType, 'iPod') !== FALSE) {
 			$this->DeviceOS = self::IOS;
-		} else if (strpos($haystack, 'Android') !== FALSE) {
+		} else if (strpos($this->DeviceType, 'Android') !== FALSE) {
 			$this->DeviceOS = self::ANDROID;
-		} else if (strpos($haystack, 'Windows') !== FALSE) {
+		} else if (strpos($this->DeviceType, 'Windows') !== FALSE) {
 			$this->DeviceOS = self::WINDOWS;
-		} else if (strpos($haystack, 'BlackBerry') !== FALSE) {
+		} else if (strpos($this->DeviceType, 'BlackBerry') !== FALSE) {
 			$this->DeviceOS = self::BLACKBARRY;
-		} else if (strpos($haystack, 'Linux') !== FALSE) {
+		} else if (strpos($this->DeviceType, 'Linux') !== FALSE) {
 			$this->DeviceOS = self::LINUX;
 		}
 		
