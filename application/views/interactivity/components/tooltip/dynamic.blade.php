@@ -61,176 +61,187 @@ $rgb = array($r, $g, $b);
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
-	<link rel="stylesheet" href="{{ $baseDirectory }}comp_{{ $id }}/css/hotspot.css" type="text/css" />
+	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
 	<style type="text/css">
 	body{
-		position: absolute;
-		width: 100%;
-		height: 100%;
 		overflow: hidden;
 	}
-	#hotspot{
-		position: absolute;
+	*{
+		margin: 0;
+		padding: 0;
+		-webkit-tap-highlight-color: transparent !important;
 	}
 	.hs-spot-object{
-		position: fixed !important;
-		background-size: 100% 100%;
-		{{($init == 'right' || $init == 'bottom' ? 'top:0; left:0;' : ($init == 'left' ? 'top:0; right:0;' : ($init == 'top' ? 'bottom:0; left:0;' : '')))}};
+		position: fixed;
+		cursor: pointer;
+		z-index:1;
+		@if($option == 1)
+		width: auto;
+		height:auto;
+		border-radius:50%;
+	    -moz-border-radius:50%;
+	    -webkit-border-radius:50%;
+	    -khtml-border-radius: 50%;
+		color: #058ae5;
+		border: 2px solid #d2d2d2;
+		background: {{ $iconcolor }};
+		padding: 6%;
+		background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANtJREFUeNrs2LENwjAQhWHbgt59Go/ABuANmCYt1HTZADZgA9gARqChT5+GO8USJBLlRUr0P+kUuYn1OXKK551h1qd3lMdNZiPTyuSurp5W+wVnm32BaBR2sNzMGpNG6zhnzKQBAwYMGDBgwIABAwYMGDBgwPyNL3WQtijJ4P1bmd3P+iVzMdhHa6yrYh7uWwfNOW1YCEQTQ/lEi8hKJru+abQo6NLoLurBWdWzjbc8KbmPRzesZO9dXWV+zWDAgAEDBgwYMGDAgAEDBgwYMBNhzm7YyzWWm30EGADiORxNIOidwAAAAABJRU5ErkJggg==');
+		background-size: 75% 75%;
+		background-repeat: no-repeat;
+		background-position: center center;
+		@endif
+		{{($init == 'right' || $init == 'bottom' ? 'top:1px; left:1px;' : ($init == 'left' ? 'top:1px; right:1px;' : ($init == 'top' ? 'bottom:1px; left:1px;' : '')))}};
+	}
+	.hs-spot-object .hs-spot-object-inner{
+		background: {{ $iconcolor }} !important;
 	}
 	@if($option == 2)
 	.hs-spot-object{
 		background-image: url("{{$vFile}}");
+		background-size: 100% 100%;
 		background-repeat: no-repeat;
 	}
 	@endif
-	.hs-spot.visible .hs-spot-shape-inner{
-		background: {{ $iconcolor }} !important;
-	}
-	@if( $init == "right")
-	.hs-spot-object.right .hs-tooltip:before{
-		border-right: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-	@elseif( $init == "left")
-	.hs-spot-object.left .hs-tooltip:before{
-		border-left: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-
-	@elseif( $init == "top")
-	.hs-spot-object.top .hs-tooltip:before{
-		border-top: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-		
-	@elseif( $init == "bottom")
-	.hs-spot-object.bottom .hs-tooltip:before{
-		border-bottom: 8px solid rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-	}
-	@endif
-	.hs-tooltip{
-		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }}) !important;
-		padding: 0;
-		padding-left: 10px;
-  		padding-right: 2px;
-  		@if($option==1)
-		margin: auto 1px;
-		@endif
-	}
-	.hs-tooltip-wrap{
-		z-index: 9999 !important;
-		padding: 0 !important;
-		position: fixed;
-		{{($init == 'right' ? 'top:0 !important; right: 0 !important; left: auto !important' : ($init == 'left' ? 'top:0 !important; left: 0 !important' : ($init == 'top' ? 'left:0 !important; top: 0!important;' : ($init == 'bottom' ? 'left:0 !important; bottom: 0!important;' : ''))))}};
-	}
-	*{
-		-webkit-tap-highlight-color: transparent !important;
-	}
 	#myScrollableDiv{
+		position: fixed;
 		word-wrap: break-word;
 		overflow-y: scroll;
 		overflow-x: hidden;
+		z-index:0;
+		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }});
+		text-align:center;
 	}
-	.hs-spot.visible .hs-spot-shape{
-		top: 0;
-		left: 0;
+	#myScrollableDiv div:first-child{
+		padding: 12% 14% 9% 7%;
+	}
+	.closed{
+		display: none;
+	}
+	/*SCROLLBAR ADDITIONAL STYLES*/
+	.slimScrollDiv{
+		position: fixed !important;
+		display: none;
+	}
+	.slimScrollBar{
+		background: #058ae5 !important;
+		-webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+		box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+		right: 2.5% !important;
+		width: 5% !important;
+		opacity: 0.75 !important;
+		margin: 0 2%;
+	}
+	.slimScrollRail{
+		right: 4% !important;
+		width: 3% !important;
+		margin: 2% 1.3%;
+		height: 97% !important;
 	}
 	</style>
 </head>
 <body>
-	<div id="hotspot" class="hs-wrap hs-loading">
-		@if($option==1)
-		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="visible">
-		@elseif ($option==2)
-		<div class="hs-spot-object" data-type="spot" data-popup-position="{{ $init }}" data-visible="invisible">
-		@endif
-			<div id="myScrollableDiv">
-				{{$content}}
-			</div>
-		</div>
+	<div class="hs-spot-object" style="display:none;"></div>
+	<div id="myScrollableDiv" class="closed">
+		<div>{{$content}}</div>
 	</div>
-
-	<script src="{{ $baseDirectory }}comp_{{ $id }}/js/lib/jquery-1.7.1.min.js"></script>
-	<script src="{{ $baseDirectory }}comp_{{ $id }}/js/hotspot.js"></script>
+	<script src="{{ $baseDirectory }}comp_{{ $id }}/lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/prettify.js"></script>
+	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.slimscroll.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			var ua = navigator.userAgent.toLowerCase();
+			var isAndroid = ua.indexOf("android") > -1;
+			if(isAndroid) {
+				setInterval(function(){
+					$('body').css('background-image',"url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6M0FGRDNDQ0EwRUIwMTFFNThENTJGODhCQzcyNDE1NjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6M0FGRDNDQ0IwRUIwMTFFNThENTJGODhCQzcyNDE1NjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDozQUZEM0NDODBFQjAxMUU1OEQ1MkY4OEJDNzI0MTU2NCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozQUZEM0NDOTBFQjAxMUU1OEQ1MkY4OEJDNzI0MTU2NCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhYwDdYAAAAPSURBVHjaYvj//z9AgAEABf4C/i3Oie4AAAAASUVORK5CYII=')");
+					$('body').css('background-repeat','no-repeat');
+				},100);
+			}
 
-			$('#hotspot').hotspot({ "show_on" : "click" });
-
-			var bodyHeight=$(window).height();
+			$('#myScrollableDiv').slimScroll({
+		      alwaysVisible: true,
+		      railVisible: true
+		  	});
+			
+			var bodyHeight=$(document).height();
 			var bodyWidth=$(document).width();
 
 			var bodyWidthFromTasarlayici={{$w}};
 			var bodyHeightFromTasarlayici={{$h}};
 
-			var calcBodyWidth=(bodyWidthFromTasarlayici/bodyWidth)*100;
-			var calcBodyHeight=(bodyHeightFromTasarlayici/bodyHeight)*100;
-			$('#hotspot').css('width',calcBodyWidth+'%').css('height',calcBodyHeight+'%');
-
-			var imgWidth=30;
-			var calcWidth;
-			var imgHeight=30;
-			var calcHeight;
+			var calcIconWidth=(35/bodyWidthFromTasarlayici)*100;
+			$('.hs-spot-object').css('padding',(calcIconWidth/2)+'%');
+			$('.hs-spot-object').fadeIn(1000);
 
 			@if($option==1)
-
-				function opacityAnimate(){
-					$('.hs-spot-shape').animate({ opacity: 0.40 }, function(){ 
-						$(this).animate({ opacity: 0.15 },opacityAnimate())
-					});
-				}
-				opacityAnimate();
-
-				calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
-				calcHeight=(imgHeight/bodyHeightFromTasarlayici)*100;				
-				renderImg();			
-			@endif
-
-			@if($option==2)
-
-			var focused=false;
-			$('#hotspot').click(function(){
-				if(!focused)
+			$('.hs-spot-object').click(function(){
+				if($('#myScrollableDiv').hasClass('closed'))
 				{
-					$('.hs-spot-object').css('background-image','url("' + <?php echo json_encode($vFile2) ?> + '")');
-					focused=true;
+					setTimeout(function(){
+						$('#myScrollableDiv').slimScroll().attachWheel;
+						// $('.slimScrollBar').scrollTop(10);
+					},500);
+					$('#myScrollableDiv,.slimScrollDiv').removeClass('closed').css('display','block');
+					$(this).css('background-image',"url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAadJREFUeNrU2sttwkAQBuD9LeWee5pIB4gKUkKggoQLReQCHUAnKQGniNy555JZwJJl2d7XzOx4pJHBzIr5JFhpVoajePr6PdDl092jpVz/7V+uzngM+wbd8G8OgzrzIOr7RJdN/15DuRqpfaX8pgXPS4F0mJ+JNSZBU5AOc6S8LgE0B7lhHv+LtXVQCEKxRa/41jTlVNPVNoUYCPV1xmCROVAsxL/AyGIzoBTIKMYKKBUyiakNyoHMYmqBciFBjDaoBBKF0QKVQqIx0iAOSBJGCsQFScZwgzghWRguEDckG1MKkoAUYXJBUpBiTCpIEsKCSQC1khA2TCTISUJYMQUgFgg7JgPEBhHB9ECXQNmOIEfO722EZquPiJp37kMSiZ9ZaPsVm4dQEcIOahQh4udyjRJk6xQOGqEB6bZf6YkVWhCNiRWaEGkQtCGSINSASIFQCyIBQk0INwi1IZwgWIBwgWAFwgGCJUgpCNYgJSBYhOSCYBWSA4JlSCoI1iEpIP9Uk0ecLENiQX7SfFsCxAf10s5NrHNPNZmCxIA85jzygUlICPQvwAAYXM4RLb8QqQAAAABJRU5ErkJggg==')");
+					$(this).css('background-size','60% 60%');
 				}	
 				else
 				{
-					$('.hs-spot-object').css('background-image','url("' + <?php echo json_encode($vFile) ?> + '")');
-					focused=false;
+					$('#myScrollableDiv,.slimScrollDiv').addClass('closed').css('display','none');;
+					$(this).css('background-image',"url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANtJREFUeNrs2LENwjAQhWHbgt59Go/ABuANmCYt1HTZADZgA9gARqChT5+GO8USJBLlRUr0P+kUuYn1OXKK551h1qd3lMdNZiPTyuSurp5W+wVnm32BaBR2sNzMGpNG6zhnzKQBAwYMGDBgwIABAwYMGDBgwPyNL3WQtijJ4P1bmd3P+iVzMdhHa6yrYh7uWwfNOW1YCEQTQ/lEi8hKJru+abQo6NLoLurBWdWzjbc8KbmPRzesZO9dXWV+zWDAgAEDBgwYMGDAgAEDBgwYMBNhzm7YyzWWm30EGADiORxNIOidwAAAAABJRU5ErkJggg==')");
+					$(this).css('background-size','75% 75%');
+				}
+				render();
+			});
+			@endif
+
+			@if($option==2)
+			$('.hs-spot-object').click(function(){
+				if($('#myScrollableDiv').hasClass('closed'))
+				{
+					$(this).css('background-image','url("' + <?php echo json_encode($vFile2) ?> + '")');
+					$('#myScrollableDiv,.slimScrollDiv').removeClass('closed').css('display','block');
+				}	
+				else
+				{
+					$(this).css('background-image','url("' + <?php echo json_encode($vFile) ?> + '")');
+					$('#myScrollableDiv,.slimScrollDiv').addClass('closed').css('display','none');;
 				}
 			});
 
+			var calcHeight;
+			var calcWidth;
 			var image = new Image();
 			image.src = "{{$vFile}}";
 			image.onload = function() {
-				imgWidth={{$iconwidth}};
+				var imgWidth={{$iconwidth}};
 				calcWidth=(imgWidth/bodyWidthFromTasarlayici)*100;
-				imgHeight={{$iconheight}};
+				var imgHeight={{$iconheight}};
 				calcHeight=(imgHeight/bodyHeightFromTasarlayici)*100;
-				renderImg();
+				$('.hs-spot-object').css('width',calcWidth+'%').css('height',calcHeight+'%');
+				render();
 			};
 			@endif
 
-			function renderImg(){
-				$('#image').css('height',calcHeight+'%');
-				$('.hs-spot-object').attr('style','width:'+calcWidth+'%;'+' height:'+calcHeight+'%;');
-				diffIconWidth = (calcWidth * bodyWidthFromTasarlayici)/100;
-				diffIconHeight = (calcHeight * bodyHeightFromTasarlayici)/100;
-				$('.hs-tooltip-wrap').css('width',(bodyWidth-diffIconWidth)+'px');
-				$('.hs-tooltip').css('height',bodyHeight+'px');
-				@if($init=="top")
-				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
-				$('.hs-tooltip').css('top','0').css('position','fixed');
+			function render(){
+				var spotWidth = $('.hs-spot-object').outerWidth();
+				var spotHeight = $('.hs-spot-object').outerHeight();
+
+				  ('{{$init}}' == 'right' || '{{$init}}' == 'bottom' ? $('#myScrollableDiv').css('left',spotWidth/2).css('top',spotHeight/2)
+				: ('{{$init}}' == 'left' ? $('#myScrollableDiv').css('right',spotWidth/2).css('top',spotHeight/2)
+				: ('{{$init}}' == 'top' ? $('#myScrollableDiv').css('left',spotWidth/2).css('bottom',spotHeight/2) : '')));
+
+				@if($option==1)
+				  $('#myScrollableDiv').css('width',100-spotWidth/2+'%');
+				  $('#myScrollableDiv').css('height',100-spotHeight/2+'%');
 				@endif
-				@if($init=="bottom")
-				$('.hs-tooltip').css('height',(bodyHeight-diffIconHeight)+'px');
+				@if($option==2)
+				  $('#myScrollableDiv').css('width',(100-calcWidth)-10+'%');
+				  $('#myScrollableDiv').css('height',(100-calcHeight)-10+'%');
 				@endif
-				$('#myScrollableDiv').css('height',($('.hs-tooltip').height()-15)+'px');
-			}
-			var ua = navigator.userAgent.toLowerCase();
-			var isAndroid = ua.indexOf("android") > -1;
-			var isMobile = ua.indexOf("mobile") > -1;
-			if(isAndroid && isMobile) {
-				$('#myScrollableDiv *').css('font-size','50%');
+				$('.slimScrollDiv').attr('style',$('#myScrollableDiv').attr('style'));
 			}
 		});
 	</script>
