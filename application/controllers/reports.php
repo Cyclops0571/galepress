@@ -33,10 +33,10 @@ class Reports_Controller extends Base_Controller {
 		$reportFilter = new ReportFilter();
 		$reportFilter->reportID = $id;
 		$reportFilter->startDate = Input::get('sd', '') . ' 00:00:00';
-		$reportFilter->startDate = Input::get('ed', '') . ' 00:00:00';
-		$reportFilter->contentID = (int) Input::get('customerID', '0');
+		$reportFilter->endDate = Input::get('ed', '') . ' 00:00:00';
 		$reportFilter->applicationID = (int) Input::get('applicationID', '0');
 		$reportFilter->contentID = (int) Input::get('contentID', '0');
+		$reportFilter->customerID = (int) Input::get('customerID', '0');
 		$reportFilter->country = Input::get('country', '');
 		$reportFilter->city = Input::get('city', '');
 		$reportFilter->district = Input::get('district', '');
@@ -45,42 +45,74 @@ class Reports_Controller extends Base_Controller {
 		$reportFilter->rowCount = (int) Config::get('custom.rowcount');
 		$reportFilter->userTypeID = Auth::User()->UserTypeID == eUserTypes::Manager ? eUserTypes::Manager : eUserTypes::Customer;
 
-
-		$currentUser = Auth::User();
-
-
-
 		switch ($reportFilter->reportID) {
 			case Report::customerTraficReport :
-				Report::getCustomerTrafficReport();
+				$arrReport = Report::getCustomerTrafficReport();
 				break;
 			case Report::applicationTraficReport :
-				Report::getApplicationTrafficReport();
+				$arrReport = Report::getApplicationTrafficReport();
 				break;
 			case Report::trafficReport :
-				Report::getTrafficReport();
+				$arrReport = Report::getTrafficReport();
+				if ((int) $reportFilter->userTypeID == eUserTypes::Customer && (int) $reportFilter->applicationID > 0) {
+					array_shift($arrReport['columnWidth']);
+					array_shift($arrReport['fieldType']);
+					array_shift($arrReport['fieldName']);
+					array_shift($arrReport['fieldCaption']);
+				}
 				break;
 			case Report::deviceReport :
-				Report::getDeviceReport();
+				$arrReport = Report::getDeviceReport();
 				break;
 			case Report::downloadReport :
-				Report::getDownloadReport();
+				$arrReport = Report::getDownloadReport();
+				if ($reportFilter->userTypeID == eUserTypes::Manager) {
+					$arrReport['fieldType'] = array("String", "String", "String", "String", "Number");
+					$arrReport['fieldName'] = array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "DownloadCount");
+					$arrReport['fieldCaption'] = __("common.reports_columns_report1001_admin")->get();
+				}
+
+				//Uygulama secildiyse uygulama adini gosterme!
+				if ((int) $reportFilter->userTypeID == eUserTypes::Customer && (int) $reportFilter->applicationID > 0) {
+					array_shift($arrReport['columnWidth']);
+					array_shift($arrReport['fieldType']);
+					array_shift($arrReport['fieldName']);
+					array_shift($arrReport['fieldCaption']);
+				}
 				break;
 			case Report::customerLocationReport :
-				Report::getCostomerLocationReport();
+				$arrReport = Report::getCostomerLocationReport();
 				break;
 			case Report::applicationLocationReport :
-				Report::getApplicationLocationReport();
+				$arrReport = Report::getApplicationLocationReport();
 				break;
 			case Report::locationReport :
-				Report::getLocationReport();
+				if ($reportFilter->userTypeID == eUserTypes::Manager) {
+					$arrReport = array(
+						'fieldType' => array("String", "String", "String", "String", "String", "String", "String", "Percent"),
+						'fieldName' => array("CustomerNo", "CustomerName", "ApplicationName", "ContentName", "Country", "City", "District", "Percent"),
+						'fieldCaption' => __("common.reports_columns_report1301_admin")->get()
+					);
+				} else {
+					$arrReport = Report::getLocationReport();
+					//Uygulama secildiyse uygulama adini gosterme!
+					if ((int) $reportFilter->applicationID > 0) {
+						array_shift($arrReport['columnWidth']);
+						array_shift($arrReport['fieldType']);
+						array_shift($arrReport['fieldName']);
+						array_shift($arrReport['fieldCaption']);
+					}
+				}
+
 				break;
 			case Report::viewReport :
-				Report::getViewReport();
+				$arrReport = Report::getViewReport();
 				break;
 		}
-		$rows = array(); ///571571571
-		
+
+		$rows = $reportFilter->getRows();
+
+
 		if ($reportFilter->map == 1) {
 			$arr = array();
 			foreach ($rows as $row) {
@@ -93,12 +125,6 @@ class Reports_Controller extends Base_Controller {
 			return View::make('pages.reportmap', $data);
 		}
 
-
-		$reportUser = 'customer';
-		if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
-			$reportUser = 'admin';
-		}
-
 		if ($reportFilter->showAsXlsForm == 1) {
 			header("Content-Type: application/octet-stream");
 			header("Content-Transfer-Encoding: binary");
@@ -108,16 +134,15 @@ class Reports_Controller extends Base_Controller {
 
 			$schema_insert = "";
 			$sep = "\t";
-			$arrFieldCaption = $arrReport[$reportUser]['fieldCaption'];
-			$arrFieldType = $arrReport[$reportUser]['fieldType'];
-			$arrFieldName = $arrReport[$reportUser]['fieldName'];
+			$arrFieldCaption = $arrReport['fieldCaption'];
+			$arrFieldType = $arrReport['fieldType'];
+			$arrFieldName = $arrReport['fieldName'];
 
 			for ($i = 0; $i < count($arrFieldCaption); $i++) {
 				$schema_insert .= $arrFieldCaption[$i] . $sep;
 			}
 			$schema_insert .= "\n";
 
-			$rows = DB::table(DB::raw('(' . $sql . ') t'))->get();
 			foreach ($rows as $row) {
 				$row = get_object_vars($row);
 				$r = "";
@@ -148,16 +173,14 @@ class Reports_Controller extends Base_Controller {
 			return;
 		}
 
-		$rows = DB::table(DB::raw('(' . $sql . ') t'))->paginate($reportFilter->rowCount);
 
 		$data = array(
 			'report' => $reportFilter->reportID,
 			'sd' => $reportFilter->startDate,
 			'ed' => $reportFilter->endDate,
-			'arrColumnWidth' => $arrReport[$reportUser]['columnWidth'],
-			'arrFieldCaption' => $arrReport[$reportUser]['fieldCaption'],
-			'arrFieldType' => $arrReport[$reportUser]['fieldType'],
-			'arrFieldName' => $arrReport[$reportUser]['fieldName'],
+			'arrFieldCaption' => $arrReport['fieldCaption'],
+			'arrFieldType' => $arrReport['fieldType'],
+			'arrFieldName' => $arrReport['fieldName'],
 			'rows' => $rows
 		);
 		return View::make('pages.reportdetail', $data);

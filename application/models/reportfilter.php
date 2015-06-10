@@ -15,24 +15,37 @@ class ReportFilter {
 	public $map = 0;
 	public $rowCount = 0;
 	public $userTypeID = eUserTypes::Customer;
-
-	public function getReportSqlFile() {
-		$filePath = "files/report.sql/" . $this->reportID . ($this->map ? "map.sql" : ".sql");
-		return File::get($filePath);
-	}
 	
-	public static function getSqlReplecements() {
-		return array(
+	/**
+	 * 
+	 * @return string Sql
+	 */
+	public function getRows() {
+		$sqlPath = "application/report.sql/" . $this->reportID . ($this->map ? "map.sql" : ".sql");
+		$sqlTemplate = File::get($sqlPath);
+		$replecements = array(
 			'{SD}' => Common::dateWrite($this->startDate, false),
 			'{ED}' => Common::dateWrite($this->endDate, false),
-			'{CUSTOMERID}' => ($this->customerID > 0 ? '' . $this->customerID : 'null'),
-			'{APPLICATIONID}' => ($this->applicationID > 0 ? '' . $this->applicationID : 'null'),
-			'{CONTENTID}', ($this->contentID ? 'null' : ''. $this->contentID),
-			'{COUNTRY}' => ($this->country  ? 'null' : "'$this->country'"),
-			'{CITY}' => ($this->city > 0 ? 'null' : "'$this->city'"),
+			'{CONTENTID}' => $this->contentID > 0 ? $this->contentID : 'null',
+			'{CUSTOMERID}' => ($this->customerID > 0 ? $this->customerID : 'null'),
+			'{APPLICATIONID}' => ($this->applicationID > 0 ? $this->applicationID : 'null'),
+			'{COUNTRY}' => ($this->country  ? "'$this->country'" : 'null'),
+			'{CITY}' => ($this->city ? "'$this->city'" : 'null'),
 			'{DISTRICT}' => ($this->district? 'null' : "'$this->district'"),
-			
 		);
+		
+		foreach($replecements as $key => $value) {
+//			echo $key , "-----", $value, PHP_EOL;
+			$sqlTemplate = str_replace($key, $value, $sqlTemplate);
+		}
+
+		if($this->map || $this->showAsXlsForm) {
+			return DB::table(DB::raw('(' . $sqlTemplate . ') t'))->get();
+		}
+		
+//		echo DB::raw('(' . $sqlTemplate . ') t'); exit;
+		
+		return DB::table(DB::raw('(' . $sqlTemplate . ') t'))->paginate($this->rowCount);
 	}
 
 }

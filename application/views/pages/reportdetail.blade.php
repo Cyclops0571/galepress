@@ -25,8 +25,8 @@
             		?>
             		<table class="table table-bordered table-striped table-hover">
                         <colgroup>
-                        	@foreach($arrColumnWidth as $w)
-                                <col{{ (strlen($w) > 0 ? ' width="'.$w.'"' : '') }} />
+                        	@foreach($arrFieldCaption as $c)
+                                <col width="100"/>
                             @endforeach
                         </colgroup>
                         <thead>
