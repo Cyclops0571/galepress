@@ -55,7 +55,6 @@ class Reports_Controller extends Base_Controller {
 			case Report::trafficReport :
 				$arrReport = Report::getTrafficReport();
 				if ((int) $reportFilter->userTypeID == eUserTypes::Customer && (int) $reportFilter->applicationID > 0) {
-					array_shift($arrReport['columnWidth']);
 					array_shift($arrReport['fieldType']);
 					array_shift($arrReport['fieldName']);
 					array_shift($arrReport['fieldCaption']);
@@ -74,7 +73,6 @@ class Reports_Controller extends Base_Controller {
 
 				//Uygulama secildiyse uygulama adini gosterme!
 				if ((int) $reportFilter->userTypeID == eUserTypes::Customer && (int) $reportFilter->applicationID > 0) {
-					array_shift($arrReport['columnWidth']);
 					array_shift($arrReport['fieldType']);
 					array_shift($arrReport['fieldName']);
 					array_shift($arrReport['fieldCaption']);
@@ -97,7 +95,6 @@ class Reports_Controller extends Base_Controller {
 					$arrReport = Report::getLocationReport();
 					//Uygulama secildiyse uygulama adini gosterme!
 					if ((int) $reportFilter->applicationID > 0) {
-						array_shift($arrReport['columnWidth']);
 						array_shift($arrReport['fieldType']);
 						array_shift($arrReport['fieldName']);
 						array_shift($arrReport['fieldCaption']);
@@ -111,7 +108,7 @@ class Reports_Controller extends Base_Controller {
 		}
 
 		$rows = $reportFilter->getRows();
-
+//		var_dump($rows); exit;
 
 		if ($reportFilter->map == 1) {
 			$arr = array();
