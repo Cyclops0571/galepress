@@ -62,13 +62,12 @@ $rgb = array($r, $g, $b);
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
+	<!-- <link href="{{ $baseDirectory }}comp_{{ $id }}/fonts/fonts.css" type="text/css" rel="stylesheet" /> -->
 	<style type="text/css">
 	body{
 		overflow: hidden;
 	}
 	*{
-		margin: 0;
-		padding: 0;
 		-webkit-tap-highlight-color: transparent !important;
 	}
 	.hs-spot-object{
@@ -233,9 +232,12 @@ $rgb = array($r, $g, $b);
 				: ('{{$init}}' == 'left' ? $('#myScrollableDiv').css('right',spotWidth/2).css('top',spotHeight/2)
 				: ('{{$init}}' == 'top' ? $('#myScrollableDiv').css('left',spotWidth/2).css('bottom',spotHeight/2) : '')));
 
+				  spotWidthPerc=(spotWidth/bodyWidthFromTasarlayici)*100;
+				  spotHeightPerc=(spotHeight/bodyWidthFromTasarlayici)*100;
+
 				@if($option==1)
-				  $('#myScrollableDiv').css('width',100-spotWidth/2+'%');
-				  $('#myScrollableDiv').css('height',100-spotHeight/2+'%');
+				  $('#myScrollableDiv').css('width',100-(spotWidthPerc/2)+'%');
+				  $('#myScrollableDiv').css('height',100-(spotHeightPerc/2)+'%');
 				@endif
 				@if($option==2)
 				  $('#myScrollableDiv').css('width',(100-calcWidth)-10+'%');

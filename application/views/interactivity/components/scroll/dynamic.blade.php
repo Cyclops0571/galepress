@@ -5,19 +5,25 @@
 	<title>GalePress</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
+	<!-- <link href="{{ $baseDirectory }}comp_{{ $id }}/fonts/fonts.css" type="text/css" rel="stylesheet" /> -->
+	<!-- <link type="text/css" rel="stylesheet" href="/js/ckeditor/plugins/chart/chart.css?t=F0RD"> -->
+	<!-- <link href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/fonts.css" type="text/css" rel="stylesheet" /> -->
 	<style type="text/css">
-		html,body{
-			margin: 0;
-			padding: 0;	
+		*{
+			-webkit-tap-highlight-color: transparent !important;
 		}
 		.overview{
 			width: 100%;
 			height: 100% !important;
-			padding: 0 10%;
+			padding: 0px 10% 0 0;
 		}
 		.slimScrollDiv{
 			position: fixed !important;
-			height: 100% !important;
+			width: 100% !important;
+			height: 97% !important;
+		}
+		.slimScrollBar{
+			right: 5% !important;
 		}
 	</style>
 </head>
@@ -28,6 +34,7 @@
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/lib/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/prettify.js"></script>
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.slimscroll.min.js"></script>
+	<!--<script type="text/javascript" src="/js/ckeditor/plugins/chart/chart.min.js?t=F0RD"></script>-->
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.overview').slimScroll({
