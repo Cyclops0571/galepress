@@ -49,6 +49,7 @@ class Ws_v100_Statistics_Controller extends Base_Controller
 				$s->UID = $id;
 				$s->Type = (int)Input::get('type', '0');
 				$s->Time = Input::get('time', '');
+				$s->RequestDate = date("Y-m-d", strtotime($s->Time));
 				$s->Lat = Input::get('lat', '');
 				$s->Long = Input::get('long', '');
 				$s->DeviceID = $deviceID;
