@@ -700,15 +700,12 @@ class Contents_Controller extends Base_Controller {
 		
 		    $targetHasCreated = ContentFile::find($targetContentFileID);
 			if ($targetHasCreated) {
-				// $targetHasCreated->Interactivity = 0;
+				$targetHasCreated->Interactivity = 1;
 				$targetHasCreated->HasCreated = 0;
 				$targetHasCreated->save();
 			}
-			Controller::call('interactivity@show', array($targetContentFileID));
-			$url=Config::get('custom.url')."/queueStart";
-			$ch = curl_init();  
-		    curl_setopt($ch,CURLOPT_URL,$url);
-		    curl_close($ch);
+			
+			InteractivityQueue::trigger();
 
 			return "success=" . base64_encode("true");
 

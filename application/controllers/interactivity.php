@@ -192,7 +192,6 @@ class Interactivity_Controller extends Base_Controller {
 
 	public function get_show($contentFileID) {
 		set_time_limit(3000);
-		$this->interactivityNotifyQueue();
 		$currentUser = Auth::User();
 		$ContentID = (int) ContentFile::find($contentFileID)->ContentID;
 		$ApplicationID = (int) Content::find($ContentID)->ApplicationID;
@@ -731,7 +730,7 @@ class Interactivity_Controller extends Base_Controller {
 					}
 					$p->close_pdi_document($doc);
 				});
-				$this->interactivityNotifyQueue();
+				InteractivityQueue::trigger();
 			} catch (PDFlibException $e) {
 				$data = array(
 					'errmsg' => "PDFlib exception occurred in starter_pcos sample:<br/>[" . $e->get_errnum() . "] " . $e->get_apiname() . ": " . $e->get_errmsg()
@@ -1121,7 +1120,7 @@ class Interactivity_Controller extends Base_Controller {
 					}
 				}
 			});
-			$this->interactivityNotifyQueue();
+			InteractivityQueue::trigger();
 			return "success=" . base64_encode("true");
 		} catch (Exception $e) {
 			Log::info($e->getMessage());
@@ -1438,22 +1437,6 @@ class Interactivity_Controller extends Base_Controller {
 		} catch (Exception $e) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
-	}
-
-	public function get_queueStart(){
-		$this->interactivityNotifyQueue();
-	}
-
-	private function interactivityNotifyQueue() {
-		Log::info("queuda");
-		// burada queueya atiyoruz
-		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
-		$channel = $connection->channel();
-		$channel->queue_declare('queue_interactivepdf', false, false, false, false);
-		$msg = new AMQPMessage('Interactivity Start Progress!');
-		$channel->basic_publish($msg, '', 'queue_interactivepdf');
-		$channel->close();
-		$connection->close();
 	}
 
 }
