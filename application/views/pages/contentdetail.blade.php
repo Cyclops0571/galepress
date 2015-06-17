@@ -323,7 +323,7 @@
 		                    	<select data-placeholder="{{ __('common.contents_interactivity_target') }}" style="width: 100%;" tabindex="-1" id="AppContents" name="AppContents" class="form-control select2">
 		                    		<option value="">{{ __('common.contents_interactivity_target') }}</option>
 		                            @foreach ($contentList as $cList)
-                                    <option value="{{ $cList->ContentID }}">{{ $cList->Name }}</option>
+                                    <option value="{{ $cList->ContentID }}">{{ $cList->Name }} @if((int)Auth::User()->UserTypeID == eUserTypes::Manager)<i> -> AppID:{{ $cList->ApplicationID }}</i>@endif</option>
                                 	@endforeach
 		                        </select>
 		                   	</div>

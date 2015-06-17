@@ -69,9 +69,15 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->ContentID) }}</td>
 											</tr>
 										@elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
-											<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
+											<tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}" @if($row->IsMaster==1)style="background:#5D5D5D;"@endif>
 												<?php if($page < 2): ?>
-													<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td>
+													<td style="cursor:pointer;">
+														<span class="icon-resize-vertical list-draggable-icon" @if($row->IsMaster==1)style="margin-left:-5px;"@endif>
+															@if($row->IsMaster==1)
+															<i style="font-size:11px;">(Master)</i>
+															@endif
+														</span>
+													</td>
 												<?php endif; ?>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 												<td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
