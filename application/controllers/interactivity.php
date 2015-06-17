@@ -132,6 +132,8 @@ class Interactivity_Controller extends Base_Controller {
 					if (!(strpos($url, 'www.youtube.com/embed') === false)) {
 						return Redirect::to($data['url']);
 					}
+					// var_dump($data);
+				
 					return View::make('interactivity.components.' . $componentName . '.dynamic', $data);
 				} elseif ($componentName == 'map') {
 					$type = 'roadmap';
@@ -190,7 +192,7 @@ class Interactivity_Controller extends Base_Controller {
 
 	public function get_show($contentFileID) {
 		set_time_limit(3000);
-		
+		$this->interactivityNotifyQueue();
 		$currentUser = Auth::User();
 		$ContentID = (int) ContentFile::find($contentFileID)->ContentID;
 		$ApplicationID = (int) Content::find($ContentID)->ApplicationID;
@@ -864,7 +866,6 @@ class Interactivity_Controller extends Base_Controller {
 				$closing = Input::get('closing');
 				$pageNo = (int) Input::get('pageno');
 				$ids = Input::get('compid');
-
 				//find current page id
 				$ContentFilePageID = 0;
 
@@ -1123,6 +1124,7 @@ class Interactivity_Controller extends Base_Controller {
 			$this->interactivityNotifyQueue();
 			return "success=" . base64_encode("true");
 		} catch (Exception $e) {
+			Log::info($e->getMessage());
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
 	}
@@ -1438,7 +1440,12 @@ class Interactivity_Controller extends Base_Controller {
 		}
 	}
 
+	public function get_queueStart(){
+		$this->interactivityNotifyQueue();
+	}
+
 	private function interactivityNotifyQueue() {
+		Log::info("queuda");
 		// burada queueya atiyoruz
 		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
 		$channel = $connection->channel();

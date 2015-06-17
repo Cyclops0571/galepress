@@ -76,6 +76,7 @@ class Contents_Controller extends Base_Controller {
 				') AS CategoryName, ' .
 				'o.PublishDate, ' .
 				'o.UnpublishDate, ' .
+				'o.IsMaster, ' .
 				'(CASE o.Blocked WHEN 1 THEN \'' . __('common.contents_list_blocked1') . '\' ELSE \'' . __('common.contents_list_blocked0') . '\' END) AS Blocked, ' .
 				'(CASE WHEN ('
 				. 'o.Status = 1 AND '
@@ -284,7 +285,14 @@ class Contents_Controller extends Base_Controller {
 			->where('ApplicationID', '=', $row->ApplicationID)
 			->where('ContentID', '<>', $id)
 			->where('StatusID', '=', eStatus::Active)
-			->get(array('ContentID', 'Name'));
+			->get(array('ContentID', 'Name', 'ApplicationID'));
+		if (((int) $currentUser->UserTypeID == eUserTypes::Manager)) {
+			$contentList = DB::table('Content')
+				// ->where('ApplicationID', '=', $row->ApplicationID)
+				->where('ContentID', '<>', $id)
+				// ->where('StatusID', '=', eStatus::Active)
+				->get(array('ContentID', 'Name', 'ApplicationID'));
+		}
 		if ($row) {
 			if (Common::CheckContentOwnership($id)) {
 				$this->route = __('route.' . $this->page) . '?applicationID=' . $row->ApplicationID;
@@ -397,11 +405,13 @@ class Contents_Controller extends Base_Controller {
 			// return Redirect::to(__('route.home'));
 			$sourceContentID = $id;
 			$contentFileControl = null;
-			if($new=="new"){
+			$newContentID = $new;
 
-				$content = DB::table('Content')
-								->where('ContentID', '=', $sourceContentID)
-								->first();
+			$content = DB::table('Content')
+						->where('ContentID', '=', $sourceContentID)
+						->first();
+
+			if($new=="new"){
 
 				$c = new Content();
 				$c->ApplicationID = $content->ApplicationID;
@@ -436,28 +446,26 @@ class Contents_Controller extends Base_Controller {
 				$c->ProcessTypeID = eProcessTypes::Insert;
 				$c->OrderNo = $content->OrderNo;
 				$c->save();
-			}
-			else {
-				$contentFileControl = DB::table('ContentFile')
-								->where('ContentID', '=', $new)
-								->order_by('ContentFileID', 'DESC')
-								->first();
+				$newContentID = $c->ContentID;
 
-				$contentFilePageControl = DB::table('ContentFilePage')
-								->where('ContentFileID', '=', $contentFileControl->ContentFileID)
+				$contentCategory = DB::table('ContentCategory')
+								->where('ContentID', '=', $sourceContentID)
 								->get();
-			
-				if(sizeof($contentFilePageControl)==0) {
-					Controller::call('interactivity@show', array($contentFileControl->ContentFileID));
+
+				foreach ($contentCategory as $cCategory) {
+					$cc = new ContentCategory();
+					$cc->ContentID = $newContentID;
+					$cc->CategoryID = $cCategory->CategoryID;
+					$cc->save();
 				}
-				$this->get_copyContent(null, $sourceContentID, $contentFileControl->ContentFileID);
-				return;
-			}
 
-			if($contentFileControl==null){
 
+
+				/*yeni icerigin kopyalanmasi(new)*/
+				$c = DB::table('Content')
+						->where('ContentID', '=', $newContentID)
+						->first();
 				$customerID = Application::find($c->ApplicationID)->CustomerID;
-
 				$contentFile = DB::table('ContentFile')
 								->where('ContentID', '=', $sourceContentID)
 								->first();
@@ -469,6 +477,7 @@ class Contents_Controller extends Base_Controller {
 
 				File::mkdir($destinationFolder);
 				File::copy($targetFilePath, $destinationFolder.'/'.$contentFile->FileName);
+				// Log::info($targetFilePath."|||".$destinationFolder.'/'.$contentFile->FileName);
 
 				$cf = new ContentFile();
 				$cf->ContentID = $c->ContentID;
@@ -477,8 +486,8 @@ class Contents_Controller extends Base_Controller {
 				$cf->FileName = $contentFile->FileName;
 				$cf->FileSize = $contentFile->FileSize;
 				$cf->Transferred = $contentFile->Transferred;
-				$cf->Interactivity = $contentFile->Interactivity;
-				$cf->HasCreated = $contentFile->HasCreated;
+				$cf->Interactivity = 0;
+				$cf->HasCreated = 0;
 				//$cf->InteractiveFilePath = 'files/customer_' . $customerID . '/application_' . $c->ApplicationID . '/content_' . $c->ContentID;
 				$cf->InteractiveFileName = $contentFile->InteractiveFileName;
 				$cf->InteractiveFileSize = $contentFile->InteractiveFileSize;
@@ -519,31 +528,40 @@ class Contents_Controller extends Base_Controller {
 				  	File::copy('public/'.$contentFile->FilePath.'/'.basename($file), $destinationFolder.'/'.basename($file));
 				}
 
-				$contentCategory = DB::table('ContentCategory')
-								->where('ContentID', '=', $sourceContentID)
-								->get();
+				$this->get_copyContent($destinationFolder, $sourceContentID, $c->ContentID, $cf->ContentFileID);
+			
+			}
 
-				foreach ($contentCategory as $cCategory) {
-					$cc = new ContentCategory();
-					$cc->ContentID = $c->ContentID;
-					$cc->CategoryID = $cCategory->CategoryID;
-					$cc->save();
-				}
+			$contentFileControl = DB::table('ContentFile')
+							->where('ContentID', '=', $newContentID)
+							->order_by('ContentFileID', 'DESC')
+							->first();
 
-				$this->get_copyContent($destinationFolder, $sourceContentID, $cf->ContentFileID);
+			$contentFilePageControl = DB::table('ContentFilePage')
+							->where('ContentFileID', '=', $contentFileControl->ContentFileID)
+							->get();
+		
+			if(sizeof($contentFilePageControl)==0) {/*sayfalari olusmamis*/
+				Controller::call('interactivity@show', array($contentFileControl->ContentFileID));
+				$this->get_copyContent("null", $sourceContentID, $newContentID, $contentFileControl->ContentFileID);
+			}
+			elseif($new!="new"){/*sayfalari olusmus*/
+				// Controller::call('interactivity@show', array($contentFileControl->ContentFileID));
+				$this->get_copyContent("null", $sourceContentID, $newContentID, $contentFileControl->ContentFileID);
 			}
 
 		} catch (Exception $e) {
+			Log::info($e->getMessage());
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
 	}
 
-	public function get_copyContent($destinationFolder, $sourceContentFileID, $targetContentFileID) {
+	public function get_copyContent($destinationFolder, $sourceContentID, $targetContentID, $targetContentFileID) {
 		// /***** HEDEF CONTENTIN SAYFALARI OLUSUTURLMUS OLMALI YANI INTERAKTIF TASARLAYICISI ACILMIS OLMALI!!!*****/
 		// TAŞINACAK CONTENT'IN FILE ID'SI
 		try {
 			$contentFile = DB::table('ContentFile')
-								->where('ContentID', '=', $sourceContentFileID)
+								->where('ContentID', '=', $sourceContentID)
 								->order_by('ContentFileID', 'DESC')
 								->first();
 
@@ -555,14 +573,14 @@ class Contents_Controller extends Base_Controller {
 				return;
 			}
 			else {
-				if($destinationFolder !=null) { /* kopyalanacak icerigin sayfalari yok ise olusturur */
+				if($destinationFolder!="null") { /* kopyalanacak icerigin sayfalari yok ise olusturur */
 					foreach ($contentFilePage as $ocfp) {
 						$ncfp = new ContentFilePage();
 								$ncfp->ContentFileID = $targetContentFileID;
 								$ncfp->No = $ocfp->No;
 								$ncfp->Width = $ocfp->Width;
 								$ncfp->Height = $ocfp->Height;
-								$ncfp->FilePath = $ocfp->FilePath;
+								$ncfp->FilePath = $destinationFolder.'/file_'.$targetContentFileID;
 								$ncfp->FileName = $ocfp->FileName;
 								$ncfp->FileName2 = $ocfp->FileName2;
 								$ncfp->FileSize = $ocfp->FileSize;
@@ -583,12 +601,13 @@ class Contents_Controller extends Base_Controller {
 					  	File::copy('public/'.$contentFile->FilePath.'/file_'.$contentFile->ContentFileID.'/'.basename($file), $destinationFolder.'/file_'.$targetContentFileID.'/'.basename($file));
 					}
 				}
-				
+	
 				foreach ($contentFilePage as $cfp) {
 
+
 					$filePageComponent = DB::table('PageComponent')
-									->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
-									->get();
+								->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
+								->get();
 
 					if(sizeof($filePageComponent)==0){
 						continue;
@@ -602,14 +621,23 @@ class Contents_Controller extends Base_Controller {
 					$contentFilePageNewCount = DB::table('ContentFilePage')
 								->where('ContentFileID', '=', $targetContentFileID)//****************
 								->count();
-								
-					if(isset($contentFilePageNew)){
 
+					$targetApplicationID = DB::table('Content')
+								->where('ContentID', '=', $targetContentID)//****************
+								->first();
+
+					$targetCustomerID = DB::table('Application')
+								->where('ApplicationID', '=', $targetApplicationID->ApplicationID)//****************
+								->first();
+
+					// var_dump(isset($contentFilePageNew));
+					if(isset($contentFilePageNew)){
+						// Log::info("girdiiii");
 						foreach ($filePageComponent as $fpc) {
 							$s = new PageComponent();
 							$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
 							$s->ComponentID = $fpc->ComponentID;
-							if($destinationFolder==null){
+							if($destinationFolder=="null"){
 								$lastComponentNo = DB::table('PageComponent')
 												->where('ContentFilePageID', '=', $contentFilePageNew->ContentFilePageID)
 												->order_by('No', 'DESC')
@@ -622,6 +650,7 @@ class Contents_Controller extends Base_Controller {
 							} else {
 								$s->No = $fpc->No;
 							}
+							// Log::info(serialize($ids));
 							$s->StatusID = eStatus::Active;
 							$s->DateCreated = new DateTime();
 							$s->ProcessDate = new DateTime();
@@ -637,7 +666,25 @@ class Contents_Controller extends Base_Controller {
 								$p = new PageComponentProperty();
 								$p->PageComponentID = $s->PageComponentID;
 								$p->Name = $fpcp->Name;
-								$p->Value = ($fpcp->Value > $contentFilePageNewCount && $fpcp->Name == "page" ? 1 : $fpcp->Value);
+								if($fpcp->Value > $contentFilePageNewCount && $fpcp->Name == "page"){
+									$p->Value = 1;
+								}
+								elseif($fpcp->Name == "filename"){
+									$targetPath = 'files/customer_' . $targetCustomerID->CustomerID . '/application_' . $targetApplicationID->ApplicationID . '/content_' . $targetContentID . '/file_' . $targetContentFileID . '/output/comp_' . $s->PageComponentID;
+									$targetPathFull = path('public') . $targetPath;
+									$p->Value = $targetPath.'/'.basename($fpcp->Value);
+									if (!File::exists($targetPathFull)) {
+										File::mkdir($targetPathFull);
+									}
+									$files = glob('public/'.dirname($fpcp->Value).'/*.{jpg,JPG,png,PNG,tif,TIF,mp3,MP3,m4v,M4V,mp4,MP4,mov,MOV}', GLOB_BRACE);
+									// Log::info('public/'.dirname($fpcp->Value));
+									foreach($files as $file) {
+									  	File::copy($file, $targetPathFull.'/'.basename($file));
+									}
+								}
+								else{
+									$p->Value = $fpcp->Value;
+								}
 								$p->StatusID = eStatus::Active;
 								$p->DateCreated = new DateTime();
 								$p->ProcessDate = new DateTime();
@@ -647,11 +694,26 @@ class Contents_Controller extends Base_Controller {
 						}
 
 					}
+					
 				}
 			}
+		
+		    $targetHasCreated = ContentFile::find($targetContentFileID);
+			if ($targetHasCreated) {
+				// $targetHasCreated->Interactivity = 0;
+				$targetHasCreated->HasCreated = 0;
+				$targetHasCreated->save();
+			}
+			Controller::call('interactivity@show', array($targetContentFileID));
+			$url=Config::get('custom.url')."/queueStart";
+			$ch = curl_init();  
+		    curl_setopt($ch,CURLOPT_URL,$url);
+		    curl_close($ch);
+
 			return "success=" . base64_encode("true");
 
 		} catch (Exception $e) {
+			Log::info($e->getMessage());
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
 	}
