@@ -705,7 +705,7 @@ class Contents_Controller extends Base_Controller {
 				$targetHasCreated->save();
 			}
 			
-			InteractivityQueue::trigger();
+			interactivityQueue::trigger();
 
 			return "success=" . base64_encode("true");
 
