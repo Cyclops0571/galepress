@@ -2,7 +2,7 @@
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class InteractivityQueue {
+class interactivityQueue {
 	public static function trigger() {
 		// burada queueya atiyoruz
 		$connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');

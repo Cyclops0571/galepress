@@ -730,7 +730,7 @@ class Interactivity_Controller extends Base_Controller {
 					}
 					$p->close_pdi_document($doc);
 				});
-				InteractivityQueue::trigger();
+				interactivityQueue::trigger();
 			} catch (PDFlibException $e) {
 				$data = array(
 					'errmsg' => "PDFlib exception occurred in starter_pcos sample:<br/>[" . $e->get_errnum() . "] " . $e->get_apiname() . ": " . $e->get_errmsg()
@@ -1120,7 +1120,7 @@ class Interactivity_Controller extends Base_Controller {
 					}
 				}
 			});
-			InteractivityQueue::trigger();
+			interactivityQueue::trigger();
 			return "success=" . base64_encode("true");
 		} catch (Exception $e) {
 			Log::info($e->getMessage());
