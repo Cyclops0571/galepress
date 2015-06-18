@@ -74,7 +74,7 @@ function isUrlReachable(url) {
 					alert(ret);
 				}
 			}).responseText;
-		if(ret.getValue("success") == "true")
+		if(ret)
 		{
 			return true;
 		}

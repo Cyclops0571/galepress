@@ -44,6 +44,6 @@ if(isset($Properties))
     <a {{ (Str::length($modaliconname) > 0 ? 'href="'.$modaliconname.'" ' : '') }} target="_blank" class="modal-icon modal-img{{ ($modalIconSelected == 0 ? ' hide' : '') }}">{{ Str::limit($modaliconname, 17) }}</a>
     <a class="close{{ ($modalIconSelected == 0 ? ' hide' : '') }}"><i class="icon-remove"></i></a>
     
-    <span class="error hide"><i class="icon-exclamation-sign"></i>{{ __('interactivity.video_poster_error') }}</span>
+   <!--  <span class="error hide"><i class="icon-exclamation-sign"></i>{{ __('interactivity.video_poster_error') }}</span> -->
 </div>
 <!-- end upload-modal-icon -->

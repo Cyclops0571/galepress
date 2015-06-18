@@ -826,17 +826,18 @@ class Interactivity_Controller extends Base_Controller {
 				curl_setopt($handle, CURLOPT_HEADER, true);
 				curl_setopt($handle, CURLOPT_FAILONERROR, true);
 				curl_setopt($handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-				curl_setopt($handle, CURLOPT_NOBODY, false);
+				curl_setopt($handle, CURLOPT_NOBODY, true);
+				curl_setopt($handle, CURLOPT_TIMEOUT,10);
 				curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
-				//curl_setopt($handle, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
+				curl_setopt($handle, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
 				$connectable = curl_exec($handle);
 				curl_close($handle);
 			}
 			if ($connectable) {
-				return "success=" . base64_encode("true");
+				return true;
 			}
-			return "success=" . base64_encode("false");
+			return false;
 		} catch (Exception $e) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
 		}
