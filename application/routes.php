@@ -94,7 +94,8 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_article_whymobile')->get($currentLanguage), array('as' => 'website_article_whymobile_get', 'uses' => 'website@article_whymobile'));
 	Route::get('shop', array('as' => 'website_shop', 'uses' => 'website@shop'));
 	// Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
-	Route::get('odeme', array('as' => 'website_odeme_post', 'uses' => 'website@odeme'));
+
+	Route::post('odeme', array('as' => 'website_odeme_post', 'uses' => 'website@odeme'));
 	Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'website@odemeSonuc'));
 
 	Route::get(__('route.login')->get($currentLanguage), array('as' => 'common_login_get', 'uses' => 'common@login'));

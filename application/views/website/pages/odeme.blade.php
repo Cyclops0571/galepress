@@ -11,8 +11,8 @@ $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
 '&customer_contact_ip='. Request::ip() . // ödemeyi yapan kişinin ip adresi
 '&customer_language=tr' . // ödeme formunun dili
 '&installment=true' . // taksit açık kapalı. .
-'&customer_contact_mobile=' . $email . // mobil telefon
-'&customer_contact_email=' . $telephone . // email
+'&customer_contact_mobile=' . $telephone . // mobil telefon
+'&customer_contact_email=' . $email . // email
 '&customer_presentation_usage=GalepressAylikOdeme_' . date('YmdHisu') . // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
 '&descriptor= GalepressAylikOdeme_' . date('YmdHisu'); // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
 
@@ -30,7 +30,8 @@ $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
                                   throw new Exception("Problem reading data from $url, $php_errormsg");
                                 }             
                                 $resultJson = json_decode($response,true);
-                               print_r($resultJson);
+                               // print_r($resultJson);
+                               // echo $email . "hakan";
                               
 ?>
 
