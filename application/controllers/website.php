@@ -120,16 +120,16 @@ class Website_Controller extends Base_Controller
 	{
 		return View::make('website.pages.shop');
 	}
-	public function get_odeme()
+	public function post_odeme()
 	{
-		$data = array();
-		$customerEmail = Input::get('email', '');
-		$customerTel = Input::get('telephone', '');
+		$customerData = array();
+		$customerEmail = Input::get('email');
+		$customerTel = Input::get('telephone');
 
-		$data['email'] = $customerEmail;
-		$data['telephone'] = $customerTel;
+		$customerData['email'] = $customerEmail;
+		$customerData['telephone'] = $customerTel;
 
-		return View::make('website.pages.odeme')->with($data)->render();
+		return View::make('website.pages.odeme', $customerData);
 	}
 	public function get_odemeSonuc()
 	{

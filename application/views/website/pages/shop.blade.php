@@ -314,21 +314,21 @@ info@galepress.com</a></p></li>
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		        <h4 class="modal-title">Ödeme Sayfasına Doğru...</h4>
 		      </div>
-		      <div class="modal-body">
-		      	<form id="userInfos">
-			        <div class="form-group">
-					    <label for="exampleInputEmail1">Email Adresi</label>
-					    <input type="email" class="form-control" id="email" placeholder="Email">
-					</div>
-					<div class="form-group">
-					    <label for="exampleInputPassword1">Telefon</label>
-					    <input type="tel" class="form-control" id="telephone" placeholder="Telefon">
-					</div>
-				</form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" id="payBtn">Devam Et</button>
-		      </div>
+		      <form action="/odeme" method="post">
+			      <div class="modal-body">
+				        <div class="form-group">
+						    <label for="exampleInputEmail1">Email Adresi</label>
+						    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+						</div>
+						<div class="form-group">
+						    <label for="exampleInputPassword1">Telefon</label>
+						    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Telefon">
+						</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="submit" class="btn btn-primary" id="payBtn">Devam Et</button>
+			      </div>
+		      </form>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
@@ -355,19 +355,5 @@ info@galepress.com</a></p></li>
 		
 		<!-- Custom JS -->
 		<script src="/website/scripts/shop/custom.js"></script>
-		<script type="text/javascript">
-		$(function(){
-			$('#payBtn').click(function(){
-				$.ajax({
-		            type: 'GET',
-		            url: '/odeme',
-		            data: $('#userInfos').serialize(),
-		            success: function (data) {
-		                console.log(data);
-		            }
-		        });
-			})
-		});
-		</script>
 	</body>
 </html>
