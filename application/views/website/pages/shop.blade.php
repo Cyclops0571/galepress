@@ -103,6 +103,9 @@
 		.sub-menu li{
 			max-width: 200px;
 		}
+		.modal{
+			overflow: hidden;
+		}
 		</style>
 
 	</head>
@@ -217,30 +220,15 @@
 					</div>
 
 					<hr class="tall" />
-
-					<!-- <h3 class="short"><strong>Four</strong> Plans</h3>
-					<p>Using the "Most Popular" css class.</p> -->
-
 					<div class="row">
 
 						<div class="pricing-table">
-							<!-- <div class="col-md-3">
-								<div class="plan">
-									<h3>Enterprise<span>$59</span></h3>
-									<a class="btn btn-lg btn-primary" href="#">Sign up</a>
-									<ul>
-										<li><b>10GB</b> Disk Space</li>
-										<li><b>100GB</b> Monthly Bandwidth</li>
-										<li><b>20</b> Email Accounts</li>
-										<li><b>Unlimited</b> subdomains</li>
-									</ul>
-								</div>
-							</div> -->
+
 							<div class="col-md-offset-4 col-md-3 center">
 								<div class="plan most-popular">
 									<div class="plan-ribbon-wrapper"><div class="plan-ribbon">Popular</div></div>
 									<h3>Standart<span style="line-height: 80px;">&#x20BA;100</span><br /><i style="color: rgb(0, 136, 204);font-size: 15px;">Aylık</i></h3>
-									<a class="btn btn-lg btn-primary" href="/odeme">Satın Al</a>
+									<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Satın Al</button>
 									<ul>
 										<li><b>IOS, Android</b> mobil uygulama</li>
 										<li><b>6 Adet</b> Pdf yükleme</li>
@@ -249,78 +237,11 @@
 									</ul>
 								</div>
 							</div>
-	<!-- 						<div class="col-md-3">
-								<div class="plan">
-									<h3>Standard<span>$17</span></h3>
-									<a class="btn btn-lg btn-primary" href="#">Sign up</a>
-									<ul>
-										<li><b>3GB</b> Disk Space</li>
-										<li><b>25GB</b> Monthly Bandwidth</li>
-										<li><b>5</b> Email Accounts</li>
-										<li><b>Unlimited</b> subdomains</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="plan">
-									<h3>Basic<span>$9</span></h3>
-									<a class="btn btn-lg btn-primary" href="#">Sign up</a>
-									<ul>
-										<li><b>1GB</b> Disk Space</li>
-										<li><b>10GB</b> Monthly Bandwidth</li>
-										<li><b>2</b> Email Accounts</li>
-										<li><b>Unlimited</b> subdomains</li>
-									</ul>
-								</div>
-							</div> -->
+
 						</div>
 
 					</div>
 
-					<!-- <h3><strong>Three</strong> Plans</h3>
-
-					<div class="row">
-
-						<div class="pricing-table">
-							<div class="col-md-4">
-								<div class="plan">
-									<h3>Enterprise<span>$59</span></h3>
-									<a class="btn btn-lg btn-primary" href="#">Sign up</a>
-									<ul>
-										<li><b>10GB</b> Disk Space</li>
-										<li><b>100GB</b> Monthly Bandwidth</li>
-										<li><b>20</b> Email Accounts</li>
-										<li><b>Unlimited</b> subdomains</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="plan">
-									<h3>Professional<span>$29</span></h3>
-									<a class="btn btn-lg btn-primary" href="#">Sign up</a>
-									<ul>
-										<li><b>5GB</b> Disk Space</li>
-										<li><b>50GB</b> Monthly Bandwidth</li>
-										<li><b>10</b> Email Accounts</li>
-										<li><b>Unlimited</b> subdomains</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="plan">
-									<h3>Standard<span>$17</span></h3>
-									<a class="btn btn-lg btn-primary" href="#">Sign up</a>
-									<ul>
-										<li><b>3GB</b> Disk Space</li>
-										<li><b>25GB</b> Monthly Bandwidth</li>
-										<li><b>5</b> Email Accounts</li>
-										<li><b>Unlimited</b> subdomains</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-					</div> -->
 
 				</div>
 
@@ -367,7 +288,7 @@ info@galepress.com</a></p></li>
 						<div class="row">
 							<div class="col-md-1" style="padding:0; margin-top:3px;">
 								<a href="http://www.detaysoft.com/" class="logo">
-									<img alt="Porto Website Template" class="img-responsive" src="/website/img/logo-footer.png">
+									<img alt="Detaysoft" class="img-responsive" src="/website/img/logo-footer.png">
 								</a>
 							</div>
 							<div class="col-md-7">
@@ -386,6 +307,31 @@ info@galepress.com</a></p></li>
 				</div>
 			</footer>
 		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">Ödeme Sayfasına Doğru...</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<form id="userInfos">
+			        <div class="form-group">
+					    <label for="exampleInputEmail1">Email Adresi</label>
+					    <input type="email" class="form-control" id="email" placeholder="Email">
+					</div>
+					<div class="form-group">
+					    <label for="exampleInputPassword1">Telefon</label>
+					    <input type="tel" class="form-control" id="telephone" placeholder="Telefon">
+					</div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="payBtn">Devam Et</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 		<!-- Libs -->
 		<script src="/website/styles/shop/vendor/jquery.js"></script>
 		<script src="/website/styles/shop/vendor/jquery.appear.js"></script>
@@ -409,5 +355,19 @@ info@galepress.com</a></p></li>
 		
 		<!-- Custom JS -->
 		<script src="/website/scripts/shop/custom.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$('#payBtn').click(function(){
+				$.ajax({
+		            type: 'GET',
+		            url: '/odeme',
+		            data: $('#userInfos').serialize(),
+		            success: function (data) {
+		                console.log(data);
+		            }
+		        });
+			})
+		});
+		</script>
 	</body>
 </html>

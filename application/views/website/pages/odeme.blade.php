@@ -11,8 +11,8 @@ $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
 '&customer_contact_ip='. Request::ip() . // ödemeyi yapan kişinin ip adresi
 '&customer_language=tr' . // ödeme formunun dili
 '&installment=true' . // taksit açık kapalı. .
-'&customer_contact_mobile=05336604146' . // mobil telefon
-'&customer_contact_email=srdsaygili@gmail.com' . // email
+'&customer_contact_mobile=' . $email . // mobil telefon
+'&customer_contact_email=' . $telephone . // email
 '&customer_presentation_usage=GalepressAylikOdeme_' . date('YmdHisu') . // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
 '&descriptor= GalepressAylikOdeme_' . date('YmdHisu'); // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
 
@@ -36,7 +36,16 @@ $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"    "http://www.w3.org/TR/html4/loose.dtd">  
  <html>  
-    <head>    
+    <head>
+      <style type="text/css">
+        body{
+          background: url(/website/img/galepress.png);
+          background-opacity: 0.5;
+        }
+        .iyzico-payment-form.iyziForm{
+          margin-left: 39%;
+        }
+      </style>
          <script src="https://www.iyzico.com/frontend/form/v1/widget.js?&mode=<?php echo Config::get("custom.payment_environment"); ?>&installment=true&token=<?php echo $resultJson['transaction_token']; ?>&language=tr" ></script>  
   </head>  
   <body>

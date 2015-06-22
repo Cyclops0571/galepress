@@ -71,7 +71,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<p class="lead">
-								{{$successOrErrMsg}}
+								{{$payDataMsg}}
 							</p>
 						</div>
 					</div>
