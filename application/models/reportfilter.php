@@ -31,14 +31,14 @@ class ReportFilter {
 			'{APPLICATIONID}' => ($this->applicationID > 0 ? $this->applicationID : 'null'),
 			'{COUNTRY}' => ($this->country  ? "'$this->country'" : 'null'),
 			'{CITY}' => ($this->city ? "'$this->city'" : 'null'),
-			'{DISTRICT}' => ($this->district? 'null' : "'$this->district'"),
+			'{DISTRICT}' => ($this->district ?  "'$this->district'" : 'null'),
 		);
 		
 		foreach($replecements as $key => $value) {
-//			echo $key , "-----", $value, PHP_EOL;
 			$sqlTemplate = str_replace($key, $value, $sqlTemplate);
 		}
-
+		
+//		echo $sqlTemplate; exit;
 		if($this->map || $this->showAsXlsForm) {
 			return DB::table(DB::raw('(' . $sqlTemplate . ') t'))->get();
 		}
