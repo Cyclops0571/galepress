@@ -112,6 +112,8 @@ return array(
 	'website_landing_page_realty' => 'realty',
 	'website_captcha' => 'mecaptcha',
 	'website_why_galepress' => 'how-it-works',
+	'website_payment_result' => 'payment-result/(:all)',
+	
 	'confirmemail' => 'confirm-account',
 	
 	'crop_image' => 'crop/image',

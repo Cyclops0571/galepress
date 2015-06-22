@@ -131,9 +131,33 @@ class Website_Controller extends Base_Controller
 
 		return View::make('website.pages.odeme')->with($data)->render();
 	}
-	public function get_odemeSonuc()
+	
+	public function post_odemeResponse() {
+		$paymentResult = "Error";
+		$response = Input::get("json");
+		$resultJson = json_decode($response, true);
+		if(isset($resultJson['transaction']['transaction_id'])) {
+			$orderToken = $resultJson['transaction']['transaction_id']; 
+			$curl = curl_init('https://api.iyzico.com/getStatus?token=' . $orderToken); 
+			curl_setopt($curl, CURLOPT_FAILONERROR, true);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, true); 
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+			$resultCurl = curl_exec($curl); 
+			$result = json_decode($resultCurl,true);
+			if(isset($result['transaction']['state']) && strstr($result['transaction']['state'],"paid")) {
+				$paymentResult = "Success";
+			}
+		}
+		return Redirect::to_route("website_payment_result_get", array($paymentResult));
+	}
+	
+	
+	public function get_odemeSonuc($result)
 	{
-		$payDataMsg="test";
+		die($result);
+		$payDataMsg = "Error";
+		
 		return View::make('website.pages.odemeSonuc')->with($payDataMsg)->render();
 	}
 

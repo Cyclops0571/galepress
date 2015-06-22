@@ -95,7 +95,7 @@ foreach($languages as $currentLanguage) {
 	Route::get('shop', array('as' => 'website_shop', 'uses' => 'website@shop'));
 	// Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
 	Route::get('odeme', array('as' => 'website_odeme_post', 'uses' => 'website@odeme'));
-	Route::get('odemeSonuc', array('as' => 'website_odemeSonuc', 'uses' => 'website@odemeSonuc'));
+	Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'website@odemeSonuc'));
 
 	Route::get(__('route.login')->get($currentLanguage), array('as' => 'common_login_get', 'uses' => 'common@login'));
 	Route::post(__('route.login')->get($currentLanguage), array('as' => 'common_login_post', 'uses' => 'common@login'));
@@ -468,6 +468,9 @@ Route::get("banners/delete", array('as' => 'banners_delete', 'before'=>'auth', '
 Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));
 Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
+
+Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'website@odemeResponse'));
+
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));
 

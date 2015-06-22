@@ -112,7 +112,9 @@ return array(
 	'website_landing_page_realty' => 'emlak',
 	'website_captcha' => 'mecaptcha',
 	'website_why_galepress' => 'nasil-calisir',
-	'confirmemail' => 'hesabi-onayla',
+	'website_payment_result' => 'odeme-sonuc/(:all)',
+	
+	'confirmemail' => 'hesab-onayla',
 	
 	'crop_image' => 'crop/image',
 
