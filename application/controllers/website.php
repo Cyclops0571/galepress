@@ -116,6 +116,20 @@ class Website_Controller extends Base_Controller
 		return View::make('website.pages.why-galepress');
 	}
 
+	public function get_shop()
+	{
+		return View::make('website.pages.shop');
+	}
+	public function get_odeme()
+	{
+		return View::make('website.pages.odeme');
+	}
+	public function get_odemeSonuc()
+	{
+		$payData="test";
+		return View::make('website.pages.odemeSonuc')->with($payData)->render();
+	}
+
 	public function post_tryit()
 	{
 		//date_default_timezone_set('Europe/Istanbul');
