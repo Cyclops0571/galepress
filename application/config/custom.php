@@ -1,10 +1,13 @@
 <?php
 $serverUrl = 'http://www.galepress.com';
 $mailEmail = 'info@galepress.com';
+$paymentEnv = 'live';
 if(Laravel\Request::env() == ENV_TEST) {
+	$paymentEnv = 'test';
 	$serverUrl = 'http://galetest.com';
 	$mailEmail = 'info@galetest.com';
 } else if(Laravel\Request::env() == ENV_LOCAL){
+	$paymentEnv = 'test';
 	$serverUrl = 'http://localhost';
 	$mailEmail = 'info@galetest.com';
 }
@@ -40,6 +43,8 @@ return array(
 	'api_key7' => 'AIzaSyBdrHaCvdrxc43otOND3GgRk69cB_CvoaI',
 	'api_key8' => 'AIzaSyCg98n77pfxmBzCzptyD4op5T7VxO84p5w',
 	'api_key9' => 'AIzaSyCfeHTzoY_xhcCogtb1XYYUZ4_bzDlruvs',
+	
+	'payment_environment' => $paymentEnv,
 	
 	'rowcount' => 100,
 	
