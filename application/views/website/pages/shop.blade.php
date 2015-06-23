@@ -53,59 +53,62 @@
 			<script src="/website/styles/shop/vendor/respond.js"></script>
 		<![endif]-->
 		<style type="text/css">
-		*{
-			font-family: 'Titillium Web', sans-serif !important;
-		}
-		i[class~="icon"] {
-		    font-family: FontAwesome !important;
-		}
-		.lead{
-			font-weight: 300 !important;
-		}
-		p .alternative-font{
-			top: 0 !important;
-			font-size: 1.1em !important;
-		}
-		.pricing-table h3 span{
-			font-weight: 300 !important;
-		}
-		#footer .footer-copyright nav ul li{
-			border: none !important;
-		}
-		#footer .container .row > div{
-			margin-bottom: 12px !important;
-		}
-		/*#header > .container{
-			height: 37px !important;
-		}*/
-		#header{
-			min-height: 0 !important;
-		}
-		#header nav ul.nav-main{
-			margin: 0 !important;
-		}
-		.sub-menu li a img{
-			border: 1px solid black;
-			-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
-			-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
-			box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
-		}
-		.sub-menu a:hover img{
-			opacity: 0.3;
-		}
-		.sub-menu .read{
-			position:absolute;top:48%;left:28%;font-size:3em;
-			display: none;
-		}
-		.sub-menu li:hover .read{
-			display: block;
-		}
-		.sub-menu li{
-			max-width: 200px;
-		}
-		.modal{
-			overflow: hidden;
-		}
+			*{
+				font-family: 'Titillium Web', sans-serif !important;
+			}
+			i[class~="icon"] {
+			    font-family: FontAwesome !important;
+			}
+			.lead{
+				font-weight: 300 !important;
+			}
+			p .alternative-font{
+				top: 0 !important;
+				font-size: 1.1em !important;
+			}
+			.pricing-table h3 span{
+				font-weight: 300 !important;
+			}
+			#footer .footer-copyright nav ul li{
+				border: none !important;
+			}
+			#footer .container .row > div{
+				margin-bottom: 12px !important;
+			}
+			/*#header > .container{
+				height: 37px !important;
+			}*/
+			#header{
+				min-height: 0 !important;
+			}
+			#header nav ul.nav-main{
+				margin: 0 !important;
+			}
+			.sub-menu li a img{
+				border: 1px solid black;
+				-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
+				-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
+				box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
+			}
+			.sub-menu a:hover img{
+				opacity: 0.3;
+			}
+			.sub-menu .read{
+				position:absolute;top:48%;left:28%;font-size:3em;
+				display: none;
+			}
+			.sub-menu li:hover .read{
+				display: block;
+			}
+			.sub-menu li{
+				max-width: 200px;
+			}
+			.modal{
+				overflow: hidden;
+			}
+			.logo.logo-sticky-active img{
+				top: 32px !important;
+			}
 		</style>
 
 	</head>
@@ -157,7 +160,7 @@
 																<span class="read">OKU</span>
 																<span class="mega-menu-sub-title">MESAFELİ SATIŞ SÖZLEŞMESİ</span>
 																<ul class="sub-menu">
-																	<li><a href="#"><img src="/website/styles/shop/img/mesafeliSatis.jpg" width="200"/></a></li>
+																	<li><a href="/website/sozlesme/mesafeli-satis-sozlesmesi.docx"><img src="/website/styles/shop/img/mesafeliSatis.jpg" width="200"/></a></li>
 																	<!-- <li><a href="feature-icons.html">Icons</a></li>
 																	<li><a href="feature-animations.html">Animations</a></li>
 																	<li><a href="feature-typography.html">Typography</a></li>
@@ -172,7 +175,7 @@
 																<span class="read">OKU</span>
 																<span class="mega-menu-sub-title">GİZLİLİK SÖZLEŞMESİ</span>
 																<ul class="sub-menu">
-																	<li><a href="#"><img src="/website/styles/shop/img/gizlilik.jpg" width="200"/></a></li>
+																	<li><a href="/website/sozlesme/gizlilik.docx"><img src="/website/styles/shop/img/gizlilik.jpg" width="200"/></a></li>
 																</ul>
 															</li>
 														</ul>
@@ -261,13 +264,10 @@
 							<div class="contact-details">
 								<h4>İletişim</h4>
 								<ul class="contact">
-									<li><p><i class="icon icon-map-marker"></i> <strong>Adres:</strong> Alemdağ Cad. No: 109,
-Üsküdar / İstanbul / Türkiye</p></li>
+									<li><p><i class="icon icon-map-marker"></i> <strong>Adres:</strong> Alemdağ Cad. No: 109, Üsküdar / İstanbul / Türkiye</p></li>
 									<li><p><i class="icon icon-phone"></i> <strong>Telefon:</strong> +90 (216) 443 13 29</p></li>
 									<li><p><i class="icon icon-print"></i> <strong>Fax:</strong> +90 (216) 443 08 27</p></li>
-									<li><p><i class="icon icon-envelope"></i> <strong>Email:</strong> <a href="mailto:
-info@galepress.com">
-info@galepress.com</a></p></li>
+									<li><p><i class="icon icon-envelope"></i> <strong>Email:</strong> <a href="mailto:info@galepress.com">info@galepress.com</a></p></li>
 								</ul>
 							</div>
 						</div>
@@ -314,19 +314,22 @@ info@galepress.com</a></p></li>
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		        <h4 class="modal-title">Ödeme Sayfasına Doğru...</h4>
 		      </div>
-		      <form action="/odeme" method="post">
+		      <form action="/odeme" method="post" id="userInfos">
 			      <div class="modal-body">
 				        <div class="form-group">
-						    <label for="exampleInputEmail1">Email Adresi</label>
-						    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+						    <label for="InputEmail">Email Adresi</label>
+						    <input id="email" class="form-control required email" maxlength="40" name="email" size="20" type="email" tabindex="11" value="" placeholder="Email" required>
 						</div>
 						<div class="form-group">
-						    <label for="exampleInputPassword1">Telefon</label>
-						    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Telefon">
+						    <label for="InputPhone">Telefon</label>
+						    <input id="phone" maxlength="14" name="phone" type="text" class="form-control required phone" tabindex="10" value="" placeholder="Telefon" required>
+						</div>
+						<div class="form-group errorMsg hide" style="color:#CA0101;">
+							<span>Lütfen bilgilerinizi kontrol edin...</span>
 						</div>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="submit" class="btn btn-primary" id="payBtn">Devam Et</button>
+			        <button class="btn btn-primary" id="payBtn" type="submit">Devam Et</button>
 			      </div>
 		      </form>
 		    </div><!-- /.modal-content -->
@@ -355,5 +358,38 @@ info@galepress.com</a></p></li>
 		
 		<!-- Custom JS -->
 		<script src="/website/scripts/shop/custom.js"></script>
+		<script src="/website/scripts/shop/validate/jquery.mask.min.js"></script>
+
+		<script type="text/javascript">
+		$(function(){
+
+			$("#phone").mask("(999) 999-9999", {placeholder: "(___) __ ____"});
+
+			$("#userInfos").bind("submit", function() {
+
+				var email = $("#email").val();
+				var phone = $("#phone").val();
+
+				var phonePattern = /[0-9]/;
+				var mailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				// console.log(phone.length);
+			    if ( phone.length < 14 || !phonePattern.test(phone) ) {
+			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir telefon adresi girin.');
+			    	$('#phone').focus();
+			        return false;
+			    }
+			    else if(email=="" || !mailPattern.test(email)){
+			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir email adresi girin.');
+			    	$('#email').focus();
+			        return false;
+			    }
+			    else{
+			    	$('.errorMsg').addClass('hide');
+			    	// return false;
+			    }
+			});
+			
+		});
+		</script>
 	</body>
 </html>

@@ -124,10 +124,10 @@ class Website_Controller extends Base_Controller
 	{
 		$customerData = array();
 		$customerEmail = Input::get('email');
-		$customerTel = Input::get('telephone');
+		$customerTel = Input::get('phone');
 
 		$customerData['email'] = $customerEmail;
-		$customerData['telephone'] = $customerTel;
+		$customerData['phone'] = $customerTel;
 
 		return View::make('website.pages.odeme', $customerData);
 	}

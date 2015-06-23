@@ -11,7 +11,7 @@ $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
 '&customer_contact_ip='. Request::ip() . // ödemeyi yapan kişinin ip adresi
 '&customer_language=tr' . // ödeme formunun dili
 '&installment=true' . // taksit açık kapalı. .
-'&customer_contact_mobile=' . $telephone . // mobil telefon
+'&customer_contact_mobile=' . $phone . // mobil telefon
 '&customer_contact_email=' . $email . // email
 '&customer_presentation_usage=GalepressAylikOdeme_' . date('YmdHisu') . // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
 '&descriptor= GalepressAylikOdeme_' . date('YmdHisu'); // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
