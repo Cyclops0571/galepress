@@ -12,23 +12,38 @@ var cInteractivity = new function () {
 	cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
     };
 
+  //   this.clickOk = function () {
+		// var id = $("#modal-editor").attr("opener");
+		// var content = CKEDITOR.instances.editor.getData();
+		// $("#comp-" + id + "-content").val(content);
+		// $("#modal-editor").addClass("hide");
+		// $("#modal-mask").addClass("hide");
+		// $("#modal-editor").append($('.action'));
+		// CKEDITOR.instances.editor.destroy();
+		// $('#wrapper').css('position','static');
+  //   };
+
+  //   this.clickCancel = function () {
+		// $("#modal-editor").addClass("hide");
+		// $("#modal-mask").addClass("hide");
+		// $("#modal-editor").append($('.action'));
+		// CKEDITOR.instances.editor.destroy();
+		// $('#wrapper').css('position','static');
+  //   };
+
     this.clickOk = function () {
 		var id = $("#modal-editor").attr("opener");
-		var content = CKEDITOR.instances.editor.getData();
+		var content = $("#editor").val();
 		$("#comp-" + id + "-content").val(content);
 		$("#modal-editor").addClass("hide");
 		$("#modal-mask").addClass("hide");
-		$("#modal-editor").append($('.action'));
-		CKEDITOR.instances.editor.destroy();
-		$('#wrapper').css('position','static');
+		$("#editor").destroyEditor();
     };
 
     this.clickCancel = function () {
 		$("#modal-editor").addClass("hide");
 		$("#modal-mask").addClass("hide");
-		$("#modal-editor").append($('.action'));
-		CKEDITOR.instances.editor.destroy();
-		$('#wrapper').css('position','static');
+		$("#editor").destroyEditor();
     };
 
     this.openTransferModal = function (e) {
