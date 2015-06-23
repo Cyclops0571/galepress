@@ -2,12 +2,15 @@
 $serverUrl = 'http://www.galepress.com';
 $mailEmail = 'info@galepress.com';
 $paymentEnv = 'live';
+$paymentUrl = 'https://www.galepress.com';
 if(Laravel\Request::env() == ENV_TEST) {
 	$paymentEnv = 'test';
+	$paymentUrl = 'https://www.galetest.com';
 	$serverUrl = 'http://galetest.com';
 	$mailEmail = 'info@galetest.com';
 } else if(Laravel\Request::env() == ENV_LOCAL){
 	$paymentEnv = 'test';
+	$paymentUrl = 'http://localhost';
 	$serverUrl = 'http://localhost';
 	$mailEmail = 'info@galetest.com';
 }
@@ -45,6 +48,7 @@ return array(
 	'api_key9' => 'AIzaSyCfeHTzoY_xhcCogtb1XYYUZ4_bzDlruvs',
 	
 	'payment_environment' => $paymentEnv,
+	'payment_url' => $paymentUrl,
 	
 	'rowcount' => 100,
 	

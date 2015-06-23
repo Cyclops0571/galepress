@@ -155,10 +155,19 @@ class Website_Controller extends Base_Controller
 	
 	public function get_odemeSonuc($result)
 	{
-		die($result);
-		$payDataMsg = "Error";
-		
-		return View::make('website.pages.odemeSonuc')->with($payDataMsg)->render();
+		// die($result);
+		$payDataMsg="";
+		$payDataTitle="";
+		if($result=="Success"){
+			$payDataMsg = "Ödemeniz başarıyla gerçekleşti, teşekkür ederiz...";
+			$payDataTitle = "Ödeme Başarılı!";
+		}
+		else{
+			$payDataMsg = "Ödeme esnasında bir problem oluştu, lütfen yetkililerle irtibata geçiniz.";
+			$payDataTitle = "Ödeme Başarısız!";
+		}
+		$data=array('payDataMsg' => $payDataMsg, 'payDataTitle' => $payDataTitle, 'result' => $result);
+		return View::make('website.pages.odemeSonuc',$data);
 	}
 
 	public function post_tryit()

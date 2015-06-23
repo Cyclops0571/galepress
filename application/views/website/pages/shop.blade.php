@@ -113,9 +113,6 @@
 
 	</head>
 	<body>
-
-
-
 		<div class="body">
 			<header id="header">
 				<div class="container">
