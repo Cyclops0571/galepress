@@ -102,5 +102,7 @@ $components = DB::table('Component')
 <script src="/js/gurus.projectcore.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/js/session-check.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/js/lib.interactivity.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
+<script src="/js/ckeditor/ckeditor.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
+<script src="/js/ckeditor/uilanguages/languages.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 </body>
 </html>

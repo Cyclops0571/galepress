@@ -30,8 +30,8 @@ $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
                                   throw new Exception("Problem reading data from $url, $php_errormsg");
                                 }             
                                 $resultJson = json_decode($response,true);
-                               // print_r($resultJson);
-                               // echo $email . "hakan";
+                               print_r($resultJson);
+                               echo "email: " .$email. "phone: ". $phone;
                               
 ?>
 

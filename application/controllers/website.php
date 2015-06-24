@@ -149,6 +149,8 @@ class Website_Controller extends Base_Controller
 				$paymentResult = "Success";
 			}
 		}
+		// var_dump($resultJson);
+		// die;
 		return Redirect::to_route("website_payment_result_get", array($paymentResult));
 	}
 	

@@ -1603,49 +1603,39 @@
 				$("#comp-" + id + "-boxcolor").colorPicker();
 				$("#prop-" + id + " a.edit").click(function()
 				{
-					var content = $("#comp-" + id + "-content").val();
-					$("#modal-editor textarea").val(content);
-					$("#modal-editor").attr("opener", id);
-					$("#modal-editor").removeClass("hide");
-					$("#modal-mask").removeClass("hide");
-					
-					var fontMap = {
-						arial: ["Arial", "Arial, Helvetica, sans-serif"],
-						arialblack: ["Arial Black", '"Arial Black", Gadget, sans-serif'],
-						comicsans: ["Courier New", '"Courier New", Courier, monospace'],
-						courier: ["Comic Sans", '"Comic Sans MS", cursive, sans-serif'],
-						impact: ["Impact", 'Impact, Charcoal, sans-serif'],
-						lucida: ["Lucida", '"Lucida Sans Unicode", "Lucida Grande", sans-serif'],
-						lucidaconsole: ["Lucida Console", '"Lucida Console", Monaco, monospace'],
-						georgia: ["Georgia", "Georgia, serif"],
-						palatino: ["Palatino Linotype", '"Palatino Linotype", "Book Antiqua", Palatino, serif'],
-						tahoma: ["Tahoma", "Tahoma, Geneva, sans-serif"],
-						times: ["Times New Roman", "Times, serif"],
-						trebuchet: ["Trebuchet", '"Trebuchet MS", Helvetica, sans-serif'],
-						verdana: ["Verdana", "Verdana, Geneva, sans-serif"]
-					};
-					var fontList = {}
-					$.each(fontMap, function(i, font) {
-					    var fontName = font[0];
-					    var fontFace = font[1];
-					    fontList[i] = {
-					        title: "<font face='" + fontFace + "'>" + fontName + "</font>",
-					        callback: function(obj, e, sFont){
-					            obj.execCommand("fontname", fontFace);
-					        }
-					    }
+					$( "#wrapper" ).fadeOut( 250, function() {
+						var content = $("#comp-" + id + "-content").val();
+						$("#modal-editor textarea").val(content);
+						$("#modal-editor").attr("opener", id);
+						$("#modal-editor").removeClass("hide");
+						$("#modal-mask").removeClass("hide");
+						// $("#editor").redactor();
+						// console.log(content);
+						function createEditor(languageCode) {
+							CKEDITOR.replace( 'editor', {
+								language: languageCode,
+								on: 
+								{ 
+									'instanceReady': function (evt) { 
+										evt.editor.execCommand('maximize');
+											$('html,body').css('width','100%').css('height','100%');
+											$('#wrapper').css('position','fixed').css('display','none');
+											$('.cke_button__maximize').css('display','none');
+											$('.cke_top.cke_reset_all').append($( ".action" ));
+											$( ".action" ).addClass('ckeditorConfirm');
+											$('.cke_maximized').css('top','0').css('position','fixed');
+										}
+								}
+							});
+							CKEDITOR.instances.editor.setData(content);
+							CKEDITOR.instances.editor.addContentsCss("/css/ckeditor/fonts/fonts.css");
+							// CKEDITOR.instances.editor.addContentsCss("/css/ckeditor/fonts/fonts.css");
+						}
+						createEditor('tr');
+						setTimeout(function(){
+							$('#wrapper').fadeIn(500);
+						},1000);
 					});
-					$("#editor").redactor({
-						allowedTags: ['p', 'h1', 'h2', 'pre', 'font'],
-						buttonsAdd: ["|", "clips"],
-					    buttonsCustom: {
-					        clips: {
-					            title: "Font",
-					            dropdown: fontList
-					        }
-					    }
-					});
-					//$("#editor").redactor();
 				});
 			}
 			else if(componentName == "slideshow" || componentName == "gal360")
