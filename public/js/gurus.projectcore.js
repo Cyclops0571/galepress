@@ -12,19 +12,38 @@ var cInteractivity = new function () {
 	cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
     };
 
+  //   this.clickOk = function () {
+		// var id = $("#modal-editor").attr("opener");
+		// var content = CKEDITOR.instances.editor.getData();
+		// $("#comp-" + id + "-content").val(content);
+		// $("#modal-editor").addClass("hide");
+		// $("#modal-mask").addClass("hide");
+		// $("#modal-editor").append($('.action'));
+		// CKEDITOR.instances.editor.destroy();
+		// $('#wrapper').css('position','static');
+  //   };
+
+  //   this.clickCancel = function () {
+		// $("#modal-editor").addClass("hide");
+		// $("#modal-mask").addClass("hide");
+		// $("#modal-editor").append($('.action'));
+		// CKEDITOR.instances.editor.destroy();
+		// $('#wrapper').css('position','static');
+  //   };
+
     this.clickOk = function () {
-	var id = $("#modal-editor").attr("opener");
-	var content = $("#editor").val();
-	$("#comp-" + id + "-content").val(content);
-	$("#modal-editor").addClass("hide");
-	$("#modal-mask").addClass("hide");
-	$("#editor").destroyEditor();
+		var id = $("#modal-editor").attr("opener");
+		var content = $("#editor").val();
+		$("#comp-" + id + "-content").val(content);
+		$("#modal-editor").addClass("hide");
+		$("#modal-mask").addClass("hide");
+		$("#editor").destroyEditor();
     };
 
     this.clickCancel = function () {
-	$("#modal-editor").addClass("hide");
-	$("#modal-mask").addClass("hide");
-	$("#editor").destroyEditor();
+		$("#modal-editor").addClass("hide");
+		$("#modal-mask").addClass("hide");
+		$("#editor").destroyEditor();
     };
 
     this.openTransferModal = function (e) {
@@ -392,15 +411,20 @@ var cUser = new function () {
 	    var t = 'POST';
 	    var u = '/' + $('#currentlanguage').val() + '/' + route["login"];
 	    var d = cForm.serialize(frm);
-	    cUser.doAsyncRequest(t, u, d, function (ret) {
-		cNotification.success(null, ret.getValue("msg"));
 
-		document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];
+    	cUser.doAsyncRequest(t, u, d, function (ret) {
+			cNotification.success(null, ret.getValue("msg"));
+			if(getParameterByName("shopping")){
+				document.location.href = '/' + $('#currentlanguage').val() + '/shop';
+			}else{
+				document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];	
+			}
 	    });
+
 	} else {
 	    cNotification.validation();
 	}
-    };
+};
 
     this.forgotMyPassword = function () {
 
