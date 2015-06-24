@@ -4,10 +4,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>GalePress</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+	<link type="text/css" rel="stylesheet" href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/plugins/chart/chart.css?t=F0RD">
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
-	<!-- <link href="{{ $baseDirectory }}comp_{{ $id }}/fonts/fonts.css" type="text/css" rel="stylesheet" /> -->
-	<!-- <link type="text/css" rel="stylesheet" href="/js/ckeditor/plugins/chart/chart.css?t=F0RD"> -->
-	<!-- <link href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/fonts.css" type="text/css" rel="stylesheet" /> -->
+	<link href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />
 	<style type="text/css">
 		*{
 			-webkit-tap-highlight-color: transparent !important;
@@ -34,7 +33,6 @@
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/lib/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/prettify.js"></script>
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.slimscroll.min.js"></script>
-	<!--<script type="text/javascript" src="/js/ckeditor/plugins/chart/chart.min.js?t=F0RD"></script>-->
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.overview').slimScroll({
@@ -53,7 +51,19 @@
 				$('body').css('background-repeat','no-repeat');
 			},100);
 		}
+		//chart render edilirken json verisi data-chart-value icerisine tekrar set ediliyor. Sebep: html " karakterini escape yapamıyor"
+		var chart = $('.chartjs').get(0).outerHTML;
+		var n = chart.indexOf("[{");
+		var nLast = chart.indexOf("}]");
+		var res = chart.substring(n, nLast+2);
+		res=res.replace(/ /g, '');
+		// console.log(res.indexOf("&quot"));
+		if(res.indexOf("&quot")==-1){
+			$('.chartjs').attr('data-chart-value',res);
+		}
 	});
     </script>
+    <script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/plugins/chart/lib/chart.min.js?t=F0RD"></script>
+	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/plugins/chart/widget2chart.js?t=F0RD"></script>
 </body>
 </html>

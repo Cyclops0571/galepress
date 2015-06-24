@@ -1,0 +1,395 @@
+@font-face {
+  font-family: 'dosis';
+  src: url(Dosis/Dosis-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'dosis';
+  src: url(Dosis/Dosis-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'dosis';
+  src: url(Dosis/Dosis-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/*************/
+@font-face {
+  font-family: 'alegreya';
+  src: url(Alegreya/Alegreya-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'alegreya';
+  src: url(Alegreya/Alegreya-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'alegreya';
+  src: url(Alegreya/Alegreya-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'alegreya';
+  src: url(Alegreya/Alegreya-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/********************/
+@font-face {
+  font-family: 'anton';
+  src: url(Anton/Anton.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/*********************/
+@font-face {
+  font-family: 'cuprum';
+  src: url(Cuprum/Cuprum-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cuprum';
+  src: url(Cuprum/Cuprum-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'cuprum';
+  src: url(Cuprum/Cuprum-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cuprum';
+  src: url(Cuprum/Cuprum-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/**************************/
+@font-face {
+  font-family: 'exo';
+  src: url(Exo/Exo-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(Exo/Exo-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(Exo/Exo-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(Exo/Exo-MediumItalic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(Exo/Exo-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(Exo/Exo-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/**************************/
+@font-face {
+  font-family: 'istok web';
+  src: url(Istok_Web/IstokWeb-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'josefinsans';
+  src: url(Josefin_Sans/JosefinSans-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(Josefin_Sans/JosefinSans-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(Josefin_Sans/JosefinSans-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(Josefin_Sans/JosefinSans-MediumItalic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(Josefin_Sans/JosefinSans-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'josefin sans';
+  src: url(Josefin_Sans/JosefinSans-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/**************************/
+@font-face {
+  font-family: 'kaushan script';
+  src: url(Kaushan_Script/KaushanScript-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'lobster';
+  src: url(Lobster/Lobster-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'marck script';
+  src: url(Marck_Script/MarckScript-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'noto serif';
+  src: url(Noto_Serif/NotoSerif-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'noto serif';
+  src: url(Noto_Serif/NotoSerif-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'noto serif';
+  src: url(Noto_Serif/NotoSerif-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'noto serif';
+  src: url(Noto_Serif/NotoSerif-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'oxygen';
+  src: url(Oxygen/Oxygen-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'oxygen';
+  src: url(Oxygen/Oxygen-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'oxygen';
+  src: url(Oxygen/Oxygen-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'oxygen';
+  src: url(Oxygen/Oxygen-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(Playfair_Display/PlayfairDisplay-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(Playfair_Display/PlayfairDisplay-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(Playfair_Display/PlayfairDisplay-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(Playfair_Display/PlayfairDisplay-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'pontano sans';
+  src: url(Pontano_Sans/PontanoSans-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'pt sans';
+  src: url(PT_Sans/PT_Sans-Web-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'pt sans';
+  src: url(PT_Sans/PT_Sans-Web-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'pt sans';
+  src: url(PT_Sans/PT_Sans-Web-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'pt sans';
+  src: url(PT_Sans/PT_Sans-Web-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'roboto';
+  src: url(Roboto/Roboto-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(Roboto/Roboto-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(Roboto/Roboto-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(Roboto/Roboto-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(Roboto/Roboto-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(Roboto/Roboto-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(Titillium_Web/TitilliumWeb-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(Titillium_Web/TitilliumWeb-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(Titillium_Web/TitilliumWeb-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(Titillium_Web/TitilliumWeb-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(Titillium_Web/TitilliumWeb-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(Titillium_Web/TitilliumWeb-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'ubuntu';
+  src: url(Ubuntu/Ubuntu-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(Ubuntu/Ubuntu-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(Ubuntu/Ubuntu-MediumItalic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(Ubuntu/Ubuntu-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(Ubuntu/Ubuntu-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(Ubuntu/Ubuntu-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
