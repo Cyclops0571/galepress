@@ -21,7 +21,7 @@
                                 </div> 
                             </div>
                             <br/>
-                            <div class="chart" id="dash_chart_1" data="{{ $downloadStatistics }}" maxdata="{{ $downloadMaxData }}" columns="{{ $columns }}" style="height: 165px; padding:1px !important; position: static !important;"></div>
+                            <div class="chart" id="dash_chart_1" data="{{ $downloadStatistics }}" maxdata="{{ $downloadMaxData }}" columns="{{ $columns }}" labelTitle="{{ __('common.dashboard_title') }}" style="height: 165px; padding:1px !important; position: static !important;"></div>
                         </div>
                         <div class="head-panel nm">
                             <div class="hp-info pull-left">
