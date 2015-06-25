@@ -3,6 +3,7 @@
 /**
  * @property int $PaymentAccountID Description
  * @property int $CustomerID Description
+ * @property int $card_token Description
  * @property int $bin Description
  * @property int $brand Description
  * @property int $expiry_month Description
