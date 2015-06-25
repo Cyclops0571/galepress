@@ -133,11 +133,13 @@ class Website_Controller extends Base_Controller
 	}
 	
 	public function post_odemeResponse() {
+		$user = Auth::User();
 		$paymentResult = "Error";
 		$response = Input::get("json");
 		$resultJson = json_decode($response, true);
 		if(isset($resultJson['transaction']['transaction_id'])) {
-			$orderToken = $resultJson['transaction']['transaction_id']; 
+//			var_dump($resultJson); exit;
+			$orderToken = $resultJson['transaction_token']; 
 			$curl = curl_init('https://api.iyzico.com/getStatus?token=' . $orderToken); 
 			curl_setopt($curl, CURLOPT_FAILONERROR, true);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
@@ -148,6 +150,31 @@ class Website_Controller extends Base_Controller
 			if(isset($result['transaction']['state']) && strstr($result['transaction']['state'],"paid")) {
 				$paymentResult = "Success";
 			}
+			
+			$paymentAccount = new PaymentAccount();
+			$paymentAccount->CustomerID = $user->CustomerID;
+			$paymentAccount->payment_count = (int)$paymentAccount->payment_count + 1;
+			$paymentAccount->last_payment_day = date("Y-m-d");
+			$paymentAccount->card_token = $result['card_token'];
+			$paymentAccount->bin = $result['account']['bin'];
+			$paymentAccount->brand = $result['account']['brand'];
+			$paymentAccount->expiry_month = $result['account']['expiry_month'];
+			$paymentAccount->expiry_year = $result['account']['expiry_year'];
+			$paymentAccount->last_4_digits = $result['account']['last_4_digits'];
+			$paymentAccount->holder = $result['account']['holder'];
+			$paymentAccount->save();
+			
+			$paymentTransaction = new PaymentTransaction();
+			$paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+			$paymentTransaction->CustomerID = $user->CustomerID;
+			$paymentTransaction->transaction_id = $result['transaction']['transaction_id'];
+			$paymentTransaction->transaction_token = $result['transaction_token'];
+			$paymentTransaction->external_id = $result['transaction']['external_id'];
+			$paymentTransaction->reference_id = $result['transaction']['reference_id'];
+			$paymentTransaction->state = $result['transaction']['state'];
+			$paymentTransaction->amount = $result['transaction']['amount'];
+			$paymentTransaction->currency = $result['transaction']['currency'];
+			$paymentTransaction->save();
 		}
 		// var_dump($resultJson);
 		// die;
