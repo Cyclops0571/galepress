@@ -313,13 +313,26 @@
 		      </div>
 		      <form action="/odeme" method="post" id="userInfos">
 			      <div class="modal-body">
+			      		<div class="form-group">
+			      			<!-- KONTROLLER YAPILACAK -->
+						    <label for="InputTc">Tc Kimlik No</label>
+						    <input id="tc" class="form-control required tc" maxlength="11" name="tc" size="20" type="number" tabindex="1" value="" placeholder="Kimlik Numarası" required>
+						</div>
+						<div class="form-group">
+						    <label for="InputAddress">Adres</label>
+						    <input id="address" class="form-control required address" maxlength="100" name="address" size="20" type="text" tabindex="2" value="" placeholder="Adres Bilgisi" required>
+						</div>
+						<div class="form-group">
+						    <label for="InputCountry">Ülke</label>
+						    <input id="country" class="form-control required country" maxlength="25" name="country" size="20" type="text" tabindex="3" value="Türkiye" placeholder="Ülke Bilgisi" required>
+						</div>
 				        <div class="form-group">
 						    <label for="InputEmail">Email Adresi</label>
-						    <input id="email" class="form-control required email" maxlength="40" name="email" size="20" type="email" tabindex="11" value="" placeholder="Email" required>
+						    <input id="email" class="form-control required email" maxlength="25" name="email" size="20" type="email" tabindex="4" value="" placeholder="Email" required>
 						</div>
 						<div class="form-group">
 						    <label for="InputPhone">Telefon</label>
-						    <input id="phone" maxlength="14" name="phone" type="text" class="form-control required phone" tabindex="10" value="" placeholder="Telefon" required>
+						    <input id="phone" maxlength="14" name="phone" size="20" type="text" class="form-control required phone" tabindex="5" value="" placeholder="Telefon" required>
 						</div>
 						<div class="form-group errorMsg hide" style="color:#CA0101;">
 							<span>Lütfen bilgilerinizi kontrol edin...</span>
