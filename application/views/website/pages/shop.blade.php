@@ -316,7 +316,7 @@
 			      		<div class="form-group">
 			      			<!-- KONTROLLER YAPILACAK -->
 						    <label for="InputTc">Tc Kimlik No</label>
-						    <input class="form-control required tc" id="tc" name="tc" type="text" maxlength="11" tabindex="1" pattern="([0-9]|[0-9]|[0-9])" placeholder="Kimlik Numarası" required/>
+						    <input class="form-control required tc" id="tc" name="tc" type="text" maxlength="11" tabindex="1" placeholder="Kimlik Numarası" required/>
 						</div>
 						<div class="form-group">
 						    <label for="InputAddress">Adres</label>
@@ -377,6 +377,7 @@
 			    $("#tc").val(this.value.match(/[0-9]*/));
 			});
 
+
 			$("#phone").mask("(999) 999-9999", {placeholder: "(___) __ ____"});
 
 			$("#userInfos").bind("submit", function() {
@@ -387,7 +388,12 @@
 				var phonePattern = /[0-9]/;
 				var mailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 				// console.log(phone.length);
-			    if ( phone.length < 14 || !phonePattern.test(phone) ) {
+				if($("#tc").val().length<11){
+					$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir tc kimlik numarası girin.');
+					$('#tc').focus();
+					return false;
+				}
+			    else if( phone.length < 14 || !phonePattern.test(phone) ) {
 			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir telefon adresi girin.');
 			    	$('#phone').focus();
 			        return false;
