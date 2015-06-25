@@ -1427,7 +1427,7 @@ input[type="checkbox"][readonly] {
   /*background-image: image-url("slideshow/next.png");*/
   left: auto;
   right: -20px;
-  z-index: 9999;
+  z-index: 9994;
 }
 /* line 55, ../sass/modules/slideshow.scss */
 .slideshow .show-slide > i {

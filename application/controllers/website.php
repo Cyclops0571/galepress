@@ -176,6 +176,8 @@ class Website_Controller extends Base_Controller
 			$paymentTransaction->currency = $result['transaction']['currency'];
 			$paymentTransaction->save();
 		}
+		// var_dump($resultJson);
+		// die;
 		return Redirect::to_route("website_payment_result_get", array($paymentResult));
 	}
 	

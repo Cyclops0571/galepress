@@ -26,26 +26,6 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about' }
 	];
 
-	config.font_names =
-	    'Roboto;' +
-	    'TitilliumWeb;' +
-	    'Ubuntu;' +
-	    'PT Sans;' +
-	    'Lobster;' +
-	    'Oxygen;' +
-	    'Play fair Display;' +
-	    'Dosis;' +
-	    'Noto Serif;' +
-	    'Josefin Sans;' +
-	    'Cuprum;' +
-	    'Anton;' +
-	    'Alegreya;' +
-	    'Exo;' +
-	    'Pontano Sans;' +
-	    'Istok Web;' +
-	    'Kaushan Script;' +
-	    'Marck Script;';
-
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';

@@ -336,16 +336,16 @@ $(document).ready(function() {
  
 	    $("#dash_chart_1").bind("plothover", function (event, pos, item) {
 	        
-	        $("#x").text(pos.x.toFixed(2));
-	        $("#y").text(pos.y.toFixed(2));
+	        $("#x").text(pos.x.toFixed(0));
+	        $("#y").text(pos.y.toFixed(0));
 
 	        if (item) {
 	            if (previousPoint != item.dataIndex) {
 	                previousPoint = item.dataIndex;
 
 	                $(".ftooltip").remove();
-	                var x = item.datapoint[0].toFixed(2),
-	                    y = item.datapoint[1].toFixed(2);
+	                var x = item.datapoint[0].toFixed(0),
+	                    y = item.datapoint[1].toFixed(0);
 
 	                showTooltip(item.pageX, item.pageY,
 	                            item.series.label + ": " + y);
@@ -359,16 +359,16 @@ $(document).ready(function() {
 
 	    $("#dash_chart_2").bind("plothover", function (event, pos, item) {
 	        
-	        $("#x").text(pos.x.toFixed(2));
-	        $("#y").text(pos.y.toFixed(2));
+	        $("#x").text(pos.x.toFixed(0));
+	        $("#y").text(pos.y.toFixed(0));
 
 	        if (item) {
 	            if (previousPoint != item.dataIndex) {
 	                previousPoint = item.dataIndex;
 
 	                $(".ftooltip").remove();
-	                var x = item.datapoint[0].toFixed(2),
-	                    y = item.datapoint[1].toFixed(2);
+	                var x = item.datapoint[0].toFixed(0),
+	                    y = item.datapoint[1].toFixed(0);
 
 	                showTooltip(item.pageX, item.pageY,
 	                            item.series.label + ": " + y);
@@ -391,9 +391,10 @@ $(document).ready(function() {
 	    var attrData = $("#dash_chart_1").attr("data").split('-');
 	    var attrColumns = $("#dash_chart_1").attr("columns").split('-');
 	    var attrMaxData = parseInt($("#dash_chart_1").attr("maxdata"));
+	    var labelTitle = $("#dash_chart_1").attr("labelTitle");
 	    //var data  = [ [1, 25], [2, 28], [3, 22], [4, 18], [5, 30], [6, 18], [7,14] ];
 	    var data  = [ [1, parseInt(attrData[0])], [2, parseInt(attrData[1])], [3, parseInt(attrData[2])], [4, parseInt(attrData[3])], [5, parseInt(attrData[4])], [6, parseInt(attrData[5])], [7, parseInt(attrData[6])] ];
-	    var plot1 = $.plotAnimator($("#dash_chart_1"), [{ data: data, animator: {steps: 50}, lines: { show: true, fill: false }, label: "İndirilme" }],{ 
+	    var plot1 = $.plotAnimator($("#dash_chart_1"), [{ data: data, animator: {steps: 50}, lines: { show: true, fill: false }, label: labelTitle }],{ 
 	                                      series: {lines: { show: true }, points: { show: false }},
 	                                      grid: { hoverable: true, clickable: true, margin: {left: 110}},
 	                                      xaxis: {ticks: [[1, attrColumns[6]],[2, attrColumns[5]],[3, attrColumns[4]],[4, attrColumns[3]],[5, attrColumns[2]],[6, attrColumns[1]],[7,attrColumns[0]]]},
@@ -402,7 +403,7 @@ $(document).ready(function() {
 
 	    //İndirilme Sayısı istatistiğindeki animasyonun sonunda çalışacak olan kod bloğu. Çizgideki noktaları getirir.
 	    $("#dash_chart_1").on("animatorComplete", function() {
-	      plot2 = $.plot($("#dash_chart_1"), [{ data: data, label: "İndirilme"}],{ 
+	      plot2 = $.plot($("#dash_chart_1"), [{ data: data, label: labelTitle}],{ 
 	                                      series: {lines: { show: true }, points: { show: true }},
 	                                      grid: { hoverable: true, clickable: true, margin: {left: 110}},
 	                                      xaxis: {ticks: [[1, attrColumns[6]],[2, attrColumns[5]],[3, attrColumns[4]],[4, attrColumns[3]],[5, attrColumns[2]],[6, attrColumns[1]],[7,attrColumns[0]]]},

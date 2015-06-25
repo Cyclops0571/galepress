@@ -1,0 +1,395 @@
+@font-face {
+  font-family: 'dosis';
+  src: url(/css/ckeditor/fonts/Dosis/Dosis-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'dosis';
+  src: url(/css/ckeditor/fonts/Dosis/Dosis-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'dosis';
+  src: url(/css/ckeditor/fonts/Dosis/Dosis-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/*************/
+@font-face {
+  font-family: 'alegreya';
+  src: url(/css/ckeditor/fonts/Alegreya/Alegreya-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'alegreya';
+  src: url(/css/ckeditor/fonts/Alegreya/Alegreya-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'alegreya';
+  src: url(/css/ckeditor/fonts/Alegreya/Alegreya-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'alegreya';
+  src: url(/css/ckeditor/fonts/Alegreya/Alegreya-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/********************/
+@font-face {
+  font-family: 'anton';
+  src: url(/css/ckeditor/fonts/Anton/Anton.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/*********************/
+@font-face {
+  font-family: 'cuprum';
+  src: url(/css/ckeditor/fonts/Cuprum/Cuprum-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cuprum';
+  src: url(/css/ckeditor/fonts/Cuprum/Cuprum-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'cuprum';
+  src: url(/css/ckeditor/fonts/Cuprum/Cuprum-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'cuprum';
+  src: url(/css/ckeditor/fonts/Cuprum/Cuprum-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/**************************/
+@font-face {
+  font-family: 'exo';
+  src: url(/css/ckeditor/fonts/Exo/Exo-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(/css/ckeditor/fonts/Exo/Exo-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(/css/ckeditor/fonts/Exo/Exo-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(/css/ckeditor/fonts/Exo/Exo-MediumItalic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(/css/ckeditor/fonts/Exo/Exo-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'exo';
+  src: url(/css/ckeditor/fonts/Exo/Exo-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/**************************/
+@font-face {
+  font-family: 'istok web';
+  src: url(/css/ckeditor/fonts/Istok_Web/IstokWeb-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'josefinsans';
+  src: url(/css/ckeditor/fonts/Josefin_Sans/JosefinSans-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(/css/ckeditor/fonts/Josefin_Sans/JosefinSans-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(/css/ckeditor/fonts/Josefin_Sans/JosefinSans-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(/css/ckeditor/fonts/Josefin_Sans/JosefinSans-MediumItalic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'josefinsans';
+  src: url(/css/ckeditor/fonts/Josefin_Sans/JosefinSans-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'josefin sans';
+  src: url(/css/ckeditor/fonts/Josefin_Sans/JosefinSans-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/**************************/
+@font-face {
+  font-family: 'kaushan script';
+  src: url(/css/ckeditor/fonts/Kaushan_Script/KaushanScript-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'lobster';
+  src: url(/css/ckeditor/fonts/Lobster/Lobster-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'marck script';
+  src: url(/css/ckeditor/fonts/Marck_Script/MarckScript-Regular.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'noto serif';
+  src: url(/css/ckeditor/fonts/Noto_Serif/NotoSerif-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'noto serif';
+  src: url(/css/ckeditor/fonts/Noto_Serif/NotoSerif-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'noto serif';
+  src: url(/css/ckeditor/fonts/Noto_Serif/NotoSerif-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'noto serif';
+  src: url(/css/ckeditor/fonts/Noto_Serif/NotoSerif-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'oxygen';
+  src: url(/css/ckeditor/fonts/Oxygen/Oxygen-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'oxygen';
+  src: url(/css/ckeditor/fonts/Oxygen/Oxygen-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'oxygen';
+  src: url(/css/ckeditor/fonts/Oxygen/Oxygen-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'oxygen';
+  src: url(/css/ckeditor/fonts/Oxygen/Oxygen-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(/css/ckeditor/fonts/Playfair_Display/PlayfairDisplay-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(/css/ckeditor/fonts/Playfair_Display/PlayfairDisplay-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(/css/ckeditor/fonts/Playfair_Display/PlayfairDisplay-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'playfairdisplay';
+  src: url(/css/ckeditor/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'pontano sans';
+  src: url(/css/ckeditor/fonts/Pontano_Sans/PontanoSans-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'pt sans';
+  src: url(/css/ckeditor/fonts/PT_Sans/PT_Sans-Web-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'pt sans';
+  src: url(/css/ckeditor/fonts/PT_Sans/PT_Sans-Web-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'pt sans';
+  src: url(/css/ckeditor/fonts/PT_Sans/PT_Sans-Web-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'pt sans';
+  src: url(/css/ckeditor/fonts/PT_Sans/PT_Sans-Web-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'roboto';
+  src: url(/css/ckeditor/fonts/Roboto/Roboto-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(/css/ckeditor/fonts/Roboto/Roboto-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(/css/ckeditor/fonts/Roboto/Roboto-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(/css/ckeditor/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(/css/ckeditor/fonts/Roboto/Roboto-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto';
+  src: url(/css/ckeditor/fonts/Roboto/Roboto-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(/css/ckeditor/fonts/Titillium_Web/TitilliumWeb-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(/css/ckeditor/fonts/Titillium_Web/TitilliumWeb-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(/css/ckeditor/fonts/Titillium_Web/TitilliumWeb-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(/css/ckeditor/fonts/Titillium_Web/TitilliumWeb-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(/css/ckeditor/fonts/Titillium_Web/TitilliumWeb-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'titilliumweb';
+  src: url(/css/ckeditor/fonts/Titillium_Web/TitilliumWeb-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+/**************************/
+@font-face {
+  font-family: 'ubuntu';
+  src: url(/css/ckeditor/fonts/Ubuntu/Ubuntu-Bold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(/css/ckeditor/fonts/Ubuntu/Ubuntu-BoldItalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(/css/ckeditor/fonts/Ubuntu/Ubuntu-MediumItalic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(/css/ckeditor/fonts/Ubuntu/Ubuntu-Medium.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(/css/ckeditor/fonts/Ubuntu/Ubuntu-LightItalic.ttf) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'ubuntu';
+  src: url(/css/ckeditor/fonts/Ubuntu/Ubuntu-Light.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
