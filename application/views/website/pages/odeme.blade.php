@@ -1,8 +1,9 @@
 <?php
+$user = Auth::User();
 $url = "https://api.iyzico.com/v2/create";   // sorgularda kullanacağımız endpoint
 $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
 '&secret=im0339018007d7a8f10f1c1434712720' . // size özel iyzico secret
-'&external_id=GalepressAylikOdeme_' . date('YmdHisu') . //sipariş numarası olarka kullanabileceğimizalan
+'&external_id=' . $user->CustomerID . //sipariş numarası olarka kullanabileceğimizalan
 '&mode=' . Config::get("custom.payment_environment") . // live olmalı, gerçek ödeme alabilmek için
 '&type=RG.DB' . // iyzico form yükleme tipi. Kart saklayan form yüklemesi.
 '&return_url=' . Config::get("custom.payment_url") . '/payment-response'. //bu ödemenin sonucunu ben hangi sayfaya dönmeliyim. Sitenizde bu ödemeye ait sonuç nereye dönsün. Başarılımı başarısız mı orada anlayacağız.
