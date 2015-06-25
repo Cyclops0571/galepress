@@ -316,7 +316,7 @@
 			      		<div class="form-group">
 			      			<!-- KONTROLLER YAPILACAK -->
 						    <label for="InputTc">Tc Kimlik No</label>
-						    <input id="tc" class="form-control required tc" maxlength="11" name="tc" size="20" type="number" tabindex="1" value="" placeholder="Kimlik Numarası" required>
+						    <input class="form-control required tc" id="tc" name="tc" type="text" maxlength="11" tabindex="1" pattern="([0-9]|[0-9]|[0-9])" placeholder="Kimlik Numarası" required/>
 						</div>
 						<div class="form-group">
 						    <label for="InputAddress">Adres</label>
@@ -372,6 +372,10 @@
 
 		<script type="text/javascript">
 		$(function(){
+
+			$("#tc").keyup(function() {
+			    $("#tc").val(this.value.match(/[0-9]*/));
+			});
 
 			$("#phone").mask("(999) 999-9999", {placeholder: "(___) __ ____"});
 
