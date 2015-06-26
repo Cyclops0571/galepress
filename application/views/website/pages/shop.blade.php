@@ -118,6 +118,10 @@
 			.toggle-group{
 				width: 187%;
 			}
+			.modal .modal-dialog{
+				height: 100%;
+  				overflow-y: auto;
+			}
 		</style>
 
 	</head>
