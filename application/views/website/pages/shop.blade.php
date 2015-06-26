@@ -401,13 +401,13 @@
 						<div class="form-group hide">
 						    <label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
 						    <div class="col-xs-9">
-						    	<input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="" placeholder="Vergi Dairesi" required>
+						    	<input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="null" placeholder="Vergi Dairesi" required>
 							</div>
 						</div>
 						<div class="form-group hide">
 						    <label for="taxNo" class="control-label col-xs-3">Vergi No</label>
 						    <div class="col-xs-9">
-						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="" placeholder="Vergi Numarası" required>
+						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="null" placeholder="Vergi Numarası" required>
 							</div>
 						</div>
 						<div class="form-group errorMsg hide" style="color:#CA0101;">
@@ -474,15 +474,11 @@
 			    if( phone.length < 14 || !phonePattern.test(phone) ) {
 			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir telefon adresi girin.');
 			    	$('#phone').focus();
-			    	$('.modal-body').addClass('hide');
-			    	$('.modal-body.stage1').removeClass('hide');
 			        return false;
 			    }
 			    else if(email=="" || !mailPattern.test(email)){
 			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir email adresi girin.');
 			    	$('#email').focus();
-			    	$('.modal-body').addClass('hide');
-			    	$('.modal-body.stage1').removeClass('hide');
 			        return false;
 			    }
 			    else if($("#tc").val().length<11){
@@ -490,7 +486,7 @@
 					$('#tc').focus();
 					return false;
 				}
-			    else{
+			    else {
 			    	$('.errorMsg').addClass('hide');
 			    	// return false;
 			    }
