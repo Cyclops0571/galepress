@@ -410,7 +410,7 @@
 						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="null" placeholder="Vergi Numarası" required>
 							</div>
 						</div>
-						<div class="form-group errorMsg hide" style="color:#CA0101;">
+						<div class="form-group errorMsg hide" style="color:#CA0101; text-align:center;">
 							<span>Lütfen bilgilerinizi kontrol edin...</span>
 						</div>
 			      </div>
@@ -454,6 +454,14 @@
 			$('#customerType').change(function() {
 			   	$('#taxOffice').closest('.form-group').toggleClass('hide');
 			    $('#taxNo').closest('.form-group').toggleClass('hide');
+			    if(!$(this).prop('checked')){
+			    	$('#taxOffice').val("");
+			    	$('#taxNo').val("");
+			    }
+			    else{
+			    	$('#taxOffice').val("null");
+			    	$('#taxNo').val("null");
+			    }
 			});
 
 			$("#tc").keyup(function() {
@@ -484,6 +492,16 @@
 			    else if($("#tc").val().length<11){
 					$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir tc kimlik numarası girin.');
 					$('#tc').focus();
+					return false;
+				}
+				else if($("#region").val()==null){
+					$('.errorMsg').removeClass('hide').text('Lütfen bölge seçiniz.');
+					$('#region').focus();
+					return false;
+				}
+				else if($("#city").val()==null){
+					$('.errorMsg').removeClass('hide').text('Lütfen şehir seçiniz.');
+					$('#city').focus();
 					return false;
 				}
 			    else {
