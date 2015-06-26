@@ -52,6 +52,8 @@
 		<!--[if lte IE 8]>
 			<script src="/website/styles/shop/vendor/respond.js"></script>
 		<![endif]-->
+
+		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
 		<style type="text/css">
 			*{
 				font-family: 'Titillium Web', sans-serif !important;
@@ -108,6 +110,13 @@
 			}
 			.logo.logo-sticky-active img{
 				top: 32px !important;
+			}
+			.modal .modal-body {
+			    max-height: 420px;
+			    overflow-y: scroll;
+			}
+			.toggle-group{
+				width: 187%;
 			}
 		</style>
 
@@ -311,28 +320,81 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		        <h4 class="modal-title">Ödeme Sayfasına Doğru...</h4>
 		      </div>
-		      <form action="/odeme" method="post" id="userInfos">
+		      <form action="/odeme" method="post" id="userInfos" class="form-horizontal">
 			      <div class="modal-body">
 			      		<div class="form-group">
-			      			<!-- KONTROLLER YAPILACAK -->
-						    <label for="InputTc">Tc Kimlik No</label>
-						    <input class="form-control required tc" id="tc" name="tc" type="text" maxlength="11" tabindex="1" placeholder="Kimlik Numarası" required/>
+						    <label for="customerType" class="control-label col-xs-3" style="padding-top: 16px;">Bireysel / Kurumsal</label>
+						    <div class="col-xs-9">
+			      				<input class="form-control required" type="checkbox" checked data-toggle="toggle" data-size="normal" id="customerType" name="customerType" data-onstyle="success" data-offstyle="info" data-on="Bireysel" data-off="Kurumsal" data-width="200">
+						    </div>
 						</div>
 						<div class="form-group">
-						    <label for="InputAddress">Adres</label>
-						    <input id="address" class="form-control required address" maxlength="100" name="address" size="20" type="text" tabindex="2" value="" placeholder="Adres Bilgisi" required>
+						    <label for="email" class="control-label col-xs-3">Email Adresi</label>
+						    <div class="col-xs-9">
+						    	<input id="email" class="form-control required" maxlength="25" name="email" size="20" type="email" tabindex="1" value="" placeholder="Email" required>
+						    </div>
 						</div>
 						<div class="form-group">
-						    <label for="InputCountry">Ülke</label>
-						    <input id="country" class="form-control required country" maxlength="25" name="country" size="20" type="text" tabindex="3" value="Türkiye" placeholder="Ülke Bilgisi" required>
+						    <label for="phone" class="control-label col-xs-3">Telefon</label>
+						    <div class="col-xs-9">
+						    	<input id="phone" maxlength="14" name="phone" size="20" type="text" class="form-control required" tabindex="2" value="" placeholder="Telefon" required>
+						    </div>
 						</div>
-				        <div class="form-group">
-						    <label for="InputEmail">Email Adresi</label>
-						    <input id="email" class="form-control required email" maxlength="25" name="email" size="20" type="email" tabindex="4" value="" placeholder="Email" required>
+						<hr>
+						<h5 class="col-xs-12">FATURA BİLGİLERİ</h5>
+						<div class="form-group">
+						    <label for="customerTitle" class="control-label col-xs-3">Ünvan</label>
+						    <div class="col-xs-9">
+						    	<input id="customerTitle" class="form-control required" maxlength="100" name="customerTitle" size="20" type="text" tabindex="6" value="" placeholder="Birey veya Şirket Unvanı" required>
+							</div>
+						</div>
+			      		<div class="form-group">
+						    <label for="tc" class="control-label col-xs-3">Tc Kimlik No</label>
+						    <div class="col-xs-9">
+						    	<input class="form-control required" id="tc" name="tc" type="text" maxlength="11" tabindex="3" placeholder="Kimlik Numarası" required/>
+						    </div>
 						</div>
 						<div class="form-group">
-						    <label for="InputPhone">Telefon</label>
-						    <input id="phone" maxlength="14" name="phone" size="20" type="text" class="form-control required phone" tabindex="5" value="" placeholder="Telefon" required>
+						    <label for="country" class="control-label col-xs-3">Ülke</label>
+						    <div class="col-xs-9">
+						    	<input id="country" class="form-control required" maxlength="25" name="country" size="20" type="text" tabindex="4" value="Türkiye" placeholder="Ülke Bilgisi" required disabled>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label for="region" class="control-label col-xs-3">Bölge</label>
+						    <div class="col-xs-9">
+						    	<input id="region" class="form-control required" maxlength="100" name="region" size="20" type="text" tabindex="6" value="" placeholder="Bölge Bilgisi" required>
+							</div>
+						</div>
+						<div class="form-group">
+						    <label for="city" class="control-label col-xs-3">Şehir</label>
+						    <div class="col-xs-9">
+						    	<input id="city" class="form-control required" maxlength="25" name="city" size="20" type="text" tabindex="5" value="" placeholder="Şehir Bilgisi" required>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label for="address" class="control-label col-xs-3">Adres</label>
+						    <div class="col-xs-9">
+						    	<input id="address" class="form-control required" maxlength="100" name="address" size="20" type="text" tabindex="6" value="" placeholder="Adres Bilgisi" required>
+							</div>
+						</div>
+						<div class="form-group">
+						    <label for="streetHouseNo" class="control-label col-xs-3">Sokak ve Konut Numarası</label>
+						    <div class="col-xs-9">
+						    	<input id="streetHouseNo" class="form-control required" maxlength="100" name="streetHouseNo" size="20" type="text" tabindex="6" value="" placeholder="221. Sok. No:5" required>
+							</div>
+						</div>
+						<div class="form-group">
+						    <label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
+						    <div class="col-xs-9">
+						    	<input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="" placeholder="Vergi Dairesi" required>
+							</div>
+						</div>
+						<div class="form-group">
+						    <label for="taxNo" class="control-label col-xs-3">Vergi No</label>
+						    <div class="col-xs-9">
+						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="" placeholder="Vergi Numarası" required>
+							</div>
 						</div>
 						<div class="form-group errorMsg hide" style="color:#CA0101;">
 							<span>Lütfen bilgilerinizi kontrol edin...</span>
@@ -369,6 +431,8 @@
 		<!-- Custom JS -->
 		<script src="/website/scripts/shop/custom.js"></script>
 		<script src="/website/scripts/shop/validate/jquery.mask.min.js"></script>
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
 
 		<script type="text/javascript">
 		$(function(){
@@ -377,8 +441,8 @@
 			    $("#tc").val(this.value.match(/[0-9]*/));
 			});
 
-
 			$("#phone").mask("(999) 999-9999", {placeholder: "(___) __ ____"});
+		
 
 			$("#userInfos").bind("submit", function() {
 
@@ -387,22 +451,26 @@
 
 				var phonePattern = /[0-9]/;
 				var mailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-				// console.log(phone.length);
-				if($("#tc").val().length<11){
-					$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir tc kimlik numarası girin.');
-					$('#tc').focus();
-					return false;
-				}
-			    else if( phone.length < 14 || !phonePattern.test(phone) ) {
+
+			    if( phone.length < 14 || !phonePattern.test(phone) ) {
 			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir telefon adresi girin.');
 			    	$('#phone').focus();
+			    	$('.modal-body').addClass('hide');
+			    	$('.modal-body.stage1').removeClass('hide');
 			        return false;
 			    }
 			    else if(email=="" || !mailPattern.test(email)){
 			    	$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir email adresi girin.');
 			    	$('#email').focus();
+			    	$('.modal-body').addClass('hide');
+			    	$('.modal-body.stage1').removeClass('hide');
 			        return false;
 			    }
+			    else if($("#tc").val().length<11){
+					$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir tc kimlik numarası girin.');
+					$('#tc').focus();
+					return false;
+				}
 			    else{
 			    	$('.errorMsg').addClass('hide');
 			    	// return false;

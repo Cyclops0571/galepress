@@ -1282,6 +1282,7 @@
 											$('html,body').css('width','100%').css('height','100%');
 											$('#wrapper').css('position','fixed').css('display','none');
 											$('.cke_button__maximize').css('display','none');
+											$('.cke_button__chart').css('display','none');
 											$('.cke_top.cke_reset_all').append($( ".action" ));
 											$( ".action" ).addClass('ckeditorConfirm');
 											$('.cke_maximized').css('top','0').css('position','fixed');
@@ -1648,6 +1649,7 @@
 											$('html,body').css('width','100%').css('height','100%');
 											$('#wrapper').css('position','fixed').css('display','none');
 											$('.cke_button__maximize').css('display','none');
+											$('.cke_button__chart').css('display','none');
 											$('.cke_top.cke_reset_all').append($( ".action" ));
 											$( ".action" ).addClass('ckeditorConfirm');
 											$('.cke_maximized').css('top','0').css('position','fixed');
