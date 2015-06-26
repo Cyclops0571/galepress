@@ -70,6 +70,8 @@ class BackupDatabase_Task {
 		$result = shell_exec($scpCommand);
 		$result .= "Database backup islemi sorunsuz calisti.";
 		Common::sendStatusMail($result);
+		chmod('/home/admin/domains/galepress.com/public_html/storage/logs/' . date('Y-m-d') . ".log", "777");
+		
 		
 		// <editor-fold defaultstate="collapsed" desc="old_Version Mail code">
 		/*
