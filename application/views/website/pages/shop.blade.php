@@ -363,7 +363,16 @@
 						<div class="form-group">
 						    <label for="region" class="control-label col-xs-3">Bölge</label>
 						    <div class="col-xs-9">
-						    	<input id="region" class="form-control required" maxlength="100" name="region" size="20" type="text" tabindex="6" value="" placeholder="Bölge Bilgisi" required>
+						    	<select id="region" class="form-control required" name="region" tabindex="6" placeholder="Bölge Bilgisi" required>
+						    		<option selected="selected" disabled="disabled">Bölge Seçiniz</option>
+									<option>Akdeniz Bölgesi</option>
+									<option>Doğu Anadolu Bölgesi</option>
+									<option>Ege Bölgesi</option>
+									<option>Güneydoğu Anadolu Bölgesi</option>
+									<option>İç Anadolu Bölgesi</option>
+									<option>Marmara Bölgesi</option>
+									<option>Karadeniz Bölgesi</option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -375,7 +384,7 @@
 						<div class="form-group">
 						    <label for="address" class="control-label col-xs-3">Adres</label>
 						    <div class="col-xs-9">
-						    	<input id="address" class="form-control required" maxlength="100" name="address" size="20" type="text" tabindex="6" value="" placeholder="Adres Bilgisi" required>
+						    	<textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi" required rows="4"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
