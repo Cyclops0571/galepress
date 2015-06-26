@@ -112,7 +112,7 @@
 				top: 32px !important;
 			}
 			.modal .modal-body {
-			    max-height: 420px;
+			    max-height: 400px;
 			    overflow-y: scroll;
 			}
 			.toggle-group{
@@ -384,13 +384,13 @@
 						    	<input id="streetHouseNo" class="form-control required" maxlength="100" name="streetHouseNo" size="20" type="text" tabindex="6" value="" placeholder="221. Sok. No:5" required>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 						    <label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
 						    <div class="col-xs-9">
 						    	<input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="" placeholder="Vergi Dairesi" required>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 						    <label for="taxNo" class="control-label col-xs-3">Vergi No</label>
 						    <div class="col-xs-9">
 						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="" placeholder="Vergi Numarası" required>
@@ -436,6 +436,11 @@
 
 		<script type="text/javascript">
 		$(function(){
+
+			$('#customerType').change(function() {
+			   	$('#taxOffice').closest('.form-group').toggleClass('hide');
+			    $('#taxNo').closest('.form-group').toggleClass('hide');
+			});
 
 			$("#tc").keyup(function() {
 			    $("#tc").val(this.value.match(/[0-9]*/));
