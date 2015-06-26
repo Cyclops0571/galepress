@@ -113,7 +113,10 @@
 			}
 			.modal .modal-body {
 			    max-height: 420px;
-			    overflow-y: overlay;
+			    overflow-y: scroll;
+			}
+			.toggle-group{
+				width: 187%;
 			}
 		</style>
 
