@@ -414,7 +414,7 @@
 						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="null" placeholder="Vergi Numarası" required>
 							</div>
 						</div>
-						<div class="form-group errorMsg hide" style="color:#CA0101; text-align:center;">
+						<div class="form-group errorMsg hide" style="color:#CA0101; text-align:center; font-size:18px;">
 							<span>Lütfen bilgilerinizi kontrol edin...</span>
 						</div>
 			      </div>
