@@ -118,7 +118,10 @@ class Website_Controller extends Base_Controller
 
 	public function get_shop()
 	{
-		return View::make('website.pages.shop');
+		$customerData = array();
+
+		$customerData['city'] = City::all();
+		return View::make('website.pages.shop', $customerData);
 	}
 	public function post_odeme()
 	{

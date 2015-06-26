@@ -378,7 +378,12 @@
 						<div class="form-group">
 						    <label for="city" class="control-label col-xs-3">Şehir</label>
 						    <div class="col-xs-9">
-						    	<input id="city" class="form-control required" maxlength="25" name="city" size="20" type="text" tabindex="5" value="" placeholder="Şehir Bilgisi" required>
+						    	<select id="city" class="form-control required" name="city" tabindex="6" placeholder="Şehir Bilgisi" required>
+						    		<option selected="selected" disabled="disabled">Şehir Seçiniz</option>
+						    		@foreach($city as $c)
+									<option value="{{$c->CityID}}">{{$c->CityName}}</option>
+									@endforeach
+								</select>
 						    </div>
 						</div>
 						<div class="form-group">
@@ -390,7 +395,7 @@
 						<div class="form-group">
 						    <label for="streetHouseNo" class="control-label col-xs-3">Sokak ve Konut Numarası</label>
 						    <div class="col-xs-9">
-						    	<input id="streetHouseNo" class="form-control required" maxlength="100" name="streetHouseNo" size="20" type="text" tabindex="6" value="" placeholder="221. Sok. No:5" required>
+						    	<input id="streetHouseNo" class="form-control required" maxlength="100" name="streetHouseNo" size="20" type="text" tabindex="6" value="" placeholder="... Sok. No:..." required>
 							</div>
 						</div>
 						<div class="form-group hide">
