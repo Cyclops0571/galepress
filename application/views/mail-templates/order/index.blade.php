@@ -516,7 +516,7 @@ ul
     <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:22.5pt">
      <td width="300" rowspan="2" style="width:200.0pt;padding:0cm 0cm 0cm 0cm;
      height:22.5pt">
-     <p class="MsoNormal"><a href="http://www.GALEPRESS.COM/?kid=400005_24062015_anasayfa" target="_blank" title="GALEPRESS.COM"><span style="text-decoration:none;text-underline:none"><img border="0" width="210" id="_x0000_i1026" src="http://www.galepress.com/website/img/logo-dark.png" alt="GALEPRESS.COM" style="margin-top:15px;"></span></a></p>
+     <p class="MsoNormal"><a href="http://www.galepress.com/?kid=400005_24062015_anasayfa" target="_blank" title="GALEPRESS.COM"><span style="text-decoration:none;text-underline:none"><img border="0" width="210" id="_x0000_i1026" src="http://www.galepress.com/website/img/logo-dark.png" alt="GALEPRESS.COM" style="margin-top:15px;"></span></a></p>
      </td>
      <td valign="bottom" style="padding:0cm 0cm 0cm 0cm;height:22.5pt">
      <p class="MsoNormal"><span style="font-size:8.5pt;color:#7F7F7F">{$date}<o:p></o:p></span></p>
