@@ -2055,6 +2055,6 @@
     </script>
     </div>
     <script src="/website/app-form/js/bootstrap.js"></script>
-    <script src="/website/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="/website/scripts/jquery.inputlimiter.1.3.1.min.js"></script>
 </body>
 </html>
