@@ -25,7 +25,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'colors' },
 		{ name: 'about' }
 	];
-
+	
 	config.font_names =
 	    'Roboto;' +
 	    'TitilliumWeb;' +
