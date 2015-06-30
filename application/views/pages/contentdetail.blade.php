@@ -487,6 +487,7 @@
 					        	<a href="#modal_default_10" class="btn delete expand remove" style="width:100%;" data-toggle="modal">{{ __('common.detailpage_delete') }}</a>
 					        </div>
 					        <div class="col-md-2">
+					        	<!-- HATA OLDUGU ICIN GIZLENDI -->
 	                    		<input type="button" value="{{ __('common.contents_copy_btn') }}" class="btn my-btn-send" onclick="cContent.copy();" />
 							</div>
 					        <div class="col-md-2">

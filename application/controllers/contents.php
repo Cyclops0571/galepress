@@ -573,6 +573,19 @@ class Contents_Controller extends Base_Controller {
 				return;
 			}
 			else {
+
+				$contentFilePageNewCount = DB::table('ContentFilePage')
+							->where('ContentFileID', '=', $targetContentFileID)//****************
+							->count();
+
+				$targetApplicationID = DB::table('Content')
+							->where('ContentID', '=', $targetContentID)//****************
+							->first();
+
+				$targetCustomerID = DB::table('Application')
+							->where('ApplicationID', '=', $targetApplicationID->ApplicationID)//****************
+							->first();
+
 				if($destinationFolder!="null") { /* kopyalanacak icerigin sayfalari yok ise olusturur */
 					foreach ($contentFilePage as $ocfp) {
 						$ncfp = new ContentFilePage();
@@ -580,7 +593,7 @@ class Contents_Controller extends Base_Controller {
 								$ncfp->No = $ocfp->No;
 								$ncfp->Width = $ocfp->Width;
 								$ncfp->Height = $ocfp->Height;
-								$ncfp->FilePath = $destinationFolder.'/file_'.$targetContentFileID;
+								$ncfp->FilePath = 'files/customer_' . $targetCustomerID->CustomerID . '/application_' . $targetApplicationID->ApplicationID . '/content_' . $targetContentID . '/file_' . $targetContentFileID;
 								$ncfp->FileName = $ocfp->FileName;
 								$ncfp->FileName2 = $ocfp->FileName2;
 								$ncfp->FileSize = $ocfp->FileSize;
@@ -617,17 +630,6 @@ class Contents_Controller extends Base_Controller {
 					$contentFilePageNew = DB::table('ContentFilePage')
 								->where('ContentFileID', '=', $targetContentFileID)//****************
 								->where('No', '=', $cfp->No)
-								->first();
-					$contentFilePageNewCount = DB::table('ContentFilePage')
-								->where('ContentFileID', '=', $targetContentFileID)//****************
-								->count();
-
-					$targetApplicationID = DB::table('Content')
-								->where('ContentID', '=', $targetContentID)//****************
-								->first();
-
-					$targetCustomerID = DB::table('Application')
-								->where('ApplicationID', '=', $targetApplicationID->ApplicationID)//****************
 								->first();
 
 					// var_dump(isset($contentFilePageNew));
