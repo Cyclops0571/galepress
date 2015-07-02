@@ -365,21 +365,6 @@
 						    </div>
 						</div>
 						<div class="form-group">
-						    <label for="region" class="control-label col-xs-3">Bölge</label>
-						    <div class="col-xs-9">
-						    	<select id="region" class="form-control required" name="region" tabindex="6" placeholder="Bölge Bilgisi" required>
-						    		<option selected="selected" disabled="disabled">Bölge Seçiniz</option>
-									<option>Akdeniz Bölgesi</option>
-									<option>Doğu Anadolu Bölgesi</option>
-									<option>Ege Bölgesi</option>
-									<option>Güneydoğu Anadolu Bölgesi</option>
-									<option>İç Anadolu Bölgesi</option>
-									<option>Marmara Bölgesi</option>
-									<option>Karadeniz Bölgesi</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
 						    <label for="city" class="control-label col-xs-3">Şehir</label>
 						    <div class="col-xs-9">
 						    	<select id="city" class="form-control required" name="city" tabindex="6" placeholder="Şehir Bilgisi" required>
@@ -394,12 +379,6 @@
 						    <label for="address" class="control-label col-xs-3">Adres</label>
 						    <div class="col-xs-9">
 						    	<textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi" required rows="4"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-						    <label for="streetHouseNo" class="control-label col-xs-3">Sokak ve Konut Numarası</label>
-						    <div class="col-xs-9">
-						    	<input id="streetHouseNo" class="form-control required" maxlength="100" name="streetHouseNo" size="20" type="text" tabindex="6" value="" placeholder="... Sok. No:..." required>
 							</div>
 						</div>
 						<div class="form-group hide">
@@ -458,13 +437,16 @@
 			$('#customerType').change(function() {
 			   	$('#taxOffice').closest('.form-group').toggleClass('hide');
 			    $('#taxNo').closest('.form-group').toggleClass('hide');
+			    $('#tc').closest('.form-group').toggleClass('hide');
 			    if(!$(this).prop('checked')){
 			    	$('#taxOffice').val("");
 			    	$('#taxNo').val("");
+			    	$('#tc').val("null");
 			    }
 			    else{
 			    	$('#taxOffice').val("null");
 			    	$('#taxNo').val("null");
+			    	$('#tc').val("");
 			    }
 			});
 
@@ -493,16 +475,16 @@
 			    	$('#email').focus();
 			        return false;
 			    }
-			    else if($("#tc").val().length<11){
+			    else if($("#tc").val().length<11 && $('#customerType').prop('checked')){
 					$('.errorMsg').removeClass('hide').text('Lütfen geçerli bir tc kimlik numarası girin.');
 					$('#tc').focus();
 					return false;
 				}
-				else if($("#region").val()==null){
-					$('.errorMsg').removeClass('hide').text('Lütfen bölge seçiniz.');
-					$('#region').focus();
-					return false;
-				}
+				// else if($("#region").val()==null){
+				// 	$('.errorMsg').removeClass('hide').text('Lütfen bölge seçiniz.');
+				// 	$('#region').focus();
+				// 	return false;
+				// }
 				else if($("#city").val()==null){
 					$('.errorMsg').removeClass('hide').text('Lütfen şehir seçiniz.');
 					$('#city').focus();
