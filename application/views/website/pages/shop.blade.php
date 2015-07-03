@@ -378,7 +378,7 @@
 						<div class="form-group">
 						    <label for="address" class="control-label col-xs-3">Adres</label>
 						    <div class="col-xs-9">
-						    	<textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi" required rows="4"></textarea>
+						    	<textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi, Sok. No, Konut No" required rows="4"></textarea>
 							</div>
 						</div>
 						<div class="form-group hide">
