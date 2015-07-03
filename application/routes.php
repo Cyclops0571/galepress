@@ -93,6 +93,8 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));
 	Route::get(__('route.website_article_whymobile')->get($currentLanguage), array('as' => 'website_article_whymobile_get', 'uses' => 'website@article_whymobile'));
 	Route::get('shop', array('as' => 'website_shop', 'before' => 'auth', 'uses' => 'website@shop'));
+	Route::get('payment-galepress', array('as' => 'website_payment_galepress_get', 'before' => 'auth', 'uses' => 'website@payment_galepress'));
+	Route::post('payment-galepress', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'website@payment_galepress'));
 	// Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
 
 	Route::post('odeme', array('as' => 'website_odeme_post', 'uses' => 'website@odeme'));

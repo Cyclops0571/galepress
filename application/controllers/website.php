@@ -123,7 +123,13 @@ class Website_Controller extends Base_Controller
 		$customerData['city'] = City::all();
 		return View::make('website.pages.shop', $customerData);
 	}
-	public function post_odeme()
+
+	public function get_payment_galepress()
+	{
+		return View::make('website.pages.payment-galepress');
+	}
+
+	public function post_payment_galepress()
 	{
 		$customerData = array();
 		$customerEmail = Input::get('email');
@@ -133,6 +139,18 @@ class Website_Controller extends Base_Controller
 		$customerData['phone'] = $customerTel;
 
 		return View::make('website.pages.odeme', $customerData);
+	}
+
+	public function post_odeme()
+	{
+		$customerData = array();
+		$customerEmail = Input::get('email');
+		$customerTel = Input::get('phone');
+
+		$customerData['email'] = $customerEmail;
+		$customerData['phone'] = $customerTel;
+
+		return View::make('website.pages.payment-galepress', $customerData);
 	}
 	
 	public function post_odemeResponse() {
