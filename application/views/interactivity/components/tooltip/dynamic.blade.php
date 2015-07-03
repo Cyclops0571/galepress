@@ -112,8 +112,8 @@ $rgb = array($r, $g, $b);
 		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }});
 		text-align:center;
 	}
-	#myScrollableDiv div:first-child{
-		padding: 12% 14% 9% 7%;
+	#myScrollableDiv > .myContent:first-child{
+		padding: 5% 14% 9% 7%;
 	}
 	.closed{
 		display: none;
@@ -128,14 +128,14 @@ $rgb = array($r, $g, $b);
 		-webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
 		-moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
 		box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
-		right: 2.5% !important;
-		width: 5% !important;
+		right: 0.5% !important;
+		/*width: 5% !important;*/
 		opacity: 0.75 !important;
 		margin: 0 2%;
 	}
 	.slimScrollRail{
-		right: 4% !important;
-		width: 3% !important;
+		right: 1% !important;
+		/*width: 3% !important;*/
 		margin: 2% 1.3%;
 		height: 97% !important;
 	}
@@ -144,7 +144,9 @@ $rgb = array($r, $g, $b);
 <body>
 	<div class="hs-spot-object" style="display:none;"></div>
 	<div id="myScrollableDiv" class="closed">
-		{{$content}}
+		<div class="myContent">
+			{{$content}}
+		</div>
 	</div>
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/lib/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/prettify.js"></script>
@@ -162,6 +164,7 @@ $rgb = array($r, $g, $b);
 
 			$('#myScrollableDiv').slimScroll({
 		      alwaysVisible: true,
+		      size: "4px",
 		      railVisible: true
 		  	});
 			
@@ -246,6 +249,8 @@ $rgb = array($r, $g, $b);
 				@endif
 				$('.slimScrollDiv').attr('style',$('#myScrollableDiv').attr('style'));
 			}
+			// console.log($('#myScrollableDiv').height(), $('#myScrollableDiv > *:first-child').height());
+			
 			// //chart render edilirken json verisi data-chart-value icerisine tekrar set ediliyor. Sebep: html " karakterini escape yapamıyor"
 			// var chart = $('.chartjs').get(0).outerHTML;
 			// var n = chart.indexOf("[{");
