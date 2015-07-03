@@ -64,19 +64,7 @@
 		if($('.overview').height() > $('.overview > *:first-child').height()){
 			$('.slimScrollBar, .slimScrollRail').css('display','none');
 		}
-		//chart render edilirken json verisi data-chart-value icerisine tekrar set ediliyor. Sebep: html " karakterini escape yapamıyor"
-		// var chart = $('.chartjs').get(0).outerHTML;
-		// var n = chart.indexOf("[{");
-		// var nLast = chart.indexOf("}]");
-		// var res = chart.substring(n, nLast+2);
-		// res=res.replace(/ /g, '');
-		// // console.log(res.indexOf("&quot"));
-		// if(res.indexOf("&quot")==-1){
-		// 	$('.chartjs').attr('data-chart-value',res);
-		// }
 	});
     </script>
-    <!--<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/plugins/chart/lib/chart.min.js?t=F0RD"></script>-->
-	<!--<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/plugins/chart/widget2chart.js?t=F0RD"></script>-->
 </body>
 </html>
