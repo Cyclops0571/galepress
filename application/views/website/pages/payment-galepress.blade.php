@@ -38,7 +38,7 @@
             color: white;
             cursor: pointer;
             margin-right: 16px;
-            border-radius: 9px;
+            border-radius: 4px;
         }
         #bodyBackground{
             position: fixed;
