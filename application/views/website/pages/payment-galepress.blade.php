@@ -61,14 +61,6 @@
         <div class="card-wrapper"></div>
 
         <div class="form-container active">
-            <!-- <form action="/payment-galepress" method="post" id="paymentForm">
-                <input placeholder="Kart Numarası" type="text" name="number" required>
-                <input placeholder="Ad Soyad" type="text" name="name" required>
-                <input placeholder="AA/YY" type="text" name="expiry" required>
-                <input placeholder="CVC" type="text" name="cvc" maxlength="3" required>
-                <input type="submit" value="Gönder" name="payBtn" id="payBtn">
-            </form> -->
-
 
             <form action="/payment-galepress" method="post" id="paymentForm" class="form-horizontal">
                 <div class="form-group">
@@ -85,29 +77,7 @@
                 </div>
                 <div class="form-group">
                     <label for="expiry" class="control-label col-md-3">Geçerlilik Tarihi</label>
-                    <!-- <input class="form-control required" placeholder="fake" type="text" name="expiry" id="expiry" required> -->
                     <div class="col-md-4">
-                        <!-- <input class="form-control required" placeholder="AA" type="text" name="expiryMonth" required> -->
-                        <!-- <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="expiryMonth" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            AA
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="expiryMonth" style="min-width:61px;">
-                            <li><a href="#">01</a></li>
-                            <li><a href="#">02</a></li>
-                            <li><a href="#">03</a></li>
-                            <li><a href="#">04</a></li>
-                            <li><a href="#">05</a></li>
-                            <li><a href="#">06</a></li>
-                            <li><a href="#">07</a></li>
-                            <li><a href="#">08</a></li>
-                            <li><a href="#">09</a></li>
-                            <li><a href="#">10</a></li>
-                            <li><a href="#">11</a></li>
-                            <li><a href="#">12</a></li>
-                          </ul>
-                        </div> -->
                         <select name="expiryMonth" id="expiryMonth" class="form-control" runat="server" style="max-width: 181px;">
                             <option selected disabled>Ay</option>
                             <option value="01">01</option>
@@ -125,27 +95,6 @@
                         </select>
                     </div>
                     <div class="col-md-5">
-                        <!-- <input class="form-control required" placeholder="YYYY" type="text" name="expiryYear" required> -->
-                        <!-- <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="expiryYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            AA
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="expiryYear" style="min-width:61px;">
-                            <li><a href="#">2015</a></li>
-                            <li><a href="#">2016</a></li>
-                            <li><a href="#">2017</a></li>
-                            <li><a href="#">2018</a></li>
-                            <li><a href="#">2019</a></li>
-                            <li><a href="#">2020</a></li>
-                            <li><a href="#">2021</a></li>
-                            <li><a href="#">2022</a></li>
-                            <li><a href="#">2023</a></li>
-                            <li><a href="#">2024</a></li>
-                            <li><a href="#">2025</a></li>
-                            <li><a href="#">2026</a></li>
-                          </ul>
-                        </div> -->
                         <select name="expiryYear" id="expiryYear" class="form-control" runat="server" style="max-width: 181px;">
                             <option selected disabled>Yıl</option>
                             <option value="2015">2015</option>
@@ -166,35 +115,16 @@
                 <div class="form-group">
                     <label for="cvc" class="control-label col-md-3">CVC</label>
                     <div class="col-md-9">
-                        <input class="form-control required" placeholder="CVC" type="text" name="cvc" id="cvc" maxlength="3" style="max-width: 181px;" required>
+                        <input class="form-control required" placeholder="CVC" type="text" name="cvc" id="cvc" maxlength="3" required>
                     </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Gönder" name="payBtn" id="payBtn">
+                </div>
+                <div class="form-group errorMsg hide" style="color:#CA0101; text-align:center; font-size:18px;">
+                    <span>Lütfen bilgilerinizi kontrol edin...</span>
                 </div>
             </form>
-
-            <!-- <form action="/payment-galepress" method="post" id="paymentForm" class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Kart No:</label>
-                    <div class="col-xs-4">
-                        <input placeholder="Kart Numarası" type="text" name="number" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-2 control-label">Ad Soyad:</label>
-                    <div class="col-xs-4">
-                        <input placeholder="Ad Soyad" type="text" name="name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-2 control-label">Ay:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" placeholder="Month" name="expMonth" />
-                    </div>
-                    <label class="col-xs-2 control-label">Yıl:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" placeholder="Year" name="expYear" />
-                    </div>
-                </div>
-            </form> -->
         </div>
     </div>
 
@@ -208,18 +138,43 @@
                var selected = $('select#expiryMonth option:selected').val();
                $('input#expiry').val(selected);
                $('input#expiry').text(selected);
-               // $("input#expiry").focus().trigger("keypress");
-               $("input#expiry").trigger("focus");
-                // var e = jQuery.Event("keypress");
-                // e.which = '97';
-                // $("input#expiry").trigger(e);
-    //             $("input#expiry").trigger("keypress") // you can trigger keypress like this if you need to..
-    // .val(function(i,val){return val + ' ';});
-    // $("input#expiry").trigger("keydown") // you can trigger keypress like this if you need to..
-    // .val(function(i,val){return val + ' ';});
-    //     $("input#expiry").trigger("keydown") // you can trigger keypress like this if you need to..
-    // .val(function(i,val){return val + ' ';});
+            });
 
+              $("#paymentForm").bind("submit", function() {
+
+                var expiryMonth = $("#expiryMonth").val();
+                var expiryYear = $("#expiryYear").val();
+
+                if($('#cardno').val().length<16){
+
+                    $('.errorMsg').removeClass('hide').text('Lütfen 16 haneli kart numaranızı girin.');
+                    $('#cardno').focus();
+                    return false;
+                }
+
+                else if($('#name').val().length==0){
+
+                    $('.errorMsg').removeClass('hide').text('Lütfen adınızı girin.');
+                    $('#name').focus();
+                    return false;
+                }
+
+                else if(expiryMonth==null || expiryYear==null){
+
+                    $('.errorMsg').removeClass('hide').text('Lütfen geçerlilik tarihini eksiksiz girin.');
+                    $('#expiryMonth').focus();
+                    return false;
+                }
+                else if($('#cvc').val().length<3){
+
+                    $('.errorMsg').removeClass('hide').text('Lütfen kartın arkasındaki 3 haneli güvenlik numaranızı girin.');
+                    $('#cvc').focus();
+                    return false;
+                }
+                else {
+                    $('.errorMsg').addClass('hide');
+                    // return false;
+                }
             });
         })
 
@@ -244,12 +199,6 @@
             },
         });
 
-
-        // setTimeout(function(){
-        //     // alert("asd");
-        //     $('body').css('background','red url(/website/img/shop/paymentBack1.jpg) no-repeat center center');
-        //     // $('body').css('background','red url(/website/img/shop/paymentBack.jpg) no-repeat center center');
-        // },2000);
     </script>
 </body>
 </html>
