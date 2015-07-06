@@ -23,11 +23,6 @@
         form {
             margin: 30px;
         }
-        /*input {
-            width: 200px;
-            margin: 10px auto;
-            display: block;
-        }*/
         .jp-card .jp-card-front{
             background-color: #41A2FF !important;
             background-image:url(/website/img/galepress.png) !important; 
@@ -42,6 +37,8 @@
             border: 1px solid white;
             color: white;
             cursor: pointer;
+            margin-right: 16px;
+            border-radius: 9px;
         }
         #bodyBackground{
             position: fixed;
@@ -119,7 +116,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Gönder" name="payBtn" id="payBtn">
+                    <input type="submit" value="Gönder" name="payBtn" id="payBtn" class="pull-right">
                 </div>
                 <div class="form-group errorMsg hide" style="color:#CA0101; text-align:center; font-size:18px;">
                     <span>Lütfen bilgilerinizi kontrol edin...</span>
@@ -134,13 +131,21 @@
 
 
         $(function(){
+            var selectedMonth="";
+            var selectedYear="";
             $('select#expiryMonth').on('change', function(){
-               var selected = $('select#expiryMonth option:selected').val();
-               $('input#expiry').val(selected);
-               $('input#expiry').text(selected);
+               selectedMonth = $('select#expiryMonth option:selected').val();
+               $('.jp-card-expiry').css('opacity',1);
+               $('.jp-card-expiry').text(selectedMonth + '/' + selectedYear);
             });
 
-              $("#paymentForm").bind("submit", function() {
+            $('select#expiryYear').on('change', function(){
+               selectedYear = $('select#expiryYear option:selected').val();
+               $('.jp-card-expiry').css('opacity',1);
+               $('.jp-card-expiry').text(selectedMonth + '/' + selectedYear);
+            });
+
+            $("#paymentForm").bind("submit", function() {
 
                 var expiryMonth = $("#expiryMonth").val();
                 var expiryYear = $("#expiryYear").val();
