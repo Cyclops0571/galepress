@@ -25,13 +25,10 @@
 			width: 100% !important;
 			height: 97% !important;
 		}
-		.slimScrollBar{
+		.slimScrollBar, .slimScrollRail{
 			position: fixed !important;
 			right: 2% !important;
-		}
-		.slimScrollRail{
-			position: fixed !important;
-			right: 2% !important;
+/*			display: none;*/
 		}
 	</style>
 </head>
@@ -40,14 +37,12 @@
      	{{$content}}
 	</div>
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/lib/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/prettify.js"></script>
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.overview').slimScroll({
-	      alwaysVisible: true,
-	      size: "4px",
-	      railVisible: true
+	      alwaysVisible: false,
+	      size: "2px"
 	  	});
      	var ua = navigator.userAgent.toLowerCase();
 		var isAndroid = ua.indexOf("android") > -1;
@@ -61,9 +56,24 @@
 				$('body').css('background-repeat','no-repeat');
 			},100);
 		}
-		if($('.overview').height() > $('.overview > *:first-child').height()){
-			$('.slimScrollBar, .slimScrollRail').css('display','none');
+		// if($('.overview').height() > $('.overview > *:first-child').height()){
+		// 	$('.slimScrollBar, .slimScrollRail').css('display','none');
+		// }
+		// $('.overview').slimScroll().bind('slimscroll', function(e, pos){
+		//     console.log("Reached " + pos);
+		// });
+		if($('.overview').height() < $('.overview > *:first-child').height()){
+			setTimeout(function(){
+				$( ".slimScrollBar" ).animate({ "top": "+=50px" }, "slow" );
+				$( "body" ).animate({ "margin-top": "-=50px" }, "slow", function(){
+					$( "body" ).animate({ "margin-top": "+=50px" }, "slow");
+					$( ".slimScrollBar" ).animate({ "top": "-=50px" }, "slow", function(){
+						$( ".slimScrollBar" ).hide(250);
+					} );
+				} );
+			},300);
 		}
+
 	});
     </script>
 </body>
