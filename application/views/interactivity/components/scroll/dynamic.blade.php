@@ -40,7 +40,8 @@
 	$(document).ready(function() {
 		$('.overview').slimScroll({
 	      alwaysVisible: false,
-	      size: "2px"
+	      size: "2px",
+	      railVisible: true
 	  	});
      	var ua = navigator.userAgent.toLowerCase();
 		var isAndroid = ua.indexOf("android") > -1;
@@ -65,7 +66,7 @@
 				$( ".overview *:first-child" ).animate({ "margin-top": "-=50px" }, "slow", function(){
 					$( ".overview *:first-child" ).animate({ "margin-top": "0px" }, "slow");
 					$( ".slimScrollBar" ).animate({ "top": "0px" }, "slow", function(){
-						$( ".slimScrollBar" ).hide(250);
+						$( ".slimScrollBar" ).fadeOut(250);
 					} );
 				} );
 			},300);
