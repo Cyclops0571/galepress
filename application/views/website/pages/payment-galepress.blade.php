@@ -74,7 +74,7 @@
 				<input type="hidden" name="installment_count" value="1" />
 				<input type="hidden" name="currency" value="TRY" />
 				
-				<!--<input type="hidden" name="card_brand" value="VISA" />-->
+				<input type="hidden" name="card_brand" id="card_brand" value="VISA" />
 				
 				<input type="hidden" name="descriptor" value="<?php echo 'GalepressAylikOdeme_' . date('YmdHisu');?>" />
 				<input type="hidden" name="customer_first_name" value="<?php echo $paymentAccount->title;?>" />
@@ -182,6 +182,13 @@
 
 
         $(function(){
+
+            $('#card_number').keyup(function(){
+                   cardType = $('.jp-card').attr('class').split(' ')[1];
+                   cardType = cardType.split('-')[2];
+                   $('#card_brand').val(cardType);
+            });
+
             var selectedMonth="";
             var selectedYear="";
             $('select#card_expiry_month').on('change', function(){
