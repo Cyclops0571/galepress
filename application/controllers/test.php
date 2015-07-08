@@ -19,59 +19,25 @@ class Test_Controller extends Base_Controller{
 	}
 
 	public function get_index() {
-		echo ReportFilter::$applicationID;
-		return;
+		echo date("Y-m-d", strtotime("-1 day"));
+		exit;
+		var_dump($GLOBALS['laravel_paths']);
+		$list = array (
+			array('aaa', 'bbb', 'ccc', 'dddd'),
+			array('123', '456', '789'),
+			array('"aaa"', '"bbb"')
+		);
+
+//		$fp = fopen('file.xls', 'w');
+//
+//		foreach ($list as $fields) {
+//			fputcsv($fp, $fields);
+//		}
 		
-		// //TAŞINACAK CONTENT'IN FILE ID'SINI GIRIN
-		// $contentFilePage = DB::table('ContentFilePage')
-		// 					->where('ContentFileID', '=', 2877)
-		// 					->get();
-
-		// foreach ($contentFilePage as $cfp) {
-
-		// 	$filePageComponent = DB::table('PageComponent')
-		// 					->where('ContentFilePageID', '=', $cfp->ContentFilePageID)
-		// 					->get();
-
-		// 	if(sizeof($filePageComponent)==0){
-		// 		continue;
-		// 	}
-
-		// 	//HANGI CONTENT'E TASINACAK
-		// 	$contentFilePageNew = DB::table('ContentFilePage')
-		// 				->where('ContentFileID', '=', 2880)
-		// 				->where('No', '=', $cfp->No)
-		// 				->first();
-
-		// 	foreach ($filePageComponent as $fpc) {
-		// 		$s = new PageComponent();
-		// 		$s->ContentFilePageID = $contentFilePageNew->ContentFilePageID;
-		// 		$s->ComponentID = $fpc->ComponentID;
-		// 		$s->No = $fpc->No;
-		// 		$s->StatusID = eStatus::Active;
-		// 		$s->DateCreated = new DateTime();
-		// 		$s->ProcessDate = new DateTime();
-		// 		$s->ProcessTypeID = eProcessTypes::Insert;
-		// 		$s->save();
-
-		// 		$filePageComponentProperty = DB::table('PageComponentProperty')
-		// 								->where('PageComponentID', '=', $fpc->PageComponentID)
-		// 								->where('StatusID', '=', eStatus::Active)
-		// 								->get();
-
-		// 		foreach ($filePageComponentProperty as $fpcp) {
-		// 			$p = new PageComponentProperty();
-		// 			$p->PageComponentID = $s->PageComponentID;
-		// 			$p->Name = $fpcp->Name;
-		// 			$p->Value = $fpcp->Value;
-		// 			$p->StatusID = eStatus::Active;
-		// 			$p->DateCreated = new DateTime();
-		// 			$p->ProcessDate = new DateTime();
-		// 			$p->ProcessTypeID = eProcessTypes::Insert;
-		// 			$p->save();
-		// 		}
-		// 	}
-		// }
+		
+		
+		
+		
 	}
 
 	public function get_moveInteractivite() {

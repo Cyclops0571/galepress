@@ -92,13 +92,13 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_article_workflow')->get($currentLanguage), array('as' => 'website_article_workflow_get', 'uses' => 'website@article_workflow'));
 	Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));
 	Route::get(__('route.website_article_whymobile')->get($currentLanguage), array('as' => 'website_article_whymobile_get', 'uses' => 'website@article_whymobile'));
-	Route::get('shop', array('as' => 'website_shop', 'before' => 'auth', 'uses' => 'website@shop'));
-	Route::get('payment-galepress', array('as' => 'website_payment_galepress_get', 'before' => 'auth', 'uses' => 'website@payment_galepress'));
-	Route::post('payment-galepress', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'website@payment_galepress'));
+	Route::get('shop', array('as' => 'website_shop', 'before' => 'auth', 'uses' => 'payment@shop'));
+	Route::get('payment-galepress', array('as' => 'website_payment_galepress_get', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
+	Route::post('payment-galepress', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
 	// Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
 
-	Route::post('odeme', array('as' => 'website_odeme_post', 'uses' => 'website@odeme'));
-	Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'website@odemeSonuc'));
+	Route::post('odeme', array('as' => 'website_odeme_post', 'uses' => 'payment@odeme'));
+	Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'payment@odemeSonuc'));
 
 	Route::get(__('route.login')->get($currentLanguage), array('as' => 'common_login_get', 'uses' => 'common@login'));
 	Route::post(__('route.login')->get($currentLanguage), array('as' => 'common_login_post', 'uses' => 'common@login'));
@@ -472,7 +472,7 @@ Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'au
 Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 
-Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'website@odemeResponse'));
+Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
 
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));

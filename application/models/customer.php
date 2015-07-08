@@ -25,4 +25,12 @@ class Customer extends Eloquent
 	public static function find($customerID, $columns = array('*')) {
 		return Customer::where(self::$key, "=", $customerID)->first($columns);
 	}
+	
+	/**
+	 * 
+	 * @return PaymentAccount
+	 */
+	public function PaymentAccount() {
+		return $this->has_one('PaymentAccount', "CustomerID")->first();
+	}
 }

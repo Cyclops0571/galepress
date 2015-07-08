@@ -16,5 +16,13 @@ class PaymentTransaction extends Eloquent {
 
 	public static $table = 'PaymentTransaction';
 	public static $key = 'PaymentTransactionID';
+	
+	/**
+	 * 
+	 * @return PaymentAccount
+	 */
+	public function PaymentAccount() {
+		return $this->belongs_to('PaymentAccount')->first();
+	}
 
 }

@@ -512,17 +512,17 @@ class Common_Controller extends Base_Controller {
 			$today = new DateTime();
 			$todayAddWeek = Date("Y-m-d", strtotime("+7 days"));
 
-			$s = new Customer();
-			$s->CustomerNo = "m0" . $matches;
-			$s->CustomerName = $faceUserObj->first_name . " " . $faceUserObj->last_name;
-			$s->Email = $faceUserObj->email;
-			$s->StatusID = eStatus::Active;
-			$s->CreatorUserID = -1;
-			$s->DateCreated = new DateTime();
-			$s->ProcessUserID = -1;
-			$s->ProcessDate = new DateTime();
-			$s->ProcessTypeID = eProcessTypes::Insert;
-			$s->save();
+			$Customer = new Customer();
+			$Customer->CustomerNo = "m0" . $matches;
+			$Customer->CustomerName = $faceUserObj->first_name . " " . $faceUserObj->last_name;
+			$Customer->Email = $faceUserObj->email;
+			$Customer->StatusID = eStatus::Active;
+			$Customer->CreatorUserID = -1;
+			$Customer->DateCreated = new DateTime();
+			$Customer->ProcessUserID = -1;
+			$Customer->ProcessDate = new DateTime();
+			$Customer->ProcessTypeID = eProcessTypes::Insert;
+			$Customer->save();
 
 			$lastCustomerID = DB::table('Customer')
 					->order_by('CustomerID', 'DESC')
@@ -540,35 +540,28 @@ class Common_Controller extends Base_Controller {
 			$app->Blocked = 0;
 			$app->Status = 1;
 			$app->Trail = 1;
-			$s->save();
+			$app->save();
 
-			$s = new User();
-			$s->UserTypeID = 111;
-			$s->CustomerID = $lastCustomerID;
-			$s->Username = $faceUserObj->id;
-			$s->FbUsername = $faceUserObj->id;
-			//$s->Password = Hash::make("TestPassword");
-			$s->FirstName = $faceUserObj->first_name;
-			$s->LastName = $faceUserObj->last_name;
-			$s->Email = $faceUserObj->email;
-			$s->FbEmail = $faceUserObj->email;
-			$s->FbAccessToken = $accessToken;
-			$s->StatusID = eStatus::Active;
-			$s->CreatorUserID = -1;
-			$s->DateCreated = new DateTime();
-			$s->ProcessUserID = -1;
-			$s->ProcessDate = new DateTime();
-			$s->ProcessTypeID = eProcessTypes::Insert;
-			//$s->ConfirmCode = $confirmCode;
-			$s->save();
+			$user = new User();
+			$user->UserTypeID = 111;
+			$user->CustomerID = $lastCustomerID;
+			$user->Username = $faceUserObj->id;
+			$user->FbUsername = $faceUserObj->id;
+			//$user->Password = Hash::make("TestPassword");
+			$user->FirstName = $faceUserObj->first_name;
+			$user->LastName = $faceUserObj->last_name;
+			$user->Email = $faceUserObj->email;
+			$user->FbEmail = $faceUserObj->email;
+			$user->FbAccessToken = $accessToken;
+			$user->StatusID = eStatus::Active;
+			$user->CreatorUserID = -1;
+			$user->DateCreated = new DateTime();
+			$user->ProcessUserID = -1;
+			$user->ProcessDate = new DateTime();
+			$user->ProcessTypeID = eProcessTypes::Insert;
+			//$user->ConfirmCode = $confirmCode;
+			$user->save();
 
-			$user = DB::table('User')
-					->where('Username', '=', $faceUserObj->id)
-					->where('FbEmail', '=', $faceUserObj->email)
-					//->where('Password', '=', Hash::make($password))
-					->where('StatusID', '=', eStatus::Active)
-					->first();
-			//var_dump(Hash::check(NULL, $user->Password));
 			if (Auth::facebookAttempt(array('username' => $user->Username, 'fbemail' => $user->FbEmail, 'StatusID' => eStatus::Active))) {
 
 				$user = Auth::User();

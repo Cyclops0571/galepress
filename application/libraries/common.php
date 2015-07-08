@@ -119,10 +119,10 @@ class Common {
 
 	public static function CheckApplicationOwnership($applicationID) {
 		$currentUser = Auth::User();
-		if ((int) $currentUser->UserTypeID == eUserTypes::Manager)  {
+		if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 			return true;
 		}
-		
+
 		if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
 			$a = Application::find($applicationID);
 			if ($a) {
@@ -356,7 +356,7 @@ class Common {
 	}
 
 	public static function download(
-		$RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
+	$RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
 		$file = path('public') . $filepath . '/' . $filename;
 
 		if (file_exists($file) && is_file($file)) {
@@ -460,7 +460,7 @@ class Common {
 				})
 				->where('c.StatusID', '=', eStatus::Active)
 				->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
-		if(!$content) {
+		if (!$content) {
 			throw new Exception(__('common.list_norecord'), "102");
 		}
 		$contentFile = DB::table('ContentFile')
@@ -469,7 +469,7 @@ class Common {
 				->order_by('ContentFileID', 'DESC')
 				->first();
 
-		if(!$contentFile) {
+		if (!$contentFile) {
 			throw new Exception(__('common.list_norecord'), "102");
 		}
 		$contentCoverImageFile = DB::table('ContentCoverImageFile')
@@ -477,25 +477,25 @@ class Common {
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('ContentCoverImageFileID', 'DESC')
 				->first();
-		if(!$contentCoverImageFile) {
+		if (!$contentCoverImageFile) {
 			throw new Exception(__('common.list_norecord'), "102");
 		}
-		
-		if($Width > 0 && $Height > 0) {
+
+		if ($Width > 0 && $Height > 0) {
 			//image var mi kontrol edip yok ise olusturup, ismini set edelim;
 			$originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . IMAGE_CROPPED_2048;
-			if(!is_file($originalImage)) {
-				$originalImage =  path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
+			if (!is_file($originalImage)) {
+				$originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
 			}
 			$pathInfoOI = pathinfo($originalImage);
 			$fileName = IMAGE_CROPPED_NAME . "_" . $Width . "x" . $Height . ".jpg";
-			if(!is_file($pathInfoOI["dirname"] . "/" . $fileName)) {
+			if (!is_file($pathInfoOI["dirname"] . "/" . $fileName)) {
 				//resize original image to new path and then save it.
-				if(!is_file($originalImage)) {
+				if (!is_file($originalImage)) {
 					throw new Exception(__('common.file_notfound'), "102");
 				}
 				$im = new Imagick($originalImage);
-				$im->resizeImage($Width,$Height,Imagick::FILTER_LANCZOS,1, TRUE);
+				$im->resizeImage($Width, $Height, Imagick::FILTER_LANCZOS, 1, TRUE);
 				$im->writeImage($pathInfoOI["dirname"] . "/" . $fileName);
 				$im->destroy();
 			}
@@ -511,10 +511,10 @@ class Common {
 					throw new Exception('Not implemented', '102');
 			}
 		}
-		
-		
+
+
 		$file = path('public') . $contentCoverImageFile->FilePath . '/' . $fileName;
-		if(!is_file($file)) {
+		if (!is_file($file)) {
 			throw new Exception(__('common.file_notfound'), "102");
 		}
 		$fileSize = File::size($file);
@@ -540,7 +540,7 @@ class Common {
 		$r->ProcessDate = new DateTime();
 		$r->ProcessTypeID = eProcessTypes::Insert;
 		$r->save();
-		
+
 		$requestID = $r->RequestID;
 
 		// set the download rate limit (=> 200,0 kb/s)
@@ -992,6 +992,37 @@ class Common {
 				->get($column);
 
 		return $rs;
+	}
+
+	public static function toExcel($twoDimensionalArray, $toFile) {
+		$rows = array();
+		$sep = "\t";
+		foreach($twoDimensionalArray as $row) {
+			$tmpStr = "";
+			foreach($row as $cell) {
+				if ($cell != "") {
+					$r .= "$cell" . $sep;
+				} else {
+					$r .= "" . $sep;
+				}
+				$tmpStr .= $cell . $sep;
+			}
+			
+			$tmpStr1 = str_replace($sep . "$", "", $tmpStr);
+			$tmpStr2 = preg_replace("/\r\n|\n\r|\n|\r/", " ", $tmpStr1);
+			$tmpStr2 .= "\t";
+			$tmpStr3 = trim($tmpStr2);
+			$tmpStr3 .= "\n";
+			
+			$rows[] = $tmpStr3;
+		}
+		
+		$rows[] = "\n";
+		$result = implode("", $rows);
+		$finalResult = chr(255) . chr(254) . iconv("UTF-8", "UTF-16LE//IGNORE", $result);
+		$fileHandle = fopen($toFile, "w");
+		fwrite($fileHandle, $finalResult);
+		fclose();
 	}
 
 }

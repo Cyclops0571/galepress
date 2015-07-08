@@ -53,29 +53,80 @@
     </style>
 </head>
 <body>
+	<?php if(false) {
+		$paymentAccount = new PaymentAccount();	
+	}
+	?>
     <img src="/website/img/shop/paymentBack.jpg" id="bodyBackground">
     <div class="demo-container">
         <div class="card-wrapper"></div>
 
         <div class="form-container active">
 
-            <form action="/payment-galepress" method="post" id="paymentForm" class="form-horizontal">
+            <form action="https://iyziconnect.com/post/v1/" method="post" id="paymentForm" class="form-horizontal">
+				<input type="hidden" name="api" value="im0322080005c70f195bca1434712720" />
+				<input type="hidden" name="secret" value="im0339018007d7a8f10f1c1434712720" />
+				<input type="hidden" name="response_mode" value="ASYNC" />
+				<input type="hidden" name="mode" value="<?php echo Config::get("custom.payment_environment");?>" />
+				<input type="hidden" name="type" value="DB" />
+				<input type="hidden" name="amount" value="10000" />
+				<input type="hidden" name="installment" value="false" />
+				<input type="hidden" name="installment_count" value="1" />
+				<input type="hidden" name="currency" value="TRY" />
+				
+				<!--<input type="hidden" name="card_brand" value="VISA" />-->
+				
+				<input type="hidden" name="descriptor" value="<?php echo 'GalepressAylikOdeme_' . date('YmdHisu');?>" />
+				<input type="hidden" name="customer_first_name" value="<?php echo $paymentAccount->title;?>" />
+				<input type="hidden" name="customer_last_name" value="<?php echo $paymentAccount->title;?>" />
+				<input type="hidden" name="customer_company_name" value="<?php echo $paymentAccount->title;?>" />
+				
+				<input type="hidden" name="customer_shipping_address_line_1" value="<?php echo $paymentAccount->address;?>" />
+				<input type="hidden" name="customer_shipping_address_line_2" value="" />
+				<input type="hidden" name="customer_shipping_address_zip" value="" />
+				<input type="hidden" name="customer_shipping_address_city" value="" />
+				<input type="hidden" name="customer_shipping_address_state" value="state" />
+				<input type="hidden" name="customer_shipping_address_country" value="Türkiye" />
+				
+				<input type="hidden" name="customer_billing_address_line_1" value="<?php echo $paymentAccount->address;?>" />
+				<input type="hidden" name="customer_billing_address_line_2" value="" />
+				<input type="hidden" name="customer_billing_address_zip" value="" />
+				<input type="hidden" name="customer_billing_address_city" value="" />
+				<input type="hidden" name="customer_billing_address_state" value="state" />
+				<input type="hidden" name="customer_billing_address_country" value="Türkiye" />
+				
+				<input type="hidden" name="customer_contact_email" value="<?php echo $paymentAccount->email;?>" />
+				<input type="hidden" name="customer_contact_phone" value="" />
+				<input type="hidden" name="customer_contact_mobile" value="<?php echo $paymentAccount->phone;?>" />
+				<input type="hidden" name="customer_contact_ip" value="<?php echo Request::ip();?>" />
+				
+				<input type="hidden" name="item_id_1" value="1" />
+				<input type="hidden" name="item_name_1" value="GalePress - Dijital Yayın Platformu" />
+				<input type="hidden" name="item_unit_quantity_1" value="1" />
+				<input type="hidden" name="item_unit_amount_1" value="1200" />
+				<input type="hidden" name="external_id" value="<?php echo $paymentAccount->CustomerID;?>" />
+				
+				
+				
+				<input type="hidden" name="return_url" value="<?php echo Config::get("custom.payment_url") . '/payment-response';?>" />
+				<input type="hidden" name="customer_language" value="tr" />
+				<input type="hidden" name="customer_presentation_usage" value="<?php echo 'GalepressAylikOdeme_' . date('YmdHisu');?>" />
                 <div class="form-group">
-                    <label for="cardno" class="control-label col-md-3">Kart Numarası</label>
+                    <label for="card_number" class="control-label col-md-3">Kart Numarası</label>
                     <div class="col-xs-9">
-                        <input class="form-control required" placeholder="Kart Numarası" type="text" name="cardno" id="cardno" required>
+                        <input class="form-control required" placeholder="Kart Numarası" type="text" name="card_number" id="card_number" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="control-label col-md-3">Ad Soyad</label>
+                    <label for="card_holder_name" class="control-label col-md-3">Ad Soyad</label>
                     <div class="col-xs-9">
-                        <input class="form-control required" placeholder="Ad Soyad" type="text" name="name" id="name" required>
+                        <input class="form-control required" placeholder="Ad Soyad" type="text" name="card_holder_name" id="card_holder_name" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="expiry" class="control-label col-md-3">Geçerlilik Tarihi</label>
+                    <label for="card_expiry_month" class="control-label col-md-3">Geçerlilik Tarihi</label>
                     <div class="col-md-4">
-                        <select name="expiryMonth" id="expiryMonth" class="form-control" runat="server" style="max-width: 181px;">
+                        <select name="card_expiry_month" id="card_expiry_month" class="form-control" runat="server" style="max-width: 181px;">
                             <option selected disabled>Ay</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -92,7 +143,7 @@
                         </select>
                     </div>
                     <div class="col-md-5">
-                        <select name="expiryYear" id="expiryYear" class="form-control" runat="server" style="max-width: 181px;">
+                        <select name="card_expiry_year" id="card_expiry_year" class="form-control" runat="server" style="max-width: 181px;">
                             <option selected disabled>Yıl</option>
                             <option value="2015">2015</option>
                             <option value="2016">2016</option>
@@ -110,9 +161,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cvc" class="control-label col-md-3">CVC</label>
+                    <label for="card_verification" class="control-label col-md-3">CVC</label>
                     <div class="col-md-9">
-                        <input class="form-control required" placeholder="CVC" type="text" name="cvc" id="cvc" maxlength="3" required>
+                        <input class="form-control required" placeholder="CVC" type="text" name="card_verification" id="card_verification" maxlength="3" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -133,47 +184,47 @@
         $(function(){
             var selectedMonth="";
             var selectedYear="";
-            $('select#expiryMonth').on('change', function(){
-               selectedMonth = $('select#expiryMonth option:selected').val();
+            $('select#card_expiry_month').on('change', function(){
+               selectedMonth = $('select#card_expiry_month option:selected').val();
                $('.jp-card-expiry').css('opacity',1);
                $('.jp-card-expiry').text(selectedMonth + '/' + selectedYear);
             });
 
-            $('select#expiryYear').on('change', function(){
-               selectedYear = $('select#expiryYear option:selected').val();
+            $('select#card_expiry_year').on('change', function(){
+               selectedYear = $('select#card_expiry_year option:selected').val();
                $('.jp-card-expiry').css('opacity',1);
                $('.jp-card-expiry').text(selectedMonth + '/' + selectedYear);
             });
 
             $("#paymentForm").bind("submit", function() {
 
-                var expiryMonth = $("#expiryMonth").val();
-                var expiryYear = $("#expiryYear").val();
+                var card_expiry_month = $("#card_expiry_month").val();
+                var card_expiry_year = $("#card_expiry_year").val();
 
-                if($('#cardno').val().length<16){
+                if($('#card_number').val().length<16){
 
                     $('.errorMsg').removeClass('hide').text('Lütfen 16 haneli kart numaranızı girin.');
-                    $('#cardno').focus();
+                    $('#card_number').focus();
                     return false;
                 }
 
-                else if($('#name').val().length==0){
+                else if($('#card_holder_name').val().length==0){
 
                     $('.errorMsg').removeClass('hide').text('Lütfen adınızı girin.');
-                    $('#name').focus();
+                    $('#card_holder_name').focus();
                     return false;
                 }
 
-                else if(expiryMonth==null || expiryYear==null){
+                else if(card_expiry_month==null || card_expiry_year==null){
 
                     $('.errorMsg').removeClass('hide').text('Lütfen geçerlilik tarihini eksiksiz girin.');
-                    $('#expiryMonth').focus();
+                    $('#card_expiry_month').focus();
                     return false;
                 }
-                else if($('#cvc').val().length<3){
+                else if($('#card_verification').val().length<3){
 
                     $('.errorMsg').removeClass('hide').text('Lütfen kartın arkasındaki 3 haneli güvenlik numaranızı girin.');
-                    $('#cvc').focus();
+                    $('#card_verification').focus();
                     return false;
                 }
                 else {
@@ -187,10 +238,10 @@
             form: document.querySelector('form'),
             container: '.card-wrapper',
             formSelectors: {
-                numberInput: 'input#cardno', // optional — default input[name="number"]
+                numberInput: 'input#card_number', // optional — default input[name="number"]
                 expiryInput: 'input#expiry', // optional — default input[name="expiry"]
-                cvcInput: 'input#cvc', // optional — default input[name="cvc"]
-                nameInput: 'input#name' // optional - defaults input[name="name"]
+                cvcInput: 'input#card_verification', // optional — default input[name="cvc"]
+                nameInput: 'input#card_holder_name' // optional - defaults input[name="name"]
             },
             values: {
                 number: '•••• •••• •••• ••••',

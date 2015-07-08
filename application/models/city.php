@@ -12,4 +12,9 @@ class City extends Eloquent {
 	public static $key = 'CityID';
 
 	//put your code here
+
+	public static function all($orderyBy = "CityName", $sort = "ASC") {
+		return City::order_by($orderyBy, $sort)->get();
+	}
+
 }
