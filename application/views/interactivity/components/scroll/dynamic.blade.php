@@ -4,7 +4,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>GalePress</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
-	<!--<link type="text/css" rel="stylesheet" href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/plugins/chart/chart.css?t=F0RD">-->
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />
 	<style type="text/css">
@@ -28,7 +27,6 @@
 		.slimScrollBar, .slimScrollRail{
 			position: fixed !important;
 			right: 2% !important;
-/*			display: none;*/
 		}
 	</style>
 </head>
@@ -56,14 +54,6 @@
 				$('body').css('background-repeat','no-repeat');
 			},100);
 		}
-		// if($('.overview').height() > $('.overview > *:first-child').height()){
-		// 	$('.slimScrollBar, .slimScrollRail').css('display','none');
-		// }
-		// $('.overview').slimScroll().bind('slimscroll', function(e, pos){
-		//     console.log("Reached " + pos);
-		// });
-		
-		// console.log($('.overview > *').height());
 		var count = 0;
 		$( ".overview > *" ).each(function() {
 		  count += $( this ).height();
