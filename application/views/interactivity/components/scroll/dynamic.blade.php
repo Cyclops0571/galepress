@@ -18,7 +18,7 @@
 			word-wrap: break-word;
 		}
 		.overview > *:first-child{
-			margin: 0 !important;
+			margin: 0;
 		}
 		.slimScrollDiv{
 			position: fixed !important;
@@ -62,12 +62,19 @@
 		// $('.overview').slimScroll().bind('slimscroll', function(e, pos){
 		//     console.log("Reached " + pos);
 		// });
-		if($('.overview').height() < $('.overview > *:first-child').height()){
+		
+		// console.log($('.overview > *').height());
+		var count = 0;
+		$( ".overview > *" ).each(function() {
+		  count += $( this ).height();
+		});
+
+		if($('.overview').height() < count){
 			setTimeout(function(){
 				$( ".slimScrollBar" ).animate({ "top": "+=50px" }, "slow" );
-				$( "body" ).animate({ "margin-top": "-=50px" }, "slow", function(){
-					$( "body" ).animate({ "margin-top": "+=50px" }, "slow");
-					$( ".slimScrollBar" ).animate({ "top": "-=50px" }, "slow", function(){
+				$( ".overview *:first-child" ).animate({ "margin-top": "-=50px" }, "slow", function(){
+					$( ".overview *:first-child" ).animate({ "margin-top": "0px" }, "slow");
+					$( ".slimScrollBar" ).animate({ "top": "0px" }, "slow", function(){
 						$( ".slimScrollBar" ).hide(250);
 					} );
 				} );
