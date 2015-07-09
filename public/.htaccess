@@ -34,7 +34,11 @@
 
 	#RewriteCond %{REQUEST_URI} ^/soap.php [NC]
 	#RewriteRule ^(.*)$ http://v2.galepress.com/tr/soap [R=301,NC]
-
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^blog/(.*)$ /home/admin/domains/galepress.com/public_html/public/blog/index.php
+	
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)$ index.php/$1 [L]
