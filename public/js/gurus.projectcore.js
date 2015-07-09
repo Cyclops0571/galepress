@@ -21,6 +21,7 @@ var cInteractivity = new function () {
 		$("#modal-editor").append($('.action'));
 		CKEDITOR.instances.editor.destroy();
 		$('#wrapper').css('position','static');
+		$('body').css('overflow','auto');
     };
 
     this.clickCancel = function () {
@@ -29,6 +30,7 @@ var cInteractivity = new function () {
 		$("#modal-editor").append($('.action'));
 		CKEDITOR.instances.editor.destroy();
 		$('#wrapper').css('position','static');
+		$('body').css('overflow','auto');
     };
 
   //   this.clickOk = function () {
