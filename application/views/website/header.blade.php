@@ -40,7 +40,7 @@
 
               <li><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}" title="{{__('website.contact')}}" id="menu_item_Contactus" data-ref="#">{{__('website.contact')}}</a></li>
 
-              <li><a href="/{{ Session::get('language') }}/{{__('route.website_blog')}}" title="Blog" id="menu_item_Blog" data-ref="#">BLOG</a></li>
+              <li><a href="/{{__('route.website_blog')}}" title="Blog" id="menu_item_Blog" data-ref="#">BLOG</a></li>
 
               <!-- <li><a href="http://shop.galepress.com/" target="_blank" title="Shop" id="menu_item_Shop" data-ref="#">SHOP</a></li> -->
           </ul>

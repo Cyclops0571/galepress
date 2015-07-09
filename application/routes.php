@@ -61,9 +61,9 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_contact')->get($currentLanguage), array('as' => 'website_contact_get', 'uses' => 'website@contact'));
 	Route::get(__('route.website_sitemap')->get($currentLanguage), array('as' => 'website_sitemap_get', 'uses' => 'website@sitemap'));
 	Route::get(__('route.website_search')->get($currentLanguage), array('as' => 'website_search_get', 'uses' => 'website@search'));
-	Route::get(__('route.website_blog')->get($currentLanguage), array('as' => 'website_blog_get', 'uses' => 'website@blog'));
-	Route::get(__('route.website_blog_news')->get($currentLanguage), array('as' => 'website_blog_news_get', 'uses' => 'website@blogNews'));
-	Route::get(__('route.website_blog_tutorials')->get($currentLanguage), array('as' => 'website_blog_tutorials_get', 'uses' => 'website@blogTutorials'));
+	// Route::get(__('route.website_blog')->get($currentLanguage), array('as' => 'website_blog_get', 'uses' => 'website@blog'));
+	// Route::get(__('route.website_blog_news')->get($currentLanguage), array('as' => 'website_blog_news_get', 'uses' => 'website@blogNews'));
+	// Route::get(__('route.website_blog_tutorials')->get($currentLanguage), array('as' => 'website_blog_tutorials_get', 'uses' => 'website@blogTutorials'));
 	Route::get(__('route.website_sectors')->get($currentLanguage), array('as' => 'website_sectors_get', 'uses' => 'website@sectors'));
 	Route::get(__('route.website_sectors_retail')->get($currentLanguage), array('as' => 'website_sectors_retail_get', 'uses' => 'website@sectors_retail'));
 	Route::get(__('route.website_sectors_humanresources')->get($currentLanguage), array('as' => 'website_sectors_humanresources_get', 'uses' => 'website@sectors_humanresources'));
