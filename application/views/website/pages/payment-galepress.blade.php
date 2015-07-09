@@ -64,17 +64,17 @@
         <div class="form-container active">
 
             <form action="https://iyziconnect.com/post/v1/" method="post" id="paymentForm" class="form-horizontal">
-				<input type="hidden" name="api" value="im0322080005c70f195bca1434712720" />
-				<input type="hidden" name="secret" value="im0339018007d7a8f10f1c1434712720" />
+				<input type="hidden" name="api" value="<?php echo Config::get("custom.iyzico_api_id");?>" />
+				<input type="hidden" name="secret" value="<?php echo Config::get("custom.iyzico_secret");?>" />
 				<input type="hidden" name="response_mode" value="ASYNC" />
 				<input type="hidden" name="mode" value="<?php echo Config::get("custom.payment_environment");?>" />
 				<input type="hidden" name="type" value="DB" />
-				<input type="hidden" name="amount" value="10000" />
+				<input type="hidden" name="amount" value="1" />
 				<input type="hidden" name="installment" value="false" />
 				<input type="hidden" name="installment_count" value="1" />
 				<input type="hidden" name="currency" value="TRY" />
 				
-				<input type="hidden" name="card_brand" id="card_brand" value="VISA" />
+				<input type="hidden" name="card_brand" id="card_brand" value="" />
 				
 				<input type="hidden" name="descriptor" value="<?php echo 'GalepressAylikOdeme_' . date('YmdHisu');?>" />
 				<input type="hidden" name="customer_first_name" value="<?php echo $paymentAccount->title;?>" />

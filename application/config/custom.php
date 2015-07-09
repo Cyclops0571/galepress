@@ -3,17 +3,29 @@ $serverUrl = 'http://www.galepress.com';
 $mailEmail = 'info@galepress.com';
 $paymentEnv = 'live';
 $paymentUrl = 'https://www.galepress.com';
+$iyzicoApiID = 'im015089500879819fdc991436189064';
+$iyzicoSecret = 'im015536200eaf0002c8d01436189064';
 if(Laravel\Request::env() == ENV_TEST) {
+	$iyzicoApiID = 'im095675100e6b443315841436188424';
+	$iyzicoSecret = 'im09762570052d771a4b2d1436188424';
 	$paymentEnv = 'test';
 	$paymentUrl = 'https://www.galetest.com';
 	$serverUrl = 'http://galetest.com';
 	$mailEmail = 'info@galetest.com';
 } else if(Laravel\Request::env() == ENV_LOCAL){
+	$iyzicoApiID = 'im095675100e6b443315841436188424';
+	$iyzicoSecret = 'im09762570052d771a4b2d1436188424';
 	$paymentEnv = 'test';
 	$paymentUrl = 'http://localhost';
 	$serverUrl = 'http://localhost';
 	$mailEmail = 'info@galetest.com';
 }
+
+//
+//$paymentEnv = 'live';
+//$paymentUrl = 'https://www.galepress.com';
+//$iyzicoApiID = 'im015089500879819fdc991436189064';
+//$iyzicoSecret = 'im015536200eaf0002c8d01436189064';
 
 return array(
 	
@@ -49,6 +61,10 @@ return array(
 	
 	'payment_environment' => $paymentEnv,
 	'payment_url' => $paymentUrl,
+	'iyzico_api_id' => $iyzicoApiID,
+	'iyzico_secret' => $iyzicoSecret,
+	'payment_url' => $paymentUrl,
+	
 	
 	'rowcount' => 100,
 	

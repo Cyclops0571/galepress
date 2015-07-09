@@ -126,6 +126,10 @@
 
 	</head>
 	<body>
+		<?php if(FALSE) {
+			$paymentAccount = new PaymentAccount();
+		}
+		?>
 		<div class="body">
 			<header id="header">
 				<div class="container">
@@ -326,22 +330,23 @@
 		      </div>
 		      <form action="/odeme" method="post" id="userInfos" class="form-horizontal">
 			      <div class="modal-body">
+					  <?php $bireysel_kurumsal = $paymentAccount->kurumsal ? 'data-on="Kurumsal" data-off="Bireysel"' : 'data-on="Bireysel" data-off="Kurumsal"' ;?>
 			      		<div class="form-group">
 						    <label for="customerType" class="control-label col-xs-3" style="padding-top: 16px;">Bireysel / Kurumsal</label>
 						    <div class="col-xs-9">
-			      				<input class="form-control required" type="checkbox" checked data-toggle="toggle" data-size="normal" id="customerType" name="customerType" data-onstyle="success" data-offstyle="info" data-on="Bireysel" data-off="Kurumsal" data-width="200">
+			      				<input class="form-control required" type="checkbox" checked data-toggle="toggle" data-size="normal" id="customerType" name="customerType" data-onstyle="success" data-offstyle="info" <?php echo $bireysel_kurumsal; ?> data-width="200">
 						    </div>
 						</div>
 						<div class="form-group">
 						    <label for="email" class="control-label col-xs-3">Email Adresi</label>
 						    <div class="col-xs-9">
-						    	<input id="email" class="form-control required" maxlength="25" name="email" size="20" type="email" tabindex="1" value="" placeholder="Email" required>
+						    	<input id="email" class="form-control required" maxlength="25" name="email" size="20" type="email" tabindex="1" value="<?php echo $paymentAccount->email;?>" placeholder="Email" required>
 						    </div>
 						</div>
 						<div class="form-group">
 						    <label for="phone" class="control-label col-xs-3">Telefon</label>
 						    <div class="col-xs-9">
-						    	<input id="phone" maxlength="14" name="phone" size="20" type="text" class="form-control required" tabindex="2" value="" placeholder="Telefon" required>
+						    	<input id="phone" maxlength="14" name="phone" size="20" type="text" class="form-control required" tabindex="2" value="<?php echo $paymentAccount->phone;?>" placeholder="Telefon" required>
 						    </div>
 						</div>
 						<hr>

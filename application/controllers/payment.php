@@ -5,9 +5,22 @@ class Payment_Controller extends Base_Controller {
 	public $restful = true;
 
 	public function get_shop() {
+		$user = Auth::User();
+		$user instanceof User;
+		$customer = Customer::find($user->CustomerID);
+		if (!$customer) {
+			return Redirect::to(__('route.home'));
+		}
+		$paymentAccount = $customer->PaymentAccount();
+		if(!$paymentAccount) {
+			$paymentAccount = new PaymentAccount();
+		}
+		
 		$customerData = array();
-
 		$customerData['city'] = City::all();
+		$customerData['paymentAccount'] = $paymentAccount;
+
+		
 		return View::make('website.pages.shop', $customerData);
 	}
 
