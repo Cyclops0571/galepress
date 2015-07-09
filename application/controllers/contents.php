@@ -427,7 +427,7 @@ class Contents_Controller extends Base_Controller {
 				$c->IsBuyable = $content->IsBuyable;
 				$c->Price = $content->Price;
 				$c->CurrencyID = $content->CurrencyID;
-				$c->IsMaster = $content->IsMaster;
+				$c->IsMaster = 2;
 				$c->Orientation = $content->Orientation;
 				$c->Identifier = $content->Identifier;
 				$c->AutoDownload = $content->AutoDownload;
