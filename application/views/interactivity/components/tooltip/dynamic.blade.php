@@ -70,6 +70,7 @@ $rgb = array($r, $g, $b);
 	}
 	*{
 		-webkit-tap-highlight-color: transparent !important;
+		font-family: roboto;
 	}
 	.hs-spot-object{
 		position: fixed;

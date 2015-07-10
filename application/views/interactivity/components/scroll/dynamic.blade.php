@@ -9,6 +9,7 @@
 	<style type="text/css">
 		*{
 			-webkit-tap-highlight-color: transparent !important;
+			font-family: roboto;
 		}
 		.overview{
 			width: 100%;
