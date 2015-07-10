@@ -48,7 +48,12 @@
 		var isAndroid = ua.indexOf("android") > -1;
 		var isMobile = ua.indexOf("mobile") > -1;
 		if(isAndroid && isMobile) {
-			document.body.style.fontSize = "50%";
+			// document.body.style.fontSize = "30%";
+			$('*').each(function(){
+	        	var k =  parseInt($(this).css('font-size')); 
+	        	var redSize = ((k*90)/100) ; //here, you can give the percentage( now it is reduced to 90%)
+	        	$(this).css('font-size',redSize);  
+	       });
 		}
 		else if(isAndroid){ //KARICALANMA PROBLEMİ İÇİN...
 			setInterval(function(){
