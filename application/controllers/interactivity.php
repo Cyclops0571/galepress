@@ -86,7 +86,7 @@ class Interactivity_Controller extends Base_Controller {
 											$val = 'files/temp/' . $value;
 											$data = array_merge($data, array($name => $val));
 										}
-									} elseif ($name == 'url' && !Common::startsWith($value, 'http://') && !Common::startsWith($value, 'https://')) {
+									} elseif ($name == 'url' && !Common::startsWith($value, 'http://') && !Common::startsWith($value, 'https://') && !empty($value)) {
 										$value = 'http://' . $value;
 
 										$data = array_merge($data, array($name => $value));
@@ -1071,7 +1071,7 @@ class Interactivity_Controller extends Base_Controller {
 												}
 											}
 
-											if ($name == 'url' && !Common::startsWith($value, 'http://') && !Common::startsWith($value, 'https://')) {
+											if ($name == 'url' && !Common::startsWith($value, 'http://') && !Common::startsWith($value, 'https://') && !empty($value)) {
 												$value = 'http://' . $value;
 											}
 

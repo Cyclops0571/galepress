@@ -354,13 +354,13 @@
 						<div class="form-group">
 						    <label for="customerTitle" class="control-label col-xs-3">Ünvan</label>
 						    <div class="col-xs-9">
-						    	<input id="customerTitle" class="form-control required" maxlength="100" name="customerTitle" size="20" type="text" tabindex="6" value="" placeholder="Birey veya Şirket Unvanı" required>
+						    	<input id="customerTitle" class="form-control required" maxlength="100" name="customerTitle" size="20" type="text" tabindex="6" value="<?php echo $paymentAccount->title;?>" placeholder="Birey veya Şirket Unvanı" required>
 							</div>
 						</div>
 			      		<div class="form-group">
 						    <label for="tc" class="control-label col-xs-3">Tc Kimlik No</label>
 						    <div class="col-xs-9">
-						    	<input class="form-control required" id="tc" name="tc" type="text" maxlength="11" tabindex="3" placeholder="Kimlik Numarası" required/>
+						    	<input class="form-control required" id="tc" name="tc" type="text" maxlength="11" tabindex="3" value="<?php echo $paymentAccount->tckn;?>" placeholder="<?php echo $paymentAccount->tckn;?>" required/>
 						    </div>
 						</div>
 						<div class="form-group">
@@ -375,7 +375,7 @@
 						    	<select id="city" class="form-control required" name="city" tabindex="6" placeholder="Şehir Bilgisi" required>
 						    		<option selected="selected" disabled="disabled">Şehir Seçiniz</option>
 						    		@foreach($city as $c)
-									<option value="{{$c->CityID}}">{{$c->CityName}}</option>
+									<option value="{{$c->CityID}}" <?php echo $c->CityID == $paymentAccount->city_id ? 'selected="selected"' : ''; ?> >{{$c->CityName}}</option>
 									@endforeach
 								</select>
 						    </div>
@@ -383,19 +383,19 @@
 						<div class="form-group">
 						    <label for="address" class="control-label col-xs-3">Adres</label>
 						    <div class="col-xs-9">
-						    	<textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi, Sok. No, Konut No" required rows="4"></textarea>
+								<textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi, Sok. No, Konut No" required rows="4"><?php echo $paymentAccount->address;?></textarea>
 							</div>
 						</div>
 						<div class="form-group hide">
 						    <label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
 						    <div class="col-xs-9">
-						    	<input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="null" placeholder="Vergi Dairesi" required>
+						    	<input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="<?php echo $paymentAccount->vergi_dairesi; ?>" placeholder="Vergi Dairesi" required>
 							</div>
 						</div>
 						<div class="form-group hide">
 						    <label for="taxNo" class="control-label col-xs-3">Vergi No</label>
 						    <div class="col-xs-9">
-						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="null" placeholder="Vergi Numarası" required>
+						    	<input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="<?php echo $paymentAccount->vergi_no; ?>" placeholder="Vergi Numarası" required>
 							</div>
 						</div>
 						<div class="form-group errorMsg hide" style="color:#CA0101; text-align:center; font-size:18px;">

@@ -44,6 +44,7 @@ Route::get('(:any)/(:any)', array('do' => function(){
 
 Route::get('/', function() { return View::make('website.pages.home'); });
 Route::get("test", "test@index");
+Route::post("test", "test@index");
 Route::get("move", "test@moveInteractivite");
 Route::get("test/image", "test@image");
 Route::post("test/image", "test@image");
@@ -93,11 +94,13 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));
 	Route::get(__('route.website_article_whymobile')->get($currentLanguage), array('as' => 'website_article_whymobile_get', 'uses' => 'website@article_whymobile'));
 	Route::get('shop', array('as' => 'website_shop', 'before' => 'auth', 'uses' => 'payment@shop'));
+	
 	Route::get('payment-galepress', array('as' => 'website_payment_galepress_get', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
 	Route::post('payment-galepress', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
 	// Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
 
-	Route::post('odeme', array('as' => 'website_odeme_post', 'uses' => 'payment@odeme'));
+	Route::post('odeme', array('as' => 'website_odeme_post', 'before' => 'auth', 'uses' => 'payment@odeme'));
+	Route::post('odeme-onay', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_approval'));
 	Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'payment@odemeSonuc'));
 
 	Route::get(__('route.login')->get($currentLanguage), array('as' => 'common_login_get', 'uses' => 'common@login'));

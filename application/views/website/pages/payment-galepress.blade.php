@@ -63,54 +63,8 @@
 
         <div class="form-container active">
 
-            <form action="https://iyziconnect.com/post/v1/" method="post" id="paymentForm" class="form-horizontal">
-				<input type="hidden" name="api" value="<?php echo Config::get("custom.iyzico_api_id");?>" />
-				<input type="hidden" name="secret" value="<?php echo Config::get("custom.iyzico_secret");?>" />
-				<input type="hidden" name="response_mode" value="ASYNC" />
-				<input type="hidden" name="mode" value="<?php echo Config::get("custom.payment_environment");?>" />
-				<input type="hidden" name="type" value="DB" />
-				<input type="hidden" name="amount" value="1" />
-				<input type="hidden" name="installment" value="false" />
-				<input type="hidden" name="installment_count" value="1" />
-				<input type="hidden" name="currency" value="TRY" />
-				
+            <form action="/odeme-onay" method="post" id="paymentForm" class="form-horizontal">
 				<input type="hidden" name="card_brand" id="card_brand" value="" />
-				
-				<input type="hidden" name="descriptor" value="<?php echo 'GalepressAylikOdeme_' . date('YmdHisu');?>" />
-				<input type="hidden" name="customer_first_name" value="<?php echo $paymentAccount->title;?>" />
-				<input type="hidden" name="customer_last_name" value="<?php echo $paymentAccount->title;?>" />
-				<input type="hidden" name="customer_company_name" value="<?php echo $paymentAccount->title;?>" />
-				
-				<input type="hidden" name="customer_shipping_address_line_1" value="<?php echo $paymentAccount->address;?>" />
-				<input type="hidden" name="customer_shipping_address_line_2" value="" />
-				<input type="hidden" name="customer_shipping_address_zip" value="" />
-				<input type="hidden" name="customer_shipping_address_city" value="" />
-				<input type="hidden" name="customer_shipping_address_state" value="state" />
-				<input type="hidden" name="customer_shipping_address_country" value="Türkiye" />
-				
-				<input type="hidden" name="customer_billing_address_line_1" value="<?php echo $paymentAccount->address;?>" />
-				<input type="hidden" name="customer_billing_address_line_2" value="" />
-				<input type="hidden" name="customer_billing_address_zip" value="" />
-				<input type="hidden" name="customer_billing_address_city" value="" />
-				<input type="hidden" name="customer_billing_address_state" value="state" />
-				<input type="hidden" name="customer_billing_address_country" value="Türkiye" />
-				
-				<input type="hidden" name="customer_contact_email" value="<?php echo $paymentAccount->email;?>" />
-				<input type="hidden" name="customer_contact_phone" value="" />
-				<input type="hidden" name="customer_contact_mobile" value="<?php echo $paymentAccount->phone;?>" />
-				<input type="hidden" name="customer_contact_ip" value="<?php echo Request::ip();?>" />
-				
-				<input type="hidden" name="item_id_1" value="1" />
-				<input type="hidden" name="item_name_1" value="GalePress - Dijital Yayın Platformu" />
-				<input type="hidden" name="item_unit_quantity_1" value="1" />
-				<input type="hidden" name="item_unit_amount_1" value="1200" />
-				<input type="hidden" name="external_id" value="<?php echo $paymentAccount->CustomerID;?>" />
-				
-				
-				
-				<input type="hidden" name="return_url" value="<?php echo Config::get("custom.payment_url") . '/payment-response';?>" />
-				<input type="hidden" name="customer_language" value="tr" />
-				<input type="hidden" name="customer_presentation_usage" value="<?php echo 'GalepressAylikOdeme_' . date('YmdHisu');?>" />
                 <div class="form-group">
                     <label for="card_number" class="control-label col-md-3">Kart Numarası</label>
                     <div class="col-xs-9">
@@ -161,9 +115,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="card_verification" class="control-label col-md-3">CVC</label>
+                    <label for="card_verification" class="control-label col-md-3">CVC2</label>
                     <div class="col-md-9">
-                        <input class="form-control required" placeholder="CVC" type="text" name="card_verification" id="card_verification" maxlength="3" required>
+                        <input class="form-control required" placeholder="CVC2" type="text" name="card_verification" id="card_verification" maxlength="3" required>
+                    </div>
+                </div>
+				<div class="form-group">
+					<label for="3d_secure" class="control-label col-md-3">3D Secure</label>
+                    <div class="col-md-9">
+                        <input type="checkbox" name="3d_secure" id="3d_secure" value="1"> 
                     </div>
                 </div>
                 <div class="form-group">

@@ -11,6 +11,9 @@
  * @property int $state Description
  * @property int $amount Description
  * @property int $currency Description
+ * @property int $request Description
+ * @property int $response Description
+ * @property int $paid Description
  */
 class PaymentTransaction extends Eloquent {
 
