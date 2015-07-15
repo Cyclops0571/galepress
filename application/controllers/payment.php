@@ -21,11 +21,11 @@ class Payment_Controller extends Base_Controller {
 		$customerData['paymentAccount'] = $paymentAccount;
 
 
-		return View::make('website.pages.shop', $customerData);
+		return View::make('payment.shop', $customerData);
 	}
 
 	public function get_payment_galepress() {
-		return View::make('website.pages.payment-galepress');
+		return View::make('payment.payment-galepress');
 	}
 
 	public function post_payment_galepress() {
@@ -36,7 +36,7 @@ class Payment_Controller extends Base_Controller {
 		$customerData['email'] = $customerEmail;
 		$customerData['phone'] = $customerTel;
 
-		return View::make('website.pages.odeme', $customerData);
+		return View::make('payment.odeme', $customerData);
 	}
 
 	public function post_odeme() {
@@ -67,7 +67,7 @@ class Payment_Controller extends Base_Controller {
 		$data = array();
 		$data["paymentAccount"] = $paymentAccount;
 
-		return View::make('website.pages.payment-galepress', $data);
+		return View::make('payment.payment-galepress', $data);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Payment_Controller extends Base_Controller {
 		}
 		$paymentAccount = $customer->PaymentAccount();
 		if(!$paymentAccount) {
-			return Redirect::to(__('route.home'));
+			return Redirect::to('shop');
 		}
 		
 		
@@ -121,6 +121,7 @@ class Payment_Controller extends Base_Controller {
 		$postData['installment_count'] = NULL;
 		$postData['currency'] = "TRY";
 		$postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
+		$postData['card_register'] = 1;
 		$postData['card_number'] = str_replace(" ", "", Input::get("card_number"));
 		$postData['card_expiry_year'] = Input::get("card_expiry_year");
 		$postData['card_expiry_month'] = Input::get("card_expiry_month");
@@ -148,8 +149,10 @@ class Payment_Controller extends Base_Controller {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postDataString);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+		curl_setopt($ch, CURLOPT_FAILONERROR, true);
 		$response = curl_exec($ch);
 		curl_close($ch);
 		if ($response === false) {
@@ -159,16 +162,56 @@ class Payment_Controller extends Base_Controller {
 		$paymentTransaction->save();
 		
 		$resultJson = json_decode($response, true);
-		print_r($resultJson);
+
+		if(!$secure3D) {
+			$paymentResult = "Error";
+			$paymentAccount->CustomerID = $user->CustomerID;
+			$paymentAccount->payment_count = (int) $paymentAccount->payment_count + 1;
+			$paymentAccount->last_payment_day = date("Y-m-d");
+			$paymentAccount->card_token = $resultJson['card_token'];
+			$paymentAccount->bin = $resultJson['account']['bin'];
+			$paymentAccount->brand = $resultJson['account']['brand'];
+			$paymentAccount->expiry_month = $resultJson['account']['expiry_month'];
+			$paymentAccount->expiry_year = $resultJson['account']['expiry_year'];
+			$paymentAccount->last_4_digits = $resultJson['account']['lastfourdigits'];
+			$paymentAccount->holder = $resultJson['account']['holder'];
+			$paymentAccount->save();
+
+			$paymentTransaction = new PaymentTransaction();
+			$paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+			$paymentTransaction->CustomerID = $user->CustomerID;
+			$paymentTransaction->transaction_id = $resultJson['transaction']['transaction_id'];
+			$paymentTransaction->external_id = $resultJson['transaction']['external_id'];
+			$paymentTransaction->reference_id = $resultJson['transaction']['reference_id'];
+			$paymentTransaction->state = $resultJson['transaction']['state'];
+			$paymentTransaction->amount = $resultJson['transaction']['amount'];
+			$paymentTransaction->currency = $resultJson['transaction']['currency'];
+			$paymentTransaction->save();
+			
+			if (isset($resultJson['transaction']['state']) && strstr($resultJson['transaction']['state'], "paid")) {
+				$paymentResult = "Success";
+			}
+			return Redirect::to_route("website_payment_result_get", array($paymentResult));
+		} else {
+			print_r($resultJson);
+		}
 	}
 
 	public function post_odemeResponse() {
 		$user = Auth::User();
+		$user instanceof User;
+		$customer = Customer::find($user->CustomerID);
+		if (!$customer) {
+			return Redirect::to(__('route.home'));
+		}
+		$paymentAccount = $customer->PaymentAccount();
+		if(!$paymentAccount) {
+			return Redirect::to('shop');
+		}
 		$paymentResult = "Error";
 		$response = Input::get("json");
 		$resultJson = json_decode($response, true);
 		if (isset($resultJson['transaction']['transaction_id'])) {
-//			var_dump($resultJson); exit;
 			$orderToken = $resultJson['transaction_token'];
 			$curl = curl_init('https://api.iyzico.com/getStatus?token=' . $orderToken);
 			curl_setopt($curl, CURLOPT_FAILONERROR, true);
@@ -181,8 +224,6 @@ class Payment_Controller extends Base_Controller {
 				$paymentResult = "Success";
 			}
 
-			$paymentAccount = new PaymentAccount();
-			$paymentAccount->CustomerID = $user->CustomerID;
 			$paymentAccount->payment_count = (int) $paymentAccount->payment_count + 1;
 			$paymentAccount->last_payment_day = date("Y-m-d");
 			$paymentAccount->card_token = $result['card_token'];
@@ -198,7 +239,6 @@ class Payment_Controller extends Base_Controller {
 			$paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
 			$paymentTransaction->CustomerID = $user->CustomerID;
 			$paymentTransaction->transaction_id = $result['transaction']['transaction_id'];
-			$paymentTransaction->transaction_token = $result['transaction_token'];
 			$paymentTransaction->external_id = $result['transaction']['external_id'];
 			$paymentTransaction->reference_id = $result['transaction']['reference_id'];
 			$paymentTransaction->state = $result['transaction']['state'];
@@ -223,7 +263,7 @@ class Payment_Controller extends Base_Controller {
 			$payDataTitle = "Ödeme Başarısız!";
 		}
 		$data = array('payDataMsg' => $payDataMsg, 'payDataTitle' => $payDataTitle, 'result' => $result);
-		return View::make('website.pages.odemeSonuc', $data);
+		return View::make('payment.odeme_sonuc', $data);
 	}
 
 }

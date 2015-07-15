@@ -328,7 +328,7 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		        <h4 class="modal-title">Ödeme Sayfasına Doğru...</h4>
 		      </div>
-		      <form action="/odeme" method="post" id="userInfos" class="form-horizontal">
+				<form action="/odeme" method="post" id="userInfos" class="form-horizontal" novalidate>
 			      <div class="modal-body">
 					  <?php $bireysel_kurumsal = $paymentAccount->kurumsal ? 'data-on="Kurumsal" data-off="Bireysel"' : 'data-on="Bireysel" data-off="Kurumsal"' ;?>
 			      		<div class="form-group">
@@ -352,7 +352,7 @@
 						<hr>
 						<h5 class="col-xs-12">FATURA BİLGİLERİ</h5>
 						<div class="form-group">
-						    <label for="customerTitle" class="control-label col-xs-3">Ünvan</label>
+						    <label for="customerTitle" class="control-label col-xs-3">İsim / Ünvan</label>
 						    <div class="col-xs-9">
 						    	<input id="customerTitle" class="form-control required" maxlength="100" name="customerTitle" size="20" type="text" tabindex="6" value="<?php echo $paymentAccount->title;?>" placeholder="Birey veya Şirket Unvanı" required>
 							</div>
@@ -360,7 +360,7 @@
 			      		<div class="form-group">
 						    <label for="tc" class="control-label col-xs-3">Tc Kimlik No</label>
 						    <div class="col-xs-9">
-						    	<input class="form-control required" id="tc" name="tc" type="text" maxlength="11" tabindex="3" value="<?php echo $paymentAccount->tckn;?>" placeholder="<?php echo $paymentAccount->tckn;?>" required/>
+						    	<input class="form-control required" id="tc" name="tc" type="text" maxlength="11" tabindex="3" value="<?php echo $paymentAccount->tckn;?>" placeholder="<?php echo $paymentAccount->tckn;?>"/>
 						    </div>
 						</div>
 						<div class="form-group">
