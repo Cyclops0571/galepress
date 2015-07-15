@@ -14,6 +14,7 @@ return array(
 	'home' => 'startseite',
 	'dashboard' => 'anzeigepanel',
 	'mydetail' => 'meine-Benutzerdaten',
+	'shop' => 'shop',
 	
 	'users' => 'benutzer',
 	'users_new' => 'benutzer/neu',

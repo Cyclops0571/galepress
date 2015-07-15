@@ -167,6 +167,7 @@ return array(
 	'application_settings_caption_tab' => 'Tab Settings',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
+	'application_payment' => 'Application Payment',
 
 	'applications_list_blocked1' => 'Yes',
 	'applications_list_blocked0' => 'No',

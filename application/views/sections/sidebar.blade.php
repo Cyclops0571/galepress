@@ -171,4 +171,9 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 		</ul>
 	</li>
 	@endif
+	@if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+	<li>
+		<a href="{{URL::to(__('route.shop'))}}"><span class="icon-credit-card"></span>{{ __('common.application_payment') }}</a>
+	</li>
+	@endif
 </ul> 

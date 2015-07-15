@@ -14,6 +14,7 @@ return array(
 	'home' => 'anasayfa',
 	'dashboard' => 'dashboard',
 	'mydetail' => 'kullanici-bilgilerim',
+	'shop' => 'odeme',
 	
 	'users' => 'kullanicilar',
 	'users_new' => 'kullanicilar/yeni',

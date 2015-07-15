@@ -14,6 +14,7 @@ return array(
 	'home' => 'home',
 	'dashboard' => 'dashboard',
 	'mydetail' => 'user-detail',
+	'shop' => 'shop',
 	
 	'users' => 'users',
 	'users_new' => 'users/new',

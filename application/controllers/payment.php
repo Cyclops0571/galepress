@@ -177,7 +177,6 @@ class Payment_Controller extends Base_Controller {
 			$paymentAccount->holder = $resultJson['account']['holder'];
 			$paymentAccount->save();
 
-			$paymentTransaction = new PaymentTransaction();
 			$paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
 			$paymentTransaction->CustomerID = $user->CustomerID;
 			$paymentTransaction->transaction_id = $resultJson['transaction']['transaction_id'];

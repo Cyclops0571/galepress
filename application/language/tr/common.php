@@ -167,6 +167,7 @@ return array(
 	'application_settings_caption_tab' => 'Tab Ayarları ',
 	'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
 	'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
+	'application_payment' => 'Ödeme',
 
 	'applications_list_blocked1' => 'Evet',
 	'applications_list_blocked0' => 'Hayır',
