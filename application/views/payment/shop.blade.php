@@ -233,6 +233,9 @@
 							<p class="lead">
 								PDF üzerine video, ses, 3D resim galeri, 360˚, animasyon, harita gibi <span class="alternative-font">interaktifliği</span> sağlayan medyalar eklenebilir.
 							</p>
+							<p class="lead">
+								Bu paket yanlızca <b>bireysel anlaşma yapmış olan müşterilerimiz</b> için geçerlidir.
+							</p>
 						</div>
 					</div>
 
@@ -340,7 +343,7 @@
 						<div class="form-group">
 						    <label for="email" class="control-label col-xs-3">Email Adresi</label>
 						    <div class="col-xs-9">
-						    	<input id="email" class="form-control required" maxlength="25" name="email" size="20" type="email" tabindex="1" value="<?php echo $paymentAccount->email;?>" placeholder="Email" required>
+						    	<input id="email" class="form-control required" maxlength="50" name="email" size="50" type="email" tabindex="1" value="<?php echo $paymentAccount->email;?>" placeholder="Email" required>
 						    </div>
 						</div>
 						<div class="form-group">
