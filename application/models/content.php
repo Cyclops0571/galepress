@@ -23,6 +23,7 @@
  * @property int $Approval Description
  * @property int $Blocked Description
  * @property int $Status Description
+ * @property int $RemoveFromMobile Description
  * @property int $Version Description
  * @property int $PdfVersion Description
  * @property int $CoverImageVersion Description

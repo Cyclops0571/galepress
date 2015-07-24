@@ -1,8 +1,9 @@
 <?php
 
-class eStatus
-{
+class eStatus {
+
     const Active = 1;
     const Passive = 2;
-	const Deleted = 3;
+    const Deleted = 3;
+
 }

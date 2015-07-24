@@ -94,6 +94,7 @@ return array(
 	'detailpage_save' => 'Speichern',
 	'detailpage_update' => 'Aktualisieren',
 	'detailpage_delete' => 'Löschen',
+        'detailpage_remove' => 'Remove',
 	'detailpage_send' => 'Neues Passwort einfordern',
 	'detailpage_success' => 'Erfolgreich durchgeführt.',
 	'detailpage_fail' => 'Ein Fehler ist aufgetreten, versuchen Sie es bitte später noch einmal.',

@@ -94,6 +94,7 @@ return array(
 	'detailpage_save' => 'Save',
 	'detailpage_update' => 'Update',
 	'detailpage_delete' => 'Erase',
+        'detailpage_remove' => 'Remove',
 	'detailpage_send' => 'Send the new password',
 	'detailpage_success' => 'Operation is successful.',
 	'detailpage_fail' => 'An error occurred while performing the operation.',

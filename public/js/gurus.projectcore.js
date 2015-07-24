@@ -811,6 +811,19 @@ var cContent = new function () {
     this.erase = function () {
 	cCommon.erase(this.objectName);
     };
+    
+    this.removeFromMobile = function (id) {
+        console.log(route[_self.objectName]);
+        cNotification.hide();
+        cNotification.loader();
+        var url = '/' + $('#currentlanguage').val() + '/contents/remove_from_mobile/' + id;
+        var d = new Array();
+        cCommon.doAsyncRequest('GET', url, d, function (ret) {
+                cNotification.success();
+                var qs = cCommon.getQS(); //get query string
+                document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;
+        });
+    };
 
     this.selectFile = function () {
 	$('#File').click();
@@ -1460,7 +1473,7 @@ var cCommon = new function () {
 	var d = cForm.serialize(frm);
 	cCommon.doAsyncRequest(t, u, d, function (ret) {
 	    cNotification.success();
-	    var qs = cCommon.getQS();
+	    var qs = cCommon.getQS(); //get query string
 	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;
 	});
     };

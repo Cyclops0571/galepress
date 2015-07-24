@@ -94,6 +94,7 @@ return array(
 	'detailpage_save' => 'Kaydet',
 	'detailpage_update' => 'Güncelle',
 	'detailpage_delete' => 'Sil',
+        'detailpage_remove' => 'Kaldır',
 	'detailpage_send' => 'Yeni parola gönder',
 	'detailpage_success' => 'İşlem başarıyla yapıldı.',
 	'detailpage_fail' => 'İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz.',

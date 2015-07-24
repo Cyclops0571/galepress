@@ -190,6 +190,7 @@ foreach($languages as $currentLanguage) {
 
 	// <editor-fold defaultstate="collapsed" desc="Contents">
 	Route::post("contents/order/(:num)", array('as' => 'contents_order', 'before' => 'auth', 'uses' => 'contents@order'));
+        Route::get("contents/remove_from_mobile/(:num)", array("as" => "content_remove_from_mobile", 'before' => 'auth', 'uses' => 'contents@remove_from_mobile'));
 	Route::get(__('route.contents')->get($currentLanguage), array('as' => 'contents', 'before' => 'auth', 'uses' => 'contents@index'));
 	Route::get(__('route.contents_request')->get($currentLanguage), array('as' => 'contents_request', 'uses' => 'contents@request'));
 	Route::get(__('route.contents_new')->get($currentLanguage), array('as' => 'contents_new', 'before' => 'auth', 'uses' => 'contents@new'));
@@ -476,6 +477,7 @@ Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 
 Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
+//Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
 
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));

@@ -1,7 +1,7 @@
 <?php
 
 class Ws_v102_Contents_Controller extends Base_Controller
-{
+{       const serviceVersion = 102;
 	public $restful = true;
 	
 	public function get_version($contentID)
@@ -24,7 +24,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 	{
 		return Ws::render(function() use ($contentID)
 		{
-			$content = Ws::getContent($contentID);
+			$content = Ws::getContent($contentID, Ws_v102_Contents_Controller::serviceVersion);
 			$categories = Ws::getContentCategories($contentID);
 			return Response::json(array(
 				'status' => 0,
@@ -47,7 +47,8 @@ class Ws_v102_Contents_Controller extends Base_Controller
 				'ContentStatus' => ((int)$content->Status == 1 ? true : false),
 				'ContentVersion' => (int)$content->Version,
 				'ContentPdfVersion' => (1000 + ($content->PdfVersion === null ? 1 : (int)$content->PdfVersion)),
-				'ContentCoverImageVersion' => (1000 + ($content->CoverImageVersion === null ? 1 : (int)$content->CoverImageVersion))
+				'ContentCoverImageVersion' => (1000 + ($content->CoverImageVersion === null ? 1 : (int)$content->CoverImageVersion)),
+                                'RemoveFromMobile' => $content->RemoveFromMobile
 			));
 		});
 	}
