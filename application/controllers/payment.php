@@ -207,7 +207,7 @@ class Payment_Controller extends Base_Controller {
 
             return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
         } else {
-            print_r($resultJson);
+            print_r($response);
         }
     }
 
@@ -216,6 +216,12 @@ class Payment_Controller extends Base_Controller {
      * @return type
      */
     public function post_odemeResponse() {
+        echo "POST";
+        echo "--------------POST--------------";
+        var_dump($_POST);
+        echo "--------------GET--------------";
+        var_dump($_GET);
+        echo "--------------EXIT--------------";
         $user = Auth::User();
         $user instanceof User;
         $customer = Customer::find($user->CustomerID);
@@ -247,7 +253,7 @@ class Payment_Controller extends Base_Controller {
                 $paymentAccount->brand = $result['account']['brand'];
                 $paymentAccount->expiry_month = $result['account']['expiry_month'];
                 $paymentAccount->expiry_year = $result['account']['expiry_year'];
-                $paymentAccount->last_4_digits = $result['account']['last_4_digits'];
+                $paymentAccount->last_4_digits = $result['account']['lastfourdigits'];
                 $paymentAccount->holder = $result['account']['holder'];
                 $paymentAccount->save();
 
@@ -275,6 +281,69 @@ class Payment_Controller extends Base_Controller {
                 } else {
                     $paymentResult = $resultJson['response']["error_message"];
                 }
+            }
+        }
+        return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
+    }
+
+    public function get_odemeResponse() {
+        $user = Auth::User();
+        $user instanceof User;
+        $customer = Customer::find($user->CustomerID);
+        if (!$customer) {
+            return Redirect::to(__('route.home'));
+        }
+        $paymentAccount = $customer->PaymentAccount();
+        if (!$paymentAccount) {
+            return Redirect::to('shop');
+        }
+        $paymentResult = "Error";
+        $response64decoded = Input::get("response");
+        if (!empty($response64decoded)) {
+            $paymentResult = "Iyzico servis saglayıcısı şu anda cevap vermiyor. Lütfen daha sonra tekrar deneyiniz.";
+        }
+        $response = json_decode(base64_decode($response64decoded), TRUE);
+        if (!isset($response['transaction']['transaction_id'])) {
+            $paymentResult = "Iyzico servis saglayıcısında bir hata oldu. Lütfen daha sonra tekrar deneyiniz"; //transaction_id dönmüyor ??
+        }
+
+        if (isset($response['transaction']['state']) && strstr($response['transaction']['state'], "paid")) {
+            $paymentResult = "Success";
+            $paymentAccount->payment_count = (int) $paymentAccount->payment_count + 1;
+            $paymentAccount->last_payment_day = date("Y-m-d");
+            $paymentAccount->card_token = $response['card_token'];
+            $paymentAccount->bin = $response['account']['bin'];
+            $paymentAccount->brand = $response['account']['brand'];
+            $paymentAccount->expiry_month = $response['account']['expiry_month'];
+            $paymentAccount->expiry_year = $response['account']['expiry_year'];
+            $paymentAccount->last_4_digits = $response['account']['lastfourdigits'];
+            $paymentAccount->holder = $response['account']['holder'];
+            $paymentAccount->save();
+
+            $paymentTransaction = PaymentTransaction::find($response['transaction']['external_id']);
+            $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+            $paymentTransaction->CustomerID = $user->CustomerID;
+            $paymentTransaction->transaction_id = $response['transaction']['transaction_id'];
+            $paymentTransaction->external_id = $response['transaction']['external_id'];
+            $paymentTransaction->reference_id = $response['transaction']['reference_id'];
+            $paymentTransaction->state = $response['transaction']['state'];
+            $paymentTransaction->amount = $response['transaction']['amount'];
+            $paymentTransaction->currency = $response['transaction']['currency'];
+            $paymentTransaction->response = json_encode($response);
+            $paymentTransaction->save();
+        } else {
+            $paymentTransaction = PaymentTransaction::find($response['transaction']['external_id']);
+            $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+            $paymentTransaction->CustomerID = $user->CustomerID;
+            $paymentTransaction->transaction_id = $response['transaction']['transaction_id'];
+            $paymentTransaction->external_id = $response['transaction']['external_id'];
+            $paymentTransaction->state = "rejected";
+            $paymentTransaction->response = json_encode($response);
+            $paymentTransaction->save();
+            if (!empty($response['response']["error_message_tr"])) {
+                $paymentResult = $response['response']["error_message_tr"];
+            } else {
+                $paymentResult = $response['response']["error_message"];
             }
         }
         return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));

@@ -476,8 +476,9 @@ Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'au
 Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
 Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
 
-Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
+Route::get('payment-response', array('as' => 'website_odeme_response_post', 'before'=>'auth', 'uses' => 'payment@odemeResponse'));
 //Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
+//Route::get('payment-response/(:any)', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
 
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));
