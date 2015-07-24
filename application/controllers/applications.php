@@ -84,7 +84,6 @@ class Applications_Controller extends Base_Controller {
 								$query->or_where('PackageName', 'LIKE', '%' . $search . '%');
 								$query->or_where('Blocked', 'LIKE', '%' . $search . '%');
 								$query->or_where('Status', 'LIKE', '%' . $search . '%');
-								$query->or_where('ExpirationDate', 'LIKE', '%' . $search . '%');
 								$query->or_where('ApplicationID', 'LIKE', '%' . $search . '%');
 							}
 						})

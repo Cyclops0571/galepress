@@ -43,12 +43,12 @@ class Ws_v102_Contents_Controller extends Base_Controller
 				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),
 				'ContentOrientation' => (int)$content->Orientation,
 				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),
-				'ContentBlocked' => ((int)$content->Blocked == 1 ? true : false),
-				'ContentStatus' => ((int)$content->Status == 1 ? true : false),
+				'ContentBlocked' => (bool)$content->Blocked,
+				'ContentStatus' => (bool)$content->Status,
 				'ContentVersion' => (int)$content->Version,
 				'ContentPdfVersion' => (1000 + ($content->PdfVersion === null ? 1 : (int)$content->PdfVersion)),
 				'ContentCoverImageVersion' => (1000 + ($content->CoverImageVersion === null ? 1 : (int)$content->CoverImageVersion)),
-                                'RemoveFromMobile' => $content->RemoveFromMobile
+                                'RemoveFromMobile' => (bool)$content->RemoveFromMobile
 			));
 		});
 	}

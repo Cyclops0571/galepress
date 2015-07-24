@@ -104,7 +104,7 @@ class Ws {
                         'ContentStatus' => ((int) $r->Status == 1 ? true : false),
                         'ContentVersion' => (int) $r->Version,
                         'ContentOrderNo' => (int) $r->OrderNo,
-                        'RemoveFromMobile' => (int) $r->RemoveFromMobile
+                        'RemoveFromMobile' => (bool)$r->RemoveFromMobile
                     ));
                 }
             }
