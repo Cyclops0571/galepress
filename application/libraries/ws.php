@@ -72,7 +72,6 @@ class Ws {
                     $q->where('StatusID', '=', eStatus::Active);
                     $q->or_where("RemoveFromMobile", "=", eRemoveFromMobile::Active);
                 })
-                ->or_where('RemoveFromMobile', "=", eRemoveFromMobile::Active)
                 ->order_by('OrderNo', 'DESC')
                 ->order_by('MonthlyName', 'ASC')
                 ->order_by('Name', 'ASC');
@@ -104,7 +103,7 @@ class Ws {
                         'ContentStatus' => ((int) $r->Status == 1 ? true : false),
                         'ContentVersion' => (int) $r->Version,
                         'ContentOrderNo' => (int) $r->OrderNo,
-                        'RemoveFromMobile' => (bool)$r->RemoveFromMobile
+                        'RemoveFromMobile' => (bool)$r->RemoveFromMobile,
                     ));
                 }
             }
