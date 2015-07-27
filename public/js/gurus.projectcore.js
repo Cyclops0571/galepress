@@ -2047,7 +2047,7 @@ var cTemplate = new function () {
 	gallery.setup();
 	slider.api.addEventListener(MSSliderEvent.CHANGE_START, function () {
 	    $("#ms-gallery-1 .ms-gallery-botcont").stop(true);
-	    $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
+//	    $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
 	});
 	slider.api.addEventListener(MSSliderEvent.CHANGE_END, function () {
 	    $("#ms-gallery-1 .ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
@@ -2058,7 +2058,7 @@ var cTemplate = new function () {
 		$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0}, 250);
 	    }
 	    else {
-		$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
+//		$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
 	    }
 	});
 	var slider2 = new MasterSlider();
@@ -2076,7 +2076,7 @@ var cTemplate = new function () {
 	gallery2.setup();
 	slider2.api.addEventListener(MSSliderEvent.CHANGE_START, function () {
 	    $("#ms-gallery-2 .ms-gallery-botcont").stop(true);
-	    $("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
+//	    $("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 750);
 	});
 	slider2.api.addEventListener(MSSliderEvent.CHANGE_END, function () {
 	    $("#ms-gallery-2 .ms-gallery-botcont").delay(2500).animate({opacity: 0}, 2500);
@@ -2087,7 +2087,7 @@ var cTemplate = new function () {
 		$("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0}, 250);
 	    }
 	    else {
-		$("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
+//		$("#ms-gallery-2 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
 	    }
 	});
 	$(".ms-info").each(function () {

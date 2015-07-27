@@ -104,13 +104,13 @@ if ($banner) {
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_address') }}"><span class="icon-info-sign"></span></a></div>
 			</div> 
-			<div class="form-row">
+<!--			<div class="form-row">
 				<div class="col-md-3">{{__('common.map_form_desc')}}</div>
 				<div class="col-md-8">
 					<input type="text" id="Description" name='Description' value="<?php echo $Description; ?>" />
 				</div>
 				<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_target_desc') }}"><span class="icon-info-sign"></span></a></div>
-			</div>
+			</div>-->
 			<div class="form-row">
 				<div class="col-md-3">{{__('common.banners_active')}}</div>
 				<div class="col-md-8">
