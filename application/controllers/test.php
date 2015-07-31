@@ -25,57 +25,7 @@ class Test_Controller extends Base_Controller {
 	}
 	
 	public function get_index() {
-		
-		echo "get"; exit;
-		$data = 'api_id=im015089500879819fdc991436189064'
-				. '&secret=im015536200eaf0002c8d01436189064'
-				. '&response_mode=ASYNC&mode=live&external_id=orderid10'
-				. '&customer_first_name=test_firstname'
-				. '&customer_last_name=test_lastname'
-				. '&customer_contact_email=test%40test.com'
-				. '&type=DB&amount=100'
-				. '&installment_count='
-				. '&currency=TRY'
-				. '&descriptor=Test_description'
-				. '&card_number=4624490000912262'
-				. '&card_expiry_year=2017'
-				. '&card_expiry_month=07&card_brand=VISA'
-				. '&card_holder_name=John+Doe'
-				. '&card_verification=093'
-				. '&connector_type=Garanti';
-		$url = "https://iyziconnect.com/post/v1/";   // sorgularda kullanacağımız endpoint
-//		$data = 'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
-//				'&secret=im0339018007d7a8f10f1c1434712720' . // size özel iyzico secret
-//				'&external_id=' . $user->CustomerID . //sipariş numarası olarka kullanabileceğimizalan
-//				'&mode=' . Config::get("custom.payment_environment") . // live olmalı, gerçek ödeme alabilmek için
-//				'&type=RG.DB' . // iyzico form yükleme tipi. Kart saklayan form yüklemesi.
-//				'&return_url=' . Config::get("custom.payment_url") . '/payment-response' . //bu ödemenin sonucunu ben hangi sayfaya dönmeliyim. Sitenizde bu ödemeye ait sonuç nereye dönsün. Başarılımı başarısız mı orada anlayacağız.
-//				'&amount=10000' . // 100 ile çarpılmış bağış bedeli. 10,99 TL bağış için 1099 olmalı.  100 lira bağış için 10000 olmalı
-//				'&currency=TRY' . //  para birimi. Bu sabit olarak TRY olmalı
-//				'&customer_contact_ip=' . Request::ip() . // ödemeyi yapan kişinin ip adresi
-//				'&customer_language=tr' . // ödeme formunun dili
-//				'&installment=false' . // taksit açık kapalı. .
-//				'&customer_contact_mobile=' . $phone . // mobil telefon
-//				'&customer_contact_email=' . $email . // email
-//				'&customer_presentation_usage=GalepressAylikOdeme_' . date('YmdHisu') . // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
-//				'&descriptor= GalepressAylikOdeme_' . date('YmdHisu'); // iyzico kontrol panelde ilk bakışta ödemenin ne ile ilgili yapıldığını görebilme. Sipariş numarası ile aynı olabilir.
-
-		$params = array('http' => array(
-				'method' => 'POST',
-				'content' => $data
-		));
-		$ctx = stream_context_create($params);
-		$fp = @fopen($url, 'rb', false, $ctx);
-		if (!$fp) {
-			throw new Exception("Problem with $url, $php_errormsg");
-		}
-		$response = @stream_get_contents($fp);
-		if ($response === false) {
-			throw new Exception("Problem reading data from $url, $php_errormsg");
-		}
-		$resultJson = json_decode($response, true);
-		print_r($resultJson);
-		//echo "email: " . $email . "phone: " . $phone;
+            return View::make('test.javascripttest', array());
 	}
 
 	public function get_moveInteractivite() {

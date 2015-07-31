@@ -378,7 +378,7 @@
 						    	<select id="city" class="form-control required" name="city" tabindex="6" placeholder="Şehir Bilgisi" required>
 						    		<option selected="selected" disabled="disabled">Şehir Seçiniz</option>
 						    		@foreach($city as $c)
-									<option value="{{$c->CityID}}" <?php echo $c->CityID == $paymentAccount->city_id ? 'selected="selected"' : ''; ?> >{{$c->CityName}}</option>
+									<option value="{{$c->CityID}}" <?php echo $c->CityID == $paymentAccount->CityID ? 'selected="selected"' : ''; ?> >{{$c->CityName}}</option>
 									@endforeach
 								</select>
 						    </div>

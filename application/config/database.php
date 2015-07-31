@@ -13,6 +13,12 @@ if(Laravel\Request::env() == ENV_TEST) {
 }
 
 
+//if(TRUE) {
+//	$dbName = "db";
+//	$dbUserName = "root";
+//	$dbPassword = "";
+//}
+
 return array(
 
 	/*

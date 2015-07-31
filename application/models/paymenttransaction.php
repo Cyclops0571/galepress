@@ -25,7 +25,7 @@ class PaymentTransaction extends Eloquent {
 	 * @return PaymentAccount
 	 */
 	public function PaymentAccount() {
-		return $this->belongs_to('PaymentAccount')->first();
+            return $this->belongs_to('PaymentAccount', 'PaymentAccountID')->first();
 	}
 
 }

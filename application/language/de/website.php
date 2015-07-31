@@ -246,9 +246,55 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 		<p>Many brands have started developing their own apps to catch the increasing mobile app trend. With Galepress you can start being part of the trend and increase both your brand equity and awareness. Moreover, you don’t need to be a millionaire to develop apps for your brand; with different options and solutions matching your company’s needs you can develop the perfect mobile app.</p>
 		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>',
 
+         
+	'tryit_form_title' => 'Create Application',
+	'tryit_form_subtitle' => 'It Is Free!',
+	'tryit_form_name' => 'Name',
+	'tryit_form_name_surname' => 'Name Surname',
+	'tryit_form_name_placeholder' => 'Enter your name...',
+	'tryit_form_lastname' => 'Last Name',
+	'tryit_form_lastname_placeholder' => 'Enter your last name...',
+	'tryit_form_email' => 'E-mail',
+	'tryit_form_email_placeholder' => 'Enter your e-mail account...',
+	'tryit_form_appname' => 'Application Name',
+	'tryit_form_appname_placeholder' => 'Enter your application name...',
+	'tryit_form_username' => 'User Name',
+	'tryit_form_username_placeholder' => 'Enter your user name...',
+	'tryit_form_pass' => 'Password',
+	'tryit_form_pass_placeholder' => 'Enter your password...',
+	'tryit_form_pass2' => 'Re-enter Password...',
+	'tryit_form_pass2_placeholder' => 'Enter your password again...',
+	'tryit_form_securitycode' => 'Security Code',
+	'tryit_form_securitycode_placeholder' => 'Enter code from image...',
+	'tryit_form_submit' => 'Create Application',
+	'tryit_form_return' => 'Return To Login',
+
+	'tryit_form_message_mail' => 'You activate your account by clicking on the link sent to your email address.',	
+	'tryit_form_error_email' => 'Please enter a valid e-mail address.',	
+	'tryit_form_error2_email' => 'E-mail address is already exist.',
+	'tryit_form_error_user' => 'User name is already exist.',
+	'tryit_form_error_pass' => 'Passwords are not match.',
+	'tryit_form_error_securitycode' => 'The entered code is not valid.',
+
+	'tryit_form_error_required_firstname' => 'Your name is required.',
+	'tryit_form_error_required_lastname' => 'Your last name is required.',
+	'tryit_form_error_required_email' => 'Your e-mail address is required',
+	'tryit_form_error_required_appname' => 'Your application name is required.',
+	'tryit_form_error_required_username' => 'Your user name is required.',
+	'tryit_form_error_required_pass' => 'Password is required.',
+	'tryit_form_error_required_pass2' => 'Re-enter password is required.',
+	'tryit_form_error_required_passmatch' => 'Passwords must be matched.',
+	'tryit_form_error_required_securitycode' => 'The security code is required.',
+	'tryit_form_error_required_invalidcaptcha' => 'The security code is not valid.',
+	'tryit_form_error_required_checkfields' => 'Please check the red fields.',
+    
 	'blog_news' => 'News and Activities',
 	'blog_tutorials' => 'Tutorials',
 
-
+        'webinar_phone' => 'Phone',
+        'webinar_form_name_surname_placeholder' => 'Enter your name and surname...',
+        'webinar_form_phone_placeholder' => 'Enter your phone number...',
+        'webinar_form_submit' => 'Register To Tutorial',
+        'webinar_accept_email' => 'I accept to getting email from this Galepress Digital Publishing Company',
 
 );

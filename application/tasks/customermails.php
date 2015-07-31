@@ -28,7 +28,7 @@ class CustomerMails_Task {
 			    )
 			    ->group_by('a.ApplicationID')
 				->get();
-			$this->sendMail($apps, "Tutorial", View::make('mail-templates.tutorial.index')->render(),"hakan.sarier@detaysoft.com", 3);
+			$this->sendMail($apps, "Tutorial", View::make('mail-templates.tutorial.index')->render(),"serdar.saygili@detaysoft.com", 3);
 	        /**************************/
 	        /*************kayittan 3 gun sonra pdf yuklemis deneme musterilerine tutorial mailini gonder.*************/
 
@@ -53,7 +53,7 @@ class CustomerMails_Task {
 			    )
 			    ->group_by('a.ApplicationID')
 				->get();
-			$this->sendMail($apps, "Webinar", View::make('mail-templates.webinar.index')->render(),"hakan.sarier@detaysoft.com", 4);
+			$this->sendMail($apps, "Webinar", View::make('mail-templates.webinar.index')->render(),"serdar.saygili@detaysoft.com", 4);
 	        /**************************/
 	        /*************kayittan 3 gun sonra pdf YUKLEMEMIS deneme musterilerine webinar mailini gonder.*************/
 
@@ -79,7 +79,7 @@ class CustomerMails_Task {
 			    )
 			    ->group_by('a.ApplicationID')
 				->get();
-			$this->sendMail($apps, "Webinar", View::make('mail-templates.webinar.index')->render(),"hakan.sarier@detaysoft.com", 4);
+			$this->sendMail($apps, "Webinar", View::make('mail-templates.webinar.index')->render(),"serdar.saygili@detaysoft.com", 4);
 	        /**************************/
 	        /*************kayittan 5 gun sonra pdf yuklemis deneme musterilerine webinar mailini gonder.*************/
 
@@ -103,7 +103,7 @@ class CustomerMails_Task {
 			    )
 			    ->group_by('a.ApplicationID')
 				->get();
-			$this->sendMail($apps, "Try Period Ending After 2 Days", View::make('mail-templates.tryending2days.index')->render(),"hakan.sarier@detaysoft.com", 5);
+			$this->sendMail($apps, "Try Period Ending After 2 Days", View::make('mail-templates.tryending2days.index')->render(),"serdar.saygili@detaysoft.com", 5);
 	        /**************************/
 	        /*************kayittan 5 gun sonra pdf YUKLEMEMIS deneme musterilerine 'Try Period Ending After 2 Days' mailini gonder.*************/
 
@@ -123,7 +123,7 @@ class CustomerMails_Task {
 			        'CustomerID'
 			    ))
 				->get();
-			$this->sendMail($apps, "New Features", View::make('mail-templates.newfeature.index')->render(),"hakan.sarier@detaysoft.com", 6);
+			$this->sendMail($apps, "New Features", View::make('mail-templates.newfeature.index')->render(),"serdar.saygili@detaysoft.com", 6);
 	        /**************************/
 	        /*************kayittan 6 gun sonra deneme musterilerine new features mailini gonder.*************/
 
@@ -143,7 +143,7 @@ class CustomerMails_Task {
 			        'CustomerID'
 			    ))
 				->get();
-			$this->sendMail($apps, "Try Ending Today", View::make('mail-templates.tryendingtoday.index')->render(),"hakan.sarier@detaysoft.com", 7);
+			$this->sendMail($apps, "Try Ending Today", View::make('mail-templates.tryendingtoday.index')->render(),"serdar.saygili@detaysoft.com", 7);
 	        /**************************/
 	        /*************kayittan 7 gun sonra deneme musterilerine 'Try Period Ending Today' mailini gonder.*************/
 
@@ -163,7 +163,7 @@ class CustomerMails_Task {
 			        'CustomerID'
 			    ))
 				->get();
-			$this->sendMail($apps, "Feedback", View::make('mail-templates.feedback.index')->render(),"hakan.sarier@detaysoft.com", 8);
+			$this->sendMail($apps, "Feedback", View::make('mail-templates.feedback.index')->render(),"serdar.saygili@detaysoft.com", 8);
 	        /**************************/
 	        /*************kayittan 8 gun sonra deneme musterilerine 'Feedback' mailini gonder.*************/
 

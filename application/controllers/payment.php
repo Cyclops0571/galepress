@@ -58,7 +58,7 @@ class Payment_Controller extends Base_Controller {
         $paymentAccount->phone = Input::get('phone');
         $paymentAccount->title = Input::get('customerTitle');
         $paymentAccount->tckn = Input::get('tc');
-        $paymentAccount->city_id = Input::get('city'); //id
+        $paymentAccount->CityID = Input::get('city'); //id
         $paymentAccount->address = Input::get('address');
         $paymentAccount->vergi_dairesi = Input::get('taxOffice');
         $paymentAccount->vergi_no = Input::get('taxNo');

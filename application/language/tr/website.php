@@ -409,6 +409,7 @@ return array(
 	'tryit_form_title' => 'Uygulama Oluştur',
 	'tryit_form_subtitle' => 'Ücretsiz!',
 	'tryit_form_name' => 'Ad',
+    	'tryit_form_name_surname' => 'Ad Soyad',
 	'tryit_form_name_placeholder' => 'Adınızı girin...',
 	'tryit_form_lastname' => 'Soyad',
 	'tryit_form_lastname_placeholder' => 'Soyadınızı girin...',
@@ -449,4 +450,9 @@ return array(
 	'blog_news' => 'Haberler ve Aktiviteler',
 	'blog_tutorials' => 'Eğitim Videoları',
 
+        'webinar_phone' => 'Telefon',
+        'webinar_form_name_surname_placeholder' => 'Adınızı ve Soyadınızı girin...',
+        'webinar_form_phone_placeholder' => 'Telefon numaranızı girin...',
+        'webinar_form_submit' => 'Eğitime Kaydol',
+        'webinar_accept_email' => 'Bana tanıtım emaili göndermenizi kabul ediyorum.',
 );

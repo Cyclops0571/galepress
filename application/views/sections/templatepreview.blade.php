@@ -114,7 +114,8 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                             <div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
                                                 <?php $imgPath = $savedBanner->getImagePath($application); ?>
                                                 <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
-                                                <div class="ms-info">{{$savedBanner->Description}}</div>
+                                                <div class="ms-info"></div>
+<!--                                                <div class="ms-info">{{$savedBanner->Description}}</div>-->
                                                 <!-- <a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a> -->
                                             </div>
                                         <?php endforeach; ?>
@@ -135,6 +136,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                             <div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
                                                 <?php $imgPath = $savedBanner->getImagePath($application); ?>
                                                 <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
+                                                <div class="ms-info"></div>
                                                 <!--<div class="ms-info">{{$savedBanner->Description}}</div>-->
                                                 <!-- <a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a> -->
                                             </div>

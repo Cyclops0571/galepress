@@ -68,16 +68,15 @@ class Ws {
 
     public static function getApplicationContents($applicationID, $isTest = False) {
         $query = Content::where('ApplicationID', '=', $applicationID)
-                ->where(function($q) {
-                    $q->where('StatusID', '=', eStatus::Active);
-                    $q->or_where("RemoveFromMobile", "=", eRemoveFromMobile::Active);
-                })
+                ->where('StatusID', '=', eStatus::Active)
                 ->order_by('OrderNo', 'DESC')
                 ->order_by('MonthlyName', 'ASC')
                 ->order_by('Name', 'ASC');
         if (!$isTest) {
-            $query->where('Status', '=', eStatus::Active);
-
+            $query->where(function($q) {
+                $q->where('Status', '=', eStatus::Active);
+                $q->or_where("RemoveFromMobile", "=", eRemoveFromMobile::Active);
+            });
         }
 
         $categoryID = (int) Input::get('categoryID', '-1');
@@ -86,12 +85,15 @@ class Ws {
         }
 
         $rs = $query->get();
+//        var_dump(DB::last_query()) ; exit;
+//        var_dump($rs); exit;
         if ($rs) {
             $contents = array();
             foreach ($rs as $r) {
                 $r instanceof Content;
                 $serveContent = $r->PublishDate <= date("Y-m-d H:i:s");
                 $serveContent = $serveContent && ($r->IsUnpublishActive == 0 || $r->UnpublishDate > date("Y-m-d"));
+                $serveContent = $serveContent || ($r->RemoveFromMobile == eRemoveFromMobile::Active);
                 if ($serveContent) {
                     array_push($contents, array(
                         'ContentID' => (int) $r->ContentID,
@@ -103,7 +105,7 @@ class Ws {
                         'ContentStatus' => ((int) $r->Status == 1 ? true : false),
                         'ContentVersion' => (int) $r->Version,
                         'ContentOrderNo' => (int) $r->OrderNo,
-                        'RemoveFromMobile' => (bool)$r->RemoveFromMobile,
+                        'RemoveFromMobile' => (bool) $r->RemoveFromMobile,
                     ));
                 }
             }
@@ -131,7 +133,7 @@ class Ws {
                     ->where('StatusID', '=', eStatus::Active)
                     ->first();
         }
-        
+
         if (!$content) {
             throw new Exception("İçerik bulunamadı.", "102");
         }

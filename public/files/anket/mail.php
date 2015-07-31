@@ -30,7 +30,7 @@ if(isset($_POST['formData']))
 	      $headers .= "Content-type: text/html; charset=utf-8\r\n";
 	      $headers .= "From:  <".$name.$surname."> \n";
 	      
-	      mail('hakan.sarier@detaysoft.com', $subject, $icerik, $headers);
+	      mail('serdar.saygili@detaysoft.com', $subject, $icerik, $headers);
 	      echo "Mesajınız başarı ile gönderildi.";
 	}
 	else

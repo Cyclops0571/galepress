@@ -10,7 +10,7 @@
  * @property int $tckn Description
  * @property int $vergi_dairesi Description
  * @property int $vergi_no Description
- * @property int $city_id Description
+ * @property int $CityID Description
  * @property int $kurumsal Description
  * @property int $address Description
  * @property int $last_payment_day Description
@@ -31,6 +31,6 @@ class PaymentAccount extends Eloquent{
 	 * @return City
 	 */
 	public function city() {
-		return $this->has_one('City', 'city_id')->first();
+            return $this->belongs_to('City', 'CityID')->first();
 	}
 }
