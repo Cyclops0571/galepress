@@ -141,6 +141,12 @@ if (false) {
 						<hr style="border-top: 1px solid black; border-bottom: 1px solid #565656; margin-top:15px;">
 					</div>
 				</div>
+                        <div class="form-row">
+                            <div class="col-md-3">{{ __('common.tabs_title')}}</div>
+                            <div class="col-md-8">
+                                <input type="text" name="TabTitle_<?php echo $tabNo; ?>" id="TabTitle_<?php echo $tabNo; ?>" value="<?php echo $tab->TabTitle; ?>" maxlength="12" />
+                            </div>
+                        </div>
 				<div class="form-row">
 					<div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
 					<div class="col-md-8">

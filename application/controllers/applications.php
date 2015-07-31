@@ -413,6 +413,7 @@ class Applications_Controller extends Base_Controller {
 			}
 			$j = $i + 1;
 			$tabs[$i]->ApplicationID = $application->ApplicationID;
+                        $tabs[$i]->TabTitle = Input::get("TabTitle_" . $j, 'Başlık ' . $j);
 			$tabs[$i]->Url = Input::get("Url_" . $j, '');
 			$tabs[$i]->InhouseUrl = Input::get("InhouseUrl_" . $j, '');
 			$tabs[$i]->IconUrl = Input::get("hiddenSelectedIcon_" . $j, '');

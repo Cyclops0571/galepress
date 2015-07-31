@@ -170,7 +170,7 @@ class Application extends Eloquent
 		$tabs = $this->Tabs();
 		foreach($tabs as $tab) {
 			if($tab->Status == eStatus::Active) {
-				$tabsForService[] = array("tabLogoUrl" => Config::get('custom.url') . $tab->IconUrl, "tabUrl" => $tab->urlForService());
+				$tabsForService[] = array("tabTitle" => $tab->TabTitle, "tabLogoUrl" => Config::get('custom.url') . $tab->IconUrl, "tabUrl" => $tab->urlForService());
 			}
 		}
 		return $tabsForService;

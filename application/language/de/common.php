@@ -575,6 +575,7 @@ return array(
 	'banners_list_status0' => 'Not Publicationed',
 	
 	'tabs_url' => 'Mobile kompatible Web-Link',
+	'tabs_title' => 'Tab Title',
 	'tabs_inhouse_url' => 'Tab Feature',
 	'tabs_icon' => 'Symbol',
 	'tabs_active' => 'Tab Aktiv',

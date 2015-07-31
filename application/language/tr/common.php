@@ -570,6 +570,7 @@ return array(
 	'banners_list_status0' => 'Yayında değil',
 	
 	'tabs_url' => 'Web link',
+        'tabs_title' => 'Başlık',
 	'tabs_inhouse_url' => 'Tab Özelliği',
 	'tabs_icon' => 'İkon',
 	'tabs_active' => 'Tab Active',

@@ -3,6 +3,7 @@
 /**
  * @property int $TabID Description
  * @property int $ApplicationID Description
+ * @property int $TabTitle Description
  * @property int $Url Description
  * @property int $InhouseUrl Description
  * @property int $IconUrl Description
