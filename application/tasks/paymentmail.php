@@ -133,23 +133,30 @@ class PaymentMail_Task {
                 Common::toExcel($transactionExcelArray, $transactionExcelFile);
             }
 
-            // <editor-fold defaultstate="collapsed" desc="old_Version Mail code">
+            // <editor-fold defaultstate="collapsed" desc="Send Mail">
             if(!empty($accountExcelFile) || !empty($transactionExcelFile)) {
                 $subject = __('common.task_success_subject');
                 $msg = "Excel Filelari listededir";
                 try{
                     Bundle::start('messages');
                     Message::send(function($m) use($subject, $msg, $accountExcelFile, $transactionExcelFile) {
-                        $m->from(Config::get('custom.admin_email'), Config::get('custom.mail_displayname'));
-                        $m->to(Config::get('custom.admin_email'));
-                        $m->subject($subject);
-                        $m->body($msg);
-    //                    if(!empty($accountExcelFile)) {
-    //                        $m->attach($accountExcelFile);
-    //                    }
-    //                    if(!empty($transactionExcelFile)) {
-    //                        $m->attach($transactionExcelFile);
-    //                    }
+                        $m->from('serdar.saygili@detaysoft.com', 'Galepress System Admin');
+                        $m->to('srdsaygili@gmail.com');
+                        $m->subject('deneme mailidir');
+                        $m->body("send the fucking mail pls");
+                        if(!empty($accountExcelFile)) {
+                            $m->attach($accountExcelFile);
+                        }
+                        if(!empty($transactionExcelFile)) {
+                            echo "transactionExcelFile";
+                            $m->attach($transactionExcelFile);
+                        } else {
+                            echo "no transaction excel file";
+                        }
+//                        $m->from(Config::get('custom.admin_email'), Config::get('custom.mail_displayname'));
+//                        $m->to(Config::get('custom.admin_email'));
+//                        $m->subject($subject);
+//                        $m->body($msg);
                     });
                     
                 } catch (Exception $ex) {

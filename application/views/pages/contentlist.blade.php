@@ -47,7 +47,7 @@ $sortDirLink = '&sort_dir='.($sort_dir == 'DESC' ? 'ASC' : 'DESC');
                             <thead>
                                 <tr>
 									@if($currentPageNo < 2 && (int)Auth::User()->UserTypeID == eUserTypes::Customer)
-									<th><span class="icon-move"></span></th>
+									<th>Sırala</th>
 									@endif
 									<?php foreach($fields as $field): ?>
 									<?php $sortLink = '&sort='.$field[1]; ?>

@@ -223,7 +223,7 @@
                             <li><span class="icon-user" style="color:#1681bf; font-size:16px;"></span></li>
                         </ul>
                     </div>
-                    <div class="head-panel nm">
+                    <div class="head-panel nm" style="border-top: 1px solid">
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-user"></span>&nbsp;{{__('common.statistics_user')}}&nbsp;<span class="reportSubtitle">{{ Auth::User()->Username; }}</span>                            
                         </div>
@@ -275,7 +275,7 @@
                             <li><span class="icon-dropbox" style="color:#1681bf; font-size:16px;"></span></li>
                         </ul>
                     </div>
-                    <div class="head-panel nm">
+                    <div class="head-panel nm" style="border-top: 1px solid">
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-dropbox"></span>&nbsp;{{__('common.applications_applicationname')}}&nbsp;<span class="reportSubtitle">{{ $appDetail->Name }}</span>
                         </div>                 
@@ -299,7 +299,7 @@
                             <div style="float:right;" id="endDate" value="{{ Common::dateRead($appDetail->ExpirationDate, 'yyyy-MM-dd'); }}">{{ Common::dateRead($appDetail->ExpirationDate, 'dd.MM.yyyy'); }}</div>
                             <span id="datePerValue"></span>
                             <div class="hp-sm">                                    
-                                <div class="progress progress-small progress-striped active">
+                                <div class="progress progress-small">
                                     <div class="progress-bar progress-bar-danger" id="appProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>                                                            
                             </div>

@@ -14,9 +14,9 @@
         <meta name="MSSmartTagsPreventParsing" content="true" />
         <meta name="revisit-after" content="3 days" />
         <meta name="keywords" content="" />
-        <meta name="author" content="Designed and built by GURUS Technology" />
-        <meta name="copyright" content="GURUS Technology" />
-        <meta name="company" content="GURUS" />
+        <meta name="author" content="Serdar Saygılı" />
+        <meta name="copyright" content="Galepress Technology" />
+        <meta name="company" content="Detay Danışmanlık Bilgisayar Hiz. San. ve Dış Tic. A.Ş." />
         <meta name="description" content="" />
         <meta name="verify-v1" content="" />
         <meta name="robots" content="all" />
