@@ -6,7 +6,7 @@
         <div class="col-md-9">
             <div class="col-md-12">
                 <div class="block block-drop-shadow">
-                    <div class="head bg-default bg-light-ltr">
+                    <div class="head bg-default">
                         <h2>{{ __('common.dashboard_title') }}</h2>
                         <span class="hp-info pull-right">
                             {{Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date"))}}

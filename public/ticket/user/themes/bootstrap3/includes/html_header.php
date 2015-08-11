@@ -138,7 +138,11 @@ if ($auth->logged_in() && $config->get('database_version') > 9) {
 	<?php } ?>
 	
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<?php echo $config->get('address'); ?>/"><?php echo safe_output($config->get('name')); ?></a>			
+		    <a style="padding: 0 0 0 0" class="navbar-brand" href="http://<?php echo $config->get('domain'); ?>/tr/anasayfa">
+			<img style="height: 50px"
+			alt="<?php echo safe_output($config->get('name')); ?>"
+			src='<?php echo $config->get('address'); ?>/user/themes/<?php echo safe_output(CURRENT_THEME); ?>/images/ticketIcon.png' >
+		    </a>			
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -188,7 +192,7 @@ if ($auth->logged_in() && $config->get('database_version') > 9) {
 				<?php $plugins->run('html_header_nav_finish'); ?>				
 			</ul>
 			<?php if ($auth->logged_in()) { ?>
-				<ul class="nav navbar-nav navbar-right">						
+<!--				<ul class="nav navbar-nav navbar-right">						
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-star"></span> <?php echo safe_output(ucwords($auth->get('name'))); ?> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -199,7 +203,7 @@ if ($auth->logged_in() && $config->get('database_version') > 9) {
 
 						</ul>
 					</li>
-				</ul>
+				</ul>-->
 			<?php } ?>
 		</div><!--/.nav-collapse -->	
 

@@ -153,7 +153,7 @@ function set_path($path, $value)
 define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
-define("APP_VER", 39);
+define("APP_VER", 40);
 define("NORMAL_IMAGE_FILE", 1101);
 define("SMALL_IMAGE_FILE", 1102);
 define("PDF_FILE", 1001);
@@ -165,4 +165,4 @@ define("IMAGE_EXTENSION", ".jpg");
 define("CATEGORY_GENEL_ID", 1);
 define("SHOW_IMAGE_CROP", "showImageCrop");
 define("PATH_TEMP_FILE", "files/temp");
-define("TAB_COUNT", 3);
+define("TAB_COUNT", 2);

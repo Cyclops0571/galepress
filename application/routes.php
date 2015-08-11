@@ -91,7 +91,6 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.website_captcha')->get($currentLanguage), array('as' => 'website_captcha_get', 'uses' => 'website@captcha_iframe'));
 	// </editor-fold>
 
-	Route::get(__('route.confirmemail')->get($currentLanguage), array('as' => 'common_confirmemail_get', 'uses' => 'common@confirmemail'));
 	Route::get(__('appcreatewithface')->get($currentLanguage), array('as' => 'appcreatewithface', 'uses' => 'website@app_create_face'));
 
 	Route::get(__('route.website_article_workflow')->get($currentLanguage), array('as' => 'website_article_workflow_get', 'uses' => 'website@article_workflow'));
@@ -106,6 +105,8 @@ foreach($languages as $currentLanguage) {
 	Route::post('odeme', array('as' => 'website_odeme_post', 'before' => 'auth', 'uses' => 'payment@odeme'));
 	Route::post('odeme-onay', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_approval'));
 	Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'payment@odemeSonuc'));
+
+	// <editor-fold defaultstate="collapsed" desc="Common">
 
 	Route::get(__('route.login')->get($currentLanguage), array('as' => 'common_login_get', 'uses' => 'common@login'));
 	Route::post(__('route.login')->get($currentLanguage), array('as' => 'common_login_post', 'uses' => 'common@login'));
@@ -125,6 +126,11 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.mydetail')->get($currentLanguage), array('as' => 'common_mydetail_get', 'before' => 'auth', 'uses' => 'common@mydetail'));
 	Route::post(__('route.mydetail')->get($currentLanguage), array('as' => 'common_mydetail_post', 'before' => 'auth|csrf', 'uses' => 'common@mydetail'));
 	
+	Route::get(__('route.confirmemail')->get($currentLanguage), array('as' => 'common_confirmemail_get', 'uses' => 'common@confirmemail'));
+	
+	Laravel\Routing\Route::get(__('route.my_ticket')->get($currentLanguage), array('as' => 'my_ticket', 'before' => 'auth', 'uses' => 'common@ticket'));
+	// </editor-fold>
+		
 	// <editor-fold defaultstate="collapsed" desc="Users">
 	Route::get(__('route.users')->get($currentLanguage), array('as' => 'users', 'before' => 'auth', 'uses' => 'users@index'));
 	Route::get(__('route.users_new')->get($currentLanguage), array('as' => 'users_new', 'before' => 'auth', 'uses' => 'users@new'));

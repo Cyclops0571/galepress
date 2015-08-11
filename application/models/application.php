@@ -89,7 +89,9 @@ class Application extends Eloquent
 	 * @return Tab
 	 */
 	public function Tabs() {
-		return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)->get();
+		return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)
+			->take(TAB_COUNT)
+			->get();
 	}
 	
 	/**

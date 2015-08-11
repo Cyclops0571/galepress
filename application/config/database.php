@@ -2,6 +2,9 @@
 $dbName = "admin_galepress";
 $dbUserName = "admin_gpuser";
 $dbPassword = "tu4ydebyr";
+$dbNameTicket = 'galepress_ticket';
+$dbUsernameTicket = 'galepress_ticket';
+$dbPasswordTicket = ':Ekt4eca';
 if(Laravel\Request::env() == ENV_TEST) {
 	$dbName = "admin_galepress";
 	$dbUserName = "admin_galepress";
@@ -10,6 +13,9 @@ if(Laravel\Request::env() == ENV_TEST) {
 	$dbName = "db";
 	$dbUserName = "root";
 	$dbPassword = "";
+        $dbNameTicket = 'galepress_ticket';
+        $dbUsernameTicket = 'root';
+        $dbPasswordTicket = '';
 }
 
 
@@ -95,6 +101,16 @@ return array(
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
+                
+                'galepress_ticket' => array(
+                    'driver'   => 'mysql',
+                    'host'     => '127.0.0.1',
+                    'database' => $dbNameTicket,
+                    'username' => $dbUsernameTicket,
+                    'password' => $dbPasswordTicket,
+                    'charset'  => 'utf8',
+                    'prefix'   => '',
+                ),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
