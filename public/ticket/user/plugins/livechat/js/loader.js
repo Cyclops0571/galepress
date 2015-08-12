@@ -13,7 +13,7 @@ function lcs_start_chat() {
 
 $(document).ready(function () {
 
-	$('#lcs').html('<div id="lcs_chat_links"><a href="#" id="lcs_start_chat">Start Chat</a></div>');
+	$('#lcs').html('<div id="lcs_chat_links"><a href="#" id="lcs_start_chat">Canlı Destek</a></div>');
 
 
 	if ($.cookie("lcs_on") == 1) {

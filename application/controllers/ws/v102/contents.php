@@ -25,6 +25,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 		return Ws::render(function() use ($contentID)
 		{
 			$content = Ws::getContent($contentID, Ws_v102_Contents_Controller::serviceVersion);
+			$content instanceof Content;
 			$categories = Ws::getContentCategories($contentID);
 			return Response::json(array(
 				'status' => 0,
@@ -39,7 +40,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 				'ContentIsBuyable' => ((int)$content->IsBuyable == 1 ? true : false),
 				'ContentPrice' => $content->Price,
 				'ContentCurrency' => $content->Currency(1),
-				'ContentIdentifier' => $content->Identifier,
+				'ContentIdentifier' => $content->getIdentifier(),
 				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),
 				'ContentOrientation' => (int)$content->Orientation,
 				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),

@@ -1,7 +1,7 @@
 * #lcs {
 	z-index: 1000;
 	font-size: 14px;
-    letter-spacing: 0;
+	letter-spacing: 0;
 	overflow: hidden;
 	display: block;
 	height: 30px;
@@ -12,8 +12,8 @@
 	text-align: right;
 	font-weight: bold;
 	border: 2px #3FA8CC solid;
-    border-radius: 4px;
 	background-color: #3FA8CC;
+	-moz-border-radius: 15px 15px 0px 0px;-webkit-border-radius: 15px 15px 0px 0px;border-radius: 15px 15px 0px 0px;
 }
 
 * #lcs p {

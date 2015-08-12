@@ -53,6 +53,10 @@ class Content extends Eloquent {
 	  }
 	 */
 
+	/**
+	 * 
+	 * @return Application
+	 */
 	public function Application() {
 		return $this->belongs_to('Application', 'ApplicationID')->first();
 	}
@@ -299,5 +303,9 @@ class Content extends Eloquent {
 			}
 		}
 		parent::save();
+	}
+	
+	public function getIdentifier () {
+	    return $this->Application()->BundleText . "." . $this->ContentID;
 	}
 }

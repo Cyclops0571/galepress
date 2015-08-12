@@ -99,13 +99,17 @@ class Ws {
                         'ContentID' => (int) $r->ContentID,
                         'ContentName' => $r->Name,
                         'ContentMonthlyName' => $r->MonthlyName,
-                        'ContentIsMaster' => ((int) $r->IsMaster == 1 ? true : false),
+                        'ContentIsMaster' => (bool) $r->IsMaster,
                         'ContentOrientation' => (int) $r->Orientation,
-                        'ContentBlocked' => ((int) $r->Blocked == 1 ? true : false),
-                        'ContentStatus' => ((int) $r->Status == 1 ? true : false),
+                        'ContentBlocked' => (bool) $r->Blocked,
+                        'ContentStatus' => (bool) $r->Status,
                         'ContentVersion' => (int) $r->Version,
                         'ContentOrderNo' => (int) $r->OrderNo,
                         'RemoveFromMobile' => (bool) $r->RemoveFromMobile,
+			'ContentIsBuyable' => (bool) $r->IsBuyable,
+			'ContentPrice' => $r->Price,
+			'ContentCurrency' => $r->Currency(1),
+			'ContentIdentifier' => $r->getIdentifier(),
                     ));
                 }
             }

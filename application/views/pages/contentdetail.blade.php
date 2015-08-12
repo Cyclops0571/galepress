@@ -48,7 +48,7 @@ if (isset($row)) {
     $CurrencyID = (int) $row->CurrencyID;
     $IsMaster = (int) $row->IsMaster;
     $Orientation = (int) $row->Orientation;
-    $Identifier = $row->Identifier;
+    $Identifier = $row->getIdentifier();
     $AutoDownload = (int) $row->AutoDownload;
     $Approval = (int) $row->Approval;
     $Blocked = (int) $row->Blocked;
@@ -374,13 +374,21 @@ $groupcodes = DB::table('GroupCode AS gc')
             </div>
         </div>
     </div>
-    <div class="block disabledFields hide">
+    <div class="block">
         <div class="content controls" style="overflow:visible">
+	    <div class="form-row <?php echo ($ContentID && $IsBuyable) > 0 ? "" : 'disabledFields hide'?>">
+                <div class="col-md-3">{{ __('common.contents_identifier') }}</div>
+                <div class="col-md-8">
+		    {{ $Identifier }}
+                    <!--<input type="text" name="Identifier" disabled id="Identifier" class="form-control textbox" value="{{ $Identifier }}" />-->
+                </div>
+                <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_identifier') }}"><span class="icon-info-sign"></span></a></div>
+            </div>
             <div class="form-row">
                 <div class="col-md-3">{{ __('common.contents_isbuyable') }}</div>
                 <div class="col-md-8">
                     <div class="checkbox-inline">
-                        <input type="checkbox" name="IsBuyable" disabled id="IsBuyable" value="1"{{ ((int)$IsBuyable == 1 ? ' checked="checked"' : '') }} />
+                        <input type="checkbox" name="IsBuyable" id="IsBuyable" value="1"{{ ((int)$IsBuyable == 1 ? ' checked="checked"' : '') }} />
                     </div>                             
                 </div>
                 <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_isbuyable') }}"><span class="icon-info-sign"></span></a></div>
@@ -388,11 +396,11 @@ $groupcodes = DB::table('GroupCode AS gc')
             <div class="form-row">
                 <div class="col-md-3">{{ __('common.contents_price') }}</div>
                 <div class="col-md-8">               
-                    <input type="text" name="Price" disabled id="Price" class="form-control textbox" value="{{ $Price }}" style="width:100px;" />
+                    <input type="text" name="Price" id="Price" class="form-control textbox" value="{{ $Price }}" style="width:100px;" />
                 </div>
                 <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_price') }}"><span class="icon-info-sign"></span></a></div>
             </div>
-            <div class="form-row">
+            <div class="form-row disabledFields hide">
                 <div class="col-md-3">{{ __('common.contents_currency') }}</div>
                 <div class="col-md-8">
                     <select id="CurrencyID" name="CurrencyID" disabled class="form-control select2" style="width: 100%;" tabindex="-1">
@@ -403,13 +411,6 @@ $groupcodes = DB::table('GroupCode AS gc')
                     </select>
                 </div>
                 <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_currency') }}"><span class="icon-info-sign"></span></a></div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-3">{{ __('common.contents_identifier') }}</div>
-                <div class="col-md-8">               
-                    <input type="text" name="Identifier" disabled id="Identifier" class="form-control textbox" value="{{ $Identifier }}" />
-                </div>
-                <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_identifier') }}"><span class="icon-info-sign"></span></a></div>
             </div>
         </div>
     </div>

@@ -654,7 +654,6 @@ class Common_Controller extends Base_Controller {
 	$laravelUser = Laravel\Auth::User();
 	$laravelUser instanceof User;
 	$ticketUserExists = $users->is_user($laravelUser->Username);
-	
 	if(!$ticketUserExists) {
 	    //add user to the system
 	    $add_array = array(
@@ -668,6 +667,11 @@ class Common_Controller extends Base_Controller {
 		'user_level' => 1,
 	    );
 	    $users->add($add_array);
+	} else {
+	    $ticketUserSet = $users->get(array('username' => $laravelUser->Username));
+	    $ticketUser = $ticketUserSet[0];
+	    $password = $laravelUser->UserTypeID == eUserTypes::Manager ? 'detay2006' : 2233;
+	    $users->edit(array('id' => $ticketUser['id'], 'password' => $password));
 	}
 	
 	//authenticate user

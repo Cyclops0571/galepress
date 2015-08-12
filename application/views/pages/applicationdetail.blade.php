@@ -7,6 +7,8 @@
 		$CustomerID = 0;
 		$Name = '';
 		$Detail = '';
+		$Price = '';
+		$BundleText = '';
 		$StartDate = '';
 		$ExpirationDate = '';
 		$ApplicationStatusID = 0;
@@ -28,6 +30,8 @@
 			$CustomerID = (int)$row->CustomerID;
 			$Name = $row->Name;
 			$Detail = $row->Detail;
+			$Price = $row->Price;
+			$BundleText = $row->BundleText;
 			$StartDate = $row->StartDate;
 			$ExpirationDate = $row->ExpirationDate;
 			$ApplicationStatusID = (int)$row->ApplicationStatusID;
@@ -101,6 +105,18 @@
 						<div class="col-md-3">{{ __('common.applications_detail') }}</div>
 						<div class="col-md-9">
 							<textarea name="Detail" id="Detail" class="form-control" rows="2" cols="20">{{ $Detail }}</textarea>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-3">{{ __('common.applications_price') }}</div>
+						<div class="col-md-9">
+						    <input type="text" name="Price" id="Price" class="form-control textbox" value="{{ $Price }}"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-3">{{ __('common.applications_bundle') }}</div>
+						<div class="col-md-9">
+						    <input type="text" name="BundleText" id="BundleText" class="form-control textbox" value="{{ $BundleText }}"/>
 						</div>
 					</div>
 					<div class="form-row">

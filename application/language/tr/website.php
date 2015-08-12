@@ -305,6 +305,7 @@ return array(
 	'footer_socialmedia' => 'Sosyal Medya',
 	'footer_contact' => 'İletişim',
 	'footer_copyright' => 'Copyright 2013 © Her hakkı Detay Danışmalık A.Ş.\'ye aittir',
+	'footer_livechat' => 'Canlı Destek',
 
 	'howitworks_title' => 'Kolayca 3 Adımda, Tüm İçeriklerinizi 155 Ülke İle Aynı Anda Paylaşın !',
 

@@ -9,14 +9,14 @@ class TestDeneme_Task {
 
     public function run() {
         echo Laravel\Request::env();
-        $connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
-        $channel = $connection->channel();
-        $channel->queue_declare('queue_interactivepdf', false, false, false, false);
-        $msg = new AMQPMessage('Hello World!');
-        $channel->basic_publish($msg, '', 'queue_interactivepdf');
-        echo " [x] Sent 'Hello World!'\n";
-        $channel->close();
-        $connection->close();
+//        $connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
+//        $channel = $connection->channel();
+//        $channel->queue_declare('queue_interactivepdf', false, false, false, false);
+//        $msg = new AMQPMessage('Hello World!');
+//        $channel->basic_publish($msg, '', 'queue_interactivepdf');
+//        echo " [x] Sent 'Hello World!'\n";
+//        $channel->close();
+//        $connection->close();
     }
 
     public function consume() {

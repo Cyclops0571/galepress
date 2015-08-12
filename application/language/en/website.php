@@ -307,6 +307,7 @@ return array(
 	'footer_socialmedia' => 'Social Media',
 	'footer_contact' => 'Contact',
 	'footer_copyright' => 'Copyright 2013 © Her hakkı Detay Danışmalık A.Ş. All rights reserved.',
+	'footer_livechat' => 'Live Support',
 
 	'howitworks_title' => 'Easily 3 steps, The chance to be published in 155 countries !',
 

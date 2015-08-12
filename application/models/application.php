@@ -6,6 +6,8 @@
  * @property int $Detail Description
  * @property int $ThemeBackground Description
  * @property int $ThemeForeground Description
+ * @property int $Price Description
+ * @property text $BundleText Description
  * @property int $StartDate Description
  * @property int $ExpirationDate Description
  * @property int $ApplicationStatusID Description

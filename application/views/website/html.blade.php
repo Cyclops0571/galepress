@@ -41,6 +41,7 @@
       <div id="back_to_top"><a href="#" class="fa fa-arrow-up fa-lg"></a></div>
     </div>
     <script src="/website/scripts/vendor/jquery.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
     <script src="/website/scripts/vendor/queryloader2.min.js"></script>
     <script src="/website/scripts/vendor/owl.carousel.js"></script>
     <script src="/website/scripts/vendor/jquery.ba-cond.min.js"></script>
@@ -70,6 +71,14 @@
     <script src="/website/scripts/jquery.gmap.min.js"></script>
     <script src="/website/scripts/circle_diagram.js"></script>
     <script src="/website/scripts/main.js?v=<?php echo APP_VER; ?>"></script>
+    <!-- Tickets: Live Chat Start -->
+    <!-- Replace all links to "<?php echo Laravel\Config::get('custom.url'); ?>/ticket" with your tickets URL -->
+    <script type="text/javascript">
+       var sts_base_url = "<?php echo Laravel\Config::get('custom.url'); ?>/ticket";
+    </script>
+    <link rel="stylesheet" type="text/css" href="<?php echo Laravel\Config::get('custom.url'); ?>/ticket/user/plugins/livechat/css/client.css" />
+    <script type="text/javascript" src="<?php echo Laravel\Config::get('custom.url'); ?>/ticket/user/plugins/livechat/js/loader.js"></script>
+    <!-- Tickets: Live Chat Finish -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -369,7 +369,6 @@ class Contents_Controller extends Base_Controller {
                     $content->IsBuyable = (int) Input::get('IsBuyable');
                     $content->Price = (float) Input::get('Price');
                     $content->CurrencyID = (int) Input::get('CurrencyID');
-                    $content->Identifier = Input::get('Identifier');
                     $content->Orientation = (int) Input::get('Orientation');
                     $content->setPassword(Input::get('Password'));
                     $content->setMaster((int) Input::get('IsMaster'));

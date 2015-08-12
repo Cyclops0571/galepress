@@ -97,7 +97,7 @@ $(function(){
 	$("#IsBuyable").click(function(){
 		if($(this).is(':checked')){
 			$("#Price").addClass("required");
-			$("#CurrencyID").addClass("required");
+			//$("#CurrencyID").addClass("required");
 			$("label[for='Price']").html('Fiyat: <span class="error">*</span>');
 			$("label[for='CurrencyID']").html('Para Birimi: <span class="error">*</span>');
 		}

@@ -121,6 +121,7 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.logout')->get($currentLanguage), array('as' => 'common_logout', 'uses' => 'common@logout'));
 
 	Route::get(__('route.home')->get($currentLanguage), array('as' => 'common_home', 'before' => 'auth', 'uses' => 'common@home'));
+	Route::get("myhome", array('as' => 'common_myhome', 'uses' => 'test@myhome'));
 	Route::get(__('route.dashboard')->get($currentLanguage), array('as' => 'common_dashboard', 'before' => 'auth', 'uses' => 'common@dashboard'));
 
 	Route::get(__('route.mydetail')->get($currentLanguage), array('as' => 'common_mydetail_get', 'before' => 'auth', 'uses' => 'common@mydetail'));

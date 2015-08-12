@@ -177,6 +177,8 @@ return array(
 	'applications_customer' => 'Kunde:',
 	'applications_applicationname' => 'Applikationsbezeichnung:',
 	'applications_detail' => 'Einzelheiten:',
+	'applications_price' => 'Price(For Mounth):',
+	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Anfangsdatum (TT.MM.JJJJ):',
 	'applications_expirationdate' => 'Gültigkeit (TT.MM.JJJJ):',
 	'applications_notificationtext' => 'Anzeigetext:',

@@ -11,7 +11,6 @@
 | screen of death, as it can provide some clues.
 |
 */
-
 ini_set('display_errors', 'On');
 /*
 |--------------------------------------------------------------------------
