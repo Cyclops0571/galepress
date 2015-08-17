@@ -833,6 +833,18 @@ class Interactivity_Controller extends Base_Controller {
 				curl_setopt($handle, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
 				$connectable = curl_exec($handle);
 				curl_close($handle);
+				if(!$connectable) {
+				    //eger server CURLOPT_NOBODY desteklemiyorsa
+				    $handle2 = curl_init($url);
+				    curl_setopt($handle2, CURLOPT_HEADER, true);
+				    curl_setopt($handle2, CURLOPT_FAILONERROR, true);
+				    curl_setopt($handle2, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+				    curl_setopt($handle2, CURLOPT_TIMEOUT,10);
+				    curl_setopt($handle2, CURLOPT_RETURNTRANSFER, true);
+				    curl_setopt($handle2, CURLOPT_FOLLOWLOCATION, true);
+				    curl_setopt($handle2, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
+				    $connectable = curl_exec($handle2);
+				}
 			}
 			if ($connectable) {
 				return true;
