@@ -306,6 +306,6 @@ class Content extends Eloquent {
 	}
 	
 	public function getIdentifier () {
-	    return $this->Application()->BundleText . "." . $this->ContentID;
+	    return strtolower($this->Application()->BundleText) . "." . $this->ContentID;
 	}
 }

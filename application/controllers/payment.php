@@ -188,6 +188,7 @@ class Payment_Controller extends Base_Controller {
                 $paymentTransaction->state = $resultJson['transaction']['state'];
                 $paymentTransaction->amount = $resultJson['transaction']['amount'];
                 $paymentTransaction->currency = $resultJson['transaction']['currency'];
+		$paymentTransaction->paid = 1;
                 $paymentTransaction->save();
             } else {
                 $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
@@ -266,6 +267,7 @@ class Payment_Controller extends Base_Controller {
                 $paymentTransaction->state = $result['transaction']['state'];
                 $paymentTransaction->amount = $result['transaction']['amount'];
                 $paymentTransaction->currency = $result['transaction']['currency'];
+		$paymentTransaction->paid = 1;
                 $paymentTransaction->save();
             } else {
                 $paymentTransaction = new PaymentTransaction();

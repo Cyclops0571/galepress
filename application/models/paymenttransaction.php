@@ -14,6 +14,7 @@
  * @property int $request Description
  * @property int $response Description
  * @property int $paid Description
+ * @property int $mail_send Description
  */
 class PaymentTransaction extends Eloquent {
 

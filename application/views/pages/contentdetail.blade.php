@@ -42,8 +42,6 @@ if (isset($row)) {
     $IsProtected = (int) $row->IsProtected;
     $Password = $row->Password;
     $IsBuyable = (int) $row->IsBuyable;
-    //$Price = (int)$row->Price;
-    //$Price = (float)$row->Price;
     $Price = number_format((float) $row->Price, 2, '.', '');
     $CurrencyID = (int) $row->CurrencyID;
     $IsMaster = (int) $row->IsMaster;
