@@ -40,19 +40,7 @@ class PushNotification_Task {
 				foreach ($pn as $n) {
 					try {
 						$result = false;
-						if($n->ApplicationID == 117) {
-							$muhammedGunesTokenSet = array(
-								'APA91bFscBHM2TntnUHnZf2od3NBRnyX0HQlM6rnE7UAqg8jnoGkRDbr4D-wT1h2ZNXye6oblyyxgnhTYZSwmRymeWn0itd7iYuM2f1a6-bOetAHXF8avlD0j629wBQFvLAAOA5lLv4U5-eSOCtDpMFI1BFISEg3KQ',
-								'APA91bGriPV7QNduoJ7455Q905FybBM1XuDdBjWR-MOX1NG7PYB3EhaUQDF2K-LO6qERryAbFCZIzsjVzZ44jJn92lkPS_LIM1b3SxtOd3sNVMZSrD_rhHvZ6OxNrUwDVRrV-M_-ecrmnRcjHVIR2n_bFtCjQhhhPg', 
-								'APA91bHXi1x4RnTAXwk1GEmsxydePrixx-CU7Me4C4YAumbJT_dXn8DjfCTwiK7lYbw5GCvCnUUMwUOjANQ3PCzBTcRVHniFJP4F6OYNBc34Y9Bq9gQ19F-SjheB8IeqFvBn620vylga6g5T1FytPoiC9qnBMFg8lw',
-								'APA91bFMcHOr0_Q5pfq53uwBoziWIRZ4AxKv8hTDUaRV3GOOi1VRfUCSCYfaDblDxsSO-WuDMKfIfWBXCCsvcuVvUq7MJpEyWXoPHgUqG3LMde1RO2ZETwWBcOeHxxhhs-13gNXDa5OfUSD7__ekmsF3odKbvqXONA'
-								);
-							if(in_array($n->DeviceToken , $muhammedGunesTokenSet)) {
-								$result = $this->androidInternal($n->NotificationText, $n->DeviceToken);
-							} else {
-								$result = TRUE;
-							}
-						} else if ($n->DeviceType === 'ios') {
+						if ($n->DeviceType === 'ios') {
 							$cert = path('public') . 'files/customer_' . $n->CustomerID . '/application_' . $n->ApplicationID . '/' . $n->CkPem;
 
 							$result = $this->iosInternal($cert, $n->NotificationText, $n->DeviceToken);

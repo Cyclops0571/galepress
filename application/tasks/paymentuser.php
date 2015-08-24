@@ -2,41 +2,198 @@
 
 class PaymentUser_Task {
 
-    public function run()
-    {
-		try
-		{
-			$this->getPayment();
-		}
-		catch (Exception $e)
-		{
-			$msg = __('common.task_message', array(
-					'task' => '`BackupDatabase`',
-					'detail' => $e->getMessage()
-					)
-				);
-			Common::sendErrorMail($msg);
-		}
+    public function run() {
+	try {
+	    $this->getPayment();
+	} catch (Exception $e) {
+	    $msg = __('common.task_message', array(
+		'task' => '`BackupDatabase`',
+		'detail' => $e->getMessage()
+		    )
+	    );
+	    Common::sendErrorMail($msg);
+	}
     }
 
-	
-	public function getPayment() {
-		$paymentAccounts = PaymentAccount::all();
-		foreach($paymentAccounts as $paymentAccount) {
-			$paymentAccount instanceof PaymentAccount;
-			if($paymentAccount->payment_count < 12) {
-				//tam olarak gununde mailler gitmeli ve bu program calismali...
-				if(date("Y-m-d") == date('Y-m-d', strtotime("+1 mounth", $paymentAccount->last_payment_day))) {
-					//todo kredi karti ise cekmeyi dene
-					//cekemedin ise mail at hatirlatma yap...
-				}
-				
-				
+    public function getPayment() {
+	$WarningMailSet = array();
+	$paymentAccounts = PaymentAccount::all();
+	$paymentUserName = "";
+	$paymentUserSurname = "";
+	foreach ($paymentAccounts as $paymentAccount) {
+	    $errorReason = "";
+	    if (!empty($paymentAccount->FirstPayment)) {
+		//echo $paymentAccount->PaymentAccountID;
+		//her kullanici icin bir payment account acilacak mi???
+		$firstPayment = date(strtotime($paymentAccount->FirstPayment));
+		$validTime = strtotime("+" . $paymentAccount->payment_count . " month", $firstPayment);
+		$paymentAccount->ValidUntil = date('Y-m-d', $validTime);
+		$paymentAccount->save();
+	    }
+
+	    $paymentAccount instanceof PaymentAccount;
+	    $paymentAmount = ((int) (Config::get("custom.payment_amount") * 1.18)) * 100;
+
+	    if ($paymentAccount->PaymentAccountID != 1) {
+		//once kendi uzerimde deniyorum... 571571
+		continue;
+	    } else {
+		$paymentAmount = 1;
+	    }
+
+	    if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d")) {
+		$paymentResult = FALSE;
+		//when payment ocurs increase the ValidUntil date
+		// <editor-fold defaultstate="collapsed" desc="first bin check">
+		$binCheckData = array();
+		$binCheckData['api_id'] = Config::get("custom.iyzico_api_id");
+		$binCheckData['secret'] = Config::get("custom.iyzico_secret");
+		$binCheckData['bin'] = $paymentAccount->bin;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, Config::get("custom.iyzico_bin_check_url"));
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, Common::getPostDataString($binCheckData));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+		//curl_setopt($ch, CURLOPT_FAILONERROR, true);
+		$bincheckResponse = curl_exec($ch);
+		curl_close($ch);
+		// </editor-fold>
+
+		$responseJson = json_decode($bincheckResponse, TRUE);
+		if ($responseJson["status"] == "SUCCESS" && $responseJson["details"]["CARD_TYPE"] == "CREDIT CARD") {
+		    $paymentUserName = "";
+		    $paymentUserSurname = "";
+
+		    $paymentUserNameSurnameSet = explode(" ", $paymentAccount->holder);
+		    if (count($paymentUserNameSurnameSet) >= 2) {
+			for ($i = 0; $i < count($paymentUserNameSurnameSet) - 1; $i++) {
+			    $paymentUserName = empty($paymentUserName) ? $paymentUserNameSurnameSet[$i] : $paymentUserName . " " . $paymentUserNameSurnameSet[$i];
 			}
+			$paymentUserSurname = $paymentUserNameSurnameSet[count($paymentUserNameSurnameSet) - 1];
+		    }
+
+		    $paymentTransaction = new PaymentTransaction();
+		    $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+		    $paymentTransaction->CustomerID = $paymentAccount->CustomerID;
+		    $paymentTransaction->save();
+
+		    $postData['api_id'] = Config::get("custom.iyzico_api_id");
+		    $postData['secret'] = Config::get("custom.iyzico_secret");
+		    $postData['response_mode'] = "SYNC";
+		    $postData['mode'] = Config::get("custom.payment_environment");
+		    $postData['external_id'] = $paymentTransaction->PaymentTransactionID;
+		    $postData['customer_first_name'] = $paymentUserName;
+		    $postData['customer_last_name'] = $paymentUserSurname;
+		    $postData['customer_company_name'] = "iyzico";
+		    $postData['customer_contact_email'] = $paymentAccount->email;
+		    $postData['customer_contact_mobile'] = str_replace(array(" ", "-", "(", ")"), "", $paymentAccount->phone);
+		    $postData['customer_contact_ip'] = Request::ip();
+		    $postData['customer_language'] = 'tr';
+		    $postData['customer_presentation_usage'] = 'GalepressAylikOdeme_' . date('YmdHisu');
+		    $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
+		    $postData['type'] = "DB";
+		    $postData['amount'] = $paymentAmount;
+		    $postData['card_token'] = $paymentAccount->card_token;
+		    $postData['card_verification'] = 000;
+		    $postData['amount'] = 100;
+		    $postData['installment_count'] = NULL;
+		    $postData['currency'] = "TRY";
+		    $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
+		    $postData['card_register'] = 1;
+		    $postData['card_holder_name'] = Input::get("card_holder_name");
+		    $postData['connector_type'] = "Garanti";
+		    $postData['customer_contact_ip'] = "37.9.205.203";
+ 
+		    $paymentTransaction->request = json_encode($postData);
+		    $paymentTransaction->save();
+
+		    //do the request then 
+		    $ch = curl_init();
+		    curl_setopt($ch, CURLOPT_URL, Config::get('custom.iyzico_url'));
+		    curl_setopt($ch, CURLOPT_POST, 1);
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		    curl_setopt($ch, CURLOPT_POSTFIELDS, Common::getPostDataString($postData));
+		    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+		    $paymentResponse = curl_exec($ch);
+		    curl_close($ch);
+		    $transaction = json_decode($paymentResponse, TRUE);
+
+		    $paymentTransaction->response = $paymentResponse;
+		    if (isset($transaction['transaction']['state']) && strpos($transaction['transaction']['state'], "paid") !== FALSE) {
+			//paid
+			//increment the payment count 
+			//increase the validUntil date 
+			//update the last payment date
+			//success
+			$paymentResult = TRUE;
+			$paymentAccount->payment_count = $paymentAccount->payment_count + 1;
+			$paymentAccount->ValidUntil = date("Y-m-d", strtotime("+" . $paymentAccount->payment_count . " month", $firstPayment));
+			$paymentAccount->last_payment_day = date("Y-m-d");
+			$paymentAccount->WarningMailPhase = 0;
+			$paymentAccount->save();
+
+			$paymentTransaction->transaction_id = $transaction['transaction']['transaction_id'];
+			$paymentTransaction->external_id = $transaction['transaction']['external_id'];
+			$paymentTransaction->reference_id = $transaction['transaction']['reference_id'];
+			$paymentTransaction->state = $transaction['transaction']['state'];
+			$paymentTransaction->amount = $transaction['transaction']['amount'];
+			$paymentTransaction->currency = $transaction['transaction']['currency'];
+			$paymentTransaction->paid = 1;
+			$paymentTransaction->save();
+			Common::sendPaymentUserSuccesMail($paymentAccount->holder, $paymentAccount->email, $paymentAmount);
+		    } else {
+			//not paid
+			$paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+			$paymentTransaction->CustomerID = $paymentAccount->CustomerID;
+			$paymentTransaction->transaction_id = $transaction['transaction']['transaction_id'];
+			$paymentTransaction->external_id = $transaction['transaction']['external_id'];
+			$paymentTransaction->reference_id = $transaction['transaction']['reference_id'];
+			$paymentTransaction->state = $transaction['transaction']['state'];
+			$paymentTransaction->save();
+			$errorReason = !empty($transaction["response"]["error_message_tr"]) ? $transaction["response"]["error_message_tr"] : $transaction["response"]["error_message"];
+		    }
+		} else {
+		    $errorReason = "Sistemin hesabınızdan otomatik para tahsilatı yapmasını istiyorsanız lütfen bankamatik kartı yerine kredi kartı tanımlayınız. \n\r"
+			. "Eğer kredi kartınız ile otomatik ödeme yapmak istemiyorsanız panelden bankamatik kartınız ile manuel ödeme yapabilirsiniz. \n\r"
+			. "Lütfen en kısa zamanda ödemenizi yapınız. \n\r";
 		}
-		
-		
-		
+
+		// <editor-fold defaultstate="collapsed" desc="prepare warning mail list">
+		if (!$paymentResult) {
+		    //mail it to user, 
+		    $paymentAccount->WarningMailPhase++;
+		    if ($paymentAccount->WarningMailPhase < 3) {
+			$paymentAccount->save();
+		    }
+		    $userInfoSet = array();
+		    $userInfoSet["customerID"] = $paymentAccount->CustomerID;
+		    $userInfoSet["error_reason"] = $errorReason;
+		    $userInfoSet["email"] = $paymentAccount->email;
+		    $userInfoSet["name_surname"] = $paymentAccount->holder;
+		    $userInfoSet["last_payment_day"] = $paymentAccount->last_payment_day;
+		    $userInfoSet["warning_mail_phase"] = $paymentAccount->warning_mail_phase;
+		    $WarningMailSet[] = $userInfoSet;
+		}
+		// </editor-fold>
+	    }
 	}
 	
+	// <editor-fold defaultstate="collapsed" desc="Send Warning mail">
+	if (!empty($WarningMailSet)) {
+	    Common::sendPaymentUserReminderMail($WarningMailSet);
+	    $msg = "Ödeme yapmayan müşteri listesi: \r\n";
+	    foreach ($WarningMailSet as $WarningMail) {
+		$customer = Customer::find($WarningMail["customerID"]);
+		$msg .= "CustomerID: " . $customer->CustomerID . " İsim: " . $customer->CustomerName
+			. " Son Ödeme Tarihi: " . date("d-m-Y", strtotime($WarningMail["last_payment_day"]))
+			. " Uyarı Mail Seviyesi: " . $WarningMail["warning_mail_phase"] 
+			. " Hata Sebebi:" . $WarningMail["error_reason"] . "\r\n";
+	    }
+	    Common::sendPaymentAdminReminderMail($msg);
+	}
+	// </editor-fold>
+	
+    }
+
 }

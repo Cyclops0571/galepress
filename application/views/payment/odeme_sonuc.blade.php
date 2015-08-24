@@ -117,7 +117,7 @@
 			<header id="header">
 				<div class="container">
 					<h1 class="logo">
-						<a href="{{Config::get('custom.payment_url')}}">
+						<a href="{{Config::get('custom.iyzico_return_url')}}">
 							<img alt="GalePress" data-sticky-width="252" data-sticky-height="82" src="/website/img/logo-dark.png">
 						</a>
 					</h1>

@@ -101,7 +101,7 @@ class Payment_Controller extends Base_Controller {
         $postData = array();
         if ($secure3D) {
             $postData['response_mode'] = "ASYNC";
-            $postData['return_url'] = Config::get("custom.payment_url") . '/payment-response';
+            $postData['return_url'] = Config::get("custom.iyzico_return_url") . '/payment-response';
         } else {
             $postData['response_mode'] = "SYNC";
         }
@@ -134,23 +134,11 @@ class Payment_Controller extends Base_Controller {
         $paymentTransaction->request = json_encode($postData);
         $paymentTransaction->save();
 
-        $url = "https://iyziconnect.com/post/v1/";   // sorgularda kullanacağımız endpoint
-        //$url = "http://www.galepress.com/test";   // sorgularda kullanacağımız endpoint
-
-        $postDataString = "";
-        foreach ($postData as $key => $value) {
-            if (empty($postDataString)) {
-                $postDataString .= $key . "=" . $value;
-            } else {
-                $postDataString .= '&' . $key . "=" . $value;
-            }
-        }
-
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, Config::get('custom.iyzico_url'));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postDataString);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, Common::getPostDataString($postData));
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
         //curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $response = curl_exec($ch);

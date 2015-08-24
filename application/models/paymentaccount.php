@@ -13,7 +13,11 @@
  * @property int $CityID Description
  * @property int $kurumsal Description
  * @property int $address Description
+ * @property int $payment_count Description
+ * @property int $FirstPayment Description
  * @property int $last_payment_day Description
+ * @property int $ValidUntil Description
+ * @property int $WarningMailPhase Description
  * @property int $card_token Description
  * @property int $bin Description
  * @property int $brand Description

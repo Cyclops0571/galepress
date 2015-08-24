@@ -3,584 +3,584 @@
 class Common {
 
     public static function dirsize($dir) {
-        if (is_file($dir))
-            return filesize($dir);
-        if ($dh = opendir($dir)) {
-            $size = 0;
-            while (($file = readdir($dh)) !== false) {
-                if ($file == '.' || $file == '..')
-                    continue;
-                $s = Common::dirsize($dir . '/' . $file);
-                $size += $s;
-            }
-            closedir($dh);
-            return $size;
-        }
-        return 0;
+	if (is_file($dir))
+	    return filesize($dir);
+	if ($dh = opendir($dir)) {
+	    $size = 0;
+	    while (($file = readdir($dh)) !== false) {
+		if ($file == '.' || $file == '..')
+		    continue;
+		$s = Common::dirsize($dir . '/' . $file);
+		$size += $s;
+	    }
+	    closedir($dh);
+	    return $size;
+	}
+	return 0;
     }
 
     public static function xmlEscape($string) {
-        return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
+	return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
     }
 
     public static function CheckCategoryOwnership($categoryID) {
-        $currentUser = Auth::User();
+	$currentUser = Auth::User();
 
-        if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-            $count = DB::table('Customer AS c')
-                    ->join('Application AS a', function($join) {
-                        $join->on('a.CustomerID', '=', 'c.CustomerID');
-                        $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                    })
-                    ->join('Category AS t', function($join) use ($categoryID) {
-                        $join->on('t.CategoryID', '=', DB::raw($categoryID));
-                        $join->on('t.ApplicationID', '=', 'a.ApplicationID');
-                        $join->on('t.StatusID', '=', DB::raw(eStatus::Active));
-                    })
-                    ->where('c.CustomerID', '=', $currentUser->CustomerID)
-                    ->where('c.StatusID', '=', eStatus::Active)
-                    ->count();
-            if ($count > 0) {
-                return true;
-            }
-            return false;
-        } else {
-            return true;
-        }
+	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+	    $count = DB::table('Customer AS c')
+		    ->join('Application AS a', function($join) {
+			$join->on('a.CustomerID', '=', 'c.CustomerID');
+			$join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+		    })
+		    ->join('Category AS t', function($join) use ($categoryID) {
+			$join->on('t.CategoryID', '=', DB::raw($categoryID));
+			$join->on('t.ApplicationID', '=', 'a.ApplicationID');
+			$join->on('t.StatusID', '=', DB::raw(eStatus::Active));
+		    })
+		    ->where('c.CustomerID', '=', $currentUser->CustomerID)
+		    ->where('c.StatusID', '=', eStatus::Active)
+		    ->count();
+	    if ($count > 0) {
+		return true;
+	    }
+	    return false;
+	} else {
+	    return true;
+	}
     }
 
     public static function CheckCategoryOwnershipWithApplication($applicationID, $categoryID) {
-        $currentUser = Auth::User();
+	$currentUser = Auth::User();
 
-        $chk4Application = Common::CheckApplicationOwnership($applicationID);
+	$chk4Application = Common::CheckApplicationOwnership($applicationID);
 
-        if ($chk4Application) {
-            if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-                $count = DB::table('Customer AS c')
-                        ->join('Application AS a', function($join) use ($applicationID) {
-                            $join->on('a.ApplicationID', '=', DB::raw($applicationID));
-                            $join->on('a.CustomerID', '=', 'c.CustomerID');
-                            $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                        })
-                        ->join('Category AS t', function($join) use ($categoryID) {
-                            $join->on('t.CategoryID', '=', DB::raw($categoryID));
-                            $join->on('t.ApplicationID', '=', 'a.ApplicationID');
-                            $join->on('t.StatusID', '=', DB::raw(eStatus::Active));
-                        })
-                        ->where('c.CustomerID', '=', $currentUser->CustomerID)
-                        ->where('c.StatusID', '=', eStatus::Active)
-                        ->count();
-                if ($count > 0) {
-                    return true;
-                }
-            } else {
-                $count = DB::table('Category')
-                        ->where('CategoryID', '=', $categoryID)
-                        ->where('ApplicationID', '=', $applicationID)
-                        ->where('StatusID', '=', eStatus::Active)
-                        ->count();
-                if ($count > 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
+	if ($chk4Application) {
+	    if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+		$count = DB::table('Customer AS c')
+			->join('Application AS a', function($join) use ($applicationID) {
+			    $join->on('a.ApplicationID', '=', DB::raw($applicationID));
+			    $join->on('a.CustomerID', '=', 'c.CustomerID');
+			    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+			})
+			->join('Category AS t', function($join) use ($categoryID) {
+			    $join->on('t.CategoryID', '=', DB::raw($categoryID));
+			    $join->on('t.ApplicationID', '=', 'a.ApplicationID');
+			    $join->on('t.StatusID', '=', DB::raw(eStatus::Active));
+			})
+			->where('c.CustomerID', '=', $currentUser->CustomerID)
+			->where('c.StatusID', '=', eStatus::Active)
+			->count();
+		if ($count > 0) {
+		    return true;
+		}
+	    } else {
+		$count = DB::table('Category')
+			->where('CategoryID', '=', $categoryID)
+			->where('ApplicationID', '=', $applicationID)
+			->where('StatusID', '=', eStatus::Active)
+			->count();
+		if ($count > 0) {
+		    return true;
+		}
+	    }
+	}
+	return false;
     }
 
     public static function CheckContentPasswordOwnership($contentPasswordID) {
-        $currentUser = Auth::User();
+	$currentUser = Auth::User();
 
-        if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-            $count = DB::table('Customer AS c')
-                    ->join('Application AS a', function($join) {
-                        $join->on('a.CustomerID', '=', 'c.CustomerID');
-                        $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                    })
-                    ->join('Content AS cn', function($join) {
-                        $join->on('cn.ApplicationID', '=', 'a.ApplicationID');
-                        $join->on('cn.StatusID', '=', DB::raw(eStatus::Active));
-                    })
-                    ->join('ContentPassword AS cp', function($join) use ($contentPasswordID) {
-                        $join->on('cp.ContentPasswordID', '=', DB::raw($contentPasswordID));
-                        $join->on('cp.ContentID', '=', 'cn.ContentID');
-                        $join->on('cp.StatusID', '=', DB::raw(eStatus::Active));
-                    })
-                    ->where('c.CustomerID', '=', $currentUser->CustomerID)
-                    ->where('c.StatusID', '=', eStatus::Active)
-                    ->count();
-            if ($count > 0) {
-                return true;
-            }
-            return false;
-        } else {
-            return true;
-        }
+	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+	    $count = DB::table('Customer AS c')
+		    ->join('Application AS a', function($join) {
+			$join->on('a.CustomerID', '=', 'c.CustomerID');
+			$join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+		    })
+		    ->join('Content AS cn', function($join) {
+			$join->on('cn.ApplicationID', '=', 'a.ApplicationID');
+			$join->on('cn.StatusID', '=', DB::raw(eStatus::Active));
+		    })
+		    ->join('ContentPassword AS cp', function($join) use ($contentPasswordID) {
+			$join->on('cp.ContentPasswordID', '=', DB::raw($contentPasswordID));
+			$join->on('cp.ContentID', '=', 'cn.ContentID');
+			$join->on('cp.StatusID', '=', DB::raw(eStatus::Active));
+		    })
+		    ->where('c.CustomerID', '=', $currentUser->CustomerID)
+		    ->where('c.StatusID', '=', eStatus::Active)
+		    ->count();
+	    if ($count > 0) {
+		return true;
+	    }
+	    return false;
+	} else {
+	    return true;
+	}
     }
 
     public static function CheckApplicationOwnership($applicationID) {
-        $currentUser = Auth::User();
-        if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
-            return true;
-        }
+	$currentUser = Auth::User();
+	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
+	    return true;
+	}
 
-        if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-            $a = Application::find($applicationID);
-            if ($a) {
-                if ((int) $a->StatusID == eStatus::Active) {
-                    $c = $a->Customer();
-                    if ((int) $c->StatusID == eStatus::Active) {
-                        if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+	    $a = Application::find($applicationID);
+	    if ($a) {
+		if ((int) $a->StatusID == eStatus::Active) {
+		    $c = $a->Customer();
+		    if ((int) $c->StatusID == eStatus::Active) {
+			if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
+			    return true;
+			}
+		    }
+		}
+	    }
+	}
+	return false;
     }
 
     public static function CheckContentOwnership($contentID) {
-        $currentUser = Auth::User();
+	$currentUser = Auth::User();
 
-        if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-            $o = Content::find($contentID);
-            if ($o) {
-                if ((int) $o->StatusID == eStatus::Active) {
-                    $a = $o->Application();
-                    if ((int) $a->StatusID == eStatus::Active) {
-                        $c = $a->Customer();
-                        if ((int) $c->StatusID == eStatus::Active) {
-                            if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        } else {
-            return true;
-        }
+	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+	    $o = Content::find($contentID);
+	    if ($o) {
+		if ((int) $o->StatusID == eStatus::Active) {
+		    $a = $o->Application();
+		    if ((int) $a->StatusID == eStatus::Active) {
+			$c = $a->Customer();
+			if ((int) $c->StatusID == eStatus::Active) {
+			    if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
+				return true;
+			    }
+			}
+		    }
+		}
+	    }
+	    return false;
+	} else {
+	    return true;
+	}
     }
 
     public static function AuthInteractivity($applicationID) {
-        if (Common::CheckApplicationOwnership($applicationID)) {
-            $a = Application::find($applicationID);
-            if ($a) {
-                return (1 == (int) $a->Package()->Interactive);
-            }
-        }
-        return false;
+	if (Common::CheckApplicationOwnership($applicationID)) {
+	    $a = Application::find($applicationID);
+	    if ($a) {
+		return (1 == (int) $a->Package()->Interactive);
+	    }
+	}
+	return false;
     }
 
     public static function AuthMaxPDF($applicationID) {
-        if (Common::CheckApplicationOwnership($applicationID)) {
-            $currentPDF = (int) Content::where('ApplicationID', '=', $applicationID)->where('Status', '=', 1)->where('StatusID', '=', eStatus::Active)->count();
-            $maxPDF = 0;
+	if (Common::CheckApplicationOwnership($applicationID)) {
+	    $currentPDF = (int) Content::where('ApplicationID', '=', $applicationID)->where('Status', '=', 1)->where('StatusID', '=', eStatus::Active)->count();
+	    $maxPDF = 0;
 
-            $a = Application::find($applicationID);
-            if ($a) {
-                $maxPDF = (int) Application::find($applicationID)->Package()->MaxActivePDF;
-                if ($currentPDF < $maxPDF) {
-                    return true;
-                }
-            }
-        }
-        return false;
+	    $a = Application::find($applicationID);
+	    if ($a) {
+		$maxPDF = (int) Application::find($applicationID)->Package()->MaxActivePDF;
+		if ($currentPDF < $maxPDF) {
+		    return true;
+		}
+	    }
+	}
+	return false;
     }
 
     public static function getContentDetail($ContentID, $Password, &$oCustomerID, &$oApplicationID, &$oContentID, &$oContentFileID, &$oContentFilePath, &$oContentFileName) {
-        $oCustomerID = 0;
-        $oApplicationID = 0;
-        $oContentID = 0;
-        $oContentFileID = 0;
-        $oContentFilePath = '';
-        $oContentFileName = '';
+	$oCustomerID = 0;
+	$oApplicationID = 0;
+	$oContentID = 0;
+	$oContentFileID = 0;
+	$oContentFilePath = '';
+	$oContentFileName = '';
 
-        $c = DB::table('Customer AS c')
-                ->join('Application AS a', function($join) {
-                    $join->on('a.CustomerID', '=', 'c.CustomerID');
-                    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->join('Content AS o', function($join) use ($ContentID) {
-                    $join->on('o.ContentID', '=', DB::raw($ContentID));
-                    $join->on('o.ApplicationID', '=', 'a.ApplicationID');
-                    $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->where('c.StatusID', '=', eStatus::Active)
-                ->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
-        if ($c) {
-            $oCustomerID = (int) $c->CustomerID;
-            $oApplicationID = (int) $c->ApplicationID;
-            $oContentID = (int) $c->ContentID;
-            $IsProtected = (int) $c->IsProtected;
-            if ($IsProtected == 1) {
-                //Content
-                $authPwd = false;
-                $checkPwd = DB::table('Content')
-                        ->where('ContentID', '=', $oContentID)
-                        ->where('StatusID', '=', eStatus::Active)
-                        ->first();
-                if ($checkPwd) {
-                    $authPwd = Hash::check($Password, $checkPwd->Password);
-                }
-                //Content password
-                $authPwdList = false;
-                $checkPwdList = DB::table('ContentPassword')
-                        ->where('ContentID', '=', $oContentID)
-                        ->where('StatusID', '=', eStatus::Active)
-                        ->get();
-                if ($checkPwdList) {
-                    foreach ($checkPwdList as $pwd) {
-                        if ((int) $pwd->Qty > 0) {
-                            if (Hash::check($Password, $pwd->Password)) {
-                                $authPwdList = true;
-                                //dec counter
-                                $current = ContentPassword::find($pwd->ContentPasswordID);
-                                if ((int) $current->Qty > 0) {
-                                    $current->Qty = $current->Qty - 1;
-                                    $current->save();
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
+	$c = DB::table('Customer AS c')
+		->join('Application AS a', function($join) {
+		    $join->on('a.CustomerID', '=', 'c.CustomerID');
+		    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+		})
+		->join('Content AS o', function($join) use ($ContentID) {
+		    $join->on('o.ContentID', '=', DB::raw($ContentID));
+		    $join->on('o.ApplicationID', '=', 'a.ApplicationID');
+		    $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
+		})
+		->where('c.StatusID', '=', eStatus::Active)
+		->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
+	if ($c) {
+	    $oCustomerID = (int) $c->CustomerID;
+	    $oApplicationID = (int) $c->ApplicationID;
+	    $oContentID = (int) $c->ContentID;
+	    $IsProtected = (int) $c->IsProtected;
+	    if ($IsProtected == 1) {
+		//Content
+		$authPwd = false;
+		$checkPwd = DB::table('Content')
+			->where('ContentID', '=', $oContentID)
+			->where('StatusID', '=', eStatus::Active)
+			->first();
+		if ($checkPwd) {
+		    $authPwd = Hash::check($Password, $checkPwd->Password);
+		}
+		//Content password
+		$authPwdList = false;
+		$checkPwdList = DB::table('ContentPassword')
+			->where('ContentID', '=', $oContentID)
+			->where('StatusID', '=', eStatus::Active)
+			->get();
+		if ($checkPwdList) {
+		    foreach ($checkPwdList as $pwd) {
+			if ((int) $pwd->Qty > 0) {
+			    if (Hash::check($Password, $pwd->Password)) {
+				$authPwdList = true;
+				//dec counter
+				$current = ContentPassword::find($pwd->ContentPasswordID);
+				if ((int) $current->Qty > 0) {
+				    $current->Qty = $current->Qty - 1;
+				    $current->save();
+				}
+				break;
+			    }
+			}
+		    }
+		}
 
-                if (!($authPwd || $authPwdList)) {
-                    throw new Exception(__('common.contents_wrongpassword'), "101");
-                }
-            }
+		if (!($authPwd || $authPwdList)) {
+		    throw new Exception(__('common.contents_wrongpassword'), "101");
+		}
+	    }
 
-            $cf = DB::table('ContentFile')
-                    ->where('ContentID', '=', $oContentID)
-                    ->where('StatusID', '=', eStatus::Active)
-                    ->order_by('ContentFileID', 'DESC')
-                    ->first();
-            if ($cf) {
-                $oContentFileID = (int) $cf->ContentFileID;
-                $oContentFilePath = $cf->FilePath;
-                $oContentFileName = $cf->FileName;
+	    $cf = DB::table('ContentFile')
+		    ->where('ContentID', '=', $oContentID)
+		    ->where('StatusID', '=', eStatus::Active)
+		    ->order_by('ContentFileID', 'DESC')
+		    ->first();
+	    if ($cf) {
+		$oContentFileID = (int) $cf->ContentFileID;
+		$oContentFilePath = $cf->FilePath;
+		$oContentFileName = $cf->FileName;
 
-                if ((int) $cf->Interactivity == 1) {
-                    //$oContentFilePath = $cf->InteractiveFilePath;
-                    //$oContentFileName = $cf->InteractiveFileName;
-                    if ((int) $cf->HasCreated == 1) {
-                        $oContentFilePath = $cf->InteractiveFilePath;
-                        $oContentFileName = $cf->InteractiveFileName;
-                    } else {
-                        throw new Exception(__('common.contents_interactive_file_hasnt_been_created'), "104");
-                    }
-                }
-            } else {
-                throw new Exception(__('common.list_norecord'), "102");
-            }
-        } else {
-            throw new Exception(__('common.list_norecord'), "102");
-        }
+		if ((int) $cf->Interactivity == 1) {
+		    //$oContentFilePath = $cf->InteractiveFilePath;
+		    //$oContentFileName = $cf->InteractiveFileName;
+		    if ((int) $cf->HasCreated == 1) {
+			$oContentFilePath = $cf->InteractiveFilePath;
+			$oContentFileName = $cf->InteractiveFileName;
+		    } else {
+			throw new Exception(__('common.contents_interactive_file_hasnt_been_created'), "104");
+		    }
+		}
+	    } else {
+		throw new Exception(__('common.list_norecord'), "102");
+	    }
+	} else {
+	    throw new Exception(__('common.list_norecord'), "102");
+	}
     }
 
     public static function getContentDetailWithCoverImage(
     $ContentID, &$oCustomerID, &$oApplicationID, &$oContentID, &$oContentFileID, &$oContentFilePath, &$oContentFileName, &$oContentCoverImageFileID, &$oContentCoverImageFilePath, &$oContentCoverImageFileName, &$oContentCoverImageFileName2) {
-        $oCustomerID = 0;
-        $oApplicationID = 0;
-        $oContentID = 0;
-        $oContentFileID = 0;
-        $oContentFilePath = '';
-        $oContentFileName = '';
-        $oContentCoverImageFileID = 0;
-        $oContentCoverImageFilePath = '';
-        $oContentCoverImageFileName = '';
-        $oContentCoverImageFileName2 = '';
+	$oCustomerID = 0;
+	$oApplicationID = 0;
+	$oContentID = 0;
+	$oContentFileID = 0;
+	$oContentFilePath = '';
+	$oContentFileName = '';
+	$oContentCoverImageFileID = 0;
+	$oContentCoverImageFilePath = '';
+	$oContentCoverImageFileName = '';
+	$oContentCoverImageFileName2 = '';
 
-        $c = DB::table('Customer AS c')
-                ->join('Application AS a', function($join) {
-                    $join->on('a.CustomerID', '=', 'c.CustomerID');
-                    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->join('Content AS o', function($join) use ($ContentID) {
-                    $join->on('o.ContentID', '=', DB::raw($ContentID));
-                    $join->on('o.ApplicationID', '=', 'a.ApplicationID');
-                    $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->where('c.StatusID', '=', eStatus::Active)
-                ->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
-        if ($c) {
-            $oCustomerID = (int) $c->CustomerID;
-            $oApplicationID = (int) $c->ApplicationID;
-            $oContentID = (int) $c->ContentID;
+	$c = DB::table('Customer AS c')
+		->join('Application AS a', function($join) {
+		    $join->on('a.CustomerID', '=', 'c.CustomerID');
+		    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+		})
+		->join('Content AS o', function($join) use ($ContentID) {
+		    $join->on('o.ContentID', '=', DB::raw($ContentID));
+		    $join->on('o.ApplicationID', '=', 'a.ApplicationID');
+		    $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
+		})
+		->where('c.StatusID', '=', eStatus::Active)
+		->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
+	if ($c) {
+	    $oCustomerID = (int) $c->CustomerID;
+	    $oApplicationID = (int) $c->ApplicationID;
+	    $oContentID = (int) $c->ContentID;
 
-            $cf = DB::table('ContentFile')
-                    ->where('ContentID', '=', $oContentID)
-                    ->where('StatusID', '=', eStatus::Active)
-                    ->order_by('ContentFileID', 'DESC')
-                    ->first();
-            if ($cf) {
-                $oContentFileID = (int) $cf->ContentFileID;
-                $oContentFilePath = $cf->FilePath;
-                $oContentFileName = $cf->FileName;
+	    $cf = DB::table('ContentFile')
+		    ->where('ContentID', '=', $oContentID)
+		    ->where('StatusID', '=', eStatus::Active)
+		    ->order_by('ContentFileID', 'DESC')
+		    ->first();
+	    if ($cf) {
+		$oContentFileID = (int) $cf->ContentFileID;
+		$oContentFilePath = $cf->FilePath;
+		$oContentFileName = $cf->FileName;
 
-                if ((int) $cf->Interactivity == 1) {
-                    //$oContentFilePath = $cf->InteractiveFilePath;
-                    //$oContentFileName = $cf->InteractiveFileName;
-                    if ((int) $cf->HasCreated == 1) {
-                        //$oContentFilePath = $cf->InteractiveFilePath;
-                        //$oContentFileName = $cf->InteractiveFileName;
-                        $oContentFilePath = '';
-                        $oContentFileName = '';
-                    } else {
-                        //Cover image oldugundan engellenmemeli!!!
-                        //throw new Exception(__('common.contents_interactive_file_hasnt_been_created'), "104");
-                    }
-                }
+		if ((int) $cf->Interactivity == 1) {
+		    //$oContentFilePath = $cf->InteractiveFilePath;
+		    //$oContentFileName = $cf->InteractiveFileName;
+		    if ((int) $cf->HasCreated == 1) {
+			//$oContentFilePath = $cf->InteractiveFilePath;
+			//$oContentFileName = $cf->InteractiveFileName;
+			$oContentFilePath = '';
+			$oContentFileName = '';
+		    } else {
+			//Cover image oldugundan engellenmemeli!!!
+			//throw new Exception(__('common.contents_interactive_file_hasnt_been_created'), "104");
+		    }
+		}
 
-                $cif = DB::table('ContentCoverImageFile')
-                        ->where('ContentFileID', '=', $oContentFileID)
-                        ->where('StatusID', '=', eStatus::Active)
-                        ->order_by('ContentCoverImageFileID', 'DESC')
-                        ->first();
-                if ($cif) {
-                    $oContentCoverImageFileID = (int) $cif->ContentCoverImageFileID;
-                    $oContentCoverImageFilePath = $cif->FilePath;
-                    $oContentCoverImageFileName = $cif->FileName;
-                    $oContentCoverImageFileName2 = $cif->FileName2;
-                } else {
-                    throw new Exception(__('common.list_norecord'), "102");
-                }
-            } else {
-                throw new Exception(__('common.list_norecord'), "102");
-            }
-        } else {
-            throw new Exception(__('common.list_norecord'), "102");
-        }
+		$cif = DB::table('ContentCoverImageFile')
+			->where('ContentFileID', '=', $oContentFileID)
+			->where('StatusID', '=', eStatus::Active)
+			->order_by('ContentCoverImageFileID', 'DESC')
+			->first();
+		if ($cif) {
+		    $oContentCoverImageFileID = (int) $cif->ContentCoverImageFileID;
+		    $oContentCoverImageFilePath = $cif->FilePath;
+		    $oContentCoverImageFileName = $cif->FileName;
+		    $oContentCoverImageFileName2 = $cif->FileName2;
+		} else {
+		    throw new Exception(__('common.list_norecord'), "102");
+		}
+	    } else {
+		throw new Exception(__('common.list_norecord'), "102");
+	    }
+	} else {
+	    throw new Exception(__('common.list_norecord'), "102");
+	}
     }
 
     public static function download(
     $RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
-        $file = path('public') . $filepath . '/' . $filename;
+	$file = path('public') . $filepath . '/' . $filename;
 
-        if (file_exists($file) && is_file($file)) {
-            $fileSize = File::size($file);
-            //throw new Exception($fileSize);
+	if (file_exists($file) && is_file($file)) {
+	    $fileSize = File::size($file);
+	    //throw new Exception($fileSize);
 
-            $dataTransferred = 0;
-            $percentage = 0;
+	    $dataTransferred = 0;
+	    $percentage = 0;
 
-            $r = new Requestt();
-            $r->RequestTypeID = $RequestTypeID;
-            $r->CustomerID = $CustomerID;
-            $r->ApplicationID = $ApplicationID;
-            $r->ContentID = $ContentID;
-            $r->ContentFileID = $ContentFileID;
-            if ($ContentCoverImageFileID > 0) {
-                $r->ContentCoverImageFileID = $ContentCoverImageFileID;
-            }
-            $r->RequestDate = new DateTime();
-            $r->IP = Request::ip(); //getenv("REMOTE_ADDR")
-            $r->DeviceType = $_SERVER['HTTP_USER_AGENT']; //Holmes::get_device();
-            $r->FileSize = $fileSize;
-            $r->DataTransferred = 0;
-            $r->Percentage = 0;
-            $r->StatusID = eStatus::Active;
-            $r->CreatorUserID = 0;
-            $r->DateCreated = new DateTime();
-            $r->ProcessUserID = 0;
-            $r->ProcessDate = new DateTime();
-            $r->ProcessTypeID = eProcessTypes::Insert;
-            $r->save();
+	    $r = new Requestt();
+	    $r->RequestTypeID = $RequestTypeID;
+	    $r->CustomerID = $CustomerID;
+	    $r->ApplicationID = $ApplicationID;
+	    $r->ContentID = $ContentID;
+	    $r->ContentFileID = $ContentFileID;
+	    if ($ContentCoverImageFileID > 0) {
+		$r->ContentCoverImageFileID = $ContentCoverImageFileID;
+	    }
+	    $r->RequestDate = new DateTime();
+	    $r->IP = Request::ip(); //getenv("REMOTE_ADDR")
+	    $r->DeviceType = $_SERVER['HTTP_USER_AGENT']; //Holmes::get_device();
+	    $r->FileSize = $fileSize;
+	    $r->DataTransferred = 0;
+	    $r->Percentage = 0;
+	    $r->StatusID = eStatus::Active;
+	    $r->CreatorUserID = 0;
+	    $r->DateCreated = new DateTime();
+	    $r->ProcessUserID = 0;
+	    $r->ProcessDate = new DateTime();
+	    $r->ProcessTypeID = eProcessTypes::Insert;
+	    $r->save();
 
-            $requestID = $r->RequestID;
+	    $requestID = $r->RequestID;
 
-            // set the download rate limit (=> 200,0 kb/s)
-            $download_rate = 200.0;
+	    // set the download rate limit (=> 200,0 kb/s)
+	    $download_rate = 200.0;
 
-            // send headers
-            ob_end_clean();
-            set_time_limit(0);
-            header("Cache-Control: no-store, no-cache, must-revalidate");
-            header("Cache-Control: post-check=0, pre-check=0", FALSE);
-            header("Pragma: no-cache");
-            header("Expires: " . GMDATE("D, d M Y H:i:s", MKTIME(DATE("H") + 2, DATE("i"), DATE("s"), DATE("m"), DATE("d"), DATE("Y"))) . " GMT");
-            header("Last-Modified: " . GMDATE("D, d M Y H:i:s") . " GMT");
-            header("Content-Type: application/octet-stream");
-            header("Content-Length: " . $fileSize);
-            header('Content-Disposition: inline; filename="' . str_replace(" ", "_", $filename) . '"'); //dosya isminde bosluk varsa problem oluyor!!!
-            header("Content-Transfer-Encoding: binary\n");
+	    // send headers
+	    ob_end_clean();
+	    set_time_limit(0);
+	    header("Cache-Control: no-store, no-cache, must-revalidate");
+	    header("Cache-Control: post-check=0, pre-check=0", FALSE);
+	    header("Pragma: no-cache");
+	    header("Expires: " . GMDATE("D, d M Y H:i:s", MKTIME(DATE("H") + 2, DATE("i"), DATE("s"), DATE("m"), DATE("d"), DATE("Y"))) . " GMT");
+	    header("Last-Modified: " . GMDATE("D, d M Y H:i:s") . " GMT");
+	    header("Content-Type: application/octet-stream");
+	    header("Content-Length: " . $fileSize);
+	    header('Content-Disposition: inline; filename="' . str_replace(" ", "_", $filename) . '"'); //dosya isminde bosluk varsa problem oluyor!!!
+	    header("Content-Transfer-Encoding: binary\n");
 
-            // open file stream
-            $fc = fopen($file, "r");
+	    // open file stream
+	    $fc = fopen($file, "r");
 
-            //http://psoug.org/snippet/Download_File_To_Client_53.htm
-            //http://stackoverflow.com/questions/1507985/php-determine-how-many-bytes-sent-over-http
-            //http://php.net/manual/en/function.ignore-user-abort.php
-            //http://php.net/manual/en/function.http-send-file.php
-            //http://stackoverflow.com/questions/737045/send-a-file-to-client
-            //SELECT RequestID, FileSize, DataTransferred, Percentage FROM Request ORDER BY RequestID DESC LIMIT 10;
-            //ignore_user_abort(true);
+	    //http://psoug.org/snippet/Download_File_To_Client_53.htm
+	    //http://stackoverflow.com/questions/1507985/php-determine-how-many-bytes-sent-over-http
+	    //http://php.net/manual/en/function.ignore-user-abort.php
+	    //http://php.net/manual/en/function.http-send-file.php
+	    //http://stackoverflow.com/questions/737045/send-a-file-to-client
+	    //SELECT RequestID, FileSize, DataTransferred, Percentage FROM Request ORDER BY RequestID DESC LIMIT 10;
+	    //ignore_user_abort(true);
 
-            while (!feof($fc) && connection_status() == 0) {
+	    while (!feof($fc) && connection_status() == 0) {
 
-                //echo fread($fc, round($download_rate * 1024));
-                print fread($fc, round($download_rate * 1024));
+		//echo fread($fc, round($download_rate * 1024));
+		print fread($fc, round($download_rate * 1024));
 
-                // flush the content to the browser
-                flush();
+		// flush the content to the browser
+		flush();
 
-                //$dataTransferred = $dataTransferred + round($download_rate * 1024);
-                //$dataTransferred = $dataTransferred + strlen($contents);
-                $dataTransferred = ftell($fc);
-                $percentage = ($dataTransferred * 100) / $fileSize;
+		//$dataTransferred = $dataTransferred + round($download_rate * 1024);
+		//$dataTransferred = $dataTransferred + strlen($contents);
+		$dataTransferred = ftell($fc);
+		$percentage = ($dataTransferred * 100) / $fileSize;
 
-                $r = Requestt::find($requestID);
-                $r->DataTransferred = $dataTransferred;
-                $r->Percentage = $percentage;
-                $r->ProcessUserID = 0;
-                $r->ProcessDate = new DateTime();
-                $r->ProcessTypeID = eProcessTypes::Update;
-                $r->save();
-            }
+		$r = Requestt::find($requestID);
+		$r->DataTransferred = $dataTransferred;
+		$r->Percentage = $percentage;
+		$r->ProcessUserID = 0;
+		$r->ProcessDate = new DateTime();
+		$r->ProcessTypeID = eProcessTypes::Update;
+		$r->save();
+	    }
 
-            // close file stream
-            fclose($fc);
-        } else {
-            throw new Exception(__('common.file_notfound'), "102");
-        }
+	    // close file stream
+	    fclose($fc);
+	} else {
+	    throw new Exception(__('common.file_notfound'), "102");
+	}
     }
 
     public static function downloadImage($ContentID, $RequestTypeID, $Width, $Height) {
-        $content = DB::table('Customer AS c')
-                ->join('Application AS a', function($join) {
-                    $join->on('a.CustomerID', '=', 'c.CustomerID');
-                    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->join('Content AS o', function($join) use ($ContentID) {
-                    $join->on('o.ContentID', '=', DB::raw($ContentID));
-                    $join->on('o.ApplicationID', '=', 'a.ApplicationID');
-                    $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->where('c.StatusID', '=', eStatus::Active)
-                ->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
-        if (!$content) {
-            throw new Exception(__('common.list_norecord'), "102");
-        }
-        $contentFile = DB::table('ContentFile')
-                ->where('ContentID', '=', $ContentID)
-                ->where('StatusID', '=', eStatus::Active)
-                ->order_by('ContentFileID', 'DESC')
-                ->first();
+	$content = DB::table('Customer AS c')
+		->join('Application AS a', function($join) {
+		    $join->on('a.CustomerID', '=', 'c.CustomerID');
+		    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+		})
+		->join('Content AS o', function($join) use ($ContentID) {
+		    $join->on('o.ContentID', '=', DB::raw($ContentID));
+		    $join->on('o.ApplicationID', '=', 'a.ApplicationID');
+		    $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
+		})
+		->where('c.StatusID', '=', eStatus::Active)
+		->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
+	if (!$content) {
+	    throw new Exception(__('common.list_norecord'), "102");
+	}
+	$contentFile = DB::table('ContentFile')
+		->where('ContentID', '=', $ContentID)
+		->where('StatusID', '=', eStatus::Active)
+		->order_by('ContentFileID', 'DESC')
+		->first();
 
-        if (!$contentFile) {
-            throw new Exception(__('common.list_norecord'), "102");
-        }
-        $contentCoverImageFile = DB::table('ContentCoverImageFile')
-                ->where('ContentFileID', '=', $contentFile->ContentFileID)
-                ->where('StatusID', '=', eStatus::Active)
-                ->order_by('ContentCoverImageFileID', 'DESC')
-                ->first();
-        if (!$contentCoverImageFile) {
-            throw new Exception(__('common.list_norecord'), "102");
-        }
+	if (!$contentFile) {
+	    throw new Exception(__('common.list_norecord'), "102");
+	}
+	$contentCoverImageFile = DB::table('ContentCoverImageFile')
+		->where('ContentFileID', '=', $contentFile->ContentFileID)
+		->where('StatusID', '=', eStatus::Active)
+		->order_by('ContentCoverImageFileID', 'DESC')
+		->first();
+	if (!$contentCoverImageFile) {
+	    throw new Exception(__('common.list_norecord'), "102");
+	}
 
-        if ($Width > 0 && $Height > 0) {
-            //image var mi kontrol edip yok ise olusturup, ismini set edelim;
-            $originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . IMAGE_CROPPED_2048;
-            if (!is_file($originalImage)) {
-                $originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
-            }
-            $pathInfoOI = pathinfo($originalImage);
-            $fileName = IMAGE_CROPPED_NAME . "_" . $Width . "x" . $Height . ".jpg";
-            if (!is_file($pathInfoOI["dirname"] . "/" . $fileName)) {
-                //resize original image to new path and then save it.
-                if (!is_file($originalImage)) {
-                    throw new Exception(__('common.file_notfound'), "102");
-                }
-                $im = new Imagick($originalImage);
-                $im->resizeImage($Width, $Height, Imagick::FILTER_LANCZOS, 1, TRUE);
-                $im->writeImage($pathInfoOI["dirname"] . "/" . $fileName);
-                $im->destroy();
-            }
-        } else {
-            switch ($RequestTypeID) {
-                case SMALL_IMAGE_FILE:
-                    $fileName = $contentCoverImageFile->FileName2;
-                    break;
-                case NORMAL_IMAGE_FILE:
-                    $fileName = $contentCoverImageFile->FileName2;
-                    break;
-                default:
-                    throw new Exception('Not implemented', '102');
-            }
-        }
+	if ($Width > 0 && $Height > 0) {
+	    //image var mi kontrol edip yok ise olusturup, ismini set edelim;
+	    $originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . IMAGE_CROPPED_2048;
+	    if (!is_file($originalImage)) {
+		$originalImage = path('public') . $contentCoverImageFile->FilePath . '/' . $contentCoverImageFile->SourceFileName;
+	    }
+	    $pathInfoOI = pathinfo($originalImage);
+	    $fileName = IMAGE_CROPPED_NAME . "_" . $Width . "x" . $Height . ".jpg";
+	    if (!is_file($pathInfoOI["dirname"] . "/" . $fileName)) {
+		//resize original image to new path and then save it.
+		if (!is_file($originalImage)) {
+		    throw new Exception(__('common.file_notfound'), "102");
+		}
+		$im = new Imagick($originalImage);
+		$im->resizeImage($Width, $Height, Imagick::FILTER_LANCZOS, 1, TRUE);
+		$im->writeImage($pathInfoOI["dirname"] . "/" . $fileName);
+		$im->destroy();
+	    }
+	} else {
+	    switch ($RequestTypeID) {
+		case SMALL_IMAGE_FILE:
+		    $fileName = $contentCoverImageFile->FileName2;
+		    break;
+		case NORMAL_IMAGE_FILE:
+		    $fileName = $contentCoverImageFile->FileName2;
+		    break;
+		default:
+		    throw new Exception('Not implemented', '102');
+	    }
+	}
 
 
-        $file = path('public') . $contentCoverImageFile->FilePath . '/' . $fileName;
-        if (!is_file($file)) {
-            throw new Exception(__('common.file_notfound'), "102");
-        }
-        $fileSize = File::size($file);
-        $dataTransferred = 0;
-        $percentage = 0;
-        $r = new Requestt();
-        $r->RequestTypeID = $RequestTypeID;
-        $r->CustomerID = (int) $content->CustomerID;
-        $r->ApplicationID = (int) $content->ApplicationID;
-        $r->ContentID = $ContentID;
-        $r->ContentFileID = (int) $contentFile->ContentFileID;
-        $r->ContentCoverImageFileID = $contentCoverImageFile->ContentCoverImageFileID;
-        $r->RequestDate = new DateTime();
-        $r->IP = Request::ip();
-        $r->DeviceType = $_SERVER['HTTP_USER_AGENT']; //Holmes::get_device();
-        $r->FileSize = $fileSize;
-        $r->DataTransferred = 0;
-        $r->Percentage = 0;
-        $r->StatusID = eStatus::Active;
-        $r->CreatorUserID = 0;
-        $r->DateCreated = new DateTime();
-        $r->ProcessUserID = 0;
-        $r->ProcessDate = new DateTime();
-        $r->ProcessTypeID = eProcessTypes::Insert;
-        $r->save();
+	$file = path('public') . $contentCoverImageFile->FilePath . '/' . $fileName;
+	if (!is_file($file)) {
+	    throw new Exception(__('common.file_notfound'), "102");
+	}
+	$fileSize = File::size($file);
+	$dataTransferred = 0;
+	$percentage = 0;
+	$r = new Requestt();
+	$r->RequestTypeID = $RequestTypeID;
+	$r->CustomerID = (int) $content->CustomerID;
+	$r->ApplicationID = (int) $content->ApplicationID;
+	$r->ContentID = $ContentID;
+	$r->ContentFileID = (int) $contentFile->ContentFileID;
+	$r->ContentCoverImageFileID = $contentCoverImageFile->ContentCoverImageFileID;
+	$r->RequestDate = new DateTime();
+	$r->IP = Request::ip();
+	$r->DeviceType = $_SERVER['HTTP_USER_AGENT']; //Holmes::get_device();
+	$r->FileSize = $fileSize;
+	$r->DataTransferred = 0;
+	$r->Percentage = 0;
+	$r->StatusID = eStatus::Active;
+	$r->CreatorUserID = 0;
+	$r->DateCreated = new DateTime();
+	$r->ProcessUserID = 0;
+	$r->ProcessDate = new DateTime();
+	$r->ProcessTypeID = eProcessTypes::Insert;
+	$r->save();
 
-        $requestID = $r->RequestID;
+	$requestID = $r->RequestID;
 
-        // set the download rate limit (=> 200,0 kb/s)
-        $download_rate = 200.0;
+	// set the download rate limit (=> 200,0 kb/s)
+	$download_rate = 200.0;
 
-        // send headers
-        ob_end_clean();
-        set_time_limit(0);
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", FALSE);
-        header("Pragma: no-cache");
-        header("Expires: " . GMDATE("D, d M Y H:i:s", MKTIME(DATE("H") + 2, DATE("i"), DATE("s"), DATE("m"), DATE("d"), DATE("Y"))) . " GMT");
-        header("Last-Modified: " . GMDATE("D, d M Y H:i:s") . " GMT");
-        header("Content-Type: application/octet-stream");
-        header("Content-Length: " . $fileSize);
-        header('Content-Disposition: inline; filename="' . str_replace(" ", "_", $fileName) . '"'); //dosya isminde bosluk varsa problem oluyor!!!
-        header("Content-Transfer-Encoding: binary\n");
-        // open file stream
-        $fc = fopen($file, "r");
-        while (!feof($fc) && connection_status() == 0) {
-            //echo fread($fc, round($download_rate * 1024));
-            print fread($fc, round($download_rate * 1024));
+	// send headers
+	ob_end_clean();
+	set_time_limit(0);
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	header("Cache-Control: post-check=0, pre-check=0", FALSE);
+	header("Pragma: no-cache");
+	header("Expires: " . GMDATE("D, d M Y H:i:s", MKTIME(DATE("H") + 2, DATE("i"), DATE("s"), DATE("m"), DATE("d"), DATE("Y"))) . " GMT");
+	header("Last-Modified: " . GMDATE("D, d M Y H:i:s") . " GMT");
+	header("Content-Type: application/octet-stream");
+	header("Content-Length: " . $fileSize);
+	header('Content-Disposition: inline; filename="' . str_replace(" ", "_", $fileName) . '"'); //dosya isminde bosluk varsa problem oluyor!!!
+	header("Content-Transfer-Encoding: binary\n");
+	// open file stream
+	$fc = fopen($file, "r");
+	while (!feof($fc) && connection_status() == 0) {
+	    //echo fread($fc, round($download_rate * 1024));
+	    print fread($fc, round($download_rate * 1024));
 
-            // flush the content to the browser
-            flush();
+	    // flush the content to the browser
+	    flush();
 
-            //$dataTransferred = $dataTransferred + round($download_rate * 1024);
-            //$dataTransferred = $dataTransferred + strlen($contents);
-            $dataTransferred = ftell($fc);
-            $percentage = ($dataTransferred * 100) / $fileSize;
+	    //$dataTransferred = $dataTransferred + round($download_rate * 1024);
+	    //$dataTransferred = $dataTransferred + strlen($contents);
+	    $dataTransferred = ftell($fc);
+	    $percentage = ($dataTransferred * 100) / $fileSize;
 
-            $r = Requestt::find($requestID);
-            $r->DataTransferred = $dataTransferred;
-            $r->Percentage = $percentage;
-            $r->ProcessUserID = 0;
-            $r->ProcessDate = new DateTime();
-            $r->ProcessTypeID = eProcessTypes::Update;
-            $r->save();
-        }
-        fclose($fc);
+	    $r = Requestt::find($requestID);
+	    $r->DataTransferred = $dataTransferred;
+	    $r->Percentage = $percentage;
+	    $r->ProcessUserID = 0;
+	    $r->ProcessDate = new DateTime();
+	    $r->ProcessTypeID = eProcessTypes::Update;
+	    $r->save();
+	}
+	fclose($fc);
     }
 
     /**
@@ -588,442 +588,497 @@ class Common {
      * @param error $msg
      */
     public static function sendErrorMail($msg) {
-        $toEmailSet = Config::get('custom.admin_email_set');
-        $subject = __('common.task_subject');
-        Log::info($msg);
-        Bundle::start('messages');
-        foreach ($toEmailSet as $toEmail) {
-            Message::send(function($m) use($toEmail, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-                $m->to($toEmail);
-                $m->subject($subject);
-                $m->body($msg);
-            });
-        }
+	$toEmailSet = Config::get('custom.admin_email_set');
+	$subject = __('common.task_subject');
+	Log::info($msg);
+	Bundle::start('messages');
+	foreach ($toEmailSet as $toEmail) {
+	    Message::send(function($m) use($toEmail, $subject, $msg) {
+		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+		$m->to($toEmail);
+		$m->subject($subject);
+		$m->body($msg);
+	    });
+	}
+    }
+
+    public static function sendPaymentUserSuccesMail($username, $email, $amount) {
+	Bundle::start('messages');
+	Message::send(function($m) use($username, $email, $amount) {
+	    $body = "Sayın " . $username . ", \r\n"
+		    . "Galepress Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
+		    . "Firmamız adına teşekkür eder iyi günler dileriz.\r\n\r\n\r\n"
+		    . "Saygılarımızla Galepress";
+	    $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+	    $m->to($email);
+	    $m->subject("Galepress Dijital Yayin Platformu Otomatik Ödeme Maili");
+	    $m->body($body);
+	});
+    }
+
+    public static function sendPaymentUserReminderMail($userList) {
+	Bundle::start('messages');
+	foreach ($userList as $user) {
+	    Message::send(function($m) use($user) {
+		$body = "Sayın " . $user["name_surname"] . ", \r\n"
+			. "Galepress Dijital Yayin Platformundan aldığınız ürünün ödeme tarihinde kredi kartınızdan ücreti tahsil etmeyi denedik fakat başarılı olamadık. \r\n"
+			. "Bunun sebebi: " . $user["error_reason"] . "\r\n\r\n\r\n"
+			. "Saygılarımızla Galepress";
+		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+		$m->to($user["email"]);
+		$m->subject("Galepress Dijital Yayin Platformu Ödeme Hatırlatma Maili");
+		$m->body($body);
+	    });
+	}
+    }
+
+    public static function sendPaymentAdminReminderMail($msg) {
+	$adminMailSet = Config::get("custom.payment_delay_reminder_admin_mail_set");
+	Bundle::start('messages');
+	foreach ($adminMailSet as $adminMail) {
+	    Message::send(function($m) use($adminMail, $msg) {
+		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+		$m->to($adminMail);
+		$m->subject("Galepress Ödeme Hatırlatma Maili");
+		$m->body($msg);
+	    });
+	}
     }
 
     public static function sendStatusMail($msg) {
-        $toEmailSet = Config::get('custom.admin_email_set');
-        $subject = __('common.task_status');
-        Log::info($msg);
-        Bundle::start('messages');
-        foreach ($toEmailSet as $toEmail) {
-            Message::send(function($m) use($toEmail, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-                $m->to($toEmail);
-                $m->subject($subject);
-                $m->body($msg);
-            });
-        }
+	$toEmailSet = Config::get('custom.admin_email_set');
+	$subject = __('common.task_status');
+	Log::info($msg);
+	Bundle::start('messages');
+	foreach ($toEmailSet as $toEmail) {
+	    Message::send(function($m) use($toEmail, $subject, $msg) {
+		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+		$m->to($toEmail);
+		$m->subject($subject);
+		$m->body($msg);
+	    });
+	}
     }
 
     public static function sendEmail($toEmail, $toDisplayName, $subject, $msg) {
-        try {
-            Message::send(function($m) use($toEmail, $toDisplayName, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-                //$m->to($toEmail);
-                $m->to($toEmail, $toDisplayName);
-                $m->subject($subject);
-                $m->body($msg);
-                //$m->html(true);
-            });
-        } catch (Exception $e) {
-            //return 'Mailer error: ' . $e->getMessage();
-        }
+	try {
+	    Message::send(function($m) use($toEmail, $toDisplayName, $subject, $msg) {
+		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+		//$m->to($toEmail);
+		$m->to($toEmail, $toDisplayName);
+		$m->subject($subject);
+		$m->body($msg);
+		//$m->html(true);
+	    });
+	} catch (Exception $e) {
+	    //return 'Mailer error: ' . $e->getMessage();
+	}
     }
 
     public static function sendHtmlEmail($toEmail, $toDisplayName, $subject, $msg) {
-        try {
-            Bundle::start('messages');
-            Message::send(function($m) use($toEmail, $toDisplayName, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
-                //$m->to($toEmail);
-                $m->to($toEmail, $toDisplayName);
-                $m->subject($subject);
-                $m->body($msg);
-                $m->html(true);
-            });
-            return true;
-        } catch (Exception $e) {
-            // return 'Mailer error: ' . $e->getMessage();
-            return false;
-        }
+	try {
+	    Bundle::start('messages');
+	    Message::send(function($m) use($toEmail, $toDisplayName, $subject, $msg) {
+		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+		//$m->to($toEmail);
+		$m->to($toEmail, $toDisplayName);
+		$m->subject($subject);
+		$m->body($msg);
+		$m->html(true);
+	    });
+	    return true;
+	} catch (Exception $e) {
+	    // return 'Mailer error: ' . $e->getMessage();
+	    return false;
+	}
     }
 
     public static function generatePassword($length = 6, $level = 2) {
-        list($usec, $sec) = explode(' ', microtime());
-        srand((float) $sec + ((float) $usec * 100000));
+	list($usec, $sec) = explode(' ', microtime());
+	srand((float) $sec + ((float) $usec * 100000));
 
-        $validchars[1] = "0123456789abcdfghjkmnpqrstvwxyz";
-        $validchars[2] = "0123456789abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $validchars[3] = "0123456789_!@#$%&*()-=+/abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_!@#$%&*()-=+/";
+	$validchars[1] = "0123456789abcdfghjkmnpqrstvwxyz";
+	$validchars[2] = "0123456789abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$validchars[3] = "0123456789_!@#$%&*()-=+/abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_!@#$%&*()-=+/";
 
-        $password = "";
-        $counter = 0;
+	$password = "";
+	$counter = 0;
 
-        while ($counter < $length) {
-            $actChar = substr($validchars[$level], rand(0, strlen($validchars[$level]) - 1), 1);
+	while ($counter < $length) {
+	    $actChar = substr($validchars[$level], rand(0, strlen($validchars[$level]) - 1), 1);
 
-            // All character must be different
-            if (!strstr($password, $actChar)) {
-                $password .= $actChar;
-                $counter++;
-            }
-        }
-        return $password;
+	    // All character must be different
+	    if (!strstr($password, $actChar)) {
+		$password .= $actChar;
+		$counter++;
+	    }
+	}
+	return $password;
     }
 
     public static function convert2Localzone($d, $write = false) {
-        //2009-07-14 04:27:16
-        if (Auth::check()) {
-            $sign = '+';
-            $hour = 0;
-            $minute = 0;
+	//2009-07-14 04:27:16
+	if (Auth::check()) {
+	    $sign = '+';
+	    $hour = 0;
+	    $minute = 0;
 
-            $timezone = Auth::User()->Timezone;
-            $timezone = str_replace('UTC', '', $timezone);
-            $timezone = preg_replace('/\s+/', '', $timezone);
-            //var_dump($timezone);
+	    $timezone = Auth::User()->Timezone;
+	    $timezone = str_replace('UTC', '', $timezone);
+	    $timezone = preg_replace('/\s+/', '', $timezone);
+	    //var_dump($timezone);
 
-            if (Str::length($timezone) > 0) {
+	    if (Str::length($timezone) > 0) {
 
-                $sign = substr($timezone, 0, 1);
-                $timezone = str_replace($sign, '', $timezone);
-                $pos = strrpos($timezone, ":");
-                if ($pos === false) {
-                    //yok
-                    $hour = (int) $timezone;
-                } else {
-                    //var
-                    $segment = explode(":", $timezone);
-                    $hour = (int) $segment[0];
-                    $minute = (int) $segment[1];
-                }
-            }
+		$sign = substr($timezone, 0, 1);
+		$timezone = str_replace($sign, '', $timezone);
+		$pos = strrpos($timezone, ":");
+		if ($pos === false) {
+		    //yok
+		    $hour = (int) $timezone;
+		} else {
+		    //var
+		    $segment = explode(":", $timezone);
+		    $hour = (int) $segment[0];
+		    $minute = (int) $segment[1];
+		}
+	    }
 
-            //var_dump($sign);
-            //var_dump($hour);
-            //var_dump($minute);
-            //var_dump($d);
+	    //var_dump($sign);
+	    //var_dump($hour);
+	    //var_dump($minute);
+	    //var_dump($d);
 
-            if ($write) {
-                if ($sign == '+') {
-                    $sign = '-';
-                } else {
-                    $sign = '+';
-                }
-            }
+	    if ($write) {
+		if ($sign == '+') {
+		    $sign = '-';
+		} else {
+		    $sign = '+';
+		}
+	    }
 
-            if ($hour > 0) {
-                $date = new DateTime($d);
-                $d = date("Y-m-d H:i:s", strtotime($sign . $hour . ' hours', $date->getTimestamp()));
-            }
+	    if ($hour > 0) {
+		$date = new DateTime($d);
+		$d = date("Y-m-d H:i:s", strtotime($sign . $hour . ' hours', $date->getTimestamp()));
+	    }
 
-            if ($minute > 0) {
-                $date = new DateTime($d);
-                $d = date("Y-m-d H:i:s", strtotime($sign . $minute . ' minutes', $date->getTimestamp()));
-            }
-            //var_dump($d);
-        }
-        return $d;
+	    if ($minute > 0) {
+		$date = new DateTime($d);
+		$d = date("Y-m-d H:i:s", strtotime($sign . $minute . ' minutes', $date->getTimestamp()));
+	    }
+	    //var_dump($d);
+	}
+	return $d;
     }
 
     public static function dateRead($date, $format, $useLocal = true) {
-        $ret = "";
-        if ($useLocal) {
-            $date = Common::convert2Localzone($date);
-        }
-        if (strlen($date) == 10) {
-            //2009-07-14
-            $year = substr($date, 0, 4);
-            $month = substr($date, 5, 2);
-            $day = substr($date, 8, 2);
-            $hour = "00";
-            $minute = "00";
-            $second = "00";
+	$ret = "";
+	if ($useLocal) {
+	    $date = Common::convert2Localzone($date);
+	}
+	if (strlen($date) == 10) {
+	    //2009-07-14
+	    $year = substr($date, 0, 4);
+	    $month = substr($date, 5, 2);
+	    $day = substr($date, 8, 2);
+	    $hour = "00";
+	    $minute = "00";
+	    $second = "00";
 
-            //11:12
-            if ($format == "Ymd")
-                $ret = $year . $month . $day;
+	    //11:12
+	    if ($format == "Ymd")
+		$ret = $year . $month . $day;
 
-            //11:12
-            if ($format == "HH:mm")
-                $ret = $hour . ":" . $minute;
+	    //11:12
+	    if ($format == "HH:mm")
+		$ret = $hour . ":" . $minute;
 
-            //29
-            if ($format == "dd")
-                $ret = $day;
+	    //29
+	    if ($format == "dd")
+		$ret = $day;
 
-            //08
-            if ($format == "MM")
-                $ret = $month;
+	    //08
+	    if ($format == "MM")
+		$ret = $month;
 
-            //2009
-            if ($format == "yyyy")
-                $ret = $year;
+	    //2009
+	    if ($format == "yyyy")
+		$ret = $year;
 
-            //29.08.2009
-            if ($format == "dd.MM.yyyy")
-                $ret = $day . "." . $month . "." . $year;
+	    //29.08.2009
+	    if ($format == "dd.MM.yyyy")
+		$ret = $day . "." . $month . "." . $year;
 
-            //29.08.2009 11:12
-            if ($format == "dd.MM.yyyy HH:mm")
-                $ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
+	    //29.08.2009 11:12
+	    if ($format == "dd.MM.yyyy HH:mm")
+		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
 
-            //29.08.2009 11:12:23
-            if ($format == "dd.MM.yyyy HH:mm:ss")
-                $ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
-        }
-        else if (strlen($date) == 19) {
-            //2009-07-14 04:27:16
-            $year = substr($date, 0, 4);
-            $month = substr($date, 5, 2);
-            $day = substr($date, 8, 2);
-            $hour = substr($date, 11, 2);
-            $minute = substr($date, 14, 2);
-            $second = substr($date, 17, 2);
+	    //29.08.2009 11:12:23
+	    if ($format == "dd.MM.yyyy HH:mm:ss")
+		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
+	}
+	else if (strlen($date) == 19) {
+	    //2009-07-14 04:27:16
+	    $year = substr($date, 0, 4);
+	    $month = substr($date, 5, 2);
+	    $day = substr($date, 8, 2);
+	    $hour = substr($date, 11, 2);
+	    $minute = substr($date, 14, 2);
+	    $second = substr($date, 17, 2);
 
-            //11:12
-            if ($format == "Ymd")
-                $ret = $year . $month . $day;
+	    //11:12
+	    if ($format == "Ymd")
+		$ret = $year . $month . $day;
 
-            //11:12
-            if ($format == "HH:mm")
-                $ret = $hour . ":" . $minute;
+	    //11:12
+	    if ($format == "HH:mm")
+		$ret = $hour . ":" . $minute;
 
-            //29
-            if ($format == "dd")
-                $ret = $day;
+	    //29
+	    if ($format == "dd")
+		$ret = $day;
 
-            //08
-            if ($format == "MM")
-                $ret = $month;
+	    //08
+	    if ($format == "MM")
+		$ret = $month;
 
-            //2009
-            if ($format == "yyyy")
-                $ret = $year;
+	    //2009
+	    if ($format == "yyyy")
+		$ret = $year;
 
-            //29.08.2009
-            if ($format == "dd.MM.yyyy")
-                $ret = $day . "." . $month . "." . $year;
+	    //29.08.2009
+	    if ($format == "dd.MM.yyyy")
+		$ret = $day . "." . $month . "." . $year;
 
-            //29.08.2009 11:12
-            if ($format == "dd.MM.yyyy HH:mm")
-                $ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
+	    //29.08.2009 11:12
+	    if ($format == "dd.MM.yyyy HH:mm")
+		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
 
-            //29.08.2009 11:12:23
-            if ($format == "dd.MM.yyyy HH:mm:ss")
-                $ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
-        }
-        return $ret;
+	    //29.08.2009 11:12:23
+	    if ($format == "dd.MM.yyyy HH:mm:ss")
+		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
+	}
+	return $ret;
     }
 
     public static function dateWrite($date, $useLocal = true) {
-        $ret = "";
-        //29/08/2009
-        //29.08.2009
-        if (strlen($date) == 10) {
-            $day = substr($date, 0, 2);
-            $month = substr($date, 3, 2);
-            $year = substr($date, 6, 4);
+	$ret = "";
+	//29/08/2009
+	//29.08.2009
+	if (strlen($date) == 10) {
+	    $day = substr($date, 0, 2);
+	    $month = substr($date, 3, 2);
+	    $year = substr($date, 6, 4);
 
-            //2009-07-14 04:27:16
-            $ret = $year . "-" . $month . "-" . $day . " 00:00:00";
-        }
+	    //2009-07-14 04:27:16
+	    $ret = $year . "-" . $month . "-" . $day . " 00:00:00";
+	}
 
-        //29/08/2009 11:12
-        //29.08.2009 11:12
-        if (strlen($date) == 16) {
-            $day = substr($date, 0, 2);
-            $month = substr($date, 3, 2);
-            $year = substr($date, 6, 4);
-            $hour = substr($date, 11, 2);
-            $minute = substr($date, 14, 2);
+	//29/08/2009 11:12
+	//29.08.2009 11:12
+	if (strlen($date) == 16) {
+	    $day = substr($date, 0, 2);
+	    $month = substr($date, 3, 2);
+	    $year = substr($date, 6, 4);
+	    $hour = substr($date, 11, 2);
+	    $minute = substr($date, 14, 2);
 
-            //2009-07-14 04:27
-            $ret = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":00";
-        }
+	    //2009-07-14 04:27
+	    $ret = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":00";
+	}
 
-        if (strlen($date) == 19) {
-            $day = substr($date, 0, 2);
-            $month = substr($date, 3, 2);
-            $year = substr($date, 6, 4);
-            $hour = substr($date, 11, 2);
-            $minute = substr($date, 14, 2);
-            $second = substr($date, 17, 2);
+	if (strlen($date) == 19) {
+	    $day = substr($date, 0, 2);
+	    $month = substr($date, 3, 2);
+	    $year = substr($date, 6, 4);
+	    $hour = substr($date, 11, 2);
+	    $minute = substr($date, 14, 2);
+	    $second = substr($date, 17, 2);
 
-            //2009-07-14 04:27:16
-            $ret = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":" . $second;
-        }
-        if ($useLocal) {
-            $ret = Common::convert2Localzone($ret, true);
-        }
-        return $ret;
+	    //2009-07-14 04:27:16
+	    $ret = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":" . $second;
+	}
+	if ($useLocal) {
+	    $ret = Common::convert2Localzone($ret, true);
+	}
+	return $ret;
     }
 
     public static function getFormattedData($data, $type) {
-        $ret = "";
-        //$FieldTypeVariant
-        //Number
-        //String
-        //Percent
-        //DateTime
-        //Date
-        //Bit
-        if ($type == "Number") {
-            $ret = $data;
-        } elseif ($type == "String") {
-            if (Common::startsWith($data, '!!!')) {
-                $ret = __('common.' . str_replace('!!!', '', $data))->get();
-            } else {
-                $ret = $data;
-            }
-        } elseif ($type == "Percent") {
-            $ret = '% ' . round((float) $data, 2);
-        } elseif ($type == "DateTime") {
-            $ret = Common::dateRead($data, "dd.MM.yyyy HH:mm");
-        } elseif ($type == "Date") {
-            $ret = Common::dateRead($data, "dd.MM.yyyy");
-        } elseif ($type == "Bit") {
-            $ret = ((int) $data == 1 ? "Evet" : "Hayır");
-        } elseif ($type == "Size") {
+	$ret = "";
+	//$FieldTypeVariant
+	//Number
+	//String
+	//Percent
+	//DateTime
+	//Date
+	//Bit
+	if ($type == "Number") {
+	    $ret = $data;
+	} elseif ($type == "String") {
+	    if (Common::startsWith($data, '!!!')) {
+		$ret = __('common.' . str_replace('!!!', '', $data))->get();
+	    } else {
+		$ret = $data;
+	    }
+	} elseif ($type == "Percent") {
+	    $ret = '% ' . round((float) $data, 2);
+	} elseif ($type == "DateTime") {
+	    $ret = Common::dateRead($data, "dd.MM.yyyy HH:mm");
+	} elseif ($type == "Date") {
+	    $ret = Common::dateRead($data, "dd.MM.yyyy");
+	} elseif ($type == "Bit") {
+	    $ret = ((int) $data == 1 ? "Evet" : "Hayır");
+	} elseif ($type == "Size") {
 
-            $size = (float) $data;
-            $s = "Byte";
+	    $size = (float) $data;
+	    $s = "Byte";
 
-            if ($size > 1024) {
+	    if ($size > 1024) {
 
-                $size = $size / 1024;
-                $s = "KB";
+		$size = $size / 1024;
+		$s = "KB";
 
-                if ($size > 1024) {
+		if ($size > 1024) {
 
-                    $size = $size / 1024;
-                    $s = "MB";
+		    $size = $size / 1024;
+		    $s = "MB";
 
-                    if ($size > 1024) {
+		    if ($size > 1024) {
 
-                        $size = $size / 1024;
-                        $s = "GB";
+			$size = $size / 1024;
+			$s = "GB";
 
-                        if ($size > 1024) {
+			if ($size > 1024) {
 
-                            $size = $size / 1024;
-                            $s = "TB";
-                        }
-                    }
-                }
-            }
-            $size = number_format($size, 2, '.', '');
-            $ret = $size . " " . $s;
-        } else {
-            $ret = $data;
-        }
-        return $ret;
+			    $size = $size / 1024;
+			    $s = "TB";
+			}
+		    }
+		}
+	    }
+	    $size = number_format($size, 2, '.', '');
+	    $ret = $size . " " . $s;
+	} else {
+	    $ret = $data;
+	}
+	return $ret;
     }
 
     public static function startsWith($haystack, $needle) {
-        $length = strlen($needle);
-        return (substr($haystack, 0, $length) === $needle);
+	$length = strlen($needle);
+	return (substr($haystack, 0, $length) === $needle);
     }
 
     public static function endsWith($haystack, $needle) {
-        $length = strlen($needle);
-        if ($length == 0) {
-            //return true;
-            return false;
-        }
-        return (substr($haystack, -$length) === $needle);
+	$length = strlen($needle);
+	if ($length == 0) {
+	    //return true;
+	    return false;
+	}
+	return (substr($haystack, -$length) === $needle);
     }
 
     public static function monthName($month) {
-        $m = __('common.month_names')->get();
-        return $m[$month];
+	$m = __('common.month_names')->get();
+	return $m[$month];
     }
 
     public static function getLocationData($type, $customerID, $applicationID, $contentID, $country = '', $city = '') {
-        $currentUser = Auth::User();
+	$currentUser = Auth::User();
 
-        $isCountry = false;
-        $isCity = false;
-        $isDistrict = false;
-        $column = 'Country';
+	$isCountry = false;
+	$isCity = false;
+	$isDistrict = false;
+	$column = 'Country';
 
-        if ($type == 'country') {
-            $isCountry = true;
-            $column = 'Country';
-        } elseif ($type == 'city') {
-            $isCity = true;
-            $column = 'City';
-        } elseif ($type == 'district') {
-            $isDistrict = true;
-            $column = 'District';
-        }
+	if ($type == 'country') {
+	    $isCountry = true;
+	    $column = 'Country';
+	} elseif ($type == 'city') {
+	    $isCity = true;
+	    $column = 'City';
+	} elseif ($type == 'district') {
+	    $isDistrict = true;
+	    $column = 'District';
+	}
 
-        $rs = DB::table('Statistic')
-                ->where(function($query) use($currentUser, $isCountry, $isCity, $isDistrict, $customerID, $applicationID, $contentID, $country, $city) {
-                    if ((int) $currentUser->UserTypeID == eUserTypes::Manager && $customerID > 0) {
-                        $query->where('CustomerID', '=', $customerID);
-                    } elseif ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-                        $query->where('CustomerID', '=', $currentUser->CustomerID);
-                    }
+	$rs = DB::table('Statistic')
+		->where(function($query) use($currentUser, $isCountry, $isCity, $isDistrict, $customerID, $applicationID, $contentID, $country, $city) {
+		    if ((int) $currentUser->UserTypeID == eUserTypes::Manager && $customerID > 0) {
+			$query->where('CustomerID', '=', $customerID);
+		    } elseif ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+			$query->where('CustomerID', '=', $currentUser->CustomerID);
+		    }
 
-                    if ($applicationID > 0) {
-                        if (Common::CheckApplicationOwnership($applicationID)) {
-                            $query->where('ApplicationID', '=', $applicationID);
-                        }
-                    }
+		    if ($applicationID > 0) {
+			if (Common::CheckApplicationOwnership($applicationID)) {
+			    $query->where('ApplicationID', '=', $applicationID);
+			}
+		    }
 
-                    if ($contentID > 0) {
-                        if (Common::CheckContentOwnership($contentID)) {
-                            $query->where('ContentID', '=', $contentID);
-                        }
-                    }
+		    if ($contentID > 0) {
+			if (Common::CheckContentOwnership($contentID)) {
+			    $query->where('ContentID', '=', $contentID);
+			}
+		    }
 
-                    if ($isCity) {
-                        $query->where('Country', '=', (strlen($country) > 0 ? $country : '???'));
-                    } elseif ($isDistrict) {
-                        $query->where('Country', '=', (strlen($country) > 0 ? $country : '???'));
-                        $query->where('City', '=', (strlen($city) > 0 ? $city : '???'));
-                    }
-                })
-                ->distinct()
-                ->order_by($column, 'ASC')
-                ->get($column);
+		    if ($isCity) {
+			$query->where('Country', '=', (strlen($country) > 0 ? $country : '???'));
+		    } elseif ($isDistrict) {
+			$query->where('Country', '=', (strlen($country) > 0 ? $country : '???'));
+			$query->where('City', '=', (strlen($city) > 0 ? $city : '???'));
+		    }
+		})
+		->distinct()
+		->order_by($column, 'ASC')
+		->get($column);
 
-        return $rs;
+	return $rs;
     }
 
     public static function toExcel($twoDimensionalArray, $toFile) {
-        $rows = array();
-        $sep = "\t";
-        foreach ($twoDimensionalArray as $row) {
-            $tmpStr = "";
-            foreach ($row as $cell) {
-                $r = "";
-                if ($cell != "") {
-                    $r .= "$cell" . $sep;
-                } else {
-                    $r .= "" . $sep;
-                }
-                $tmpStr .= $r;
-            }
+	$rows = array();
+	$sep = "\t";
+	foreach ($twoDimensionalArray as $row) {
+	    $tmpStr = "";
+	    foreach ($row as $cell) {
+		$r = "";
+		if ($cell != "") {
+		    $r .= "$cell" . $sep;
+		} else {
+		    $r .= "" . $sep;
+		}
+		$tmpStr .= $r;
+	    }
 
-            $tmpStr1 = str_replace($sep . "$", "", $tmpStr);
-            $tmpStr2 = preg_replace("/\r\n|\n\r|\n|\r/", " ", $tmpStr1);
-            $tmpStr2 .= "\t";
-            $tmpStr3 = trim($tmpStr2);
-            $tmpStr3 .= "\n";
+	    $tmpStr1 = str_replace($sep . "$", "", $tmpStr);
+	    $tmpStr2 = preg_replace("/\r\n|\n\r|\n|\r/", " ", $tmpStr1);
+	    $tmpStr2 .= "\t";
+	    $tmpStr3 = trim($tmpStr2);
+	    $tmpStr3 .= "\n";
 
-            $rows[] = $tmpStr3;
-        }
+	    $rows[] = $tmpStr3;
+	}
 
-        $rows[] = "\n";
-        $result = implode("", $rows);
-        $finalResult = chr(255) . chr(254) . iconv("UTF-8", "UTF-16LE//IGNORE", $result);
-        $fileHandle = fopen($toFile, "w");
-        fwrite($fileHandle, $finalResult);
-        fclose($fileHandle);
+	$rows[] = "\n";
+	$result = implode("", $rows);
+	$finalResult = chr(255) . chr(254) . iconv("UTF-8", "UTF-16LE//IGNORE", $result);
+	$fileHandle = fopen($toFile, "w");
+	fwrite($fileHandle, $finalResult);
+	fclose($fileHandle);
+    }
+
+    public static function getPostDataString($postData) {
+	$postDataString = "";
+	foreach ($postData as $key => $value) {
+	    if (empty($postDataString)) {
+		$postDataString .= $key . "=" . $value;
+	    } else {
+		$postDataString .= '&' . $key . "=" . $value;
+	    }
+	}
+	return $postDataString;
     }
 
 }

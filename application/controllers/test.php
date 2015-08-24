@@ -21,13 +21,26 @@ class Test_Controller extends Base_Controller {
 
     public function post_index() {
 
-	echo "zzzzzzz";
-
-	var_dump($_POST);
+	echo "zzzzzzz", PHP_EOL;
+	echo readfile('php://input'), PHP_EOL;
+	echo readfile("php://filter/read=string.toupper|string.rot13/resource=http://www.google.com"), PHP_EOL;
+	//var_dump($_POST);
 	exit;
     }
 
     public function get_index() {
+	echo date("Y-m-d", strtotime("+1 month", date(strtotime("2015-04-01"))));
+	exit;
+//	$binarydata = pack("nvc*", 0x1234, 0x5678, 65, 66);
+//	dd($binarydata);
+//	var_dump(chr(0));
+//	dd(pack('H*', 'aaaaaaaaa'));
+	$token = 'APA91bEmfN-i8YRaILLgUJvneezm1GQti9eDmRtyqUSZCxqpbqXf-3anKW6tviVFt2stgQfD3LoIxgG8PRbZsfSJUDBCf4-DFh8Ct_TlcT0pdEKZd9KK_UrmudKCmGBGos-GetP84KDAvzyEJwMqGUYjcCFj5900QA';
+	$token = 'APA91bEmfN-i8YRaILLgUJvneezm1GQti9eDmRtyqUSZCxqpbqXf-3anKW6tviVFt2stgQfD3LoIxgG8PRbZsfSJUDBCf4-DFh8Ct_TlcT0pdEKZd9KK_UrmudKCmGBGos-GetP84KDAvzyEJwMqGUYjcCFj5900QA';
+	echo pack('H*', str_replace(' ', '', sprintf('%u', CRC32($token))));
+//	echo pack('H*', $token);
+	exit;
+	
 	include(path('public') . "ticket/bootstrap.php");
 	$data = array(
 	    'api_version' => '1',
