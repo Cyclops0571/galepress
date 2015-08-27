@@ -485,7 +485,8 @@ Route::get("/template/(:num)", array('as' => 'template_index', 'before'=>'auth',
 Route::get("banners/delete", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
 Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));
 Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses'=>'banners@service_view'));
-Route::get('maps/webview/(:num)', array('as', 'uses'=>'maps@webview'));
+Route::get('maps/webview/(:num)', array('as' => 'map_view', 'uses'=>'maps@webview'));
+Route::get('payment/paymentAcountByApplicationID/(:num)', array('as' => 'app_payment_data', 'uses' => 'payment@paymentAcountByApplicationID'));
 
 Route::get('payment-response', array('as' => 'website_odeme_response_post', 'before'=>'auth', 'uses' => 'payment@odemeResponse'));
 //Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));

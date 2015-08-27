@@ -106,7 +106,7 @@ if (!defined(__NAMESPACE__ . '\ROOT')) exit;
 						<select name="action_id">
 							<option value="">&nbsp;</option>
 							<?php foreach($status as $item) { ?>
-								<option value="<?php echo (int) $item['id']; ?>"><?php echo safe_output($item['name']); ?></option>
+								<option value="<?php echo (int) $item['id']; ?>"><?php echo safe_output($language->get($item['name'])); ?></option>
 							<?php } ?>
 						</select>
 					<?php } else { ?>

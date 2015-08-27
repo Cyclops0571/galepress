@@ -178,6 +178,8 @@ return array(
 	'applications_applicationname' => 'Uygulama Adı:',
 	'applications_detail' => 'Detay:',
 	'applications_price' => 'Fiyat(Aylık):',
+	'applications_placeholder_price' => 'Fiyat(Aylık):',
+	'applications_placeholder_price' => 'Fiyat(Aylık):',
 	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Başlangıç Tarihi (gg.aa.yyyy):',
 	'applications_expirationdate' => 'Geçerlilik Tarihi (gg.aa.yyyy):',

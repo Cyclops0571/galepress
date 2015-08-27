@@ -75,7 +75,7 @@ class lang {
 		$language_array['Permissions']							= 'İzinler';
 
 		$language_array['Status']								= 'Statüler';
-		$language_array['Priority']								= 'Öncelikler';
+		$language_array['Priority']								= 'Öncelik';
 		$language_array['Submitted By']							= 'Tarafından Gönderildi';
 		$language_array['Assigned User']						= 'Görevli Kullanıcı';
 		$language_array['Department']							= 'Departman';
@@ -495,9 +495,9 @@ class lang {
 		$language_array['Email Address (recommended)']							= 'Mail Adresi (önerilen)';
 		$language_array['Phone Number (optional)']								= 'Telefon (isteğe bağlı)';
 		$language_array['Check for updates']									= 'Güncellemeleri Denetle';
-		$language_array['New Ticket Reply']										= 'New Ticket Reply';
-		$language_array['New Department Ticket']								= 'New Department Ticket';
-		$language_array['New Department Ticket Reply']							= 'New Department Ticket Reply';
+		$language_array['New Ticket Reply']										= 'Yeni Cevap';
+		$language_array['New Department Ticket']								= 'Yeni Departman Bileti';
+		$language_array['New Department Ticket Reply']							= 'Yeni Departman Cevabı';
 		$language_array['Assigned User To Ticket']								= 'Bilete Atanmış Kullanıcı';
 		$language_array['Reply/Notifications to ticket owner for new tickets via POP3 download']								= 'POP3 ile indrilen biletler için bilet sahibine bildirim gidecektir.';
 		$language_array['Online Plugins Directory']								= 'Çevrimiçi Eklenti Kütüphanesi';
@@ -510,7 +510,41 @@ class lang {
 		//3.5+
 		$language_array['Reset']												= 'Reset';
 		$language_array['Merge']												= 'Birleştir';
-	
+		
+		///////////////////////////////////////////////////
+		$language_array['Add Ticket'] = 'Bilet Ekle';
+		$language_array['Show Open Tickets'] = 'Açık Biletleri Göster';
+		$language_array['Show Closed Tickets'] = 'Kapalı Biletleri Göster';
+		$language_array['Min Added Date'] = 'Başlangıç Tarihi Giriniz';
+		$language_array['Max Added Date'] = 'Bitiş Tarihi Giriniz';
+		$language_array['Low'] = 'Düşük';
+		$language_array['Medium'] = 'Orta';
+		$language_array['High'] = 'Yüksek';
+		$language_array['Change Status'] = 'Durumu Değiştir';
+		$language_array['Default Department'] = 'Varsayılan Departman';
+		$language_array['In Progress'] = 'Üzerinde Çalışılıyor';
+		$language_array['Select Ticket (for Mass Action)'] = 'Bilet Seç (Çoklu İşlemler İçin)';
+		$language_array['Transfer Ticket'] = 'Bileti Transfer Et';
+		$language_array['Display Dashboard'] = 'Gösterilecek Panel';
+		$language_array['API Require Secure HTTP'] = 'API için Güvenli HTTP (https) Gerekir';
+		$language_array['Permission Groups'] = 'İzin Grupları';
+		$language_array['No SMTP Accounts Are Setup.'] = 'Kurulu SMTP Hesabı Bulunamadı.';
+		$language_array['Password Reset'] = 'Şifre Yenileme';
+		$language_array['Ticket Date Due'] = 'Biletin Son Günü';
+		$language_array['Carbon Copy Reply'] = 'Kopyasını Gönder';
+		$language_array['Allows you to Carbon Copy this ticket to other users e.g. user@example.com,user2@example.net. Note: CCed users will be able to view the entire ticket thread via the guest portal.'] = 'Biletin bir kopyasını da başka bir kullanıcıya göndermenizi sağlar. örn: user@example.com, user2@example.net Not:Kopya gönderilmiş kullanıcı biletin bütün işlemlerini misafir olarak izleyebilir.';
+		$language_array['Allows you to Carbon Copy this reply to other users e.g. user@example.com,user2@example.net.'] = 'Biletin bir kopyasını da başka bir kullanıcıya göndermenizi sağlar. örn: user@example.com, user2@example.net';
+		$language_array['Note: If enabled CCed users will be able to view the entire ticket thread via the guest portal (but not via email).'] = 'Not:Kopya gönderilmiş kullanıcı biletin bütün işlemlerini misafir olarak izleyebilir. (Fakat mailden takip edemez.)';
+		$language_array['An email will be sent to'] = 'Mail gönderilecek kullanıcı:';
+		$language_array['Public Reply'] = 'Herkese gidecek mail cevap.';
+		$language_array['Private Reply'] = 'Yanlızca istenilen kişiye gidecek cevap.';
+		$language_array['History'] = 'Geçmiş';
+		$language_array['Live Chat'] = 'Canlı Destek';
+		$language_array['Date Due'] = 'Son Gün';
+		
+
+		
+		
 		
 		$this->lang_array 			= $language_array;
 		

@@ -355,19 +355,19 @@ include(core\ROOT . '/user/themes/'. CURRENT_THEME .'/includes/html_header.php')
 					<?php if ($auth->can('manage_tickets')) { ?>
 						<select name="department_id" id="update_department_id">
 							<?php foreach($departments as $department) { ?>
-								<option value="<?php echo (int) $department['id']; ?>"<?php if ($ticket['department_id'] == $department['id']) { echo ' selected="selected"'; } ?>><?php echo safe_output(ucwords($department['name'])); ?></option>
+								<option value="<?php echo (int) $department['id']; ?>"<?php if ($ticket['department_id'] == $department['id']) { echo ' selected="selected"'; } ?>><?php echo safe_output(ucwords($language->get($department['name']))); ?></option>
 							<?php } ?>
 						</select>
 					<?php } else if ($auth->can('tickets_transfer_department')) { ?>
 						<select name="department_id" id="update_department_id">
 							<?php foreach($departments as $department) { ?>
 								<?php if ($department['is_user_member']) { ?>
-									<option value="<?php echo (int) $department['id']; ?>"<?php if ($ticket['department_id'] == $department['id']) { echo ' selected="selected"'; } ?>><?php echo safe_output(ucwords($department['name'])); ?></option>
+									<option value="<?php echo (int) $department['id']; ?>"<?php if ($ticket['department_id'] == $department['id']) { echo ' selected="selected"'; } ?>><?php echo safe_output(ucwords($language->get($department['name']))); ?></option>
 								<?php } ?>
 							<?php } ?>		
 						</select>
 					<?php } else { ?>
-						<?php echo safe_output(ucwords($ticket['department_name'])); ?>
+						<?php echo safe_output(ucwords($language->get($department['name']))); ?>
 					<?php } ?>
 				</p>
 				<div class="clearfix"></div>	

@@ -22,14 +22,7 @@ class PaymentUser_Task {
 	$paymentUserSurname = "";
 	foreach ($paymentAccounts as $paymentAccount) {
 	    $errorReason = "";
-	    if (!empty($paymentAccount->FirstPayment)) {
-		//echo $paymentAccount->PaymentAccountID;
-		//her kullanici icin bir payment account acilacak mi???
-		$firstPayment = date(strtotime($paymentAccount->FirstPayment));
-		$validTime = strtotime("+" . $paymentAccount->payment_count . " month", $firstPayment);
-		$paymentAccount->ValidUntil = date('Y-m-d', $validTime);
-		$paymentAccount->save();
-	    }
+
 
 	    $paymentAccount instanceof PaymentAccount;
 	    $paymentAmount = ((int) (Config::get("custom.payment_amount") * 1.18)) * 100;
@@ -43,7 +36,6 @@ class PaymentUser_Task {
 
 	    if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d")) {
 		$paymentResult = FALSE;
-		//when payment ocurs increase the ValidUntil date
 		// <editor-fold defaultstate="collapsed" desc="first bin check">
 		$binCheckData = array();
 		$binCheckData['api_id'] = Config::get("custom.iyzico_api_id");
@@ -123,12 +115,10 @@ class PaymentUser_Task {
 		    if (isset($transaction['transaction']['state']) && strpos($transaction['transaction']['state'], "paid") !== FALSE) {
 			//paid
 			//increment the payment count 
-			//increase the validUntil date 
 			//update the last payment date
 			//success
 			$paymentResult = TRUE;
 			$paymentAccount->payment_count = $paymentAccount->payment_count + 1;
-			$paymentAccount->ValidUntil = date("Y-m-d", strtotime("+" . $paymentAccount->payment_count . " month", $firstPayment));
 			$paymentAccount->last_payment_day = date("Y-m-d");
 			$paymentAccount->WarningMailPhase = 0;
 			$paymentAccount->save();
@@ -166,6 +156,7 @@ class PaymentUser_Task {
 		    if ($paymentAccount->WarningMailPhase < 3) {
 			$paymentAccount->save();
 		    }
+		    
 		    $userInfoSet = array();
 		    $userInfoSet["customerID"] = $paymentAccount->CustomerID;
 		    $userInfoSet["error_reason"] = $errorReason;

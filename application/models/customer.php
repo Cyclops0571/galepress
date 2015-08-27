@@ -51,6 +51,14 @@ class Customer extends Eloquent {
      * 
      * @return PaymentAccount
      */
+    public function getLastSelectedPaymentAccount() {
+	return $this->has_one('PaymentAccount', "CustomerID")->order_by("selected_at", "DESC")->first();
+    }
+    
+    /**
+     * 
+     * @return PaymentAccount
+     */
     public function PaymentAccount() {
 	return $this->has_one('PaymentAccount', "CustomerID")->first();
     }

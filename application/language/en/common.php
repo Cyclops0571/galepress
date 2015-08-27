@@ -178,6 +178,7 @@ return array(
 	'applications_applicationname' => 'Application Name:',
 	'applications_detail' => 'Detail:',
 	'applications_price' => 'Price(For Mounth):',
+	'applications_placeholder_price' => 'Price(For Mounth):',
 	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Starting Date (gg.aa.yyyy):',
 	'applications_expirationdate' => 'Expiration Date (dd.mm.yyyy):',

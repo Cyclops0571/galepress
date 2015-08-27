@@ -62,7 +62,7 @@
         <div class="demo-container">
             <div class="header">
                 <h3>
-                    Fiyat: <?php echo (int) (Config::get("custom.payment_amount") * 1.18) ?> TL (<?php echo Config::get("custom.payment_amount"); ?> TL + KDV)
+                    Fiyat: <?php echo $application->Price * 1.18 ?> TL (<?php echo $application->Price; ?> TL + <?php echo $application->Price * 0.18;?> KDV)
                 </h3>
             </div>
             <div class="card-wrapper"></div>

@@ -620,14 +620,34 @@ class Common {
 	Bundle::start('messages');
 	foreach ($userList as $user) {
 	    Message::send(function($m) use($user) {
-		$body = "Sayın " . $user["name_surname"] . ", \r\n"
-			. "Galepress Dijital Yayin Platformundan aldığınız ürünün ödeme tarihinde kredi kartınızdan ücreti tahsil etmeyi denedik fakat başarılı olamadık. \r\n"
-			. "Bunun sebebi: " . $user["error_reason"] . "\r\n\r\n\r\n"
-			. "Saygılarımızla Galepress";
+		$msg = "";
+		switch ($paymentAccount->WarningMailPhase) {
+		    case 1:
+			$msg = "Değerli Müşterimiz, \r\n\r\n"
+			    . "Bekleyen bir ödemeniz bulunmaktadır ve iki hafta içinde ödemenizi tamamlamanız gerekmektedir. "
+			    . "İlginiz için teşekkür eder, sizinle çalışmaktan mutluluk duymaktayız. \r\n\r\n"
+			    . "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
+			    . "İyi çalışmalar.";
+			break;
+		    case 2:
+			$msg = "Değerli Müşterimiz, \r\n\r\n"
+			    . "Borcunuzun son ödeme tarihi 7 gün sonradır, en kısa zamanda ödemenizi gerçekleştirmeniz gerekmektedir. "
+			    . "İlginiz için teşekkür eder, sizinle çalışmaktan mutluluk duymaktayız. \r\n\r\n"
+			    . "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
+			    . "İyi çalışmalar.";
+			break;
+		    case 3:
+			$msg = "Değerli Müşterimiz, \r\n\r\n"
+			    . "Borcunuzu 3 gün içinde ödemediğiniz takdirde uygulamanız bloke edilecektir. \r\n\r\n"
+			    . "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
+			    . "İyi çalışmalar.";
+			break;
+		}
+
 		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
 		$m->to($user["email"]);
 		$m->subject("Galepress Dijital Yayin Platformu Ödeme Hatırlatma Maili");
-		$m->body($body);
+		$m->body($msg);
 	    });
 	}
     }

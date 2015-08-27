@@ -158,7 +158,7 @@ include(core\ROOT . '/user/themes/'. CURRENT_THEME .'/includes/html_header.php')
 					<p><?php echo safe_output($language->get('Status')); ?><br />					
 						<select name="state_id">
 						<?php foreach ($status as $status_item) { ?>
-							<option value="<?php echo (int) $status_item['id']; ?>"<?php if (isset($_POST['state_id']) && ($_POST['state_id'] == $status_item['id'])) { echo ' selected="selected"'; } ?>><?php echo safe_output($status_item['name']); ?></option>
+							<option value="<?php echo (int) $status_item['id']; ?>"<?php if (isset($_POST['state_id']) && ($_POST['state_id'] == $status_item['id'])) { echo ' selected="selected"'; } ?>><?php echo safe_output($language->get($status_item['name'])); ?></option>
 						<?php } ?>
 						</select>
 					</p>
@@ -166,7 +166,7 @@ include(core\ROOT . '/user/themes/'. CURRENT_THEME .'/includes/html_header.php')
 					<p><?php echo safe_output($language->get('Priority')); ?><br />
 					<select name="priority_id">
 						<?php foreach ($priorities as $priority) { ?>
-						<option value="<?php echo (int) $priority['id']; ?>"<?php if (isset($_POST['priority_id']) && $_POST['priority_id'] == $priority['id']) { echo ' selected="selected"'; } ?>><?php echo safe_output($priority['name']); ?></option>
+						<option value="<?php echo (int) $priority['id']; ?>"<?php if (isset($_POST['priority_id']) && $_POST['priority_id'] == $priority['id']) { echo ' selected="selected"'; } ?>><?php echo safe_output($language->get($priority['name'])); ?></option>
 						<?php } ?>
 					</select></p>				
 					

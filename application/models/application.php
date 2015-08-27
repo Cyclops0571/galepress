@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @property int $ApplicationID Description
  * @property int $CustomerID Description
@@ -34,156 +35,157 @@
  * @property int $BannerTransitionRate Description
  * @property int $TabActive Description
  */
-class Application extends Eloquent
-{
-	public static $timestamps = false;
-	public static $table = 'Application';
-	public static $key = 'ApplicationID';
-	
-	/**
-	 * 
-	 * @return Customer
-	 */
-	public function Customer()
-	{
-		return $this->belongs_to('Customer', 'CustomerID')->first();
-	}
-	
-	public function ApplicationStatus($languageID)
-	{
-		if((int)$this->ApplicationStatusID > 0)
-		{
-			$gc = GroupCode::find($this->ApplicationStatusID)->first();
-			if($gc) {
-				return $gc->DisplayName($languageID);	
-			}
-		}
-		return '';
-	}
-	
-	public function Package()
-	{
-		return $this->belongs_to('Package', 'PackageID')->first();
-	}
+class Application extends Eloquent {
 
-	public function Categories($statusID)
-	{
-		return $this->has_many('Category', $this->key())->where('StatusID', '=', $statusID)->get();
+    public static $timestamps = false;
+    public static $table = 'Application';
+    public static $key = 'ApplicationID';
+
+    /**
+     * 
+     * @return Customer
+     */
+    public function Customer() {
+	return $this->belongs_to('Customer', 'CustomerID')->first();
+    }
+
+    public function ApplicationStatus($languageID) {
+	if ((int) $this->ApplicationStatusID > 0) {
+	    $gc = GroupCode::find($this->ApplicationStatusID)->first();
+	    if ($gc) {
+		return $gc->DisplayName($languageID);
+	    }
 	}
-	
-	public function Contents($statusID)
-	{
-		return $this->has_many('Content', $this->key())->where('StatusID', '=', $statusID)->get();
-	}
-	
-	public function Users()
-	{
-		return $this->has_many('ApplicationUser', $this->key());
-	}
-	
-	public function Tags()
-	{
-		return $this->has_many('ApplicationTag', $this->key());
-	}
-	
-	/**
-	 * 
-	 * @return Tab
-	 */
-	public function Tabs() {
-		return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)
+	return '';
+    }
+
+    public function Package() {
+	return $this->belongs_to('Package', 'PackageID')->first();
+    }
+
+    public function Categories($statusID) {
+	return $this->has_many('Category', $this->key())->where('StatusID', '=', $statusID)->get();
+    }
+
+    public function Contents($statusID) {
+	return $this->has_many('Content', $this->key())->where('StatusID', '=', $statusID)->get();
+    }
+
+    public function Users() {
+	return $this->has_many('ApplicationUser', $this->key());
+    }
+
+    public function Tags() {
+	return $this->has_many('ApplicationTag', $this->key());
+    }
+
+    /**
+     * 
+     * @return Tab
+     */
+    public function Tabs() {
+	return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)
 			->take(TAB_COUNT)
 			->get();
-	}
-	
-	/**
-	 * 
-	 * @return Content
-	 */
-	public function getContentSet() {
-		return Content::where('ApplicationID', '=', $this->ApplicationID)
+    }
+
+    /**
+     * 
+     * @return Content
+     */
+    public function getContentSet() {
+	return Content::where('ApplicationID', '=', $this->ApplicationID)
 			->where('StatusID', '=', eStatus::Active)
 			->order_by('Name', 'ASC')
 			->get();
+    }
+
+    /**
+     * 
+     * @param int $applicationID
+     * @return Application
+     */
+    public static function find($applicationID, $columns = array('*')) {
+	return Application::where(self::$key, "=", $applicationID)->first($columns);
+    }
+
+    public function CheckOwnership() {
+	$currentUser = Auth::User();
+	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
+	    return true;
 	}
-	
-	/**
-	 * 
-	 * @param int $applicationID
-	 * @return Application
-	 */
-	public static function find($applicationID, $columns = array('*')) {
-		return Application::where(self::$key, "=", $applicationID)->first($columns);
-	}
-	
-	public function CheckOwnership() {
-		$currentUser = Auth::User();
-		if ((int) $currentUser->UserTypeID == eUserTypes::Manager)  {
+
+	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
+	    if ((int) $this->StatusID == eStatus::Active) {
+		$c = $this->Customer();
+		if ((int) $c->StatusID == eStatus::Active) {
+		    if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
 			return true;
+		    }
 		}
-		
-		if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
-			if ((int) $this->StatusID == eStatus::Active) {
-				$c = $this->Customer();
-				if ((int) $c->StatusID == eStatus::Active) {
-					if ((int) $currentUser->CustomerID == (int) $c->CustomerID) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
+	    }
+	    return false;
 	}
-	
-	public function save($IncrementVersion = TRUE) {
-		if(!$this->dirty()) {
-			return true;
-		}
-		
-		$userID = -1;
-		if(Auth::User()) {
-			$userID = Auth::User()->UserID;
-		}
-		
-		if((int)$this->ApplicationID == 0) {
-			$this->DateCreated = new DateTime();
-			$this->ProcessTypeID = eProcessTypes::Insert;
-			$this->CreatorUserID = $userID;
-			$this->StatusID = eStatus::Active;
-		} else {
-			$this->ProcessTypeID = eProcessTypes::Update;
-		}
-		$this->ProcessUserID = $userID;
-		$this->ProcessDate = new DateTime();
-		if($IncrementVersion) {
-			$this->Version = (int)$this->Version + 1;
-		}
-		parent::save();
+    }
+
+    public function save($IncrementVersion = TRUE) {
+	if (!$this->dirty()) {
+	    return true;
 	}
-	
-	public function incrementAppVersion() {
-		$this->Version++;
-		parent::save();
+
+	$userID = -1;
+	if (Auth::User()) {
+	    $userID = Auth::User()->UserID;
 	}
-	
-	public function TabsForService() {
-		$tabsForService = array();
-		if(!$this->TabActive) {
-			return $tabsForService;
-		}
-		$tabs = $this->Tabs();
-		foreach($tabs as $tab) {
-			if($tab->Status == eStatus::Active) {
-				$tabsForService[] = array(
-                                    "tabTitle" => $tab->TabTitle, 
-                                    "tabLogoUrl" => Config::get('custom.url') . $tab->IconUrl, 
-                                    "tabLogoUrl_1x" => Config::get('custom.url') . str_replace("app-icons", "app-icons/1x", $tab->IconUrl), 
-                                    "tabLogoUrl_2x" => Config::get('custom.url') . str_replace("app-icons", "app-icons/2x", $tab->IconUrl), 
-                                    "tabLogoUrl_3x" => Config::get('custom.url') . str_replace("app-icons", "app-icons/3x", $tab->IconUrl), 
-                                    "tabUrl" => $tab->urlForService()
-                                );
-			}
-		}
-		return $tabsForService;
+
+	if ((int) $this->ApplicationID == 0) {
+	    $this->DateCreated = new DateTime();
+	    $this->ProcessTypeID = eProcessTypes::Insert;
+	    $this->CreatorUserID = $userID;
+	    $this->StatusID = eStatus::Active;
+	} else {
+	    $this->ProcessTypeID = eProcessTypes::Update;
 	}
+	$this->ProcessUserID = $userID;
+	$this->ProcessDate = new DateTime();
+	if ($IncrementVersion) {
+	    $this->Version = (int) $this->Version + 1;
+	}
+	parent::save();
+    }
+
+    public function incrementAppVersion() {
+	$this->Version++;
+	parent::save();
+    }
+
+    public function TabsForService() {
+	$tabsForService = array();
+	if (!$this->TabActive) {
+	    return $tabsForService;
+	}
+	$tabs = $this->Tabs();
+	foreach ($tabs as $tab) {
+	    if ($tab->Status == eStatus::Active) {
+		$tabsForService[] = array(
+		    "tabTitle" => $tab->TabTitle,
+		    "tabLogoUrl" => Config::get('custom.url') . $tab->IconUrl,
+		    "tabLogoUrl_1x" => Config::get('custom.url') . str_replace("app-icons", "app-icons/1x", $tab->IconUrl),
+		    "tabLogoUrl_2x" => Config::get('custom.url') . str_replace("app-icons", "app-icons/2x", $tab->IconUrl),
+		    "tabLogoUrl_3x" => Config::get('custom.url') . str_replace("app-icons", "app-icons/3x", $tab->IconUrl),
+		    "tabUrl" => $tab->urlForService()
+		);
+	    }
+	}
+	return $tabsForService;
+    }
+
+    /**
+     * 
+     * @return PaymentAccount
+     */
+    public function PaymentAccount() {
+	return $this->has_one('PaymentAccount', "ApplicationID")->first();
+    }
+
 }

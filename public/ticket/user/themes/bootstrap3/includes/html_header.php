@@ -61,7 +61,7 @@ if ($auth->logged_in() && $config->get('database_version') > 9) {
 		<script type="text/javascript" src="<?php echo $config->get('address'); ?>/system/libraries/redactor/fullscreen.js"></script>
 		<script type="text/javascript" src="<?php echo $config->get('address'); ?>/system/libraries/redactor/fontcolor.js"></script>
 
-		<script type="text/javascript" src="<?php echo $config->get('address'); ?>/system/libraries/redactor/redactor.min.js"></script>
+		<script type="text/javascript" src="<?php echo $config->get('address'); ?>/system/libraries/redactor/redactor.js"></script>
 		<link rel="stylesheet" href="<?php echo $config->get('address'); ?>/system/libraries/redactor/css/redactor.css" />
 
 		<script type="text/javascript"> 
@@ -80,7 +80,8 @@ if ($auth->logged_in() && $config->get('database_version') > 9) {
 					],
 					plugins: ['fontsize', 'fontfamily', 'fontcolor'],
 					minHeight: 100,
-					toolbarFixed: false
+					toolbarFixed: false,
+					lang: 'tr'
 				});
 			}
 		);

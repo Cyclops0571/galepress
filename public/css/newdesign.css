@@ -5,7 +5,7 @@
 @import "stylesheet.css?v=8";
 @import "backgrounds.css?v=6";
 @import "themes.css?v=6";
-@import "mystyles.css?v=8";
+@import "mystyles.css?v=9";
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {    
     #imgPreview{width:100px;}

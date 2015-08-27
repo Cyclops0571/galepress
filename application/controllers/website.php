@@ -502,6 +502,7 @@ class Website_Controller extends Base_Controller
         public function get_webinar(){
 		return View::make('website.webinar');
 	}
+	
 	public function post_webinar(){
 		$errors = array();
 		$data = array(); 

@@ -1,7 +1,6 @@
 <?php
 
 class Payment_Controller extends Base_Controller {
-
     public $restful = true;
 
     public function get_shop() {
@@ -11,7 +10,13 @@ class Payment_Controller extends Base_Controller {
         if (!$customer) {
             return Redirect::to(__('route.home'));
         }
-        $paymentAccount = $customer->PaymentAccount();
+	
+	$applications = array_merge($customer->Applications(eStatus::Active), $customer->Applications(eStatus::Passive));
+	if(empty($applications) || $applications[0]->CustomerID != $customer->CustomerID) {
+            return Redirect::to(__('route.home'));
+	}
+	
+        $paymentAccount = $customer->getLastSelectedPaymentAccount();
         if (!$paymentAccount) {
             $paymentAccount = new PaymentAccount();
         }
@@ -19,7 +24,7 @@ class Payment_Controller extends Base_Controller {
         $customerData = array();
         $customerData['city'] = City::all();
         $customerData['paymentAccount'] = $paymentAccount;
-
+	$customerData['applications'] = $applications;
 
         return View::make('payment.shop', $customerData);
     }
@@ -43,16 +48,23 @@ class Payment_Controller extends Base_Controller {
         $user = Auth::User();
         $user instanceof User;
         $customer = Customer::find($user->CustomerID);
+	$application = Application::find(Input::get("applicationID"));
         if (!$customer) {
             return Redirect::to(__('route.home'));
         }
+	
+	if($application->CustomerID != $customer->CustomerID) {
+            return Redirect::to(__('route.home'));
+	}
 
         $customer instanceof Customer;
-        $paymentAccount = $customer->PaymentAccount();
+        $paymentAccount = $application->PaymentAccount();
         if (!$paymentAccount) {
             $paymentAccount = new PaymentAccount();
+	    $paymentAccount->CustomerID = $customer->CustomerID;
+	    $paymentAccount->ApplicationID = $application->ApplicationID;
         }
-        $paymentAccount->CustomerID = $customer->CustomerID;
+
         $paymentAccount->kurumsal = Input::get('customerType') == 'on' ? 0 : 1;
         $paymentAccount->email = Input::get('email');
         $paymentAccount->phone = Input::get('phone');
@@ -62,10 +74,12 @@ class Payment_Controller extends Base_Controller {
         $paymentAccount->address = Input::get('address');
         $paymentAccount->vergi_dairesi = Input::get('taxOffice');
         $paymentAccount->vergi_no = Input::get('taxNo');
+	$paymentAccount->selected_at = date("Y-m-d H:i:s");
         $paymentAccount->save();
 
         $data = array();
         $data["paymentAccount"] = $paymentAccount;
+        $data["application"] = $application;
 
         return View::make('payment.payment-galepress', $data);
     }
@@ -82,10 +96,11 @@ class Payment_Controller extends Base_Controller {
         if (!$customer) {
             return Redirect::to(__('route.home'));
         }
-        $paymentAccount = $customer->PaymentAccount();
+        $paymentAccount = $customer->getLastSelectedPaymentAccount();
         if (!$paymentAccount) {
             return Redirect::to('shop');
         }
+	$application = $paymentAccount->Application();
 
 
         //send data
@@ -118,7 +133,7 @@ class Payment_Controller extends Base_Controller {
         $postData['customer_presentation_usage'] = 'GalepressAylikOdeme_' . date('YmdHisu');
         $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
         $postData['type'] = "DB";
-        $postData['amount'] = ((int) (Config::get("custom.payment_amount") * 1.18)) * 100;
+        $postData['amount'] = $application->Price * 118;
         $postData['installment_count'] = NULL;
         $postData['currency'] = "TRY";
         $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
@@ -130,7 +145,6 @@ class Payment_Controller extends Base_Controller {
         $postData['card_holder_name'] = Input::get("card_holder_name");
         $postData['card_verification'] = Input::get("card_verification");
         $postData['connector_type'] = "Garanti";
-
         $paymentTransaction->request = json_encode($postData);
         $paymentTransaction->save();
 
@@ -156,9 +170,12 @@ class Payment_Controller extends Base_Controller {
             $paymentResult = "Error";
             if (isset($resultJson['transaction']['state']) && strstr($resultJson['transaction']['state'], "paid")) {
                 $paymentResult = "Success";
+		if($paymentAccount->payment_count == 0) {
+		    $paymentAccount->FirstPayment = date('Y-m-d');
+		}
+                $paymentAccount->last_payment_day = date("Y-m-d");
                 $paymentAccount->CustomerID = $user->CustomerID;
                 $paymentAccount->payment_count = (int) $paymentAccount->payment_count + 1;
-                $paymentAccount->last_payment_day = date("Y-m-d");
                 $paymentAccount->card_token = $resultJson['card_token'];
                 $paymentAccount->bin = $resultJson['account']['bin'];
                 $paymentAccount->brand = $resultJson['account']['brand'];
@@ -181,10 +198,14 @@ class Payment_Controller extends Base_Controller {
             } else {
                 $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
                 $paymentTransaction->CustomerID = $user->CustomerID;
-                $paymentTransaction->transaction_id = $resultJson['transaction']['transaction_id'];
-                $paymentTransaction->external_id = $resultJson['transaction']['external_id'];
-                $paymentTransaction->reference_id = $resultJson['transaction']['reference_id'];
-                $paymentTransaction->state = $resultJson['transaction']['state'];
+		if(isset($resultJson['transaction'])) {
+		    $paymentTransaction->transaction_id = $resultJson['transaction']['transaction_id'];
+		    $paymentTransaction->external_id = $resultJson['transaction']['external_id'];
+		    $paymentTransaction->reference_id = $resultJson['transaction']['reference_id'];
+		    $paymentTransaction->state = $resultJson['transaction']['state'];
+		} else {
+		    $paymentTransaction->state = 'rejected';
+		}
                 $paymentTransaction->save();
                 if (!empty($resultJson['response']["error_message_tr"])) {
                     $paymentResult = $resultJson['response']["error_message_tr"];
@@ -205,19 +226,13 @@ class Payment_Controller extends Base_Controller {
      * @return type
      */
     public function post_odemeResponse() {
-        echo "POST";
-        echo "--------------POST--------------";
-        var_dump($_POST);
-        echo "--------------GET--------------";
-        var_dump($_GET);
-        echo "--------------EXIT--------------";
         $user = Auth::User();
         $user instanceof User;
         $customer = Customer::find($user->CustomerID);
         if (!$customer) {
             return Redirect::to(__('route.home'));
         }
-        $paymentAccount = $customer->PaymentAccount();
+        $paymentAccount = $customer->getLastSelectedPaymentAccount();
         if (!$paymentAccount) {
             return Redirect::to('shop');
         }
@@ -235,6 +250,9 @@ class Payment_Controller extends Base_Controller {
             $result = json_decode($resultCurl, true);
             if (isset($result['transaction']['state']) && strstr($result['transaction']['state'], "paid")) {
                 $paymentResult = "Success";
+		if($paymentAccount->payment_count == 0) {
+		    $paymentAccount->FirstPayment = date('Y-m-d');
+		}
                 $paymentAccount->payment_count = (int) $paymentAccount->payment_count + 1;
                 $paymentAccount->last_payment_day = date("Y-m-d");
                 $paymentAccount->card_token = $result['card_token'];
@@ -266,11 +284,15 @@ class Payment_Controller extends Base_Controller {
                 $paymentTransaction->reference_id = $resultJson['transaction']['reference_id'];
                 $paymentTransaction->state = $resultJson['transaction']['state'];
                 $paymentTransaction->save();
-                if (!empty($resultJson['response']["error_message_tr"])) {
-                    $paymentResult = $resultJson['response']["error_message_tr"];
-                } else {
-                    $paymentResult = $resultJson['response']["error_message"];
-                }
+		if(!empty($resultJson['response'])) {
+		    if (!empty($resultJson['response']["error_message_tr"])) {
+			$paymentResult = $resultJson['response']["error_message_tr"];
+		    } else {
+			$paymentResult = $resultJson['response']["error_message"];
+		    }
+		} else {
+		    $paymentResult = "Şu anda banka yanıt veremiyor.";
+		}
             }
         }
         return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
@@ -283,7 +305,7 @@ class Payment_Controller extends Base_Controller {
         if (!$customer) {
             return Redirect::to(__('route.home'));
         }
-        $paymentAccount = $customer->PaymentAccount();
+        $paymentAccount = $customer->getLastSelectedPaymentAccount();
         if (!$paymentAccount) {
             return Redirect::to('shop');
         }
@@ -354,4 +376,9 @@ class Payment_Controller extends Base_Controller {
         return View::make('payment.odeme_sonuc', $data);
     }
 
+    
+    public function get_paymentAcountByApplicationID($appID) {
+	$paymentAccount = PaymentAccount::where('ApplicationID', "=", $appID)->first();
+	return json_encode($paymentAccount);
+    }
 }

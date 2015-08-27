@@ -20,7 +20,6 @@ class Test_Controller extends Base_Controller {
     }
 
     public function post_index() {
-
 	echo "zzzzzzz", PHP_EOL;
 	echo readfile('php://input'), PHP_EOL;
 	echo readfile("php://filter/read=string.toupper|string.rot13/resource=http://www.google.com"), PHP_EOL;
@@ -29,6 +28,17 @@ class Test_Controller extends Base_Controller {
     }
 
     public function get_index() {
+//	echo date(strtotime('2015-01-01')) . " ---- " . strtotime('2015-01-01');
+	echo date("Y-m-d", strtotime("2015-08-26" . " +1 month"));
+	exit;
+	$pa = PaymentAccount::find(1);
+	var_dump($pa);
+	var_dump($pa->Application());
+	exit;
+	$a1 = array(1, 2, 3, 4, 5);
+	$a2 = array(6,7,8);
+	$a1[] = $a2;
+	
 	echo date("Y-m-d", strtotime("+1 month", date(strtotime("2015-04-01"))));
 	exit;
 //	$binarydata = pack("nvc*", 0x1234, 0x5678, 65, 66);
