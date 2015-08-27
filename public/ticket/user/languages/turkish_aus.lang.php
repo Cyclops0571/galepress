@@ -92,7 +92,7 @@ class lang {
 		$language_array['Attach File']							= 'Dosya Ekle';
 		$language_array['Close Ticket']							= 'Bileti Kapat';
 		
-		$language_array['ago']									= 'ago';
+		$language_array['ago']									= 'önce';
 
 		$language_array['Open']									= 'Açık';
 		$language_array['Closed']								= 'Kapalı';
@@ -504,7 +504,7 @@ class lang {
 		$language_array['Plugins are located on the web server in the user/plugins/ folder.']								= 'Eklentiler web-serverda user/plugins/ dosyasına yerleştirildi.';
 		$language_array['Add API Key']											= 'API Anahtarı Ekle';
 		$language_array['Published Version']									= 'Yayımlanan Versiyon';
-		$language_array['s']													= 's';
+		$language_array['s']													= '';
 		$language_array['Show Filter']											= 'Filtreleri Göster';
 		
 		//3.5+
@@ -541,6 +541,8 @@ class lang {
 		$language_array['History'] = 'Geçmiş';
 		$language_array['Live Chat'] = 'Canlı Destek';
 		$language_array['Date Due'] = 'Son Gün';
+		$language_array['Min Date'] = 'Bu Tarihten Sonra';
+		$language_array['Max Date'] = 'Bu Tarihten Önce';
 		
 
 		

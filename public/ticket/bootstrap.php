@@ -10,6 +10,7 @@
  */
 
 namespace sts;
+
 //it would be nice to have this above the namespace as currently it isn't too useful.
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 	die('This program requires PHP 5.3.0 or higher to run.');
