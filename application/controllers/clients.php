@@ -205,12 +205,22 @@ class Clients_Controller extends Base_Controller {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
 	    } else if($clientSameEmail) {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
-	    } else {
-		
 	    }
 	    $s = new Client();
 	} else {
 	    $s = Client::find($id);
+	    if(!$s) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("user_not_found"));
+	    }
+	    
+	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $s->ClientID)->first();
+	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $s->ClientID)->first();
+	    if ($clientSameUsername) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+	    } else if($clientSameEmail) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+	    }
+	    
 	}
 	$s->Username = $username;
 	$s->Email = $email;

@@ -6,6 +6,9 @@ return array(
     "invalid_application_id_at_row" => "Yekinizin olmadığı Uygulama ID'si kullanıyorsunuz. Satır:",
     "inserted_mobile_user_count" => "Eklenen Kullanıcı Sayısı: ",
     "updated_mobile_user_count" => "Güncellenen Kullanıcı Sayısı: ",
+    "username_must_be_unique" => "Kullanıcı ismi daha önce kullanılmış. ",
+    "email_must_be_unique" => "Email daha önce kaydedilmiş. ",
+    "user_not_found" => "Kayıtlı kullanıcı bulunamadı.",
     
 );
 
