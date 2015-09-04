@@ -415,12 +415,12 @@ var cUser = new function () {
 	    var d = cForm.serialize(frm);
 
     	cUser.doAsyncRequest(t, u, d, function (ret) {
-			cNotification.success(null, ret.getValue("msg"));
-			if(getParameterByName("shopping")){
-				document.location.href = '/' + $('#currentlanguage').val() + '/shop';
-			}else{
-				document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];	
-			}
+		cNotification.success(null, ret.getValue("msg"));
+		if(getParameterByName("shopping")){
+			document.location.href = '/' + $('#currentlanguage').val() + '/shop';
+		} else {
+			document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];
+		}
 	    });
 
 	} else {
@@ -1439,7 +1439,7 @@ var cCommon = new function () {
 	if (typeof fSuccess !== 'function') {
 	    fSuccess = function (ret) {
 		cNotification.success();
-		var qs = cCommon.getQS();
+		var qs = cCommon.getQS(); //get query string
 	    };
 	}
 

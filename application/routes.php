@@ -39,15 +39,23 @@ Route::get('(:any)/(:any)', array('do' => function(){
 }));
 */
 
-
+$csrf = Config::get('custom.csrf');
 
 
 Route::get('/', function() { return View::make('website.pages.home'); });
+
+ // <editor-fold defaultstate="collapsed" desc="Test">
 Route::get("test", "test@index");
 Route::post("test", "test@index");
 Route::get("move", "test@moveInteractivite");
 Route::get("test/image", "test@image");
 Route::post("test/image", "test@image");
+Route::get("test/download", "test@download");
+Route::post("test/download", "test@download");
+// </editor-fold>
+
+
+Route::post("client/excelupload", "clients@excelupload");
 $languages = Config::get('application.languages', array());
 
 foreach($languages as $currentLanguage) {
@@ -125,7 +133,7 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.dashboard')->get($currentLanguage), array('as' => 'common_dashboard', 'before' => 'auth', 'uses' => 'common@dashboard'));
 
 	Route::get(__('route.mydetail')->get($currentLanguage), array('as' => 'common_mydetail_get', 'before' => 'auth', 'uses' => 'common@mydetail'));
-	Route::post(__('route.mydetail')->get($currentLanguage), array('as' => 'common_mydetail_post', 'before' => 'auth|csrf', 'uses' => 'common@mydetail'));
+	Route::post(__('route.mydetail')->get($currentLanguage), array('as' => 'common_mydetail_post', 'before' => 'auth' . $csrf, 'uses' => 'common@mydetail'));
 	
 	Route::get(__('route.confirmemail')->get($currentLanguage), array('as' => 'common_confirmemail_get', 'uses' => 'common@confirmemail'));
 	
@@ -136,17 +144,26 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.users')->get($currentLanguage), array('as' => 'users', 'before' => 'auth', 'uses' => 'users@index'));
 	Route::get(__('route.users_new')->get($currentLanguage), array('as' => 'users_new', 'before' => 'auth', 'uses' => 'users@new'));
 	Route::get(__('route.users_show')->get($currentLanguage), array('as' => 'users_show', 'before' => 'auth', 'uses' => 'users@show'));
-	Route::post(__('route.users_save')->get($currentLanguage), array('as' => 'users_save', 'before' => 'auth|csrf', 'uses' => 'users@save'));
-	Route::post(__('route.users_send')->get($currentLanguage), array('as' => 'users_send', 'before' => 'auth|csrf', 'uses' => 'users@send'));
-	Route::post(__('route.users_delete')->get($currentLanguage), array('as' => 'users_delete', 'before' => 'auth|csrf', 'uses' => 'users@delete'));
+	Route::post(__('route.users_save')->get($currentLanguage), array('as' => 'users_save', 'before' => 'auth' . $csrf, 'uses' => 'users@save'));
+	Route::post(__('route.users_send')->get($currentLanguage), array('as' => 'users_send', 'before' => 'auth' . $csrf, 'uses' => 'users@send'));
+	Route::post(__('route.users_delete')->get($currentLanguage), array('as' => 'users_delete', 'before' => 'auth' . $csrf, 'uses' => 'users@delete'));
 	// </editor-fold>
 
+	// <editor-fold defaultstate="collapsed" desc="Clients">
+	Route::get(__('route.clients')->get($currentLanguage), array('as' => 'clients', 'before' => 'auth', 'uses' => 'clients@index'));
+	Route::get(__('route.clients_new')->get($currentLanguage), array('as' => 'clients_new', 'before' => 'auth', 'uses' => 'clients@new'));
+	Route::get(__('route.clients_show')->get($currentLanguage), array('as' => 'clients_show', 'before' => 'auth', 'uses' => 'clients@show'));
+	Route::post(__('route.clients_save')->get($currentLanguage), array('as' => 'clients_save', 'before' => 'auth' . $csrf, 'uses' => 'clients@save'));
+	Route::post(__('route.clients_send')->get($currentLanguage), array('as' => 'clients_send', 'before' => 'auth' . $csrf, 'uses' => 'clients@send'));
+	Route::post(__('route.clients_delete')->get($currentLanguage), array('as' => 'clients_delete', 'before' => 'auth' . $csrf, 'uses' => 'clients@delete'));
+	// </editor-fold>
+		
 	// <editor-fold defaultstate="collapsed" desc="Customers">
 	Route::get(__('route.customers')->get($currentLanguage), array('as' => 'customers', 'before' => 'auth', 'uses' => 'customers@index'));
 	Route::get(__('route.customers_new')->get($currentLanguage), array('as' => 'customers_new', 'before' => 'auth', 'uses' => 'customers@new'));
 	Route::get(__('route.customers_show')->get($currentLanguage), array('as' => 'customers_show', 'before' => 'auth', 'uses' => 'customers@show'));
-	Route::post(__('route.customers_save')->get($currentLanguage), array('as' => 'customers_save', 'before' => 'auth|csrf', 'uses' => 'customers@save'));
-	Route::post(__('route.customers_delete')->get($currentLanguage), array('as' => 'customers_delete', 'before' => 'auth|csrf', 'uses' => 'customers@delete'));
+	Route::post(__('route.customers_save')->get($currentLanguage), array('as' => 'customers_save', 'before' => 'auth' . $csrf, 'uses' => 'customers@save'));
+	Route::post(__('route.customers_delete')->get($currentLanguage), array('as' => 'customers_delete', 'before' => 'auth' . $csrf, 'uses' => 'customers@delete'));
 	// </editor-fold>
 
 	// <editor-fold defaultstate="collapsed" desc="Applications">
@@ -154,9 +171,10 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.applications_new')->get($currentLanguage), array('as' => 'applications_new', 'before' => 'auth', 'uses' => 'applications@new'));
 	Route::get(__('route.applications_show')->get($currentLanguage), array('as' => 'applications_show', 'before' => 'auth', 'uses' => 'applications@show'));
 	Route::post(__('route.applications_pushnotification')->get($currentLanguage), array('as' => 'applications_push', 'before' => 'auth', 'uses' => 'applications@push'));
-	Route::post(__('route.applications_save')->get($currentLanguage), array('as' => 'applications_save', 'before' => 'auth|csrf', 'uses' => 'applications@save'));
-	Route::post(__('route.applications_delete')->get($currentLanguage), array('as' => 'applications_delete', 'before' => 'auth|csrf', 'uses' => 'applications@delete'));
+	Route::post(__('route.applications_save')->get($currentLanguage), array('as' => 'applications_save', 'before' => 'auth' . $csrf, 'uses' => 'applications@save'));
+	Route::post(__('route.applications_delete')->get($currentLanguage), array('as' => 'applications_delete', 'before' => 'auth' . $csrf, 'uses' => 'applications@delete'));
 	Route::post(__('route.applications_uploadfile')->get($currentLanguage), array('as' => 'applications_uploadfile', 'before' => 'auth', 'uses' => 'applications@uploadfile'));
+	Route::get(__('route.applications_usersettings')->get($currentLanguage), array('as' => 'applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
 	Route::post(__('route.applications_uploadfile2')->get($currentLanguage), array('do' => function()
 	{
 		try
@@ -197,7 +215,6 @@ foreach($languages as $currentLanguage) {
 		}
 	}));
 	// </editor-fold>
-	Route::get(__('route.applications_usersettings')->get($currentLanguage), array('as' => 'applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
 
 	// <editor-fold defaultstate="collapsed" desc="Contents">
 	Route::post("contents/order/(:num)", array('as' => 'contents_order', 'before' => 'auth', 'uses' => 'contents@order'));
@@ -206,9 +223,9 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.contents_request')->get($currentLanguage), array('as' => 'contents_request', 'uses' => 'contents@request'));
 	Route::get(__('route.contents_new')->get($currentLanguage), array('as' => 'contents_new', 'before' => 'auth', 'uses' => 'contents@new'));
 	Route::get(__('route.contents_show')->get($currentLanguage), array('as' => 'contents_show', 'before' => 'auth', 'uses' => 'contents@show'));
-	Route::post(__('route.contents_save')->get($currentLanguage), array('as' => 'contents_save', 'before' => 'auth|csrf', 'uses' => 'contents@save'));
+	Route::post(__('route.contents_save')->get($currentLanguage), array('as' => 'contents_save', 'before' => 'auth' . $csrf, 'uses' => 'contents@save'));
 	Route::get('/copy/(:num)/(:all)', array('as' => 'copy', 'before' => 'auth', 'uses' => 'contents@copy'));
-	Route::post(__('route.contents_delete')->get($currentLanguage), array('as' => 'contents_delete', 'before' => 'auth|csrf', 'uses' => 'contents@delete'));
+	Route::post(__('route.contents_delete')->get($currentLanguage), array('as' => 'contents_delete', 'before' => 'auth' . $csrf, 'uses' => 'contents@delete'));
 	Route::post(__('route.contents_template_save')->get($currentLanguage), array('as' => 'contents_template_save', 'before' => 'auth', 'uses' => 'contents@template_save'));
 	Route::post(__('route.contents_uploadfile')->get($currentLanguage), array('as' => 'contents_uploadfile', 'before' => 'auth', 'uses' => 'contents@uploadfile'));
 	Route::post(__('route.contents_uploadfile2')->get($currentLanguage), array('do' => function()
@@ -298,7 +315,7 @@ foreach($languages as $currentLanguage) {
 
 	// <editor-fold defaultstate="collapsed" desc="Password">
 	Route::get(__('route.contents_passwords')->get($currentLanguage), array('as' => 'contents_passwords', 'before' => 'auth', 'uses' => 'contentpasswords@index'));
-	Route::post(__('route.contents_passwords_save')->get($currentLanguage), array('as' => 'contents_passwords_save', 'before' => 'auth|csrf', 'uses' => 'contentpasswords@save'));
+	Route::post(__('route.contents_passwords_save')->get($currentLanguage), array('as' => 'contents_passwords_save', 'before' => 'auth' . $csrf, 'uses' => 'contentpasswords@save'));
 	Route::post(__('route.contents_passwords_delete')->get($currentLanguage), array('as' => 'contents_passwords_delete', 'before' => 'auth', 'uses' => 'contentpasswords@delete'));
 	// </editor-fold>
 
@@ -307,9 +324,9 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.orders')->get($currentLanguage), array('as' => 'orders', 'before' => 'auth', 'uses' => 'orders@index'));
 	Route::get(__('route.orders_new')->get($currentLanguage), array('as' => 'orders_new', 'before' => 'auth', 'uses' => 'orders@new'));
 	Route::get(__('route.orders_show')->get($currentLanguage), array('as' => 'orders_show', 'before' => 'auth', 'uses' => 'orders@show'));
-	//Route::post(__('route.orders_save')->get($currentLanguage), array('as' => 'orders_save', 'before' => 'auth|csrf', 'uses' => 'orders@save'));
+	//Route::post(__('route.orders_save')->get($currentLanguage), array('as' => 'orders_save', 'before' => 'auth' . $csrf, 'uses' => 'orders@save'));
 	Route::post(__('route.orders_save')->get($currentLanguage), array('as' => 'orders_save', 'uses' => 'orders@save'));
-	Route::post(__('route.orders_delete')->get($currentLanguage), array('as' => 'orders_delete', 'before' => 'auth|csrf', 'uses' => 'orders@delete'));
+	Route::post(__('route.orders_delete')->get($currentLanguage), array('as' => 'orders_delete', 'before' => 'auth' . $csrf, 'uses' => 'orders@delete'));
 	Route::post(__('route.orders_uploadfile')->get($currentLanguage), array('as' => 'orders_uploadfile', 'uses' => 'orders@uploadfile'));
 	Route::post(__('route.orders_uploadfile2')->get($currentLanguage), array('do' => function()
 	{
@@ -370,7 +387,7 @@ foreach($languages as $currentLanguage) {
 
 	// <editor-fold defaultstate="collapsed" desc="Category">
 	Route::get(__('route.categories')->get($currentLanguage), array('as' => 'categories', 'before' => 'auth', 'uses' => 'categories@index'));
-	Route::post(__('route.categories_save')->get($currentLanguage), array('as' => 'categories_save', 'before' => 'auth|csrf', 'uses' => 'categories@save'));
+	Route::post(__('route.categories_save')->get($currentLanguage), array('as' => 'categories_save', 'before' => 'auth' . $csrf, 'uses' => 'categories@save'));
 	Route::post(__('route.categories_delete')->get($currentLanguage), array('as' => 'categories_delete', 'before' => 'auth', 'uses' => 'categories@delete'));
 	// </editor-fold>
 
@@ -387,7 +404,7 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.interactivity_show')->get($currentLanguage), array('as' => 'interactivity_show', 'before' => 'auth', 'uses' => 'interactivity@show'));
 	Route::get(__('route.interactivity_fb')->get($currentLanguage), array('as' => 'interactivity_fb', 'uses' => 'interactivity@fb'));
 	Route::post(__('route.interactivity_check')->get($currentLanguage), array('as' => 'interactivity_check', 'before' => 'auth', 'uses' => 'interactivity@check'));
-	Route::post(__('route.interactivity_save')->get($currentLanguage), array('as' => 'interactivity_save', 'before' => 'auth|csrf', 'uses' => 'interactivity@save'));
+	Route::post(__('route.interactivity_save')->get($currentLanguage), array('as' => 'interactivity_save', 'before' => 'auth' . $csrf, 'uses' => 'interactivity@save'));
 	Route::post(__('route.interactivity_transfer')->get($currentLanguage), array('as' => 'interactivity_transfer', 'before' => 'auth', 'uses' => 'interactivity@transfer'));
 	Route::post(__('route.interactivity_refreshtree')->get($currentLanguage), array('as' => 'interactivity_refreshtree', 'before' => 'auth', 'uses' => 'interactivity@refreshtree'));
 	Route::post(__('route.interactivity_upload')->get($currentLanguage), array('as' => 'interactivity_upload', 'before' => 'auth', 'uses' => 'interactivity@upload'));

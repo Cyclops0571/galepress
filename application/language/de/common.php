@@ -76,6 +76,8 @@ return array(
 	'statistics_firstlogin' => 'Erstes Einloggen erfolgt.',
 	
 	'commandbar_add' => 'Hinzufügen',
+	'commandbar_excel_upload' => 'Upload Excel File',
+	'commandbar_excel_download' => 'Download Sample Excel File',
 	'commandbar_search' => 'Suchen',
 	
 	'header_upload' => 'Nicht hochgeladen',
@@ -99,6 +101,7 @@ return array(
 	'detailpage_success' => 'Erfolgreich durchgeführt.',
 	'detailpage_fail' => 'Ein Fehler ist aufgetreten, versuchen Sie es bitte später noch einmal.',
 	'detailpage_validation' => 'Es gibt Pflichtfelder!',
+	'detailpage_unauthorized_attempt' => 'Yetkiniz olmayan bir islem yapmaya çalışıyorsunuz!',
 	'detailpage_incorrect_input' => 'Incorrect input submitted!',
 	
 	'mydetail' => 'Meine Benutzerdaten',
@@ -123,6 +126,26 @@ return array(
 	'users_password' => 'Passwort',
 	'users_password2' => 'Passwort (erneut)',
 	'users_timezone' => 'Timezone',
+    
+    	'clients_caption' => 'Kullanıcılar',
+	'clients_caption_detail' => 'Kullanıcı Detayı',
+	'clients_list_column1' => '',
+	'clients_list_column2' => 'Benutzername',
+	'clients_list_column3' => 'Ad',
+	'clients_list_column4' => 'Soyad',
+	'clients_list_column5' => 'E-posta',
+	'clients_list_column6' => 'Uygulama',
+	'clients_list_column7' => 'Son Giris Tarihi',
+	'clients_list_column8' => 'ID',
+	'clients_firstname' => 'Ad',
+	'clients_lastname' => 'Soyad',
+	'clients_email' => 'E-posta',
+	'clients_username' => 'Kullanıcı Adı',
+	'clients_password' => 'Parola',
+	'clients_password2' => 'Parola (Tekrar)',
+    	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
+					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
+	'clients_timezone' => 'Zaman Dilimi',
 	
 	'customers_caption' => 'Kunden',
 	'customers_caption_detail' => 'Kundeneinzelheiten',
@@ -595,4 +618,5 @@ return array(
 	'image_select' => 'Wählen Sie Bild...',
 	'image' => 'Bild',
 
+	'client_list' => 'Mobile Users',
 );

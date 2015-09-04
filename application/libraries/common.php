@@ -118,7 +118,14 @@ class Common {
     }
 
     public static function CheckApplicationOwnership($applicationID) {
+	if((int)$applicationID == 0) {
+	    return FALSE;
+	}
 	$currentUser = Auth::User();
+	if($currentUser == NULL) {
+	    return FALSE;
+	}
+	
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    return true;
 	}
@@ -1099,6 +1106,14 @@ class Common {
 	    }
 	}
 	return $postDataString;
+    }
+    
+    public static function localize($key, $replacements = array(), $language = null) {
+	$result = Laravel\Lang::line(Laravel\Request::$route->controller . 'Lang.' . $key, $replacements, $language);
+	if(empty($result)) {
+	    $result = $key;
+	}
+	return $result;
     }
 
 }

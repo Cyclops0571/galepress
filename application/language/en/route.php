@@ -22,6 +22,13 @@ return array(
     'users_save' => 'users/save',
     'users_send' => 'users/send',
     'users_delete' => 'users/delete',
+    
+    'clients' => 'clients',
+    'clients_new' => 'clients/new',
+    'clients_show' => 'clients/(:num)',
+    'clients_save' => 'clients/save',
+    'clients_send' => 'clients/send',
+    'clients_delete' => 'clients/delete',
 
     'customers' => 'customers',
     'customers_new' => 'customers/new',

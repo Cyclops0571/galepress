@@ -157,7 +157,7 @@
 																<span class="read">OKU</span>
 																<span class="mega-menu-sub-title">MESAFELİ SATIŞ SÖZLEŞMESİ</span>
 																<ul class="sub-menu">
-																	<li><a href="/website/sozlesme/mesafeli-satis-sozlesmesi.docx"><img src="/website/styles/shop/img/mesafeliSatis.jpg" width="200"/></a></li>
+																	<li><a href="/website/sozlesme/mesafeli-satis-sozlesmesi.docx?1"><img src="/website/styles/shop/img/mesafeliSatis.jpg" width="200"/></a></li>
 																	<!-- <li><a href="feature-icons.html">Icons</a></li>
 																	<li><a href="feature-animations.html">Animations</a></li>
 																	<li><a href="feature-typography.html">Typography</a></li>

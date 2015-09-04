@@ -58,6 +58,7 @@
             $paymentAccount = new PaymentAccount();
         }
         ?>
+	
         <img src="/website/img/shop/paymentBack.jpg" id="bodyBackground">
         <div class="demo-container">
             <div class="header">
@@ -65,6 +66,7 @@
                     Fiyat: <?php echo $application->Price * 1.18 ?> TL (<?php echo $application->Price; ?> TL + <?php echo $application->Price * 0.18;?> KDV)
                 </h3>
             </div>
+	    
             <div class="card-wrapper"></div>
 
             <div class="form-container active">
@@ -142,7 +144,7 @@
                                     <h4 class="modal-title">Ödeme Onay</h4>
                                 </div>          
                                 <div class="modal-body">
-                                    <label class="control-label"><p>Hesabınızdan <?php echo (int) (Config::get("custom.payment_amount") * 1.18); ?> TL çekilecektir. Onaylıyor musunuz ?</p></label>
+                                    <label class="control-label"><p>Hesabınızdan <?php echo $application->Price * 1.18; ?> TL çekilecektir. Onaylıyor musunuz ?</p></label>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>

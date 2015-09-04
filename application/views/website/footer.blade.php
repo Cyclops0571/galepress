@@ -1,5 +1,5 @@
     <!-- Tickets: Live Chat Bar Start -->
-    <div id="lcs"><a href="#" id="lcs_start_chat">{{__('website.footer_livechat')}}</a></div>
+    <!--<div id="lcs"><a href="#" id="lcs_start_chat">{{__('website.footer_livechat')}}</a></div>-->
     <!-- Tickets: Live Chat Bar Finish -->
     <footer id="footer">
       <div class="inner sep-bottom-sm">

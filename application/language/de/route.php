@@ -22,6 +22,13 @@ return array(
     'users_save' => 'benutzer/speichern',
     'users_send' => 'benutzer/senden',
     'users_delete' => 'benutzer/loschen',
+    
+    'clients' => 'klient',
+    'clients_new' => 'klient/neu',
+    'clients_show' => 'klient/(:num)',
+    'clients_save' => 'klient/speichern',
+    'clients_send' => 'klient/senden',
+    'clients_delete' => 'klient/loschen',
 
     'customers' => 'kunden',
     'customers_new' => 'kunden/neu',

@@ -543,6 +543,17 @@ class lang {
 		$language_array['Date Due'] = 'Son Gün';
 		$language_array['Min Date'] = 'Bu Tarihten Sonra';
 		$language_array['Max Date'] = 'Bu Tarihten Önce';
+		$language_array['Start Chat'] = 'Sohbete Başla';
+		$language_array['Live Chat Enabled'] = 'Canlı Destek Aktif';
+		$language_array['Live Chat Disabled'] = 'Canlı Destek Kapalı';
+		$language_array['Active Sessions'] = 'Aktif Oturumlar';
+		$language_array['Start Time'] = 'Başlangıç Zamanı';
+		$language_array['Finished Time'] = 'Bitiş Zamanı';
+		$language_array['Last Guest Message'] = 'Son Mesaj';
+		$language_array['Started'] = 'Başlangıç';
+		$language_array['Finished'] = 'Bitiş';
+		$language_array['Messages'] = 'Mesajlar';
+		$language_array['Chat Ended'] = 'Sohbet Bitti';
 		
 
 		

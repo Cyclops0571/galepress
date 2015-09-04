@@ -1,7 +1,6 @@
 @layout('layouts.master')
 
 @section('content')    
-    
     <?php
 	$UserID = 0;
 	$UserTypeID = 0;

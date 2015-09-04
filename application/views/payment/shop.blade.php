@@ -205,7 +205,7 @@
 								<span class="read">OKU</span>
 								<span class="mega-menu-sub-title">MESAFELİ SATIŞ SÖZLEŞMESİ</span>
 								<ul class="sub-menu">
-								    <li><a href="/website/sozlesme/mesafeli-satis-sozlesmesi.docx"><img src="/website/styles/shop/img/mesafeliSatis.jpg" width="200"/></a></li>
+								    <li><a href="/website/sozlesme/mesafeli-satis-sozlesmesi.docx?1"><img src="/website/styles/shop/img/mesafeliSatis.jpg" width="200"/></a></li>
 								    <!-- <li><a href="feature-icons.html">Icons</a></li>
 								    <li><a href="feature-animations.html">Animations</a></li>
 								    <li><a href="feature-typography.html">Typography</a></li>
@@ -279,7 +279,7 @@
 				<div class="plan most-popular">
 				    <?php if (!$priceDiffers): ?>
     				    <div class="plan-ribbon-wrapper"><div class="plan-ribbon">Popular</div></div>
-    				    <h3>Standart<span style="line-height: 80px;">&#x20BA;100</span><br /><i style="color: rgb(0, 136, 204);font-size: 15px;">Aylık</i></h3>
+    				    <h3>Standart<span style="line-height: 80px;">&#x20BA;<?php echo $applications[0]->Price ?></span><br /><i style="color: rgb(0, 136, 204);font-size: 15px;">Aylık</i></h3>
 				    <?php endif; ?>
 				    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Satın Al</button>
 				    <ul>
@@ -395,7 +395,7 @@
     					    $("#phone").val(paymentAccount["attributes"]["phone"]);
     					    $("#customerTitle").val(paymentAccount["attributes"]["title"]);
     					    $("#tc").val(paymentAccount["attributes"]["tckn"]);
-    					    //$("#city").val(paymentAccount["attributes"]["tckn"]); 572572
+    					    //$("#city").val(paymentAccount["attributes"]["city"]); 572572
     					    $("#address").val(paymentAccount["attributes"]["address"]);
     					    $("#taxOffice").val(paymentAccount["attributes"]["vergi_dairesi"]);
     					    $("#taxNo").val(paymentAccount["attributes"]["vergi_no"]);
@@ -436,7 +436,7 @@
     			    </div>
     			    <hr>
 			    <?php else: ?>
-    			    <input type="hidden" name="applicationID" value="<?php echo $price; ?>" />
+    			    <input type="hidden" name="applicationID" value="<?php echo $applications[0]->ApplicationID; ?>" />
 			    <?php endif; ?>
 
 			    <h5 class="col-xs-12">KULLANICI BİLGİLERİ</h5>

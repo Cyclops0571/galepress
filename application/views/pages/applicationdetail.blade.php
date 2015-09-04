@@ -68,7 +68,7 @@ $groupcodes = DB::table('GroupCode AS gc')
 $packages = DB::table('Package')
 	->order_by('PackageID', 'ASC')
 	->get();
-$Price = number_format($Price, 2);
+$Price = number_format((float)$Price, 2);
 ?>
 <div class="col-md-8">    
     <div class="block block-drop-shadow">

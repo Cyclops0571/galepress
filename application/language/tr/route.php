@@ -22,6 +22,13 @@ return array(
     'users_save' => 'kullanicilar/kaydet',
     'users_send' => 'kullanicilar/gonder',
     'users_delete' => 'kullanicilar/sil',
+    
+    'clients' => 'mobil-kullanici',
+    'clients_new' => 'mobil-kullanici/yeni',
+    'clients_show' => 'mobil-kullanici/(:num)',
+    'clients_save' => 'mobil-kullanici/kaydet',
+    'clients_send' => 'mobil-kullanici/gonder',
+    'clients_delete' => 'mobil-kullanici/sil',
 
     'customers' => 'musteriler',
     'customers_new' => 'musteriler/yeni',

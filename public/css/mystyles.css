@@ -440,3 +440,6 @@ td:hover .list-draggable-icon{
     padding: 7px 12px;
     pointer-events: none;
 }
+
+table a.sort_down{background:url(../images_pres/arrow.png) no-repeat right center; padding-right:14px;}
+table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center; padding-right:14px;}

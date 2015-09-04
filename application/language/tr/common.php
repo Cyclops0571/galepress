@@ -76,6 +76,8 @@ return array(
 	'statistics_firstlogin' => 'Sisteme ilk kez girildi.',
 	
 	'commandbar_add' => 'Ekle',
+	'commandbar_excel_upload' => 'Excel Dosyası Yükle',
+	'commandbar_excel_download' => 'Download Sample Excel File',
 	'commandbar_search' => 'Ara',
 	
 	'header_upload' => 'Yüklenmedi',
@@ -99,6 +101,7 @@ return array(
 	'detailpage_success' => 'İşlem başarıyla yapıldı.',
 	'detailpage_fail' => 'İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz.',
 	'detailpage_validation' => 'Doldurulması gereken alanlar var!',
+	'detailpage_unauthorized_attempt' => 'Yetkiniz olmayan bir islem yapmaya çalışıyorsunuz!',
 	'detailpage_incorrect_input' => 'Doldurulması gereken alanlar var!',
 	
 	'mydetail' => 'Kullanıcı Bilgilerim',
@@ -123,6 +126,27 @@ return array(
 	'users_password' => 'Parola',
 	'users_password2' => 'Parola (Tekrar)',
 	'users_timezone' => 'Zaman Dilimi',
+    
+	'clients_caption' => 'Mobil Kullanıcılar',
+	'clients_caption_detail' => 'Kullanıcı Detayı',
+	'clients_list_column1' => '',
+	'clients_list_column2' => 'Kullanıcı Adı',
+	'clients_list_column3' => 'Ad',
+	'clients_list_column4' => 'Soyad',
+	'clients_list_column5' => 'E-posta',
+    	'clients_list_column6' => 'Uygulama',
+	'clients_list_column7' => 'Son Giris Tarihi',
+    	'clients_list_column8' => 'ID',
+	'clients_firstname' => 'Ad',
+	'clients_lastname' => 'Soyad',
+	'clients_email' => 'E-posta',
+	'clients_username' => 'Kullanıcı Adı',
+	'clients_password' => 'Parola',
+	'clients_password2' => 'Parola (Tekrar)',
+	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
+					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
+	'clients_timezone' => 'Zaman Dilimi',
+	
 	
 	'customers_caption' => 'Müşteriler',
 	'customers_caption_detail' => 'Müşteri Detayı',
@@ -591,4 +615,7 @@ return array(
 	
 	'image_select' => 'Resim seç...',
 	'image' => 'Resim',
+	
+	'client_list' => 'Mobil Kullanıcılar',
+    
 );

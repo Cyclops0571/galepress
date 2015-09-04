@@ -7,6 +7,7 @@ $iyzicoReturnUrl = 'https://www.galepress.com';
 $iyzicoApiID = 'im015089500879819fdc991436189064';
 $iyzicoSecret = 'im015536200eaf0002c8d01436189064';
 $paymentAmount = 100;
+$csrf = "|csrf";
 if (Laravel\Request::env() == ENV_TEST) {
     $iyzicoApiID = 'im095675100e6b443315841436188424';
     $iyzicoSecret = 'im09762570052d771a4b2d1436188424';
@@ -15,7 +16,9 @@ if (Laravel\Request::env() == ENV_TEST) {
     $serverUrl = 'http://galetest.com';
     $mailEmail = 'info@galetest.com';
     $paymentAmount = 1;
+    $csrf = "";
 } else if (Laravel\Request::env() == ENV_LOCAL) {
+    $csrf = "";
     $iyzicoApiID = 'im095675100e6b443315841436188424';
     $iyzicoSecret = 'im09762570052d771a4b2d1436188424';
     $paymentEnv = 'test';
@@ -37,6 +40,7 @@ return array(
       | Company Name
       |--------------------------------------------------------------------------
      */
+    'csrf' => $csrf,
     'companyname' => 'GALEPRESS',
     'mail_displayname' => 'GALEPRESS',
     'mail_email' => $mailEmail,

@@ -76,6 +76,8 @@ return array(
 	'statistics_firstlogin' => 'First Entry To The System:',
 	
 	'commandbar_add' => 'Add',
+	'commandbar_excel_upload' => 'Upload Excel File',
+	'commandbar_excel_download' => 'Download Sample Excel File',
 	'commandbar_search' => 'Search',
 	
 	'header_upload' => 'Not Upload',
@@ -99,6 +101,7 @@ return array(
 	'detailpage_success' => 'Operation is successful.',
 	'detailpage_fail' => 'An error occurred while performing the operation.',
 	'detailpage_validation' => 'Required fields!',
+	'detailpage_unauthorized_attempt' => 'Unauthorized operation attempt!',
 	'detailpage_incorrect_input' => 'Incorrect input submitted!',
 	
 	'mydetail' => 'My user information',
@@ -123,6 +126,26 @@ return array(
 	'users_password' => 'Password',
 	'users_password2' => 'Password (Repeat)',
 	'users_timezone' => 'Timezone',
+    
+    	'clients_caption' => 'Mobile Users',
+	'clients_caption_detail' => 'Mobile User Detayı',
+	'clients_list_column1' => '',
+	'clients_list_column2' => 'User Name',
+	'clients_list_column3' => 'Name',
+	'clients_list_column4' => 'Surname',
+	'clients_list_column5' => 'E-mail',
+    	'clients_list_column6' => 'Application',
+	'clients_list_column7' => 'Last Login Date',
+	'clients_list_column8' => 'ID',
+	'clients_firstname' => 'Name:',
+	'clients_lastname' => 'Surname:',
+	'clients_email' => 'E-posta',
+	'clients_username' => 'User Name',
+	'clients_password' => 'Password',
+	'clients_password2' => 'Password (Repeat)',
+	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
+					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
+	'clients_timezone' => 'Timezone',
 	
 	'customers_caption' => 'Customers',
 	'customers_caption_detail' => 'Customer Detail',
@@ -591,5 +614,7 @@ return array(
 	
 	'image_select' => 'Choose Image...',
 	'image' => 'Image',
+    
+	'client_list' => 'Mobile Users',
 
 );

@@ -34,6 +34,8 @@ class Customer extends Eloquent {
      * @return Application
      */
     public function Applications($statusID) {
+	
+	
 	return $this->has_many('Application', $this->key())->where('StatusID', '=', $statusID)->get();
     }
 

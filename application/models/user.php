@@ -25,11 +25,30 @@
  */
 class User extends Eloquent {
 
-	public static $timestamps = false;
-	public static $table = 'User';
-	public static $key = 'UserID';
+    public static $timestamps = false;
+    public static $table = 'User';
+    public static $key = 'UserID';
 
-	public function Customer() {
-		return $this->belongs_to('Customer', 'CustomerID')->first();
+    /**
+     * 
+     * @return Customer
+     */
+    public function Customer() {
+	return $this->belongs_to('Customer', 'CustomerID')->first();
+    }
+
+    /**
+     * 
+     * @return Application
+     */
+    public function Application($statusID = eStatus::Active) {
+	
+	if ($this->UserTypeID == eUserTypes::Manager) {
+	    $applications = Application::where('StatusID', '=', $statusID)->get();
+	} else {
+	    $applications = $this->Customer()->Applications($statusID);
 	}
+	return $applications;
+    }
+
 }

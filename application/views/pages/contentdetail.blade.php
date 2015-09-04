@@ -223,9 +223,10 @@ $groupcodes = DB::table('GroupCode AS gc')
 
                     <input type="file" name="File" class="btn btn-mini hidden" id="File" style="opacity:0;" />
                     <script type="text/javascript">
-                                $('#File').ready(function(){
-                        $('#File').css('opacity', '1');
-                        });</script>
+			$('#File').ready(function(){
+			    $('#File').css('opacity', '1');
+                        });
+		    </script>
 
                     <div id="FileButton" class="uploadify hide" style="height: 30px; width: 120px; opacity: 1;">
                         <div id="File-button" class="uploadify-button " style="height: 30px; line-height: 30px; width: 120px;">
