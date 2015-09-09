@@ -1,4 +1,10 @@
 <?php
+$defaultLang = 'tr';
+if (Laravel\Request::env() == ENV_TEST) {
+    $defaultLang = 'en';
+} else if (Laravel\Request::env() == ENV_LOCAL) {
+    $defaultLang = 'en';
+}
 
 return array(
 
@@ -92,7 +98,7 @@ return array(
 	|
 	*/
 
-	'language' => 'tr',
+	'language' => $defaultLang,
 
 	/*
 	|--------------------------------------------------------------------------

@@ -346,7 +346,7 @@
                                         @if(Config::get('application.language')=="tr")
                                         <div class="modal-body">{{ $expApp->Name }} uygulamanızın geçerlilik süresi {{$diff->days}} gün sonra sona erecektir. <span id="dialogText-warning"></span></div>
                                         @elseif(Config::get('application.language')=="en")
-                                        <div class="modal-body">{{ $expApp->Name }} will expire after {{$diff->days}} day. <span id="dialogText-warning"></span></div>
+                                        <div class="modal-body">{{ $expApp->Name }} will expire in {{$diff->days}} day. <span id="dialogText-warning"></span></div>
                                         @elseif(Config::get('application.language')=="de")
                                         <div class="modal-body">{{ $expApp->Name }} wird nach {{$diff->days}} Tag auslaufen. <span id="dialogText-warning"></span></div>
                                         @endif

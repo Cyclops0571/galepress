@@ -52,6 +52,8 @@ Route::get("test/image", "test@image");
 Route::post("test/image", "test@image");
 Route::get("test/download", "test@download");
 Route::post("test/download", "test@download");
+
+Route::get('test/v(:num)', 'test@routetest');
 // </editor-fold>
 
 
@@ -156,6 +158,10 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.clients_save')->get($currentLanguage), array('as' => 'clients_save', 'before' => 'auth' . $csrf, 'uses' => 'clients@save'));
 	Route::post(__('route.clients_send')->get($currentLanguage), array('as' => 'clients_send', 'before' => 'auth' . $csrf, 'uses' => 'clients@send'));
 	Route::post(__('route.clients_delete')->get($currentLanguage), array('as' => 'clients_delete', 'before' => 'auth' . $csrf, 'uses' => 'clients@delete'));
+	
+	Laravel\Routing\Route::get(__('route.clients_register')->get($currentLanguage), array('as' => 'clientsregister', 'uses' => 'clients@clientregister'));
+	Laravel\Routing\Route::post(__('route.clients_register_save')->get($currentLanguage), array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
+	
 	// </editor-fold>
 		
 	// <editor-fold defaultstate="collapsed" desc="Customers">
@@ -554,6 +560,8 @@ Route::get('ws/v102/applications/(:num)/detail', array('uses' => 'ws.v102.applic
 Route::get('ws/v102/applications/(:num)/categories', array('uses' => 'ws.v102.applications@categories'));
 Route::get('ws/v102/applications/(:num)/categories/(:num)/detail', array('uses' => 'ws.v102.applications@categoryDetail'));
 Route::get('ws/v102/applications/(:num)/contents', array('uses' => 'ws.v102.applications@contents'));
+Route::get('ws/v102/applications/authorized_application_list', array('uses' => 'ws.v102.applications@authorized_application_list'));
+Route::post('ws/v102/applications/authorized_application_list', array('uses' => 'ws.v102.applications@authorized_application_list'));
 // WS-Contents
 Route::get('ws/v102/contents/(:num)/version', array('uses' => 'ws.v102.contents@version'));
 Route::get('ws/v102/contents/(:num)/detail', array('uses' => 'ws.v102.contents@detail'));
@@ -561,8 +569,28 @@ Route::get('ws/v102/contents/(:num)/cover-image', array('uses' => 'ws.v102.conte
 Route::get('ws/v102/contents/(:num)/file', array('uses' => 'ws.v102.contents@file'));
 // WS-Statistics
 Route::post('ws/v102/statistics', array('uses' => 'ws.v102.statistics@create'));
-Route::get('ws/v102/applications/authorized_application_list', array('uses' => 'ws.v102.applications@authorized_application_list'));
-Route::post('ws/v102/applications/authorized_application_list', array('uses' => 'ws.v102.applications@authorized_application_list'));
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="New Webservice Routes">
+Route::get('webservice/(:num)/applications/(:num)/version', array('uses' => 'webservice.applications@version'));
+Route::get('webservice/(:num)/applications/(:num)/detail', array('uses' => 'webservice.applications@detail'));
+Route::get('wwebservice/(:num)/applications/(:num)/categories', array('uses' => 'webservice.applications@categories'));
+Route::get('webservice/(:num)/applications/(:num)/categories/(:num)/detail', array('uses' => 'webservice.applications@categoryDetail'));
+
+Route::get('webservice/(:num)/applications/(:num)/contents', array('uses' => 'webservice.applications@contents'));
+
+
+
+Route::get('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
+Route::post('webservice(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
+Route::post('webservice/(:num)/applications/login_application', array('uses' => 'webservice.applications@login_application'));
+// WS-Contents
+Route::get('webservice/(:num)/contents/(:num)/version', array('uses' => 'webservice.contents@version'));
+Route::get('webservice/(:num)/contents/(:num)/detail', array('uses' => 'webservice.contents@detail'));
+Route::get('webservice/(:num)/contents/(:num)/cover-image', array('uses' => 'webservice.contents@coverImage'));
+Route::get('webservice/(:num)/contents/(:num)/file', array('uses' => 'webservice.contents@file'));
+// WS-Statistics
+Route::post('webservice/(:num)/statistics', array('uses' => 'webservice.statistics@create'));
 // </editor-fold>
 
 /*

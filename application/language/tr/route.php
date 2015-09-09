@@ -29,6 +29,9 @@ return array(
     'clients_save' => 'mobil-kullanici/kaydet',
     'clients_send' => 'mobil-kullanici/gonder',
     'clients_delete' => 'mobil-kullanici/sil',
+    'clients_register' => 'mobil-kullanici/kayitol/(:num)',
+    'clients_register_save' => 'mobil-kullanici/kayitol',
+    'clients_registered' => 'mobil-kullanici/kayit-basarili',
 
     'customers' => 'musteriler',
     'customers_new' => 'musteriler/yeni',

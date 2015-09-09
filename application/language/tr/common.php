@@ -1,12 +1,12 @@
 <?php 
 
 return array(
-
 	/*
 	|--------------------------------------------------------------------------
 	| Common Language Lines
 	|--------------------------------------------------------------------------
 	*/
+	'support' => 'DESTEK',
 	'login_caption' => 'Galepress Login',
 	'login_remember' => 'Beni hatırla',
 	'login_button' => 'Giriş',
@@ -141,8 +141,12 @@ return array(
 	'clients_lastname' => 'Soyad',
 	'clients_email' => 'E-posta',
 	'clients_username' => 'Kullanıcı Adı',
-	'clients_password' => 'Parola',
-	'clients_password2' => 'Parola (Tekrar)',
+	'clients_password' => 'Şifre',
+	'clients_password2' => 'Şifre (Tekrar)',
+    	'clients_password_new' => 'Yeni Şifre',
+	'clients_password_retype_new' => 'Yeni Şifre Tekrar',
+	'clients_password_does_not_match' => 'Şifre; Onay Şifresiyle uyuşmuyor.',
+	'clients_password_current' => 'Eski Şifre',
 	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
 					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
 	'clients_timezone' => 'Zaman Dilimi',

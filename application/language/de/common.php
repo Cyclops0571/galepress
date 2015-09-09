@@ -7,6 +7,7 @@ return array(
 	| Common Language Lines
 	|--------------------------------------------------------------------------
 	*/
+	'support' => 'UNTERSTÜTZUNG',
 	'login_caption' => 'Galepress - Einloggen',
 	'login_remember' => 'Sichern',
 	'login_button' => 'Einloggen',
@@ -137,12 +138,16 @@ return array(
 	'clients_list_column6' => 'Uygulama',
 	'clients_list_column7' => 'Son Giris Tarihi',
 	'clients_list_column8' => 'ID',
-	'clients_firstname' => 'Ad',
+	'clients_firstname' => 'Vornamen',
 	'clients_lastname' => 'Soyad',
-	'clients_email' => 'E-posta',
-	'clients_username' => 'Kullanıcı Adı',
-	'clients_password' => 'Parola',
-	'clients_password2' => 'Parola (Tekrar)',
+	'clients_email' => 'Email',
+	'clients_username' => 'Benutzername',
+	'clients_password' => 'Passwort',
+	'clients_password2' => 'Passwort (erneut)',
+	'clients_password_does_not_match' => 'Kennwort nicht Kennwort bestätigen lassen.',
+	'clients_password_new' => 'Passwort (neu)',
+	'clients_password_retype_new' => 'Passwort (neue Re-type)',
+	'clients_password_current' => 'Aktuelles Passwort',
     	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
 					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
 	'clients_timezone' => 'Zaman Dilimi',

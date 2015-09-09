@@ -176,62 +176,65 @@ class Clients_Controller extends Base_Controller {
 	    $appIDSet[] = $application->ApplicationID;
 	}
 
-	$id = (int) Input::get($this->pk, '0');
-
+	$clientID = (int) Input::get($this->pk, '0');
+	$password = Input::get('Password');
+	$username = trim(Input::get('Username'));
+	$applicationID = Input::get('ApplicationID');
+	$email = Input::get('Email;');
+	
 	$rules = array(
-	    'UserTypeID' => 'required',
 	    'Username' => 'required|min:2',
 	    'FirstName' => 'required',
 	    'LastName' => 'required',
-	    'Email' => 'required|email'
+	    'Email' => 'required|email',
+	    
 	);
 
+	if ($clientID == 0) {
+	    $rules['Password'] = 'required|min:2';
+	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
+	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
+	    if ($clientSameUsername) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+	    } else if ($clientSameEmail) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+	    }
+	    $s = new Client();
+	} else {
+	    $s = Client::find($clientID);
+	    if (!$s) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("user_not_found"));
+	    }
+
+	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $s->ClientID)->first();
+	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $s->ClientID)->first();
+	    if ($clientSameUsername) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+	    } else if ($clientSameEmail) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+	    }
+	}
+	
 	$v = Validator::make(Input::all(), $rules);
 	if (!$v->passes()) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	}
 
-	$password = Input::get('Password');
-
-	
-	$username = trim(Input::get('Username'));
-	$applicationID = Input::get('ApplicationID');
-	$email = Input::get('Email;');
-	
-	if ($id == 0) {
-	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
-	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
-	    if ($clientSameUsername) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
-	    } else if($clientSameEmail) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
-	    }
-	    $s = new Client();
-	} else {
-	    $s = Client::find($id);
-	    if(!$s) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("user_not_found"));
-	    }
-	    
-	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $s->ClientID)->first();
-	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $s->ClientID)->first();
-	    if ($clientSameUsername) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
-	    } else if($clientSameEmail) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
-	    }
-	    
+	if ($s->Username != $username) {
+	    $s->Token = $s->Username . "_" . md5(uniqid());
 	}
+
 	$s->Username = $username;
 	$s->Email = $email;
+
 	$s->ApplicationID = $applicationID;
 	if (strlen(trim($password)) > 0) {
 	    $s->Password = md5($password);
 	}
-	
+
 	$s->Name = Input::get('FirstName');
 	$s->Surname = Input::get('LastName');
-	if ($id == 0) {
+	if ($clientID == 0) {
 	    $s->StatusID = eStatus::Active;
 	    $s->CreatorUserID = $currentUser->UserID;
 	}
@@ -311,80 +314,207 @@ class Clients_Controller extends Base_Controller {
 	$object = json_decode($ob);
 	$filePath = path('public') . 'files/temp/' . $object->File[0]->name;
 
-	    include_once path("base") . "application/libraries/excel_reader2.php";
-	    error_reporting(E_ALL ^ E_NOTICE);
-	    $data = new Spreadsheet_Excel_Reader($filePath);
-	    $rowCount = $data->rowcount();
-	    $columnCount = $data->colcount();
-	    $includeAppColumn = 0;
-	    if(count($appIDSet) > 1) {
-		$includeAppColumn = 1;
-	    }
-	    
-	    
-	    if ($rowCount < 2) {
-		$responseMsg = Common::localize("invalid_excel_file_two_rows");
-	    } else if($columnCount != 7) {
-		$responseMsg = Common::localize("invalid_excel_file_seven_columns");
-	    } else {
-		$addedUserCount = 0;
-		$updatedUserCount = 0;
-		for ($row = 2; $row <= $rowCount; $row++) {
-		    $colNo = 1;
-		    $applicationID = $data->val($row, $colNo++);
-		    $username = $data->val($row, $colNo++);
-		    $password = $data->val($row, $colNo++);
-		    $email = $data->val($row, $colNo++);
-		    $name = $data->val($row, $colNo++);
-		    $surname = $data->val($row, $colNo++);
-		    $paidUntil = date("Y-m-d", strtotime($data->val($row, $colNo++)));
-		    if (!in_array($applicationID, $appIDSet)) {
-			$responseMsg .= Common::localize("invalid_application_id_at_row") . $row;
-			break;
-		    }
+	include_once path("base") . "application/libraries/excel_reader2.php";
+	error_reporting(E_ALL ^ E_NOTICE);
+	$data = new Spreadsheet_Excel_Reader($filePath);
+	$rowCount = $data->rowcount();
+	$columnCount = $data->colcount();
+	$includeAppColumn = 0;
+	if (count($appIDSet) > 1) {
+	    $includeAppColumn = 1;
+	}
 
-		    /* @var $client Client */
-		    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
-		    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
-		    if ($clientSameUsername) {
-			//user exists upgrade or what ???
-			$clientSameUsername->Name = $name;
-			$clientSameUsername->Surname = $surname;
-			$clientSameUsername->PaidUntil = $paidUntil;
-			$clientSameUsername->save();
-			$updatedUserCount++;
-			continue;
-		    } else if($clientSameEmail) {
-			$clientSameEmail->Name = $name;
-			$clientSameEmail->Surname = $surname;
-			$clientSameEmail->PaidUntil = $paidUntil;
-			$clientSameEmail->save();
-			$updatedUserCount++;
-			continue;
-		    }
 
-		    $client = new Client();
-		    $client->ApplicationID = $applicationID;
-		    $client->Username = $username;
-		    $client->Password = md5($password);
-		    $client->Email = $email;
-		    $client->Name = $name;
-		    $client->Surname = $surname;
-		    $client->PaidUntil = $paidUntil;
-		    $client->StatusID = eStatus::Active;
-		    $client->CreatorUserID = $user->UserID;
-		    $client->save();
-		    $addedUserCount++;
+	if ($rowCount < 2) {
+	    $responseMsg = Common::localize("invalid_excel_file_two_rows");
+	} else if ($columnCount != 7) {
+	    $responseMsg = Common::localize("invalid_excel_file_seven_columns");
+	} else {
+	    $addedUserCount = 0;
+	    $updatedUserCount = 0;
+	    for ($row = 2; $row <= $rowCount; $row++) {
+		$colNo = 1;
+		$applicationID = $data->val($row, $colNo++);
+		$username = $data->val($row, $colNo++);
+		$password = $data->val($row, $colNo++);
+		$email = $data->val($row, $colNo++);
+		$name = $data->val($row, $colNo++);
+		$surname = $data->val($row, $colNo++);
+		$paidUntil = date("Y-m-d", strtotime($data->val($row, $colNo++)));
+		if (!in_array($applicationID, $appIDSet)) {
+		    $responseMsg .= Common::localize("invalid_application_id_at_row") . $row;
+		    break;
 		}
-		$responseMsg .= Common::localize('inserted_mobile_user_count') . $addedUserCount . " " . Common::localize('updated_mobile_user_count') . $updatedUserCount;
-		$status = 'success';
+
+		/* @var $client Client */
+		$clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
+		$clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
+		if ($clientSameUsername) {
+		    //user exists upgrade or what ???
+		    $clientSameUsername->Name = $name;
+		    $clientSameUsername->Surname = $surname;
+		    $clientSameUsername->PaidUntil = $paidUntil;
+		    $clientSameUsername->save();
+		    $updatedUserCount++;
+		    continue;
+		} else if ($clientSameEmail) {
+		    $clientSameEmail->Name = $name;
+		    $clientSameEmail->Surname = $surname;
+		    $clientSameEmail->PaidUntil = $paidUntil;
+		    $clientSameEmail->save();
+		    $updatedUserCount++;
+		    continue;
+		}
+
+		$client = new Client();
+		$client->ApplicationID = $applicationID;
+		$client->Username = $username;
+		$client->Token = $client->Username . "_" . md5(uniqid());
+		$client->Password = md5($password);
+		$client->Email = $email;
+		$client->Name = $name;
+		$client->Surname = $surname;
+		$client->PaidUntil = $paidUntil;
+		$client->StatusID = eStatus::Active;
+		$client->CreatorUserID = $user->UserID;
+		$client->save();
+		$addedUserCount++;
 	    }
+	    $responseMsg .= Common::localize('inserted_mobile_user_count') . $addedUserCount . " " . Common::localize('updated_mobile_user_count') . $updatedUserCount;
+	    $status = 'success';
+	}
 	$json = get_object_vars($object);
 	$arr = $json[$element];
 	$obj = $arr[0];
-	$obj->responseMsg = (string)$responseMsg;
+	$obj->responseMsg = (string) $responseMsg;
 	$obj->status = $status;
 
 	return Response::json($obj);
     }
+
+    /**
+     * Mobil application interface for register
+     * @param type $applicationID
+     * @return HTML
+     */
+    public function get_clientregister($applicationID) {
+	$application = Application::find($applicationID);
+	$data = array();
+	$data["application"] = $application;
+	return View::make(Laravel\Request::$route->controller . '.clientregister', $data);
+    }
+
+    /**
+     * Mobil application interface for user profile update
+     */
+    public function get_updateclient($clientToken) {
+	/* @var $client Client */
+	$client = Client::where('Token', '=', $clientToken)->first();
+	if (!$client) {
+	    //redirect to register page 571571
+	}
+	$data = array();
+	$data["application"] = $client->Application();
+	$data["client"] = $client;
+
+	return View::make(Laravel\Request::$route->controller . '.clientregister', $data);
+    }
+
+    public function post_clientregister() {
+	$clientID = (int) Input::get($this->pk, '0');
+	$username = trim(Input::get('Username'));
+	$applicationID = Input::get('ApplicationID');
+	$email = Input::get('Email');
+	$password = Input::get('Password');
+	$password2 = Input::get('Password2');
+
+	$rules = array(
+	    'Username' => 'required|min:2',
+	    'FirstName' => 'required',
+	    'LastName' => 'required',
+	    'Email' => 'required|email'
+	);
+	if($clientID == 0) {
+	    $rules['Password'] = 'required|min:2';
+	    $rules['Password2'] = 'required|min:2';
+	}
+
+	$v = Laravel\Validator::make(Input::all(), $rules);
+	if (!$v->passes()) {
+	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+	}
+
+	if ($clientID == 0) {
+	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
+	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
+	    if ($clientSameUsername) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+	    } else if ($clientSameEmail) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+	    }
+	    $client = new Client();
+
+
+	    if ($password != $password2) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.clients_password_does_not_match'));
+	    }
+	    if (strlen(trim($password)) > 0) {
+		$client->Password = md5($password);
+	    } else {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.clients_password_does_not_match'));
+	    }
+	} else {
+	    $client = Client::find($clientID);
+	    if (!$client) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("user_not_found"));
+	    }
+	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $client->ClientID)->first();
+	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $client->ClientID)->first();
+	    if ($clientSameUsername) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+	    } else if ($clientSameEmail) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+	    }
+	}
+
+
+	if ($client->Username != $username) {
+	    $client->Token = $client->Username . "_" . md5(uniqid());
+	}
+	
+	if (strlen(trim($password)) > 0) {
+	    $client->Password = md5($password);
+	}
+
+	$client->Username = $username;
+	$client->Email = $email;
+	$client->ApplicationID = $applicationID;
+	$client->Name = Input::get('FirstName');
+	$client->Surname = Input::get('LastName');
+	
+	if ($clientID == 0) {
+	    $client->StatusID = eStatus::Active;
+	    $client->CreatorUserID = 0;
+	}
+
+	$client->save();
+	return "success=" . base64_encode("true");
+    }
+
+    public function get_successfulclientregister() {
+	//ajax ile atilan request duzgun ise buraya donecegim.
+    }
+
+    public function get_forgetpassword() {
+	
+    }
+
+    public function post_forgetpassword() {
+	
+    }
+
+    public function get_passwordsent() {
+	
+    }
+
 }

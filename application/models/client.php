@@ -6,6 +6,7 @@
  * @property int $Username Description
  * @property int $Password Description
  * @property int $Email Description
+ * @property int $Token Description
  * @property int $Name Description
  * @property int $Surname Description
  * @property int $PaidUntil Description

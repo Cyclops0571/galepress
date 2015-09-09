@@ -29,6 +29,9 @@ return array(
     'clients_save' => 'clients/save',
     'clients_send' => 'clients/send',
     'clients_delete' => 'clients/delete',
+    'clients_register' => 'clients/register/(:num)',
+    'clients_register_save' => 'clients/register',
+    'clients_registered' => 'clients/successfully-registered',
 
     'customers' => 'customers',
     'customers_new' => 'customers/new',

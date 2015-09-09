@@ -8,7 +8,6 @@
         <title>{{ Config::get('custom.companyname') }}</title>
         <!-- Meta tags -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="google-site-verification" content="" />
         <meta http-equiv="content-Language" content="tr" />
         <meta http-equiv="imagetoolbar" content="false" />
         <meta name="MSSmartTagsPreventParsing" content="true" />

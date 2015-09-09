@@ -7,6 +7,7 @@ return array(
 	| Common Language Lines
 	|--------------------------------------------------------------------------
 	*/
+    	'support' => 'SUPPORT',
 	'login_caption' => 'Galepress Login',
 	'login_remember' => 'Remember me',
 	'login_button' => 'Login',
@@ -143,6 +144,10 @@ return array(
 	'clients_username' => 'User Name',
 	'clients_password' => 'Password',
 	'clients_password2' => 'Password (Repeat)',
+	'clients_password_does_not_match' => 'Password does not match the confirm password.',
+	'clients_password_new' => 'New Password',
+	'clients_password_retype_new' => 'New Password Re-type',
+	'clients_password_current' => 'Old Password',
 	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
 					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
 	'clients_timezone' => 'Timezone',

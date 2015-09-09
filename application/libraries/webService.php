@@ -1,6 +1,6 @@
 <?php
 
-class Ws {
+class WebService {
 
     /**
      * If there is a exception then catches it and returns a valid Response else returns what the Closure returns
@@ -19,13 +19,8 @@ class Ws {
 	}
     }
 
-    /**
-     * 
-     * @param type $customerID
-     * @return Customer
-     * @throws Exception
-     */
-    public static function getCustomer($customerID) {
+    // Customer
+    public static function getCheckCustomer($ServiceVersion, $customerID) {
 	$customer = Customer::where('CustomerID', '=', $customerID)->where('StatusID', '=', eStatus::Active)->first();
 	if (!$customer) {
 	    throw eServiceError::getException(eServiceError::UserNotFound);
@@ -35,11 +30,12 @@ class Ws {
 
     /**
      * 
+     * @param type $ServiceVersion
      * @param type $applicationID
      * @return Application
      * @throws Exception
      */
-    public static function getApplication($applicationID) {
+    public static function getCheckApplication($ServiceVersion, $applicationID) {
 	$application = Application::where('ApplicationID', '=', $applicationID)->where('StatusID', '=', eStatus::Active)->first();
 	if (!$application) {
 	    throw eServiceError::getException(eServiceError::ApplicationNotFound);
@@ -50,7 +46,7 @@ class Ws {
 	return $application;
     }
 
-    public static function getApplicationCategories($applicationID) {
+    public static function getCheckApplicationCategories($ServiceVersion, $applicationID) {
 	$categories = array();
 	//add general
 	array_push($categories, array(
@@ -67,17 +63,17 @@ class Ws {
 	return $categories;
     }
 
-    public static function getApplicationCategoryDetail($applicationID, $categoryID) {
+    public static function getCheckApplicationCategoryDetail($ServiceVersion, $applicationID, $categoryID) {
 	$category = Category::where('CategoryID', '=', $categoryID)
-		->where('ApplicationID', '=', $applicationID)
-		->where('StatusID', '=', eStatus::Active)->first();
+			->where('ApplicationID', '=', $applicationID)
+			->where('StatusID', '=', eStatus::Active)->first();
 	if (!$category) {
 	    throw eServiceError::getException(eServiceError::CategoryNotFound);
 	}
 	return $category;
     }
 
-    public static function getApplicationContents($applicationID, $isTest = False) {
+    public static function getCheckApplicationContents($ServiceVersion, $applicationID, $isTest = False) {
 	$query = Content::where('ApplicationID', '=', $applicationID)
 		->where('StatusID', '=', eStatus::Active)
 		->order_by('OrderNo', 'DESC')
@@ -135,19 +131,13 @@ class Ws {
      * @return Content
      * @throws Exception
      */
-    public static function getContent($contentID, $serviceVersion = 0) {
-	if ($serviceVersion >= 102) {
-	    $content = Content::where('ContentID', '=', $contentID)
-		    ->where(function($q) {
-			$q->where('StatusID', '=', eStatus::Active);
-			$q->or_where("RemoveFromMobile", "=", eRemoveFromMobile::Active);
-		    })
-		    ->first();
-	} else {
-	    $content = Content::where('ContentID', '=', $contentID)
-		    ->where('StatusID', '=', eStatus::Active)
-		    ->first();
-	}
+    public static function getCheckContent($ServiceVersion, $contentID) {
+	$content = Content::where('ContentID', '=', $contentID)
+		->where(function($q) {
+		    $q->where('StatusID', '=', eStatus::Active);
+		    $q->or_where("RemoveFromMobile", "=", eRemoveFromMobile::Active);
+		})
+		->first();
 
 	if (!$content) {
 	    throw eServiceError::getException(eServiceError::ContentNotFound);
@@ -158,7 +148,7 @@ class Ws {
 	return $content;
     }
 
-    public static function getContentCategories($contentID) {
+    public static function getContentCategories($ServiceVersion, $contentID) {
 	$categories = array();
 	$sql = '' .
 		'SELECT ct.CategoryID, ct.Name ' .
@@ -177,7 +167,7 @@ class Ws {
     }
 
     // Check User credential
-    public static function checkUserCredential($customerID) {
+    public static function checkUserCredential($ServiceVersion, $customerID) {
 	$username = Input::get('username', '');
 	$password = Input::get('password', '');
 	$user = null;
@@ -195,7 +185,7 @@ class Ws {
     }
 
     // Save token
-    public static function saveToken($customerID, $applicationID) {
+    public static function saveToken($ServiceVersion, $customerID, $applicationID) {
 	$UDID = Input::get('udid', '');
 	$applicationToken = Input::get('applicationToken', '');
 	$deviceToken = Input::get('deviceToken', '');
@@ -243,14 +233,78 @@ class Ws {
      * @param type $applicationID
      * @param type $username
      * @param type $password
-     * @return Client
+     * @param type $userFacebookID
+     * @param type $userFbEmail
+     * @return User
+     * @throws Exception
      */
-    public static function getClient($serviceVersion, $applicationID, $username, $password) {
-	return Client::where("Username", '=', $username)
-			->where('Password', '=', $password)
-			->where('ApplicationID', '=', $applicationID)
-			->where('StatusID', '=', eStatus::Active)
-			->first();
+    public static function getCheckUser($ServiceVersion, $applicationID, $username, $password, $userFacebookID, $userFbEmail) {
+	if (!empty($username) && !empty($password)) {
+	    //username ve password login
+	    $user = User::where('Username', '=', $username)->where('StatusID', '=', eStatus::Active)->first();
+	    if (!$user) {
+		throw eServiceError::getException(eServiceError::IncorrectUserCredentials);
+	    }
+
+	    if (!Hash::check($password, $user->Password)) {
+		throw eServiceError::getException(eServiceError::IncorrectUserCredentials);
+	    }
+	} else if (!empty($userFacebookID) && !empty($userFbEmail)) {
+	    //facebook login
+	    $user = User::where('FbUsername', '=', $userFacebookID)
+			    ->where('FbEmail', '=', $userFbEmail)
+			    ->where('StatusID', '=', eStatus::Active)->first();
+	    if (!$user) {
+		throw eServiceError::getException(eServiceError::CreateAccount);
+	    }
+	} else {
+	    throw eServiceError::getException(eServiceError::IncorrectUserCredentials);
+	}
+
+	if ($user->CustomerID == 0) {
+	    //Customer not exist
+	    throw eServiceError::getException(eServiceError::IncorrectUserCredentials);
+	}
+
+	return $user;
+    }
+
+    /**
+     * 
+     * @param type $serviceVersion
+     * @param type $applicationID
+     * @param type $username
+     * @param type $password
+     * @return Client
+     * @throws Exception
+     */
+    public static function getCheckClient($serviceVersion, $applicationID, $username, $password) {
+	if (empty($username) || empty($password)) {
+	    throw eServiceError::getException(eServiceError::ClientNotFound);
+	}
+
+	/* @var $client Client */
+	$client = Client::where('ApplicationID', '=', $applicationID)
+		->where('Username', '=', $username)
+		->where('StatusID', '=', eStatus::Active)->first();
+	if (!$client) {
+	    echo "burasi1"; exit;
+	    throw eServiceError::getException(eServiceError::ClientNotFound);
+	} else if ($client->Password != $password) {
+	    echo "burasi2"; exit;
+	    $client->InvalidPasswordAttempts++;
+	    $client->save();
+	    throw eServiceError::getException(eServiceError::ClientIncorrectPassword);
+	} else if ($client->InvalidPasswordAttempts > 5 && (time() - strtotime($client->updated_at)) < 7200) {
+	    echo "burasi3"; exit;
+	    throw eServiceError::getException(eServiceError::ClientInvalidPasswordAttemptsLimit);
+	}
+
+	if(empty($client->Token)) {
+	    $client->Token = $client->Username . "_" . md5(uniqid());
+	    $client->save();
+	}
+	return $client;
     }
 
 }

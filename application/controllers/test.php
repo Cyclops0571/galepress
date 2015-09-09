@@ -20,6 +20,7 @@ class Test_Controller extends Base_Controller {
     }
 
     public function post_index() {
+	
 	echo "aaa";
 	var_dump($_POST);
 	dd($_FILES);
@@ -56,6 +57,17 @@ class Test_Controller extends Base_Controller {
     }
 
     public function get_index() {
+	echo strtotime("2015-09-07 17:15:00") . "   ----------------   ";
+	echo time(); exit;
+	$res = openssl_pkey_new();
+	openssl_pkey_export($res, $privateKey);
+	$pubkey=openssl_pkey_get_details($res);
+	
+	var_dump($privateKey);
+	echo PHP_EOL . "---------------------------------" . PHP_EOL;
+	var_dump($pubkey);
+	
+	
 //	echo date(strtotime('2015-01-01')) . " ---- " . strtotime('2015-01-01');
 	echo date("Y-m-d", strtotime("2015-08-26" . " +1 month"));
 	exit;
@@ -281,6 +293,10 @@ class Test_Controller extends Base_Controller {
 
     public function get_myhome() {
 	return View::make('website.pages.home');
+    }
+    
+    public function get_routetest($x) {
+	echo  $x . "aaaaaaaaaaaaaa";
     }
 
 }
