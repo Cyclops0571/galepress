@@ -1,6 +1,5 @@
 <style>
     .vertical{
-    writing-mode:tb-rl;
     -webkit-transform:rotate(90deg);
     -moz-transform:rotate(90deg);
     -o-transform: rotate(90deg);
