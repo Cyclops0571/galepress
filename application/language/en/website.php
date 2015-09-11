@@ -12,7 +12,6 @@ return array(
 	'description' => 'GalePress - Digital Publishing Platform',
 
 	'page_home' => 'Home',
-	'page_aboutus' => 'About Us',
 	'page_galepress' => 'GalePress',
 	'page_products' => 'Products',
 	'page_advantages' => 'Benefits',
@@ -103,10 +102,11 @@ return array(
 	'latest_sharings' => 'Latest Tweet',
 	'please_wait' => 'Please wait...',
 	'contact' => 'Contact',
+	'block' => 'Block',
 
 	'address' => 'Adress:',
 	'address_istanbul' => 'Alemdağ rd. No: 109, 34692 Üsküdar / İstanbul / Turkey<br />',
-	'address_sivas' => 'Yenişehir st. İşhan Köyü,Ötegeçe Mevkii 49/1 58140 Teknokent Sivas / Turkey<br />',
+	'address_usa' => 'North Tustin, CA  Denver, CO <br />',
 	'phone' => 'Telephone:',
 	'fax' => 'Fax:',
 
@@ -118,29 +118,6 @@ return array(
 
 	'search' => 'Search...',
 	'copyright' => '© Copyright 2013 Detaysoft. All rights reserved',
-
-	//ABOUTUS
-	'aboutus_desc' => 'GENERAL DESCRIPTION',
-	'aboutus_desc_detail' => 'Detaysoft has provided customer-satisfaction focused and privileged services to over 200 global sector-leading organizations for more than 13 years.  Starting with a core consultant team during its establishment in 1999,  it is one of the most experienced consultancy companies now. Through its successful projects, unique solutions and long-term partnership perception, Detaysoft increased its preferability among its business partners. In the past few years, Detaysoft has held an important growth rate. In 2007, Detaysoft established Dubai office and with the establishment of Sivas Office in 2008, Detaysoft built the first SAP consultancy team in Central Anatolian.',
-	'aboutus_milestone' => 'MILESTONES',
-	'aboutus_milestone1' => 'Experience in more than 400 projects, over 200 customers and 20 sectors',
-	'aboutus_milestone2' => 'SAP Gold Partner',
-	'aboutus_milestone3' => 'SAP PCOE Certificate Holder',
-	'aboutus_milestone4' => 'SAP 2011 Best Performance Challenge Winner',
-	'aboutus_milestone5' => '4 office locations: Istanbul(HD), Sivas, Elazığ, Dubai',
-	'aboutus_milestone6' => 'Turquality 1.Group IT Consulting Firm',
-	'aboutus_milestone7' => 'R&D projects suppported by Tübitak',
-	'aboutus_milestone8' => 'Sybase Mobile solution partner',
-	'aboutus_milestone9' => 'SAP SuccessFactors partner',
-	'aboutus_milestone10' => 'SAP EMEA Partner Excellence Award 2013 for Top Partner - Marketing Best Practice',
-	'aboutus_milestone11' => 'Among Turkey\'s Top 500 IT Companies and Top 10 IT Consulting Firms',
-	'aboutus_locations' => 'LOCATIONS',
-	'aboutus_loc_istanbul' => 'ISTANBUL - CENTRAL',
-	'aboutus_loc_istanbul_adress' => 'Alemdağ Cad. No: 109, 34692 Üsküdar / İstanbul / Türkiye<br />',
-	'aboutus_loc_sivas' => 'SIVAS - OFFICE',
-	'aboutus_loc_sivas_adress' => 'Yenişehir Mah. İşhan Köyü,Ötegeçe Mevkii 49/1 58140 Teknokent Sivas / Türkiye<br />',
-	'aboutus_loc_dubai' => 'DUBAI - OFFFICE FZCO',
-	'aboutus_loc_elazig' => 'ELAZIG - OFFICE',
 
 	//WHAT IS GALEPRESS
 	'whatis' => 'What is GalePress?',
@@ -261,7 +238,6 @@ return array(
 	'menu_explore' => 'Explore',
 
 	'home_video_title' => 'Mobile world is now at your fingertips!',	
-
 	'home_intro_title' => 'One Platform To Rule Them All',
 	'home_intro_text' => 'The solution that your company needs might be increasing customer interaction, boost sales activity, hiring more qualified personnel or decreasing printing costs. Now you can have all these solutions and many more with the agile structure of GalePress. Thanks to the software renting model, you won’t need any personnel, an office or consulting for your mobile solutions department. Mobile world is now at your fingertips.',
 	'home_sectors_title' => 'For Every Sector',
@@ -282,7 +258,7 @@ return array(
 	'home_stars_pleon_subtitle' => 'Process Management',
 	'home_stars_mopas' => 'We’re glad that we are using a platform which has the same principle we have; supplying the best quality for the best price. Thanks to GalePress, we’ve created a win-win situation where we can notify our customers on spot.',
 	'home_stars_mopas_subtitle' => 'Insert Distribution',
-
+    
 	'home_interactive_editor_description' => 'Watch your visuals come to life with animated content.',
 	'home_interactive_editor' => 'INTERACTIVE EDITOR',
 	'home_interactive_editor_word1' => 'INTERACTIVE',

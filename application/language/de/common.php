@@ -144,7 +144,6 @@ return array(
 	'clients_username' => 'Benutzername',
 	'clients_password' => 'Passwort',
 	'clients_password2' => 'Passwort (erneut)',
-	'clients_password_does_not_match' => 'Kennwort nicht Kennwort bestätigen lassen.',
 	'clients_password_new' => 'Passwort (neu)',
 	'clients_password_retype_new' => 'Passwort (neue Re-type)',
 	'clients_password_current' => 'Aktuelles Passwort',

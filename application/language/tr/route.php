@@ -30,6 +30,7 @@ return array(
     'clients_send' => 'mobil-kullanici/gonder',
     'clients_delete' => 'mobil-kullanici/sil',
     'clients_register' => 'mobil-kullanici/kayitol/(:num)',
+    'clients_update' => 'mobil-kullanici/guncelle/(:num)/(:any)',
     'clients_register_save' => 'mobil-kullanici/kayitol',
     'clients_registered' => 'mobil-kullanici/kayit-basarili',
 
@@ -99,7 +100,6 @@ return array(
     'interactivity_upload2' => 'etkilesimli-pdf/yukle2',
     'interactivity_loadpage' => 'etkilesimli-pdf/sayfayukle',
 
-    'website_aboutus' => 'hakkimizda',
     'website_galepress' => 'galepress-nedir',
     'website_products' => 'urunler',
     'website_advantages' => 'avantajlar',

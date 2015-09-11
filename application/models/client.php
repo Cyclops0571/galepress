@@ -41,7 +41,7 @@ class Client extends Laravel\Database\Eloquent\Model {
     }
     
     public function Application() {
-	return $this->belongs_to('Application', 'ApplicationID');
+	return $this->belongs_to('Application', 'ApplicationID')->first();
     }
 
 }

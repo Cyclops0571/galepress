@@ -12,7 +12,6 @@ return array(
 	'description' => 'GalePress - Dijital Yayıncılık Platformu',
 
 	'page_home' => 'Anasayfa',
-	'page_aboutus' => 'Hakkımızda',
 	'page_galepress' => 'GalePress',
 	'page_products' => 'Ürünler',
 	'page_advantages' => 'Avantajlar',
@@ -102,10 +101,11 @@ return array(
 	'latest_sharings' => 'Son Paylaşılanlar',
 	'please_wait' => 'Lütfen Bekleyin...',
 	'contact' => 'İLETİŞİM',
+	'block' => 'Block',
 
 	'address' => 'Adres:',
 	'address_istanbul' => 'Alemdağ Cad. No: 109,<br /> Üsküdar / İstanbul / Türkiye',
-	'address_sivas' => 'Yenişehir Mah. İşhan Köyü,Ötegeçe Mevkii 49/1 58140 Teknokent Sivas / Türkiye<br />',
+	'address_usa' => 'North Tustin, CA  Denver, CO <br />',
 	'phone' => 'Telefon:',
 	'fax' => 'Faks:',
 
@@ -117,29 +117,6 @@ return array(
 
 	'search' => 'Arama yapın...',
 	'copyright' => '© Copyright 2013 Detaysoft. Tüm hakları saklıdır.',
-
-	//ABOUTUS
-	'aboutus_desc' => 'Genel Tanıtım',
-	'aboutus_desc_detail' => 'Detaysoft, 13 yılı aşkın bir süredir, yazılım uygulamaları ve yenilikçi geliştirme konusunda, personel sayısı 200\'ü aşan ve kendi sektöründe lider kuruluşlara danışmanlık hizmeti vermektedir. Kurulduğu 1999 yılından itibaren başarılı projeler üreten Detaysoft, zamanla sektörünün en deneyimli teknoloji firmaları arasına girdi. Ürettiği başarılı projeler, özgün çözümler ve uzun vadeli ortak çalışma anlayışı Detaysoft\'u tercih eden iş ortaklarının sayısını artırdı. Sektördeki bu karşılıklı güven sayesinde Detaysoft, önemli bir büyüme ivmesi yakaladı. 2007 yılında Dubai ofisini açan Detaysoft, 2008 yilinda Sivas ofisini kurdu. Detaysoft Sivas ofisinde, büyük şehirlerden sonra ilk defa Anadolu\'da büyük bir SAP danışman kadrosu oluşturdu. Türkiye\'deki en büyük SAP iş ortaklarından Detaysoft, 13 yılı aşkın bir süredir SAP\'nin tüm ürün ailesini kapsayan konularda, Mobil Uygulama Danışmanlığı alanları dâhil olmak üzere, Ar-Ge Projelerinde ürün geliştirmekte ve danışmanlık hizmetleri vermektedir.',
-	'aboutus_milestone' => 'KİLOMETRE TAŞLARI',
-	'aboutus_milestone1' => '20 Sektörde 200\'ün üzerinde müşteri referansı ve 400\'den fazla tamamlanmış proje',
-	'aboutus_milestone2' => 'SAP Gold Partner',
-	'aboutus_milestone3' => 'SAP PCOE Sertifikası Sahibi',
-	'aboutus_milestone4' => '2011 Best Performance Challenge Kapsamında En İyi Performans Ödülü Sahibi',
-	'aboutus_milestone5' => '4 farklı ofis lokasyonu : İstanbul, Sivas, Dubai, Elazığ',
-	'aboutus_milestone6' => 'Turquality® Destek Programı kapsamında, Bilişim alaninda 1.Grup Danışman Firma',
-	'aboutus_milestone7' => 'Tübitak tarafindan desteklenmiş Ar-Ge Projeleri',
-	'aboutus_milestone8' => 'Sybase mobil uygulama çözüm ortağı',
-	'aboutus_milestone9' => 'SuccessFactors çözüm ortağı',
-	'aboutus_milestone10' => 'Uluslararası SAP İş Ortakları Mükemmeliyet Ödü̈lleri 2013 -Pazarlama alanında ‘En İyi İş Ortağı’',
-	'aboutus_milestone11' => 'Türkiye Bilişim 500\'de Danışmanlık kategorisinde 6. sırada bulunuyor.',
-	'aboutus_locations' => 'LOKASYONLAR',
-	'aboutus_loc_istanbul' => 'İSTANBUL - MERKEZ',
-	'aboutus_loc_istanbul_adress' => 'Alemdağ Cad. No: 109, 34692 Üsküdar / İstanbul / Türkiye<br />',
-	'aboutus_loc_sivas' => 'SİVAS - OFİS',
-	'aboutus_loc_sivas_adress' => 'Yenişehir Mah. İşhan Köyü,Ötegeçe Mevkii 49/1 58140 Teknokent Sivas / Türkiye<br />',
-	'aboutus_loc_dubai' => 'DUBAI - OFİS FZCO',
-	'aboutus_loc_elazig' => 'ELAZIĞ - OFİS',
 
 	//WHAT IS GALEPRESS
 	'whatis' => 'Nedir?',

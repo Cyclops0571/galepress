@@ -73,20 +73,29 @@
                 <div id="map-canvas" style="height:500px">
                   <script>
                     var
-                      lat = 41.024272,
-                      lon = 29.083097,
+                      lat = 39.740242,
+                      lon = -104.991615,
                       infoText = [
                         '<div style="white-space:nowrap">',, 
                           '<h5>Detaysoft</h5>',
-                          'Alemdağ Cad. No: 109<br>',
-                          'Üsküdar / İstanbul / Türkiye<br>',
-                          '34692, Turkey',
+                          'North Tustin, CA <br>',
+                          'Call: +1-949-836-7342<br>',
+                          'United States of America (USA)',
+                        '</div>'
+                      ],
+                      infoText2 = [
+                        '<div style="white-space:nowrap">',, 
+                          '<h5>Detaysoft</h5>',
+                          'Denver, CO <br>',
+                          'Call: +1-973-462-6622<br>',
+                          'United States of America (USA)',
                         '</div>'
                       ],
                       mapOptions = {
                         scrollwheel: false,
                         markers: [
-                          { latitude: lat, longitude: lon, html: infoText.join('') }
+                          { latitude: lat, longitude: lon, html: infoText.join('') },
+                          { latitude: 33.763610, longitude: -117.791064, html: infoText2.join('') }
                         ],
                         icon: {
                           image: '/website/img/themes/royalblue/marker.png',

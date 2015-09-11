@@ -30,6 +30,7 @@ return array(
     'clients_send' => 'clients/send',
     'clients_delete' => 'clients/delete',
     'clients_register' => 'clients/register/(:num)',
+    'clients_update' => 'clients/update/(:num)/(:any)',
     'clients_register_save' => 'clients/register',
     'clients_registered' => 'clients/successfully-registered',
 
@@ -99,7 +100,6 @@ return array(
     'interactivity_upload2' => 'interactive-pdf/load2',
     'interactivity_loadpage' => 'interactive-pdf/loadpage',
 
-    'website_aboutus' => 'aboutus',
     'website_galepress' => 'whatisgalepress',
     'website_products' => 'products',
     'website_advantages' => 'benefits',

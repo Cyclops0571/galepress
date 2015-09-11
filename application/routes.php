@@ -63,7 +63,6 @@ $languages = Config::get('application.languages', array());
 foreach($languages as $currentLanguage) {
 	
 	// <editor-fold defaultstate="collapsed" desc="website">
-	Route::get(__('route.website_aboutus')->get($currentLanguage), array('as' => 'website_aboutus_get', 'uses' => 'website@aboutus'));
 	Route::get(__('route.website_galepress')->get($currentLanguage), array('as' => 'website_galepress_get', 'uses' => 'website@galepress'));
 	Route::get(__('route.website_products')->get($currentLanguage), array('as' => 'website_products_get', 'uses' => 'website@products'));
 	Route::get(__('route.website_advantages')->get($currentLanguage), array('as' => 'website_advantages_get', 'uses' => 'website@advantages'));
@@ -160,6 +159,7 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.clients_delete')->get($currentLanguage), array('as' => 'clients_delete', 'before' => 'auth' . $csrf, 'uses' => 'clients@delete'));
 	
 	Laravel\Routing\Route::get(__('route.clients_register')->get($currentLanguage), array('as' => 'clientsregister', 'uses' => 'clients@clientregister'));
+	Laravel\Routing\Route::get(__('route.clients_update')->get($currentLanguage), array('as' => 'clientsregister', 'uses' => 'clients@updateclient'));
 	Laravel\Routing\Route::post(__('route.clients_register_save')->get($currentLanguage), array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
 	
 	// </editor-fold>

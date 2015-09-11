@@ -18,9 +18,9 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function get_version($ServiceVersion, $applicationID) {
-	return WebService::render(function() use ($ServiceVersion, $applicationID) {
+	return webService::render(function() use ($ServiceVersion, $applicationID) {
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-		    $application = WebService::getCheckApplication($ServiceVersion, $applicationID);
+		    $application = webService::getCheckApplication($ServiceVersion, $applicationID);
 		    return Response::json(array(
 				'status' => 0,
 				'error' => "",
@@ -39,7 +39,7 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function get_detail($ServiceVersion, $applicationID) {
-	return WebService::render(function() use ($ServiceVersion, $applicationID) {
+	return webService::render(function() use ($ServiceVersion, $applicationID) {
 		    /*
 		      INFO: Force | guncellemeye zorlanip zorlanmayacagini selimin tablosundan sorgula!
 		      0: Zorlama
@@ -48,11 +48,11 @@ class Webservice_Applications_Controller extends Base_Controller {
 		      3: Sil ve zorla
 		     */
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-		    $application = WebService::getCheckApplication($ServiceVersion, $applicationID);
-		    $customer = WebService::getCheckCustomer($ServiceVersion, $application->CustomerID);
+		    $application = webService::getCheckApplication($ServiceVersion, $applicationID);
+		    $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
 
 		    //INFO:Save token method come from get_contents
-		    WebService::saveToken($ServiceVersion, $customer->CustomerID, $applicationID);
+		    webService::saveToken($ServiceVersion, $customer->CustomerID, $applicationID);
 
 		    return Response::json(array(
 				'status' => 0,
@@ -83,10 +83,10 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function get_categories($ServiceVersion, $applicationID) {
-	return WebService::render(function() use ($ServiceVersion, $applicationID) {
+	return webService::render(function() use ($ServiceVersion, $applicationID) {
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-		    WebService::getCheckApplication($ServiceVersion, $applicationID);
-		    $categories = WebService::getCheckApplicationCategories($ServiceVersion, $applicationID);
+		    webService::getCheckApplication($ServiceVersion, $applicationID);
+		    $categories = webService::getCheckApplicationCategories($ServiceVersion, $applicationID);
 		    return Response::json(array(
 				'status' => 0,
 				'error' => "",
@@ -103,10 +103,10 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function get_categoryDetail($ServiceVersion, $applicationID, $categoryID) {
-	return WebService::render(function() use ($ServiceVersion, $applicationID, $categoryID) {
+	return webService::render(function() use ($ServiceVersion, $applicationID, $categoryID) {
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-		    WebService::getCheckApplication($ServiceVersion, $applicationID);
-		    $category = WebService::getCheckApplicationCategoryDetail($ServiceVersion, $applicationID, $categoryID);
+		    webService::getCheckApplication($ServiceVersion, $applicationID);
+		    $category = webService::getCheckApplicationCategoryDetail($ServiceVersion, $applicationID, $categoryID);
 		    return Response::json(array(
 				'status' => 0,
 				'error' => "",
@@ -123,10 +123,10 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function get_contents($ServiceVersion, $applicationID) {
-	return WebService::render(function() use ($ServiceVersion, $applicationID) {
+	return webService::render(function() use ($ServiceVersion, $applicationID) {
 		    $isTest = Input::get('isTest', 0) ? TRUE : FALSE;
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-		    $application = WebService::getCheckApplication($ServiceVersion, $applicationID);
+		    $application = webService::getCheckApplication($ServiceVersion, $applicationID);
 
 		    switch ($application->ThemeForeground) {
 			case 2:
@@ -150,7 +150,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    $tabs[] = array("tabLogoUrl" => $baseUrl . "img/bg-drop.png", "tabUrl" => "http://www.google.com/");
 
 
-		    $contents = WebService::getCheckApplicationContents($ServiceVersion, $applicationID, $isTest);
+		    $contents = webService::getCheckApplicationContents($ServiceVersion, $applicationID, $isTest);
 
 		    return Response::json(array(
 				'status' => 0,
@@ -172,7 +172,7 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return type
      */
     public function post_authorized_application_list($ServiceVersion) {
-	return WebService::render(function() use ($ServiceVersion) {
+	return webService::render(function() use ($ServiceVersion) {
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
 		    $username = Input::get('username');
 		    $password = Input::get('password');
@@ -180,7 +180,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    $userFacebookID = Input::get('userFacebookID');
 		    $userFbEmail = Input::get('userFbEmail');
 		    $responseSet = array();
-		    $user = WebService::getCheckUser($ServiceVersion, $username, $password, $userFacebookID, $userFbEmail);
+		    $user = webService::getCheckUser($ServiceVersion, $username, $password, $userFacebookID, $userFbEmail);
 
 		    //We have a user now...
 		    if ($user->UserTypeID == eUserTypes::Customer) {
@@ -212,14 +212,14 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function post_login_application($ServiceVersion) {
-	return WebService::render(function() use ($ServiceVersion) {
+	return webService::render(function() use ($ServiceVersion) {
 		    $applicationID = Laravel\Input::get("applicationID");
 		    $username = Laravel\Input::get("username");
 		    $password = Laravel\Input::get("password");
 		    
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-		    WebService::getCheckApplication($ServiceVersion, $applicationID);
-		    $client = WebService::getCheckClient($ServiceVersion, $applicationID, $username, $password);
+		    webService::getCheckApplication($ServiceVersion, $applicationID);
+		    $client = webService::getCheckClient($ServiceVersion, $applicationID, $username, $password);
 
 		    if (!$client) {
 			return FALSE;

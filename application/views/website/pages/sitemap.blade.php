@@ -28,9 +28,6 @@
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/">{{__('website.page_home')}}</a>
 					</li>
 					<li>
-						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_aboutus')}}">{{__('website.page_aboutus')}}</a>
-					</li>
-					<li>
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_galepress')}}">{{__('website.page_galepress')}}</a>
 					</li>
 					<li>

@@ -118,14 +118,14 @@ class Common {
     }
 
     public static function CheckApplicationOwnership($applicationID) {
-	if((int)$applicationID == 0) {
+	if ((int) $applicationID == 0) {
 	    return FALSE;
 	}
 	$currentUser = Auth::User();
-	if($currentUser == NULL) {
+	if ($currentUser == NULL) {
 	    return FALSE;
 	}
-	
+
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    return true;
 	}
@@ -362,8 +362,7 @@ class Common {
 	}
     }
 
-    public static function download(
-    $RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
+    public static function download($RequestTypeID, $CustomerID, $ApplicationID, $ContentID, $ContentFileID, $ContentCoverImageFileID, $filepath, $filename) {
 	$file = path('public') . $filepath . '/' . $filename;
 
 	if (file_exists($file) && is_file($file)) {
@@ -631,23 +630,23 @@ class Common {
 		switch ($paymentAccount->WarningMailPhase) {
 		    case 1:
 			$msg = "Değerli Müşterimiz, \r\n\r\n"
-			    . "Bekleyen bir ödemeniz bulunmaktadır ve iki hafta içinde ödemenizi tamamlamanız gerekmektedir. "
-			    . "İlginiz için teşekkür eder, sizinle çalışmaktan mutluluk duymaktayız. \r\n\r\n"
-			    . "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
-			    . "İyi çalışmalar.";
+				. "Bekleyen bir ödemeniz bulunmaktadır ve iki hafta içinde ödemenizi tamamlamanız gerekmektedir. "
+				. "İlginiz için teşekkür eder, sizinle çalışmaktan mutluluk duymaktayız. \r\n\r\n"
+				. "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
+				. "İyi çalışmalar.";
 			break;
 		    case 2:
 			$msg = "Değerli Müşterimiz, \r\n\r\n"
-			    . "Borcunuzun son ödeme tarihi 7 gün sonradır, en kısa zamanda ödemenizi gerçekleştirmeniz gerekmektedir. "
-			    . "İlginiz için teşekkür eder, sizinle çalışmaktan mutluluk duymaktayız. \r\n\r\n"
-			    . "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
-			    . "İyi çalışmalar.";
+				. "Borcunuzun son ödeme tarihi 7 gün sonradır, en kısa zamanda ödemenizi gerçekleştirmeniz gerekmektedir. "
+				. "İlginiz için teşekkür eder, sizinle çalışmaktan mutluluk duymaktayız. \r\n\r\n"
+				. "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
+				. "İyi çalışmalar.";
 			break;
 		    case 3:
 			$msg = "Değerli Müşterimiz, \r\n\r\n"
-			    . "Borcunuzu 3 gün içinde ödemediğiniz takdirde uygulamanız bloke edilecektir. \r\n\r\n"
-			    . "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
-			    . "İyi çalışmalar.";
+				. "Borcunuzu 3 gün içinde ödemediğiniz takdirde uygulamanız bloke edilecektir. \r\n\r\n"
+				. "Eğer ödemenizi gerçekleştirdiyseniz bu maili dikkate almayabilirsiniz. \r\n\r\n"
+				. "İyi çalışmalar.";
 			break;
 		}
 
@@ -1107,10 +1106,10 @@ class Common {
 	}
 	return $postDataString;
     }
-    
+
     public static function localize($key, $replacements = array(), $language = null) {
 	$result = Laravel\Lang::line(Laravel\Request::$route->controller . 'Lang.' . $key, $replacements, $language);
-	if(empty($result)) {
+	if (empty($result)) {
 	    $result = $key;
 	}
 	return $result;

@@ -105,36 +105,50 @@
 
 
     <script type="text/javascript">
+    var SelectedLanguage = <?php echo json_encode(Session::get('language')); ?>;
     $(function(){
 
-        if("{{ Session::get('language') }}"=="tr"){
-
-            $('.dropdown.languageChange > a').attr('href','/tr');
-            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/trFlag.png');
+        if(SelectedLanguage === "de"){
+	    $('.dropdown.languageChange > a').attr('href','/de');
+            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/deFlag.png');
 
             $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
-
-
-        } else {
+	    
+	    $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/tr');
+            $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/trFlag.png');
+        } else if( SelectedLanguage === "en") {
 
             $('.dropdown.languageChange > a').attr('href','/en');
             $('.dropdown.languageChange > a img').attr('src','/website/img/flags/enFlag.png');
 
             $('.dropdown.languageChange ul li:first-child a').attr('href','/tr');
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
-        }
+	    
+	    $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
+            $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/deFlag.png');
+        } else {
+	    $('.dropdown.languageChange > a').attr('href','/tr');
+            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/trFlag.png');
+
+            $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
+            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
+	    
+            $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
+            $('.dropdown.languageChange ul li:nth-child(2)w a img').attr('src','/website/img/flags/deFlag.png');
+	}
 
         $('.dropdown.languageChange ul li').click(function(event){
             var target = $( event.target );
             if(target.is('a')){
                 $('.dropdown.languageChange > a img').attr('src',$(event.target).find('img').attr('src'));
-                if("{{ Session::get('language') }}"=="tr"){
-                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
-                }
-                else{
+                if(SelectedLanguage === "de"){
+                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/deFlag.png');
+                } else if(SelectedLanguage === "en" ) {
                     $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
-                }
+                } else {
+                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
+		}
             }
         });
 

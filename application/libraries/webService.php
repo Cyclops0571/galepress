@@ -1,6 +1,6 @@
 <?php
 
-class WebService {
+class webService {
 
     /**
      * If there is a exception then catches it and returns a valid Response else returns what the Closure returns
@@ -288,15 +288,12 @@ class WebService {
 		->where('Username', '=', $username)
 		->where('StatusID', '=', eStatus::Active)->first();
 	if (!$client) {
-	    echo "burasi1"; exit;
 	    throw eServiceError::getException(eServiceError::ClientNotFound);
 	} else if ($client->Password != $password) {
-	    echo "burasi2"; exit;
 	    $client->InvalidPasswordAttempts++;
 	    $client->save();
 	    throw eServiceError::getException(eServiceError::ClientIncorrectPassword);
 	} else if ($client->InvalidPasswordAttempts > 5 && (time() - strtotime($client->updated_at)) < 7200) {
-	    echo "burasi3"; exit;
 	    throw eServiceError::getException(eServiceError::ClientInvalidPasswordAttemptsLimit);
 	}
 

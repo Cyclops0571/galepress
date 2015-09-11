@@ -144,7 +144,6 @@ return array(
 	'clients_username' => 'User Name',
 	'clients_password' => 'Password',
 	'clients_password2' => 'Password (Repeat)',
-	'clients_password_does_not_match' => 'Password does not match the confirm password.',
 	'clients_password_new' => 'New Password',
 	'clients_password_retype_new' => 'New Password Re-type',
 	'clients_password_current' => 'Old Password',

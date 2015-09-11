@@ -20,8 +20,29 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	@include('js.language')
+        {{ HTML::script('js/jquery-2.1.0.min.js'); }}
+        {{ HTML::script('js/jquery-ui-1.10.4.custom.min.js'); }}
+	{{ HTML::script('js/bootstrap.min.js'); }}
+	{{ HTML::script('js/generic.js?v=' . APP_VER); }}
     </head>
     <body>
+	<style>
+	    /* statusbar */
+	    .statusbar{position: fixed; bottom: 0px; width: 100%; padding: 10px; background: rgba(0,0,0,0.70); z-index: 99;}
+	    .statusbar .statusbar-icon{float: left; margin-right: 10px; padding: 3px 0px;}
+            .statusbar .statusbar-icon [class^=icon]{font-size: 20px; line-height: 24px;}
+	    .statusbar .statusbar-text{font-size: 12px; font-weight: lighter; color: #FFF; float: left; padding-right: 30px; line-height: 30px;}
+	    .statusbar .statusbar-body{float: left; padding-right: 30px;}
+	    .statusbar .statusbar-close{position: absolute; right: 15px; top: 50%; margin-top: -8px; cursor: pointer; opacity: 0.2; filter: alpha(opacity=20);}
+            .statusbar .statusbar-close:hover{ opacity: 0.5; filter: alpha(opacity=50);}
+
+	    .statusbar.statusbar-info{background: rgba(47,132,177,0.70);} /* #2F84B1 */
+	    .statusbar.statusbar-danger{background: rgba(175,47,47,0.70);}/* #AF2F2F */
+	    .statusbar.statusbar-success{background: rgba(89,173,47,0.70);} /* #FFA91F */
+	    .statusbar.statusbar-warning{background: rgba(255,169,31,0.70);} /* #59AD2F */        
+	    /* eof statusbar */
+	</style>
 	<?php
 	$ClientID = 0;
 	$ApplicationID = 0;
@@ -59,39 +80,39 @@
 			<input type="text" name="Username" id="Username" class="form-control textbox required" value="<?php echo $Username; ?>" />
 		    </div>
 		</div>
-		<?php if($ClientID > 0): ?>
-		    <div class="form-row">
-			<div class="col-md-4"><?php echo __('common.clients_password_current'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
-			<div class="col-md-8">
-			    <input type="password" name="Password" id="Password" class="form-control textbox<?php echo $ClientID == 0 ? ' required' : ''; ?>" value="" />      
-			</div>
-		    </div>
-		    <div class="form-row">
-			<div class="col-md-4"><?php echo __('common.clients_password_new'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
-			<div class="col-md-8">
-			    <input type="password" name="Password" id="Password" class="form-control textbox<?php echo $ClientID == 0 ? ' required' : ''; ?>" value="" />      
-			</div>
-		    </div>
-		    <div class="form-row">
-			<div class="col-md-4"><?php echo __('common.clients_password_retype_new'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
-			<div class="col-md-8">
-			    <input type="password" name="Password" id="Password" class="form-control textbox<?php echo $ClientID == 0 ? ' required' : ''; ?>" value="" />      
-			</div>
-		    </div>
+		<?php if ($ClientID > 0): ?>
+    		<div class="form-row">
+    		    <div class="col-md-4"><?php echo __('common.clients_password_current'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
+    		    <div class="col-md-8">
+    			<input type="password" name="Password" id="Password" class="form-control textbox<?php echo $ClientID == 0 ? ' required' : ''; ?>" value="" />      
+    		    </div>
+    		</div>
+    		<div class="form-row">
+    		    <div class="col-md-4"><?php echo __('common.clients_password_new'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
+    		    <div class="col-md-8">
+    			<input type="password" name="Password" id="Password" class="form-control textbox<?php echo $ClientID == 0 ? ' required' : ''; ?>" value="" />      
+    		    </div>
+    		</div>
+    		<div class="form-row">
+    		    <div class="col-md-4"><?php echo __('common.clients_password_retype_new'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
+    		    <div class="col-md-8">
+    			<input type="password" name="Password" id="Password" class="form-control textbox<?php echo $ClientID == 0 ? ' required' : ''; ?>" value="" />      
+    		    </div>
+    		</div>
 		<?php else: ?>
-		    <div class="form-row">
-			<div class="col-md-4"><?php echo __('common.clients_password'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
+    		<div class="form-row">
+    		    <div class="col-md-4"><?php echo __('common.clients_password'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
 			<?php echo $errors->first('Password', '<p class="error">:message</p>'); ?>
-			<div class="col-md-8">
-			    <input type="password" name="Password" id="Password" class="form-control textbox" value="" />      
-			</div>
-		    </div>              
-		    <div class="form-row">
-			<div class="col-md-4"><?php echo __('common.clients_password2'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
-			<div class="col-md-8">
-			    <input type="password" name="Password2" id="Password2" class="form-control textbox" value="" />      
-			</div>
-		    </div>              
+    		    <div class="col-md-8">
+    			<input type="password" name="Password" id="Password" class="form-control textbox" value="" />      
+    		    </div>
+    		</div>              
+    		<div class="form-row">
+    		    <div class="col-md-4"><?php echo __('common.clients_password2'); ?><?php echo $ClientID == 0 ? ' <span class="error">*</span>' : ''; ?></div>
+    		    <div class="col-md-8">
+    			<input type="password" name="Password2" id="Password2" class="form-control textbox" value="" />      
+    		    </div>
+    		</div>              
 		<?php endif; ?>
 		<div class="form-row">
 		    <div class="col-md-4"><?php echo __('common.clients_firstname'); ?> <span class="error">*</span></div>
@@ -123,10 +144,18 @@
 		<?php echo Laravel\Form::close(); ?>
 	    </div>
 	</div>
-	<!-- Latest compiled and minified JavaScript -->
+	<script>
+	    $(function () {
+		if(typeof deneme !== "undefined" && typeof deneme.errmsg !== "undefined") {
+		    sNotification.failure(response.errmsg);
+//		    if(typeof response.errmsg !== "undefined") {
+//		    }
+		} else {
+		    console.log("zzzzzzz");
+		    
+		}
+	    });
 
-        {{ HTML::script('js/jquery-2.1.0.min.js'); }}
-        {{ HTML::script('js/jquery-ui-1.10.4.custom.min.js'); }}
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	</script>
     </body>
 </html>

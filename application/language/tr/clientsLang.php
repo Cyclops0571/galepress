@@ -9,6 +9,9 @@ return array(
     "username_must_be_unique" => "Kullanıcı ismi daha önce kullanılmış. ",
     "email_must_be_unique" => "Email daha önce kaydedilmiş. ",
     "user_not_found" => "Kayıtlı kullanıcı bulunamadı.",
+    "client_application_invalid" => "Kullanıcı kaydı ile Uygulama uyuşmuyor",
+    "invalid_password" => "Şifre Hatalı",
+    'password_does_not_match' => 'Şifre; Onay Şifresiyle uyuşmuyor.',
     
 );
 

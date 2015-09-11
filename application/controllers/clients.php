@@ -200,6 +200,8 @@ class Clients_Controller extends Base_Controller {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
 	    }
 	    $s = new Client();
+	    $s->Token = $username . "_" . md5(uniqid());
+	    
 	} else {
 	    $s = Client::find($clientID);
 	    if (!$s) {
@@ -218,10 +220,6 @@ class Clients_Controller extends Base_Controller {
 	$v = Validator::make(Input::all(), $rules);
 	if (!$v->passes()) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
-	}
-
-	if ($s->Username != $username) {
-	    $s->Token = $s->Username . "_" . md5(uniqid());
 	}
 
 	$s->Username = $username;
@@ -394,6 +392,9 @@ class Clients_Controller extends Base_Controller {
 
     /**
      * Mobil application interface for register
+     * urlEN: clients/register/ApplicationID
+     * urlDU: klient/registrieren/ApplicationID
+     * urlTR: mobil-kullanici/kayitol/ApplicationID
      * @param type $applicationID
      * @return HTML
      */
@@ -407,11 +408,11 @@ class Clients_Controller extends Base_Controller {
     /**
      * Mobil application interface for user profile update
      */
-    public function get_updateclient($clientToken) {
+    public function get_updateclient($applicationID, $clientToken) {
 	/* @var $client Client */
 	$client = Client::where('Token', '=', $clientToken)->first();
 	if (!$client) {
-	    //redirect to register page 571571
+	    return Redirect::to(str_replace("(:num)", $applicationID, __("route.clients_register")));
 	}
 	$data = array();
 	$data["application"] = $client->Application();
@@ -427,9 +428,12 @@ class Clients_Controller extends Base_Controller {
 	$email = Input::get('Email');
 	$password = Input::get('Password');
 	$password2 = Input::get('Password2');
+	$newPassword = Laravel\Input::get('NewPassword');
+	$newPassword2 = Laravel\Input::get('NewPassword2');
 
 	$rules = array(
 	    'Username' => 'required|min:2',
+	    'Password' => 'required|min:2',
 	    'FirstName' => 'required',
 	    'LastName' => 'required',
 	    'Email' => 'required|email'
@@ -441,49 +445,55 @@ class Clients_Controller extends Base_Controller {
 
 	$v = Laravel\Validator::make(Input::all(), $rules);
 	if (!$v->passes()) {
-	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+	    return ajaxResponse::error(__('common.detailpage_validation'));
 	}
 
 	if ($clientID == 0) {
 	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
 	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
 	    if ($clientSameUsername) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+		return ajaxResponse::error(Common::localize("username_must_be_unique"));
 	    } else if ($clientSameEmail) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+		return ajaxResponse::error(Common::localize("email_must_be_unique"));
 	    }
-	    $client = new Client();
-
+	    
 
 	    if ($password != $password2) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.clients_password_does_not_match'));
+		return ajaxResponse::error(Common::localize("password_does_not_match"));
 	    }
-	    if (strlen(trim($password)) > 0) {
-		$client->Password = md5($password);
-	    } else {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.clients_password_does_not_match'));
-	    }
+	    
+	    $client->Password = md5($password);
+	    $client = new Client();
+	    $client->Token = $username . "_" . md5(uniqid());
+	    $client->StatusID = eStatus::Active;
+	    $client->CreatorUserID = 0;
 	} else {
+	    //current password is a must !!!
 	    $client = Client::find($clientID);
 	    if (!$client) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("user_not_found"));
+		return ajaxResponse::error(Common::localize("user_not_found"));
+	    } else if ($client->ApplicationID != $applicationID) {
+		return ajaxResponse::error(Common::localize("client_application_invalid"));
 	    }
+	    
 	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $client->ClientID)->first();
 	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $client->ClientID)->first();
 	    if ($clientSameUsername) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
+		return ajaxResponse::error(Common::localize("username_must_be_unique"));
 	    } else if ($clientSameEmail) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
+		return ajaxResponse::error(Common::localize("email_must_be_unique"));
 	    }
-	}
-
-
-	if ($client->Username != $username) {
-	    $client->Token = $client->Username . "_" . md5(uniqid());
-	}
-	
-	if (strlen(trim($password)) > 0) {
-	    $client->Password = md5($password);
+	    
+	    if($client->Password != md5($password)) {
+		return ajaxResponse::error(Common::localize("invalid_password"));
+	    }
+	    
+	    if(!empty($newPassword) || !empty($newPassword2)) {
+		if($newPassword != $newPassword2) {
+		    return ajaxResponse::error(Common::localize("password_does_not_match"));
+		}
+		$client->Password = md5($newPassword);
+	    }
 	}
 
 	$client->Username = $username;
@@ -491,29 +501,29 @@ class Clients_Controller extends Base_Controller {
 	$client->ApplicationID = $applicationID;
 	$client->Name = Input::get('FirstName');
 	$client->Surname = Input::get('LastName');
-	
-	if ($clientID == 0) {
-	    $client->StatusID = eStatus::Active;
-	    $client->CreatorUserID = 0;
-	}
-
 	$client->save();
-	return "success=" . base64_encode("true");
+	return ajaxResponse::success();
     }
 
     public function get_successfulclientregister() {
 	//ajax ile atilan request duzgun ise buraya donecegim.
+	$data = array();
+	return View::make(Laravel\Request::$route->controller . '.successfulclientregister', $data);
     }
 
     public function get_forgetpassword() {
-	
+	$data = array();
+	return View::make(Laravel\Request::$route->controller . '.forgetpassword', $data);
     }
 
     public function post_forgetpassword() {
+	return ajaxResponse::success();
 	
     }
 
     public function get_passwordsent() {
+	$data = array();
+	return View::make(Laravel\Request::$route->controller . '.passwordsent', $data);
 	
     }
 

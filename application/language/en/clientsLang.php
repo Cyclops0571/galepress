@@ -9,5 +9,9 @@ return array(
     "username_must_be_unique" => "Username already registered.",
     "email_must_be_unique" => "Email already registered.",
     "user_not_found" => "A registered user was not found.",
+    "client_application_invalid" => "Client and Application does not match",
+    "invalid_password" => "Invalid Password",
+    'password_does_not_match' => 'Password does not match the confirm password.',
+
 );
 

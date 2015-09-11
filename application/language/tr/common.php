@@ -145,7 +145,6 @@ return array(
 	'clients_password2' => 'Şifre (Tekrar)',
     	'clients_password_new' => 'Yeni Şifre',
 	'clients_password_retype_new' => 'Yeni Şifre Tekrar',
-	'clients_password_does_not_match' => 'Şifre; Onay Şifresiyle uyuşmuyor.',
 	'clients_password_current' => 'Eski Şifre',
 	'clients_password_tooltip' => 'Parola (Mobil kullanıcıyı ilk oluştururken mecburidir; sonraki seferlerde boş bırakırsanız kullanıcının şifresini değiştirmez. '
 					. 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
