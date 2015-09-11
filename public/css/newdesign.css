@@ -2,10 +2,10 @@
 @import "jquery-ui.min.css?v=6";
 @import "font-awesome.min.css?v=6";
 @import "select2.css?v=6";
-@import "stylesheet.css?v=9";
+@import "stylesheet.css?v=10";
 @import "backgrounds.css?v=6";
 @import "themes.css?v=6";
-@import "mystyles.css?v=9";
+@import "mystyles.css?v=10";
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {    
     #imgPreview{width:100px;}

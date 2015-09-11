@@ -386,11 +386,13 @@
 					    
     					    if (paymentAccount["attributes"]["kurumsal"] == 0) {
     						//bireysel
-    						$("#checkboxKurumsal").bootstrapToggle('on');
+    						$("#customerType").bootstrapToggle('on');
     					    } else {
-    						$("#checkboxKurumsal").bootstrapToggle('off');
+    						$("#customerType").bootstrapToggle('off');
+						
     					    }
 
+					    changeCustomerType();
     					    $("#email").val(paymentAccount["attributes"]["email"]);
     					    $("#phone").val(paymentAccount["attributes"]["phone"]);
     					    $("#customerTitle").val(paymentAccount["attributes"]["title"]);
@@ -444,11 +446,15 @@
 			    <div class="form-group">
 				<label for="customerType" class="control-label col-xs-3" style="padding-top: 16px;">Bireysel / Kurumsal</label>
 				<div class="col-xs-9">
-				    <input id='checkboxKurumsal' class="form-control required" type="checkbox" 
+				    <input class="form-control required" type="checkbox" 
 					   checked data-toggle="toggle" data-size="normal" 
 					   id="customerType" name="customerType" 
 					   data-onstyle="success" 
-					   data-offstyle="info" <?php echo $bireysel_kurumsal; ?> data-width="200">
+					   data-offstyle="info" 
+					   data-on="Bireysel" 
+					   data-off="Kurumsal" 
+					   data-width="200"
+					   >
 				</div>
 			    </div>
 			    <div class="form-group">
@@ -477,6 +483,18 @@
 				    <input class="form-control required" id="tc" name="tc" type="text" maxlength="11" tabindex="3" value="<?php echo $paymentAccount->tckn; ?>" placeholder="<?php echo $paymentAccount->tckn; ?>"/>
 				</div>
 			    </div>
+			    			    <div class="form-group hide">
+				<label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
+				<div class="col-xs-9">
+				    <input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="<?php echo $paymentAccount->vergi_dairesi; ?>" placeholder="Vergi Dairesi" required>
+				</div>
+			    </div>
+			    <div class="form-group hide">
+				<label for="taxNo" class="control-label col-xs-3">Vergi No</label>
+				<div class="col-xs-9">
+				    <input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="<?php echo $paymentAccount->vergi_no; ?>" placeholder="Vergi Numarası" required>
+				</div>
+			    </div>
 			    <div class="form-group">
 				<label for="country" class="control-label col-xs-3">Ülke</label>
 				<div class="col-xs-9">
@@ -498,18 +516,6 @@
 				<label for="address" class="control-label col-xs-3">Adres</label>
 				<div class="col-xs-9">
 				    <textarea id="address" class="form-control required" maxlength="100" name="address" size="20" tabindex="6" placeholder="Adres Bilgisi, Sok. No, Konut No" required rows="4"><?php echo $paymentAccount->address; ?></textarea>
-				</div>
-			    </div>
-			    <div class="form-group hide">
-				<label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
-				<div class="col-xs-9">
-				    <input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice" size="20" type="text" tabindex="7" value="<?php echo $paymentAccount->vergi_dairesi; ?>" placeholder="Vergi Dairesi" required>
-				</div>
-			    </div>
-			    <div class="form-group hide">
-				<label for="taxNo" class="control-label col-xs-3">Vergi No</label>
-				<div class="col-xs-9">
-				    <input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20" type="text" tabindex="8" value="<?php echo $paymentAccount->vergi_no; ?>" placeholder="Vergi Numarası" required>
 				</div>
 			    </div>
 			    <div class="form-group errorMsg hide" style="color:#CA0101; text-align:center; font-size:18px;">
@@ -551,22 +557,25 @@
 
 
 	<script type="text/javascript">
+	    var bootstrapInitialStatus = <?php echo json_encode($paymentAccount->kurumsal ? "off" : "on")?>;
+	    function changeCustomerType() {
+		if ($("#customerType").prop('checked')) {//bireysel
+		    $('#tc').closest('.form-group').removeClass('hide');
+		    $('#taxOffice').closest('.form-group').addClass('hide');
+		    $('#taxNo').closest('.form-group').addClass('hide');
+		}
+		else {//kurumsal
+		    $('#taxOffice').closest('.form-group').removeClass('hide');
+		    $('#taxNo').closest('.form-group').removeClass('hide');
+		    $('#tc').closest('.form-group').addClass('hide');
+		}
+	    }
+	    
 	    $(function () {
-
+		$("#customerType").bootstrapToggle(bootstrapInitialStatus); 
+		changeCustomerType();
 		$('#customerType').change(function () {
-		    $('#taxOffice').closest('.form-group').toggleClass('hide');
-		    $('#taxNo').closest('.form-group').toggleClass('hide');
-		    $('#tc').closest('.form-group').toggleClass('hide');
-		    if (!$(this).prop('checked')) {
-			$('#taxOffice').val("");
-			$('#taxNo').val("");
-			$('#tc').val("null");
-		    }
-		    else {
-			$('#taxOffice').val("null");
-			$('#taxNo').val("null");
-			$('#tc').val("");
-		    }
+		    changeCustomerType();
 		});
 
 		$("#tc").keyup(function () {
