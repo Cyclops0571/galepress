@@ -12,6 +12,9 @@ return array(
     "client_application_invalid" => "Kullanıcı kaydı ile Uygulama uyuşmuyor",
     "invalid_password" => "Şifre Hatalı",
     'password_does_not_match' => 'Şifre; Onay Şifresiyle uyuşmuyor.',
+    'forgot_password' => 'Şifremi Unuttum',
+    'personol_info' => 'Kişisel Bilgiler',
+    'reset_password' => 'Şifre Resetleme Sayfası',
     
 );
 

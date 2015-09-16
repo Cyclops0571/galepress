@@ -159,9 +159,12 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.clients_delete')->get($currentLanguage), array('as' => 'clients_delete', 'before' => 'auth' . $csrf, 'uses' => 'clients@delete'));
 	
 	Laravel\Routing\Route::get(__('route.clients_register')->get($currentLanguage), array('as' => 'clientsregister', 'uses' => 'clients@clientregister'));
-	Laravel\Routing\Route::get(__('route.clients_update')->get($currentLanguage), array('as' => 'clientsregister', 'uses' => 'clients@updateclient'));
-	Laravel\Routing\Route::post(__('route.clients_register_save')->get($currentLanguage), array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
-	
+	Laravel\Routing\Route::get(__('route.clients_update')->get($currentLanguage), array('as' => 'saveclientsregister', 'uses' => 'clients@updateclient'));
+	Laravel\Routing\Route::get(__('route.clients_registered')->get($currentLanguage), array('as' => 'clientsregistered', 'uses' => 'clients@registered'));
+	Laravel\Routing\Route::get(__('route.clients_forgotpassword')->get($currentLanguage), array('as' => 'clientsregistered', 'uses' => 'clients@forgotpassword'));
+	Laravel\Routing\Route::get(__('route.clients_resetpw')->get($currentLanguage), array('as' => 'clientsresetpw', 'uses' => 'clients@resetpw'));
+	Laravel\Routing\Route::get(__('route.clients_pw_reseted')->get($currentLanguage), array('as' => 'pwreseted', 'uses' => 'clients@passwordreseted'));
+
 	// </editor-fold>
 		
 	// <editor-fold defaultstate="collapsed" desc="Customers">
@@ -501,7 +504,9 @@ foreach($languages as $currentLanguage) {
 }
 
 
-
+Laravel\Routing\Route::post('clients/clientregister', array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
+Laravel\Routing\Route::post('clients/forgotpassword', array('as' => 'clientsregistered', 'uses' => 'clients@forgotpassword'));
+Laravel\Routing\Route::post("clients/resetpw", array('as' => 'clientsresetpw', 'uses' => 'clients@resetpw'));
 
 Route::post('applications/userApplicationSettings', array('as' => 'save_applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
 Route::get("/template/(:num)", array('as' => 'template_index', 'before'=>'auth', 'uses'=>'template@index'));

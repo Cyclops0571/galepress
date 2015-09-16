@@ -1108,7 +1108,7 @@ class Common {
     }
 
     public static function localize($key, $replacements = array(), $language = null) {
-	$result = Laravel\Lang::line(Laravel\Request::$route->controller . 'Lang.' . $key, $replacements, $language);
+	$result = Laravel\Lang::line(Laravel\Request::$route->controller . '.' . $key, $replacements, $language);
 	if (empty($result)) {
 	    $result = $key;
 	}

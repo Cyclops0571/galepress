@@ -57,6 +57,7 @@ class Test_Controller extends Base_Controller {
     }
 
     public function get_index() {
+	dd(Laravel\URL::to_route("clientsregistered"));
 	echo strtotime("2015-09-07 17:15:00") . "   ----------------   ";
 	echo time(); exit;
 	$res = openssl_pkey_new();

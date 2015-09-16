@@ -42,7 +42,9 @@
 		<li><a href="/{{ Session::get('language') }}/{{__('route.website_showcase')}}" title="{{__('website.menu_showcase')}}" id="menu_item_features-grid" data-ref="features-grid">{{__('website.menu_showcase')}}</a></li>
 
 		<li><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}" title="{{__('website.contact')}}" id="menu_item_Contactus" data-ref="#">{{__('website.contact')}}</a></li>
+		<?php if(Session::get('language') != 'en'): ?>
 		<li><a href="/{{__('route.website_blog')}}" title="Blog" id="menu_item_Blog" data-ref="#">{{__('website.block')}}</a></li>
+		<?php endif; ?>
 	    </ul>
         </div>
     </div>

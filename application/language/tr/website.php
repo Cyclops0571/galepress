@@ -101,7 +101,7 @@ return array(
 	'latest_sharings' => 'Son Paylaşılanlar',
 	'please_wait' => 'Lütfen Bekleyin...',
 	'contact' => 'İLETİŞİM',
-	'block' => 'Block',
+	'block' => 'BLOG',
 
 	'address' => 'Adres:',
 	'address_istanbul' => 'Alemdağ Cad. No: 109,<br /> Üsküdar / İstanbul / Türkiye',

@@ -2,6 +2,9 @@
 
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     $output = NULL;
+    if(!isset($_SERVER["REMOTE_ADDR"])) {
+	return $output;
+    }
     if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
 	$ip = $_SERVER["REMOTE_ADDR"];
 	if ($deep_detect) {

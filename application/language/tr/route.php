@@ -33,6 +33,9 @@ return array(
     'clients_update' => 'mobil-kullanici/guncelle/(:num)/(:any)',
     'clients_register_save' => 'mobil-kullanici/kayitol',
     'clients_registered' => 'mobil-kullanici/kayit-basarili',
+    'clients_forgotpassword' => 'mobil-kullanici/sifremi-unuttum/(:num)',
+    'clients_resetpw' => 'mobil-kullanici/parolami-sifirla',
+    'clients_pw_reseted' => 'mobil-kullanici/sifre-yenilendi',
 
     'customers' => 'musteriler',
     'customers_new' => 'musteriler/yeni',

@@ -12,6 +12,8 @@
  * @property int $PaidUntil Description
  * @property int $LastLoginDate Description
  * @property int $InvalidPasswordAttempts Description
+ * @property int $PWRecoveryCode Description
+ * @property int $PWRecoveryDate Description
  * @property int $StatusID Description
  * @property int $CreatorUserID Description
  * @property int $created_at Description

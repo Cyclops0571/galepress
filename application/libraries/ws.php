@@ -44,7 +44,7 @@ class Ws {
 	if (!$application) {
 	    throw eServiceError::getException(eServiceError::ApplicationNotFound);
 	}
-	if (!($application->ExpirationDate >= date("Y-m-d H:i:s") && (int) $application->Blocked == 0 && (int) $application->Status == 1)) {
+	if (!($application->ExpirationDate >= date("Y-m-d H:i:s") && (int) $application->Blocked == 0 && (int) $application->Status == eStatus::Active)) {
 	    throw eServiceError::getException(eServiceError::PassiveApplication);
 	}
 	return $application;

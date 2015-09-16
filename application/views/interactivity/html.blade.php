@@ -27,12 +27,8 @@
 <!--[if lt IE 9]>
 <link rel="stylesheet" href="/css/ie.css" type="text/css">
 <![endif]-->
-        
-<!--[if IE 7]>
-<link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
-<![endif]-->
 
-<!--[if lt IE 7]>
+<!--[if lt IE 8]>
 <p class="chromeframe">Çok eski bir tarayıcı kullanıyorsunuz (IE6). Daha iyi bir deneyim için<a href="http://browsehappy.com/">tarayıcınızı güncelleyin </a> veya <a href="http://www.google.com/chromeframe/?redirect=true">Google Chrome yükleyin</a></p>
 <![endif]-->
 

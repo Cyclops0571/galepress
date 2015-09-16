@@ -120,8 +120,8 @@ class Common_Controller extends Base_Controller {
 		$msg = __('common.login_email_message', array(
 		    'firstname' => $user->FirstName,
 		    'lastname' => $user->LastName,
-		    'url' => Config::get('custom.url') . Config::get('application.language') . '/' . __('route.resetmypassword') . '?email=' . $user->Email . '&code=' . $pass
-			)
+		    'url' => Config::get('custom.url') . "/" . Config::get('application.language') . '/' . __('route.resetmypassword') . '?email=' . $user->Email . '&code=' . $pass
+		    )
 		);
 
 		Common::sendEmail($user->Email, $user->FirstName . ' ' . $user->LastName, $subject, $msg);

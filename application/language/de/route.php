@@ -32,6 +32,9 @@ return array(
     'clients_register' => 'klient/registrieren/(:num)',
     'clients_register_save' => 'klient/registrieren',
     'clients_registered' => 'klient/erfolgreich-registriert',
+    'clients_forgotpassword' => 'klient/passwort-vergessen/(:num)',
+    'clients_resetpw' => 'klient/passwort-zurucksetzen',
+    'clients_pw_reseted' => 'klient/passwort-zuruckgesetzt',
 
     'customers' => 'kunden',
     'customers_new' => 'kunden/neu',

@@ -41,7 +41,7 @@ return array(
 	),
 	"confirmed"      => ":attribute onayı eşleşmiyor.",
 	"different"      => ":attribute ile :other birbirinden farklı olmalıdır.",
-	"email"          => ":attribute biçimi geçersiz.",
+	"email"          => ":attribute formatı geçersiz.",
 	"exists"         => "Seçili :attribute geçersiz.",
 	"image"          => ":attribute resim dosyası olmalıdır.",
 	"in"             => "selected :attribute geçersiz.",

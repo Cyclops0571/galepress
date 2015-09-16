@@ -139,9 +139,8 @@ class PaymentMail_Task {
 		try {
 		    Bundle::start('messages');
 		    Message::send(function($m) use($subject, $msg, $accountExcelFile, $transactionExcelFile) {
-//			$m->from('serdar.saygili@detaysoft.com', 'Galepress System Admin');
-                        $m->to('srdsaygili@gmail.com', 'guler.nesil@detaysoft.com', 'enes.taskiran@detaysoft.com');
-			$m->to(array('srdsaygili@gmail.com', 'serdar.saygili@detaysoft.com'));
+			$m->from('serdar.saygili@detaysoft.com', 'Galepress System Admin');
+                        $m->to('srdsaygili@gmail.com', 'guler.nesil@detaysoft.com');
 			$m->html("true");
 			$m->subject('Galepress Ödeme Bilgilendirme Maili');
 			$m->body("Merhaba; <br/>"

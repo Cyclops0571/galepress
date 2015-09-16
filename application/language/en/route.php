@@ -33,7 +33,10 @@ return array(
     'clients_update' => 'clients/update/(:num)/(:any)',
     'clients_register_save' => 'clients/register',
     'clients_registered' => 'clients/successfully-registered',
-
+    'clients_forgotpassword' => 'clients/forgot-password/(:num)',
+    'clients_resetpw' => 'clients/reset-my-password',
+    'clients_pw_reseted' => 'clients/password-reseted',
+    
     'customers' => 'customers',
     'customers_new' => 'customers/new',
     'customers_show' => 'customers/(:num)',

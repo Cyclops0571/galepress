@@ -33,7 +33,13 @@ class Clients_Controller extends Base_Controller {
     }
 
     public function get_index() {
-	//throw new Exception("error da errrorr");
+	$rules = array(
+	    'applicationID' => 'required',
+	);
+	if(!Laravel\Validator::make(\Laravel\Input::all(), $rules)->passes()) {
+	    \Laravel\Redirect::to(__('route.home')); //571571
+	}
+	
 	$applicationID = (int) Input::get('applicationID', 0);
 
 	/* @var $currentUser User  */
@@ -44,7 +50,7 @@ class Clients_Controller extends Base_Controller {
 	    $applications = array();
 	    $application = Application::find($applicationID);
 	    if ($application->CustomerID != $currentUser->CustomerID) {
-		\Laravel\Redirect::to(__('route.home'));
+		\Laravel\Redirect::to(__('route.home')); //571571
 	    }
 	    $applications[] = $application;
 	} else {
@@ -181,13 +187,12 @@ class Clients_Controller extends Base_Controller {
 	$username = trim(Input::get('Username'));
 	$applicationID = Input::get('ApplicationID');
 	$email = Input::get('Email;');
-	
+
 	$rules = array(
 	    'Username' => 'required|min:2',
 	    'FirstName' => 'required',
 	    'LastName' => 'required',
 	    'Email' => 'required|email',
-	    
 	);
 
 	if ($clientID == 0) {
@@ -201,7 +206,6 @@ class Clients_Controller extends Base_Controller {
 	    }
 	    $s = new Client();
 	    $s->Token = $username . "_" . md5(uniqid());
-	    
 	} else {
 	    $s = Client::find($clientID);
 	    if (!$s) {
@@ -216,7 +220,7 @@ class Clients_Controller extends Base_Controller {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
 	    }
 	}
-	
+
 	$v = Validator::make(Input::all(), $rules);
 	if (!$v->passes()) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
@@ -246,41 +250,9 @@ class Clients_Controller extends Base_Controller {
     }
 
     /**
-     * Send new password to user who forgets it
-     * @return type
+     * Insert New Clients From Excel
+     * @return HTML
      */
-    public function post_send() {
-	return "post_send";
-	$currentUser = Auth::User();
-
-	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
-	    $id = (int) Input::get($this->pk, '0');
-
-	    $s = User::find($id);
-	    if ($s) {
-		$pass = Common::generatePassword();
-
-		$s->Password = Hash::make($pass);
-		$s->ProcessUserID = $currentUser->UserID;
-		$s->ProcessDate = new DateTime();
-		$s->ProcessTypeID = eProcessTypes::Update;
-		$s->save();
-
-		$subject = __('common.login_resetpassword_email_subject');
-		$msg = __('common.login_resetpassword_email_message', array(
-		    'firstname' => $s->FirstName,
-		    'lastname' => $s->LastName,
-		    'pass' => $pass
-			)
-		);
-
-		Common::sendEmail($s->Email, $s->FirstName . ' ' . $s->LastName, $subject, $msg);
-	    }
-	    return "success=" . base64_encode("true");
-	}
-	return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
-    }
-
     public function post_excelupload() {
 	$responseMsg = "";
 	$status = "Failed";
@@ -427,20 +399,20 @@ class Clients_Controller extends Base_Controller {
 	$applicationID = Input::get('ApplicationID');
 	$email = Input::get('Email');
 	$password = Input::get('Password');
-	$password2 = Input::get('Password2');
 	$newPassword = Laravel\Input::get('NewPassword');
 	$newPassword2 = Laravel\Input::get('NewPassword2');
 
 	$rules = array(
+	    'ApplicationID' => 'required',
 	    'Username' => 'required|min:2',
 	    'Password' => 'required|min:2',
 	    'FirstName' => 'required',
 	    'LastName' => 'required',
 	    'Email' => 'required|email'
 	);
-	if($clientID == 0) {
-	    $rules['Password'] = 'required|min:2';
-	    $rules['Password2'] = 'required|min:2';
+	if ($clientID == 0) {
+	    $rules['Password'] = 'required|min:2|max:12';
+	    $rules['Password2'] = 'required|min:2|max:12|same:Password';
 	}
 
 	$v = Laravel\Validator::make(Input::all(), $rules);
@@ -456,14 +428,9 @@ class Clients_Controller extends Base_Controller {
 	    } else if ($clientSameEmail) {
 		return ajaxResponse::error(Common::localize("email_must_be_unique"));
 	    }
-	    
 
-	    if ($password != $password2) {
-		return ajaxResponse::error(Common::localize("password_does_not_match"));
-	    }
-	    
-	    $client->Password = md5($password);
 	    $client = new Client();
+	    $client->Password = md5($password);
 	    $client->Token = $username . "_" . md5(uniqid());
 	    $client->StatusID = eStatus::Active;
 	    $client->CreatorUserID = 0;
@@ -475,7 +442,7 @@ class Clients_Controller extends Base_Controller {
 	    } else if ($client->ApplicationID != $applicationID) {
 		return ajaxResponse::error(Common::localize("client_application_invalid"));
 	    }
-	    
+
 	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $client->ClientID)->first();
 	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $client->ClientID)->first();
 	    if ($clientSameUsername) {
@@ -483,13 +450,13 @@ class Clients_Controller extends Base_Controller {
 	    } else if ($clientSameEmail) {
 		return ajaxResponse::error(Common::localize("email_must_be_unique"));
 	    }
-	    
-	    if($client->Password != md5($password)) {
+
+	    if ($client->Password != md5($password)) {
 		return ajaxResponse::error(Common::localize("invalid_password"));
 	    }
-	    
-	    if(!empty($newPassword) || !empty($newPassword2)) {
-		if($newPassword != $newPassword2) {
+
+	    if (!empty($newPassword) || !empty($newPassword2)) {
+		if ($newPassword != $newPassword2) {
 		    return ajaxResponse::error(Common::localize("password_does_not_match"));
 		}
 		$client->Password = md5($newPassword);
@@ -502,29 +469,144 @@ class Clients_Controller extends Base_Controller {
 	$client->Name = Input::get('FirstName');
 	$client->Surname = Input::get('LastName');
 	$client->save();
-	return ajaxResponse::success();
+	Session::get('language');
+	return ajaxResponse::success(Laravel\URL::to_route("clientsregistered") . "?usertoken=" . $client->Token);
     }
 
-    public function get_successfulclientregister() {
+    /**
+     * Show successfull register message
+     * @return type
+     */
+    public function get_registered() {
 	//ajax ile atilan request duzgun ise buraya donecegim.
 	$data = array();
-	return View::make(Laravel\Request::$route->controller . '.successfulclientregister', $data);
+	return View::make(Laravel\Request::$route->controller . '.registered', $data);
     }
 
-    public function get_forgetpassword() {
+    public function get_forgotpassword($applicationID) {
+	$application = Application::find($applicationID);
 	$data = array();
-	return View::make(Laravel\Request::$route->controller . '.forgetpassword', $data);
+	$data["application"] = $application;
+	return View::make(Laravel\Request::$route->controller . "." . Laravel\Request::$route->controller_action, $data);
     }
 
-    public function post_forgetpassword() {
-	return ajaxResponse::success();
+    public function post_forgotpassword() {
+	$rules = array(
+	    'Email' => 'required|email',
+	    'ApplicationID' => 'required',
+	);
+
+	$v = Laravel\Validator::make(Input::all(), $rules);
+	if ($v->invalid()) {
+	    $errorMsg = $v->errors->first();
+	    if(empty($errorMsg)) {
+		$errorMsg = __('common.detailpage_validation');
+	    }
+	    return ajaxResponse::error($errorMsg);
+	}
+	$email = Laravel\Input::get("Email");
+	$applicationID = Laravel\Input::get("ApplicationID");
+	/* @var $client Client */
+	$client = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
+	if (!$client) {
+	    return ajaxResponse::error(Common::localize("user_not_found"));
+	}
+
+	$client->PWRecoveryCode = Common::generatePassword();
+	$client->PWRecoveryDate = new DateTime();
+	$client->save();
+
+	$subject = __('common.login_email_subject');
+	$msg = __('common.login_email_message', array(
+	    'firstname' => $client->Name,
+	    'lastname' => $client->Surname,
+	    'url' => Laravel\URL::to_route("clientsresetpw") . "?ApplicationID=" . $applicationID . "&email=" . $client->Email . "&code=" . $client->PWRecoveryCode
+		)
+	);
+
+	Common::sendEmail($client->Email, $client->Name . ' ' . $client->Surname, $subject, $msg);
+	return ajaxResponse::success(__('common.login_emailsent'));
+    }
+
+    /**
+     * Mobil application interface for renewing user password 
+     * @return HTML
+     */
+    public function get_resetpw() {
+	$errorMsg = "";
+	$rules = array(
+	    'ApplicationID' => 'required',
+	    'email' => 'required|email',
+	    'code' => 'required|min:2',
+	);
+	
+	$v = Laravel\Validator::make(Input::all(), $rules);
+	if ($v->invalid()) {
+	    $errorMsg = $v->errors->first();
+	    if(empty($errorMsg)) {
+		$errorMsg = __('common.login_ticketnotfound');
+	    }
+	}
+
+	$applicationID = Input::get("ApplicationID");
+	$email = Input::get("email");
+	$code = Input::get("code");
+	
+	$client = Client::where("ApplicationID", "=", $applicationID)
+		->where("Email", "=", $email)
+		->where("PwRecoveryCode", "=", $code)
+		->where("PwRecoveryDate", ">", DB::raw('ADDDATE(CURDATE(), INTERVAL -7 DAY)'))
+		->where("StatusID", "=", eStatus::Active)
+		->first();
+
+	if(!$client) {
+	    $errorMsg = __('common.login_ticketnotfound');
+	}
+	
+	$data = array();
+	$data["errorMsg"] = $errorMsg;
+	return View::make(Laravel\Request::$route->controller . "." . Laravel\Request::$route->controller_action, $data);
+    }
+
+    /**
+     * Saves new user password then redirect to successful token page
+     */
+    public function post_resetpw() {
+	$rules = array(
+	    'Email' => 'required|email',
+	    'Code' => 'required',
+	    'Password' => 'required|min:6|max:12',
+	    'Password2' => 'required|min:6|max:12|same:Password'
+	);
+	
+	$v = Validator::make(Input::all(), $rules);
+	if ($v->invalid()) {
+	    $errorMsg = $v->errors->first();
+	    if(empty($errorMsg)) {
+		$errorMsg = __('common.detailpage_validation');
+	    }
+	    return ajaxResponse::error($errorMsg);
+	}
+	
+	/* @var $client Client */
+	$client = $client = Client::where("ApplicationID", "=", Input::get('ApplicationID'))
+		->where("Email", "=", Input::get('Email'))
+		->where("PwRecoveryCode", "=", Input::get('Code'))
+		->where("PwRecoveryDate", ">", DB::raw('ADDDATE(CURDATE(), INTERVAL -7 DAY)'))
+		->where("StatusID", "=", eStatus::Active)
+		->first();
+	if(!$client) {
+	    return ajaxResponse::error(__('common.login_ticketnotfound'));
+	}
+	
+	$client->Password = md5(Input::get("Password"));
+	$client->save();
+	return ajaxResponse::success(Laravel\URL::to_route("pwreseted") . "?usertoken=" . $client->Token);
 	
     }
 
-    public function get_passwordsent() {
+    public function get_passwordreseted() {
 	$data = array();
-	return View::make(Laravel\Request::$route->controller . '.passwordsent', $data);
-	
+	return View::make(Laravel\Request::$route->controller . '.passwordreseted', $data);
     }
-
 }

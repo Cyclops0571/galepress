@@ -102,8 +102,10 @@ return array(
 	'detailpage_success' => 'Erfolgreich durchgeführt.',
 	'detailpage_fail' => 'Ein Fehler ist aufgetreten, versuchen Sie es bitte später noch einmal.',
 	'detailpage_validation' => 'Es gibt Pflichtfelder!',
+    	'detailpage_fill_this_arae' => 'Dieses Feld ist erforderlich',
 	'detailpage_unauthorized_attempt' => 'Yetkiniz olmayan bir islem yapmaya çalışıyorsunuz!',
 	'detailpage_incorrect_input' => 'Incorrect input submitted!',
+	'password_renewed_caption' => 'Passwort Reset Seite',
 	
 	'mydetail' => 'Meine Benutzerdaten',
 	'pushnotify_caption' => 'PUSH BENACHRICHTIGUNGEN',

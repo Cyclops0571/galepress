@@ -12,6 +12,8 @@ return array(
     "client_application_invalid" => "Client and Application does not match",
     "invalid_password" => "Invalid Password",
     'password_does_not_match' => 'Password does not match the confirm password.',
-
+    'forgot_password' => 'Forgot Password',
+    'personol_info' => 'Personal Informations',
+    'reset_password' => 'Password Reset Page',
 );
 

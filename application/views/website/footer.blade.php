@@ -58,12 +58,12 @@
 				<li><a href="<?php echo __("route.website_contact")?>"><i class="fa fa-map-marker fa-lg"></i><small>{{__('website.address_usa')}}</small></a></li>
 				<li><i class="fa fa-phone fa-lg"></i><small>+1-949-836-7342</small></li>
 				<li><i class="fa fa-fax fa-lg"></i><small>+1-973-462-6622</small></li>
-				<li><i class="fa fa-envelope fa-lg"></i><a href="mailto:info@galepress.com">info@galepress.com</a></small></li>
+				<li><i class="fa fa-envelope fa-lg"></i><a href="mailto:usa@galepress.com">usa@galepress.com</a></small></li>
 			    </ul>
 			</div>
 		    </div>
 
-		    <div class="col-md-4 col-md-offset-1">
+		    <div class="col-md-5">
 			<div class="widget">
 			    <ul class="widget-address sep-top-xs">
 				<li><a href="<?php echo __("route.website_contact")?>"><i class="fa fa-map-marker fa-lg"></i><small>{{__('website.address_istanbul')}}</small></a></li>

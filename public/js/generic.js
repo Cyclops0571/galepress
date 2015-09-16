@@ -1,4 +1,4 @@
-/* global notification, route, sNotifications */
+/* global notification, route, sNotifications, currentLanguage */
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // NOTIFICATION
@@ -12,7 +12,6 @@ var sNotification = new function () {
     $(function () {
 	_self.element = $("#myNotification");
 	if (typeof (notification) === 'undefined') {
-	    console.log(typeof (notification));
 	    notification = {
 		'validation': 'There are areas that need to be filled!',
 		'loading': 'Loading...',
@@ -295,12 +294,27 @@ var sAjax = new function () {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // FORM
-var cForm = new function () {
+var sForm = new function () {
+    this.bindEnterKey = function(event, func) {
+	var keyCode = null;
+	if (event.which) {
+	    keyCode = event.which;
+	} else if (event.keyCode) {
+	    keyCode = event.keyCode;
+	}
+	if (13 == keyCode) {
+	    func();
+	    return false;
+	}
+	return true;
+    };
+    
     this.validate = function (formObj) {
 	var ret = true;
 	formObj.each(function () {
 	    $("div.error", $(this)).removeClass("error");
 	    $(".required", $(this)).each(function () {
+		console.log($(this).attr('id'));
 		if (!$(this).val()) {
 		    ret = false;
 		    $(this).prev().addClass("error");
@@ -377,14 +391,15 @@ var modalform = new function () {
 
 // COMMON
 var sCommon = new function () {
-    this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
-	sAjax.doAsyncRequest(t, u, d, funcSuccess, funcError, true);
-    };
 
-    this.save = function (objectName, fSuccess, formID) {
+    this.save = function (url, fSuccess, formID) {
 	if (typeof fSuccess !== 'function') {
-	    fSuccess = function (ret) {
-		sNotification.success();
+	    fSuccess = function (response) {
+		if(typeof response !== 'undefined' && typeof response.succesMsg !== 'undefined') {
+		    sNotification.success(response.succesMsg);
+		} else {
+		    sNotification.success();
+		}
 	    };
 	}
 
@@ -395,14 +410,13 @@ var sCommon = new function () {
 	} else {
 	    frm = $("form:first");
 	}
-	var validate = cForm.validate(frm);
+	var validate = sForm.validate(frm);
 	if (validate) {
 	    sNotification.loader();
 
-	    var u = '/' + $('#currentlanguage').val() + '/' + route[objectName + "_save"];
-	    var d = cForm.serialize(frm);
+	    var d = sForm.serialize(frm);
 	    var async = true;
-	    sAjax.request(u, d, async, fSuccess);
+	    sAjax.request(url, d, async, fSuccess);
 	} else {
 	    sNotification.validation();
 	}
@@ -420,11 +434,11 @@ var sCommon = new function () {
 
 	var frm = $("form:first");
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_delete"];
-	var d = cForm.serialize(frm);
+	var u = '/' + currentLanguage + '/' + deleteRoute;
+	var d = sForm.serialize(frm);
 	sCommon.doAsyncRequest(t, u, d, function (ret) {
 	    sNotifications.success();
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param];
+	    document.location.href = '/' + currentLanguage + '/' + route[param];
 	});
     };
 
@@ -445,10 +459,3 @@ var sCommon = new function () {
 	});
     };
 };
-
-var sClientRegister = new function () {
-    this.objectName = "clients";
-    
-};
-
-sClientRegister.prototype = sCommon;

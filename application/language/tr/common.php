@@ -101,8 +101,10 @@ return array(
 	'detailpage_success' => 'İşlem başarıyla yapıldı.',
 	'detailpage_fail' => 'İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz.',
 	'detailpage_validation' => 'Doldurulması gereken alanlar var!',
+	'detailpage_fill_this_arae' => 'Lütfen bu alanı doldurunuz',
 	'detailpage_unauthorized_attempt' => 'Yetkiniz olmayan bir islem yapmaya çalışıyorsunuz!',
 	'detailpage_incorrect_input' => 'Doldurulması gereken alanlar var!',
+	'password_renewed_caption' => 'Parola Yenileme Sayfası',
 	
 	'mydetail' => 'Kullanıcı Bilgilerim',
 	'pushnotify_caption' => 'BİLDİRİM GÖNDER',
