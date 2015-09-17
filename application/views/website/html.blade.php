@@ -110,7 +110,7 @@
 
         if(SelectedLanguage === "de"){
 	    $('.dropdown.languageChange > a').attr('href','/de');
-            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/deFlag.png');
+            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/deFlag.png?1');
 
             $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
@@ -126,7 +126,7 @@
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
 	    
 	    $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
-            $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/deFlag.png');
+            $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/deFlag.png?1');
         } else {
 	    $('.dropdown.languageChange > a').attr('href','/tr');
             $('.dropdown.languageChange > a img').attr('src','/website/img/flags/trFlag.png');
@@ -135,7 +135,7 @@
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
 	    
             $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
-            $('.dropdown.languageChange ul li:nth-child(2)w a img').attr('src','/website/img/flags/deFlag.png');
+            $('.dropdown.languageChange ul li:nth-child(2)w a img').attr('src','/website/img/flags/deFlag.png?1');
 	}
 
         $('.dropdown.languageChange ul li').click(function(event){
@@ -143,7 +143,7 @@
             if(target.is('a')){
                 $('.dropdown.languageChange > a img').attr('src',$(event.target).find('img').attr('src'));
                 if(SelectedLanguage === "de"){
-                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/deFlag.png');
+                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/deFlag.png?1');
                 } else if(SelectedLanguage === "en" ) {
                     $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
                 } else {

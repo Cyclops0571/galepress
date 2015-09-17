@@ -107,7 +107,7 @@ class Common_Controller extends Base_Controller {
 
 	    if ($user) {
 		$pass = Common::generatePassword();
-
+		/* @var $s User */
 		$s = User::find($user->UserID);
 		$s->PWRecoveryCode = $pass;
 		$s->PWRecoveryDate = new DateTime();
@@ -120,6 +120,7 @@ class Common_Controller extends Base_Controller {
 		$msg = __('common.login_email_message', array(
 		    'firstname' => $user->FirstName,
 		    'lastname' => $user->LastName,
+		    'username' => $s->Username,
 		    'url' => Config::get('custom.url') . "/" . Config::get('application.language') . '/' . __('route.resetmypassword') . '?email=' . $user->Email . '&code=' . $pass
 		    )
 		);
@@ -495,7 +496,6 @@ class Common_Controller extends Base_Controller {
 		->first();
 
 	if (!$user) {
-
 	    $lastCustomerNo = DB::table('Customer')
 		    ->order_by('CustomerID', 'DESC')
 		    ->take(1)

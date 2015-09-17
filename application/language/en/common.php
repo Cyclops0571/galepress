@@ -19,6 +19,7 @@ return array(
 	'login_email_subject' => 'Galepress.com password resetting e-mail',
 	'login_email_message' => "".
 								"Esteemed :firstname :lastname, \n\n".
+								"Your Username is :username, \n\n" .
 								"Click under the link for reset your password. If you don't want it, please don't regard this e-mail.\n\n".
 								":url\n\n".
 								"Regards, \n".
@@ -26,6 +27,7 @@ return array(
 	'login_resetpassword_email_subject' => 'Galepress.com password resetting e-mail',
 	'login_resetpassword_email_message' => "".
 								"Esteemed :firstname :lastname, \n\n".
+								"Your Username is :username, \n\n" .
 								"Password is changed as :pass. \n\n".
 								"Regards, \n".
 								"Galepress",

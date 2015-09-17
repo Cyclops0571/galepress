@@ -217,6 +217,7 @@ class Users_Controller extends Base_Controller {
 		$msg = __('common.login_resetpassword_email_message', array(
 		    'firstname' => $s->FirstName,
 		    'lastname' => $s->LastName,
+		    'username' => $s->Username,
 		    'pass' => $pass
 			)
 		);

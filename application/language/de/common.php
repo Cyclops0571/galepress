@@ -19,6 +19,7 @@ return array(
 	'login_email_subject' => 'Email zum Zurücksetzen  des Passworts für Galepress.com',
 	'login_email_message' => "".
 								"Ehrenwert :firstname :lastname, \n\n".
+								"Ihr Benutzername :username, \n\n" .
 								"Sie können auf den folgenden Link klicken, um Ihr Passwort zurückzusetzen. Wenn Sie einen solchen Antrag haben, ignorieren Sie bitte diese E-Mail, die Sie.\n\n".
 								":url\n\n".
 								"Grüße, \n".
@@ -26,6 +27,7 @@ return array(
 	'login_resetpassword_email_subject' => 'Email zum Zurücksetzen  des Passworts für Galepress.com',
 	'login_resetpassword_email_message' => "".
 								"Ehrenwert :firstname :lastname, \n\n".
+								"Ihr Benutzername :username, \n\n" .
 								"Ihr Passwort :pass in der geänderten Fassung. \n\n".
 								"Grüße, \n".
 								"Galepress",

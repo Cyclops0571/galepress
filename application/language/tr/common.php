@@ -18,6 +18,7 @@ return array(
 	'login_email_subject' => 'Galepress.com parola sıfırlama e-postası',
 	'login_email_message' => "".
 								"Sayın :firstname :lastname, \n\n".
+								"Kullanıcı Adınız :username, \n\n" .
 								"Parolanızı sıfırlamak için aşağıdaki linke tıklayabilirsiniz. Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n".
 								":url\n\n".
 								"Saygılarımızla, \n".
@@ -25,6 +26,7 @@ return array(
 	'login_resetpassword_email_subject' => 'Galepress.com parola sıfırlama e-postası',
 	'login_resetpassword_email_message' => "".
 								"Sayın :firstname :lastname, \n\n".
+								"Kullanıcı Adınız :username, \n\n" .
 								"Parolanız :pass olarak değiştirilmiştir. \n\n".
 								"Saygılarımızla, \n".
 								"Galepress",

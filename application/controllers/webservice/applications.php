@@ -216,7 +216,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    $applicationID = Laravel\Input::get("applicationID");
 		    $username = Laravel\Input::get("username");
 		    $password = Laravel\Input::get("password");
-		    
+
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
 		    webService::getCheckApplication($ServiceVersion, $applicationID);
 		    $client = webService::getCheckClient($ServiceVersion, $applicationID, $username, $password);
@@ -230,6 +230,89 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    return Laravel\Response::json($result);
 		}
 	);
+    }
+
+    public function post_fblogin($ServiceVersion) {
+	return webService::render(function() use ($ServiceVersion) {
+		    /* @var $client Client */
+		    $rules = array(
+			'clientLanguage' => 'required|in:' . implode(",", Laravel\Config::get("application.languages")),
+			'applicationID' => 'required|integer',
+			'facebookToken' => 'required',
+			'facebookUserId' => 'required',
+			'facebookEmail' => 'required|email',
+			'name' => 'required',
+			'surname' => 'required',
+		    );
+
+
+		    $v = Laravel\Validator::make(\Laravel\Input::all(), $rules);
+		    if ($v->invalid()) {
+			throw eServiceError::getException(eServiceError::GenericError, $v->errors->first());
+		    }
+		    
+		    Laravel\Config::set("application.language", Laravel\Input::get("clientLanguage"));
+		    $applicationID = Laravel\Input::get("applicationID");
+		    $facebookToken = Laravel\Input::get("facebookToken");
+		    $facebookUserId = Laravel\Input::get("facebookUserId");
+		    $facebookEmail = Laravel\Input::get("facebookEmail");
+		    $name = Laravel\Input::get("name");
+		    $surname = Laravel\Input::get("surname");
+		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+		    webService::getCheckApplication($ServiceVersion, $applicationID);
+		    $client = Client::where("ApplicationID", "=", $applicationID)
+				    ->where("StatusID", "=", eStatus::Active)
+				    ->where("Email", "=", $facebookEmail)->first();
+		    if ($client) {
+			$result = array();
+			$result['accessToken'] = $client->Token;
+			return Laravel\Response::json($result);
+		    }
+
+		    $flag = TRUE;
+		    $userNo = "";
+		    do {
+			
+			$username = Laravel\Str::ascii($name . $surname . $userNo) ;
+			$clientExists = Client::where("Username", "=", $username)
+				->where("ApplicationID", "=", $applicationID)
+				->first();
+			if (!$clientExists) {
+			    //register client
+			    $flag = FALSE;
+			    $password = Common::generatePassword();
+			    $clientNew = new Client();
+			    $clientNew->Password = $password;
+			    $clientNew->Token = $username . "_" . md5(uniqid());
+			    $clientNew->StatusID = eStatus::Active;
+			    $clientNew->CreatorUserID = 0;
+			    $clientNew->Username = $username;
+			    $clientNew->Email = $facebookEmail;
+			    $clientNew->ApplicationID = $applicationID;
+			    $clientNew->Name = $name;
+			    $clientNew->Surname = $surname;
+			    $clientNew->save();
+			    $application = Application::find($applicationID);
+			    //send mail to client
+			    $subject = __('clients.registered_email_subject', array('Application' => $application->Name));
+			    $msg = __('clients.login_resetpassword_email_message', array(
+				'Application' => $application->Name,
+				'firstname' => $clientNew->Name,
+				'lastname' => $clientNew->Surname,
+				'username' => $clientNew->Username,
+				'pass' => $password
+				    )
+			    );
+			    Common::sendEmail($clientNew->Email, $clientNew->Name . ' ' . $clientNew->Surname, $subject, $msg);
+			} else {
+			    $userNo = 1 + (int) $userNo;
+			}
+		    } while ($flag);
+
+		    $result = array();
+		    $result['accessToken'] = $clientNew->Token;
+		    return Laravel\Response::json($result);
+		});
     }
 
 }

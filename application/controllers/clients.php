@@ -469,7 +469,8 @@ class Clients_Controller extends Base_Controller {
 	$client->Name = Input::get('FirstName');
 	$client->Surname = Input::get('LastName');
 	$client->save();
-	Session::get('language');
+	//572572 send mail to user
+	
 	return ajaxResponse::success(Laravel\URL::to_route("clientsregistered") . "?usertoken=" . $client->Token);
     }
 
@@ -511,15 +512,18 @@ class Clients_Controller extends Base_Controller {
 	if (!$client) {
 	    return ajaxResponse::error(Common::localize("user_not_found"));
 	}
-
+	
+	$application = Application::find($applicationID);
 	$client->PWRecoveryCode = Common::generatePassword();
 	$client->PWRecoveryDate = new DateTime();
 	$client->save();
 
-	$subject = __('common.login_email_subject');
-	$msg = __('common.login_email_message', array(
+	$subject = __('clients.login_email_subject', array('Application' => $application->Name));
+	$msg = __('clients.login_email_message', array(
+	    'Application' => $application->Name,
 	    'firstname' => $client->Name,
 	    'lastname' => $client->Surname,
+	    'username' => $client->Username,
 	    'url' => Laravel\URL::to_route("clientsresetpw") . "?ApplicationID=" . $applicationID . "&email=" . $client->Email . "&code=" . $client->PWRecoveryCode
 		)
 	);
@@ -588,8 +592,10 @@ class Clients_Controller extends Base_Controller {
 	    return ajaxResponse::error($errorMsg);
 	}
 	
+	$applicationID = Input::get('ApplicationID');
+	
 	/* @var $client Client */
-	$client = $client = Client::where("ApplicationID", "=", Input::get('ApplicationID'))
+	$client = $client = Client::where("ApplicationID", "=", $applicationID)
 		->where("Email", "=", Input::get('Email'))
 		->where("PwRecoveryCode", "=", Input::get('Code'))
 		->where("PwRecoveryDate", ">", DB::raw('ADDDATE(CURDATE(), INTERVAL -7 DAY)'))
@@ -599,8 +605,22 @@ class Clients_Controller extends Base_Controller {
 	    return ajaxResponse::error(__('common.login_ticketnotfound'));
 	}
 	
-	$client->Password = md5(Input::get("Password"));
+	$application = $application = Application::find($applicationID);
+	$pass = trim(Input::get("Password"));
+	$client->Password = md5($pass);
 	$client->save();
+	
+	$subject = __('clients.login_resetpassword_email_subject', array('Application' => $application->Name,));
+	$msg = __('clients.login_resetpassword_email_message', array(
+		'firstname' => $client->Name,
+		'lastname' => $client->Surname,
+		'username' => $client->Username,
+		'pass' => $pass
+		)
+	);
+	Common::sendEmail($client->Email, $client->Name . ' ' . $client->Surname, $subject, $msg);
+
+	
 	return ajaxResponse::success(Laravel\URL::to_route("pwreseted") . "?usertoken=" . $client->Token);
 	
     }

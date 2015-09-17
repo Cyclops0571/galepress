@@ -57,6 +57,12 @@ class Test_Controller extends Base_Controller {
     }
 
     public function get_index() {
+	Laravel\Config::set("application.language", "tr");
+	Laravel\Session::put("language", "tr");
+	echo Laravel\Session::get("language");
+	echo __('common.support');
+	return;
+	
 	dd(Laravel\URL::to_route("clientsregistered"));
 	echo strtotime("2015-09-07 17:15:00") . "   ----------------   ";
 	echo time(); exit;
