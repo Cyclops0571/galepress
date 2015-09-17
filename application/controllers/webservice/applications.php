@@ -250,13 +250,13 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    if ($v->invalid()) {
 			throw eServiceError::getException(eServiceError::GenericError, $v->errors->first());
 		    }
-		    
-		    Laravel\Config::set("application.language", Laravel\Input::get("clientLanguage"));
+
 		    $applicationID = Laravel\Input::get("applicationID");
 		    $facebookToken = Laravel\Input::get("facebookToken");
 		    $facebookUserId = Laravel\Input::get("facebookUserId");
 		    $facebookEmail = Laravel\Input::get("facebookEmail");
 		    $name = Laravel\Input::get("name");
+		    Laravel\Config::set("application.language", Laravel\Input::get("clientLanguage"));
 		    $surname = Laravel\Input::get("surname");
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
 		    webService::getCheckApplication($ServiceVersion, $applicationID);
@@ -272,8 +272,8 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    $flag = TRUE;
 		    $userNo = "";
 		    do {
-			
-			$username = Laravel\Str::ascii($name . $surname . $userNo) ;
+
+			$username = Laravel\Str::ascii($name . $surname . $userNo);
 			$clientExists = Client::where("Username", "=", $username)
 				->where("ApplicationID", "=", $applicationID)
 				->first();
@@ -295,7 +295,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 			    $application = Application::find($applicationID);
 			    //send mail to client
 			    $subject = __('clients.registered_email_subject', array('Application' => $application->Name));
-			    $msg = __('clients.login_resetpassword_email_message', array(
+			    $msg = __('clients.registered_email_message', array(
 				'Application' => $application->Name,
 				'firstname' => $clientNew->Name,
 				'lastname' => $clientNew->Surname,
@@ -303,6 +303,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'pass' => $password
 				    )
 			    );
+			    
 			    Common::sendEmail($clientNew->Email, $clientNew->Name . ' ' . $clientNew->Surname, $subject, $msg);
 			} else {
 			    $userNo = 1 + (int) $userNo;

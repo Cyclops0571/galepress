@@ -16,7 +16,7 @@ return array(
     'personol_info' => 'Persönliche Informationen',
     'reset_password' => 'Password Reset Seite',
     'registered_email_subject' => ':Application Anwendungsregistrierung',
-    'registered_email_subject' => "".
+    'registered_email_message' => "".
 							    "Ehrenwert :firstname :lastname, \n\n".
 							    "Ihre Anmeldung für: :Application Anwendung erfolgreich abgeschlossen.\n" .
 							    "Ihr Benutzername :username, \n\n" .

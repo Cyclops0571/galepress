@@ -36,10 +36,10 @@ class Clients_Controller extends Base_Controller {
 	$rules = array(
 	    'applicationID' => 'required',
 	);
-	if(!Laravel\Validator::make(\Laravel\Input::all(), $rules)->passes()) {
+	if (!Laravel\Validator::make(\Laravel\Input::all(), $rules)->passes()) {
 	    \Laravel\Redirect::to(__('route.home')); //571571
 	}
-	
+
 	$applicationID = (int) Input::get('applicationID', 0);
 
 	/* @var $currentUser User  */
@@ -469,8 +469,19 @@ class Clients_Controller extends Base_Controller {
 	$client->Name = Input::get('FirstName');
 	$client->Surname = Input::get('LastName');
 	$client->save();
-	//572572 send mail to user
-	
+
+	$application = Application::find($applicationID);
+	$subject = __('clients.registered_email_subject', array('Application' => $application->Name));
+	$msg = __('clients.registered_email_message', array(
+	    'Application' => $application->Name,
+	    'firstname' => $client->Name,
+	    'lastname' => $client->Surname,
+	    'username' => $client->Username,
+	    'pass' => empty($newPassword) ? $password : $newPassword
+		)
+	);
+	Common::sendEmail($client->Email, $client->Name . ' ' . $client->Surname, $subject, $msg);
+
 	return ajaxResponse::success(Laravel\URL::to_route("clientsregistered") . "?usertoken=" . $client->Token);
     }
 
@@ -500,7 +511,7 @@ class Clients_Controller extends Base_Controller {
 	$v = Laravel\Validator::make(Input::all(), $rules);
 	if ($v->invalid()) {
 	    $errorMsg = $v->errors->first();
-	    if(empty($errorMsg)) {
+	    if (empty($errorMsg)) {
 		$errorMsg = __('common.detailpage_validation');
 	    }
 	    return ajaxResponse::error($errorMsg);
@@ -512,7 +523,7 @@ class Clients_Controller extends Base_Controller {
 	if (!$client) {
 	    return ajaxResponse::error(Common::localize("user_not_found"));
 	}
-	
+
 	$application = Application::find($applicationID);
 	$client->PWRecoveryCode = Common::generatePassword();
 	$client->PWRecoveryDate = new DateTime();
@@ -543,11 +554,11 @@ class Clients_Controller extends Base_Controller {
 	    'email' => 'required|email',
 	    'code' => 'required|min:2',
 	);
-	
+
 	$v = Laravel\Validator::make(Input::all(), $rules);
 	if ($v->invalid()) {
 	    $errorMsg = $v->errors->first();
-	    if(empty($errorMsg)) {
+	    if (empty($errorMsg)) {
 		$errorMsg = __('common.login_ticketnotfound');
 	    }
 	}
@@ -555,7 +566,7 @@ class Clients_Controller extends Base_Controller {
 	$applicationID = Input::get("ApplicationID");
 	$email = Input::get("email");
 	$code = Input::get("code");
-	
+
 	$client = Client::where("ApplicationID", "=", $applicationID)
 		->where("Email", "=", $email)
 		->where("PwRecoveryCode", "=", $code)
@@ -563,10 +574,10 @@ class Clients_Controller extends Base_Controller {
 		->where("StatusID", "=", eStatus::Active)
 		->first();
 
-	if(!$client) {
+	if (!$client) {
 	    $errorMsg = __('common.login_ticketnotfound');
 	}
-	
+
 	$data = array();
 	$data["errorMsg"] = $errorMsg;
 	return View::make(Laravel\Request::$route->controller . "." . Laravel\Request::$route->controller_action, $data);
@@ -582,18 +593,18 @@ class Clients_Controller extends Base_Controller {
 	    'Password' => 'required|min:6|max:12',
 	    'Password2' => 'required|min:6|max:12|same:Password'
 	);
-	
+
 	$v = Validator::make(Input::all(), $rules);
 	if ($v->invalid()) {
 	    $errorMsg = $v->errors->first();
-	    if(empty($errorMsg)) {
+	    if (empty($errorMsg)) {
 		$errorMsg = __('common.detailpage_validation');
 	    }
 	    return ajaxResponse::error($errorMsg);
 	}
-	
+
 	$applicationID = Input::get('ApplicationID');
-	
+
 	/* @var $client Client */
 	$client = $client = Client::where("ApplicationID", "=", $applicationID)
 		->where("Email", "=", Input::get('Email'))
@@ -601,32 +612,32 @@ class Clients_Controller extends Base_Controller {
 		->where("PwRecoveryDate", ">", DB::raw('ADDDATE(CURDATE(), INTERVAL -7 DAY)'))
 		->where("StatusID", "=", eStatus::Active)
 		->first();
-	if(!$client) {
+	if (!$client) {
 	    return ajaxResponse::error(__('common.login_ticketnotfound'));
 	}
-	
+
 	$application = $application = Application::find($applicationID);
 	$pass = trim(Input::get("Password"));
 	$client->Password = md5($pass);
 	$client->save();
-	
+
 	$subject = __('clients.login_resetpassword_email_subject', array('Application' => $application->Name,));
 	$msg = __('clients.login_resetpassword_email_message', array(
-		'firstname' => $client->Name,
-		'lastname' => $client->Surname,
-		'username' => $client->Username,
-		'pass' => $pass
+	    'firstname' => $client->Name,
+	    'lastname' => $client->Surname,
+	    'username' => $client->Username,
+	    'pass' => $pass
 		)
 	);
 	Common::sendEmail($client->Email, $client->Name . ' ' . $client->Surname, $subject, $msg);
 
-	
+
 	return ajaxResponse::success(Laravel\URL::to_route("pwreseted") . "?usertoken=" . $client->Token);
-	
     }
 
     public function get_passwordreseted() {
 	$data = array();
 	return View::make(Laravel\Request::$route->controller . '.passwordreseted', $data);
     }
+
 }

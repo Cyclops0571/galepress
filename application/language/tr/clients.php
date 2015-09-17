@@ -16,30 +16,31 @@ return array(
     'personol_info' => 'Kişisel Bilgiler',
     'reset_password' => 'Şifre Resetleme Sayfası',
     
-    'registered_email_subject' => ':Application Application Registration',
-    'registered_email_subject' => "".
-							    "Esteemed :firstname :lastname, \n\n".
-							    "Your registration for :Application Application succesfully completed.\n".
-							    "Your Username is :username, \n" .
-							    "Your Password is :pass. \n\n".
-							    "Regards, \n".
+    'registered_email_subject' => ':Application Uygulama Kaydı',
+    'registered_email_message' => "".
+							    "Sayın :firstname :lastname, \n\n".
+							    ":Application uygulamasına kaydınız başarıyla yapıldı.\n".
+							    "Kullanıcı Adınız is :username, \n" .
+							    "Parolanız :pass. \n\n".
+							    "Saygılarımızla, \n".
 							    "Galepress",
     
-    'login_email_subject' => ':Application Application password resetting e-mail',
+    'login_email_subject' => ':Application uygulaması parola sıfırlama e-postası',
     'login_email_message' => "".
-							    "Esteemed :firstname :lastname, \n\n".
-							    "Your Username is :username, \n\n" .
-							    "Click under the link for reset your :Application applicaton password. If you don't want it, please don't regard this e-mail.\n\n".
+							    "Sayın :firstname :lastname, \n\n".
+							    "Kullanıcı Adınız :username, \n\n" .
+							    ":Application uygulaması parolanızı sıfırlamak için aşağıdaki linke tıklayabilirsiniz. \n" . 
+							    "Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n".
 							    ":url\n\n".
-							    "Regards, \n".
+							    "Saygılarımızla, \n".
 							    "Galepress",
-    'login_resetpassword_email_subject' => ':Application Application password resetting e-mail',
+    'login_resetpassword_email_subject' => ':Application parola sıfırlama e-postası',
     'login_resetpassword_email_message' => "".
-							    "Esteemed :firstname :lastname, \n\n".
-							    "Your :Application Application password changed \n" .
-							    "Your Username is :username, \n" .
-							    "Password is changed as :pass. \n\n".
-							    "Regards, \n".
+							    "Sayın :firstname :lastname, \n\n".
+							    ":Application uygulamasi şifreniz değiştirilmiştir.\n" .
+							    "Kullanıcı Adınız :username, \n" .
+							    "Parolanız :pass olarak değiştirilmiştir. \n\n".
+							    "Saygılarımızla, \n".
 							    "Galepress",
 );
 

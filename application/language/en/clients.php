@@ -16,7 +16,7 @@ return array(
     'personol_info' => 'Personal Informations',
     'reset_password' => 'Password Reset Page',
     'registered_email_subject' => ':Application Application Registration',
-    'registered_email_subject' => "".
+    'registered_email_message' => "".
 							    "Esteemed :firstname :lastname, \n\n".
 							    "Your registration for :Application Application succesfully completed.\n".
 							    "Your Username is :username, \n" .
