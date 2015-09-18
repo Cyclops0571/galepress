@@ -481,7 +481,7 @@ class Clients_Controller extends Base_Controller {
 		)
 	);
 	Common::sendEmail($client->Email, $client->Name . ' ' . $client->Surname, $subject, $msg);
-
+	
 	return ajaxResponse::success(Laravel\URL::to_route("clientsregistered") . "?usertoken=" . $client->Token);
     }
 

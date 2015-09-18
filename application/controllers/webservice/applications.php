@@ -48,6 +48,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 		      3: Sil ve zorla
 		     */
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+		    /* @var $application Application */
 		    $application = webService::getCheckApplication($ServiceVersion, $applicationID);
 		    $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
 
@@ -72,6 +73,12 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'ApplicationStatus' => ((int) $application->Status == 1 ? true : false),
 				'ApplicationVersion' => (int) $application->Version,
 				'Force' => (int) $application->Force,
+				'SubscriptionWeekActive' => (int) $application->SubscriptionWeekActive,
+				'WeekPrice' => (int) $application->WeekPrice,
+				'SubscriptionMonthActive' => (int) $application->SubscriptionMonthActive,
+				'MonthPrice' => $application->MonthPrice,
+				'SubscriptionYearActive' => (int) $application->SubscriptionYearActive,
+				'YearPrice' => (int) $application->YearPrice,
 		    ));
 		});
     }

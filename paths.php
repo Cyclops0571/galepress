@@ -153,7 +153,7 @@ function set_path($path, $value)
 define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
-define("APP_VER", 43);
+define("APP_VER", 44);
 define("NORMAL_IMAGE_FILE", 1101);
 define("SMALL_IMAGE_FILE", 1102);
 define("PDF_FILE", 1001);

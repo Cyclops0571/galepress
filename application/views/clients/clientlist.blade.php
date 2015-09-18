@@ -103,7 +103,7 @@
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Name); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Surname); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Email); ?> </td>
-					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Application->Name); ?> </td>
+					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Application()->Name); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, Common::dateRead($row->LastLoginDate, 'dd.MM.yyyy')); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->ClientID); ?> </td>
 				    </tr>
@@ -118,6 +118,7 @@
 		    </table>
 		</div>
 	    </div>
+
 	    <!-- end tabular_content-->
 	    <div class="select">
 		@if((int)Input::get('customerID', 0) > 0)

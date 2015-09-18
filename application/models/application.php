@@ -34,6 +34,12 @@
  * @property int $BannerIntervalTime Description
  * @property int $BannerTransitionRate Description
  * @property int $TabActive Description
+ * @property int $SubscriptionWeekActive Description
+ * @property int $WeekPrice Description
+ * @property int $SubscriptionMonthActive Description
+ * @property int $MonthPrice Description
+ * @property int $SubscriptionYearActive Description
+ * @property int $YearPrice Description
  */
 class Application extends Eloquent {
 
@@ -187,5 +193,16 @@ class Application extends Eloquent {
     public function PaymentAccount() {
 	return $this->has_one('PaymentAccount', "ApplicationID")->first();
     }
-
+    
+    /**
+     * 
+     * @param int $type
+     * @return type
+     */
+    public function getSubscriptionIdentifier($type = 1) {
+	if(empty($this->BundleText)) {
+	    return "www.galepress.com.appid." . $this->ApplicationID . "type." . $type;
+	} 
+	return $this->BundleText . ".appid." . $this->ApplicationID . ".type." . $type;
+    }
 }
