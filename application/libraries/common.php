@@ -118,9 +118,6 @@ class Common {
     }
 
     public static function CheckApplicationOwnership($applicationID) {
-	if ((int) $applicationID == 0) {
-	    return FALSE;
-	}
 	$currentUser = Auth::User();
 	if ($currentUser == NULL) {
 	    return FALSE;
@@ -130,6 +127,10 @@ class Common {
 	    return true;
 	}
 
+	if ((int) $applicationID == 0) {
+	    return FALSE;
+	}
+	
 	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
 	    $a = Application::find($applicationID);
 	    if ($a) {
@@ -623,11 +624,16 @@ class Common {
     }
 
     public static function sendPaymentUserReminderMail($userList) {
+	return; //571571
 	Bundle::start('messages');
 	foreach ($userList as $user) {
+	    if(!in_array($user["warning_mail_phase"], array(1,2,3))) {
+		continue;
+	    }
+	    
 	    Message::send(function($m) use($user) {
 		$msg = "";
-		switch ($paymentAccount->WarningMailPhase) {
+		switch ($user["warning_mail_phase"]) {
 		    case 1:
 			$msg = "Değerli Müşterimiz, \r\n\r\n"
 				. "Bekleyen bir ödemeniz bulunmaktadır ve iki hafta içinde ödemenizi tamamlamanız gerekmektedir. "

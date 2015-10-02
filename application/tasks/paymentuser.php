@@ -25,15 +25,6 @@ class PaymentUser_Task {
 
 
 	    $paymentAccount instanceof PaymentAccount;
-	    $paymentAmount = ((int) (Config::get("custom.payment_amount") * 1.18)) * 100;
-
-	    if ($paymentAccount->PaymentAccountID != 1) {
-		//once kendi uzerimde deniyorum... 571571
-		continue;
-	    } else {
-		$paymentAmount = 1;
-	    }
-
 	    if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d")) {
 		$paymentResult = FALSE;
 		// <editor-fold defaultstate="collapsed" desc="first bin check">
@@ -64,7 +55,6 @@ class PaymentUser_Task {
 			}
 			$paymentUserSurname = $paymentUserNameSurnameSet[count($paymentUserNameSurnameSet) - 1];
 		    }
-
 		    $paymentTransaction = new PaymentTransaction();
 		    $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
 		    $paymentTransaction->CustomerID = $paymentAccount->CustomerID;
@@ -85,15 +75,20 @@ class PaymentUser_Task {
 		    $postData['customer_presentation_usage'] = 'GalepressAylikOdeme_' . date('YmdHisu');
 		    $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
 		    $postData['type'] = "DB";
-		    $postData['amount'] = $paymentAmount;
+		    
+		    $application = $paymentAccount->Application();
+		    $paymentAmount = $application->Price * 1.18;
+		    $postData['amount'] = (int)($paymentAmount * 100);
 		    $postData['card_token'] = $paymentAccount->card_token;
-		    $postData['card_verification'] = 000;
-		    $postData['amount'] = 100;
+		    $postData['card_expiry_year'] = $paymentAccount->expiry_year;
+		    $postData['card_expiry_month'] = $paymentAccount->expiry_month;
+		    $postData['card_verification'] = $paymentAccount->card_verification;
 		    $postData['installment_count'] = NULL;
 		    $postData['currency'] = "TRY";
 		    $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
 		    $postData['card_register'] = 1;
-		    $postData['card_holder_name'] = Input::get("card_holder_name");
+		    $postData['card_brand'] = $paymentAccount->brand;
+		    $postData['card_holder_name'] = $paymentAccount->holder;
 		    $postData['connector_type'] = "Garanti";
 		    $postData['customer_contact_ip'] = "37.9.205.203";
  

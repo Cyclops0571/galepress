@@ -143,7 +143,7 @@ return array(
 	'clients_list_column7' => 'Son Giris Tarihi',
 	'clients_list_column8' => 'ID',
 	'clients_firstname' => 'Vornamen',
-	'clients_lastname' => 'Soyad',
+	'clients_lastname' => 'Nachname',
 	'clients_email' => 'Email',
 	'clients_username' => 'Benutzername',
 	'clients_password' => 'Passwort',

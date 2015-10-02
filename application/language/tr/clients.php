@@ -42,5 +42,7 @@ return array(
 							    "Parolanız :pass olarak değiştirilmiştir. \n\n".
 							    "Saygılarımızla, \n".
 							    "Galepress",
+    'selected_content_name' => 'Seçilmiş İçerikler',
+    'selectable_content_name' => 'Seçilebilir İçerikler',
 );
 

@@ -39,5 +39,7 @@ return array(
 							    "Ihr Passwort :pass in der geänderten Fassung. \n\n".
 							    "Grüße, \n".
 							    "Galepress",
+    'selected_content_name' => 'ausgewählte Inhalte',
+    'selectable_content_name' => 'Wählbare Inhalt',
 );
 

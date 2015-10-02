@@ -202,8 +202,6 @@ function getContentDetailWithCategories($contentID) {
 	);
 	try {
 		return request("/contents/".(int)$contentID."/detail", $default);
-		//$ret = request("/contents/".(int)$contentID."/detail?withCategories=true");
-		//$ret = request_GetContentDetailWithCategories($contentID);
 	}
 	catch (Exception $e) {
 		$default['status'] = $e->getCode();

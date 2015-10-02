@@ -25,6 +25,7 @@
  * @property int $expiry_year Description
  * @property int $last_4_digits Description
  * @property int $holder Description
+ * @property int $card_verification Description
  * @property int $mail_send Description
  * @property int $selected_at Description
  */

@@ -1,5 +1,4 @@
 <?php
-
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     $output = NULL;
     if(!isset($_SERVER["REMOTE_ADDR"])) {
@@ -71,13 +70,13 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
 $defaultLang = 'tr';
 $userInfo = ip_info();
 if(!empty($userInfo) && !empty($userInfo["country_code"]) &&  $userInfo["country_code"] != "TR") {
-    $defaultLang = 'en';
+    $defaultLang = 'usa';
 }
 
 if (Laravel\Request::env() == ENV_TEST) {
-    $defaultLang = 'en';
+    $defaultLang = 'usa';
 } else if (Laravel\Request::env() == ENV_LOCAL) {
-    $defaultLang = 'en';
+    $defaultLang = 'usa';
 }
 
 return array(
@@ -170,12 +169,13 @@ return array(
       | the default language will automatically be set to that language.
       |
      */
-    'languages' => array('tr', 'en', 'de'),
+    'languages' => array('tr', 'en', 'de', 'usa'),
     // Languages with ID for quick lookup
     'langs' => array(
 	'tr' => 1,
 	'en' => 2,
-	'de' => 3
+	'de' => 3,
+	'usa' => 4,
     ),
     /*
       |--------------------------------------------------------------------------

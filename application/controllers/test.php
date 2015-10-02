@@ -11,6 +11,22 @@
  *
  * @author Detay
  */
+
+class dd {
+    const ASdf = 5;
+    public static function make() {
+	return new static();
+    }
+}
+
+class dd2 extends dd{
+    
+}
+
+class dd3 extends dd2 {
+    
+}
+
 class Test_Controller extends Base_Controller {
 
     public $restful = true;
@@ -19,44 +35,19 @@ class Test_Controller extends Base_Controller {
 	parent::__construct();
     }
 
-    public function post_index() {
-	
-	echo "aaa";
-	var_dump($_POST);
-	dd($_FILES);
-    }
-
-    public function get_download() {
-	return Laravel\View::make('test.download');
-    }
-
-    public function post_download() {
-	ob_start();
-	$element = Input::get('element');
-	$options = array(
-	    'upload_dir' => path('public') . 'files/temp/',
-	    'upload_url' => URL::base() . '/files/temp/',
-	    'param_name' => $element,
-	    'accept_file_types' => '/\.(xls)$/i'
-	);
-	$upload_handler = new UploadHandler($options);
-
-	if (!Request::ajax()) {
-	    return;
-	}
-
-	$upload_handler->post(false);
-
-	$ob = ob_get_contents();
-	ob_end_clean();
-
-	$json = get_object_vars(json_decode($ob));
-	$arr = $json[$element];
-	$obj = $arr[0];
-	return Response::json($obj);
-    }
-
+    
     public function get_index() {
+	dd(dd3::make());
+	$tmp = array(1,2,3);
+	echo implode(",", $tmp);
+	exit;
+	$tmp2 = array(5,2,3,4);
+	$mrg = array_merge($tmp, $tmp2);
+	$umrg = array_unique($mrg);
+	sort($umrg);
+	dd($umrg);
+	$paymentAccount = PaymentAccount::find(1);
+//	dd($paymentAccount->Application()->Price * 118);
 	Laravel\Config::set("application.language", "tr");
 	Laravel\Session::put("language", "tr");
 	echo Laravel\Session::get("language");
@@ -168,6 +159,43 @@ class Test_Controller extends Base_Controller {
 
 	return View::make('test.javascripttest', array());
     }
+    
+    public function post_index() {
+	echo "aaa";
+	var_dump($_POST);
+	dd($_FILES);
+    }
+
+    public function get_download() {
+	return Laravel\View::make('test.download');
+    }
+
+    public function post_download() {
+	ob_start();
+	$element = Input::get('element');
+	$options = array(
+	    'upload_dir' => path('public') . 'files/temp/',
+	    'upload_url' => URL::base() . '/files/temp/',
+	    'param_name' => $element,
+	    'accept_file_types' => '/\.(xls)$/i'
+	);
+	$upload_handler = new UploadHandler($options);
+
+	if (!Request::ajax()) {
+	    return;
+	}
+
+	$upload_handler->post(false);
+
+	$ob = ob_get_contents();
+	ob_end_clean();
+
+	$json = get_object_vars(json_decode($ob));
+	$arr = $json[$element];
+	$obj = $arr[0];
+	return Response::json($obj);
+    }
+
 
     public function get_moveInteractivite() {
 

@@ -152,7 +152,7 @@ class Ws {
 	if (!$content) {
 	    throw eServiceError::getException(eServiceError::ContentNotFound);
 	}
-	if (!((int) $content->Blocked == 0)) {
+	if ((int) $content->Blocked != 0) {
 	    throw eServiceError::getException(eServiceError::ContentBlocked);
 	}
 	return $content;

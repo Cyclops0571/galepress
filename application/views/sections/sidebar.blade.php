@@ -37,29 +37,28 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     	    <script type="text/javascript">
     		$(document).ready(function () {
     		    var appID = $("input[name$='pplicationID']").val();
-    		    $(".page-navigation ul#allApps li a").each(function (index) {
-    			if (getURLParameter($(this).attr('href'), 'applicationID') == appID) {
-    			    $(this).attr('class', 'visited');
-    			    return false;
-    			}
-    		    });
+    		    if (document.location.href.indexOf("applicationID") !== -1) {
+    			$(".page-navigation ul#allApps li a").each(function (index) {
+    			    if (getURLParameter($(this).attr('href'), 'applicationID') == appID) {
+    				$(this).attr('class', 'visited');
+    				return false;
+    			    }
+    			});
+    		    }
     		    function getURLParameter(url, name) {
     			return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
     		    }
-    		    if (appID != "" && appID > 0) {
+    		    if (document.location.href.indexOf("applicationID") !== -1 && appID != "" && appID > 0) {
     			$(".page-navigation ul#allApps").prev().trigger('click');
     		    }
     		});
     	    </script>
-		<?php $currentDate = date("Y-m-d"); ?>
 		<?php if (Auth::User() != NULL): ?>
-		    @foreach(Auth::User()->Customer()->Applications(1) as $app)
-		    @if( $app->ExpirationDate < $currentDate )
-		    <li style="width:100%;">{{ HTML::link(__('route.contents').'?applicationID='.$app->ApplicationID, $app->Name, array('class' => 'expired-app')) }}</li>
-		    @else
-		    <li style="width:100%;">{{ HTML::link(__('route.contents').'?applicationID='.$app->ApplicationID, $app->Name) }}</li>
-		    @endif
-		    @endforeach
+		    <?php foreach (Auth::User()->Customer()->Applications(eStatus::Active) as $app): ?>
+	    	    <li style="width:100%;">
+			    <?php echo HTML::link(__('route.contents') . '?applicationID=' . $app->ApplicationID, $app->Name, $app->sidebarClass()); ?>
+	    	    </li>
+		    <?php endforeach; ?>
 		<?php endif; ?>
     	</ul>                               
         </li>
@@ -143,37 +142,50 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     </li>
     <?php if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Manager): ?>
         <li>
-            <a href="#"><span class="icon-user"></span>Kullanıcı Ayarları</a>
-            <ul>
-                {{ HTML::nav_link(__('route.users'), __('common.menu_users')) }}
-                {{ HTML::nav_link(__('route.mydetail'), __('common.menu_mydetail')) }}
-            </ul>
+    	<a href="#"><span class="icon-user"></span>Kullanıcı Ayarları</a>
+    	<ul>
+    	    {{ HTML::nav_link(__('route.users'), __('common.menu_users')) }}
+    	    {{ HTML::nav_link(__('route.mydetail'), __('common.menu_mydetail')) }}
+    	</ul>
         </li>
     <?php endif; ?>
     <?php if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Customer): ?>
         <li>
-            <a href="{{URL::to(__('route.mydetail'))}}"><span class="icon-user"></span>{{ __('common.menu_mydetail') }}</a>
+    	<a href="{{URL::to(__('route.mydetail'))}}"><span class="icon-user"></span>{{ __('common.menu_mydetail') }}</a>
         </li>
         <li>
-            <a href="#"><span class="icon-cogs"></span>{{__('common.application_settings_caption_detail')}}</a>
-            <ul>
-		<?php $currentDate = date("Y-m-d"); ?>
-                @foreach(Auth::User()->Customer()->Applications(1) as $app)
-                @if( $app->ExpirationDate < $currentDate )
-                <li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name, array('class' => 'expired-app')) }}</li>
-                @else
-                <li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name) }}</li>
-                @endif
-                @endforeach
-            </ul>
+    	<a href="#"><span class="icon-cogs"></span>{{__('common.application_settings_caption_detail')}}</a>
+    	<ul id="allSettings">
+    	    <script type="text/javascript">
+    		$(document).ready(function () {
+		    var appID = $("input[name$='pplicationID']").val();
+    		    if (document.location.href.indexOf("applicationID") === -1) {
+    			$(".page-navigation ul#allSettings li a").each(function (index) {
+			    var match = $(this).attr('href').match(/\d+/);
+    			    if (match.length > 0 && match[0] === appID) {
+    				$(this).attr('class', 'visited');
+    				return false;
+    			    }
+    			});
+    		    }
+		    
+		    if (document.location.href.indexOf("applicationID") === -1 && appID != "" && appID > 0) {
+    			$(".page-navigation ul#allSettings").prev().trigger('click');
+    		    }
+    		});
+    	    </script>
+		<?php foreach (Auth::User()->Customer()->Applications(1) as $app): ?>
+		    <li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name, $app->sidebarClass()) }}</li>
+		<?php endforeach; ?>
+    	</ul>
         </li>
-	<li>
-	    <a href="<?php echo Laravel\URL::to(__('route.clients')) ?>">
-		<span class="icon-mobile-phone"></span><?php echo __('common.client_list') ?>
-	    </a>
-	</li>
         <li>
-            <a href="{{URL::to(__('route.shop'))}}"><span class="icon-credit-card"></span>{{ __('common.application_payment') }}</a>
+    	<a href="<?php echo Laravel\URL::to(__('route.clients')) ?>">
+    	    <span class="icon-mobile-phone"></span><?php echo __('common.client_list') ?>
+    	</a>
+        </li>
+        <li>
+    	<a href="{{URL::to(__('route.shop'))}}"><span class="icon-credit-card"></span>{{ __('common.application_payment') }}</a>
         </li>
     <?php endif; ?>
 </ul> 

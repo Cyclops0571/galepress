@@ -183,6 +183,7 @@ class Payment_Controller extends Base_Controller {
                 $paymentAccount->expiry_year = $resultJson['account']['expiry_year'];
                 $paymentAccount->last_4_digits = $resultJson['account']['lastfourdigits'];
                 $paymentAccount->holder = $resultJson['account']['holder'];
+		$paymentAccount->card_verification = Input::get("card_verification");
                 $paymentAccount->save();
 
                 $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;

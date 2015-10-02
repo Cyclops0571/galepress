@@ -195,7 +195,6 @@ $server->wsdl->addComplexType(
 );
 $server->register("getContentDetail", array("contentID" => "xsd:int"), array("return" => "tns:ctGetContentDetail"), "urn:ContentDetail", "urn:ContentDetail#getContentDetail");
 
-//getContentDetailWithCategories
 $server->wsdl->addComplexType(
 	'ctGetContentDetailWithCategories',
 	'complexType',

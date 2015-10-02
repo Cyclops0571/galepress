@@ -73,7 +73,12 @@ class webService {
 	return $category;
     }
 
-    public static function getCheckApplicationContents($ServiceVersion, $applicationID, $isTest = False) {
+    public static function getCheckApplicationContents($data = null) {
+	$ServiceVersion = isset($data["ServiceVersion"]) ? $data["ServiceVersion"] : False;
+	$applicationID = isset($data["applicationID"]) ? $data["applicationID"] : False;
+	$accessToken = isset($data["accessToken"]) ? $data["accessToken"] : False;
+	$isTest = isset($data["isTest"]) ? $data["isTest"] : False;
+	
 	$query = Content::where('ApplicationID', '=', $applicationID)
 		->where('StatusID', '=', eStatus::Active)
 		->order_by('OrderNo', 'DESC')
@@ -92,8 +97,6 @@ class webService {
 	}
 
 	$rs = $query->get();
-//        var_dump(DB::last_query()) ; exit;
-//        var_dump($rs); exit;
 	if ($rs) {
 	    $contents = array();
 	    foreach ($rs as $r) {
@@ -102,6 +105,25 @@ class webService {
 		$serveContent = $serveContent && ($r->IsUnpublishActive == 0 || $r->UnpublishDate > date("Y-m-d"));
 		$serveContent = $serveContent || ($r->RemoveFromMobile == eRemoveFromMobile::Active);
 		if ($serveContent) {
+		    
+		    //check if client has an access to wanted content.
+		    $clientBoughtContent = FALSE;
+		    /* @var $client Client */
+		    $client = Client::where("Token", "=", $accessToken)->where("StatusID", "=", eStatus::Active)->first();
+		    if(!empty($accessToken) && !$client) {
+			throw eServiceError::getException(eServiceError::ClientNotFound);
+		    }
+		    if(!$client) {
+			$clientBoughtContent = FALSE;
+		    } else if($client->PaidUntil) {
+			$clientBoughtContent = TRUE;
+		    } else {
+			$boughtContentIDSet = explode(",", $client->ContentIDSet);
+			if(in_array($r->ContentID, $boughtContentIDSet)) {
+			    $clientBoughtContent = TRUE;
+			}
+		    }
+		    
 		    array_push($contents, array(
 			'ContentID' => (int) $r->ContentID,
 			'ContentName' => $r->Name,
@@ -117,6 +139,7 @@ class webService {
 			'ContentPrice' => $r->Price,
 			'ContentCurrency' => $r->Currency(1),
 			'ContentIdentifier' => $r->getIdentifier(),
+			'ContentBought' => $clientBoughtContent,
 		    ));
 		}
 	    }

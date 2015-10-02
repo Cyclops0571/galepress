@@ -1435,7 +1435,7 @@ var cCommon = new function () {
 	cAjax.doAsyncRequest(t, u, d, funcSuccess, funcError, true);
     };
 
-    this.save = function (param, fSuccess, formID) {
+    this.save = function (param, fSuccess, formID, additionalData) {
 	if (typeof fSuccess !== 'function') {
 	    fSuccess = function (ret) {
 		cNotification.success();
@@ -1457,6 +1457,9 @@ var cCommon = new function () {
 	    var t = 'POST';
 	    var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
 	    var d = cForm.serialize(frm);
+	    if(typeof additionalData !== 'undefined') {
+		d = d + additionalData;
+	    }
 	    cCommon.doAsyncRequest(t, u, d, fSuccess);
 	} else {
 	    cNotification.validation();

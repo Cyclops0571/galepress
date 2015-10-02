@@ -294,7 +294,7 @@ class Applications_Controller extends Base_Controller {
 		$s->Name = Input::get('Name');
 		$s->Detail = Input::get('Detail');
 		$s->Price = Input::get('Price');
-		$s->BundleText = Input::get('BundleText');
+		$s->BundleText = strtolower(Input::get('BundleText'));
 		$s->StartDate = new DateTime(Common::dateWrite(Input::get('StartDate')));
 		$s->ExpirationDate = new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
 		$s->ApplicationStatusID = (int) Input::get('ApplicationStatusID');

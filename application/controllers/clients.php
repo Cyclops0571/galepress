@@ -109,35 +109,67 @@ class Clients_Controller extends Base_Controller {
     }
 
     public function get_new() {
+	$selectableContents = NULL;
 	/* @var $currentUser User */
 	$currentUser = Auth::User();
+	$applications = $currentUser->Application();
+	foreach ($applications as $app) {
+	    $tmpContents = $app->Contents();
+	    foreach ($tmpContents as $tmp) {
+		$selectableContents[] = $tmp;
+	    }
+	}
+
 	$data = array();
 	$data['page'] = $this->page;
 	$data['route'] = $this->route;
 	$data['caption'] = $this->caption;
 	$data['detailcaption'] = $this->detailcaption;
-	$data['applications'] = $currentUser->Application();
+	$data['applications'] = $applications;
+	$data['contents'] = array();
+	$data['selectableContents'] = $selectableContents;
+
 	return View::make(Laravel\Request::$route->controller . '.' . Str::lower($this->table) . 'detail', $data)
 			->nest('filterbar', 'sections.filterbar', $data);
     }
 
     public function get_show($id) {
+	$selectableContents = NULL;
 	/* @var $currentUser User */
 	$currentUser = Auth::User();
 
 	/* @var $client Client */
 	$client = Client::find($id);
+
 	if (!$client) {
 	    \Laravel\Redirect::to($this->route);
 	}
-	$data = array(
-	    'page' => $this->page,
-	    'route' => $this->route,
-	    'caption' => $this->caption,
-	    'detailcaption' => $this->detailcaption,
-	    'row' => $client,
-	    'applications' => $currentUser->Application()
-	);
+	$applications = $currentUser->Application();
+	foreach ($applications as $app) {
+	    $tmpContents = $app->Contents();
+	    foreach ($tmpContents as $tmp) {
+		$selectableContents[] = $tmp;
+	    }
+	}
+	
+	$contents = $client->Contents();
+	foreach($selectableContents as $key => $selectableContent) {
+	    foreach($contents as $content) {
+		if($selectableContent->ContentID == $content->ContentID) {
+		    unset($selectableContents[$key]);
+		}
+	    }
+	}
+	
+	$data = array();
+	$data[ 'page'] = $this->page;
+	$data[ 'route'] = $this->route;
+	$data[ 'caption'] = $this->caption;
+	$data[ 'detailcaption'] = $this->detailcaption;
+	$data[ 'row'] = $client;
+	$data[ 'applications'] = $applications;
+	$data[ 'contents'] = $contents;
+	$data['selectableContents'] = $selectableContents;
 	return View::make(Laravel\Request::$route->controller . '.' . Str::lower($this->table) . 'detail', $data)
 			->nest('filterbar', 'sections.filterbar', $data);
     }
@@ -186,7 +218,8 @@ class Clients_Controller extends Base_Controller {
 	$password = Input::get('Password');
 	$username = trim(Input::get('Username'));
 	$applicationID = Input::get('ApplicationID');
-	$email = Input::get('Email;');
+	$email = Input::get('Email');
+	$contentIDSet = \Laravel\Input::get("contentIDSet", array());
 
 	$rules = array(
 	    'Username' => 'required|min:2',
@@ -204,16 +237,16 @@ class Clients_Controller extends Base_Controller {
 	    } else if ($clientSameEmail) {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("email_must_be_unique"));
 	    }
-	    $s = new Client();
-	    $s->Token = $username . "_" . md5(uniqid());
+	    $client = new Client();
+	    $client->Token = $username . "_" . md5(uniqid());
 	} else {
-	    $s = Client::find($clientID);
-	    if (!$s) {
+	    $client = Client::find($clientID);
+	    if (!$client) {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("user_not_found"));
 	    }
 
-	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $s->ClientID)->first();
-	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $s->ClientID)->first();
+	    $clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->where('ClientID', "!=", $client->ClientID)->first();
+	    $clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->where('ClientID', "!=", $client->ClientID)->first();
 	    if ($clientSameUsername) {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(Common::localize("username_must_be_unique"));
 	    } else if ($clientSameEmail) {
@@ -223,30 +256,50 @@ class Clients_Controller extends Base_Controller {
 
 	$v = Validator::make(Input::all(), $rules);
 	if (!$v->passes()) {
+	    dd($v->errors->first());
+	    return ajaxResponse::error($v->errors->first());
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	}
 
-	$s->Username = $username;
-	$s->Email = $email;
+	$client->Username = $username;
+	$client->Email = $email;
+	$client->ApplicationID = $applicationID;
 
-	$s->ApplicationID = $applicationID;
 	if (strlen(trim($password)) > 0) {
-	    $s->Password = md5($password);
+	    $client->Password = md5($password);
 	}
 
-	$s->Name = Input::get('FirstName');
-	$s->Surname = Input::get('LastName');
+	$client->Name = Input::get('FirstName');
+	$client->Surname = Input::get('LastName');
 	if ($clientID == 0) {
-	    $s->StatusID = eStatus::Active;
-	    $s->CreatorUserID = $currentUser->UserID;
+	    $client->StatusID = eStatus::Active;
+	    $client->CreatorUserID = $currentUser->UserID;
 	}
 
-	if (!in_array($s->ApplicationID, $appIDSet)) {
+	if(count($appIDSet) == 1) {
+	    $client->ApplicationID = $appIDSet[0];
+	} else if (!in_array($client->ApplicationID, $appIDSet)) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_unauthorized_attempt'));
 	}
 
-	$s->save();
-	return "success=" . base64_encode("true");
+	$selecteableContentIDSet = array();
+	foreach ($applications as $application) {
+	    $contents = $application->Contents();
+	    foreach ($contents as $content) {
+		$selecteableContentIDSet[] = $content->ContentID;
+	    }
+	}
+	foreach($contentIDSet as $key => $contentID) {
+	    if(!in_array($contentID, $selecteableContentIDSet)) {
+		unset($contentIDSet[$key]);
+	    }
+	}
+	
+	$contentIDSet = array_unique($contentIDSet);
+	sort($contentIDSet);
+	$client->ContentIDSet = implode(",", $contentIDSet);
+	$client->save();
+	return "success=" . base64_encode("true") . "&id=" . base64_encode($client->ClientID);
     }
 
     /**
@@ -254,6 +307,7 @@ class Clients_Controller extends Base_Controller {
      * @return HTML
      */
     public function post_excelupload() {
+	$selectableContentIDSet = NULL;
 	$responseMsg = "";
 	$status = "Failed";
 	/* @var $user User */
@@ -277,6 +331,7 @@ class Clients_Controller extends Base_Controller {
 	    return;
 	}
 
+
 	$upload_handler->post(false);
 
 	$ob = ob_get_contents();
@@ -297,7 +352,7 @@ class Clients_Controller extends Base_Controller {
 
 	if ($rowCount < 2) {
 	    $responseMsg = Common::localize("invalid_excel_file_two_rows");
-	} else if ($columnCount != 7) {
+	} else if ($columnCount != 8) {
 	    $responseMsg = Common::localize("invalid_excel_file_seven_columns");
 	} else {
 	    $addedUserCount = 0;
@@ -311,6 +366,8 @@ class Clients_Controller extends Base_Controller {
 		$name = $data->val($row, $colNo++);
 		$surname = $data->val($row, $colNo++);
 		$paidUntil = date("Y-m-d", strtotime($data->val($row, $colNo++)));
+		$contentIDSetNew = explode(",", $data->val($row, $colNo++));
+
 		if (!in_array($applicationID, $appIDSet)) {
 		    $responseMsg .= Common::localize("invalid_application_id_at_row") . $row;
 		    break;
@@ -320,35 +377,61 @@ class Clients_Controller extends Base_Controller {
 		$clientSameUsername = Client::where('ApplicationID', "=", $applicationID)->where('Username', '=', $username)->first();
 		$clientSameEmail = Client::where('ApplicationID', "=", $applicationID)->where('Email', '=', $email)->first();
 		if ($clientSameUsername) {
-		    //user exists upgrade or what ???
-		    $clientSameUsername->Name = $name;
-		    $clientSameUsername->Surname = $surname;
-		    $clientSameUsername->PaidUntil = $paidUntil;
-		    $clientSameUsername->save();
+		    //user exists same
+		    $client = $clientSameUsername;
+		    $client->Name = $name;
+		    $client->Surname = $surname;
+		    $client->PaidUntil = $paidUntil;
 		    $updatedUserCount++;
-		    continue;
 		} else if ($clientSameEmail) {
-		    $clientSameEmail->Name = $name;
-		    $clientSameEmail->Surname = $surname;
-		    $clientSameEmail->PaidUntil = $paidUntil;
-		    $clientSameEmail->save();
+		    $client = $clientSameEmail;
+		    $client->Name = $name;
+		    $client->Surname = $surname;
+		    $client->PaidUntil = $paidUntil;
 		    $updatedUserCount++;
-		    continue;
+		} else {
+		    $client = new Client();
+		    $client->ApplicationID = $applicationID;
+		    $client->Username = $username;
+		    $client->Token = $client->Username . "_" . md5(uniqid());
+		    $client->Password = md5($password);
+		    $client->Email = $email;
+		    $client->Name = $name;
+		    $client->Surname = $surname;
+		    $client->PaidUntil = $paidUntil;
+		    $client->StatusID = eStatus::Active;
+		    $client->CreatorUserID = $user->UserID;
+		    $addedUserCount++;
 		}
 
-		$client = new Client();
-		$client->ApplicationID = $applicationID;
-		$client->Username = $username;
-		$client->Token = $client->Username . "_" . md5(uniqid());
-		$client->Password = md5($password);
-		$client->Email = $email;
-		$client->Name = $name;
-		$client->Surname = $surname;
-		$client->PaidUntil = $paidUntil;
-		$client->StatusID = eStatus::Active;
-		$client->CreatorUserID = $user->UserID;
+		//Uygulama sahibi bu contentID ye yetkilendirme yapabilir mi diye bakmiyorum su anda ama bakmaliyim...
+		if (!empty($contentIDSetNew)) {
+		    $contentIDSet = explode(",", $client->ContentIDSet);
+		    $mergedContentIDSet = array_merge($contentIDSet, $contentIDSetNew);
+		    $uniqueContentIDSet = array_unique($mergedContentIDSet);
+		    sort($uniqueContentIDSet);
+		    $filteredContentIDSet = array_filter($uniqueContentIDSet);
+		    if (count($filteredContentIDSet) != $contentIDSet) {
+			if ($selectableContentIDSet == NULL) {
+			    $selectableContentIDSet = array();
+			    foreach ($applications as $application) {
+				$contents = $application->Contents();
+				foreach ($contents as $content) {
+				    $selectableContentIDSet[] = $content->ContentID;
+				}
+			    }
+			}
+			//yeni eklenilenler var
+			foreach ($filteredContentIDSet as $key => $contentID) {
+			    if (!in_array($contentID, $selectableContentIDSet)) {
+				unset($filteredContentIDSet[$key]);
+			    }
+			}
+		    }
+		    $client->ContentIDSet = implode(",", $filteredContentIDSet);
+		}
+
 		$client->save();
-		$addedUserCount++;
 	    }
 	    $responseMsg .= Common::localize('inserted_mobile_user_count') . $addedUserCount . " " . Common::localize('updated_mobile_user_count') . $updatedUserCount;
 	    $status = 'success';
@@ -481,7 +564,7 @@ class Clients_Controller extends Base_Controller {
 		)
 	);
 	Common::sendEmail($client->Email, $client->Name . ' ' . $client->Surname, $subject, $msg);
-	
+
 	return ajaxResponse::success(Laravel\URL::to_route("clientsregistered") . "?usertoken=" . $client->Token);
     }
 

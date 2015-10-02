@@ -74,10 +74,13 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'ApplicationVersion' => (int) $application->Version,
 				'Force' => (int) $application->Force,
 				'SubscriptionWeekActive' => (int) $application->SubscriptionWeekActive,
+				'SubscriptionWeekIdentifier' => $application->getSubscriptionIdentifier(1),
 				'WeekPrice' => (int) $application->WeekPrice,
 				'SubscriptionMonthActive' => (int) $application->SubscriptionMonthActive,
+				'SubscriptionMonthIdentifier' => $application->getSubscriptionIdentifier(2),
 				'MonthPrice' => $application->MonthPrice,
 				'SubscriptionYearActive' => (int) $application->SubscriptionYearActive,
+				'SubscriptionYearIdentifier' => $application->getSubscriptionIdentifier(3),
 				'YearPrice' => (int) $application->YearPrice,
 		    ));
 		});
@@ -130,8 +133,10 @@ class Webservice_Applications_Controller extends Base_Controller {
      * @return Laravel\Response
      */
     public function get_contents($ServiceVersion, $applicationID) {
+	//get user token here then return acourdin to this 571571
 	return webService::render(function() use ($ServiceVersion, $applicationID) {
 		    $isTest = Input::get('isTest', 0) ? TRUE : FALSE;
+		    $accessToken = Input::get('accessToken', "");
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
 		    $application = webService::getCheckApplication($ServiceVersion, $applicationID);
 
@@ -156,8 +161,12 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    $tabs[] = array("tabLogoUrl" => $baseUrl . "img/galeLogo.png", "tabUrl" => $baseUrl . "/maps/webview/" . $application->ApplicationID);
 		    $tabs[] = array("tabLogoUrl" => $baseUrl . "img/bg-drop.png", "tabUrl" => "http://www.google.com/");
 
-
-		    $contents = webService::getCheckApplicationContents($ServiceVersion, $applicationID, $isTest);
+		    $serviceData = array();
+		    $serviceData["ServiceVersion"] = $ServiceVersion;
+		    $serviceData["applicationID"] = $applicationID;
+		    $serviceData["isTest"] = $isTest;
+		    $serviceData["accessToken"] = $accessToken;
+		    $contents = webService::getCheckApplicationContents($serviceData);
 
 		    return Response::json(array(
 				'status' => 0,

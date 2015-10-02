@@ -73,8 +73,17 @@ class Application extends Eloquent {
 	return $this->has_many('Category', $this->key())->where('StatusID', '=', $statusID)->get();
     }
 
-    public function Contents($statusID) {
-	return $this->has_many('Content', $this->key())->where('StatusID', '=', $statusID)->get();
+    /**
+     * 
+     * @param type $statusID
+     * @return Content
+     */
+    public function Contents($statusID = eStatus::All) {
+	$rs = $this->has_many('Content', $this->key());
+	if($statusID != eStatus::All) {
+	    $rs->where('StatusID', '=', $statusID);
+	}
+	return $rs->get();
     }
 
     public function Users() {
@@ -201,8 +210,15 @@ class Application extends Eloquent {
      */
     public function getSubscriptionIdentifier($type = 1) {
 	if(empty($this->BundleText)) {
-	    return "www.galepress.com.appid." . $this->ApplicationID . "type." . $type;
+	    return "www.galepress.com.appid." . $this->ApplicationID . "type" . $type;
 	} 
-	return $this->BundleText . ".appid." . $this->ApplicationID . ".type." . $type;
+	return $this->BundleText . ".appid." . $this->ApplicationID . ".type" . $type;
+    }
+    
+    public function sidebarClass() {
+	if($this->ExpirationDate < date("Y-m-d")) {
+	    return array("class" => 'expired-app');
+	}
+	return array();
     }
 }

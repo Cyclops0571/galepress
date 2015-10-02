@@ -13,7 +13,7 @@
 			    <span class="icon-plus"></span>
 			</a>
 			<!--excel sample file download-->
-			<a href='/SampleClientExcel.xml' download='SampleClientExcel.xml' title="{{__('common.commandbar_excel_download')}}" class="widget-icon widget-icon-circle">
+			<a href='<?php echo Client::getSampleXmlUrl(); ?>' download='SampleClientExcel.xls' title="{{__('common.commandbar_excel_download')}}" class="widget-icon widget-icon-circle">
 			    <span class="icon-download" style="font-size: 15px;"></span>
 			</a>
 			

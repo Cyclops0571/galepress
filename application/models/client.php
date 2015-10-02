@@ -10,6 +10,7 @@
  * @property int $Name Description
  * @property int $Surname Description
  * @property int $PaidUntil Description
+ * @property int $ContentIDSet Description
  * @property int $LastLoginDate Description
  * @property int $InvalidPasswordAttempts Description
  * @property int $PWRecoveryCode Description
@@ -41,9 +42,35 @@ class Client extends Laravel\Database\Eloquent\Model {
     public static function find($clientID, $columns = array('*')) {
 	return Client::where(self::$key, "=", $clientID)->first($columns);
     }
-    
+
     public function Application() {
 	return $this->belongs_to('Application', 'ApplicationID')->first();
     }
 
+    /**
+     * 
+     * @return ClientSubscription
+     */
+    public function ClientContents() {
+	return $this->has_many("ClientSubscription", "ClientSubscription")->get();
+    }
+
+    /**
+     * 
+     * @return Content
+     */
+    public function Contents() {
+	$contents = array();
+	$contentIDSet = explode(",", $this->ContentIDSet);
+	foreach($contentIDSet as $contentID) {
+	    $tmpContent = Content::find($contentID);
+	    if($tmpContent) {
+		$contents[] = $tmpContent;
+	    }
+	}
+	return $contents;
+    }
+    
+    public static function getSampleXmlUrl() {
+    }
 }
