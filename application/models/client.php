@@ -72,5 +72,6 @@ class Client extends Laravel\Database\Eloquent\Model {
     }
     
     public static function getSampleXmlUrl() {
+	return "/files/sampleFiles/SampleClientExcel_" . Laravel\Config::get("application.language") . ".xls";
     }
 }
