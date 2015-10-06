@@ -113,14 +113,14 @@
             $('.dropdown.languageChange > a img').attr('src','/website/img/flags/deFlag.png?1');
 
             $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
-            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
+            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/usaFlag.png');
 	    
 	    $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/tr');
             $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/trFlag.png');
         } else if( SelectedLanguage === "en") {
 
             $('.dropdown.languageChange > a').attr('href','/en');
-            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/enFlag.png');
+            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/usaFlag.png');
 
             $('.dropdown.languageChange ul li:first-child a').attr('href','/tr');
             $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
@@ -132,7 +132,7 @@
             $('.dropdown.languageChange > a img').attr('src','/website/img/flags/trFlag.png');
 
             $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
-            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
+            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/usaFlag.png');
 	    
             $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
             $('.dropdown.languageChange ul li:nth-child(2)w a img').attr('src','/website/img/flags/deFlag.png?1');
@@ -145,7 +145,7 @@
                 if(SelectedLanguage === "de"){
                     $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/deFlag.png?1');
                 } else if(SelectedLanguage === "en" ) {
-                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/enFlag.png');
+                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/usaFlag.png');
                 } else {
                     $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
 		}

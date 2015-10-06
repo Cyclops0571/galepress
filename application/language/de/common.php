@@ -199,7 +199,9 @@ return array(
 	'application_settings_caption_tab' => 'Tab Einstellungen',
 	'application_settings_template_background_tip' => 'Er vertritt Anwendung \'s Hintergrundfarbe.',
 	'application_settings_template_foreground_tip' => 'Er vertritt Anwendung \'s Vordergrundfarbe.',
-	'application_payment' => 'Application Payment',
+	'application_settings_subscription' => 'Abonnement-Einstellungen',
+    
+	'application_payment' => 'Anwendungs Zahlung',
 
 	'applications_list_blocked1' => 'Ja',
 	'applications_list_blocked0' => 'Nein',
@@ -627,4 +629,8 @@ return array(
 	'image' => 'Bild',
 
 	'client_list' => 'Mobile Users',
+	
+	'sort' => 'Sortieren',
+	'active' => 'Activ',
+	'price' => 'Kurs',
 );

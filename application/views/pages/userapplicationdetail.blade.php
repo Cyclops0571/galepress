@@ -108,6 +108,7 @@ if (false) {
 	    </div>
 	</div>
     </div>
+
     <div class="block block-drop-shadow bg-light-rtl">
 	<div class="header">
 	    <h2>{{ __('common.application_settings_caption_tab') }}</h2>
@@ -210,6 +211,41 @@ if (false) {
 	    <?php endforeach; ?>
 	</div>
     </div>
+
+    <div class="block block-drop-shadow bg-light-rtl">
+	<div class="header" style="border-bottom: 1px solid black">
+	    <h2>{{ __('common.application_settings_subscription') }}</h2>
+	</div>
+	<div class="content controls">
+	    <?php foreach (Subscription::types() as $key => $value): ?> 
+    	    <div class="form-row" style="border-bottom: 1px solid #565656">
+    		<div class="col-md-12"> <?php echo __("clients." . $value); ?></div>
+    	    </div>
+    	    <div class="form-row">
+    		<div class="col-md-3"><?php echo __('common.active'); ?></div>
+    		<div class="col-md-8">
+		    <input name="SubscriptionStatus_<?php echo $key; ?>" type="checkbox" value="1" <?php echo $application->subscriptionStatus($key) == eStatus::Active ? 'checked' : ''; ?>>
+    		</div>
+    		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.active_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
+    	    </div>
+    	    <div class="form-row">
+    		<div class="col-md-3"><?php echo __('common.price'); ?></div>
+    		<div class="col-md-8">
+		    <input class="money" name="SubscriptionPrice_<?php echo $key; ?>" type="text" value="<?php echo $application->subscriptionPrice($key); ?>" placeholder="00,00" />
+    		</div>
+    		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.price_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
+    	    </div>
+    	    <div class="form-row">
+    		<div class="col-md-3"><?php echo __('clients.identifier'); ?></div>
+    		<div class="col-md-8">
+		    <span><?php echo $application->getSubscriptionIdentifier($key); ?></span>
+    		</div>
+    		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.identifier_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
+    	    </div>
+	    <?php endforeach; ?>
+	</div>
+    </div>
+
     <div class="block block-drop-shadow">
 	<div class="content controls">
 	    <div class="form-row row-save">
@@ -258,6 +294,8 @@ if (false) {
 	    var text = $('#dialog-tab-active-warning .modal-body').text().replace("[[innerText]]", '{{ __("common.tabs_warning_url")}}');
 	    $('#dialog-tab-active-warning .modal-body').text(text);
 	});
+
+	$('.money').mask('000.000.000.000.000,00', {reverse: true, placeholder: "00,00"});
     });
 </script>
 @endsection

@@ -199,6 +199,8 @@ return array(
 	'application_settings_caption_tab' => 'Tab Settings',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
+	'application_settings_subscription' => 'Subscription Settings',
+    
 	'application_payment' => 'Application Payment',
 
 	'applications_list_blocked1' => 'Yes',
@@ -616,7 +618,7 @@ return array(
 	'tabs_dont_use_feature' => 'Dont use this feature',
 	
 	'tabs_tab_status' => 'Tab Status',
-	'tabs_info_tab_status' => 'Tabs appears in my application. You can add up to 3 tabs on your application.',
+	'tabs_info_tab_status' => 'Tabs appears in my application. You can add up to 2 tabs on your application.',
 
 	'tabs_warning_url' => 'a valid web address is not entered.',
 	
@@ -624,5 +626,9 @@ return array(
 	'image' => 'Image',
     
 	'client_list' => 'Mobile Users',
+    
+	'sort' => 'Sort',
+	'active' => 'Active',
+	'price' => 'Price',
 
 );

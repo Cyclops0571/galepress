@@ -136,7 +136,7 @@ class webService {
 			'ContentOrderNo' => (int) $r->OrderNo,
 			'RemoveFromMobile' => (bool) $r->RemoveFromMobile,
 			'ContentIsBuyable' => (bool) $r->IsBuyable,
-			'ContentPrice' => $r->Price,
+			'ContentPrice' => (string)$r->Price,
 			'ContentCurrency' => $r->Currency(1),
 			'ContentIdentifier' => $r->getIdentifier(),
 			'ContentBought' => $clientBoughtContent,
@@ -253,7 +253,6 @@ class webService {
     /**
      * 
      * @param type $serviceVersion
-     * @param type $applicationID
      * @param type $username
      * @param type $password
      * @param type $userFacebookID
@@ -261,7 +260,7 @@ class webService {
      * @return User
      * @throws Exception
      */
-    public static function getCheckUser($ServiceVersion, $applicationID, $username, $password, $userFacebookID, $userFbEmail) {
+    public static function getCheckUser($ServiceVersion, $username, $password, $userFacebookID, $userFbEmail) {
 	if (!empty($username) && !empty($password)) {
 	    //username ve password login
 	    $user = User::where('Username', '=', $username)->where('StatusID', '=', eStatus::Active)->first();

@@ -83,14 +83,13 @@ if (isset($client)) {
 
 	    <div class="btns">
 		<input type="button" value="<?php echo __('common.detailpage_save'); ?>" onclick="sClient.save();">                                        
-		<div style="position:relative;height:56px;top:-5px;">
+<!--		<div style="position:relative;height:56px;top:-5px;">
 		    <input class="submit_facebook" id="submit_facebook" type="submit" value="" >                                                            
 		    <div style="width:160px;margin-left:auto;margin-right:auto;position:relative;bottom:56px;pointer-events: none;">                           
 			<span style="font-size:23px;color:#fff;border-right:1px solid #456fae;padding-right:8px;">f</span>
 			<span style="color:#fff;display:inline;position:absolute;display:inline;left:25px;top:6px;width:150px;"> Login with <span style="font-weight:600;">Facebook</span></span>
 		    </div>
-		</div>
-
+		</div>-->
 	    </div>
 
 	</form>

@@ -80,7 +80,7 @@ class Application extends Eloquent {
      */
     public function Contents($statusID = eStatus::All) {
 	$rs = $this->has_many('Content', $this->key());
-	if($statusID != eStatus::All) {
+	if ($statusID != eStatus::All) {
 	    $rs->where('StatusID', '=', $statusID);
 	}
 	return $rs->get();
@@ -202,23 +202,86 @@ class Application extends Eloquent {
     public function PaymentAccount() {
 	return $this->has_one('PaymentAccount', "ApplicationID")->first();
     }
-    
+
     /**
      * 
      * @param int $type
      * @return type
      */
     public function getSubscriptionIdentifier($type = 1) {
-	if(empty($this->BundleText)) {
+	if (empty($this->BundleText)) {
 	    return "www.galepress.com.appid." . $this->ApplicationID . "type" . $type;
-	} 
+	}
 	return $this->BundleText . ".appid." . $this->ApplicationID . ".type" . $type;
     }
-    
+
+    /**
+     * 
+     * @param type $key
+     * @param type $value
+     * @return type
+     */
+    public function subscriptionStatus($key, $value = NULL) {
+	$result = "";
+	switch ($key) {
+	    case Subscription::week:
+		if ($value != NULL) {
+		    $this->SubscriptionWeekActive = $value;
+		}
+		$result = $this->SubscriptionWeekActive;
+		break;
+	    case Subscription::mounth:
+		if ($value != NULL) {
+		    $this->SubscriptionMonthActive = $value;
+		}
+		$result = $this->SubscriptionMonthActive;
+		break;
+	    case Subscription::year:
+		if ($value != NULL) {
+		    $this->SubscriptionYearActive = $value;
+		}
+		$result = $this->SubscriptionYearActive;
+		break;
+	}
+	return $result;
+    }
+
+    /**
+     * 
+     * @param type $key
+     * @param type $value
+     * @return type
+     */
+    public function subscriptionPrice($key, $value = NULL) {
+	$result = "";
+	switch ($key) {
+	    case Subscription::week:
+		if ($value != NULL) {
+		    $this->WeekPrice = $value;
+		}
+		$result = $this->WeekPrice;
+		break;
+	    case Subscription::mounth:
+		if ($value != NULL) {
+		    $this->MonthPrice = $value;
+		}
+		$result = $this->MonthPrice;
+		break;
+	    case Subscription::year:
+		if ($value != NULL) {
+		    $this->YearPrice = $value;
+		}
+		$result = $this->YearPrice;
+		break;
+	}
+	return $result;
+    }
+
     public function sidebarClass() {
-	if($this->ExpirationDate < date("Y-m-d")) {
+	if ($this->ExpirationDate < date("Y-m-d")) {
 	    return array("class" => 'expired-app');
 	}
 	return array();
     }
+
 }

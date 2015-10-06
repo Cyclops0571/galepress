@@ -261,7 +261,6 @@ class Applications_Controller extends Base_Controller {
     //POST
     public function post_save() {
 	$currentUser = Auth::User();
-
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    $id = (int) Input::get($this->pk, '0');
 
@@ -330,6 +329,8 @@ class Applications_Controller extends Base_Controller {
 	    } else {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	    }
+	    
+	    
 	}
 	return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
     }
@@ -423,9 +424,17 @@ class Applications_Controller extends Base_Controller {
 	    $tabs[$i]->StatusID = eStatus::Active;
 	    $tabs[$i]->save();
 	}
-
-	$application->save();
-	$application->incrementAppVersion();
+	
+	foreach(Subscription::types() as $key => $subscription) {
+	    $application->subscriptionPrice($key, Common::moneyFormat("SubscriptionPrice_" . $key));
+	    $application->subscriptionStatus($key, Input::get("SubscriptionStatus_" . $key));
+	}
+	if(!$application->dirty()) {
+	    $application->incrementAppVersion();
+	} else {
+	    $application->save();
+	}
+	
 	return "success=" . base64_encode("true");
     }
 

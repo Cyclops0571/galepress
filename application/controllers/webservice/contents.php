@@ -1,10 +1,10 @@
 <?php
 
-class Ws_v102_Contents_Controller extends Base_Controller
-{       const serviceVersion = 102;
+class Webservice_Contents_Controller extends Base_Controller
+{       
 	public $restful = true;
 	
-	public function get_version($contentID)
+	public function get_version($serviceVersion, $contentID)
 	{
 		return Ws::render(function() use ($contentID)
 		{
@@ -20,11 +20,11 @@ class Ws_v102_Contents_Controller extends Base_Controller
 		});
 	}
 
-	public function get_detail($contentID)
+	public function get_detail($serviceVersion, $contentID)
 	{
-		return Ws::render(function() use ($contentID)
+		return Ws::render(function() use ($contentID, $serviceVersion)
 		{
-			$content = Ws::getContent($contentID, Ws_v102_Contents_Controller::serviceVersion);
+			$content = Ws::getContent($contentID, $serviceVersion);
 			$content instanceof Content;
 			$categories = Ws::getContentCategories($contentID);
 			return Response::json(array(
@@ -54,7 +54,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 		});
 	}
 
-	public function get_coverImage($contentID)
+	public function get_coverImage($serviceVersion, $contentID)
 	{
 		return Ws::render(function() use ($contentID)
 		{
@@ -74,7 +74,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 		});
 	}
 
-	public function get_file($contentID)
+	public function get_file($serviceVersion, $contentID)
 	{
 		return Ws::render(function() use ($contentID)
 		{

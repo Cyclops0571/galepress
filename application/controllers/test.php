@@ -17,10 +17,20 @@ class dd {
     public static function make() {
 	return new static();
     }
+    
+    public static function who() {
+	echo __CLASS__;
+    }
+    
+    public static function test() {
+	static::who();
+    }
 }
 
 class dd2 extends dd{
-    
+    public static function who() {
+	echo __CLASS__;
+    }
 }
 
 class dd3 extends dd2 {
@@ -28,7 +38,7 @@ class dd3 extends dd2 {
 }
 
 class Test_Controller extends Base_Controller {
-
+    
     public $restful = true;
 
     public function __construct() {
@@ -37,7 +47,7 @@ class Test_Controller extends Base_Controller {
 
     
     public function get_index() {
-	dd(dd3::make());
+	dd(dd3::who());
 	$tmp = array(1,2,3);
 	echo implode(",", $tmp);
 	exit;

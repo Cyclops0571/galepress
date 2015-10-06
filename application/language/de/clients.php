@@ -41,5 +41,18 @@ return array(
 							    "Galepress",
     'selected_content_name' => 'ausgewählte Inhalte',
     'selectable_content_name' => 'Wählbare Inhalt',
+    'week_subscription' => 'Wöchentliche Abonnement',
+    'month_subscription' => 'Monatliches Abo',
+    'year_subscription' => 'Jahresabo',
+    'active_info_week_subscription' => 'Uygulamanızda paralı haftalık üyelik oluşturmak için bu özelliği seçmelisiniz.',
+    'active_info_month_subscription' => 'Uygulamanızda paralı aylık üyelik oluşturmak için bu özelliği seçmelisiniz.',
+    'active_info_year_subscription' => 'Uygulamanızda paralı yıllık üyelik oluşturmak için bu özelliği seçmelisiniz.',
+    'price_info_week_subscription' => 'Uygulamanızda haftalık üyelik ücreti.',
+    'price_info_month_subscription' => 'Uygulamanızda aylık üyelik ücreti.',
+    'price_info_year_subscription' => 'Uygulamanızda yıllık üyelik ücreti.',
+    'identifier_info_week_subscription' => 'Haftalık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
+    'identifier_info_month_subscription' => 'Aylık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
+    'identifier_info_year_subscription' => 'Yıllık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
+    'identifier' => 'Tanımlayıcı',
 );
 

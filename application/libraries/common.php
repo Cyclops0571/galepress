@@ -1121,4 +1121,7 @@ class Common {
 	return $result;
     }
 
+    public static function moneyFormat($inputName) {
+	return str_replace(",", ".", str_replace(".", "", Input::get($inputName)));
+    }
 }

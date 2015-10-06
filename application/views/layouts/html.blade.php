@@ -49,6 +49,8 @@
         {{ HTML::script('js/jquery-1.7.2.min.js'); }}
         {{ HTML::script('js/jquery-ui-1.10.4.custom.min.js'); }}
         {{ HTML::script('js/bootstrap.min.js'); }}
+        {{ HTML::script('js/bootstrap.min.js'); }}
+        {{ HTML::script('js/jquery.mask.min.js'); }}
         {{ HTML::script('js/jquery.uniform.min.js'); }}
         {{ HTML::script('js/jquery.knob.js'); }}
         {{ HTML::script('js/flot/jquery.flot.js'); }}

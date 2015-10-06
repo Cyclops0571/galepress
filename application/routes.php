@@ -579,7 +579,7 @@ Route::post('ws/v102/statistics', array('uses' => 'ws.v102.statistics@create'));
 // <editor-fold defaultstate="collapsed" desc="New Webservice Routes">
 Route::get('webservice/(:num)/applications/(:num)/version', array('uses' => 'webservice.applications@version'));
 Route::get('webservice/(:num)/applications/(:num)/detail', array('uses' => 'webservice.applications@detail'));
-Route::get('wwebservice/(:num)/applications/(:num)/categories', array('uses' => 'webservice.applications@categories'));
+Route::get('webservice/(:num)/applications/(:num)/categories', array('uses' => 'webservice.applications@categories'));
 Route::get('webservice/(:num)/applications/(:num)/categories/(:num)/detail', array('uses' => 'webservice.applications@categoryDetail'));
 
 Route::get('webservice/(:num)/applications/(:num)/contents', array('uses' => 'webservice.applications@contents'));
@@ -587,7 +587,7 @@ Route::get('webservice/(:num)/applications/(:num)/contents', array('uses' => 'we
 
 
 Route::get('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
-Route::post('webservice(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
+Route::post('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
 Route::post('webservice/(:num)/applications/login_application', array('uses' => 'webservice.applications@login_application'));
 Route::post('webservice/(:num)/applications/fblogin', array('uses' => 'webservice.applications@fblogin'));
 // WS-Contents

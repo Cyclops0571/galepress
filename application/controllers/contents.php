@@ -367,7 +367,7 @@ class Contents_Controller extends Base_Controller {
                     $content->UnpublishDate = new DateTime(Common::dateWrite(Input::get('UnpublishDate')));
                     $content->IsProtected = (int) Input::get('IsProtected');
                     $content->IsBuyable = (int) Input::get('IsBuyable');
-                    $content->Price = (float) Input::get('Price');
+                    $content->Price = Common::moneyFormat('Price');
                     $content->CurrencyID = (int) Input::get('CurrencyID');
                     $content->Orientation = (int) Input::get('Orientation');
                     $content->setPassword(Input::get('Password'));

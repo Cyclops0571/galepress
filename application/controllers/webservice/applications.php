@@ -75,13 +75,13 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'Force' => (int) $application->Force,
 				'SubscriptionWeekActive' => (int) $application->SubscriptionWeekActive,
 				'SubscriptionWeekIdentifier' => $application->getSubscriptionIdentifier(1),
-				'WeekPrice' => (int) $application->WeekPrice,
+				'WeekPrice' => (string)$application->WeekPrice,
 				'SubscriptionMonthActive' => (int) $application->SubscriptionMonthActive,
 				'SubscriptionMonthIdentifier' => $application->getSubscriptionIdentifier(2),
-				'MonthPrice' => $application->MonthPrice,
+				'MonthPrice' => (string)$application->MonthPrice,
 				'SubscriptionYearActive' => (int) $application->SubscriptionYearActive,
 				'SubscriptionYearIdentifier' => $application->getSubscriptionIdentifier(3),
-				'YearPrice' => (int) $application->YearPrice,
+				'YearPrice' => (string) $application->YearPrice,
 		    ));
 		});
     }

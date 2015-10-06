@@ -199,6 +199,8 @@ return array(
 	'application_settings_caption_tab' => 'Tab Ayarları ',
 	'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
 	'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
+	'application_settings_subscription' => 'Üyelik Ayarları',
+    
 	'application_payment' => 'Ödeme',
 
 	'applications_list_blocked1' => 'Evet',
@@ -616,7 +618,7 @@ return array(
 	'tabs_dont_use_feature' => 'Bu özelliği kullanma',
 	
 	'tabs_tab_status' => 'Tab Durumu',
-	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün. Uygulamanıza en fazla 3 tab ekleyebilirsiniz.',
+	'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün. Uygulamanıza en fazla 2 tab ekleyebilirsiniz.',
 
 	'tabs_warning_url' => 'geçerli bir web adresi girilmedi.',
 	
@@ -624,5 +626,8 @@ return array(
 	'image' => 'Resim',
 	
 	'client_list' => 'Mobil Kullanıcılar',
-    
+	
+	'sort' => 'Sırala',
+	'active' => 'Aktif',
+	'price' => 'Fiyat',
 );

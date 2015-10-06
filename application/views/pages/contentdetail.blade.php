@@ -42,7 +42,7 @@ if (isset($row)) {
     $IsProtected = (int) $row->IsProtected;
     $Password = $row->Password;
     $IsBuyable = (int) $row->IsBuyable;
-    $Price = number_format((float) $row->Price, 2, '.', '');
+    $Price = number_format($row->Price, 2, ',', '.');
     $CurrencyID = (int) $row->CurrencyID;
     $IsMaster = (int) $row->IsMaster;
     $Orientation = (int) $row->Orientation;
@@ -395,7 +395,7 @@ $groupcodes = DB::table('GroupCode AS gc')
             <div class="form-row">
                 <div class="col-md-3">{{ __('common.contents_price') }}</div>
                 <div class="col-md-8">               
-                    <input type="text" name="Price" id="Price" class="form-control textbox" value="{{ $Price }}" style="width:100px;" />
+                    <input type="text" name="Price" id="Price" class="form-control textbox" value="{{ $Price }}" placeholder="00,00" style="width:100px;" />
                 </div>
                 <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_price') }}"><span class="icon-info-sign"></span></a></div>
             </div>
@@ -796,6 +796,7 @@ $groupcodes = DB::table('GroupCode AS gc')
     var showCropPage = <?php echo json_encode($showCropPage); ?>;
     var ContentID = <?php echo $ContentID; ?>;
     $(function(){
+    $('#Price').mask('000.000.000.000.000,00', {reverse: true, placeholder: "00,00"});
     cContent.addFileUpload();
             cContent.addImageUpload();
             if (parseInt($("#ContentID").val()) == 0) {

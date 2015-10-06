@@ -1,10 +1,10 @@
 <?php
 
-class Ws_v102_Statistics_Controller extends Base_Controller {
+class Webservice_Statistics_Controller extends Base_Controller {
 
 	public $restful = true;
 
-	public function post_create() {
+	public function post_create($serviceVersion) {
 		return Ws::render(function() {
 					//$id, $type, $time, $lat, $long, $deviceID, $applicationID, $contentID, $page, $param5, $param6, $param7
 					$found = false;

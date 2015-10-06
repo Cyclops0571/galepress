@@ -28,7 +28,7 @@
 			<img src="/website/img/flags/trFlag.png" /><span class="caret"></span>
 		    </a>
 		    <ul aria-labelledby="menu_item_Portfolio" class="dropdown-menu" style="min-width:52px !important;width:52px !important;">
-			<li><a href="/en" data-ref="#"><img src="/website/img/flags/enFlag.png" class="noTouch"/></a></li>
+			<li><a href="/en" data-ref="#"><img src="/website/img/flags/usaFlag.png" class="noTouch"/></a></li>
 			<li><a href="/de" data-ref="#"><img src="/website/img/flags/deFlag.png?1" class="noTouch" /></a></li>
 		    </ul>
 		</li>
