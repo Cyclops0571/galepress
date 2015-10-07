@@ -221,24 +221,24 @@ class Application extends Eloquent {
      * @param type $value
      * @return type
      */
-    public function subscriptionStatus($key, $value = NULL) {
+    public function subscriptionStatus($key, $value = -1) {
 	$result = "";
 	switch ($key) {
 	    case Subscription::week:
-		if ($value != NULL) {
-		    $this->SubscriptionWeekActive = $value;
+		if ($value != -1) {
+		    $this->SubscriptionWeekActive = (int)((bool)$value);
 		}
 		$result = $this->SubscriptionWeekActive;
 		break;
 	    case Subscription::mounth:
-		if ($value != NULL) {
-		    $this->SubscriptionMonthActive = $value;
+		if ($value != -1) {
+		    $this->SubscriptionMonthActive = (int)((bool)$value);
 		}
 		$result = $this->SubscriptionMonthActive;
 		break;
 	    case Subscription::year:
-		if ($value != NULL) {
-		    $this->SubscriptionYearActive = $value;
+		if ($value != -1) {
+		    $this->SubscriptionYearActive = (int)((bool)$value);
 		}
 		$result = $this->SubscriptionYearActive;
 		break;
