@@ -329,8 +329,6 @@ class Applications_Controller extends Base_Controller {
 	    } else {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	    }
-	    
-	    
 	}
 	return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
     }
@@ -409,6 +407,20 @@ class Applications_Controller extends Base_Controller {
 	$application->BannerTransitionRate = (int) Input::get("BannerTransitionRate", 0);
 	$application->BannerActive = (int) Input::get("BannerActive", 0);
 	$application->TabActive = (int) Input::get("TabActive", 0);
+	$application->BannerCustomerActive = Input::get("BannerCustomerActive", 0);
+	if ($application->BannerCustomerActive) {
+	    $v = Validator::make(Input::all(), array("BannerCustomerUrl" => 'required'));
+	    if (!$v->passes()) {
+		$errMsg = str_replace("BannerCustomerUrl", __("common.banner_use_costomer_banner"), $v->errors->first());
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($errMsg);
+	    }
+	}
+	if(preg_match('/^https?:\/\/.+/$', Input::get("BannerCustomerUrl", ""))) {
+	    $application->BannerCustomerUrl = Input::get("BannerCustomerUrl");
+	} else {
+	    $application->BannerCustomerUrl = "http://" . Input::get("BannerCustomerUrl");
+	}
+		
 	$tabs = $application->Tabs();
 	for ($i = 0; $i < TAB_COUNT; $i++) {
 	    if (!isset($tabs[$i])) {
@@ -424,18 +436,41 @@ class Applications_Controller extends Base_Controller {
 	    $tabs[$i]->StatusID = eStatus::Active;
 	    $tabs[$i]->save();
 	}
-	
-	foreach(Subscription::types() as $key => $subscription) {
-	    $application->subscriptionPrice($key, Common::moneyFormat("SubscriptionPrice_" . $key));
+
+	foreach (Subscription::types() as $key => $subscription) {
 	    $application->subscriptionStatus($key, Input::get("SubscriptionStatus_" . $key));
 	}
-	if(!$application->dirty()) {
+	if (!$application->dirty()) {
 	    $application->incrementAppVersion();
 	} else {
 	    $application->save();
 	}
-	
+
 	return "success=" . base64_encode("true");
+    }
+    
+    public function post_refresh_identifier() {
+	$max = 1;
+	foreach (Subscription::types() as $key => $value) {
+	    if ($key > $max) {
+		$max = $key;
+	    }
+	}
+
+	$rules = array(
+	    "ApplicationID" => "required|numeric|min:1",
+	    "SubscrioptionType" => "required|numeric|min:1|max:" . $max,
+	);
+	$v = Validator::make(Input::all(), $rules);
+	if(!$v->passes()) {
+	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($v->errors->first()); 
+//	    ajaxResponse::error($v->errors->first());
+	}
+	
+	$application = Application::find(Input::get("ApplicationID"));
+	$subscriptionIdentifier = $application->SubscriptionIdentifier(Input::get("SubscrioptionType"), TRUE);
+	$application->save();
+	return "success=" . base64_encode("true") . "&SubscriptionIdentifier=" . base64_encode($subscriptionIdentifier);
     }
 
 }

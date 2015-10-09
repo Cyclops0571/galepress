@@ -74,14 +74,11 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'ApplicationVersion' => (int) $application->Version,
 				'Force' => (int) $application->Force,
 				'SubscriptionWeekActive' => (int) $application->SubscriptionWeekActive,
-				'SubscriptionWeekIdentifier' => $application->getSubscriptionIdentifier(1),
-				'WeekPrice' => (string)$application->WeekPrice,
+				'SubscriptionWeekIdentifier' => $application->SubscriptionIdentifier(Subscription::week),
 				'SubscriptionMonthActive' => (int) $application->SubscriptionMonthActive,
-				'SubscriptionMonthIdentifier' => $application->getSubscriptionIdentifier(2),
-				'MonthPrice' => (string)$application->MonthPrice,
+				'SubscriptionMonthIdentifier' => $application->SubscriptionIdentifier(Subscription::mounth),
 				'SubscriptionYearActive' => (int) $application->SubscriptionYearActive,
-				'SubscriptionYearIdentifier' => $application->getSubscriptionIdentifier(3),
-				'YearPrice' => (string) $application->YearPrice,
+				'SubscriptionYearIdentifier' => $application->SubscriptionIdentifier(Subscription::year),
 		    ));
 		});
     }
@@ -174,7 +171,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'ThemeBackground' => $application->ThemeBackground,
 				'ThemeForeground' => $hexadecimalColorCode,
 				'BannerActive' => $application->BannerActive,
-				'BannerPage' => $baseUrl . "/banners/service_view/" . $application->ApplicationID . "?ver=" . $application->Version,
+				'BannerPage' => $application->BannerPage(),
 				'Tabs' => $application->TabsForService(),
 				'Contents' => $contents
 		    ));

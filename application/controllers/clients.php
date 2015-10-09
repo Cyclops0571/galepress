@@ -256,9 +256,7 @@ class Clients_Controller extends Base_Controller {
 
 	$v = Validator::make(Input::all(), $rules);
 	if (!$v->passes()) {
-	    dd($v->errors->first());
 	    return ajaxResponse::error($v->errors->first());
-	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	}
 
 	$client->Username = $username;

@@ -367,7 +367,6 @@ class Contents_Controller extends Base_Controller {
                     $content->UnpublishDate = new DateTime(Common::dateWrite(Input::get('UnpublishDate')));
                     $content->IsProtected = (int) Input::get('IsProtected');
                     $content->IsBuyable = (int) Input::get('IsBuyable');
-                    $content->Price = Common::moneyFormat('Price');
                     $content->CurrencyID = (int) Input::get('CurrencyID');
                     $content->Orientation = (int) Input::get('Orientation');
                     $content->setPassword(Input::get('Password'));
@@ -426,11 +425,9 @@ class Contents_Controller extends Base_Controller {
                 $c->IsProtected = $content->IsProtected;
                 $c->Password = $content->Password;
                 $c->IsBuyable = $content->IsBuyable;
-                $c->Price = $content->Price;
                 $c->CurrencyID = $content->CurrencyID;
                 $c->IsMaster = 2;
                 $c->Orientation = $content->Orientation;
-                $c->Identifier = $content->Identifier;
                 $c->AutoDownload = $content->AutoDownload;
                 $c->Approval = $content->Approval;
                 $c->Blocked = $content->Blocked;
@@ -865,6 +862,22 @@ class Contents_Controller extends Base_Controller {
         } catch (Exception $e) {
             return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
         }
+    }
+    
+    public function post_refresh_identifier() {
+	$rules = array(
+	    "ContentID" => "required|numeric|min:1",
+	);
+	$v = Validator::make(Input::all(), $rules);
+	if(!$v->passes()) {
+	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($v->errors->first()); 
+//	    ajaxResponse::error($v->errors->first());
+	}
+	
+	$content = Content::find(Input::get("ContentID"));
+	$subscriptionIdentifier = $content->getIdentifier(TRUE);
+	$content->save();
+	return "success=" . base64_encode("true") . "&SubscriptionIdentifier=" . base64_encode($subscriptionIdentifier);
     }
 
 }

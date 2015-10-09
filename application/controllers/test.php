@@ -12,7 +12,7 @@
  * @author Detay
  */
 
-class dd {
+class dd1 {
     const ASdf = 5;
     public static function make() {
 	return new static();
@@ -27,7 +27,7 @@ class dd {
     }
 }
 
-class dd2 extends dd{
+class dd2 extends dd1{
     public static function who() {
 	echo __CLASS__;
     }
@@ -47,6 +47,11 @@ class Test_Controller extends Base_Controller {
 
     
     public function get_index() {
+	dd(Laravel\URL::to_route("clientsregistered"));
+	dd(preg_match('/^https?:\/\/.+$/', "asdfasf"));
+	$app = Application::find(58);
+	$app->SubscriptionIdentifier(2);
+	exit;
 	dd(dd3::who());
 	$tmp = array(1,2,3);
 	echo implode(",", $tmp);

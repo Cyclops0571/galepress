@@ -62,9 +62,37 @@ if (false) {
 	<div class="header">
 	    <h2>{{ __('common.application_settings_caption_banner') }}</h2>
 	</div>
-	<div class="content controls">
+	<div class="content controls" id="bannerSettings">
 	    <div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
 		<div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
+	    </div>
+	    <div class="form-row">
+		<div class="col-md-3">{{__('common.contents_status')}}</div>
+		<div class="col-md-8">
+		    <div class="checkbox-inline" style="padding-left:0;">
+			<div class="checker">
+			    <span>
+				<input name="BannerActive" id="BannerActive" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?> onclick="cApplication.BannerActive()" >
+			    </span>
+			</div>
+		    </div>
+		</div>
+		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
+	    </div>
+	    <div class="form-row">
+		<div class="col-md-3"><?php echo __("common.banner_use_costomer_banner"); ?></div>
+		<div class="col-md-8">
+		    <div class="input-group">
+			<span class="input-group-addon">
+			    <input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1" onclick="cApplication.BannerCustomerActive()">
+			</span>
+			<input  type="text" name="BannerCustomerUrl" value="" placeholder="http://">
+			 <span class="input-group-btn">
+			    <button class="btn btn-primary urlCheck" type="button" onclick="cApplication.checkUrl(this);"><span class="icon-ok"></span></button>
+			</span>
+		    </div>
+		</div>
+		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_use_customer_banner') }}"><span class="icon-info-sign"></span></a></div>
 	    </div>
 	    <div class="form-row">
 		<div class="col-md-3">{{__('common.banners_autoplay')}}</div>
@@ -92,19 +120,6 @@ if (false) {
 		    <input type="text" name="BannerTransitionRate"  value="<?php echo $application->BannerTransitionRate; ?>"/>
 		</div>
 		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_speed') }}"><span class="icon-info-sign"></span></a></div>
-	    </div>
-	    <div class="form-row">
-		<div class="col-md-3">{{__('common.contents_status')}}</div>
-		<div class="col-md-8">
-		    <div class="checkbox-inline" style="padding-left:0;">
-			<div class="checker">
-			    <span>
-				<input name="BannerActive" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?>>
-			    </span>
-			</div>
-		    </div>
-		</div>
-		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
 	    </div>
 	</div>
     </div>
@@ -229,16 +244,16 @@ if (false) {
     		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.active_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
     	    </div>
     	    <div class="form-row">
-    		<div class="col-md-3"><?php echo __('common.price'); ?></div>
-    		<div class="col-md-8">
-		    <input class="money" name="SubscriptionPrice_<?php echo $key; ?>" type="text" value="<?php echo $application->subscriptionPrice($key); ?>" placeholder="00,00" />
-    		</div>
-    		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.price_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
-    	    </div>
-    	    <div class="form-row">
     		<div class="col-md-3"><?php echo __('clients.identifier'); ?></div>
     		<div class="col-md-8">
-		    <span><?php echo $application->getSubscriptionIdentifier($key); ?></span>
+		    <div class="input-group">
+			<input type="text" id="SubscriptionIdenfier_<?php echo $key; ?>"  value="<?php echo $application->SubscriptionIdentifier($key); ?>" readonly="readonly">
+			<span class="input-group-btn">
+			    <button class="btn btn-primary urlCheck" type="button" onclick="cApplication.refreshSubscriptionIdentifier(<?php echo $application->ApplicationID; ?>, <?php echo $key; ?>);">
+				<span class="icon-refresh"></span>
+			    </button>
+			</span>
+		    </div>
     		</div>
     		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.identifier_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
     	    </div>
@@ -287,6 +302,8 @@ if (false) {
 	var Speed = $('input[name=BannerTransitionRate]').val();
 	cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
 	cApplication.setSelectInputActive();
+	cApplication.BannerActive();
+	cApplication.BannerCustomerActive();
 	cApplication.checkTabStatus();
 	// cApplication.checkHoverBlock();
 	$('#dialog-tab-active-warning').on('shown.bs.modal', function () {

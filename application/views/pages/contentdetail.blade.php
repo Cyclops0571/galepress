@@ -15,7 +15,6 @@ $CategoryID = 0;
 $IsProtected = 0;
 $Password = '';
 $IsBuyable = 0;
-$Price = 0;
 $CurrencyID = 0;
 $IsMaster = 0;
 $Orientation = 0;
@@ -42,7 +41,6 @@ if (isset($row)) {
     $IsProtected = (int) $row->IsProtected;
     $Password = $row->Password;
     $IsBuyable = (int) $row->IsBuyable;
-    $Price = number_format($row->Price, 2, ',', '.');
     $CurrencyID = (int) $row->CurrencyID;
     $IsMaster = (int) $row->IsMaster;
     $Orientation = (int) $row->Orientation;
@@ -378,8 +376,14 @@ $groupcodes = DB::table('GroupCode AS gc')
 	    <div class="form-row <?php echo ($ContentID && $IsBuyable) > 0 ? "" : 'disabledFields hide'?>">
                 <div class="col-md-3">{{ __('common.contents_identifier') }}</div>
                 <div class="col-md-8">
-		    {{ $Identifier }}
-                    <!--<input type="text" name="Identifier" disabled id="Identifier" class="form-control textbox" value="{{ $Identifier }}" />-->
+		    <div class="input-group">
+			<input type="text" id="ContentIdenfier"  value="<?php echo $Identifier; ?>" readonly="readonly" >
+			<span class="input-group-btn">
+			    <button class="btn btn-primary urlCheck" type="button" onclick="cContent.refreshIdentifier(<?php echo $ContentID; ?>);" >
+				<span class="icon-refresh"></span>
+			    </button>
+			</span>
+		    </div>
                 </div>
                 <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_identifier') }}"><span class="icon-info-sign"></span></a></div>
             </div>
@@ -391,13 +395,6 @@ $groupcodes = DB::table('GroupCode AS gc')
                     </div>                             
                 </div>
                 <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_isbuyable') }}"><span class="icon-info-sign"></span></a></div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-3">{{ __('common.contents_price') }}</div>
-                <div class="col-md-8">               
-                    <input type="text" name="Price" id="Price" class="form-control textbox" value="{{ $Price }}" placeholder="00,00" style="width:100px;" />
-                </div>
-                <div class="col-md-1"><a  class="tipr" title="{{ __('common.contents_tooltip_price') }}"><span class="icon-info-sign"></span></a></div>
             </div>
             <div class="form-row disabledFields hide">
                 <div class="col-md-3">{{ __('common.contents_currency') }}</div>
@@ -796,7 +793,6 @@ $groupcodes = DB::table('GroupCode AS gc')
     var showCropPage = <?php echo json_encode($showCropPage); ?>;
     var ContentID = <?php echo $ContentID; ?>;
     $(function(){
-    $('#Price').mask('000.000.000.000.000,00', {reverse: true, placeholder: "00,00"});
     cContent.addFileUpload();
             cContent.addImageUpload();
             if (parseInt($("#ContentID").val()) == 0) {

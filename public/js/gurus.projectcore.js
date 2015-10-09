@@ -698,24 +698,23 @@ var cApplication = new function () {
 		}
     };
     this.checkUrl = function (e) {
-		var url = $(e).parent().prev().val();
-		if (url.length > 0 && !isUrlReachable(url))
-		{
-		    $(e).css('background', '#9d0000');
-		    $(e).parent().parent().next().removeClass("hide");
-		    // $(e).closest('.form-row').next().find('.col-md-8').addClass('noTouchOpacity');
-		}
-		else if (isUrlReachable(url)) {
-		    $(e).parent().parent().next().addClass("hide");
-		    $(e).css('background', '#59AD2F');
-		    $(e).css('color', '#fff');
-		    // $(e).closest('.form-row').next().find('.col-md-8').addClass('noTouchOpacity');
-		}
-		else {
-		    $(e).parent().parent().next().addClass("hide");
-		    $(e).css('background-color', '#2e2e2e');
-		    // $(e).closest('.form-row').next().find('.col-md-8').removeClass('noTouchOpacity');
-		}
+	var url = $(e).parent().prev().val();
+	if(url.length === 0) {
+	    $(e).parent().parent().next().addClass("hide");
+	    $(e).css('background-color', '#2e2e2e');
+	    // $(e).closest('.form-row').next().find('.col-md-8').removeClass('noTouchOpacity');
+	} else {
+	    if(!isUrlReachable(url)) {
+		$(e).css('background', '#9d0000');
+		$(e).parent().parent().next().removeClass("hide");
+		// $(e).closest('.form-row').next().find('.col-md-8').addClass('noTouchOpacity');
+	    } else {
+		$(e).parent().parent().next().addClass("hide");
+		$(e).css('background', '#59AD2F');
+		$(e).css('color', '#fff');
+		// $(e).closest('.form-row').next().find('.col-md-8').addClass('noTouchOpacity');
+	    }
+	}
     };
 
     this.setSelectInputActive = function () {
@@ -730,26 +729,59 @@ var cApplication = new function () {
     };
 
     this.checkTabStatus = function () {
-	   	if ($("#TabActive").is(':checked')) {
-			$("#TabActive").closest('.form-row').nextAll().removeClass('noTouchOpacity');
+	var obj = $("#TabActive");
+	    if (obj.is(':checked')) {
+		obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
 	    }
 	    else{
-	    	$("#TabActive").closest('.form-row').nextAll().addClass('noTouchOpacity');
+	    	obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
 	    }
 	    $('.row-save').removeClass('noTouchOpacity');
 	};
+	
+    this.BannerActive = function() {
+	var obj = $("#BannerActive");
+	if(obj.is(":checked")) {
+	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
+	} else {
+	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
+	}
+    };
+    
+    this.BannerCustomerActive = function() {
+	var obj = $("#BannerCustomerActive");
+	if(obj.is(":checked")) {
+	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
+	    $("input[name='BannerCustomerUrl']").removeClass('noTouchOpacity');
+	} else {
+	    $("input[name='BannerCustomerUrl']").addClass('noTouchOpacity');
+	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
+	}
+    };
+    
+    this.refreshSubscriptionIdentifier = function(AppID, SubscriptionType) {
+	cNotification.loader();
+	cAjax.doAsyncRequest("POST", '/applications/refresh_identifier', 
+	{"ApplicationID" : AppID, "SubscrioptionType" : SubscriptionType},
+	function (ret) {
+	    $("#SubscriptionIdenfier_" + SubscriptionType).val(ret.getValue("SubscriptionIdentifier"));
+	    cNotification.success();
+	},
+	undefined,
+	false);
+    };
 
-	// this.checkHoverBlock = function () {
-	//    	$('.block:eq(1)').hover(
-	// 	  function() {
-	// 	  	$('.screen *').css('opacity',0.80);
-	// 	  	$('.screen .templateScreen, .screen .templateScreen .container, .screen .templateScreen .container .form-row:first').css('opacity',1);
-	// 	    $('.screen .templateScreen .ms-gallery-template,.screen .templateScreen .ms-gallery-template *').css('opacity',1);
-	// 	  }, function() {
-	// 	    $('.screen *').css('opacity',1);
-	// 	  }
-	// 	);
-	// };
+    // this.checkHoverBlock = function () {
+    //    	$('.block:eq(1)').hover(
+    // 	  function() {
+    // 	  	$('.screen *').css('opacity',0.80);
+    // 	  	$('.screen .templateScreen, .screen .templateScreen .container, .screen .templateScreen .container .form-row:first').css('opacity',1);
+    // 	    $('.screen .templateScreen .ms-gallery-template,.screen .templateScreen .ms-gallery-template *').css('opacity',1);
+    // 	  }, function() {
+    // 	    $('.screen *').css('opacity',1);
+    // 	  }
+    // 	);
+    // };
 
 };
 
@@ -1292,6 +1324,18 @@ var cContent = new function () {
 				cNotification.hide();
 	    	}
 		},1000);
+    };
+    
+    this.refreshIdentifier = function(contentID) {
+	cNotification.loader();
+	cAjax.doAsyncRequest("POST", '/contents/refresh_identifier', 
+	{"ContentID" : contentID},
+	function (ret) {
+	    $("#ContentIdenfier").val(ret.getValue("SubscriptionIdentifier"));
+	    cNotification.success();
+	},
+	undefined,
+	false);
     };
 };
 

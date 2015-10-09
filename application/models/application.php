@@ -30,16 +30,15 @@
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
  * @property int $BannerActive Description
+ * @property int $BannerCustomerActive Description
+ * @property int $BannerCustomerUrl Description
  * @property int $BannerAutoplay Description
  * @property int $BannerIntervalTime Description
  * @property int $BannerTransitionRate Description
  * @property int $TabActive Description
  * @property int $SubscriptionWeekActive Description
- * @property int $WeekPrice Description
  * @property int $SubscriptionMonthActive Description
- * @property int $MonthPrice Description
  * @property int $SubscriptionYearActive Description
- * @property int $YearPrice Description
  */
 class Application extends Eloquent {
 
@@ -174,6 +173,10 @@ class Application extends Eloquent {
 	parent::save();
     }
 
+    public function BannerPage() {
+	
+    }
+
     public function TabsForService() {
 	$tabsForService = array();
 	if (!$this->TabActive) {
@@ -206,13 +209,36 @@ class Application extends Eloquent {
     /**
      * 
      * @param int $type
+     * @param int $refreshIdentifier
      * @return type
      */
-    public function getSubscriptionIdentifier($type = 1) {
-	if (empty($this->BundleText)) {
-	    return "www.galepress.com.appid." . $this->ApplicationID . "type" . $type;
+    public function SubscriptionIdentifier($type = 1, $refreshIdentifier = false) {
+	switch ($type) {
+	    case Subscription::mounth:
+		$fieldName = "MonthIdentifier";
+		break;
+	    case Subscription::year:
+		$fieldName = "YearIdentifier";
+		break;
+	    default:
+		$fieldName = "WeekIdentifier";
+		break;
 	}
-	return $this->BundleText . ".appid." . $this->ApplicationID . ".type" . $type;
+	
+	if (empty($this->$fieldName) || $refreshIdentifier) {
+	    if (empty($this->BundleText)) {
+		$identifier = "www.galepress.com.appid." . $this->ApplicationID . "type" . $type . "t" . time();
+	    } else {
+		$identifier = strtolower($this->BundleText) . ".appid." . $this->ApplicationID . ".type" . $type . "t" . time();
+	    }
+	    if(empty($this->$fieldName)) {
+		$this->$fieldName = $identifier;
+		$this->save();
+	    } else {
+		$this->$fieldName = $identifier;
+	    }
+	}
+	return $this->$fieldName;
     }
 
     /**
@@ -226,52 +252,21 @@ class Application extends Eloquent {
 	switch ($key) {
 	    case Subscription::week:
 		if ($value != -1) {
-		    $this->SubscriptionWeekActive = (int)((bool)$value);
+		    $this->SubscriptionWeekActive = (int) ((bool) $value);
 		}
 		$result = $this->SubscriptionWeekActive;
 		break;
 	    case Subscription::mounth:
 		if ($value != -1) {
-		    $this->SubscriptionMonthActive = (int)((bool)$value);
+		    $this->SubscriptionMonthActive = (int) ((bool) $value);
 		}
 		$result = $this->SubscriptionMonthActive;
 		break;
 	    case Subscription::year:
 		if ($value != -1) {
-		    $this->SubscriptionYearActive = (int)((bool)$value);
+		    $this->SubscriptionYearActive = (int) ((bool) $value);
 		}
 		$result = $this->SubscriptionYearActive;
-		break;
-	}
-	return $result;
-    }
-
-    /**
-     * 
-     * @param type $key
-     * @param type $value
-     * @return type
-     */
-    public function subscriptionPrice($key, $value = NULL) {
-	$result = "";
-	switch ($key) {
-	    case Subscription::week:
-		if ($value != NULL) {
-		    $this->WeekPrice = $value;
-		}
-		$result = $this->WeekPrice;
-		break;
-	    case Subscription::mounth:
-		if ($value != NULL) {
-		    $this->MonthPrice = $value;
-		}
-		$result = $this->MonthPrice;
-		break;
-	    case Subscription::year:
-		if ($value != NULL) {
-		    $this->YearPrice = $value;
-		}
-		$result = $this->YearPrice;
 		break;
 	}
 	return $result;

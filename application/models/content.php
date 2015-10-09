@@ -305,10 +305,20 @@ class Content extends Eloquent {
 	parent::save();
     }
 
-    public function getIdentifier() {
-	if(empty($this->Application()->BundleText)) {
-	    return "www.galepress.com."  . $this->ContentID;
+    public function getIdentifier($refreshIdentifier = false) {
+	if (empty($this->Identifier) || $refreshIdentifier) {
+	    if (empty($this->Application()->BundleText)) {
+		$identifier = "www.galepress.com."  . $this->ContentID . "t" . time();
+	    } else {
+		$identifier = strtolower($this->Application()->BundleText) . "." . $this->ContentID . "t" . time();
+	    }
+	    if(empty($this->Identifier)) {
+		$this->Identifier = $identifier;
+		$this->save();
+	    } else {
+		$this->Identifier = $identifier;
+	    }
 	}
-	return strtolower($this->Application()->BundleText) . "." . $this->ContentID;
+	return $this->Identifier;
     }
 }

@@ -130,7 +130,7 @@ class Common {
 	if ((int) $applicationID == 0) {
 	    return FALSE;
 	}
-	
+
 	if ((int) $currentUser->UserTypeID == eUserTypes::Customer) {
 	    $a = Application::find($applicationID);
 	    if ($a) {
@@ -627,10 +627,10 @@ class Common {
 	return; //571571
 	Bundle::start('messages');
 	foreach ($userList as $user) {
-	    if(!in_array($user["warning_mail_phase"], array(1,2,3))) {
+	    if (!in_array($user["warning_mail_phase"], array(1, 2, 3))) {
 		continue;
 	    }
-	    
+
 	    Message::send(function($m) use($user) {
 		$msg = "";
 		switch ($user["warning_mail_phase"]) {
@@ -1124,4 +1124,5 @@ class Common {
     public static function moneyFormat($inputName) {
 	return str_replace(",", ".", str_replace(".", "", Input::get($inputName)));
     }
+
 }

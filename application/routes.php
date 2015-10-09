@@ -507,6 +507,8 @@ foreach($languages as $currentLanguage) {
 Laravel\Routing\Route::post('clients/clientregister', array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
 Laravel\Routing\Route::post('clients/forgotpassword', array('as' => 'clientsregistered', 'uses' => 'clients@forgotpassword'));
 Laravel\Routing\Route::post("clients/resetpw", array('as' => 'clientsresetpw', 'uses' => 'clients@resetpw'));
+Laravel\Routing\Route::post("applications/refresh_identifier", array('as' => 'applicationrefreshidentifier', 'uses' => 'applications@refresh_identifier'));
+Laravel\Routing\Route::post("contents/refresh_identifier", array('as' => 'contentrefreshidentifier', 'uses' => 'contents@refresh_identifier'));
 
 Route::post('applications/userApplicationSettings', array('as' => 'save_applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
 Route::get("/template/(:num)", array('as' => 'template_index', 'before'=>'auth', 'uses'=>'template@index'));
