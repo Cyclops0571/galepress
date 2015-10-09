@@ -586,6 +586,7 @@ return array(
 	'banners_image' => 'Image Preview:',
 	'banners_tooltip_coverimage' => 'Opt for the best view in 740x320 resolution.',
 	'banners_active' => 'Banner Active',
+	'banner_use_costomer_banner' => 'Verwenden Sie Web Source',
 	'banners_autoplay' => 'Autoplay',
 	'banners_autoplay_interval' => 'Playback Range (seconds):',
 	'banners_autoplay_speed' => 'Transition Rate (0-100):',
