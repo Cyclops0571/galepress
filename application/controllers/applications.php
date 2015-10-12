@@ -415,7 +415,7 @@ class Applications_Controller extends Base_Controller {
 		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($errMsg);
 	    }
 	}
-	if(preg_match('/^https?:\/\/.+/$', Input::get("BannerCustomerUrl", ""))) {
+	if(preg_match('/^https?:\/\/.+$/', Input::get("BannerCustomerUrl", ""))) {
 	    $application->BannerCustomerUrl = Input::get("BannerCustomerUrl");
 	} else {
 	    $application->BannerCustomerUrl = "http://" . Input::get("BannerCustomerUrl");

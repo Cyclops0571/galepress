@@ -126,47 +126,27 @@
     <script type="text/javascript">
     var SelectedLanguage = <?php echo json_encode(Session::get('language')); ?>;
     $(function(){
-
-        if(SelectedLanguage === "de"){
-	    $('.dropdown.languageChange > a').attr('href','/de');
-            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/deFlag.png?1');
-
-            $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
-            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/usaFlag.png');
-	    
-	    $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/tr');
-            $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/trFlag.png');
-        } else if( SelectedLanguage === "en") {
-
-            $('.dropdown.languageChange > a').attr('href','/en');
-            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/usaFlag.png');
-
-            $('.dropdown.languageChange ul li:first-child a').attr('href','/tr');
-            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
-	    
-	    $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
-            $('.dropdown.languageChange ul li:nth-child(2) a img').attr('src','/website/img/flags/deFlag.png?1');
-        } else {
-	    $('.dropdown.languageChange > a').attr('href','/tr');
-            $('.dropdown.languageChange > a img').attr('src','/website/img/flags/trFlag.png');
-
-            $('.dropdown.languageChange ul li:first-child a').attr('href','/en');
-            $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/usaFlag.png');
-	    
-            $('.dropdown.languageChange ul li:nth-child(2) a').attr('href','/de');
-            $('.dropdown.languageChange ul li:nth-child(2)w a img').attr('src','/website/img/flags/deFlag.png?1');
+	var Languages = ['usa', 'tr', 'de', 'en'];
+	var j = 1;
+	for(var i = 0; i < Languages.length; i++) {
+	    if(SelectedLanguage === Languages[i]) {
+		$('.dropdown.languageChange > a').attr('href','/' + Languages[i]);
+		$('.dropdown.languageChange > a img').attr('src','/website/img/flags/' + Languages[i] + 'Flag.png');
+	    } else {
+		$('.dropdown.languageChange ul li:nth-child(' + j + ') a').attr('href','/' + Languages[i]);
+		$('.dropdown.languageChange ul li:nth-child(' + j + ') a img').attr('src','/website/img/flags/' + Languages[i] + 'Flag.png');
+		j++;
+	    }
 	}
 
         $('.dropdown.languageChange ul li').click(function(event){
             var target = $( event.target );
             if(target.is('a')){
                 $('.dropdown.languageChange > a img').attr('src',$(event.target).find('img').attr('src'));
-                if(SelectedLanguage === "de"){
-                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/deFlag.png?1');
-                } else if(SelectedLanguage === "en" ) {
-                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/usaFlag.png');
-                } else {
-                    $('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/trFlag.png');
+		for(var i = 0; i < Languages[i]; i++) {
+		    if(SelectedLanguage === Languages[i]) {
+			$('.dropdown.languageChange ul li:first-child a img').attr('src','/website/img/flags/' + Languages[i] + 'Flag.png');
+		    }
 		}
             }
         });

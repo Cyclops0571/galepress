@@ -36,7 +36,7 @@ class Ws_v100_Contents_Controller extends Base_Controller
 				'ContentMonthlyName' => $content->MonthlyName,
 				'ContentIsProtected' => ((int)$content->IsProtected == 1 ? true : false),
 				'ContentIsBuyable' => ((int)$content->IsBuyable == 1 ? true : false),
-				'ContentPrice' => $content->Price,
+				'ContentPrice' => '',
 				'ContentCurrency' => $content->Currency(1),
 				'ContentIdentifier' => $content->Identifier,
 				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),

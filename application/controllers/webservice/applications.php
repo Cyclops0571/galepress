@@ -79,6 +79,9 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'SubscriptionMonthIdentifier' => $application->SubscriptionIdentifier(Subscription::mounth),
 				'SubscriptionYearActive' => (int) $application->SubscriptionYearActive,
 				'SubscriptionYearIdentifier' => $application->SubscriptionIdentifier(Subscription::year),
+				'WeekPrice' => '',
+				'MonthPrice' => '',
+				'YearPrice' => '',
 		    ));
 		});
     }

@@ -139,8 +139,9 @@ class PaymentMail_Task {
 		try {
 		    Bundle::start('messages');
 		    Message::send(function($m) use($subject, $msg, $accountExcelFile, $transactionExcelFile) {
+			/* @var $m \Swiftmailer\Drivers\Driver */
 			$m->from('serdar.saygili@detaysoft.com', 'Galepress System Admin');
-                        $m->to('srdsaygili@gmail.com', 'guler.nesil@detaysoft.com');
+                        $m->to(array('serdar.saygili@detaysoft.com', 'guler.nesil@detaysoft.com', 'enes.taskiran@detaysoft.com'));
 			$m->html("true");
 			$m->subject('Galepress Ödeme Bilgilendirme Maili');
 			$m->body("Merhaba; <br/>"

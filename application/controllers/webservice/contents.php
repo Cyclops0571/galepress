@@ -38,6 +38,7 @@ class Webservice_Contents_Controller extends Base_Controller
 				'ContentMonthlyName' => $content->MonthlyName,
 				'ContentIsProtected' => ((int)$content->IsProtected == 1 ? true : false),
 				'ContentIsBuyable' => ((int)$content->IsBuyable == 1 ? true : false),
+				'ContentPrice' => '',
 				'ContentCurrency' => $content->Currency(1),
 				'ContentIdentifier' => $content->getIdentifier(),
 				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),

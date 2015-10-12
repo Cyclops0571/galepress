@@ -84,9 +84,9 @@ if (false) {
 		<div class="col-md-8">
 		    <div class="input-group">
 			<span class="input-group-addon">
-			    <input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1" onclick="cApplication.BannerCustomerActive()">
+			    <input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1" <?php echo $application->BannerCustomerActive ? 'checked' : ''; ?> onclick="cApplication.BannerCustomerActive()">
 			</span>
-			<input  type="text" name="BannerCustomerUrl" value="" placeholder="http://">
+			<input  type="text" name="BannerCustomerUrl" value="<?php echo $application->BannerCustomerUrl ; ?>" placeholder="http://">
 			 <span class="input-group-btn">
 			    <button class="btn btn-primary urlCheck" type="button" onclick="cApplication.checkUrl(this);"><span class="icon-ok"></span></button>
 			</span>

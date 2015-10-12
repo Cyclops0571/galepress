@@ -47,6 +47,20 @@ class Test_Controller extends Base_Controller {
 
     
     public function get_index() {
+	$subject = 'deneme maili';
+	$msg = "deneme mailidir";
+	Bundle::start('messages');
+	Message::send(function($m) use($subject, $msg) {
+	    /* @var $m \Swiftmailer\Drivers\Driver */
+	    $m->from('serdar.saygili@detaysoft.com', 'Galepress System Admin');
+//	    $m->to('srdsaygili@gmail.com', 'guler.nesil@detaysoft.com', 'serdar.saygili@detaysoft.com');
+	    $m->to(array('srdsaygili@gmail.com', 'guler.nesil@detaysoft.com', 'serdar.saygili@detaysoft.com'));
+	    $m->html("true");
+	    $m->subject('deneme mailidir');
+	    $m->body("Bu mail size geldi mi ?");
+	});
+	
+	
 	dd(Laravel\URL::to_route("clientsregistered"));
 	dd(preg_match('/^https?:\/\/.+$/', "asdfasf"));
 	$app = Application::find(58);

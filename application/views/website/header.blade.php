@@ -24,12 +24,19 @@
 		    <a href="/{{ Session::get('language') }}/{{__('route.login')}}"><i class="fa fa-mobile fa-lg"></i>&nbsp;<span class="badge">{{__('website.menu_login')}}</span></a>
 		</li>
 		<li class="dropdown languageChange">
-		    <a href="/tr" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Portfolio" data-ref="#" class="dropdown-toggle">
-			<img src="/website/img/flags/trFlag.png" /><span class="caret"></span>
-		    </a>
+		    <?php foreach (Laravel\Config::get('application.languages') as $lang): ?>
+			<?php if (Session::get('language') == $lang): ?>
+			    <a href="/<?php echo $lang ?>" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Portfolio" data-ref="#" class="dropdown-toggle">
+				<img src="/website/img/flags/<?php echo $lang; ?>Flag.png" /><span class="caret"></span>
+			    </a>
+			<?php endif; ?>
+		    <?php endforeach; ?>
 		    <ul aria-labelledby="menu_item_Portfolio" class="dropdown-menu" style="min-width:52px !important;width:52px !important;">
-			<li><a href="/en" data-ref="#"><img src="/website/img/flags/usaFlag.png" class="noTouch"/></a></li>
-			<li><a href="/de" data-ref="#"><img src="/website/img/flags/deFlag.png?1" class="noTouch" /></a></li>
+			<?php foreach (Laravel\Config::get('application.languages') as $lang): ?>
+			    <?php if (Session::get('language') != $lang): ?>
+				<li><a href="//<?php echo $lang ?>" data-ref="#"><img src="/website/img/flags//<?php echo $lang ?>Flag.png" class="noTouch"/></a></li>
+			    <?php endif; ?>
+			<?php endforeach; ?>
 		    </ul>
 		</li>
 	    </ul>
@@ -42,9 +49,9 @@
 		<li><a href="/{{ Session::get('language') }}/{{__('route.website_showcase')}}" title="{{__('website.menu_showcase')}}" id="menu_item_features-grid" data-ref="features-grid">{{__('website.menu_showcase')}}</a></li>
 
 		<li><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}" title="{{__('website.contact')}}" id="menu_item_Contactus" data-ref="#">{{__('website.contact')}}</a></li>
-		<?php if(Session::get('language') != 'en'): ?>
-		<li><a href="/{{__('route.website_blog')}}" title="Blog" id="menu_item_Blog" data-ref="#">{{__('website.block')}}</a></li>
-		<?php endif; ?>
+		<?php if (Session::get('language') != 'en'): ?>
+    		<li><a href="/{{__('route.website_blog')}}" title="Blog" id="menu_item_Blog" data-ref="#">{{__('website.block')}}</a></li>
+		    <?php endif; ?>
 	    </ul>
         </div>
     </div>
