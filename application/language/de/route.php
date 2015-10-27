@@ -102,10 +102,8 @@ return array(
     'interactivity_upload2' => 'interaktiv-pdf/hochladen2',
     'interactivity_loadpage' => 'interaktiv-pdf/seite-laden',
 
-    'website_galepress' => 'wasistgalepress',
     'website_products' => 'produkte',
     'website_advantages' => 'vorteile',
-    'website_customers' => 'unserekunden',
     'website_tutorials' => 'arbeitsweise',
     'website_contact' => 'kontakt',
     'website_sitemap' => 'sitemap',

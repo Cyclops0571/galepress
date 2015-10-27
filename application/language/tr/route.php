@@ -103,10 +103,8 @@ return array(
     'interactivity_upload2' => 'etkilesimli-pdf/yukle2',
     'interactivity_loadpage' => 'etkilesimli-pdf/sayfayukle',
 
-    'website_galepress' => 'galepress-nedir',
     'website_products' => 'urunler',
     'website_advantages' => 'avantajlar',
-    'website_customers' => 'referanslar',
     'website_tutorials' => 'calisma-yapisi',
     'website_contact' => 'iletisim',
     'website_sitemap' => 'site-haritasi',

@@ -103,10 +103,8 @@ return array(
     'interactivity_upload2' => 'interactive-pdf/load2',
     'interactivity_loadpage' => 'interactive-pdf/loadpage',
 
-    'website_galepress' => 'whatisgalepress',
     'website_products' => 'products',
     'website_advantages' => 'benefits',
-    'website_customers' => 'ourcustomers',
     'website_tutorials' => 'tutorials',
     'website_contact' => 'contact',
     'website_sitemap' => 'sitemap',

@@ -55,6 +55,10 @@ class PaymentAccount extends Eloquent {
 	    return true;
 	}
 	
+	if(empty($this->FirstPayment)) {
+	    $this->FirstPayment = date('Y-m-d');
+	}
+	
 	if($this->payment_count != 0 && !empty($this->FirstPayment)) {
 	    $this->ValidUntil = date("Y-m-d", strtotime($this->FirstPayment . " +" . $this->payment_count . " month"));
 	}

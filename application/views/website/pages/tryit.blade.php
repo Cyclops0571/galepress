@@ -196,7 +196,7 @@
 
 
                                 function testAPI(accessToken) {
-                                  FB.api('/me', function(response) {
+                                  FB.api('/' + 'me', function(response) {
                                     document.getElementById('status').innerHTML =
                                       '{{__("common.thanku")}}, ' + response.name + '!';
 

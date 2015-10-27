@@ -28,16 +28,10 @@
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/">{{__('website.page_home')}}</a>
 					</li>
 					<li>
-						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_galepress')}}">{{__('website.page_galepress')}}</a>
-					</li>
-					<li>
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_products')}}">{{__('website.page_products')}}</a>
 					</li>
 					<li>
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_advantages')}}">{{__('website.page_advantages')}}</a>
-					</li>
-					<li>
-						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_customers')}}">{{__('website.page_customers')}}</a>
 					</li>
 					<li>
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_tutorials')}}">{{__('website.page_tutorials')}}</a>
@@ -45,6 +39,11 @@
 					<li>
 						<i class="icon-caret-right">&nbsp</i><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}">{{__('website.page_contact')}}</a>
 					</li>
+					<?php if(Laravel\Config::get('application.language') == 'tr'): ?>
+					    <li>
+						    <i class="icon-caret-right">&nbsp</i><a href="/blog">Blog</a>
+					    </li>
+					<?php endif; ?>
 				</ul>
 			</div>
 			<div class="span6 hidden-phone" >

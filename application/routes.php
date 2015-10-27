@@ -63,7 +63,6 @@ $languages = Config::get('application.languages', array());
 foreach($languages as $currentLanguage) {
 	
 	// <editor-fold defaultstate="collapsed" desc="website">
-	Route::get(__('route.website_galepress')->get($currentLanguage), array('as' => 'website_galepress_get', 'uses' => 'website@galepress'));
 	Route::get(__('route.website_products')->get($currentLanguage), array('as' => 'website_products_get', 'uses' => 'website@products'));
 	Route::get(__('route.website_advantages')->get($currentLanguage), array('as' => 'website_advantages_get', 'uses' => 'website@advantages'));
 	Route::get(__('route.website_showcase')->get($currentLanguage), array('as' => 'website_showcase_get', 'uses' => 'website@customers'));
@@ -519,8 +518,6 @@ Route::get('maps/webview/(:num)', array('as' => 'map_view', 'uses'=>'maps@webvie
 Route::get('payment/paymentAcountByApplicationID/(:num)', array('as' => 'app_payment_data', 'uses' => 'payment@paymentAcountByApplicationID'));
 
 Route::get('payment-response', array('as' => 'website_odeme_response_post', 'before'=>'auth', 'uses' => 'payment@odemeResponse'));
-//Route::post('payment-response', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
-//Route::get('payment-response/(:any)', array('as' => 'website_odeme_response_post', 'uses' => 'payment@odemeResponse'));
 
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));

@@ -2,34 +2,54 @@
 
 class Uploader {
     
-    public static function ContentsUploadFile($tempFile) {
+    public static function ContentsUploadFile($tempPdfFile) {
 	$filePath = path('public') . 'files/temp';
 	$imageFile = '';
-
-	//if(Str::lower($fileExt) == 'pdf')
-	if (File::is('pdf', $filePath . '/' . $tempFile)) {
+	$tempImageFile = '';
+	if (File::is('pdf', $filePath . '/' . $tempPdfFile)) {
 	    //create zip archive
-	    $zipFile = $tempFile . '.zip';
+	    $zipFile = $tempPdfFile . '.zip';
 
 	    $zip = new ZipArchive();
 	    $res = $zip->open($filePath . '/' . $zipFile, ZIPARCHIVE::CREATE);
 	    if ($res === true) {
-		$zip->addFile($filePath . '/' . $tempFile, 'file.pdf');
+		$zip->addFile($filePath . '/' . $tempPdfFile, 'file.pdf');
 		$zip->close();
 	    }
 
 	    //create snapshot
-	    $imageFile = $tempFile . '.jpg';
-	    $imageFileOriginal = $tempFile . IMAGE_ORJ_EXTENSION;
+	    $imageFile = $tempPdfFile . '.jpg';
+	    $imageFileOriginal = $tempPdfFile . IMAGE_ORJ_EXTENSION;
 
-	    $im = new imagick();
-	    //TODO:postscript delegate failed hatasi vermesine neden oluyor!!!!!!
-	    $im->setOption('pdf:use-cropbox', 'true');
-	    //$im->setResourceLimit(Imagick::RESOURCETYPE_MEMORY, 32);
-	    //$im->setResourceLimit(Imagick::RESOURCETYPE_MAP, 32);
-	    //$im->setResourceLimit(6, 2);
-	    $im->setResolution(150, 150);
-	    $im->readImage($filePath . "/" . $tempFile . "[0]");
+
+	    // <editor-fold defaultstate="collapsed" desc="old code">
+		//$im = new imagick();
+		//TODO:postscript delegate failed hatasi vermesine neden oluyor!!!!!!
+		//$im->setOption('pdf:use-cropbox', 'true');
+		//$im->setResourceLimit(Imagick::RESOURCETYPE_MEMORY, 32);
+		//$im->setResourceLimit(Imagick::RESOURCETYPE_MAP, 32);
+		//$im->setResourceLimit(6, 2);
+		//$im->setResolution(150, 150);
+		//$im->readImage($filePath . "/" . $tempPdfFile . "[0]");
+	    // </editor-fold>
+		
+	    //create image with ghostscript from file
+	    //then use imagick
+	    $tempImageFile = uniqid() . ".jpg";
+
+	    $gsCommand = array();
+	    $gsCommand[] = 'gs';
+	    $gsCommand[] = '-o ' . $filePath . "/" . $tempImageFile;
+	    $gsCommand[] = '-sDEVICE=jpeg';
+	    $gsCommand[] = '-dUseCropBox';
+	    $gsCommand[] = '-dFirstPage=1';
+	    $gsCommand[] = '-dLastPage=1';
+	    $gsCommand[] = '-dJPEGQ=100';
+	    $gsCommand[] = '-r196x196';
+	    $gsCommand[] = "'" . $filePath . "/" . $tempPdfFile . "'";
+
+	    shell_exec(implode(" ", $gsCommand));
+	    $im = new imagick($filePath . "/" . $tempImageFile);
 
 	    //convert color space to RGB
 	    //http://php.net/manual/en/imagick.setimagecolorspace.php
@@ -81,12 +101,15 @@ class Uploader {
 	    unset($im);
 
 	    //delete pdf file
-	    File::delete($filePath . '/' . $tempFile);
+	    File::delete($filePath . '/' . $tempPdfFile);
+	    if(!empty($tempImageFile) && Laravel\File::exists($filePath . '/' . $tempImageFile)) {
+		File::delete($filePath . '/' . $tempImageFile);
+	    }
 
-	    $tempFile = $zipFile;
+	    $tempPdfFile = $zipFile;
 	}
 	return array(
-	    'fileName' => $tempFile,
+	    'fileName' => $tempPdfFile,
 	    'imageFile' => $imageFile
 	);
     }
