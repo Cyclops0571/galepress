@@ -57,7 +57,8 @@
 			    <ul class="widget-address sep-top-xs">
 				<li><a href="<?php echo __("route.website_contact")?>"><i class="fa fa-map-marker fa-lg"></i><small>{{__('website.address_usa')}}</small></a></li>
 				<li><i class="fa fa-phone fa-lg"></i><small>+1-949-836-7342</small></li>
-				<li><i class="fa fa-fax fa-lg"></i><small>+1-973-462-6622</small></li>
+				<li><a href="<?php echo __("route.website_contact")?>"><i class="fa fa-map-marker fa-lg"></i><small>{{__('website.address_usa2')}}</small></a></li>
+				<li><i class="fa fa-phone fa-lg"></i><small>+1-973-462-6622</small></li>
 				<li><i class="fa fa-envelope fa-lg"></i><a href="mailto:usa@galepress.com">usa@galepress.com</a></small></li>
 			    </ul>
 			</div>

@@ -104,7 +104,7 @@
                         },
                         latitude: lat,
                         longitude: lon,
-                        zoom: 16
+                        zoom: 4
                       };
                   </script>
                 </div>

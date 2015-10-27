@@ -105,7 +105,8 @@ return array(
 
 	'address' => 'Adres:',
 	'address_istanbul' => 'Alemdağ Cad. No: 109,<br /> Üsküdar / İstanbul / Türkiye',
-	'address_usa' => 'North Tustin, CA  Denver, CO <br />',
+	'address_usa' => 'North Tustin/ CA  <br />',
+	'address_usa2' => 'Denver / CO  <br />',
 	'phone' => 'Telefon:',
 	'fax' => 'Faks:',
 
