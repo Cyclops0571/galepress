@@ -75,7 +75,7 @@ return array(
 	'menu_report_1302_detail' => 'CONTENT PAGES VIEWS REPORT',
 
 	'statistics_user' => 'User Name:',
-	'statistics_lastlogin' => 'Last Entry To The System:',
+	'statistics_lastlogin' => 'Previous Entry To The System:',
 	'statistics_firstlogin' => 'First Entry To The System:',
 	
 	'commandbar_add' => 'Add',
@@ -490,7 +490,7 @@ return array(
 	'dashboard_title' => 'TOTAL DOWNLOAD',
 	'dashboard_total' => 'Total',
 	'dashboard_welcome' => 'Welcome',
-	'dashboard_lastlogin_time' => 'Last Login Time:',
+	'dashboard_lastlogin_time' => 'Previous Login Time:',
 	'dashboard_app_count' => 'Application Count',
 	'dashboard_content_count' => 'Content Count',
 	'dashboard_previous_months' => 'Prevıous Months',

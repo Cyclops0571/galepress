@@ -9,7 +9,7 @@
                     <div class="head bg-default">
                         <h2>{{ __('common.dashboard_title') }}</h2>
                         <span class="hp-info pull-right">
-                            {{Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date"))}}
+			    <?php echo Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date")); ?>
                         </span>              
                         <div class="head-panel nm">
                             <div class="left_abs_100 reportSubtitle" style="margin-top: 70px; text-align:center; font-size: 11px;">

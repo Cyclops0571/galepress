@@ -35,9 +35,10 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     	<a href="#"><span class="icon-dropbox"></span>{{ __('common.menu_caption_applications') }}</a>
     	<ul id="allApps">
     	    <script type="text/javascript">
+		var contentsUrl = '<?php echo __('route.contents'); ?>';
     		$(document).ready(function () {
     		    var appID = $("input[name$='pplicationID']").val();
-    		    if (document.location.href.indexOf("applicationID") !== -1) {
+    		    if (document.location.href.indexOf(contentsUrl) !== -1 || document.location.href.indexOf("applicationID") !== -1) {
     			$(".page-navigation ul#allApps li a").each(function (index) {
     			    if (getURLParameter($(this).attr('href'), 'applicationID') == appID) {
     				$(this).attr('class', 'visited');
@@ -48,7 +49,7 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     		    function getURLParameter(url, name) {
     			return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
     		    }
-    		    if (document.location.href.indexOf("applicationID") !== -1 && appID != "" && appID > 0) {
+    		    if (document.location.href.indexOf(contentsUrl) !== -1 || document.location.href.indexOf("applicationID") !== -1 && appID != "" && appID > 0) {
     			$(".page-navigation ul#allApps").prev().trigger('click');
     		    }
     		});
@@ -66,78 +67,30 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     <li>
         <a href="#"><span class="icon-file-text-alt"></span> {{ __('common.menu_caption_reports') }}</a>
         <ul id="allReports">
-	    <?php if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Manager): ?>
-    	    <script type="text/javascript">
-    		$(document).ready(function () {
-    		    var reportUrl = window.location.href;
-    		    var reportUrlParams = reportUrl.split("?");
-
-    		    if (reportUrlParams[1] == "r=101")
-    			$('ul#allReports li:eq(0) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=201")
-    			$('ul#allReports li:eq(1) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=301")
-    			$('ul#allReports li:eq(2) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=302")
-    			$('ul#allReports li:eq(3) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1001")
-    			$('ul#allReports li:eq(4) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1101")
-    			$('ul#allReports li:eq(5) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1201")
-    			$('ul#allReports li:eq(6) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1301")
-    			$('ul#allReports li:eq(7) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1302")
-    			$('ul#allReports li:eq(8) a').attr('class', 'visited');
-
-    		    if (reportUrlParams[1] == "r=101" || reportUrlParams[1] == "r=201" || reportUrlParams[1] == "r=301" || reportUrlParams[1] == "r=302" || reportUrlParams[1] == "r=1001" || reportUrlParams[1] == "r=1101" || reportUrlParams[1] == "r=1201" || reportUrlParams[1] == "r=1301" || reportUrlParams[1] == "r=1302")
-    			$(".page-navigation ul#allReports").prev().trigger('click');
-    		});
-    	    </script>
-    	    {{ HTML::nav_link(__('route.reports').'?r=101', __('common.menu_report_101')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=201', __('common.menu_report_201')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=301', __('common.menu_report_301')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=302', __('common.menu_report_302')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1001', __('common.menu_report_1001')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1101', __('common.menu_report_1101')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1201', __('common.menu_report_1201')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1301', __('common.menu_report_1301')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1302', __('common.menu_report_1302')) }}
-	    <?php endif; ?>
-	    <?php if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Customer): ?>
-    	    <script type="text/javascript">
-    		$(document).ready(function () {
-    		    var reportUrl = window.location.href;
-    		    var reportUrlParams = reportUrl.split("?");
-
-    		    if (reportUrlParams[1] == "r=301")
-    			$('ul#allReports li:eq(0) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=302")
-    			$('ul#allReports li:eq(1) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1001")
-    			$('ul#allReports li:eq(2) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1301")
-    			$('ul#allReports li:eq(3) a').attr('class', 'visited');
-    		    else if (reportUrlParams[1] == "r=1302")
-    			$('ul#allReports li:eq(4) a').attr('class', 'visited');
-
-    		    if (reportUrlParams[1] == "r=301" || reportUrlParams[1] == "r=302" || reportUrlParams[1] == "r=1001" || reportUrlParams[1] == "r=1301" || reportUrlParams[1] == "r=1302") {
-    			$(".page-navigation ul#allReports").prev().trigger('click');
-
-    		    }
-    		});
-    	    </script>
-    	    {{-- HTML::nav_link(__('route.reports').'?r=101', __('common.menu_report_101')) --}}
-    	    {{-- HTML::nav_link(__('route.reports').'?r=201', __('common.menu_report_201')) --}}
-    	    {{ HTML::nav_link(__('route.reports').'?r=301', __('common.menu_report_301')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=302', __('common.menu_report_302')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1001', __('common.menu_report_1001')) }}
-    	    {{-- HTML::nav_link(__('route.reports').'?r=1101', __('common.menu_report_1101')) --}}
-    	    {{-- HTML::nav_link(__('route.reports').'?r=1201', __('common.menu_report_1201')) --}}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1301', __('common.menu_report_1301')) }}
-    	    {{ HTML::nav_link(__('route.reports').'?r=1302', __('common.menu_report_1302')) }}
-	    <?php endif; ?>
+	    <?php
+	    $reportLinks = array();
+	    if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Manager){
+		    $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
+		} else {
+		    $reportLinks = array(301, 1001, 1301, 1302);
+		}
+	    ?>
+	    <?php foreach($reportLinks as $reportLink) {
+		echo HTML::nav_link(__('route.reports').'?r=' . $reportLink, __('common.menu_report_' . $reportLink ));
+	    } ?>
+	    <script type="text/javascript">
+	    var reportLinks = <?php echo json_encode($reportLinks); ?>;
+	    $(function(){
+		var reportUrl = window.location.href;
+		var reportUrlParams = reportUrl.split("?");
+		for(var i = 0; i < reportLinks.length; i++) {
+		    if(reportUrlParams[1] === "r=" + reportLinks[i]) {
+			$('ul#allReports li:eq(' + i + ') a').attr('class', 'visited');
+			$(".page-navigation ul#allReports").prev().trigger('click');
+		    }
+		}
+	    });
+	    </script>
         </ul>
     </li>
     <?php if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Manager): ?>
@@ -169,7 +122,7 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     			});
     		    }
 		    
-		    if (document.location.href.indexOf("applicationID") === -1 && appID != "" && appID > 0) {
+		    if (document.location.href.indexOf(contentsUrl) === -1 && (document.location.href.indexOf("applicationID") === -1 && appID != "" && appID > 0)) {
     			$(".page-navigation ul#allSettings").prev().trigger('click');
     		    }
     		});

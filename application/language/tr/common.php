@@ -74,7 +74,7 @@ return array(
 	'menu_report_1302_detail' => 'İçerik Sayfaları Görüntülenme Raporu',
 	
 	'statistics_user' => 'Kullanıcı Adı:',
-	'statistics_lastlogin' => 'Sisteme Son Giriş Tarihi:',
+	'statistics_lastlogin' => 'Sisteme Önceki Giriş Tarihi:',
 	'statistics_firstlogin' => 'Sisteme ilk kez girildi.',
 	
 	'commandbar_add' => 'Ekle',
@@ -490,7 +490,7 @@ return array(
 	'dashboard_title' => 'İNDİRİLME SAYISI',
 	'dashboard_total' => 'Toplam',
 	'dashboard_welcome' => 'Hoşgeldiniz',
-	'dashboard_lastlogin_time' => 'Son Giriş Saati:',
+	'dashboard_lastlogin_time' => 'Önceki Giriş Saati:',
 	'dashboard_app_count' => 'Uygulama Adeti',
 	'dashboard_content_count' => 'İçerik Adeti',
 	'dashboard_previous_months' => 'Önceki Aylar',
