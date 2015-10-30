@@ -91,11 +91,11 @@ if ($banner) {
 			*/
 			?>
 			
-			<div class="form-row hide">
+			<div class="form-row">
 				<div class="col-md-3">{{__('common.banner_form_target_url')}}</div>
 				<div class="col-md-8">
 					<div class="input-group file">                                    
-						<input type="text" id="TargetUrl" class="form-control" name='TargetUrl' value="<?php echo $TargetUrl; ?>" placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+						<input type="text" id="TargetUrl" class="form-control" name='TargetUrl' value="<?php echo $TargetUrl; ?>" placeholder="<?php echo "http://"; ?>" style="height:35px;"/>
 						<span class="input-group-btn">
 							<button class="btn btn-primary urlCheck" type="button" id="checkUrl" onclick="cBanner.checkUrl();"><span class="icon-ok"></span></button>
 						</span>
@@ -226,8 +226,8 @@ if ($banner) {
     var Autoplay = <?php echo json_encode($application->BannerAutoplay == 1 ? true : false); ?>;
     var Speed = <?php echo $application->BannerTransitionRate; ?>;
     $(function () {
-		cBanner.addImageUpload();
-		cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
+	cBanner.addImageUpload();
+	cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
     });
 	
 </script>

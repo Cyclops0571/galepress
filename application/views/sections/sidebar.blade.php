@@ -35,22 +35,35 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     	<a href="#"><span class="icon-dropbox"></span>{{ __('common.menu_caption_applications') }}</a>
     	<ul id="allApps">
     	    <script type="text/javascript">
-		var contentsUrl = '<?php echo __('route.contents'); ?>';
+    		var contentsUrl = '<?php echo __('route.contents'); ?>';
+    		var applicationSettingRoute = "<?php echo __("route.applications_usersettings"); ?>";
     		$(document).ready(function () {
-    		    var appID = $("input[name$='pplicationID']").val();
-    		    if (document.location.href.indexOf(contentsUrl) !== -1 || document.location.href.indexOf("applicationID") !== -1) {
-    			$(".page-navigation ul#allApps li a").each(function (index) {
-    			    if (getURLParameter($(this).attr('href'), 'applicationID') == appID) {
+    		    var applicationSettingRouteExp = applicationSettingRoute.replace("(:num)", "\\d+");
+    		    var appID = parseInt($("input[name$='pplicationID']").val());
+    		    if (!(appID > 0)) {
+    			return;
+    		    }
+    		    if (document.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
+    			$(".page-navigation ul#allSettings li a").each(function (index) {
+    			    var match = $(this).attr('href').match(/\d+/);
+    			    if (match.length > 0 && parseInt(match[0]) === appID) {
     				$(this).attr('class', 'visited');
     				return false;
     			    }
     			});
+    			$(".page-navigation ul#allSettings").prev().trigger('click');
+    		    } else {
+    			$(".page-navigation ul#allApps li a").each(function (index) {
+    			    if (parseInt(getURLParameter($(this).attr('href'), 'applicationID')) === appID) {
+    				$(this).attr('class', 'visited');
+    				return false;
+    			    }
+    			});
+			$(".page-navigation ul#allApps").prev().trigger('click');
     		    }
-    		    function getURLParameter(url, name) {
+
+		    function getURLParameter(url, name) {
     			return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
-    		    }
-    		    if (document.location.href.indexOf(contentsUrl) !== -1 || document.location.href.indexOf("applicationID") !== -1 && appID != "" && appID > 0) {
-    			$(".page-navigation ul#allApps").prev().trigger('click');
     		    }
     		});
     	    </script>
@@ -69,27 +82,29 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
         <ul id="allReports">
 	    <?php
 	    $reportLinks = array();
-	    if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Manager){
-		    $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
-		} else {
-		    $reportLinks = array(301, 1001, 1301, 1302);
-		}
+	    if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Manager) {
+		$reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
+	    } else {
+		$reportLinks = array(301, 1001, 1301, 1302);
+	    }
 	    ?>
-	    <?php foreach($reportLinks as $reportLink) {
-		echo HTML::nav_link(__('route.reports').'?r=' . $reportLink, __('common.menu_report_' . $reportLink ));
-	    } ?>
+	    <?php
+	    foreach ($reportLinks as $reportLink) {
+		echo HTML::nav_link(__('route.reports') . '?r=' . $reportLink, __('common.menu_report_' . $reportLink));
+	    }
+	    ?>
 	    <script type="text/javascript">
-	    var reportLinks = <?php echo json_encode($reportLinks); ?>;
-	    $(function(){
-		var reportUrl = window.location.href;
-		var reportUrlParams = reportUrl.split("?");
-		for(var i = 0; i < reportLinks.length; i++) {
-		    if(reportUrlParams[1] === "r=" + reportLinks[i]) {
-			$('ul#allReports li:eq(' + i + ') a').attr('class', 'visited');
-			$(".page-navigation ul#allReports").prev().trigger('click');
+		var reportLinks = <?php echo json_encode($reportLinks); ?>;
+		$(function () {
+		    var reportUrl = window.location.href;
+		    var reportUrlParams = reportUrl.split("?");
+		    for (var i = 0; i < reportLinks.length; i++) {
+			if (reportUrlParams[1] === "r=" + reportLinks[i]) {
+			    $('ul#allReports li:eq(' + i + ') a').attr('class', 'visited');
+			    $(".page-navigation ul#allReports").prev().trigger('click');
+			}
 		    }
-		}
-	    });
+		});
 	    </script>
         </ul>
     </li>
@@ -109,24 +124,6 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
         <li>
     	<a href="#"><span class="icon-cogs"></span>{{__('common.application_settings_caption_detail')}}</a>
     	<ul id="allSettings">
-    	    <script type="text/javascript">
-    		$(document).ready(function () {
-		    var appID = $("input[name$='pplicationID']").val();
-    		    if (document.location.href.indexOf("applicationID") === -1) {
-    			$(".page-navigation ul#allSettings li a").each(function (index) {
-			    var match = $(this).attr('href').match(/\d+/);
-    			    if (match.length > 0 && match[0] === appID) {
-    				$(this).attr('class', 'visited');
-    				return false;
-    			    }
-    			});
-    		    }
-		    
-		    if (document.location.href.indexOf(contentsUrl) === -1 && (document.location.href.indexOf("applicationID") === -1 && appID != "" && appID > 0)) {
-    			$(".page-navigation ul#allSettings").prev().trigger('click');
-    		    }
-    		});
-    	    </script>
 		<?php foreach (Auth::User()->Customer()->Applications(1) as $app): ?>
 		    <li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name, $app->sidebarClass()) }}</li>
 		<?php endforeach; ?>

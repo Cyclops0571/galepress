@@ -91,7 +91,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
             <div class="device">
                 <div class="screen">
                     <div class="templateSplashScreen" style="opacity:0; height:100%;">
-                        <?php $fileSplash = path('public') . dirname($templateResults[0]->FilePath) . "/splash.jpg"; ?>
+			<?php $fileSplash = path('public') . dirname($templateResults[0]->FilePath) . "/splash.jpg"; ?>
                         @if(!file_exists($fileSplash))
                         <img src="/img/template-chooser/content-pages/empty-splash.jpg" width="100%">
                         @else
@@ -110,81 +110,85 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                 <div class="ms-gallery-template" id="ms-gallery-1">
                                     <!-- masterslider -->
                                     <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
-                                        <?php foreach ($bannerSet as $savedBanner): ?>
-                                            <div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
-                                                <?php $imgPath = $savedBanner->getImagePath($application); ?>
-                                                <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
-                                                <div class="ms-info"></div>
-<!--                                                <div class="ms-info">{{$savedBanner->Description}}</div>-->
-                                                <!-- <a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a> -->
-                                            </div>
-                                        <?php endforeach; ?>
-                                        <?php if (empty($bannerSet)): ?>
-                                            <?php for ($i = 0; $i < 4; $i++): ?>
-                                                <div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
-                                                    <img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}" class="sliderImages"/> 
-                                                    <div class="ms-info"></div>
-                                                </div>
-                                            <?php endfor; ?>
-                                        <?php endif; ?>
+					<?php foreach ($bannerSet as $savedBanner): ?>
+    					<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
+						<?php $imgPath = $savedBanner->getImagePath($application); ?>
+    					    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
+    					    <div class="ms-info"></div>
+    					    <!--  <div class="ms-info">{{$savedBanner->Description}}</div>-->
+						<?php if (!empty($savedBanner->TargetUrl)): ?>
+						    <a href="{{$savedBanner->TargetUrl}}" target="_blank"></a> 
+						<?php endif; ?>
+    					</div>
+					<?php endforeach; ?>
+					<?php if (empty($bannerSet)): ?>
+					    <?php for ($i = 0; $i < 4; $i++): ?>
+						<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
+						    <img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}" class="sliderImages"/> 
+						    <div class="ms-info"></div>
+						</div>
+					    <?php endfor; ?>
+					<?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="ms-gallery-template hide" id="ms-gallery-2">
                                     <!-- masterslider -->
                                     <div class="master-slider ms-skin-black-2 round-skin" id="masterslider2">
-                                        <?php foreach ($bannerSet as $savedBanner): ?>
-                                            <div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
-                                                <?php $imgPath = $savedBanner->getImagePath($application); ?>
-                                                <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
-                                                <div class="ms-info"></div>
-                                                <!--<div class="ms-info">{{$savedBanner->Description}}</div>-->
-                                                <!-- <a href="//{{$savedBanner->TargetUrl}}" target="_blank"></a> -->
-                                            </div>
-                                        <?php endforeach; ?>
-                                        <?php if (empty($bannerSet)): ?>
-                                            <?php for ($i = 0; $i < 4; $i++): ?>
-                                                <div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
-                                                    <img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}" class="sliderImages"/> 
-                                                    <div class="ms-info"></div>
-                                                </div>
-                                            <?php endfor; ?>
-                                        <?php endif; ?>
+					<?php foreach ($bannerSet as $savedBanner): ?>
+    					<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
+						<?php $imgPath = $savedBanner->getImagePath($application); ?>
+    					    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
+    					    <div class="ms-info"></div>
+    					    <!--<div class="ms-info">{{$savedBanner->Description}}</div>-->
+						<?php if (!empty($savedBanner->TargetUrl)): ?>
+						    <a href="{{$savedBanner->TargetUrl}}" target="_blank"></a> 
+						<?php endif; ?>
+    					</div>
+					<?php endforeach; ?>
+					<?php if (empty($bannerSet)): ?>
+					    <?php for ($i = 0; $i < 4; $i++): ?>
+						<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
+						    <img src="/img/bannerSlider/blank.gif" data-src="{{$defaultSliderImage}}" class="sliderImages"/> 
+						    <div class="ms-info"></div>
+						</div>
+					    <?php endfor; ?>
+					<?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <?php for ($i = 0; $i < 9; $i++): ?>
-                                    <?php
-                                    $imageSrc = "/img/template-chooser/defaultCover-" . ($i + 1) . IMAGE_EXTENSION;
-                                    $name = "";
-                                    $detail = "";
-                                    if (isset($templateResults[$i])) {
-                                        $imageSrcTmp = $templateResults[$i]->FilePath . '/' . $templateResults[$i]->FileName;
-                                        if (is_file(path("public") . $imageSrcTmp)) {
-                                            $imageSrc = "/" . $imageSrcTmp;
-                                        }
-                                        $name = $templateResults[$i]->Name;
-                                        $detail = $templateResults[$i]->Detail;
-                                        $Sayi = $templateResults[$i]->MonthlyName;
-                                    }
-                                    if ($i == 0 || $i == 3 || $i == 6) {
-                                        echo "<div class=form-row>";
-                                    }
-                                    ?>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img src="{{$imageSrc}}" width="95%">
-                                        <div class="content-bar noTouch">
-                                            <div class="col-md-12">{{$detail}}</div>
-                                            <div class="col-md-12">{{$name}}</div>
-                                            <div class="col-md-12">{{$Sayi}}</div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    if ($i == 2 || $i == 5 || $i == 8) {
-                                        echo "</div>";
-                                    }
-                                    ?>
-                                <?php endfor; ?>
+				<?php for ($i = 0; $i < 9; $i++): ?>
+				    <?php
+				    $imageSrc = "/img/template-chooser/defaultCover-" . ($i + 1) . IMAGE_EXTENSION;
+				    $name = "";
+				    $detail = "";
+				    if (isset($templateResults[$i])) {
+					$imageSrcTmp = $templateResults[$i]->FilePath . '/' . $templateResults[$i]->FileName;
+					if (is_file(path("public") . $imageSrcTmp)) {
+					    $imageSrc = "/" . $imageSrcTmp;
+					}
+					$name = $templateResults[$i]->Name;
+					$detail = $templateResults[$i]->Detail;
+					$Sayi = $templateResults[$i]->MonthlyName;
+				    }
+				    if ($i == 0 || $i == 3 || $i == 6) {
+					echo "<div class=form-row>";
+				    }
+				    ?>
+    				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+    				    <img src="{{$imageSrc}}" width="95%">
+    				    <div class="content-bar noTouch">
+    					<div class="col-md-12">{{$detail}}</div>
+    					<div class="col-md-12">{{$name}}</div>
+    					<div class="col-md-12">{{$Sayi}}</div>
+    				    </div>
+    				</div>
+				    <?php
+				    if ($i == 2 || $i == 5 || $i == 8) {
+					echo "</div>";
+				    }
+				    ?>
+				<?php endfor; ?>
                             </div>
                         </div>
                         <div class="footer text-center">
@@ -221,15 +225,15 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <ul style="list-style:none;">
-                                        <?php if (empty($categorySet)): ?>
-                                            <li><span class="category-active"></span><span> Genel</span></li>
-                                        <?php else: ?>
-                                            <?php $categoryClass = "category-active"; ?>
-                                            <?php foreach ($categorySet as $category): ?>
-                                                <li><span class="<?php echo $categoryClass; ?>"></span><span>{{$category->Name;}}</span></li>
-                                                <?php $categoryClass = "category-disable"; ?>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
+					<?php if (empty($categorySet)): ?>
+    					<li><span class="category-active"></span><span> Genel</span></li>
+					<?php else: ?>
+					    <?php $categoryClass = "category-active"; ?>
+					    <?php foreach ($categorySet as $category): ?>
+						<li><span class="<?php echo $categoryClass; ?>"></span><span>{{$category->Name;}}</span></li>
+						<?php $categoryClass = "category-disable"; ?>
+					    <?php endforeach; ?>
+					<?php endif; ?>
                                     </ul>
                                 </div>
                             </div>
@@ -325,22 +329,26 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
         </div>
     </div>
 </div>
+
+{{ HTML::script('js/chosen_v1.0.0/chosen.jquery.min.js'); }}
 <script type="text/javascript">
-		var background = <?php echo $templateResults[0]->ThemeBackground; ?>;
-		var foreground = <?php echo $templateResults[0]->ThemeForeground; ?>;
-		cTemplate.initialize(background, foreground);
-		$('.tabletIcons span:eq(0)').click(function () {
-			$('.tabletIcons span').removeClass('tabletActive');
-			$(this).addClass('tabletActive');
-			$('.device-mockup').attr('data-orientation', 'portrait');
-			$('.ms-gallery-template:eq(0)').removeClass('hide');
-			$('.ms-gallery-template:eq(1)').addClass('hide');
-		});
-		$('.tabletIcons span:eq(1)').click(function () {
-			$('.tabletIcons span').removeClass('tabletActive');
-			$(this).addClass('tabletActive');
-			$('.device-mockup').attr('data-orientation', 'landscape');
-			$('.ms-gallery-template:eq(0)').addClass('hide');
-			$('.ms-gallery-template:eq(1)').removeClass('hide');
-		})
+    var background = <?php echo $templateResults[0]->ThemeBackground; ?>;
+    var foreground = <?php echo $templateResults[0]->ThemeForeground; ?>;
+    $(document).ready(function () {
+	cTemplate.initialize(background, foreground);
+	$('.tabletIcons span:eq(0)').click(function () {
+	    $('.tabletIcons span').removeClass('tabletActive');
+	    $(this).addClass('tabletActive');
+	    $('.device-mockup').attr('data-orientation', 'portrait');
+	    $('.ms-gallery-template:eq(0)').removeClass('hide');
+	    $('.ms-gallery-template:eq(1)').addClass('hide');
+	});
+	$('.tabletIcons span:eq(1)').click(function () {
+	    $('.tabletIcons span').removeClass('tabletActive');
+	    $(this).addClass('tabletActive');
+	    $('.device-mockup').attr('data-orientation', 'landscape');
+	    $('.ms-gallery-template:eq(0)').addClass('hide');
+	    $('.ms-gallery-template:eq(1)').removeClass('hide');
+	});
+    });
 </script>

@@ -2290,9 +2290,7 @@ var cBanner = new function () {
 		    var primaryKeyID = $("#primaryKeyID").val();
 		    var hdnImageFileSelected = $("#hdnImageFileSelected").val();
 		    cNotification.success();
-		    if (parseInt(primaryKeyID) == 0 || parseInt(hdnImageFileSelected) == 1) {
-			document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + bannerID;
-		    }
+		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + bannerID;
 		}
 	);
     };

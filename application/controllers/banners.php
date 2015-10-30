@@ -186,10 +186,16 @@ class Banners_Controller extends Base_Controller {
 		if (!$application || !$application->CheckOwnership()) {
 			return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 		}
-
+		
 		$banner->ApplicationID = $application->ApplicationID;
 		$banner->TargetContent = (int) Input::get("TargetContent");
-		$banner->TargetUrl = Input::get("TargetUrl");
+		if(!Input::get("TargetUrl", "")) {
+		    $banner->TargetUrl = "";
+		} else if(preg_match('/^https?:\/\/.+$/', Input::get("TargetUrl", ""))) {
+		    $banner->TargetUrl = Input::get("TargetUrl");
+		} else {
+		    $banner->TargetUrl = "http://" . Input::get("TargetUrl");
+		}
 		$banner->Description = Input::get("Description");
 		$banner->Status = (int) Input::get('Status');
 		$banner->save();
