@@ -18,13 +18,10 @@
 //helloWorld(); //displays "Hello from the helloWorld() function!"
 
 //a better way that reuses the existing functionality
-console.log([1,2,3,4,5].join());
 Array.prototype.join = (function (originalJoin) {
         return function (separator) {
-            console.log(separator);
                 return originalJoin.call(this, separator === undefined ? '|' : separator);
         };
 })(Array.prototype.join);
-console.log([1,2,3,4,5].join());
 
 </script>

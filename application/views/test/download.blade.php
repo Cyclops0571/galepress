@@ -57,8 +57,6 @@
 	    'element': 'File'
 	},
 	add: function (e, data) {
-	    console.log('add');
-	    console.log(data);
 	    //accept all files
 	    $('#hdnFileSelected').val("1");
 	    $("[for='File']").removeClass("hide");
@@ -76,8 +74,6 @@
 	    data.context.data('data', {jqXHR: xhr});
 	},
 	progressall: function (e, data) {
-	    console.log("progressall");
-	    console.log(data);
 
 	    var progress = data.loaded / data.total * 100;
 
@@ -87,7 +83,6 @@
 	done: function (e, data) {
 	    if (data.textStatus.valueOf() === 'success'.valueOf()) {
 		var fileName = data.result.name;
-		console.log(data.result);
 
 		$('#hdnFileName').val(fileName);
 //		$("[for='File']").addClass("hide");

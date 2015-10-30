@@ -224,7 +224,6 @@ if (isset($row)) {
 		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + newObjectID;
 		};
 	    }
-	    console.log(clientID);
 	    cCommon.save(this.objectName, fsuccess, undefined, contentIDSet);
 	};
 

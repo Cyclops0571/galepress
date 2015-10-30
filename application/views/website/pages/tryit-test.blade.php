@@ -204,11 +204,10 @@
                                   }).success(function(msg) {
                                     document.location.href = "{{__('route.home')}}";
                                   }).fail(function(msg) {
-                                      //console.log(f);
-                                    // console.log(msg)
-                                  })
+				      ;
+                                  });
                               });
-                            }
+                            };
                           </script>
                         
                           <label for="name">{{__('common.signup_facebook_title')}}</label>
@@ -408,22 +407,18 @@
       })
         .success(function(data) {
           if (!data.success) {
-           // if not successful, bind errors to error variables
-           //console.log("hakan",data.errors.name);
-          $scope.errorName = data.errors.name;
-          $scope.errorLastName = data.errors.last_name;
-          $scope.errorEmail = data.errors.email;
-          $scope.errorUserName = data.errors.user_name
-          $scope.errorAppName = data.errors.app_name;
-          $scope.userExist = data.errors.user_name_exist;
-          $scope.emailExist = data.errors.email_exist;
-          $scope.errorPassword = data.errors.password;
-          $scope.errorPasswordVerify = data.errors.password_verify;
-          $scope.errorCaptcha = data.errors.captcha;
-          $scope.errorCaptchaInvalid = data.errors.captcha_invalid;
-          //console.log(data);
-
-          }else {
+	    $scope.errorName = data.errors.name;
+	    $scope.errorLastName = data.errors.last_name;
+	    $scope.errorEmail = data.errors.email;
+	    $scope.errorUserName = data.errors.user_name;
+	    $scope.errorAppName = data.errors.app_name;
+	    $scope.userExist = data.errors.user_name_exist;
+	    $scope.emailExist = data.errors.email_exist;
+	    $scope.errorPassword = data.errors.password;
+	    $scope.errorPasswordVerify = data.errors.password_verify;
+	    $scope.errorCaptcha = data.errors.captcha;
+	    $scope.errorCaptchaInvalid = data.errors.captcha_invalid;
+          } else {
             $scope.userExist=false;
             //$scope.reset($scope.form);
 

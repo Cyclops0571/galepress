@@ -207,10 +207,8 @@ $(document).ready(function() {
             } else {
                 $(this).removeClass('suan gecti').addClass('gecmedi');
             }
-            // console.log(saniye);
             /* eğer namaz okunuyorsa */
             if ( dZaman[0] == saat && dZaman[1] == dakika ) {
-              // console.log("girdi",saniye);
                 ezanVakti = true;
                 $(this).addClass('suan');
                 if(saniye == 0)
@@ -338,7 +336,6 @@ $(document).ready(function() {
         url: 'namaz-vakitleri',
         data: {location:myLocation},
         success: function (response) {
-          // console.log(response);
           var imsak = jQuery.parseJSON(response)['imsak'];
           var ogle = jQuery.parseJSON(response)['ogle'];
           var ikindi = jQuery.parseJSON(response)['ikindi'];

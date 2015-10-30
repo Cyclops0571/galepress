@@ -307,7 +307,6 @@ if (false) {
 	cApplication.checkTabStatus();
 	// cApplication.checkHoverBlock();
 	$('#dialog-tab-active-warning').on('shown.bs.modal', function () {
-	    console.log("asd");
 	    var text = $('#dialog-tab-active-warning .modal-body').text().replace("[[innerText]]", '{{ __("common.tabs_warning_url")}}');
 	    $('#dialog-tab-active-warning .modal-body').text(text);
 	});

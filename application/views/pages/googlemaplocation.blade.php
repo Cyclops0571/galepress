@@ -160,7 +160,6 @@ if (FALSE) {
                 },1250);
 
                 // zoomBtn.className = zoomBtn.className + " clicked";
-                // console.log(zoomBtn.className);
 			});
 		}
 
