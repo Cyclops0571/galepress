@@ -409,12 +409,13 @@ var cUser = new function () {
 	if (validate) {
 
 	    cNotification.loader();
-
+	    var d = new Date();
+	    var localTime = "&LocalTime=" + d.getTime() / 1000;
 	    var t = 'POST';
 	    var u = '/' + $('#currentlanguage').val() + '/' + route["login"];
-	    var d = cForm.serialize(frm);
+	    var data = cForm.serialize(frm) + localTime;
 
-    	cUser.doAsyncRequest(t, u, d, function (ret) {
+    	cUser.doAsyncRequest(t, u, data, function (ret) {
 		cNotification.success(null, ret.getValue("msg"));
 		if(getParameterByName("shopping")){
 			document.location.href = '/' + $('#currentlanguage').val() + '/shop';

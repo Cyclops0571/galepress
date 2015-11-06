@@ -51,4 +51,23 @@ class User extends Eloquent {
 	return $applications;
     }
 
+    /**
+     * 
+     * @param type $take
+     * @param type $skip
+     * @return Sessionn
+     */
+    public function Session($take = 1, $skip = 0) {
+	$query = Sessionn::where('UserID', '=', Auth::User()->UserID)
+                                ->where('StatusID', '=', eStatus::Active)
+                                ->order_by('SessionID', 'DESC')
+		->take($take)
+		->skip($skip);
+	if($take == 1) {
+	    return $query->first();
+	} else {
+	    return $query->get();
+	}
+    }
+
 }

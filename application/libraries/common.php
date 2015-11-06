@@ -818,36 +818,44 @@ class Common {
 	    $second = "00";
 
 	    //11:12
-	    if ($format == "Ymd")
+	    if ($format == "Ymd") {
 		$ret = $year . $month . $day;
+	    }
 
 	    //11:12
-	    if ($format == "HH:mm")
+	    if ($format == "HH:mm") {
 		$ret = $hour . ":" . $minute;
+	    }
 
 	    //29
-	    if ($format == "dd")
+	    if ($format == "dd") {
 		$ret = $day;
+	    }
 
 	    //08
-	    if ($format == "MM")
+	    if ($format == "MM") {
 		$ret = $month;
+	    }
 
 	    //2009
-	    if ($format == "yyyy")
+	    if ($format == "yyyy") {
 		$ret = $year;
+	    }
 
 	    //29.08.2009
-	    if ($format == "dd.MM.yyyy")
+	    if ($format == "dd.MM.yyyy") {
 		$ret = $day . "." . $month . "." . $year;
+	    }
 
 	    //29.08.2009 11:12
-	    if ($format == "dd.MM.yyyy HH:mm")
+	    if ($format == "dd.MM.yyyy HH:mm") {
 		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
+	    }
 
 	    //29.08.2009 11:12:23
-	    if ($format == "dd.MM.yyyy HH:mm:ss")
+	    if ($format == "dd.MM.yyyy HH:mm:ss") {
 		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
+	    }
 	}
 	else if (strlen($date) == 19) {
 	    //2009-07-14 04:27:16
@@ -859,36 +867,44 @@ class Common {
 	    $second = substr($date, 17, 2);
 
 	    //11:12
-	    if ($format == "Ymd")
+	    if ($format == "Ymd") {
 		$ret = $year . $month . $day;
+	    }
 
 	    //11:12
-	    if ($format == "HH:mm")
+	    if ($format == "HH:mm") {
 		$ret = $hour . ":" . $minute;
+	    }
 
 	    //29
-	    if ($format == "dd")
+	    if ($format == "dd") {
 		$ret = $day;
+	    }
 
 	    //08
-	    if ($format == "MM")
+	    if ($format == "MM") {
 		$ret = $month;
+	    }
 
 	    //2009
-	    if ($format == "yyyy")
+	    if ($format == "yyyy") {
 		$ret = $year;
+	    }
 
 	    //29.08.2009
-	    if ($format == "dd.MM.yyyy")
+	    if ($format == "dd.MM.yyyy") {
 		$ret = $day . "." . $month . "." . $year;
+	    }
 
 	    //29.08.2009 11:12
-	    if ($format == "dd.MM.yyyy HH:mm")
+	    if ($format == "dd.MM.yyyy HH:mm") {
 		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
+	    }
 
 	    //29.08.2009 11:12:23
-	    if ($format == "dd.MM.yyyy HH:mm:ss")
+	    if ($format == "dd.MM.yyyy HH:mm:ss") {
 		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
+	    }
 	}
 	return $ret;
     }

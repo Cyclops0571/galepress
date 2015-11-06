@@ -59,10 +59,10 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     				return false;
     			    }
     			});
-			$(".page-navigation ul#allApps").prev().trigger('click');
+    			$(".page-navigation ul#allApps").prev().trigger('click');
     		    }
 
-		    function getURLParameter(url, name) {
+    		    function getURLParameter(url, name) {
     			return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
     		    }
     		});
@@ -125,7 +125,9 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     	<a href="#"><span class="icon-cogs"></span>{{__('common.application_settings_caption_detail')}}</a>
     	<ul id="allSettings">
 		<?php foreach (Auth::User()->Customer()->Applications(1) as $app): ?>
-		    <li style="width:100%;">{{ HTML::link(route('applications_usersettings',$app->ApplicationID), $app->Name, $app->sidebarClass()) }}</li>
+		    <li style="width:100%;">
+			<?php echo HTML::link(str_replace('(:num)', $app->ApplicationID, __('route.applications_usersettings')), $app->Name, $app->sidebarClass()); ?>
+		    </li>
 		<?php endforeach; ?>
     	</ul>
         </li>

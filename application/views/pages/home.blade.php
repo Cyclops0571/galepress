@@ -9,7 +9,7 @@
                     <div class="head bg-default">
                         <h2>{{ __('common.dashboard_title') }}</h2>
                         <span class="hp-info pull-right">
-			    <?php echo Common::monthName((int)date('m', strtotime("$date"))).' '.date('Y', strtotime("$date")); ?>
+			    <?php echo Common::monthName((int) date('m', strtotime("$date"))) . ' ' . date('Y', strtotime("$date")); ?>
                         </span>              
                         <div class="head-panel nm">
                             <div class="left_abs_100 reportSubtitle" style="margin-top: 70px; text-align:center; font-size: 11px;">
@@ -57,16 +57,16 @@
                                     <span class="icon-globe"></span>
                                 </div>                                
                                 <span class="hp-main">
-                                    <?php
-                                        /*
-                                        $devicesTotalDownload = 0;
-                                        foreach ($previousMonths as $month) {
-                                            $devicesTotalDownload += $month->DownloadCount;
-                                        }
-                                        echo $devicesTotalDownload;
-                                        */
-                                        echo (int)$iosTotalDownload + (int)$androidTotalDownload;
-                                    ?>
+				    <?php
+				    /*
+				      $devicesTotalDownload = 0;
+				      foreach ($previousMonths as $month) {
+				      $devicesTotalDownload += $month->DownloadCount;
+				      }
+				      echo $devicesTotalDownload;
+				     */
+				    echo (int) $iosTotalDownload + (int) $androidTotalDownload;
+				    ?>
                                 </span>
                                 <span class="hp-sm">{{ __('common.dashboard_total') }}</span>
                             </div>                                                        
@@ -90,18 +90,17 @@
                         <h2 style="text-transform:none;">{{ __('common.reports_graph_ratio') }}</h2>                
                         <div class="head-panel nm">                            
                             <div class="progress">
-                                <?php
-                                $iosTotalDownloadPercent = 0;
-                                $androidTotalDownloadPercent = 0;
+				<?php
+				$iosTotalDownloadPercent = 0;
+				$androidTotalDownloadPercent = 0;
 
-                                if($iosTotalDownload + $androidTotalDownload > 0)
-                                {
-                                    $iosTotalDownloadPercent = ($iosTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
-                                    $androidTotalDownloadPercent = ($androidTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
-                                }
-                                ?>
-                                <div class="progress-bar progress-bar-success tip" title="iOS" style="width: {{$iosTotalDownloadPercent}}%; background:#cecece"><span style="color:black !important;"><?php echo round($iosTotalDownloadPercent, 2)."%" ?></span></div>
-                                <div class="progress-bar progress-bar-info tip" title="Android" style="width: {{$androidTotalDownloadPercent}}%; background:#a4c739"><span style="color:black;"><?php echo round($androidTotalDownloadPercent, 2)."%" ?></span></div>
+				if ($iosTotalDownload + $androidTotalDownload > 0) {
+				    $iosTotalDownloadPercent = ($iosTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+				    $androidTotalDownloadPercent = ($androidTotalDownload / ($iosTotalDownload + $androidTotalDownload)) * 100;
+				}
+				?>
+                                <div class="progress-bar progress-bar-success tip" title="iOS" style="width: {{$iosTotalDownloadPercent}}%; background:#cecece"><span style="color:black !important;"><?php echo round($iosTotalDownloadPercent, 2) . "%" ?></span></div>
+                                <div class="progress-bar progress-bar-info tip" title="Android" style="width: {{$androidTotalDownloadPercent}}%; background:#a4c739"><span style="color:black;"><?php echo round($androidTotalDownloadPercent, 2) . "%" ?></span></div>
                             </div>                            
                         </div>                        
                     </div>                                    
@@ -178,13 +177,13 @@
                                                 <div class="input-group-addon"><span class="icon-cloud"></span></div>
                                                 <select class="form-control select2" id="ddlContent" name="ddlContent">
                                                     <option value=""{{ ($contentID == 0 ? ' selected="selected"' : '') }}>{{ __('common.reports_select_content') }}</option>
-                                                    <?php
-                                                    $contents = DB::table('Content')
-                                                        ->where('ApplicationID', '=', $applicationID)
-                                                        ->where('StatusID', '=', eStatus::Active)
-                                                        ->order_by('Name', 'ASC')
-                                                        ->get();
-                                                    ?>
+						    <?php
+						    $contents = DB::table('Content')
+							    ->where('ApplicationID', '=', $applicationID)
+							    ->where('StatusID', '=', eStatus::Active)
+							    ->order_by('Name', 'ASC')
+							    ->get();
+						    ?>
                                                     @foreach($contents as $content)
                                                     <option value="{{ $content->ContentID }}"{{ ($contentID == (int)$content->ContentID ? ' selected="selected"' : '') }}>{{ $content->Name }}</option>
                                                     @endforeach
@@ -227,22 +226,17 @@
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-user"></span>&nbsp;{{__('common.statistics_user')}}&nbsp;<span class="reportSubtitle">{{ Auth::User()->Username; }}</span>                            
                         </div>
-                        <?php
-                        $lastLoginDate = '';
-                        $lastLoginTime = '';
-                        $s = DB::table('Session')
-                                ->where('UserID', '=', Auth::User()->UserID)
-                                ->where('StatusID', '=', eStatus::Active)
-                                ->order_by('SessionID', 'DESC')
-                                ->take(1)
-                                ->skip(1)
-                                ->first();
-                        if($s)
-                        {
-                            $lastLoginDate = Common::dateRead($s->LoginDate, 'dd.MM.yyyy');
-                            $lastLoginTime = Common::dateRead($s->LoginDate, 'HH:mm');
-                        }
-                        ?>
+			<?php
+			/* @var $s Sessionn */
+			$s = Auth::User()->Session(1, 1);
+			$lastLoginDate = '';
+			$lastLoginTime = '';
+
+			if ($s) {
+			    $lastLoginDate = Common::dateRead($s->LocalLoginDate, 'dd.MM.yyyy');
+			    $lastLoginTime = Common::dateRead($s->LocalLoginDate, 'HH:mm');
+			}
+			?>
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-calendar"></span>&nbsp;{{__('common.statistics_lastlogin')}}&nbsp;<span class="reportSubtitle">{{ $lastLoginDate }}</span>
                         </div>
@@ -255,11 +249,11 @@
                             <div class="info" style="text-align:center">                                                                                
                                 <div class="informer informer-three">
                                     <span>{{ $applicationCount; }}</span>
-                                     {{ __('common.dashboard_app_count') }}
+				    {{ __('common.dashboard_app_count') }}
                                 </div>                            
                                 <div class="informer informer-four">
                                     <span>{{ $contentCount; }}</span>
-                                     {{ __('common.dashboard_content_count') }}
+				    {{ __('common.dashboard_content_count') }}
                                 </div>                                                        
                                 <span class="icon-dropbox usrBlckIcnDrpbx"></span>
                             </div>
@@ -279,17 +273,17 @@
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-dropbox"></span>&nbsp;{{__('common.applications_applicationname')}}&nbsp;<span class="reportSubtitle">{{ $appDetail->Name }}</span>
                         </div>                 
-                          <div class="hp-info hp-simple pull-left hp-inline">
+			<div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-calendar"></span>&nbsp;{{__('common.header_enddate')}}&nbsp;<span class="reportSubtitle">{{ Common::dateRead($appDetail->ExpirationDate, 'dd.MM.yyyy'); }}</span>
                         </div>                            
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-thumbs-up"></span>&nbsp;{{__('common.header_status')}}&nbsp;<span class="reportSubtitle">
-                                <?php
-                                    $languageID = (int)Session::get('language_id');
-                                    $applicationStatusName = $appDetail->ApplicationStatus($languageID);
-                                    $applicationStatusName = (strlen(trim($applicationStatusName)) == 0 ? __('common.header_upload') : $applicationStatusName);
-                                    echo $applicationStatusName;
-                                ?>
+<?php
+$languageID = (int) Session::get('language_id');
+$applicationStatusName = $appDetail->ApplicationStatus($languageID);
+$applicationStatusName = (strlen(trim($applicationStatusName)) == 0 ? __('common.header_upload') : $applicationStatusName);
+echo $applicationStatusName;
+?>
                             </span>
                         </div>
                     </div>
@@ -316,63 +310,63 @@
 
 
 
-        <?php
-            $expiringApps = DB::table('Application')
-                        ->where('CustomerID', '=', $customerID)
-                        ->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
-                        ->where('StatusID', '=', 1)
-                        ->get();
+<?php
+$expiringApps = DB::table('Application')
+	->where('CustomerID', '=', $customerID)
+	->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
+	->where('StatusID', '=', 1)
+	->get();
 
-            $currentDate = date("Y-m-d");
-            $expiringAppCount=0;
-        ?>
-        @foreach($expiringApps as $expApp)
-            <?php
-            $date1 = new DateTime($expApp->ExpirationDate);
-            $date2 = new DateTime($currentDate);
-            $diff = $date1->diff($date2);
-            ?>
-                @if($diff->days<15)
-                <?php $expiringAppCount++; ?>
-                    <div class="modal in " id="popupContact{{ $expiringAppCount }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; z-index:9999 !important;">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title"><span class="icon-warning-sign"></span>&nbsp;&nbsp;&nbsp;{{ __('common.site_system_message') }}</h4>
-                                </div>
-                                <div class="modal-body clearfix">
-                                    @if($diff->days>0)
-                                        @if(Config::get('application.language')=="tr")
-                                        <div class="modal-body">{{ $expApp->Name }} uygulamanızın geçerlilik süresi {{$diff->days}} gün sonra sona erecektir. <span id="dialogText-warning"></span></div>
-                                        @elseif(Config::get('application.language')=="en")
-                                        <div class="modal-body">{{ $expApp->Name }} will expire in {{$diff->days}} day. <span id="dialogText-warning"></span></div>
-                                        @elseif(Config::get('application.language')=="de")
-                                        <div class="modal-body">{{ $expApp->Name }} wird nach {{$diff->days}} Tag auslaufen. <span id="dialogText-warning"></span></div>
-                                        @endif
-                                    @endif
-                                    @if($diff->days==0)
-                                        @if(Config::get('application.language')=="tr")
-                                        <div class="modal-body">{{ $expApp->Name }} uygulamanızın geçerlilik süresi bugün sona erecektir. <span id="dialogText-warning"></span></div>
-                                        @elseif(Config::get('application.language')=="en")
-                                        <div class="modal-body">{{ $expApp->Name }}'s period of validity will expire end of the day. <span id="dialogText-warning"></span></div>
-                                        @elseif(Config::get('application.language')=="de")
-                                        <div class="modal-body">Gültigkeitsdauer {{ $expApp->Name }} verfallen Ende des Tages. <span id="dialogText-warning"></span></div>
-                                        @endif
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-        @endforeach
-        <script type="text/javascript">
-        $(document).ready(function(){
-            for (var i = 1; i <= {{$expiringAppCount}}; i++) {
-                $('#popupContact'+i).modal('show');
-            };
-        });
-        </script>
+$currentDate = date("Y-m-d");
+$expiringAppCount = 0;
+?>
+@foreach($expiringApps as $expApp)
+<?php
+$date1 = new DateTime($expApp->ExpirationDate);
+$date2 = new DateTime($currentDate);
+$diff = $date1->diff($date2);
+?>
+@if($diff->days<15)
+<?php $expiringAppCount++; ?>
+<div class="modal in " id="popupContact{{ $expiringAppCount }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; z-index:9999 !important;">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title"><span class="icon-warning-sign"></span>&nbsp;&nbsp;&nbsp;{{ __('common.site_system_message') }}</h4>
+	    </div>
+	    <div class="modal-body clearfix">
+		@if($diff->days>0)
+		@if(Config::get('application.language')=="tr")
+		<div class="modal-body">{{ $expApp->Name }} uygulamanızın geçerlilik süresi {{$diff->days}} gün sonra sona erecektir. <span id="dialogText-warning"></span></div>
+		@elseif(Config::get('application.language')=="en")
+		<div class="modal-body">{{ $expApp->Name }} will expire in {{$diff->days}} day. <span id="dialogText-warning"></span></div>
+		@elseif(Config::get('application.language')=="de")
+		<div class="modal-body">{{ $expApp->Name }} wird nach {{$diff->days}} Tag auslaufen. <span id="dialogText-warning"></span></div>
+		@endif
+		@endif
+		@if($diff->days==0)
+		@if(Config::get('application.language')=="tr")
+		<div class="modal-body">{{ $expApp->Name }} uygulamanızın geçerlilik süresi bugün sona erecektir. <span id="dialogText-warning"></span></div>
+		@elseif(Config::get('application.language')=="en")
+		<div class="modal-body">{{ $expApp->Name }}'s period of validity will expire end of the day. <span id="dialogText-warning"></span></div>
+		@elseif(Config::get('application.language')=="de")
+		<div class="modal-body">Gültigkeitsdauer {{ $expApp->Name }} verfallen Ende des Tages. <span id="dialogText-warning"></span></div>
+		@endif
+		@endif
+	    </div>
+	</div>
+    </div>
+</div>
+@endif
+@endforeach
+<script type="text/javascript">
+    $(document).ready(function(){
+    for (var i = 1; i <= {{$expiringAppCount}}; i++) {
+    $('#popupContact' + i).modal('show');
+    };
+    });
+</script>
 
 
 

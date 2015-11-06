@@ -17,13 +17,13 @@ class Common_Controller extends Base_Controller {
 	$username = Input::get('Username', '');
 	$password = Input::get('Password', '');
 	$remember = Input::get('Remember', '');
+	$localDate = date("Y-m-d H:i:s", Input::get('LocalTime', time()));
 
 	$validUser = false;
 	$activeApps = false;
 
 	$user = DB::table('User')
 		->where('Username', '=', $username)
-		//->where('Password', '=', Hash::make($password))
 		->where('StatusID', '=', eStatus::Active)
 		->first();
 	if ($user) {
@@ -61,18 +61,14 @@ class Common_Controller extends Base_Controller {
 	//Kullanici aktif & Musteriyse (musteri aktif & aktif uygulamaya sahip)
 
 	if (Auth::attempt(array('username' => $username, 'password' => $password, 'StatusID' => eStatus::Active))) {
+	    //once biz kontrol ettik simdi laravele diyoruz ki git kontrol et bilgileri tekrardan duzgun kullaniciyi login et - salaklik 572572
 	    $user = Auth::User();
 	    $s = new Sessionn;
 	    $s->UserID = $user->UserID;
 	    $s->IP = Request::ip(); //getenv("REMOTE_ADDR");
 	    $s->Session = Session::instance()->session['id'];
 	    $s->LoginDate = new DateTime();
-	    $s->StatusID = eStatus::Active;
-	    $s->CreatorUserID = $user->UserID;
-	    $s->DateCreated = new DateTime();
-	    $s->ProcessUserID = $user->UserID;
-	    $s->ProcessDate = new DateTime();
-	    $s->ProcessTypeID = eProcessTypes::Insert;
+	    $s->LocalLoginDate = $localDate;
 	    $s->save();
 
 	    if ($remember == "on") {

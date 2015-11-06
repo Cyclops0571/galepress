@@ -47,25 +47,8 @@ class Test_Controller extends Base_Controller {
 
     
     public function get_index() {
-	$s = DB::table('Session')
-		->where('UserID', '=', Auth::User()->UserID)
-		->where('StatusID', '=', eStatus::Active)
-		->order_by('SessionID', 'DESC')
-		->take(1)
-		->skip(1)
-		->first();
-	
-	$s2 = Sessionn::where('UserID', '=', Auth::User()->UserID)
-		->where('StatusID', '=', eStatus::Active)
-		->order_by('SessionID', 'DESC')
-		->take(1)
-		->skip(1)
-		->first();
-	
-	var_dump($s);
-	echo "-------------------------------------" . PHP_EOL;
-	var_dump($s2);
-	exit;
+	dd(localtime());
+//	setlocale(LC_TIME, $locale);
 	
 	echo date("Y-m-d", strtotime("-1 month +1 day")); exit;
 	echo date("Y-m-d", strtotime("2015-07-20 + 3 month")); exit;

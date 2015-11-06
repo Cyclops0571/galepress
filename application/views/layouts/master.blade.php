@@ -48,15 +48,18 @@
                     <div class="controls">
                         <div class="form-row">
                             <div class="col-md-12">
+				<?php foreach(Laravel\Config::get('application.languages') as $lang): ?>
                                 <div class="checkbox">
-                                    <label><div class="radio"><span id="radio_tr" class="checked"><input type="radio" class="hidden" onclick="trActive()"></span></div><img src="http://www.galepress.com/img/tr_icon.png" /></label>
+                                    <label>
+					<div class="radio">
+					    <span id="radio_<?php echo $lang; ?>" <?php echo Laravel\Config::get('application.language') === $lang ? 'class="checked"' : ''; ?> >
+						<input type="radio" class="hidden" onclick='LanguageActive(<?php echo json_encode($lang); ?>);'>
+					    </span>
+					</div>
+					<img src="/img/flags/<?php echo $lang;?>_icon.png" />
+				    </label>
                                 </div>
-                                <div class="checkbox">
-                                    <label><div class="radio"><span id="radio_en"><input type="radio" class="hidden" onclick="enActive()"></span></div><img src="http://www.galepress.com/img/en_icon.png" /></label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><div class="radio"><span id="radio_de"><input type="radio" class="hidden" onclick="deActive()"></span></div><img src="http://www.galepress.com/img/de_iconBig.png"/></label>
-                                </div>
+				<?php endforeach; ?>
                             </div>
                         </div>
                     </div>

@@ -529,27 +529,11 @@ $(document).ready(function() {
     {
         $("#modalChangeLanguage").css("display","none");
     }
-    function trActive()
+    function LanguageActive(lang)
     {
-        document.location.href = '/tr/giris';
-        $("#radio_tr").attr("class","checked");
-        $("#radio_en").attr("class","none");
-        $("#radio_de").attr("class","none");
+        document.location.href = '/' + lang + '/giris';
+        $("#radio_" + lang ).attr("class","checked");
+        $("#radio_" + lang).attr("class","none");
+        $("#radio_" + lang).attr("class","none");
     }
-    function enActive()
-    {
-        document.location.href = '/en/home';
-        $("#radio_tr").attr("class","none");
-        $("#radio_en").attr("class","checked");
-        $("#radio_de").attr("class","none");
-    }
-    function deActive()
-    {
-
-        document.location.href = '/de/startseite';
-        $("#radio_tr").attr("class","none");
-        $("#radio_en").attr("class","none");
-        $("#radio_de").attr("class","checked");
-    }
-
 /* DİL DEĞİŞTİRME KODLARI - SON */
