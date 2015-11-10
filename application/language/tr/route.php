@@ -142,8 +142,8 @@ return array(
     'banners_show' => 'banners/(:num)',
     'banners_new' => 'banners/yeni',
     'banners_save' => 'banners/kaydet',
-    'banners_delete' => 'banners/konum/',
-    'banners_order' => 'banners/konum/',
+    'banners_delete' => 'banners/sil/',
+    'banners_order' => 'banners/sira/',
 
     'my_ticket' => 'mytickets',
 

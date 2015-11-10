@@ -170,8 +170,6 @@ class Users_Controller extends Base_Controller {
 		$s->LastName = Input::get('LastName');
 		$s->Email = Input::get('Email');
 		$s->Timezone = Input::get('Timezone');
-		//$s->PWRecoveryCode = asd;
-		//$s->PWRecoveryDate = asd;
 		if ($id == 0) {
 		    $s->StatusID = eStatus::Active;
 		    $s->CreatorUserID = $currentUser->UserID;

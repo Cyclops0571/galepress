@@ -34,7 +34,7 @@
                             <tbody>
                                 @forelse($rows->results as $row)
                                 <tr class="{{ HTML::oddeven($page) }}">
-                                    <?php /*<td>{{ HTML::link($route.'/'.$row->OrderID, Common::dateRead($row->ExpirationDate, 'dd.MM.yyyy')) }}</td>*/ ?>
+                                    <?php /*<td>{{ HTML::link($route.'/'.$row->OrderID, Common::dateRead($row->ExpirationDate, 'd.m.Y')) }}</td>*/ ?>
                                     <td>{{ HTML::link($route.'/'.$row->OrderID, $row->OrderNo) }}</td>
                                     <td>{{ HTML::link($route.'/'.$row->OrderID, $row->Name) }}</td>
                                     <td>{{ HTML::link($route.'/'.$row->OrderID, $row->Website) }}</td>

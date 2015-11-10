@@ -747,6 +747,10 @@ class Common {
 	}
 	return $password;
     }
+    
+    public static function dateLocalize($format, $timestamp = 'time()') {
+	return date($format, $timestamp);
+    }
 
     public static function convert2Localzone($d, $write = false) {
 	//2009-07-14 04:27:16
@@ -808,144 +812,21 @@ class Common {
 	if ($useLocal) {
 	    $date = Common::convert2Localzone($date);
 	}
-	if (strlen($date) == 10) {
-	    //2009-07-14
-	    $year = substr($date, 0, 4);
-	    $month = substr($date, 5, 2);
-	    $day = substr($date, 8, 2);
-	    $hour = "00";
-	    $minute = "00";
-	    $second = "00";
-
-	    //11:12
-	    if ($format == "Ymd") {
-		$ret = $year . $month . $day;
-	    }
-
-	    //11:12
-	    if ($format == "HH:mm") {
-		$ret = $hour . ":" . $minute;
-	    }
-
-	    //29
-	    if ($format == "dd") {
-		$ret = $day;
-	    }
-
-	    //08
-	    if ($format == "MM") {
-		$ret = $month;
-	    }
-
-	    //2009
-	    if ($format == "yyyy") {
-		$ret = $year;
-	    }
-
-	    //29.08.2009
-	    if ($format == "dd.MM.yyyy") {
-		$ret = $day . "." . $month . "." . $year;
-	    }
-
-	    //29.08.2009 11:12
-	    if ($format == "dd.MM.yyyy HH:mm") {
-		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
-	    }
-
-	    //29.08.2009 11:12:23
-	    if ($format == "dd.MM.yyyy HH:mm:ss") {
-		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
+	if(Laravel\Config::get('application.language') == 'usa') {
+	    if($format == 'd.m.Y') {
+		$format = 'm/d/Y';
+	    } else if($format == 'd.m.Y H:i') {
+		$format = 'm/d/Y H:i';
+	    } else if($format == 'd.m.Y H:i:s') {
+		$format = 'm/d/Y H:i:s';
 	    }
 	}
-	else if (strlen($date) == 19) {
-	    //2009-07-14 04:27:16
-	    $year = substr($date, 0, 4);
-	    $month = substr($date, 5, 2);
-	    $day = substr($date, 8, 2);
-	    $hour = substr($date, 11, 2);
-	    $minute = substr($date, 14, 2);
-	    $second = substr($date, 17, 2);
-
-	    //11:12
-	    if ($format == "Ymd") {
-		$ret = $year . $month . $day;
-	    }
-
-	    //11:12
-	    if ($format == "HH:mm") {
-		$ret = $hour . ":" . $minute;
-	    }
-
-	    //29
-	    if ($format == "dd") {
-		$ret = $day;
-	    }
-
-	    //08
-	    if ($format == "MM") {
-		$ret = $month;
-	    }
-
-	    //2009
-	    if ($format == "yyyy") {
-		$ret = $year;
-	    }
-
-	    //29.08.2009
-	    if ($format == "dd.MM.yyyy") {
-		$ret = $day . "." . $month . "." . $year;
-	    }
-
-	    //29.08.2009 11:12
-	    if ($format == "dd.MM.yyyy HH:mm") {
-		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute;
-	    }
-
-	    //29.08.2009 11:12:23
-	    if ($format == "dd.MM.yyyy HH:mm:ss") {
-		$ret = $day . "." . $month . "." . $year . " " . $hour . ":" . $minute . ":" . $second;
-	    }
-	}
-	return $ret;
+	
+	return date($format, strtotime($date));
     }
 
     public static function dateWrite($date, $useLocal = true) {
-	$ret = "";
-	//29/08/2009
-	//29.08.2009
-	if (strlen($date) == 10) {
-	    $day = substr($date, 0, 2);
-	    $month = substr($date, 3, 2);
-	    $year = substr($date, 6, 4);
-
-	    //2009-07-14 04:27:16
-	    $ret = $year . "-" . $month . "-" . $day . " 00:00:00";
-	}
-
-	//29/08/2009 11:12
-	//29.08.2009 11:12
-	if (strlen($date) == 16) {
-	    $day = substr($date, 0, 2);
-	    $month = substr($date, 3, 2);
-	    $year = substr($date, 6, 4);
-	    $hour = substr($date, 11, 2);
-	    $minute = substr($date, 14, 2);
-
-	    //2009-07-14 04:27
-	    $ret = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":00";
-	}
-
-	if (strlen($date) == 19) {
-	    $day = substr($date, 0, 2);
-	    $month = substr($date, 3, 2);
-	    $year = substr($date, 6, 4);
-	    $hour = substr($date, 11, 2);
-	    $minute = substr($date, 14, 2);
-	    $second = substr($date, 17, 2);
-
-	    //2009-07-14 04:27:16
-	    $ret = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":" . $second;
-	}
+	$ret = date('Y-m-d H:i:s', strtotime($date));
 	if ($useLocal) {
 	    $ret = Common::convert2Localzone($ret, true);
 	}

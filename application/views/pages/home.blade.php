@@ -197,7 +197,7 @@
                                         <div class="col-md-8">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                                                <input type="text" id="date" name="date" class="datepicker form-control" value="{{ Common::dateRead($date, 'dd.MM.yyyy') }}" />
+                                                <input type="text" id="date" name="date" class="datepicker form-control" value="{{ Common::dateRead($date, 'd.m.Y') }}" />
                                             </div>
                                         </div>
                                     </div>
@@ -231,10 +231,9 @@
 			$s = Auth::User()->Session(1, 1);
 			$lastLoginDate = '';
 			$lastLoginTime = '';
-
 			if ($s) {
-			    $lastLoginDate = Common::dateRead($s->LocalLoginDate, 'dd.MM.yyyy');
-			    $lastLoginTime = Common::dateRead($s->LocalLoginDate, 'HH:mm');
+			    $lastLoginDate = Common::dateRead($s->LocalLoginDate, 'd.m.Y');
+			    $lastLoginTime = Common::dateRead($s->LocalLoginDate, 'H:i');
 			}
 			?>
                         <div class="hp-info hp-simple pull-left hp-inline">
@@ -274,23 +273,23 @@
                             <span class="icon-dropbox"></span>&nbsp;{{__('common.applications_applicationname')}}&nbsp;<span class="reportSubtitle">{{ $appDetail->Name }}</span>
                         </div>                 
 			<div class="hp-info hp-simple pull-left hp-inline">
-                            <span class="icon-calendar"></span>&nbsp;{{__('common.header_enddate')}}&nbsp;<span class="reportSubtitle">{{ Common::dateRead($appDetail->ExpirationDate, 'dd.MM.yyyy'); }}</span>
+                            <span class="icon-calendar"></span>&nbsp;{{__('common.header_enddate')}}&nbsp;<span class="reportSubtitle">{{ Common::dateRead($appDetail->ExpirationDate, 'd.m.Y'); }}</span>
                         </div>                            
                         <div class="hp-info hp-simple pull-left hp-inline">
                             <span class="icon-thumbs-up"></span>&nbsp;{{__('common.header_status')}}&nbsp;<span class="reportSubtitle">
-<?php
-$languageID = (int) Session::get('language_id');
-$applicationStatusName = $appDetail->ApplicationStatus($languageID);
-$applicationStatusName = (strlen(trim($applicationStatusName)) == 0 ? __('common.header_upload') : $applicationStatusName);
-echo $applicationStatusName;
-?>
+				<?php
+				$languageID = (int) Session::get('language_id');
+				$applicationStatusName = $appDetail->ApplicationStatus($languageID);
+				$applicationStatusName = (strlen(trim($applicationStatusName)) == 0 ? __('common.header_upload') : $applicationStatusName);
+				echo $applicationStatusName;
+				?>
                             </span>
                         </div>
                     </div>
                     <div class="head-panel nm">
                         <div class="hp-info hp-simple pull-left hp-inline" style="text-align:center;">
-                            <div style="float:left;" id="startDate" value="{{ Common::dateRead($appDetail->StartDate, 'yyyy-MM-dd'); }}">{{ Common::dateRead($appDetail->StartDate, 'dd.MM.yyyy'); }}</div>
-                            <div style="float:right;" id="endDate" value="{{ Common::dateRead($appDetail->ExpirationDate, 'yyyy-MM-dd'); }}">{{ Common::dateRead($appDetail->ExpirationDate, 'dd.MM.yyyy'); }}</div>
+                            <div style="float:left;" id="startDate" value="{{ Common::dateRead($appDetail->StartDate, 'Y-m-d'); }}">{{ Common::dateRead($appDetail->StartDate, 'd.m.Y'); }}</div>
+                            <div style="float:right;" id="endDate" value="{{ Common::dateRead($appDetail->ExpirationDate, 'Y-m-d'); }}">{{ Common::dateRead($appDetail->ExpirationDate, 'd.m.Y'); }}</div>
                             <span id="datePerValue"></span>
                             <div class="hp-sm">                                    
                                 <div class="progress progress-small">

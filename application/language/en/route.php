@@ -138,5 +138,12 @@ return array(
     'maps_save' => 'maps/save',
     'maps_location' => 'maps/location/',
 
+    'banners' => 'banners',
+    'banners_show' => 'banners/(:num)',
+    'banners_new' => 'banners/new',
+    'banners_save' => 'banners/save',
+    'banners_delete' => 'banners/delete/',
+    'banners_order' => 'banners/order/',
+    
     'my_ticket' => 'biletlerim',
 );

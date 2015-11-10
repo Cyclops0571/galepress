@@ -47,9 +47,13 @@ class Test_Controller extends Base_Controller {
 
     
     public function get_index() {
-	dd(localtime());
 //	setlocale(LC_TIME, $locale);
-	
+//	echo Auth::User()->UserID;
+	echo Auth::User()->Session()->LocalLoginDate, PHP_EOL;
+	echo Common::dateRead(Auth::User()->Session()->LocalLoginDate, "dd.MM.yyyy HH:mm");
+	echo Common::dateRead(Auth::User()->Session()->LocalLoginDate, 'dd.MM.yyyy'), PHP_EOL;
+	echo date('d.m.Y'); 
+	exit;
 	echo date("Y-m-d", strtotime("-1 month +1 day")); exit;
 	echo date("Y-m-d", strtotime("2015-07-20 + 3 month")); exit;
 	$response = '{"response":{"state":"success","date_time":"15-10-23 08:48:30","request_id":"MTQ0NTU5MDEwOAHNVpS9Bj4ZTuwWGfck"},"mode":"live","card_token":"MTQ0NTU5MDA1MQDGDoQDPKTLV8pc091f","transaction":{"transaction_id":"MTQ0NTU5MDA1MAnIHvDNfQhrNTz06Oii","external_id":"1233","reference_id":"1233","state":"paid","amount":"118.00","currency":"TRY","connector_type":"Garanti","installment_count":0,"connector_auth_code":"777570"},"customer":{"first_name":"Faz\u0131l","last_name":"S\u00f6zer","email":"fazil@remax-yildiz.com"},"account":{"bin":"524347","brand":"MASTERCARD","expiry_month":"09","expiry_year":"2017","lastfourdigits":"3736","holder":"arif fazil sozer","card_family":"Axess","card_type":"CREDIT_CARD","card_association":"MASTER_CARD","issuer_bank_code":"46","issuer_bank_name":"Akbank"}}';

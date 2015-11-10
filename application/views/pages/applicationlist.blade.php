@@ -54,7 +54,7 @@
                                     <td>{{ HTML::link($route.'/'.$row->ApplicationID, $row->Blocked) }}</td>
                                     <td>{{ HTML::link($route.'/'.$row->ApplicationID, $row->Status) }}</td>
                                     <td>{{ Common::getFormattedData($row->Trail, $row->Trail) }}</td>
-                                    <td>{{ HTML::link($route.'/'.$row->ApplicationID, Common::dateRead($row->ExpirationDate, 'dd.MM.yyyy')) }}</td>
+                                    <td>{{ HTML::link($route.'/'.$row->ApplicationID, Common::dateRead($row->ExpirationDate, 'd.m.Y')) }}</td>
                                     <td>{{ HTML::link($route.'/'.$row->ApplicationID, $row->ApplicationID) }}</td>
                                     <td>{{ Common::getFormattedData($row->IsExpired, $row->IsExpired) }}</td>
                                 </tr>

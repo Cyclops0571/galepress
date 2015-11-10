@@ -33,7 +33,7 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
                 if($s)
                 {   
                     $applicationName = $s->Name;
-                    $applicationExpirationDate = Common::dateRead($s->ExpirationDate, 'dd.MM.yyyy');
+                    $applicationExpirationDate = Common::dateRead($s->ExpirationDate, 'd.m.Y');
                     $applicationStatusName = $s->ApplicationStatus();
                     $applicationStatusName = (strlen(trim($applicationStatusName)) == 0 ? __('common.header_upload') : $applicationStatusName);
                     

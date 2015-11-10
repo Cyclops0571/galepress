@@ -136,6 +136,13 @@ return array(
     'maps_new' => 'maps/new',
     'maps_save' => 'maps/save',
     'maps_location' => 'maps/location/',
+    
+    'banners' => 'banners',
+    'banners_show' => 'banners/(:num)',
+    'banners_new' => 'banners/neu',
+    'banners_save' => 'banners/sparen',
+    'banners_delete' => 'banners/loschen/',
+    'banners_order' => 'banners/auftrag/',
 
     'my_ticket' => 'mytickets',
 

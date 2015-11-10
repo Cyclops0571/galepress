@@ -24,7 +24,7 @@ class Banners_Controller extends Base_Controller {
 		$this->fields[] = __('common.banner_list_customer');
 		$this->fields[] = __('common.banner_list_application');
 		$this->fields[] = __('common.banner_form_target_url');
-		$this->fields[] = __('common.banner_form_target_content');
+//		$this->fields[] = __('common.banner_form_target_content');
 		$this->fields[] = __('common.banner_description');
 		$this->fields[] = __('common.banners_list_status');
 		$this->fields[] = __('common.banner_list_banner_id');
@@ -34,7 +34,7 @@ class Banners_Controller extends Base_Controller {
 			$this->fields = array();
 			$this->fields[] = __('common.image');
 			$this->fields[] = __('common.banner_form_target_url');
-			$this->fields[] = __('common.banner_form_target_content');
+//			$this->fields[] = __('common.banner_form_target_content');
 			$this->fields[] = __('common.banner_description');
 			$this->fields[] = __('common.banners_list_status');
 			$this->fields[] = __('common.banner_list_banner_id');

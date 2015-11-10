@@ -31,9 +31,3 @@ Date.prototype.format = function (format) {
     }
     return d;
 }
-/*
-function isDate (x) {
-	x = x.getDate("dd.mm.yyyy", "yyyy-mm-dd")
-	return (null != x) && !isNaN(x) && ("undefined" !== typeof x.getDate);
-}
-*/

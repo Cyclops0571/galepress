@@ -104,7 +104,7 @@
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Surname); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Email); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Application()->Name); ?> </td>
-					<td><?php echo HTML::link($route . '/' . $row->ClientID, Common::dateRead($row->LastLoginDate, 'dd.MM.yyyy')); ?> </td>
+					<td><?php echo HTML::link($route . '/' . $row->ClientID, Common::dateRead($row->LastLoginDate, 'd.m.Y')); ?> </td>
 					<td><?php echo HTML::link($route . '/' . $row->ClientID, $row->ClientID); ?> </td>
 				    </tr>
 				<?php endforeach; ?>

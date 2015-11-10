@@ -123,14 +123,14 @@ $Price = number_format((float)$Price, 2);
 		<div class="col-md-3">{{ __('common.applications_startdate') }}<span class="error">*</span></div>
 		{{ $errors->first('StartDate', '<p class="error">:message</p>') }}
 		<div class="col-md-9">
-		    <input type="text" name="StartDate" id="StartDate" class="form-control textbox date required" disable="disable" value="{{ Common::dateRead($StartDate, 'dd.MM.yyyy') }}" />
+		    <input type="text" name="StartDate" id="StartDate" class="form-control textbox date required" disable="disable" value="{{ Common::dateRead($StartDate, 'd.m.Y') }}" />
 		</div>
 	    </div>
 	    <div class="form-row">
 		<div class="col-md-3">{{ __('common.applications_expirationdate') }}<span class="error">*</span></div>
 		{{ $errors->first('ExpirationDate', '<p class="error">:message</p>') }}
 		<div class="col-md-9">
-		    <input type="text" name="ExpirationDate" id="ExpirationDate" class="form-control textbox date required" disable="disable" value="{{ Common::dateRead($ExpirationDate, 'dd.MM.yyyy') }}" />
+		    <input type="text" name="ExpirationDate" id="ExpirationDate" class="form-control textbox date required" disable="disable" value="{{ Common::dateRead($ExpirationDate, 'd.m.Y') }}" />
 		</div>
 	    </div>
 	    <div class="form-row">

@@ -139,7 +139,7 @@
 						<div class="col-md-3">{{ __('common.orders_startdate') }}<span class="error">*</span></div>
 						{{ $errors->first('StartDate', '<p class="error">:message</p>') }}
 						<div class="col-md-9">
-							<input type="text" name="StartDate" id="StartDate" class="form-control textbox date required" disable="disable" value="{{ Common::dateRead($StartDate, 'dd.MM.yyyy') }}" />
+							<input type="text" name="StartDate" id="StartDate" class="form-control textbox date required" disable="disable" value="{{ Common::dateRead($StartDate, 'd.m.Y') }}" />
 						</div>
 					</div>
 					*/ ?>

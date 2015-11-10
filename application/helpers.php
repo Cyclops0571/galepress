@@ -29,3 +29,16 @@ HTML::macro('oddeven', function($name = 'default')
 	$status[$name] = 1 - $status[$name];
 	return ($status[$name] % 2 == 0) ? 'even' : 'odd';
 });
+
+
+function localDateFormat($format = 'dd.MM.yyyy') {
+    $currentLang = Config::get('application.language');
+    if($currentLang != 'usa') {
+	return $format;
+    } else {
+	if($format == 'dd.MM.yyyy') {
+	    return 'mm/dd/yyyy';
+	}
+    }
+    
+}

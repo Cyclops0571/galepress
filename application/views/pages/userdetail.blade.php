@@ -23,9 +23,7 @@
 		$LastName = $row->LastName;
 		$Email = $row->Email;
 		$Timezone = $row->Timezone;
-	}
-	else 
-	{
+	} else  {
 		$UserTypeID = 111;
 		$CustomerID = (int)Input::get('customerID', 0);
 	}
@@ -123,9 +121,9 @@
                     <div class="col-md-9">
                         <select class="form-control select2" style="width: 100%;" tabindex="-1" id="Timezone" name="Timezone">
                             <option value=""{{ ($Timezone == '' ? ' selected="selected"' : '') }}></option>
-                            @foreach ($timezones as $timezone)
-                            <option value="{{ $timezone->Value }}"{{ ($Timezone == $timezone->Value ? ' selected="selected"' : '') }}>{{ $timezone->Text }}</option>
-                            @endforeach
+                            <?php foreach ($timezones as $timezone): ?>
+                                <option value="{{ $timezone->Value }}"{{ ($Timezone == $timezone->Value ? ' selected="selected"' : '') }}>{{ $timezone->Text }}</option>
+			    <?php endforeach; ?>
                         </select>
                     </div>
                 </div>

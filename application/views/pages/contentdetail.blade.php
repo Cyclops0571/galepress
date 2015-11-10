@@ -197,7 +197,7 @@ $groupcodes = DB::table('GroupCode AS gc')
                 <div class="col-md-8">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                        <input type="text" name="PublishDate" id="PublishDate" class="form-control textbox date" value="{{ Common::dateRead($PublishDate, 'dd.MM.yyyy') }}" />
+                        <input type="text" name="PublishDate" id="PublishDate" class="form-control textbox date" value="{{ Common::dateRead($PublishDate, 'd.m.Y') }}" />
                     </div>
                 </div>
                 <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_publishdate') }}"><span class="icon-info-sign"></span></a></div>
@@ -207,7 +207,7 @@ $groupcodes = DB::table('GroupCode AS gc')
                 <div class="col-md-8">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                        <input type="text" name="UnpublishDate" id="UnpublishDate" class="form-control textbox date {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabledFields') }}" value="{{ Common::dateRead($UnpublishDate, 'dd.MM.yyyy') }}" {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabled="disabled"') }} />
+                        <input type="text" name="UnpublishDate" id="UnpublishDate" class="form-control textbox date {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabledFields') }}" value="{{ Common::dateRead($UnpublishDate, 'd.m.Y') }}" {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabled="disabled"') }} />
                         <span class="input-group-addon">
                             <input type="checkbox" name="IsUnpublishActive" id="IsUnpublishActive" value="1"{{ ((int)$IsUnpublishActive == 1 ? ' checked="checked"' : '') }} /> 
                         </span>

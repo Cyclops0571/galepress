@@ -18,8 +18,6 @@ class PaymentMail_Task {
     public function sendPaymentReportMail() {
 	//yeni cekilmis bir ucret var ise onu verecek
 	//yeni acilmis bir account var ise onu verecek
-	$yesterday = date("Y-m-d", strtotime("-1 day"));
-	$today = date("Y-m-d");
 
 	$paymentAccounts = PaymentAccount::where("mail_send", "!=", 1)
 		->order_by("PaymentAccountID", "DESC")

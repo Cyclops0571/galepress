@@ -81,8 +81,8 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
 				<?php endif; ?>
 				<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
 				<td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
-				<td>{{ HTML::link($route.'/'.$row->ContentID, Common::dateRead($row->PublishDate, 'dd.MM.yyyy')) }}</td>
-				<td>{{ HTML::link($route.'/'.$row->ContentID, Common::dateRead($row->UnpublishDate, 'dd.MM.yyyy')) }}</td>
+				<td>{{ HTML::link($route.'/'.$row->ContentID, Common::dateRead($row->PublishDate, 'd.m.Y')) }}</td>
+				<td>{{ HTML::link($route.'/'.$row->ContentID, Common::dateRead($row->UnpublishDate, 'd.m.Y')) }}</td>
 				<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Blocked) }}</td>
 				<td>{{ HTML::link($route.'/'.$row->ContentID, $row->Status) }}</td>
 				<td>{{ HTML::link($route.'/'.$row->ContentID, $row->ContentID) }}</td>

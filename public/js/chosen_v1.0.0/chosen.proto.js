@@ -1,3 +1,5 @@
+/* global javascriptLang */
+
 // Chosen, a Select Box Enhancer for jQuery and Prototype
 // by Patrick Filler for Harvest, http://getharvest.com
 //
@@ -465,11 +467,11 @@
       return true;
     };
 
-    AbstractChosen.default_multiple_text = "Seçiniz...";
+    AbstractChosen.default_multiple_text = javascriptLang['select'];
 
-    AbstractChosen.default_single_text = "Seçiniz...";
+    AbstractChosen.default_single_text = javascriptLang['select'];
 
-    AbstractChosen.default_no_result_text = "Sonuç bulunamadı.";
+    AbstractChosen.default_no_result_text = javascriptLang['no_results'];
 
     return AbstractChosen;
 

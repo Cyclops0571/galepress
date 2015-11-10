@@ -194,12 +194,12 @@ return array(
 
 	'application_settings_caption_detail' => 'Application Settings',
 	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
-	'application_settings_caption_template' => 'Template Settings',
-	'application_settings_caption_banner' => 'Banner Settings',
-	'application_settings_caption_tab' => 'Tab Settings',
+	'application_settings_caption_template' => 'TEMPLATE SETTINGS',
+	'application_settings_caption_banner' => 'BANNER SETTINGS',
+	'application_settings_caption_tab' => 'TAB SETTINGS',
+	'application_settings_subscription' => 'SUBSCRIPTION SETTINGS',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
-	'application_settings_subscription' => 'Subscription Settings',
     
 	'application_payment' => 'Application Payment',
 

@@ -42,7 +42,7 @@ if (FALSE) {
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->CustomerName) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->ApplicationName) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetUrl) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>
+										<!--<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>-->
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Description) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->statusText()) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->BannerID) }}</td>
@@ -61,7 +61,7 @@ if (FALSE) {
 											</a>
 										</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetUrl) }}</td>
-										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>
+										<!--<td>{{ HTML::link($route.'/'.$row->BannerID, $row->TargetContent) }}</td>-->
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->Description) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->statusText()) }}</td>
 										<td>{{ HTML::link($route.'/'.$row->BannerID, $row->BannerID) }}</td>
