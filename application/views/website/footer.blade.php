@@ -1,6 +1,21 @@
 <!-- Tickets: Live Chat Bar Start -->
 <!--<div id="lcs"><a href="#" id="lcs_start_chat">{{__('website.footer_livechat')}}</a></div>-->
 <!-- Tickets: Live Chat Bar Finish -->
+<?php
+$socialMediaLinks = array();
+switch(Config::get('application.langugage')) {
+    case 'tr':
+	$socialMediaLinks['fa-linkedin'] = 'https://www.linkedin.com/company/galepress';
+	$socialMediaLinks['fa-twitter'] = 'https://twitter.com/GalePress';
+	$socialMediaLinks['fa-facebook'] = 'https://www.facebook.com/pages/Galepress/267455253374597?fref=ts';
+    break;
+    default :
+	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepressusa/';
+	$socialMediaLinks['fa-twitter'] = 'https://twitter.com/galepressusa';
+	$socialMediaLinks['fa-facebook'] = 'https://www.facebook.com/GalePress-USA-1530611593895881/?ref=hl';
+	
+}
+?>
 <footer id="footer">
     <div class="inner sep-bottom-sm">
         <div class="container">
@@ -24,9 +39,9 @@
 		    <div class="widget sep-top-md">
 			<h6 class="upper widget-title">{{__('website.footer_socialmedia')}}</h6>
 			<ul class="social-icon sep-top-xs">
-			    <li><a href="https://www.linkedin.com/company/galepress" class="fa fa-linkedin fa-lg"></a></li>
-			    <li><a href="https://twitter.com/GalePress" class="fa fa-twitter fa-lg"></a></li>
-			    <li><a href="https://www.facebook.com/pages/Galepress/267455253374597?fref=ts" class="fa fa-facebook fa-lg"></a></li>
+			    <?php foreach($socialMediaLinks as $faIcon => $url): ?>
+				<li><a href="<?php echo $url ?>" class="fa <?php echo $faIcon ?> fa-lg"></a></li>
+			    <?php endforeach; ?>
 			</ul>
 			<ul class="social-icon sep-top-xs">
 			    <li>
