@@ -426,7 +426,7 @@ window.averta = {};
 		var swipe = event.data.target;
 		var jqevt = event;
 		if(!swipe.enabled) return;
-		console.log($(event.target).closest(swipe.noSwipeSelector, swipe.$element).length )
+		//console.log($(event.target).closest(swipe.noSwipeSelector, swipe.$element).length );
 		if ( $(event.target).closest(swipe.noSwipeSelector, swipe.$element).length > 0 ) {
 			return;
 		}

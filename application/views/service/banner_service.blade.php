@@ -12,7 +12,7 @@
 
         <script src="/js/masterslider/jquery-1.10.2.min.js"></script>
         <script src="/js/masterslider/jquery.easing.min.js"></script>
-        <script src="/js/masterslider/masterslider.min.js"></script>
+        <script src="/js/masterslider/masterslider.js?v=3"></script>
 
         <style>			
             #ms-gallery-1{
@@ -82,7 +82,6 @@
 			<?php $imgPath = $savedBanner->getImagePath($application); ?>
     		    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" />
     		    <div class="ms-info"></div>
-    		    <!--<div class="ms-info">{{$savedBanner->Description}}</div>-->
 			<?php if (!empty($savedBanner->TargetUrl)): ?>
 			    <a href="{{$savedBanner->TargetUrl}}" target="_blank"></a> 
 			<?php endif; ?>

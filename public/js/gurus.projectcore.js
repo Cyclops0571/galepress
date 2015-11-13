@@ -1,3 +1,5 @@
+/* global route */
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // INTERACTIVITY
 var cInteractivity = new function () {
@@ -13,40 +15,40 @@ var cInteractivity = new function () {
     };
 
     this.clickOk = function () {
-		var id = $("#modal-editor").attr("opener");
-		var content = CKEDITOR.instances.editor.getData();
-		$("#comp-" + id + "-content").val(content);
-		$("#modal-editor").addClass("hide");
-		$("#modal-mask").addClass("hide");
-		$("#modal-editor").append($('.action'));
-		CKEDITOR.instances.editor.destroy();
-		$('#wrapper').css('position','static');
-		$('body').css('overflow','auto');
+	var id = $("#modal-editor").attr("opener");
+	var content = CKEDITOR.instances.editor.getData();
+	$("#comp-" + id + "-content").val(content);
+	$("#modal-editor").addClass("hide");
+	$("#modal-mask").addClass("hide");
+	$("#modal-editor").append($('.action'));
+	CKEDITOR.instances.editor.destroy();
+	$('#wrapper').css('position', 'static');
+	$('body').css('overflow', 'auto');
     };
 
     this.clickCancel = function () {
-		$("#modal-editor").addClass("hide");
-		$("#modal-mask").addClass("hide");
-		$("#modal-editor").append($('.action'));
-		CKEDITOR.instances.editor.destroy();
-		$('#wrapper').css('position','static');
-		$('body').css('overflow','auto');
+	$("#modal-editor").addClass("hide");
+	$("#modal-mask").addClass("hide");
+	$("#modal-editor").append($('.action'));
+	CKEDITOR.instances.editor.destroy();
+	$('#wrapper').css('position', 'static');
+	$('body').css('overflow', 'auto');
     };
 
-  //   this.clickOk = function () {
-		// var id = $("#modal-editor").attr("opener");
-		// var content = $("#editor").val();
-		// $("#comp-" + id + "-content").val(content);
-		// $("#modal-editor").addClass("hide");
-		// $("#modal-mask").addClass("hide");
-		// $("#editor").destroyEditor();
-  //   };
+    //   this.clickOk = function () {
+    // var id = $("#modal-editor").attr("opener");
+    // var content = $("#editor").val();
+    // $("#comp-" + id + "-content").val(content);
+    // $("#modal-editor").addClass("hide");
+    // $("#modal-mask").addClass("hide");
+    // $("#editor").destroyEditor();
+    //   };
 
-  //   this.clickCancel = function () {
-		// $("#modal-editor").addClass("hide");
-		// $("#modal-mask").addClass("hide");
-		// $("#editor").destroyEditor();
-  //   };
+    //   this.clickCancel = function () {
+    // $("#modal-editor").addClass("hide");
+    // $("#modal-mask").addClass("hide");
+    // $("#editor").destroyEditor();
+    //   };
 
     this.openTransferModal = function (e) {
 
@@ -72,11 +74,11 @@ var cInteractivity = new function () {
 	$(".transfer-modal div p strong em").html(pageNo);
 
 	$(".transfer-modal select option")
-		.removeAttr("disabled")
-		.eq(parseInt(pageNo) - 1)
-		.attr("disabled", "disabled")
-		.next()
-		.prop('selected', true);
+	.removeAttr("disabled")
+	.eq(parseInt(pageNo) - 1)
+	.attr("disabled", "disabled")
+	.next()
+	.prop('selected', true);
 
 	if ($("#transferTo").hasClass('chzn-done')) {
 	    $("#transferTo").removeClass('chzn-done')
@@ -231,9 +233,9 @@ var cInteractivity = new function () {
 	var img = new Image();
 	img.onload = function () {
 	    $("#page")
-		    .css("background", "url('" + src + "') no-repeat top left")
-		    .css("width", img.width + "px")
-		    .css("height", img.height + "px");
+	    .css("background", "url('" + src + "') no-repeat top left")
+	    .css("width", img.width + "px")
+	    .css("height", img.height + "px");
 
 	    cInteractivity.clearPage();
 	    cInteractivity.loadPage(pageno, func, obj);
@@ -338,8 +340,8 @@ var cInteractivity = new function () {
 	var h = (d.getHours() > 9 ? "" + d.getHours() : "0" + d.getHours());
 	var m = (d.getMinutes() > 9 ? "" + d.getMinutes() : "0" + d.getMinutes());
 	var s = interactivity["autosave"]
-		.replace("{hour}", h)
-		.replace("{minute}", m);
+	.replace("{hour}", h)
+	.replace("{minute}", m);
 
 	$("#pdf-save span.save-info").html(s);
 
@@ -415,19 +417,19 @@ var cUser = new function () {
 	    var u = '/' + $('#currentlanguage').val() + '/' + route["login"];
 	    var data = cForm.serialize(frm) + localTime;
 
-    	cUser.doAsyncRequest(t, u, data, function (ret) {
+	    cUser.doAsyncRequest(t, u, data, function (ret) {
 		cNotification.success(null, ret.getValue("msg"));
-		if(getParameterByName("shopping")){
-			document.location.href = '/' + $('#currentlanguage').val() + '/shop';
+		if (getParameterByName("shopping")) {
+		    document.location.href = '/' + $('#currentlanguage').val() + '/shop';
 		} else {
-			document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];
+		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];
 		}
 	    });
 
 	} else {
 	    cNotification.validation();
 	}
-};
+    };
 
     this.forgotMyPassword = function () {
 
@@ -496,7 +498,13 @@ var cUser = new function () {
     };
 
     this.save = function () {
-	cCommon.save(this.objectName);
+	cCommon.save(
+	this.objectName,
+	function () {
+	    cNotification.success();
+	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["users"];
+	}
+	);
     };
 
     this.erase = function () {
@@ -556,8 +564,12 @@ var cCustomer = new function () {
     };
 
     this.save = function () {
-
-	cCommon.save(this.objectName);
+	cCommon.save(this.objectName,
+	function () {
+	    cNotification.success();
+	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["customers"];
+	}
+	);
     };
 
     this.erase = function () {
@@ -596,7 +608,13 @@ var cApplication = new function () {
     };
 
     this.save = function () {
-	cCommon.save(this.objectName);
+	cCommon.save(
+	this.objectName,
+	function () {
+	    cNotification.success();
+	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["applications"];
+	}
+	);
     };
 
     this.erase = function () {
@@ -625,42 +643,42 @@ var cApplication = new function () {
     };
 
     this.saveUserSettings = function () {
-    	var warningText="";
-    	$(".tabActiveCheck").each(function (index) {
-		    if ($(".inhouseUrl:eq(" + index + ")")[0].selectedIndex==0  && $(".tabActiveCheck:eq(" + index + ")").attr('checked')=='checked' && $(".targetUrlCount:eq(" + index + ")").val().length==0) {
-				warningText += 'Tab '+(index+1)+' ';
-		    }
-		});
+	var warningText = "";
+	$(".tabActiveCheck").each(function (index) {
+	    if ($(".inhouseUrl:eq(" + index + ")")[0].selectedIndex == 0 && $(".tabActiveCheck:eq(" + index + ")").attr('checked') == 'checked' && $(".targetUrlCount:eq(" + index + ")").val().length == 0) {
+		warningText += 'Tab ' + (index + 1) + ' ';
+	    }
+	});
 
-		if(warningText!=""){
-			$('#dialog-tab-active-warning .modal-body').text(warningText + ': [[innerText]]');
-			$('#dialog-tab-active-warning').modal('show');
-			return;
+	if (warningText != "") {
+	    $('#dialog-tab-active-warning .modal-body').text(warningText + ': [[innerText]]');
+	    $('#dialog-tab-active-warning').modal('show');
+	    return;
+	}
+	else {
+	    $(".targetUrlCount").each(function (index) {
+		if (!$(this).parent().next().hasClass('hide') && $(".tabActiveCheck:eq(" + index + ")").attr('checked') == 'checked' && $(".inhouseUrl:eq(" + index + ")")[0].selectedIndex == 0) {
+		    $('#dialog-tab-active-warning .modal-body').text('Tab ' + (index + 1) + ': [[innerText]]');
+		    $('#dialog-tab-active-warning').modal('show');
+		    warningText = "not";
+		    return;
 		}
-		else{
-			$(".targetUrlCount").each(function (index) {
-			    if(!$(this).parent().next().hasClass('hide') && $(".tabActiveCheck:eq(" + index + ")").attr('checked')=='checked' && $(".inhouseUrl:eq(" + index + ")")[0].selectedIndex==0){
-			    	$('#dialog-tab-active-warning .modal-body').text('Tab ' +(index+1) + ': [[innerText]]');
-					$('#dialog-tab-active-warning').modal('show');
-					warningText="not";
-					return;
-			    }
-			    else if (!$(this).val().match(/^[a-zA-Z]+:\/\//))
-				{
-				    $(this).val('http://' + $(this).val());
-				}
-			});
+		else if (!$(this).val().match(/^[a-zA-Z]+:\/\//))
+		{
+		    $(this).val('http://' + $(this).val());
 		}
-		
-		if(warningText==""){
-			cCommon.save('application_usersettings',
-				function () {
-				    cNotification.success();
-				    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["applications_usersettings"].replace('(:num)', $('input[name=ApplicationID]').val());
-				}
+	    });
+	}
 
-			);
-		}
+	if (warningText == "") {
+	    cCommon.save('application_usersettings',
+	    function () {
+		cNotification.success();
+		document.location.href = '/' + $('#currentlanguage').val() + '/' + route["applications_usersettings"].replace('(:num)', $('input[name=ApplicationID]').val());
+	    }
+
+	    );
+	}
     };
 
     this.selectedIcon = function (tabNo) {
@@ -689,23 +707,23 @@ var cApplication = new function () {
     };
 
     this.InhouseUrlChange = function (e) {
-		if (e.selectedIndex != 0) {
-		    $(e).parent().closest('.form-row').next().addClass('hide').addClass('noTouchOpacity');
-		    $(e).parent().closest('.form-row').next().find('input').val('');
+	if (e.selectedIndex != 0) {
+	    $(e).parent().closest('.form-row').next().addClass('hide').addClass('noTouchOpacity');
+	    $(e).parent().closest('.form-row').next().find('input').val('');
 
-		}
-		else {
-		    $(e).parent().closest('.form-row').next().removeClass('hide').removeClass('noTouchOpacity');
-		}
+	}
+	else {
+	    $(e).parent().closest('.form-row').next().removeClass('hide').removeClass('noTouchOpacity');
+	}
     };
     this.checkUrl = function (e) {
 	var url = $(e).parent().prev().val();
-	if(url.length === 0) {
+	if (url.length === 0) {
 	    $(e).parent().parent().next().addClass("hide");
 	    $(e).css('background-color', '#2e2e2e');
 	    // $(e).closest('.form-row').next().find('.col-md-8').removeClass('noTouchOpacity');
 	} else {
-	    if(!isUrlReachable(url)) {
+	    if (!isUrlReachable(url)) {
 		$(e).css('background', '#9d0000');
 		$(e).parent().parent().next().removeClass("hide");
 		// $(e).closest('.form-row').next().find('.col-md-8').addClass('noTouchOpacity');
@@ -719,39 +737,39 @@ var cApplication = new function () {
     };
 
     this.setSelectInputActive = function () {
-		$(".inhouseUrl").each(function (index) {
-		    if ($(this).val() != 0) {
-				$(".targetUrlCount:eq(" + index + ")").closest('.form-row').addClass('hide').addClass('noTouchOpacity');
-		    }
-		    else {
-		    	$(".targetUrlCount:eq(" + index + ")").closest('.form-row').removeClass('hide').removeClass('noTouchOpacity');	
-		    }
-		});
+	$(".inhouseUrl").each(function (index) {
+	    if ($(this).val() != 0) {
+		$(".targetUrlCount:eq(" + index + ")").closest('.form-row').addClass('hide').addClass('noTouchOpacity');
+	    }
+	    else {
+		$(".targetUrlCount:eq(" + index + ")").closest('.form-row').removeClass('hide').removeClass('noTouchOpacity');
+	    }
+	});
     };
 
     this.checkTabStatus = function () {
 	var obj = $("#TabActive");
-	    if (obj.is(':checked')) {
-		obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
-	    }
-	    else{
-	    	obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
-	    }
-	    $('.row-save').removeClass('noTouchOpacity');
-	};
-	
-    this.BannerActive = function() {
+	if (obj.is(':checked')) {
+	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
+	}
+	else {
+	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
+	}
+	$('.row-save').removeClass('noTouchOpacity');
+    };
+
+    this.BannerActive = function () {
 	var obj = $("#BannerActive");
-	if(obj.is(":checked")) {
+	if (obj.is(":checked")) {
 	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
 	} else {
 	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
 	}
     };
-    
-    this.BannerCustomerActive = function() {
+
+    this.BannerCustomerActive = function () {
 	var obj = $("#BannerCustomerActive");
-	if(obj.is(":checked")) {
+	if (obj.is(":checked")) {
 	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
 	    $("input[name='BannerCustomerUrl']").removeClass('noTouchOpacity');
 	} else {
@@ -759,11 +777,11 @@ var cApplication = new function () {
 	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
 	}
     };
-    
-    this.refreshSubscriptionIdentifier = function(AppID, SubscriptionType) {
+
+    this.refreshSubscriptionIdentifier = function (AppID, SubscriptionType) {
 	cNotification.loader();
-	cAjax.doAsyncRequest("POST", '/applications/refresh_identifier', 
-	{"ApplicationID" : AppID, "SubscrioptionType" : SubscriptionType},
+	cAjax.doAsyncRequest("POST", '/applications/refresh_identifier',
+	{"ApplicationID": AppID, "SubscrioptionType": SubscriptionType},
 	function (ret) {
 	    $("#SubscriptionIdenfier_" + SubscriptionType).val(ret.getValue("SubscriptionIdentifier"));
 	    cNotification.success();
@@ -832,30 +850,30 @@ var cContent = new function () {
 	}
 
 	cCommon.save(
-		this.objectName,
-		function (ret) {
-		    contentID = ret.getValue("contentID");
-		    cNotification.success();
-		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + contentID;
-		}
+	this.objectName,
+	function (ret) {
+	    contentID = ret.getValue("contentID");
+	    cNotification.success();
+	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + contentID;
+	}
 	);
     };
 
     this.erase = function () {
 	cCommon.erase(this.objectName);
     };
-    
+
     this.removeFromMobile = function (id) {
-        console.log(route[_self.objectName]);
-        cNotification.hide();
-        cNotification.loader();
-        var url = '/' + $('#currentlanguage').val() + '/contents/remove_from_mobile/' + id;
-        var d = new Array();
-        cCommon.doAsyncRequest('GET', url, d, function (ret) {
-                cNotification.success();
-                var qs = cCommon.getQS(); //get query string
-                document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;
-        });
+	console.log(route[_self.objectName]);
+	cNotification.hide();
+	cNotification.loader();
+	var url = '/' + $('#currentlanguage').val() + '/contents/remove_from_mobile/' + id;
+	var d = new Array();
+	cCommon.doAsyncRequest('GET', url, d, function (ret) {
+	    cNotification.success();
+	    var qs = cCommon.getQS(); //get query string
+	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;
+	});
     };
 
     this.selectFile = function () {
@@ -880,8 +898,8 @@ var cContent = new function () {
 	    $(".loader").addClass("hidden");
 	    $("html").css("overflow", "scroll");
 	    iframe
-		    .attr("src", "")
-		    .css("display", "none");
+	    .attr("src", "")
+	    .css("display", "none");
 
 	    if (getFullscreenStatus()) {
 		exitFullscreen();
@@ -1285,52 +1303,52 @@ var cContent = new function () {
     };
 
     this.copy = function () {
-    	cNotification.loader();
-    	setTimeout(function(){
-    		var appID = $("#ApplicationID").val();
-	    	var contentID = $("#ContentID").val();
-			$.ajax({
-			    async: true,
-			    type: 'GET',
-			    url: '/copy/' + contentID + '/' +'new',
-			    success: function (response) {
-			    	// console.log(response);
-			    	cNotification.success();
-			    	document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
-			    }
-			});
-    	},1000);
+	cNotification.loader();
+	setTimeout(function () {
+	    var appID = $("#ApplicationID").val();
+	    var contentID = $("#ContentID").val();
+	    $.ajax({
+		async: true,
+		type: 'GET',
+		url: '/copy/' + contentID + '/' + 'new',
+		success: function (response) {
+		    // console.log(response);
+		    cNotification.success();
+		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
+		}
+	    });
+	}, 1000);
     };
 
     this.copyInteractivity = function () {
-    	cNotification.loader();
-    	setTimeout(function(){
-	    	var appID = $("#ApplicationID").val();
-	    	var contentID = $("#ContentID").val();
-	    	var targetContentID = $( "#AppContents option:selected" ).val();
-	    	if(targetContentID!=""){
-	    		$.ajax({
-				    async: true,
-				    type: 'GET',
-				    url: '/copy/' + contentID + '/' + targetContentID,
-				    success: function (response) {
-				    	// console.log(response);
-				    	cNotification.success();
-				    	document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
-				    }
-				});
-	    	}
-	    	else {
-				$('#dialog-target-content-warning').modal('show');
-				cNotification.hide();
-	    	}
-		},1000);
-    };
-    
-    this.refreshIdentifier = function(contentID) {
 	cNotification.loader();
-	cAjax.doAsyncRequest("POST", '/contents/refresh_identifier', 
-	{"ContentID" : contentID},
+	setTimeout(function () {
+	    var appID = $("#ApplicationID").val();
+	    var contentID = $("#ContentID").val();
+	    var targetContentID = $("#AppContents option:selected").val();
+	    if (targetContentID != "") {
+		$.ajax({
+		    async: true,
+		    type: 'GET',
+		    url: '/copy/' + contentID + '/' + targetContentID,
+		    success: function (response) {
+			// console.log(response);
+			cNotification.success();
+			document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
+		    }
+		});
+	    }
+	    else {
+		$('#dialog-target-content-warning').modal('show');
+		cNotification.hide();
+	    }
+	}, 1000);
+    };
+
+    this.refreshIdentifier = function (contentID) {
+	cNotification.loader();
+	cAjax.doAsyncRequest("POST", '/contents/refresh_identifier',
+	{"ContentID": contentID},
 	function (ret) {
 	    $("#ContentIdenfier").val(ret.getValue("SubscriptionIdentifier"));
 	    cNotification.success();
@@ -1502,7 +1520,7 @@ var cCommon = new function () {
 	    var t = 'POST';
 	    var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
 	    var d = cForm.serialize(frm);
-	    if(typeof additionalData !== 'undefined') {
+	    if (typeof additionalData !== 'undefined') {
 		d = d + additionalData;
 	    }
 	    cCommon.doAsyncRequest(t, u, d, fSuccess);
@@ -1749,7 +1767,7 @@ var cAjax = new function () {
 	    error: funcError
 	});
     };
-    
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1801,16 +1819,16 @@ var modalform = new function () {
 	    overlay = $(".ui-widget-overlay");
 	} else {
 	    $('<div></div>')
-		    .addClass('ui-widget-overlay')
-		    .addClass('hidden')
-		    .css("z-index", "1001")
-		    .appendTo("body");
+	    .addClass('ui-widget-overlay')
+	    .addClass('hidden')
+	    .css("z-index", "1001")
+	    .appendTo("body");
 	    overlay = $(".ui-widget-overlay");
 	}
 
 	overlay.css("width", $(document).width())
-		.css("height", $(document).height())
-		.removeClass("hidden");
+	.css("height", $(document).height())
+	.removeClass("hidden");
     };
 
     this.reposition = function () {
@@ -2262,37 +2280,37 @@ var cBanner = new function () {
     };
 
     this.checkUrl = function () {
-		var url = $('#TargetUrl').val();
-		$('#checkUrl').css('background-color', '#2e2e2e');
-		$(".input-group + span.urlError").addClass("hide");
-		if (url.length > 0 && !isUrlReachable(url))
-		{
-		    $(".input-group + span.urlError").removeClass("hide");
-		    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
-		}
-		else if (isUrlReachable(url)) {
-		    $('.my-btn-success').removeClass("noTouch").css('background', '');
-		    $('#checkUrl').css('background-color', '#59AD2F !important;');
-		    $('#checkUrl').css('color', '#fff');
-		}
-		else if (url.length == 0){
-			$('.my-btn-success').removeClass("noTouch").css('background', '');
-		}
+	var url = $('#TargetUrl').val();
+	$('#checkUrl').css('background-color', '#2e2e2e');
+	$(".input-group + span.urlError").addClass("hide");
+	if (url.length > 0 && !isUrlReachable(url))
+	{
+	    $(".input-group + span.urlError").removeClass("hide");
+	    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+	}
+	else if (isUrlReachable(url)) {
+	    $('.my-btn-success').removeClass("noTouch").css('background', '');
+	    $('#checkUrl').css('background-color', '#59AD2F !important;');
+	    $('#checkUrl').css('color', '#fff');
+	}
+	else if (url.length == 0) {
+	    $('.my-btn-success').removeClass("noTouch").css('background', '');
+	}
 
-		if ($('#imgPreview').attr('src') == '/img/bannerSlider/defaultPreview.jpg') {
-		    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
-		}
+	if ($('#imgPreview').attr('src') == '/img/bannerSlider/defaultPreview.jpg') {
+	    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+	}
     };
 
     this.save = function (applicationID) {
 	cCommon.save(this.objectName,
-		function (ret) {
-		    var bannerID = ret.getValue('bannerID');
-		    var primaryKeyID = $("#primaryKeyID").val();
-		    var hdnImageFileSelected = $("#hdnImageFileSelected").val();
-		    cNotification.success();
-		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + bannerID;
-		}
+	function (ret) {
+	    var bannerID = ret.getValue('bannerID');
+	    var primaryKeyID = $("#primaryKeyID").val();
+	    var hdnImageFileSelected = $("#hdnImageFileSelected").val();
+	    cNotification.success();
+	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + bannerID;
+	}
 	);
     };
 

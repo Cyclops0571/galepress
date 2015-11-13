@@ -46,7 +46,7 @@
 
 		<li><a href="/{{ Session::get('language') }}/{{__('route.website_sectors')}}" title="{{__('website.menu_solutions')}}" id="menu_item_Pages" data-ref="#">{{__('website.menu_solutions')}}</a></li>
 
-		<li><a href="/{{ Session::get('language') }}/{{__('route.website_showcase')}}" title="{{__('website.menu_showcase')}}" id="menu_item_features-grid" data-ref="features-grid">{{__('website.menu_showcase')}}</a></li>
+		<li><a href="/{{ Session::get('language') }}/{{__('route.website_showcase')}}" title="{{__('website.menu_showcase')}}" id="menu_item_features-grid" data-ref="features-grid"><?php echo __('website.menu_showcase'); ?></a></li>
 
 		<li><a href="/{{ Session::get('language') }}/{{__('route.website_contact')}}" title="{{__('website.contact')}}" id="menu_item_Contactus" data-ref="#">{{__('website.contact')}}</a></li>
 		<?php if (Config::get('application.language') == 'tr'): ?>

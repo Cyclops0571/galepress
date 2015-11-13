@@ -1,7 +1,6 @@
 @layout('website.html')
 
 @section('body-content')
-
       <section id="home" class="demo-1">
         <!-- Start slider-wrapper-->
         <div id="slider" style="display:none;" class="sl-slider-wrapper">

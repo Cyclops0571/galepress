@@ -98,7 +98,7 @@ return array(
 	'detailpage_caption' => 'REGISTRY PAGE',
 	'detailpage_save' => 'Save',
 	'detailpage_update' => 'Update',
-	'detailpage_delete' => 'Erase',
+	'detailpage_delete' => 'Delete',
         'detailpage_remove' => 'Remove',
 	'detailpage_send' => 'Send the new password',
 	'detailpage_success' => 'Operation is successful.',
@@ -179,7 +179,7 @@ return array(
 	'customers_billtaxnumber' => 'Tax Number:',
 	
 	'applications_caption' => 'Applications',
-	'applications_caption_detail' => 'APPLICATION DETAIL',
+	'applications_caption_detail' => 'Application Detail',
 	'applications_list_column1' => '',
 	'applications_list_column2' => 'İ.S.',
 	'applications_list_column3' => 'Customer',

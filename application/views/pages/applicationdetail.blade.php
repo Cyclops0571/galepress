@@ -342,19 +342,14 @@ $Price = number_format((float)$Price, 2);
 	    </div>
 	    <div class="form-row">
 		<div class="col-md-8"></div>
-		@if($ApplicationID == 0)
-		<div class="col-md-2"></div>
 		<div class="col-md-2">
-		    <input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_save') }}" onclick="cApplication.save();" />
-		</div>
-		@else
-		<div class="col-md-2">
+		    @if($ApplicationID != 0)
 		    <a href="#modal_default_10" data-toggle="modal"><input type="button" value="{{ __('common.detailpage_delete') }}" name="delete" class="btn delete expand remove" /></a>
+		    @endif            
 		</div>
 		<div class="col-md-2">
 		    <input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cApplication.save();" />
 		</div>
-		@endif            
 	    </div>
 	    {{ Form::close() }}
 	</div>
