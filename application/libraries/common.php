@@ -598,6 +598,7 @@ class Common {
 	$toEmailSet = Config::get('custom.admin_email_set');
 	$subject = __('common.task_subject');
 	Log::info($msg);
+	Laravel\Log::write($type, $message);
 	Bundle::start('messages');
 	foreach ($toEmailSet as $toEmail) {
 	    Message::send(function($m) use($toEmail, $subject, $msg) {
@@ -747,7 +748,7 @@ class Common {
 	}
 	return $password;
     }
-    
+
     public static function dateLocalize($format, $timestamp = 'time()') {
 	return date($format, $timestamp);
     }
@@ -808,24 +809,29 @@ class Common {
     }
 
     public static function dateRead($date, $format, $useLocal = true) {
+	if (empty($date)) {
+	    $date = date("Y-m-d");
+	}
 	$ret = "";
 	if ($useLocal) {
 	    $date = Common::convert2Localzone($date);
 	}
-	if(Laravel\Config::get('application.language') == 'usa') {
-	    if($format == 'd.m.Y') {
+	if (Laravel\Config::get('application.language') == 'usa') {
+	    if ($format == 'd.m.Y') {
 		$format = 'm/d/Y';
-	    } else if($format == 'd.m.Y H:i') {
+	    } else if ($format == 'd.m.Y H:i') {
 		$format = 'm/d/Y H:i';
-	    } else if($format == 'd.m.Y H:i:s') {
+	    } else if ($format == 'd.m.Y H:i:s') {
 		$format = 'm/d/Y H:i:s';
 	    }
 	}
-	
 	return date($format, strtotime($date));
     }
 
     public static function dateWrite($date, $useLocal = true) {
+	if (empty($date)) {
+	    $date = date("Y-m-d");
+	}
 	$ret = date('Y-m-d H:i:s', strtotime($date));
 	if ($useLocal) {
 	    $ret = Common::convert2Localzone($ret, true);

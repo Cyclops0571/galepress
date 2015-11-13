@@ -197,7 +197,7 @@ $groupcodes = DB::table('GroupCode AS gc')
                 <div class="col-md-8">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                        <input type="text" name="PublishDate" id="PublishDate" class="form-control textbox date" value="{{ Common::dateRead($PublishDate, 'd.m.Y') }}" />
+                        <input type="text" name="PublishDate" id="PublishDate" class="form-control textbox date" value="<?php echo Common::dateRead($PublishDate, 'd.m.Y'); ?>" />
                     </div>
                 </div>
                 <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_publishdate') }}"><span class="icon-info-sign"></span></a></div>

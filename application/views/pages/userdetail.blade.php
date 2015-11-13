@@ -1,5 +1,3 @@
-/* global cUser */
-
 @layout('layouts.master')
 
 @section('content')    
