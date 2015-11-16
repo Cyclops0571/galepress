@@ -47,7 +47,10 @@ class Webservice_Statistics_Controller extends Base_Controller {
 			$statistic->Time = Input::get('time', '');
 			$statistic->RequestDate = date("Y-m-d", strtotime($statistic->Time));
 			$statistic->Lat = Input::get('lat', '');
-			$statistic->Long = Input::get('long', '');
+			$statistic->Long = Input::get('lon', '');
+			if(empty($statistic->Long)) {
+			    $statistic->Long = Input::get('long', '');
+			}
 			$statistic->DeviceID = $deviceID;
 			if ($customerID > 0) {
 			    $statistic->CustomerID = $customerID;

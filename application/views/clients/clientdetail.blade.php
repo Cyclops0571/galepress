@@ -112,15 +112,14 @@ if (isset($row)) {
 			</thead>
 			<tbody>
 			    <?php foreach ($contents as $content): ?>
-    			    <tr id="contentIDSet_<?php echo $content->ContentID; ?>">
-    				<td>
-					<?php echo $content->Name; ?>
-    				</td>
-    				<td>
-					<?php echo $content->ContentID; ?>
+			    <?php endforeach; ?>
+			    <?php if(empty($contents)): ?>
+    			    <tr id="contentIDSet_0">
+				<td colspan="2">
+					<?php echo __('clients.drop_contents_here'); ?>
     				</td>
     			    </tr>
-			    <?php endforeach; ?>
+			    <?php endif; ?>
 			</tbody>
 		    </table>
 		</div>
@@ -196,6 +195,7 @@ if (isset($row)) {
 	    items: 'tbody > tr',
 	    receive: function (ev, ui) {
 		ui.item.parent().find('tbody').append(ui.item);
+		$("#contentIDSet_0").remove();
 	    }
 	});
 	$('.mySortable').disableSelection();

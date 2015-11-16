@@ -46,7 +46,7 @@ class ReportFilter {
 //		echo DB::raw('(' . $sqlTemplate . ') t'); exit;
 		
 		DB::table(DB::raw('(' . $sqlTemplate . ') t'))->paginate($this->rowCount);
-		dd(DB::last_query()); exit;
+//		dd(DB::last_query()); exit;
 		return DB::table(DB::raw('(' . $sqlTemplate . ') t'))->paginate($this->rowCount);
 		
 	}

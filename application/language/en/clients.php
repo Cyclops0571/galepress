@@ -55,5 +55,6 @@ return array(
     'identifier_info_month_subscription' => 'Aylık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
     'identifier_info_year_subscription' => 'Yıllık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
     'identifier' => 'identifier',
+    'drop_contents_here' => 'Drop your contents here.',
 );
 

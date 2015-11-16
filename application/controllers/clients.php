@@ -297,6 +297,16 @@ class Clients_Controller extends Base_Controller {
 	sort($contentIDSet);
 	$client->ContentIDSet = implode(",", $contentIDSet);
 	$client->save();
+	$VersionIncrementAppSet = array();
+	foreach ($contentIDSet as $contentID) {
+	    if($contentID == 0) {
+		continue;
+	    }
+	    $content = Content::find($contentID);
+	    if($content &&!in_array($content->ApplicationID, $VersionIncrementAppSet)) {
+		$content->Application()->incrementAppVersion();
+	    }
+	}
 	return "success=" . base64_encode("true") . "&id=" . base64_encode($client->ClientID);
     }
 
@@ -305,6 +315,7 @@ class Clients_Controller extends Base_Controller {
      * @return HTML
      */
     public function post_excelupload() {
+	$VersionIncrementAppSet = array();
 	$selectableContentIDSet = NULL;
 	$responseMsg = "";
 	$status = "Failed";
@@ -427,10 +438,18 @@ class Clients_Controller extends Base_Controller {
 			}
 		    }
 		    $client->ContentIDSet = implode(",", $filteredContentIDSet);
+		    foreach($client->ContentIDSet as $contentID) {
+			$content = Content::find($contentID);
+			if($content && !in_array($content->Application()->ApplicationID, $VersionIncrementAppSet)) {
+			    $VersionIncrementAppSet[] = $content->Application()->ApplicationID;
+			    $content->Application()->incrementAppVersion();
+			}
+		    }
 		}
 
 		$client->save();
 	    }
+	    
 	    $responseMsg .= Common::localize('inserted_mobile_user_count') . $addedUserCount . " " . Common::localize('updated_mobile_user_count') . $updatedUserCount;
 	    $status = 'success';
 	}
