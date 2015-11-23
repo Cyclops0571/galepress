@@ -72,7 +72,6 @@ class PaymentUser_Task {
 		    $postData['customer_company_name'] = "iyzico";
 		    $postData['customer_contact_email'] = $paymentAccount->email;
 		    $postData['customer_contact_mobile'] = str_replace(array(" ", "-", "(", ")"), "", $paymentAccount->phone);
-		    $postData['customer_contact_ip'] = Request::ip();
 		    $postData['customer_language'] = 'tr';
 		    $postData['customer_presentation_usage'] = 'GalepressAylikOdeme_' . date('YmdHisu');
 		    $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
@@ -92,7 +91,7 @@ class PaymentUser_Task {
 		    $postData['card_brand'] = $paymentAccount->brand;
 		    $postData['card_holder_name'] = $paymentAccount->holder;
 		    $postData['connector_type'] = "Garanti";
-		    $postData['customer_contact_ip'] = "37.9.205.203";
+		    $postData['customer_contact_ip'] = "127.0.0.1";
  
 		    $paymentTransaction->request = json_encode($postData);
 		    $paymentTransaction->save();

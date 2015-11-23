@@ -553,7 +553,7 @@
 	<!-- Custom JS -->
 	<script src="/website/scripts/shop/custom.js"></script>
 	<script src="/website/scripts/shop/validate/jquery.mask.min.js"></script>
-	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+	<script src="/js/bootstrap-toggle.min.js"></script>
 
 
 	<script type="text/javascript">

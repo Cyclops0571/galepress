@@ -14,6 +14,7 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
     $(function () {
 	if (appID && currentPageNo < 2) {
 	    $("#DataTables_Table_1 tbody").sortable({
+		delay: 150,
 		axis: 'y',
 		update: function () {
 		    var data = $(this).sortable('serialize');

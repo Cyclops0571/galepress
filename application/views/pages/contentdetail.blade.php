@@ -103,7 +103,7 @@ $groupcodes = DB::table('GroupCode AS gc')
 {{ Form::open(__('route.contents_save'), 'POST', array('enctype' => 'multipart/form-data')) }}
 {{ Form::token() }}
 <div class="col-md-9" style="padding-left:25px;">
-    <div class="block bg-light-ltr">
+    <div class="block">
         <div class="header">
             <h2>{{ __('common.detailpage_caption') }}</h2>
         </div>
