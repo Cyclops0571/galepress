@@ -580,7 +580,7 @@ return array(
 	'banner_form_target_url' => 'Hedef Url:',
 	'banner_form_target_content' => 'Hedef İçerik:',
 	'banners_caption' => 'Banner Listesi',
-	'banners_caption_detail' => 'Banner Detayı',
+	'banners_caption_detail' => 'Banner Ayarları',
 	'banners_select_content' => 'Hedef içerik seçebilirsiniz...',
 	'banners_original_image' => 'Yüklenilen resim:',
 	'banners_image' => 'Resim Önizleme:',
@@ -631,5 +631,6 @@ return array(
 	
 	'sort' => 'Sırala',
 	'active' => 'Aktif',
+	'passive' => 'Pasif',
 	'price' => 'Fiyat',
 );

@@ -364,7 +364,7 @@ class Applications_Controller extends Base_Controller {
 	$upload_handler->post(false);
     }
 
-    public function get_userApplicationSettings($id) {
+    public function get_applicationSetting($id) {
 
 	$this->detailcaption = __('common.application_settings_caption_detail');
 
@@ -381,20 +381,19 @@ class Applications_Controller extends Base_Controller {
 	    $data = array(
 		'page' => $this->page,
 		'route' => $this->route,
-		'caption' => $this->caption,
-		'detailcaption' => $this->detailcaption,
+		'caption' => $this->detailcaption,
 		'application' => $application,
 		'tabs' => $tabs,
 		'galepressTabs' => $galepressTabs
 	    );
-	    return View::make('pages.userapplicationdetail', $data)
+	    return View::make('pages.applicationsetting', $data)
 			    ->nest('filterbar', 'sections.filterbar', $data);
 	} else {
 	    return Redirect::to($this->route);
 	}
     }
 
-    public function post_userApplicationSettings() {
+    public function post_applicationSetting() {
 	$application = Application::find((int) Input::get("ApplicationID", 0));
 	if (!$application || !$application->CheckOwnership()) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('error.unauthorized_user_attempt'));

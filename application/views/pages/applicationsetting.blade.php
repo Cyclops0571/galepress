@@ -20,7 +20,7 @@ if (false) {
 <div class="col-md-6">
     {{ Form::open(__('route.applications_save'), 'POST') }}
     {{ Form::token() }}   
-    <div class="block block-drop-shadow bg-light-rtl">
+    <div class="block block-drop-shadow">
 	<div class="header">
 	    <h2>{{ __('common.application_settings_caption_template') }}</h2>
 	</div>
@@ -58,73 +58,23 @@ if (false) {
 	    </div>
 	</div>
     </div>
-    <div class="block block-drop-shadow bg-light-rtl">
-	<div class="header">
-	    <h2>{{ __('common.application_settings_caption_banner') }}</h2>
-	</div>
-	<div class="content controls" id="bannerSettings">
-	    <div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
-		<div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
-	    </div>
+    <div class="block block-drop-shadow">
+	<div class="content controls">
 	    <div class="form-row">
-		<div class="col-md-3">{{__('common.contents_status')}}</div>
-		<div class="col-md-8">
-		    <div class="checkbox-inline" style="padding-left:0;">
-			<div class="checker">
-			    <span>
-				<input name="BannerActive" id="BannerActive" type="checkbox" value="1" <?php echo $application->BannerActive ? 'checked' : ''; ?> onclick="cApplication.BannerActive()" >
-			    </span>
-			</div>
-		    </div>
+		<div class="col-md-11">
+		    {{ __('common.application_settings_caption_banner') }}
 		</div>
-		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span class="icon-info-sign"></span></a></div>
-	    </div>
-	    <div class="form-row">
-		<div class="col-md-3"><?php echo __("common.banner_use_costomer_banner"); ?></div>
-		<div class="col-md-8">
-		    <div class="input-group">
-			<span class="input-group-addon">
-			    <input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1" <?php echo $application->BannerCustomerActive ? 'checked' : ''; ?> onclick="cApplication.BannerCustomerActive()">
+		<div class="col-md-1">
+		    <a class="btn active" href="<?php echo Laravel\URL::to(__('route.banners') . '?applicationID=' . $application->ApplicationID); ?>" title="Banner"  class=" page-navigation">
+			<span class="icon-arrow-right">
 			</span>
-			<input  type="text" name="BannerCustomerUrl" value="<?php echo $application->BannerCustomerUrl ; ?>" placeholder="http://">
-			 <span class="input-group-btn">
-			    <button class="btn btn-primary urlCheck" type="button" onclick="cApplication.checkUrl(this);"><span class="icon-ok"></span></button>
-			</span>
-		    </div>
+		    </a>
 		</div>
-		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_use_customer_banner') }}"><span class="icon-info-sign"></span></a></div>
-	    </div>
-	    <div class="form-row">
-		<div class="col-md-3">{{__('common.banners_autoplay')}}</div>
-		<div class="col-md-8">
-		    <div class="checkbox-inline" style="padding-left:0;">
-			<div class="checker">
-			    <span>
-				<input name="BannerAutoplay" type="checkbox" value="1" <?php echo $application->BannerAutoplay ? 'checked' : ''; ?>>
-			    </span>
-			</div>
-		    </div>
-		</div>
-		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_autoplay') }}"><span class="icon-info-sign"></span></a></div>
-	    </div>
-	    <div class="form-row">
-		<div class="col-md-3">{{__('common.banners_autoplay_interval')}}</div>
-		<div class="col-md-8">
-		    <input type="text" name="BannerIntervalTime" value="<?php echo $application->BannerIntervalTime; ?>"/>
-		</div>
-		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_interval') }}"><span class="icon-info-sign"></span></a></div>
-	    </div>
-	    <div class="form-row">
-		<div class="col-md-3">{{__('common.banners_autoplay_speed')}}</div>
-		<div class="col-md-8">
-		    <input type="text" name="BannerTransitionRate"  value="<?php echo $application->BannerTransitionRate; ?>"/>
-		</div>
-		<div class="col-md-1"><a  class="tipr" title="{{ __('common.banners_info_speed') }}"><span class="icon-info-sign"></span></a></div>
 	    </div>
 	</div>
     </div>
 
-    <div class="block block-drop-shadow bg-light-rtl">
+    <div class="block block-drop-shadow">
 	<div class="header">
 	    <h2>{{ __('common.application_settings_caption_tab') }}</h2>
 	</div>
@@ -227,7 +177,7 @@ if (false) {
 	</div>
     </div>
 
-    <div class="block block-drop-shadow bg-light-rtl">
+    <div class="block block-drop-shadow">
 	<div class="header" style="border-bottom: 1px solid black">
 	    <h2>{{ __('common.application_settings_subscription') }}</h2>
 	</div>
@@ -239,21 +189,21 @@ if (false) {
     	    <div class="form-row">
     		<div class="col-md-3"><?php echo __('common.active'); ?></div>
     		<div class="col-md-8">
-		    <input name="SubscriptionStatus_<?php echo $key; ?>" type="checkbox" value="1" <?php echo $application->subscriptionStatus($key) == eStatus::Active ? 'checked' : ''; ?>>
+    		    <input name="SubscriptionStatus_<?php echo $key; ?>" type="checkbox" value="1" <?php echo $application->subscriptionStatus($key) == eStatus::Active ? 'checked' : ''; ?>>
     		</div>
     		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.active_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
     	    </div>
     	    <div class="form-row">
     		<div class="col-md-3"><?php echo __('clients.identifier'); ?></div>
     		<div class="col-md-8">
-		    <div class="input-group">
-			<input type="text" id="SubscriptionIdenfier_<?php echo $key; ?>"  value="<?php echo $application->SubscriptionIdentifier($key); ?>" readonly="readonly">
-			<span class="input-group-btn">
-			    <button class="btn btn-primary urlCheck" type="button" onclick="cApplication.refreshSubscriptionIdentifier(<?php echo $application->ApplicationID; ?>, <?php echo $key; ?>);">
-				<span class="icon-refresh"></span>
-			    </button>
-			</span>
-		    </div>
+    		    <div class="input-group">
+    			<input type="text" id="SubscriptionIdenfier_<?php echo $key; ?>"  value="<?php echo $application->SubscriptionIdentifier($key); ?>" readonly="readonly">
+    			<span class="input-group-btn">
+    			    <button class="btn btn-primary urlCheck" type="button" onclick="cApplication.refreshSubscriptionIdentifier(<?php echo $application->ApplicationID; ?>, <?php echo $key; ?>);">
+    				<span class="icon-refresh"></span>
+    			    </button>
+    			</span>
+    		    </div>
     		</div>
     		<div class="col-md-1"><a  class="tipr" title="<?php echo __('clients.identifier_info_' . $value) ?>"><span class="icon-info-sign"></span></a></div>
     	    </div>

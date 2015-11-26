@@ -48,6 +48,7 @@ class Uploader {
 	    $gsCommand[] = '-r196x196';
 	    $gsCommand[] = "'" . $filePath . "/" . $tempPdfFile . "'";
 
+//	    echo implode(" ", $gsCommand), PHP_EOL;
 	    shell_exec(implode(" ", $gsCommand));
 	    $im = new imagick($filePath . "/" . $tempImageFile);
 

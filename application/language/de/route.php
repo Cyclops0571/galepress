@@ -51,7 +51,7 @@ return array(
     'applications_uploadfile' => 'applikationen/datei-hochladen',
     'applications_uploadfile2' => 'applikationen/datei-hochladen2',
     'applications_usersettings' => 'applikationen/(:num)/einstellungen',
-    'application_usersettings_save' => 'applications/userApplicationSettings',
+    'application_usersettings_save' => 'applications/applicationSetting',
 
     'contents' => 'inhalte',
     'contents_request' => 'inhalte/Anforderung',
@@ -141,6 +141,7 @@ return array(
     'banners_show' => 'banners/(:num)',
     'banners_new' => 'banners/neu',
     'banners_save' => 'banners/sparen',
+    'banners_setting_save' => 'banners/setting_save',
     'banners_delete' => 'banners/loschen/',
     'banners_order' => 'banners/auftrag/',
 

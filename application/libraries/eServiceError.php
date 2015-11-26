@@ -9,8 +9,8 @@ class eServiceError {
     const UserNotFound = 120;
     const ApplicationNotFound = 130;
     const PassiveApplication = 131;
-    const CategoryNotFound = 140;
-    const IncorrectUserCredentials = 150;
+    const IncorrectUserCredentials = 140;
+    const CategoryNotFound = 150;
     const CreateAccount = 151;
     const ClientNotFound = 160;
     const ClientIncorrectPassword = 161;
@@ -45,11 +45,11 @@ class eServiceError {
 	    case eServiceError::PassiveApplication:
 		$exception = new Exception("Uygulama aktif değil. Uygulamanın süresi dolmuş, engellenmiş veya pasifleştirilmiş olabilir.", $errorNo);
 		break;
-	    case eServiceError::CategoryNotFound:
-		$exception = new Exception("Kategori bulunamadı.", $errorNo);
-		break;
 	    case eServiceError::IncorrectUserCredentials:
 		$exception = new Exception("Hatalı Kullanıcı Bilgileri.", $errorNo);
+		break;
+	    case eServiceError::CategoryNotFound:
+		$exception = new Exception("Kategori bulunamadı.", $errorNo);
 		break;
 	    case eServiceError::CreateAccount:
 		$exception = new Exception(Config::get('custom.url') . " adresinden hesap oluşturmalısınız.", $errorNo);

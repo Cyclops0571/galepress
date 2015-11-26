@@ -25,17 +25,18 @@
         {{ HTML::style('css/print.css?v=' . APP_VER, array('media' => 'print')); }}
 
 	{{ HTML::style('css/bootstrap.min.css?v=' . APP_VER, array('media' => 'screen')); }}
+	{{ HTML::style('css/bootstrap-editable.css?v=' . APP_VER, array('media' => 'screen')); }}
 	{{ HTML::style('css/jquery-ui.min.css?v=' . APP_VER, array('media' => 'screen')); }}
 	{{ HTML::style('css/font-awesome.min.css?v=' . APP_VER, array('media' => 'screen')); }}
 	{{ HTML::style('css/select2.css?v=' . APP_VER, array('media' => 'screen')); }}
 	{{ HTML::style('css/stylesheet.css?v=' . APP_VER, array('media' => 'screen')); }}
 	{{ HTML::style('css/backgrounds.css?v=' . APP_VER, array('media' => 'screen')); }}
 	{{ HTML::style('css/themes.css?v=' . APP_VER, array('media' => 'screen')); }}
-	{{ HTML::style('css/mystyles.css?v=' . APP_VER, array('media' => 'screen')); }}
 
         {{ HTML::style('css/general.css?v=' . APP_VER, array('media' => 'screen')); }}
         {{ HTML::style('css/fonts/open-sans-condensed/css/open-sans-condensed.css?v=' . APP_VER, array('media' => 'screen')); }}
         {{ HTML::style('css/myApp.css?v=' . APP_VER, array('media' => 'screen')); }}
+	{{ HTML::style('css/mystyles.css?v=' . APP_VER, array('media' => 'screen')); }}
         {{ HTML::style('uploadify/uploadify.css?v=' . APP_VER, array('media' => 'screen')); }}
         {{ HTML::style('js/chosen_v1.0.0/chosen.css?v=' . APP_VER,array('media' => 'screen'));}}
         {{ HTML::style('css/btn_interactive.css?v=' . APP_VER,array('media' => 'screen'));}}
@@ -49,7 +50,7 @@
         {{ HTML::script('js/jquery-1.7.2.min.js'); }}
         {{ HTML::script('js/jquery-ui-1.10.4.custom.min.js'); }}
         {{ HTML::script('js/bootstrap.min.js'); }}
-        {{ HTML::script('js/bootstrap.min.js'); }}
+        {{ HTML::script('js/bootstrap-editable.min.js'); }}
         {{ HTML::script('js/jquery.mask.min.js'); }}
         {{ HTML::script('js/jquery.uniform.min.js'); }}
         {{ HTML::script('js/jquery.knob.js'); }}
@@ -78,7 +79,8 @@
         {{ HTML::script('js/jqplot/jqplot.highlighter.min.js'); }}
         {{ HTML::script('js/jqplot/jqplot.dateAxisRenderer.min.js'); }}
         {{ HTML::script('js/jqplot/jqplot.categoryAxisRenderer.min.js'); }}
-
+	
+	{{ HTML::script('js/bootstrap-toggle.min.js'); }}
         <!-- Begin pngfix-->
         <!--[if lt IE 7]>
         {{ HTML::script('js/DD_belatedPNG_0.0.8a.js'); }}

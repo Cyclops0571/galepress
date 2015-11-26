@@ -304,6 +304,7 @@ class Clients_Controller extends Base_Controller {
 	    }
 	    $content = Content::find($contentID);
 	    if($content &&!in_array($content->ApplicationID, $VersionIncrementAppSet)) {
+		$VersionIncrementAppSet[] = $content->ApplicationID;
 		$content->Application()->incrementAppVersion();
 	    }
 	}

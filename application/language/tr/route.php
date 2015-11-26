@@ -52,7 +52,7 @@ return array(
     'applications_uploadfile' => 'uygulamalar/dosya-yukle',
     'applications_uploadfile2' => 'uygulamalar/dosya-yukle2',
     'applications_usersettings' => 'uygulamalar/(:num)/ayarlar',
-    'application_usersettings_save' => 'applications/userApplicationSettings',
+    'application_usersettings_save' => 'applications/applicationSetting',
 
     'contents' => 'icerikler',
     'contents_request' => 'icerikler/talep',
@@ -142,6 +142,7 @@ return array(
     'banners_show' => 'banners/(:num)',
     'banners_new' => 'banners/yeni',
     'banners_save' => 'banners/kaydet',
+    'banners_setting_save' => 'banners/setting_save',
     'banners_delete' => 'banners/sil/',
     'banners_order' => 'banners/sira/',
 

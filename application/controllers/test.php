@@ -47,6 +47,7 @@ class Test_Controller extends Base_Controller {
 
     
     public function get_index() {
+	return View::make('test.javascripttest', array());
 //	setlocale(LC_TIME, $locale);
 //	echo Auth::User()->UserID;
 	echo Auth::User()->Session()->LocalLoginDate, PHP_EOL;

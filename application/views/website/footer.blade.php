@@ -3,11 +3,12 @@
 <!-- Tickets: Live Chat Bar Finish -->
 <?php
 $socialMediaLinks = array();
-switch(Config::get('application.langugage')) {
+switch(Config::get('application.language')) {
     case 'tr':
 	$socialMediaLinks['fa-linkedin'] = 'https://www.linkedin.com/company/galepress';
 	$socialMediaLinks['fa-twitter'] = 'https://twitter.com/GalePress';
 	$socialMediaLinks['fa-facebook'] = 'https://www.facebook.com/pages/Galepress/267455253374597?fref=ts';
+	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepresstr/';
     break;
     default :
 	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepressusa/';

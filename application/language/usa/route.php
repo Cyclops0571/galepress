@@ -52,7 +52,7 @@ return array(
     'applications_uploadfile' => 'applications/load-file',
     'applications_uploadfile2' => 'applications/load-file2',
     'applications_usersettings' => 'applications/(:num)/settings',
-    'application_usersettings_save' => 'applications/userApplicationSettings',
+    'application_usersettings_save' => 'applications/applicationSetting',
 
     'contents' => 'contents',
     'contents_request' => 'contents/request',
@@ -142,6 +142,7 @@ return array(
     'banners_show' => 'banners/(:num)',
     'banners_new' => 'banners/new',
     'banners_save' => 'banners/save',
+    'banners_setting_save' => 'banners/setting_save',
     'banners_delete' => 'banners/delete/',
     'banners_order' => 'banners/order/',
     

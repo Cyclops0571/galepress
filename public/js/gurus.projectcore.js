@@ -760,11 +760,19 @@ var cApplication = new function () {
 
     this.BannerActive = function () {
 	var obj = $("#BannerActive");
-	if (obj.is(":checked")) {
+	if ($('#BannerActive').prop('checked')) {
 	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
 	} else {
 	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
 	}
+	$('#BannerActive').change(function () {
+	    var obj = $("#BannerActive");
+	    if ($('#BannerActive').prop('checked')) {
+	    obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
+	} else {
+	    obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
+	}
+	});
     };
 
     this.BannerCustomerActive = function () {
@@ -1498,7 +1506,7 @@ var cCommon = new function () {
 	cAjax.doAsyncRequest(t, u, d, funcSuccess, funcError, true);
     };
 
-    this.save = function (param, fSuccess, formID, additionalData) {
+    this.save = function (param, fSuccess, formID, additionalData, onlyUseAdditionalData) {
 	if (typeof fSuccess !== 'function') {
 	    fSuccess = function (ret) {
 		cNotification.success();
@@ -1520,7 +1528,10 @@ var cCommon = new function () {
 	    var t = 'POST';
 	    var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
 	    var d = cForm.serialize(frm);
-	    if (typeof additionalData !== 'undefined') {
+
+	    if(typeof onlyUseAdditionalData !== 'undefined') {
+		d = additionalData;
+	    } else if (typeof additionalData !== 'undefined') {
 		d = d + additionalData;
 	    }
 	    cCommon.doAsyncRequest(t, u, d, fSuccess);
@@ -2302,22 +2313,18 @@ var cBanner = new function () {
 	}
     };
 
-    this.save = function (applicationID) {
-	cCommon.save(this.objectName,
-	function (ret) {
-	    var bannerID = ret.getValue('bannerID');
-	    var primaryKeyID = $("#primaryKeyID").val();
-	    var hdnImageFileSelected = $("#hdnImageFileSelected").val();
-	    cNotification.success();
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + bannerID;
-	}
-	);
+    this.settingSave = function (applicationID) {
+	cCommon.save('banners_setting', undefined, 'bannerForm');
     };
 
     this.delete = function (id) {
 	var url = "/banners/delete";
 	var rowIDPrefix = "bannerIDSet_";
 	cCommon.delete(url, id, rowIDPrefix);
+    };
+    
+    this.saveFromList = function (id) {
+	
     };
 
     // this.targetContent = function () {

@@ -580,7 +580,7 @@ return array(
 	'banner_form_target_url' => 'Target Url:',
 	'banner_form_target_content' => 'Target Content:',
 	'banners_caption' => 'Banners',
-	'banners_caption_detail' => 'Banner Detail',
+	'banners_caption_detail' => 'Banner Settings',
 	'banners_select_content' => 'You can select the target content...',
 	'banners_original_image' => 'UPLOADED PICTURES:',
 	'banners_image' => 'Image Preview:',
@@ -631,6 +631,7 @@ return array(
     
 	'sort' => 'Sort',
 	'active' => 'Active',
+	'passive' => 'Passive',
 	'price' => 'Price',
 
 );

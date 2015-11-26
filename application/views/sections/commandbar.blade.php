@@ -12,11 +12,6 @@
 		<a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook" class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span class="icon-book"></span></a>
 		<a href="#modalTemplateChooser" data-toggle="modal" data-target="#modalTemplateChooser" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-dashboard"></span></a>
 		<a href="{{ URL::to(__('route.maps').'?applicationID='.Input::get('applicationID', 0)) }}" title="{{__('common.map_title')}}" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-map-marker" style="font-size:14px;"></span></a>
-		<a href="{{ URL::to(__('route.banners').'?applicationID='.Input::get('applicationID', 0)) }}" title="Banner" class="widget-icon widget-icon-circle" style="margin-left:10px; position:relative;">
-		    <span class="icon-picture" style="font-size:9px; color:white; vertical-align:middle; position:relative; top:-2px;"></span>
-		    <span class="icon-angle-left" style="position:absolute; font-size: 8px; left: 2px;"></span>
-		    <span class="icon-angle-right" style="position:absolute; font-size: 8px; right: 2px;"></span>
-		</a>
 	    <?php endif; ?>
 
 

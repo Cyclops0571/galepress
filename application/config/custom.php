@@ -81,4 +81,10 @@ return array(
     'updatelocation_task' => 7,
     'updatesize_task' => 8,
     'updatevirtualhost_task' => 9,
+    'api_color_blue' => '#0082CA',
+    'api_color_green' => '#009D4F',
+    'api_color_yellow' => '#ECAA00',
+    'api_color_red' => '#F63440',
+    'api_color_orange' => '#FF6D37',
+    'api_color_grey' => '#707271',
 );

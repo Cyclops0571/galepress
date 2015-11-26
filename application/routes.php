@@ -182,7 +182,7 @@ foreach($languages as $currentLanguage) {
 	Route::post(__('route.applications_save')->get($currentLanguage), array('as' => 'applications_save', 'before' => 'auth' . $csrf, 'uses' => 'applications@save'));
 	Route::post(__('route.applications_delete')->get($currentLanguage), array('as' => 'applications_delete', 'before' => 'auth' . $csrf, 'uses' => 'applications@delete'));
 	Route::post(__('route.applications_uploadfile')->get($currentLanguage), array('as' => 'applications_uploadfile', 'before' => 'auth', 'uses' => 'applications@uploadfile'));
-	Route::get(__('route.applications_usersettings')->get($currentLanguage), array('as' => 'applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
+	Route::get(__('route.applications_usersettings')->get($currentLanguage), array('as' => 'applications_usersettings', 'before' => 'auth', 'uses' => 'applications@applicationSetting'));
 	Route::post(__('route.applications_uploadfile2')->get($currentLanguage), array('do' => function()
 	{
 		try
@@ -495,21 +495,23 @@ foreach($languages as $currentLanguage) {
 	Route::get(__('route.banners_show')->get($currentLanguage), array('as' => 'banners_show', 'before'=>'auth', 'uses'=>'banners@show'));
 	Route::get(__('route.banners_new')->get($currentLanguage), array('before'=>'auth', 'uses'=>'banners@new'));
 	Route::post(__('route.banners_save')->get($currentLanguage), array('as' => 'banners_save', 'before'=>'crsf|auth', 'uses'=>'banners@save'));
+	Route::post(__('route.banners_setting_save')->get($currentLanguage), array('as' => 'banners_save', 'before'=>'crsf|auth', 'uses'=>'banners@save_banner_setting'));
 	
 	// </editor-fold>
 	
-	Route::post('/common/imageupload_ltie10', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload_ltie10'));
-	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
+//	Route::post('/common/imageupload_ltie10', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload_ltie10'));
+//	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }
 
 
+Laravel\Routing\Route::post('/banners/imageupload', array('as' => 'banners_imageupload', 'uses' => 'banners@imageupload'));
 Laravel\Routing\Route::post('clients/clientregister', array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
 Laravel\Routing\Route::post('clients/forgotpassword', array('as' => 'clientsregistered', 'uses' => 'clients@forgotpassword'));
 Laravel\Routing\Route::post("clients/resetpw", array('as' => 'clientsresetpw', 'uses' => 'clients@resetpw'));
 Laravel\Routing\Route::post("applications/refresh_identifier", array('as' => 'applicationrefreshidentifier', 'uses' => 'applications@refresh_identifier'));
 Laravel\Routing\Route::post("contents/refresh_identifier", array('as' => 'contentrefreshidentifier', 'uses' => 'contents@refresh_identifier'));
 
-Route::post('applications/userApplicationSettings', array('as' => 'save_applications_usersettings', 'before' => 'auth', 'uses' => 'applications@userApplicationSettings'));
+Route::post('applications/applicationSetting', array('as' => 'save_applications_usersettings', 'before' => 'auth', 'uses' => 'applications@applicationSetting'));
 Route::get("/template/(:num)", array('as' => 'template_index', 'before'=>'auth', 'uses'=>'template@index'));
 Route::get("banners/delete", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
 Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));

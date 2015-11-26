@@ -148,7 +148,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 			    $hexadecimalColorCode = "#E2B705";
 			    break;
 			case 4:
-			    $hexadecimalColorCode = "#AB2626";
+			    $hexadecimalColorCode = "#F63440";
 			    break;
 			case 5:
 			    $hexadecimalColorCode = "#E74C3C";
