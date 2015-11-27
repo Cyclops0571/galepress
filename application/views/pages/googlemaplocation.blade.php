@@ -194,7 +194,6 @@ if (FALSE) {
     })
 </script>
 <body class="bg-img-num1">
-    <input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
     <div id="map_canvas"></div>
     <a href="#" id="zoomBtn" class="widget-icon widget-icon-large widget-icon-circle"><span class="icon-location-arrow"></span></a>
 </body>

@@ -173,7 +173,7 @@ $Price = number_format((float)$Price, 2);
 				{
 				    $("#CkPem").uploadify({
 					'swf': '/uploadify/uploadify.swf',
-					'uploader': '/' + $('#currentlanguage').val() + '/' + route["applications_uploadfile2"],
+					'uploader': '/' + currentLanguage + '/' + route["applications_uploadfile2"],
 					'cancelImg': '/uploadify/uploadify-cancel.png',
 					'fileTypeDesc': 'PEM Files',
 					'fileTypeExt': '*.pem',
@@ -208,7 +208,7 @@ $Price = number_format((float)$Price, 2);
 				else
 				{
 				    $("#CkPem").fileupload({
-					url: '/' + $('#currentlanguage').val() + '/' + route["applications_uploadfile"],
+					url: '/' + currentLanguage + '/' + route["applications_uploadfile"],
 					dataType: 'json',
 					sequentialUploads: true,
 					formData: {

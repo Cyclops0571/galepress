@@ -9,6 +9,8 @@
  *
  *
  */
+/* global route, currentLanguage */
+
 (function($){
 	$.fn.component = function(options) {
 		
@@ -453,7 +455,7 @@
 
 					$("#prop-" + id + " input[type='file']#comp-" + id + "-modalicon").uploadify({
 						'swf': '/uploadify/uploadify.swf',
-						'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+						'uploader': '/' + currentLanguage + '/' + route["interactivity_upload2"],
 						'cancelImg': '/uploadify/uploadify-cancel.png',
 						'fileTypeDesc': fileTypeDesc,
 						'fileTypeExt': fileTypeExt,
@@ -499,7 +501,7 @@
 				else
 				{
 					$("#prop-" + id + " input[type='file']#comp-" + id + "-modalicon").fileupload({
-						url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+						url: '/' + currentLanguage + '/' + route["interactivity_upload"],
 						dataType: 'json',
 						sequentialUploads: true,
 						formData: { 
@@ -734,7 +736,7 @@
 
 					$("#prop-" + id + " div.upload input[type='file']").uploadify({
 						'swf': '/uploadify/uploadify.swf',
-						'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+						'uploader': '/' + currentLanguage + '/' + route["interactivity_upload2"],
 						'cancelImg': '/uploadify/uploadify-cancel.png',
 						'fileTypeDesc': fileTypeDesc,
 						'fileTypeExt': fileTypeExt,
@@ -783,7 +785,7 @@
 				else
 				{
 					$("#prop-" + id + " div.upload input[type='file']").fileupload({
-						url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+						url: '/' + currentLanguage + '/' + route["interactivity_upload"],
 						dataType: 'json',
 						sequentialUploads: true,
 						formData: { 
@@ -998,7 +1000,7 @@
 					
 					$("#prop-" + id + " div.properties input[type='file']#comp-" + id + "-posterimage").uploadify({
 						'swf': '/uploadify/uploadify.swf',
-						'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+						'uploader': '/' + currentLanguage + '/' + route["interactivity_upload2"],
 						'cancelImg': '/uploadify/uploadify-cancel.png',
 						'fileTypeDesc': 'Image Files',
 						'fileTypeExt': '*.jpg;*.png;*.gif;*.jpeg',
@@ -1041,7 +1043,7 @@
 				else
 				{
 					$("#prop-" + id + " div.properties input[type='file']#comp-" + id + "-posterimage").fileupload({
-						url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+						url: '/' + currentLanguage + '/' + route["interactivity_upload"],
 						dataType: 'json',
 						sequentialUploads: true,
 						formData: { 
@@ -1350,7 +1352,7 @@
 
 					$("#prop-" + id + " div.icon1 input[type='file']").uploadify({
 						'swf': '/uploadify/uploadify.swf',
-						'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+						'uploader': '/' + currentLanguage + '/' + route["interactivity_upload2"],
 						'cancelImg': '/uploadify/uploadify-cancel.png',
 						'fileTypeDesc': fileTypeDesc,
 						'fileTypeExt': fileTypeExt,
@@ -1392,7 +1394,7 @@
 				else
 				{
 					$("#prop-" + id + " div.icon1 input[type='file']").fileupload({
-						url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+						url: '/' + currentLanguage + '/' + route["interactivity_upload"],
 						dataType: 'json',
 						sequentialUploads: true,
 						formData: { 
@@ -1501,7 +1503,7 @@
 
 					$("#prop-" + id + " div.icon2 input[type='file']").uploadify({
 						'swf': '/uploadify/uploadify.swf',
-						'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+						'uploader': '/' + currentLanguage + '/' + route["interactivity_upload2"],
 						'cancelImg': '/uploadify/uploadify-cancel.png',
 						'fileTypeDesc': fileTypeDesc2,
 						'fileTypeExt': fileTypeExt2,
@@ -1543,7 +1545,7 @@
 				else
 				{
 					$("#prop-" + id + " div.icon2 input[type='file']").fileupload({
-						url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+						url: '/' + currentLanguage + '/' + route["interactivity_upload"],
 						dataType: 'json',
 						sequentialUploads: true,
 						formData: { 
@@ -1658,7 +1660,7 @@
 							CKEDITOR.instances.editor.setData(content);
 							CKEDITOR.instances.editor.addContentsCss("/css/ckeditor/fonts/fonts.css");
 						}
-						createEditor($('#currentlanguage').val());
+						createEditor(currentLanguage);
 						// setTimeout(function(){
 						// 	$('#wrapper').fadeIn(500);
 						// },1000);
@@ -1681,7 +1683,7 @@
                                     $('#prop-' + id + ' div.drop-area').addClass("hide");
                                     $("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").uploadify({
                                             'swf': '/uploadify/uploadify.swf',
-                                            'uploader': '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload2"],
+                                            'uploader': '/' + currentLanguage + '/' + route["interactivity_upload2"],
                                             'cancelImg': '/uploadify/uploadify-cancel.png',
                                             'fileTypeDesc': 'Image Files',
                                             'fileTypeExt': '*.jpg;*.png;*.gif;*.jpeg',
@@ -1736,7 +1738,7 @@
                                     */
                             } else {
                                 $("#prop-" + id + " div.fromfile input[type='file']#comp-"+ id +"-file").fileupload({
-                                    url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_upload"],
+                                    url: '/' + currentLanguage + '/' + route["interactivity_upload"],
                                     dataType: 'json',
                                     sequentialUploads: true,
                                     formData: { 

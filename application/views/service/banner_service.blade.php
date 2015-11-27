@@ -79,7 +79,7 @@
             <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
 		<?php foreach ($bannerSet as $savedBanner): ?>
     		<div class="ms-slide" data-delay="{{$IntervalTime}}">
-			<?php $imgPath = $savedBanner->getImagePath($application); ?>
+			<?php $imgPath = $savedBanner->getImagePath(); ?>
     		    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" />
     		    <div class="ms-info"></div>
 			<?php if (!empty($savedBanner->TargetUrl)): ?>

@@ -35,7 +35,7 @@
 					if(data.result !== null) {
 					    if(result.status.valueOf() === 'success'.valueOf()) {
 						cNotification.success(result.responseMsg);
-						document.location.href = '/' + $('#currentlanguage').val() + '/' + route["clients"];
+						document.location.href = '/' + currentLanguage + '/' + route["clients"];
 					    } else {
 						cNotification.validation(result.responseMsg);
 					    }

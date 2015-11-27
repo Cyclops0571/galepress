@@ -13,7 +13,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
 if ($banner) {
     $bannerID = $banner->BannerID;
     $orderNo = $banner->OrderNo;
-    $ImagePublicPath = $banner->getImagePath($application);
+    $ImagePublicPath = $banner->getImagePath();
     $ImageLocalPath = $banner->ImageLocalPath;
     $TargetUrl = $banner->TargetUrl;
     $TargetContent = $banner->TargetContent;

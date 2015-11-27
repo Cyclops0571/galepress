@@ -67,7 +67,7 @@
             var ret = $.ajax({
                 async: false,
                 type: "POST",
-                url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_check"],
+                url: '/' + currentLanguage + '/' + route["interactivity_check"],
                 data: d,
                 error: function (ret) {
                     alert(ret);

@@ -177,26 +177,33 @@ class Banners_Controller extends Base_Controller {
     }
 
     public function post_save() {
-	$newbanner = (int) Input::get("newBanner", 0);
-	if ($newbanner) {
-	    $banner = new Banner();
-	} else {
-	    $banner = Banner::find((int) Input::get("pk"));
-	    if (!$banner) {
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
-	    }
-	}
-
 	$application = Application::find(Input::get("applicationID"));
 	if (!$application || !$application->CheckOwnership()) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
 	}
 
-	if ($newbanner) {
+	if (Input::has("newBanner")) {
 	    //set a default dummy banner
+	    /* @var $maxOrderedBanner Banner */
+	    $maxOrderedBanner = Banner::where("ApplicationID", "=", $application->ApplicationID)->order_by("OrderNo", "DESC")->first();
+	    $order = 1;
+	    if($maxOrderedBanner) {
+		$order = $maxOrderedBanner->OrderNo + 1;
+	    }
+	    
+	    $banner = new Banner();
 	    $banner->ApplicationID = $application->ApplicationID;
+	    $banner->OrderNo = $order;
 	    $banner->Status = eStatus::Passive;
+	    $banner->save();
+	    $sourceFile = path('public') . 'images/upload_image.png';
+	    $destinationFolder = path('public') . 'files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/';
+	    File::copy(path('public') . 'images/upload_image.png', $destinationFolder . $banner->BannerID . IMAGE_EXTENSION);
 	} else {
+	    $banner = Banner::find((int) Input::get("pk"));
+	    if (!$banner) {
+		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+	    }
 	    if(Laravel\Input::has("TargetContent")) {
 		$banner->TargetContent = (int) Input::get("TargetContent");
 	    }
@@ -232,9 +239,8 @@ class Banners_Controller extends Base_Controller {
 		    }
 		}
 	    }
-	    
+	    $banner->save();
 	}
-	$banner->save();
 	
 	return "success=" . base64_encode("true");
     }

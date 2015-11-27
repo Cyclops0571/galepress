@@ -111,7 +111,7 @@ if (FALSE) {
 			    <?php if ((int) Auth::User()->UserTypeID == eUserTypes::Customer): ?>
     			    <th>
     		    <div class="input-group commands">
-    			<a href="<?php echo URL::to(__('route.' . $page . '_new')); ?>" title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle">
+			<a href="#" onclick="cBanner.createNewBanner(<?php echo $application->ApplicationID; ?>);" class="widget-icon widget-icon-circle">
     			    <span class="icon-plus"></span>
     			</a>
     		    </div>
@@ -134,7 +134,7 @@ if (FALSE) {
 				<?php endif; ?>
     			    <td>
     				<!--onclickde yeni image uploader popupi acilmali ??? -->
-    				<img id="bannerImage_<?php echo $row->BannerID; ?>" src="<?php echo $row->getImagePath($application) ?>" width="60px" height="30px"  style="cursor: pointer" onclick="fileUpload(this)" />
+    				<img id="bannerImage_<?php echo $row->BannerID; ?>" src="<?php echo $row->getImagePath() ?>" width="60px" height="30px"  style="cursor: pointer" onclick="fileUpload(this)" />
     				<div id="uploadProgress_<?php echo $row->BannerID; ?>" class="myProgress hide">
     				    <a href="javascript:void(0);">{{ __('interactivity.cancel') }} <i class="icon-remove"></i></a>
     				    <label for="scale"></label>
@@ -222,7 +222,6 @@ if (FALSE) {
 	    params: {'applicationID': appID},
 	    ajaxOptions: {
 		beforeSend: function () {
-		    console.log("asdfasdf");
 		    cNotification.loader();
 		}
 	    },
@@ -235,7 +234,7 @@ if (FALSE) {
 	});
 
 	$('#ImageFile').fileupload({
-	    url: '/' + $('#currentlanguage').val() + '/banners/imageupload',
+	    url: '/' + currentLanguage + '/banners/imageupload',
 	    dataType: 'json',
 	    add: function (e, data) {
 		if (/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name)) {

@@ -39,7 +39,8 @@
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
+    @include('js.language')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/website/vendor/jquery.js"><\/script>')</script>
     <script src="/js/jquery-ui-1.10.4.custom.min.js"></script>
@@ -213,7 +214,6 @@
     </script>
 </head>
 <body>
-    <input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
   <div id="wrapper">
     <!-- Sidebar -->
     <nav class="navbar navbar-inverse navbar-fixed-top headerPattern" role="navigation">
@@ -645,7 +645,7 @@
 
                   $.ajax({
                     type: "POST",
-                    url: '/' + $('#currentlanguage').val() + '/' + route["orders_save"],
+                    url: '/' + currentLanguage + '/' + route["orders_save"],
                     data: $("form").serialize(),
                     success: function(data, textStatus) {
                       if(data.getValue("success") == "true") {
@@ -716,7 +716,7 @@
                             {
                               $("#Image1024x1024").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
-                                'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                'uploader': '/' + currentLanguage + '/' + route["orders_uploadfile2"],
                                 'cancelImg': '/uploadify/uploadify-cancel.png',
                                 'fileTypeDesc': 'PNG Files',
                                 'fileTypeExts': '*.png',
@@ -767,7 +767,7 @@
                             else
                             {
                               $("#Image1024x1024").fileupload({
-                                url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                url: '/' + currentLanguage + '/' + route["orders_uploadfile"],
                                 dataType: 'json',
                                 sequentialUploads: true,
                                 formData: { 
@@ -843,7 +843,7 @@
                               {
                                 $("#Pdf").uploadify({
                                   'swf': '/uploadify/uploadify.swf',
-                                  'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                  'uploader': '/' + currentLanguage + '/' + route["orders_uploadfile2"],
                                   'cancelImg': '/uploadify/uploadify-cancel.png',
                                   'fileTypeDesc': 'PDF Files',
                                   'fileTypeExts': '*.pdf',
@@ -894,7 +894,7 @@
                               else
                               {
                                 $("#Pdf").fileupload({
-                                  url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                  url: '/' + currentLanguage + '/' + route["orders_uploadfile"],
                                   dataType: 'json',
                                   sequentialUploads: true,
                                   formData: { 
@@ -990,7 +990,7 @@
                             {
                               $("#Image640x960").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
-                                'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                'uploader': '/' + currentLanguage + '/' + route["orders_uploadfile2"],
                                 'cancelImg': '/uploadify/uploadify-cancel.png',
                                 'fileTypeDesc': 'PNG Files',
                                 'fileTypeExts': '*.png',
@@ -1041,7 +1041,7 @@
                             else
                             {
                               $("#Image640x960").fileupload({
-                                url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                url: '/' + currentLanguage + '/' + route["orders_uploadfile"],
                                 dataType: 'json',
                                 sequentialUploads: true,
                                 formData: { 
@@ -1117,7 +1117,7 @@
                             {
                               $("#Image640x1136").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
-                                'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                'uploader': '/' + currentLanguage + '/' + route["orders_uploadfile2"],
                                 'cancelImg': '/uploadify/uploadify-cancel.png',
                                 'fileTypeDesc': 'PNG Files',
                                 'fileTypeExts': '*.png',
@@ -1168,7 +1168,7 @@
                             else
                             {
                               $("#Image640x1136").fileupload({
-                                url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                url: '/' + currentLanguage + '/' + route["orders_uploadfile"],
                                 dataType: 'json',
                                 sequentialUploads: true,
                                 formData: { 
@@ -1246,7 +1246,7 @@
                             {
                               $("#Image1536x2048").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
-                                'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                'uploader': '/' + currentLanguage + '/' + route["orders_uploadfile2"],
                                 'cancelImg': '/uploadify/uploadify-cancel.png',
                                 'fileTypeDesc': 'PNG Files',
                                 'fileTypeExts': '*.png',
@@ -1297,7 +1297,7 @@
                             else
                             {
                               $("#Image1536x2048").fileupload({
-                                url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                url: '/' + currentLanguage + '/' + route["orders_uploadfile"],
                                 dataType: 'json',
                                 sequentialUploads: true,
                                 formData: { 
@@ -1372,7 +1372,7 @@
                             {
                               $("#Image2048x1536").uploadify({
                                 'swf': '/uploadify/uploadify.swf',
-                                'uploader': '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile2"],
+                                'uploader': '/' + currentLanguage + '/' + route["orders_uploadfile2"],
                                 'cancelImg': '/uploadify/uploadify-cancel.png',
                                 'fileTypeDesc': 'PNG Files',
                                 'fileTypeExts': '*.png',
@@ -1423,7 +1423,7 @@
                             else
                             {
                               $("#Image2048x1536").fileupload({
-                                url: '/' + $('#currentlanguage').val() + '/' + route["orders_uploadfile"],
+                                url: '/' + currentLanguage + '/' + route["orders_uploadfile"],
                                 dataType: 'json',
                                 sequentialUploads: true,
                                 formData: { 

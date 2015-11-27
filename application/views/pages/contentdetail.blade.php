@@ -817,11 +817,11 @@ $groupcodes = DB::table('GroupCode AS gc')
     if (parseInt($("#ContentID").val()) > 0) {
     $('#coverImageIframe').attr('iframeContentID', parseInt($("#ContentID").val()));
     }
-    $(this).find('#coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/' + route["crop_image"] + "?contentID=" + $('#coverImageIframe').attr('iframeContentID'));
+    $(this).find('#coverImageIframe').attr('src', '/' + currentLanguage + '/' + route["crop_image"] + "?contentID=" + $('#coverImageIframe').attr('iframeContentID'));
     });
             if (showCropPage == 'showImageCrop') {
     $('#dialog-cover-image').modal('show');
-            $('#dialog-cover-image #coverImageIframe').attr('src', '/' + $('#currentlanguage').val() + '/crop/image?contentID=' + ContentID);
+            $('#dialog-cover-image #coverImageIframe').attr('src', '/' + currentLanguage + '/crop/image?contentID=' + ContentID);
             $('#dialog-cover-image #coverImageIframe').attr("iframeContentID", ContentID);
     }
 

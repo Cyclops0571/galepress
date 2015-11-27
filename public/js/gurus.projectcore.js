@@ -1,4 +1,4 @@
-/* global route */
+/* global route, currentLanguage */
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // INTERACTIVITY
@@ -103,7 +103,7 @@ var cInteractivity = new function () {
 	this.saveCurrentPage();
 
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["interactivity_transfer"];
+	var u = '/' + currentLanguage + '/' + route["interactivity_transfer"];
 	var d = "contentfileid=" + contentFileID + "&componentid=" + componentID + "&from=" + from + "&to=" + to;
 	var ret = cInteractivity.doRequest(t, u, d);
 	if (ret.getValue("success") == "true") {
@@ -154,7 +154,7 @@ var cInteractivity = new function () {
     this.refreshTree = function () {
 	var contentFileID = $("#contentfileid").val();
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["interactivity_refreshtree"];
+	var u = '/' + currentLanguage + '/' + route["interactivity_refreshtree"];
 	var d = "contentfileid=" + contentFileID;
 	cInteractivity.doAsyncRequest(t, u, d, function (ret) {
 	    //Collapse destroy 
@@ -273,7 +273,7 @@ var cInteractivity = new function () {
     {
 	var frm = $("#pagecomponents");
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["interactivity_loadpage"];
+	var u = '/' + currentLanguage + '/' + route["interactivity_loadpage"];
 	var d = cForm.serialize(frm);
 	cInteractivity.doAsyncRequest(t, u, d, function (ret) {
 	    //Sayfa henuz yuklenmeden degistirilirse eski icerikleri gosterme!
@@ -332,7 +332,7 @@ var cInteractivity = new function () {
 	closing = (typeof closing == "undefined") ? false : closing;
 
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["interactivity_save"];
+	var u = '/' + currentLanguage + '/' + route["interactivity_save"];
 	var d = $("#pagecomponents").serialize() + "&closing=" + (closing ? 'true' : 'false');
 	var ret = cInteractivity.doRequest(t, u, d);
 
@@ -414,15 +414,15 @@ var cUser = new function () {
 	    var d = new Date();
 	    var localTime = "&LocalTime=" + d.getTime() / 1000;
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["login"];
+	    var u = '/' + currentLanguage + '/' + route["login"];
 	    var data = cForm.serialize(frm) + localTime;
 
 	    cUser.doAsyncRequest(t, u, data, function (ret) {
 		cNotification.success(null, ret.getValue("msg"));
 		if (getParameterByName("shopping")) {
-		    document.location.href = '/' + $('#currentlanguage').val() + '/shop';
+		    document.location.href = '/' + currentLanguage + '/shop';
 		} else {
-		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["home"];
+		    document.location.href = '/' + currentLanguage + '/' + route["home"];
 		}
 	    });
 
@@ -442,7 +442,7 @@ var cUser = new function () {
 	    cNotification.loader();
 
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["forgotmypassword"];
+	    var u = '/' + currentLanguage + '/' + route["forgotmypassword"];
 	    var d = cForm.serialize(frm);
 	    cUser.doAsyncRequest(t, u, d, function (ret) {
 		cNotification.success(null, ret.getValue("msg"));
@@ -463,7 +463,7 @@ var cUser = new function () {
 	    cNotification.loader();
 
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["resetmypassword"];
+	    var u = '/' + currentLanguage + '/' + route["resetmypassword"];
 	    var d = cForm.serialize(frm);
 	    cUser.doAsyncRequest(t, u, d, function (ret) {
 		cNotification.success(null, ret.getValue("msg"));
@@ -487,7 +487,7 @@ var cUser = new function () {
 	    cNotification.loader();
 
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["mydetail"];
+	    var u = '/' + currentLanguage + '/' + route["mydetail"];
 	    var d = cForm.serialize(frm);
 	    cUser.doAsyncRequest(t, u, d, function (ret) {
 		cNotification.success();
@@ -502,7 +502,7 @@ var cUser = new function () {
 	this.objectName,
 	function () {
 	    cNotification.success();
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["users"];
+	    document.location.href = '/' + currentLanguage + '/' + route["users"];
 	}
 	);
     };
@@ -522,7 +522,7 @@ var cUser = new function () {
 	    cNotification.loader();
 
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["users_send"];
+	    var u = '/' + currentLanguage + '/' + route["users_send"];
 	    var d = cForm.serialize(frm);
 	    cUser.doAsyncRequest(t, u, d, function (ret) {
 		cNotification.success();
@@ -550,7 +550,7 @@ var cCustomer = new function () {
     this.loadCustomerOptionList = function () {
 
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["customers"];
+	var u = '/' + currentLanguage + '/' + route["customers"];
 	var d = "option=1";
 	cCustomer.doAsyncRequest(t, u, d, function (ret) {
 	    $("#ddlCustomer").html(ret);
@@ -567,7 +567,7 @@ var cCustomer = new function () {
 	cCommon.save(this.objectName,
 	function () {
 	    cNotification.success();
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["customers"];
+	    document.location.href = '/' + currentLanguage + '/' + route["customers"];
 	}
 	);
     };
@@ -594,7 +594,7 @@ var cApplication = new function () {
     this.loadApplicationOptionList = function () {
 
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["applications"];
+	var u = '/' + currentLanguage + '/' + route["applications"];
 	var d = "customerID=" + $("#ddlCustomer").val() + "&option=1";
 	cApplication.doAsyncRequest(t, u, d, function (ret) {
 	    $("#ddlApplication").html(ret);
@@ -612,7 +612,7 @@ var cApplication = new function () {
 	this.objectName,
 	function () {
 	    cNotification.success();
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["applications"];
+	    document.location.href = '/' + currentLanguage + '/' + route["applications"];
 	}
 	);
     };
@@ -625,7 +625,7 @@ var cApplication = new function () {
 	cNotification.hide();
 	var frm = $("#formPushNotification");
 	var applicationID = parseInt($("[name='ApplicationID']", frm).val());
-	var url = '/' + $('#currentlanguage').val() + '/' + route["applications_pushnotification"];
+	var url = '/' + currentLanguage + '/' + route["applications_pushnotification"];
 	url = url.replace('(:num)', applicationID);
 	var validate = cForm.validate(frm);
 	if (validate) {
@@ -674,7 +674,7 @@ var cApplication = new function () {
 	    cCommon.save('application_usersettings',
 	    function () {
 		cNotification.success();
-		document.location.href = '/' + $('#currentlanguage').val() + '/' + route["applications_usersettings"].replace('(:num)', $('input[name=ApplicationID]').val());
+		document.location.href = '/' + currentLanguage + '/' + route["applications_usersettings"].replace('(:num)', $('input[name=ApplicationID]').val());
 	    }
 
 	    );
@@ -827,7 +827,7 @@ var cContent = new function () {
 
     this.loadContentOptionList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["contents"];
+	var u = '/' + currentLanguage + '/' + route["contents"];
 	var d = "applicationID=" + $("#ddlApplication").val() + "&option=1";
 	cContent.doAsyncRequest(t, u, d, function (ret) {
 	    $("#ddlContent").html(ret);
@@ -842,7 +842,7 @@ var cContent = new function () {
     this.save = function () {
 	if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')) {
 	    var t = 'GET';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
+	    var u = '/' + currentLanguage + '/' + route["contents_passwords"];
 	    var d = "contentID=" + $("#ContentID").val() + '&type=qty';
 	    var ret = cContent.doRequest(t, u, d);
 	    if (parseInt(ret) > 0) {
@@ -862,7 +862,7 @@ var cContent = new function () {
 	function (ret) {
 	    contentID = ret.getValue("contentID");
 	    cNotification.success();
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + '/' + contentID;
+	    document.location.href = '/' + currentLanguage + '/' + route[_self.objectName] + '/' + contentID;
 	}
 	);
     };
@@ -875,12 +875,12 @@ var cContent = new function () {
 	console.log(route[_self.objectName]);
 	cNotification.hide();
 	cNotification.loader();
-	var url = '/' + $('#currentlanguage').val() + '/contents/remove_from_mobile/' + id;
+	var url = '/' + currentLanguage + '/contents/remove_from_mobile/' + id;
 	var d = new Array();
 	cCommon.doAsyncRequest('GET', url, d, function (ret) {
 	    cNotification.success();
 	    var qs = cCommon.getQS(); //get query string
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[_self.objectName] + qs;
+	    document.location.href = '/' + currentLanguage + '/' + route[_self.objectName] + qs;
 	});
     };
 
@@ -942,7 +942,7 @@ var cContent = new function () {
 
     this.loadCategoryList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["categories"];
+	var u = '/' + currentLanguage + '/' + route["categories"];
 	var d = "appID=" + $("#ApplicationID").val();
 	cContent.doAsyncRequest(t, u, d, function (ret) {
 	    $("#dialog-category-form table tbody").html(ret);
@@ -951,7 +951,7 @@ var cContent = new function () {
 
     this.loadCategoryOptionList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["categories"];
+	var u = '/' + currentLanguage + '/' + route["categories"];
 	var d = "appID=" + $("#ApplicationID").val() + '&contentID=' + $("#ContentID").val() + '&type=options';
 	cContent.doAsyncRequest(t, u, d, function (ret) {
 	    $("#CategoryID").html(ret);
@@ -987,7 +987,7 @@ var cContent = new function () {
 
     this.deleteCategory = function (id) {
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["categories_delete"];
+	var u = '/' + currentLanguage + '/' + route["categories_delete"];
 	var d = "CategoryID=" + id;
 	cContent.doAsyncRequest(t, u, d, function (ret) {
 	    cContent.loadCategoryList();
@@ -1002,7 +1002,7 @@ var cContent = new function () {
 	if (validate) {
 	    cNotification.loader();
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["categories_save"];
+	    var u = '/' + currentLanguage + '/' + route["categories_save"];
 	    var d = cForm.serialize(frm);
 	    cContent.doAsyncRequest(t, u, d, function (ret) {
 		$("div.list_container").removeClass("hidden");
@@ -1029,7 +1029,7 @@ var cContent = new function () {
 
     this.loadPasswordList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords"];
+	var u = '/' + currentLanguage + '/' + route["contents_passwords"];
 	var d = "contentID=" + $("#ContentID").val();
 	cContent.doAsyncRequest(t, u, d, function (ret) {
 	    $("#dialog-password-form table tbody").html(ret);
@@ -1064,7 +1064,7 @@ var cContent = new function () {
 
     this.deletePassword = function (id) {
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords_delete"];
+	var u = '/' + currentLanguage + '/' + route["contents_passwords_delete"];
 	var d = "ContentPasswordID=" + id;
 	cContent.doAsyncRequest(t, u, d, function (ret) {
 	    cContent.loadPasswordList();
@@ -1078,7 +1078,7 @@ var cContent = new function () {
 	if (validate) {
 	    cNotification.loader();
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route["contents_passwords_save"];
+	    var u = '/' + currentLanguage + '/' + route["contents_passwords_save"];
 	    var d = cForm.serialize(frm);
 	    cContent.doAsyncRequest(t, u, d, function (ret) {
 		$("div.list_container").removeClass("hidden");
@@ -1102,7 +1102,7 @@ var cContent = new function () {
 	if ($("html").hasClass("lt-ie10")) {
 	    $("#File").uploadify({
 		'swf': '/uploadify/uploadify.swf',
-		'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadfile2"],
+		'uploader': '/' + currentLanguage + '/' + route["contents_uploadfile2"],
 		'cancelImg': '/uploadify/uploadify-cancel.png',
 		'fileTypeDesc': 'PDF Files',
 		'fileTypeExts': '*.pdf',
@@ -1147,7 +1147,7 @@ var cContent = new function () {
 	    });
 	} else {
 	    $("#File").fileupload({
-		url: '/' + $('#currentlanguage').val() + '/' + route["contents_uploadfile"],
+		url: '/' + currentLanguage + '/' + route["contents_uploadfile"],
 		dataType: 'json',
 		sequentialUploads: true,
 		formData: {
@@ -1213,7 +1213,7 @@ var cContent = new function () {
 	if ($("html").hasClass("lt-ie10")) {
 	    $("#CoverImageFile").uploadify({
 		'swf': '/uploadify/uploadify.swf',
-		'uploader': '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage2"],
+		'uploader': '/' + currentLanguage + '/' + route["contents_uploadcoverimage2"],
 		'cancelImg': '/uploadify/uploadify-cancel.png',
 		'fileTypeDesc': 'Image Files',
 		'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
@@ -1251,7 +1251,7 @@ var cContent = new function () {
 	    });
 	} else {
 	    $("#CoverImageFile").fileupload({
-		url: '/' + $('#currentlanguage').val() + '/' + route["contents_uploadcoverimage"],
+		url: '/' + currentLanguage + '/' + route["contents_uploadcoverimage"],
 		dataType: 'json',
 		sequentialUploads: true,
 		formData: {
@@ -1322,7 +1322,7 @@ var cContent = new function () {
 		success: function (response) {
 		    // console.log(response);
 		    cNotification.success();
-		    document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
+		    document.location.href = '/' + currentLanguage + '/' + route["contents"] + '?applicationID=' + appID;
 		}
 	    });
 	}, 1000);
@@ -1342,7 +1342,7 @@ var cContent = new function () {
 		    success: function (response) {
 			// console.log(response);
 			cNotification.success();
-			document.location.href = '/' + $('#currentlanguage').val() + '/' + route["contents"] + '?applicationID=' + appID;
+			document.location.href = '/' + currentLanguage + '/' + route["contents"] + '?applicationID=' + appID;
 		    }
 		});
 	    }
@@ -1427,7 +1427,7 @@ var cReport = new function () {
 
     this.loadCountryOptionList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["reports_location_country"];
+	var u = '/' + currentLanguage + '/' + route["reports_location_country"];
 	var d = "customerID=" + $("#ddlCustomer").val() + "&applicationID=" + $("#ddlApplication").val() + "&contentID=" + $("#ddlContent").val();
 	cReport.doAsyncRequest(t, u, d, function (ret) {
 	    $("#ddlCountry").html(ret);
@@ -1438,7 +1438,7 @@ var cReport = new function () {
 
     this.loadCityOptionList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["reports_location_city"];
+	var u = '/' + currentLanguage + '/' + route["reports_location_city"];
 	var d = "customerID=" + $("#ddlCustomer").val() + "&applicationID=" + $("#ddlApplication").val() + "&contentID=" + $("#ddlContent").val() + "&country=" + $("#ddlCountry").val();
 	cReport.doAsyncRequest(t, u, d, function (ret) {
 	    $("#ddlCity").html(ret);
@@ -1449,7 +1449,7 @@ var cReport = new function () {
 
     this.loadDistrictOptionList = function () {
 	var t = 'GET';
-	var u = '/' + $('#currentlanguage').val() + '/' + route["reports_location_district"];
+	var u = '/' + currentLanguage + '/' + route["reports_location_district"];
 	var d = "customerID=" + $("#ddlCustomer").val() + "&applicationID=" + $("#ddlApplication").val() + "&contentID=" + $("#ddlContent").val() + "&country=" + $("#ddlCountry").val() + "&city=" + $("#ddlCity").val();
 	cReport.doAsyncRequest(t, u, d, function (ret) {
 	    $("#ddlDistrict").html(ret);
@@ -1470,19 +1470,19 @@ var cReport = new function () {
 
     this.refreshReport = function () {
 	var param = this.getParameters();
-	var url = "/" + $('#currentlanguage').val() + "/" + route["reports"] + "/" + $("#report").val() + "?dummy=1" + param;
+	var url = "/" + currentLanguage + "/" + route["reports"] + "/" + $("#report").val() + "?dummy=1" + param;
 	this.setIframeUrl(url);
 	cNotification.loader();
     };
 
     this.downloadAsExcel = function () {
 	var param = this.getParameters();
-	window.open("/" + $('#currentlanguage').val() + "/" + route["reports"] + "/" + $("#report").val() + "?xls=1" + param);
+	window.open("/" + currentLanguage + "/" + route["reports"] + "/" + $("#report").val() + "?xls=1" + param);
     };
 
     this.viewOnMap = function () {
 	var param = this.getParameters();
-	var url = "/" + $('#currentlanguage').val() + "/" + route["reports"] + "/" + $("#report").val() + "?map=1" + param;
+	var url = "/" + currentLanguage + "/" + route["reports"] + "/" + $("#report").val() + "?map=1" + param;
 	this.setIframeUrl(url);
     };
 
@@ -1526,7 +1526,7 @@ var cCommon = new function () {
 	    cNotification.loader();
 
 	    var t = 'POST';
-	    var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_save"];
+	    var u = '/' + currentLanguage + '/' + route[param + "_save"];
 	    var d = cForm.serialize(frm);
 
 	    if(typeof onlyUseAdditionalData !== 'undefined') {
@@ -1546,12 +1546,12 @@ var cCommon = new function () {
 
 	var frm = $("form:first");
 	var t = 'POST';
-	var u = '/' + $('#currentlanguage').val() + '/' + route[param + "_delete"];
+	var u = '/' + currentLanguage + '/' + route[param + "_delete"];
 	var d = cForm.serialize(frm);
 	cCommon.doAsyncRequest(t, u, d, function (ret) {
 	    cNotification.success();
 	    var qs = cCommon.getQS(); //get query string
-	    document.location.href = '/' + $('#currentlanguage').val() + '/' + route[param] + qs;
+	    document.location.href = '/' + currentLanguage + '/' + route[param] + qs;
 	});
     };
 
@@ -2188,7 +2188,7 @@ var cBanner = new function () {
 	if ($("html").hasClass("lt-ie10")) {
 	    $("#ImageFile").uploadify({
 		'swf': '/uploadify/uploadify.swf',
-		'uploader': '/' + $('#currentlanguage').val() + '/common/imageupload_ltie10',
+		'uploader': '/' + currentLanguage + '/common/imageupload_ltie10',
 		'cancelImg': '/uploadify/uploadify-cancel.png',
 		'fileTypeDesc': 'Image Files',
 		'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
@@ -2227,7 +2227,7 @@ var cBanner = new function () {
 	    });
 	} else {
 	    $("#ImageFile").fileupload({
-		url: '/' + $('#currentlanguage').val() + '/common/imageupload',
+		url: '/' + currentLanguage + '/common/imageupload',
 		dataType: 'json',
 		sequentialUploads: true,
 		formData: {
@@ -2317,6 +2317,18 @@ var cBanner = new function () {
 	cCommon.save('banners_setting', undefined, 'bannerForm');
     };
 
+    this.createNewBanner = function (applicationID) {
+	cCommon.save(
+	    this.objectName,
+	    function () {
+		cNotification.success();
+		document.location.href = '/' + currentLanguage + '/' + route[_self.objectName] + '?applicationID=' + applicationID;
+	    },
+	    undefined,
+	    "&newBanner=1"
+	);
+    };
+    
     this.delete = function (id) {
 	var url = "/banners/delete";
 	var rowIDPrefix = "bannerIDSet_";

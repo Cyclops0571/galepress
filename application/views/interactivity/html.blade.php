@@ -74,7 +74,6 @@
 <![endif]-->
 </head>
 <body>
-<input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
 @_yield('body-content')
 <script src="/js/jquery.collapse.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/js/jquery.easytabs.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>

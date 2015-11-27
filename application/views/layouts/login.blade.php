@@ -7,7 +7,6 @@
 @section('body')
 
     <body id="login" class="bg-img-num1">
-    	<input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
     	<div id="login_container">
 	    	@_yield('content')
         </div>

@@ -112,7 +112,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                     <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
 					<?php foreach ($bannerSet as $savedBanner): ?>
     					<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
-						<?php $imgPath = $savedBanner->getImagePath($application); ?>
+						<?php $imgPath = $savedBanner->getImagePath(); ?>
     					    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
     					    <div class="ms-info"></div>
     					    <!--  <div class="ms-info">{{$savedBanner->Description}}</div>-->
@@ -136,7 +136,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                     <div class="master-slider ms-skin-black-2 round-skin" id="masterslider2">
 					<?php foreach ($bannerSet as $savedBanner): ?>
     					<div class="ms-slide" data-delay="{{$application->BannerIntervalTime}}">
-						<?php $imgPath = $savedBanner->getImagePath($application); ?>
+						<?php $imgPath = $savedBanner->getImagePath(); ?>
     					    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" class="sliderImages"/> 
     					    <div class="ms-info"></div>
     					    <!--<div class="ms-info">{{$savedBanner->Description}}</div>-->

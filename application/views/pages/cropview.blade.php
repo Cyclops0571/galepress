@@ -39,7 +39,6 @@ img[width="500"] {
 }
 </style>
 <body class="bg-img-num1">
-	<input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
     <div class="container content-list" style="width:500px;">
         <div class="row">
 
@@ -140,7 +139,7 @@ img[width="500"] {
 						}
 					    if(window.location.hash === "#saved")
 					    {
-					        parent.location='/' + $('#currentlanguage').val() + '/' + route["contents"] + '/' + $.urlParam('contentID');
+					        parent.location='/' + currentLanguage + '/' + route["contents"] + '/' + $.urlParam('contentID');
 					    }
 					});
 				</script>

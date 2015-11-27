@@ -105,7 +105,7 @@ function restartSession()
     var d = "url=" + encodeURIComponent('http://www.galepress.com');
     $.ajax({
 	type: "POST",
-	url: '/' + $('#currentlanguage').val() + '/' + route["interactivity_check"],
+	url: '/' + currentLanguage + '/' + route["interactivity_check"],
 	data: d,
 	success: function (resp) {
 	    //resp
@@ -129,5 +129,5 @@ function updatePageRequestTime()
 
 function goLogin()
 {
-    window.location = "/" + $('#currentlanguage').val() + "/" + route["logout"];
+    window.location = "/" + currentLanguage + "/" + route["logout"];
 }

@@ -97,8 +97,8 @@ class Banner extends Eloquent {
 	return __('common.banners_list_status' . $this->Status);
     }
 
-    public function getImagePath($application) {
-	return '/files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
+    public function getImagePath() {
+	return '/files/customer_' . $this->Application()->CustomerID . '/application_' . $this->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
     }
 
 }

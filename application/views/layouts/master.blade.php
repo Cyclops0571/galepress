@@ -8,7 +8,6 @@
 <body class="bg-img-num1">
     <div class="container content-list">
         <div class="row">
-            <input type="hidden" id="currentlanguage" value="{{ Session::get('language') }}" />
             <div class="loader-big hidden"></div>
             @include('sections.header')
         </div>
