@@ -573,6 +573,7 @@ return array(
 	'template_chooser_frontcolor3' => 'Mavi',
 	'template_chooser_frontcolor4' => 'Kırmızı',
 	'template_chooser_frontcolor5' => 'Turuncu',
+	'template_chooser_frontcolor6' => 'Gri',
 	'template_chooser_close' => 'Kapat',
 	'template_chooser_use' => 'Temayı Kullan',
 

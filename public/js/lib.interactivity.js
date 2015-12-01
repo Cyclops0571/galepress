@@ -235,7 +235,7 @@ function initPreview()
 				$("p, span, i, img", $(this)).addClass("hide");
 				
 				$("iframe", $(this))
-					.attr("src", "http://" + window.location.host + "/" + $("#currentlanguage").val() + "/" + route["interactivity_preview"] + '?dummy=1' + q)
+					.attr("src", "http://" + window.location.host + "/" + currentLanguage + "/" + route["interactivity_preview"] + '?dummy=1' + q)
 					.removeClass("hide");
 			});
         }
@@ -280,5 +280,5 @@ function closeInteractiveIDE()
 	{
 		exitFullscreen();
 	}
-	document.location.href = "/" + $("#currentlanguage").val() + "/" + route["contents"] + "/" + $("#content-id").val();
+	document.location.href = "/" + currentLanguage + "/" + route["contents"] + "/" + $("#content-id").val();
 }

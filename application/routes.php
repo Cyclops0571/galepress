@@ -512,6 +512,7 @@ Laravel\Routing\Route::post("applications/refresh_identifier", array('as' => 'ap
 Laravel\Routing\Route::post("contents/refresh_identifier", array('as' => 'contentrefreshidentifier', 'uses' => 'contents@refresh_identifier'));
 
 Route::post('applications/applicationSetting', array('as' => 'save_applications_usersettings', 'before' => 'auth', 'uses' => 'applications@applicationSetting'));
+Route::get("/csstemplates/(:any)", array('as' => 'template_index', 'uses'=>'applications@theme'));
 Route::get("/template/(:num)", array('as' => 'template_index', 'before'=>'auth', 'uses'=>'template@index'));
 Route::get("banners/delete", array('as' => 'banners_delete', 'before'=>'auth', 'uses'=>'banners@delete'));
 Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before'=>'auth', 'uses'=>'banners@order'));

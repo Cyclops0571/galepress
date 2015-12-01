@@ -47,11 +47,11 @@ if (false) {
 		<div class="col-md-3">{{ __('common.template_chooser_foreground') }}</div>
 		<div class="col-md-8">
 		    <select name="ThemeForeground" class="form-control select2" style="width: 100%;" tabindex="-1">
-			<option value="1" <?php echo $application->ThemeForeground == 1 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor3') }}</option>
-			<option value="2" <?php echo $application->ThemeForeground == 2 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor1') }}</option>
-			<option value="3" <?php echo $application->ThemeForeground == 3 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor2') }}</option>
-			<option value="4" <?php echo $application->ThemeForeground == 4 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor4') }}</option>
-			<option value="5" <?php echo $application->ThemeForeground == 5 ? "selected" : ''; ?> >{{ __('common.template_chooser_frontcolor5') }}</option>
+			<?php foreach(eTemplateColor::colorSet() as $colorKey => $colorName): ?>
+			    <option value="<?php echo $colorKey; ?>" <?php echo $application->ThemeForeground == $colorKey ? "selected" : ''; ?> >
+				    <?php echo eTemplateColor::colorName($colorKey); ?>
+			    </option>
+			<?php endforeach; ?>
 		    </select>
 		</div>
 		<div class="col-md-1"><a  class="tipr" title="{{ __('common.application_settings_template_foreground_tip') }}"><span class="icon-info-sign"></span></a></div>

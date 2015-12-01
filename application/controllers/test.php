@@ -46,7 +46,8 @@ class Test_Controller extends Base_Controller {
     }
 
     
-    public function get_index() {
+    public function get_index($test) {
+	//dd(basename("/csaa/1.css", '.css'));
 	echo uniqid(); exit;
 	return View::make('test.javascripttest', array());
 //	setlocale(LC_TIME, $locale);

@@ -471,5 +471,8 @@ class Applications_Controller extends Base_Controller {
 	$application->save();
 	return "success=" . base64_encode("true") . "&SubscriptionIdentifier=" . base64_encode($subscriptionIdentifier);
     }
-
+    
+    public function get_theme($fileName) {
+	return Response::make(eTemplateColor::templateCss($fileName), 200, array('content-type' => 'text/css'));
+    }
 }

@@ -573,6 +573,7 @@ return array(
 	'template_chooser_frontcolor3' => 'Blue',
 	'template_chooser_frontcolor4' => 'Red',
 	'template_chooser_frontcolor5' => 'Orange',
+	'template_chooser_frontcolor6' => 'Grey',
 	'template_chooser_close' => 'Close',
 	'template_chooser_use' => 'Use Theme',
 

@@ -2,12 +2,14 @@
 
 class Uploader {
     
-    public static function ContentsUploadFile($tempPdfFile) {
+    public static function ContentsUploadFile($pdfFile) {
 	$filePath = path('public') . 'files/temp';
 	$imageFile = '';
 	$tempImageFile = '';
-	if (File::is('pdf', $filePath . '/' . $tempPdfFile)) {
+	if (File::is('pdf', $filePath . '/' . $pdfFile)) {
 	    //create zip archive
+	    $tempPdfFile = uniqid() . '.pdf';
+	    File::move($filePath . '/' . $pdfFile, $filePath . '/' . $tempPdfFile);
 	    $zipFile = $tempPdfFile . '.zip';
 
 	    $zip = new ZipArchive();

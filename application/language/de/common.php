@@ -576,6 +576,7 @@ return array(
 	'template_chooser_frontcolor3' => 'Blau',
 	'template_chooser_frontcolor4' => 'Rote',
 	'template_chooser_frontcolor5' => 'Orange',
+	'template_chooser_frontcolor6' => 'Grau',
 	'template_chooser_close' => 'In der Nähe',
 	'template_chooser_use' => 'Verwenden Theme',
 

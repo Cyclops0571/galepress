@@ -174,7 +174,7 @@ class Application extends Eloquent {
     }
 
     public function BannerPage() {
-	if($this->BannerCustomerActive) {
+	if ($this->BannerCustomerActive) {
 	    return $this->BannerCustomerUrl . "?ver=" . $this->Version;
 	}
 	return Config::get('custom.url') . "/banners/service_view/" . $this->ApplicationID . "?ver=" . $this->Version;
@@ -227,14 +227,14 @@ class Application extends Eloquent {
 		$fieldName = "WeekIdentifier";
 		break;
 	}
-	
+
 	if (empty($this->$fieldName) || $refreshIdentifier) {
 	    if (empty($this->BundleText)) {
 		$identifier = "www.galepress.com.appid." . $this->ApplicationID . "type" . $type . "t" . time();
 	    } else {
 		$identifier = strtolower($this->BundleText) . ".appid." . $this->ApplicationID . ".type" . $type . "t" . time();
 	    }
-	    if(empty($this->$fieldName)) {
+	    if (empty($this->$fieldName)) {
 		$this->$fieldName = $identifier;
 		$this->save();
 	    } else {
@@ -280,6 +280,23 @@ class Application extends Eloquent {
 	    return array("class" => 'expired-app');
 	}
 	return array();
+    }
+
+    public function getThemeColor() {
+	switch ($this->ThemeForeground) {
+	    case 2:
+		return \Laravel\Config::get('custom.api_color_green');
+	    case 3:
+		return \Laravel\Config::get('custom.api_color_yellow');
+	    case 4:
+		return \Laravel\Config::get('custom.api_color_red');
+	    case 5:
+		return \Laravel\Config::get('custom.api_color_orange');
+	    case 6:
+		return \Laravel\Config::get('custom.api_color_grey');
+	    default:
+		return \Laravel\Config::get('custom.api_color_blue');
+	}
     }
 
 }

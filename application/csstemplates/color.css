@@ -1,0 +1,91 @@
+.templateScreen .header{
+    color: #TemplateColor# !important;
+}
+.templateScreen > .container .content-bar{
+    color: #TemplateColor# !important;
+}
+.templateScreen .app-name{
+    color:#TemplateColor# !important;
+}
+.templateScreen .app-buttons{
+    color:#TemplateColor# !important;
+}
+.templateScreen .header .header-categories{
+    background: url(/img/template-chooser/menu#ColorKey#.png?v=#APP_VER#) center left;
+}
+.templateScreen .header .header-extras{
+    background: url(#TemplateImage#) center right;
+}
+.templateScreen .footer .footer-home{
+    background: url(/img/template-chooser/home_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+.templateScreen .footer .footer-library{
+    background: url(/img/template-chooser/library_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+.templateScreen .footer .footer-download{
+    background: url(/img/template-chooser/download_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+.templateScreen .footer .footer-info{
+    background: url(/img/template-chooser/info_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+/*************************************************/
+.templateExtrasScreen{
+    background: #TemplateColor# !important;
+}
+.templateExtrasScreen .container .form-row.extrasBar{
+    color:#TemplateColor# !important;
+}
+.templateExtrasScreen .container .form-row.extrasBar.categories .extra-bar-icon{
+    background: url(/img/template-chooser/left_menu_category_icon#ColorKey#.png?v=#APP_VER#) left center;
+}
+.templateExtrasScreen .container .form-row.extrasBar .title-drop{
+    background: url(/img/template-chooser/left_menu_down#ColorKey#.png?v=#APP_VER#) right center;
+}
+.templateExtrasScreen .container .form-row.extrasBar.barLinks .extra-bar-icon{
+    background: url(/img/template-chooser/left_menu_link#ColorKey#.png?v=#APP_VER#) left center;
+}
+/*************************************************/
+.templateReadScreen{
+    color: #TemplateColor# !important;
+}
+.templateReadScreen .content-buttons input{
+    color: #TemplateColor# !important;
+    border: 1px solid #TemplateColor# !important;
+}
+.templateReadScreen .loading{
+    background: #TemplateColor# !important;
+}
+/********************************************************/
+.templateContentScreen div{
+    color: #TemplateColor# !important;
+}
+.templateContentScreen .triangle span{
+    color: white !important;
+}
+.templateContentScreen .app-buttons{
+    color:#TemplateColor# !important;
+}
+.templateContentScreen .thumbnails{
+    border-top: 3px solid #TemplateColor# !important;
+}
+.templateContentScreen .triangle{
+    border-color: #TemplateColor# transparent transparent transparent !important;
+}
+.templateContentScreen .header .header-table-of-contents{
+    background: url(/img/template-chooser/reader_menu#ColorKey#.png?v=#APP_VER#) left center;
+}
+.templateContentScreen .header .header-share{
+    background: url(/img/template-chooser/reader_share#ColorKey#.png?v=#APP_VER#) right center;
+}
+.templateContentScreen .footer .footer-home{
+    background: url(/img/template-chooser/home_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+.templateContentScreen .footer .footer-library{
+    background: url(/img/template-chooser/library_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+.templateContentScreen .footer .footer-download{
+    background: url(/img/template-chooser/download_selected#ColorKey#.png?v=#APP_VER#) center center;
+}
+.templateContentScreen .footer .footer-info{
+    background: url(/img/template-chooser/info_selected#ColorKey#.png?v=#APP_VER#) center center;
+}

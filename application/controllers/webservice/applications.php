@@ -139,23 +139,6 @@ class Webservice_Applications_Controller extends Base_Controller {
 		    $accessToken = Input::get('accessToken', "");
 		    Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
 		    $application = webService::getCheckApplication($ServiceVersion, $applicationID);
-
-		    switch ($application->ThemeForeground) {
-			case 2:
-			    $hexadecimalColorCode = "#00A388";
-			    break;
-			case 3:
-			    $hexadecimalColorCode = "#E2B705";
-			    break;
-			case 4:
-			    $hexadecimalColorCode = "#F63440";
-			    break;
-			case 5:
-			    $hexadecimalColorCode = "#E74C3C";
-			    break;
-			default:
-			    $hexadecimalColorCode = "#2980B9";
-		    }
 		    $baseUrl = Config::get('custom.url');
 		    $tabs = array();
 		    $tabs[] = array("tabLogoUrl" => $baseUrl . "img/galeLogo.png", "tabUrl" => $baseUrl . "/maps/webview/" . $application->ApplicationID);
@@ -172,7 +155,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'status' => 0,
 				'error' => "",
 				'ThemeBackground' => $application->ThemeBackground,
-				'ThemeForeground' => $hexadecimalColorCode,
+				'ThemeForeground' => $application->getThemeColor(),
 				'BannerActive' => $application->BannerActive,
 				'BannerPage' => $application->BannerPage(),
 				'Tabs' => $application->TabsForService(),

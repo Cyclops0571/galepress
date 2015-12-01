@@ -1904,23 +1904,7 @@ var cTemplate = new function () {
 		$('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
 		break;
 	}
-	switch (foreground) {
-	    case 1:
-		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');
-		break;
-	    case 2:
-		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-green.css" type="text/css" />');
-		break;
-	    case 3:
-		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
-		break;
-	    case 4:
-		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
-		break;
-	    case 5:
-		$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-orange.css" type="text/css" />');
-		break;
-	}
+	$('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/csstemplates/' + foreground + '.css" type="text/css" />');
     };
 
     this.initialize = function (bg, fg) {
@@ -1994,23 +1978,8 @@ var cTemplate = new function () {
 
 	$('.templateForegroundChange').on('change', '', function (e) {
 	    $('.app-foreground-templates').remove();
-	    switch (parseInt($('.templateForegroundChange:checked').val())) {
-		case 1:
-		    $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-blue.css" type="text/css" />');
-		    break;
-		case 2:
-		    $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-green.css" type="text/css" />');
-		    break;
-		case 3:
-		    $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-yellow.css" type="text/css" />');
-		    break;
-		case 4:
-		    $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-red.css" type="text/css" />');
-		    break;
-		case 5:
-		    $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/css/template-chooser/foreground-template-orange.css" type="text/css" />');
-		    break;
-	    }
+	    var cssName = parseInt($('.templateForegroundChange:checked').val());
+	    $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/csstemplates/' + cssName + '.css" type="text/css" />');
 	});
 
 	$('#modalTemplateChooser').on('shown.bs.modal', function () {

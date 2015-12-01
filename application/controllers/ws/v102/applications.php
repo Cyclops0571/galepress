@@ -94,35 +94,17 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 		return Ws::render(function() use ($applicationID) {
 					$isTest = Input::get('isTest', 0) ? TRUE : FALSE;
 					$application = Ws::getApplication($applicationID);
-
-					switch ($application->ThemeForeground) {
-						case 2:
-							$hexadecimalColorCode = "#00A388";
-							break;
-						case 3:
-							$hexadecimalColorCode = "#E2B705";
-							break;
-						case 4:
-							$hexadecimalColorCode = "#F63440";
-							break;
-						case 5:
-							$hexadecimalColorCode = "#E74C3C";
-							break;
-						default:
-							$hexadecimalColorCode = "#2980B9";
-					}
 					$baseUrl = Config::get('custom.url');
 					$tabs = array();
 					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/galeLogo.png", "tabUrl" => $baseUrl . "/maps/webview/" . (int) $application->ApplicationID);
 					$tabs[] = array("tabLogoUrl" => $baseUrl . "img/bg-drop.png", "tabUrl" => "http://www.google.com/");
-					
 
 					$contents = Ws::getApplicationContents($applicationID, $isTest);
 					return Response::json(array(
 								'status' => 0,
 								'error' => "",
 								'ThemeBackground' => $application->ThemeBackground,
-								'ThemeForeground' => $hexadecimalColorCode,
+								'ThemeForeground' => $application->getThemeColor(),
 								'BannerActive' => $application->BannerActive,
 								'BannerPage' => $application->BannerPage(),
 								'Tabs' => $application->TabsForService(),
