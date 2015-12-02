@@ -401,24 +401,7 @@ class Applications_Controller extends Base_Controller {
 
 	$application->ThemeBackground = (int) Input::get("ThemeBackground", 1);
 	$application->ThemeForeground = (int) Input::get("ThemeForeground", 1);
-	$application->BannerAutoplay = (int) Input::get("BannerAutoplay", 0);
-	$application->BannerIntervalTime = (int) Input::get("BannerIntervalTime", 0);
-	$application->BannerTransitionRate = (int) Input::get("BannerTransitionRate", 0);
-	$application->BannerActive = (int) Input::get("BannerActive", 0);
 	$application->TabActive = (int) Input::get("TabActive", 0);
-	$application->BannerCustomerActive = Input::get("BannerCustomerActive", 0);
-	if ($application->BannerCustomerActive) {
-	    $v = Validator::make(Input::all(), array("BannerCustomerUrl" => 'required'));
-	    if (!$v->passes()) {
-		$errMsg = str_replace("BannerCustomerUrl", __("common.banner_use_costomer_banner"), $v->errors->first());
-		return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($errMsg);
-	    }
-	}
-	if(preg_match('/^https?:\/\/.+$/', Input::get("BannerCustomerUrl", ""))) {
-	    $application->BannerCustomerUrl = Input::get("BannerCustomerUrl");
-	} else {
-	    $application->BannerCustomerUrl = "http://" . Input::get("BannerCustomerUrl");
-	}
 		
 	$tabs = $application->Tabs();
 	for ($i = 0; $i < TAB_COUNT; $i++) {
