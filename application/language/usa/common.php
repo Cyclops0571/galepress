@@ -487,7 +487,7 @@ return array(
 						"Regards, \n".
 						"Galepress",
 	
-	'dashboard_title' => 'TOTAL DOWNLOAD',
+	'dashboard_title' => 'CONTENT DOWNLOAD',
 	'dashboard_total' => 'Total',
 	'dashboard_welcome' => 'Welcome',
 	'dashboard_lastlogin_time' => 'Previous Login Time:',

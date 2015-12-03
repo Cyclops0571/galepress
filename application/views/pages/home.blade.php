@@ -4,6 +4,7 @@
 <div class="container" id="dashboard">
     <div class="row">              
         <div class="col-md-9">
+	    <!--TOTAL DOWNLOAD CHART START-->
             <div class="col-md-12">
                 <div class="block block-drop-shadow">
                     <div class="head bg-default">
@@ -41,7 +42,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+	    </div>
+	    <!--TOTAL DOWNLOAD CHART START-->
+	    
+	    <!--DEVICE USAGE GRAPHIC START-->
             <div class="col-md-7">
                 <div class="block block-drop-shadow">
                     <div class="head bg-dot30">
@@ -106,6 +110,8 @@
                     </div>                                    
                 </div>
             </div>
+	    <!--DEVICE USAGE GRAPHIC END-->
+	    <!--PREVIOUS MONTHS START-->
             <div class="col-md-5">
                 <div class="block block-drop-shadow">
                     <div class="content list">
@@ -146,6 +152,7 @@
                     </div>
                 </div>
             </div>
+	    <!--PREVIOUS MONTHS END-->
             <div class="block block-drop-shadow bg-light-rtl">
                 <!-- Anasayfada sayfanın sağında çıkan filtrelemeyle ilgili açılır kapanır bölüm. -->
                 <div class="site-settings">
