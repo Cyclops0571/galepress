@@ -213,6 +213,7 @@ class webService {
 	$applicationToken = Input::get('applicationToken', '');
 	$deviceToken = Input::get('deviceToken', '');
 	$deviceType = Input::get('deviceType', 'ios');
+	$accessToken = \Laravel\Input::get('accessToken', '');
 
 	//if(strlen($applicationToken) > 0 && strlen($deviceToken) > 0)
 	$token = NULL;
@@ -248,6 +249,8 @@ class webService {
 	    }
 	    $token->save();
 	}
+	
+	Client::updateDeviceToken($accessToken, $deviceToken);
     }
 
     /**

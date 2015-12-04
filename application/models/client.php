@@ -7,6 +7,7 @@
  * @property int $Password Description
  * @property int $Email Description
  * @property int $Token Description
+ * @property int $DeviceToken Description
  * @property int $Name Description
  * @property int $Surname Description
  * @property int $PaidUntil Description
@@ -73,5 +74,16 @@ class Client extends Laravel\Database\Eloquent\Model {
     
     public static function getSampleXmlUrl() {
 	return "/files/sampleFiles/SampleClientExcel_" . Laravel\Config::get("application.language") . ".xls";
+    }
+    
+    public static function updateDeviceToken($accessToken, $deviceToken) {
+	if(!empty($deviceToken)) {
+	    /* @var $client Client */
+	    $client = Client::where("Token", "=", $accessToken)->where("StatusID", "=", eStatus::Active)->first();
+	    if($client && $client->DeviceToken !== $deviceToken) {
+		$client->DeviceToken = $deviceToken;
+		$client->save();
+	    }
+	}
     }
 }
