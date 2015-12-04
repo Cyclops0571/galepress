@@ -15,7 +15,7 @@
 class dd1 {
     const ASdf = 5;
     public static function make() {
-	return new static();
+	return new static(5);
     }
     
     public static function who() {
@@ -34,7 +34,9 @@ class dd2 extends dd1{
 }
 
 class dd3 extends dd2 {
-    
+    public function __construct($a) {
+	var_dump("a:::" . $a);
+    }
 }
 
 class Test_Controller extends Base_Controller {
@@ -46,7 +48,9 @@ class Test_Controller extends Base_Controller {
     }
 
     
-    public function get_index($test) {
+    public function get_index($test = 1) {
+	dd(dd3::make());
+	exit;
 	//dd(basename("/csaa/1.css", '.css'));
 	echo uniqid(); exit;
 	return View::make('test.javascripttest', array());
@@ -250,7 +254,6 @@ class Test_Controller extends Base_Controller {
 	return Response::json($obj);
     }
 
-
     public function get_moveInteractivite() {
 
 	/*	 * *** HEDEF CONTENTIN SAYFALARI OLUSUTURLMUS OLMALI YANI INTERAKTIF TASARLAYICISI ACILMIS OLMALI!!!**** */
@@ -388,4 +391,58 @@ class Test_Controller extends Base_Controller {
 	echo  $x . "aaaaaaaaaaaaaa";
     }
 
+    public function get_iosInternalTest() {
+	$appID = 424;
+	$udid1 = 'E6A7CFD9-FE39-4C33-B7F4-6651404ED040';
+	$deviceToken1 = '22d08c4579f9a0d0e07fe7fdcd0a064989ecb93b06f7a1cf7c3a5f130b36c776';
+	
+	$app = Application::find($appID); //mmd
+	$cert = path('public') . 'files/customer_' . $app->CustomerID . '/application_' . $app->ApplicationID . '/' . $app->CkPem;
+	$message = "Your Device Token: " . $deviceToken1;
+	$deviceToken = $deviceToken1;
+	
+	
+	$success = false;
+	// Put your private key's passphrase here:
+	$passphrase = Config::get('custom.passphrase');
+
+
+	$ctx = stream_context_create();
+	stream_context_set_option($ctx, 'ssl', 'local_cert', $cert);
+	stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+	// Open a connection to the APNS server
+	$fp = stream_socket_client(
+		'ssl://gateway.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
+
+	if ($fp) {
+	    // Create the payload body
+	    $body['aps'] = array(
+		'alert' => $message,
+		'sound' => 'default'
+	    );
+
+	    // Encode the payload as JSON
+	    $payload = json_encode($body);
+
+	    // Build the binary notification
+	    $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+
+	    // Send it to the server
+	    $result = fwrite($fp, $msg, strlen($msg));
+
+
+	    if ($result) {
+		$success = true;
+	    }
+	    // Close the connection to the server
+	    fclose($fp);
+	} else {
+	    echo $errstr;
+	    exit;
+	    //throw new Exception("Failed to connect: $err $errstr" . PHP_EOL);
+	}
+	var_dump($success);
+    }
+    
 }

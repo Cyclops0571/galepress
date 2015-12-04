@@ -37,13 +37,14 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     	    <script type="text/javascript">
     		var contentsUrl = '<?php echo __('route.contents'); ?>';
     		var applicationSettingRoute = "<?php echo __("route.applications_usersettings"); ?>";
+    		var bannersController = "<?php echo __("route.banners"); ?>";
     		$(document).ready(function () {
     		    var applicationSettingRouteExp = applicationSettingRoute.replace("(:num)", "\\d+");
     		    var appID = parseInt($("input[name$='pplicationID']").val());
     		    if (!(appID > 0)) {
     			return;
     		    }
-    		    if (document.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
+    		    if (document.location.href.indexOf(bannersController) > -1 || document.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
     			$(".page-navigation ul#allSettings li a").each(function (index) {
     			    var match = $(this).attr('href').match(/\d+/);
     			    if (match.length > 0 && parseInt(match[0]) === appID) {

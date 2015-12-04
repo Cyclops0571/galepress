@@ -45,6 +45,7 @@ $csrf = Config::get('custom.csrf');
 Route::get('/', function() { return View::make('website.pages.home'); });
 
  // <editor-fold defaultstate="collapsed" desc="Test">
+Route::get('test/iosInternalTest', 'test@iosInternalTest');
 Route::get("test", "test@index");
 Route::post("test", "test@index");
 Route::get("move", "test@moveInteractivite");
