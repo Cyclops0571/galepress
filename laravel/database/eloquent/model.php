@@ -253,7 +253,7 @@ abstract class Model {
 	 *
 	 * @param  string        $model
 	 * @param  string        $foreign
-	 * @return Relationship
+	 * @return Query
 	 */
 	public function has_one($model, $foreign = null)
 	{
@@ -265,7 +265,7 @@ abstract class Model {
 	 *
 	 * @param  string        $model
 	 * @param  string        $foreign
-	 * @return Relationship
+	 * @return Query
 	 */
 	public function has_many($model, $foreign = null)
 	{
@@ -278,7 +278,7 @@ abstract class Model {
 	 * @param  string        $type
 	 * @param  string        $model
 	 * @param  string        $foreign
-	 * @return Relationship
+	 * @return Query
 	 */
 	protected function has_one_or_many($type, $model, $foreign)
 	{
@@ -297,7 +297,7 @@ abstract class Model {
 	 *
 	 * @param  string        $model
 	 * @param  string        $foreign
-	 * @return Relationship
+	 * @return Query
 	 */
 	public function belongs_to($model, $foreign = null)
 	{

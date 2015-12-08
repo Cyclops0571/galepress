@@ -1,6 +1,6 @@
 <?php
 
-class User
+class UserPomodoro
 {
   public $username;
   public $status;

@@ -6,6 +6,16 @@ use Laravel\Paginator;
 use Laravel\Database\Query\Grammars\Postgres;
 use Laravel\Database\Query\Grammars\SQLServer;
 
+
+/**
+ * Class Query
+ * @method int count()
+ * @method int min()
+ * @method int max()
+ * @method int avg()
+ * @method int sum()
+ * @package Laravel\Database
+ */
 class Query {
 
 	/**

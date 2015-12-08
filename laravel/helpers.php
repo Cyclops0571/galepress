@@ -19,7 +19,7 @@ function e($value)
  * @param  string  $key
  * @param  array   $replacements
  * @param  string  $language
- * @return string
+ * @return \Laravel\Lang
  */
 function __($key, $replacements = array(), $language = null)
 {

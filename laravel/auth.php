@@ -1,5 +1,12 @@
 <?php namespace Laravel; use Closure;
 
+/**
+ * Class Auth
+ * @method static \User User()
+ * @method static \User guest()
+ * @package Laravel
+ *
+ */
 class Auth {
 
 	/**
@@ -89,5 +96,9 @@ class Auth {
 	{
 		return call_user_func_array(array(static::driver(), $method), $parameters);
 	}
+
+    public static function deneme111() {
+        echo 'asdfasdfadsf';
+    }
 
 }

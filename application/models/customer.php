@@ -30,13 +30,11 @@ class Customer extends Eloquent {
 
     /**
      * 
-     * @param type $statusID
+     * @param int $statusID
      * @return Application
      */
     public function Applications($statusID) {
-	
-	
-	return $this->has_many('Application', $this->key())->where('StatusID', '=', $statusID)->get();
+	    return $this->has_many('Application', $this->key())->where('StatusID', '=', $statusID)->get();
     }
 
     /**

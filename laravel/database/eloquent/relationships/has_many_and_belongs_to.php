@@ -1,5 +1,6 @@
 <?php namespace Laravel\Database\Eloquent\Relationships;
 
+use Laravel\Database\Eloquent\Query;
 use Laravel\Str;
 use Laravel\Database\Eloquent\Model;
 use Laravel\Database\Eloquent\Pivot;
@@ -385,8 +386,8 @@ class Has_Many_And_Belongs_To extends Relationship {
 	/**
 	 * Set the columns on the joining table that should be fetched.
 	 *
-	 * @param  array         $column
-	 * @return Relationship
+	 * @param  array $columns
+	 * @return Query
 	 */
 	public function with($columns)
 	{

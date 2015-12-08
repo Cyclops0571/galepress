@@ -1,5 +1,10 @@
 <?php namespace Laravel; use Closure;
 
+/**
+ * Class Session
+ * @method static mixed get($key, $default = null)
+ * @package Laravel
+ */
 class Session {
 
 	/**
