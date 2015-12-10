@@ -77,7 +77,7 @@
 @_yield('body-content')
 <script src="/js/jquery.collapse.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/js/jquery.easytabs.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
-<script src="/js/redactor.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
+<script src="/js/redactor.min.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/js/jquery.colorPicker.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/js/respond.min.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script src="/bundles/jupload/js/jquery.iframe-transport.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>

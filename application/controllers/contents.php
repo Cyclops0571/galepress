@@ -91,6 +91,7 @@ class Contents_Controller extends Base_Controller {
                 'WHERE c.StatusID=1';
         $rs = DB::table(DB::raw('(' . $sql . ') t'))
                 ->where(function($query) use($currentUser, $applicationID, $search) {
+                    /** @var Laravel\Database\Query $query */
                     if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
                         if ($applicationID > 0) {
                             $query->where('ApplicationID', '=', $applicationID);
@@ -98,6 +99,7 @@ class Contents_Controller extends Base_Controller {
 
                         if (strlen(trim($search)) > 0) {
                             $query->where(function($q) use ($search) {
+                                /** @var \Laravel\Database\Query $q */
                                 $q->where('CustomerName', 'LIKE', '%' . $search . '%');
                                 $q->or_where('ApplicationName', 'LIKE', '%' . $search . '%');
                                 $q->or_where('Blocked', 'LIKE', '%' . $search . '%');
@@ -110,6 +112,7 @@ class Contents_Controller extends Base_Controller {
                             if (strlen(trim($search)) > 0) {
                                 $query->where('ApplicationID', '=', $applicationID);
                                 $query->where(function($q) use ($search) {
+                                    /** @var \Laravel\Database\Query $q */
                                     $q->where('Name', 'LIKE', '%' . $search . '%');
                                     $q->or_where('CategoryName', 'LIKE', '%' . $search . '%');
                                     $q->or_where('PublishDate', 'LIKE', '%' . $search . '%');
@@ -348,7 +351,6 @@ class Contents_Controller extends Base_Controller {
             try {
                 DB::transaction(function() use ($currentUser, $id, $applicationID, &$contentID) {
                     $content = Content::find($id);
-                    $content instanceof Content;
                     $selectedCategories = Input::get('chkCategoryID', array());
 
                     if (!$content) {
@@ -551,6 +553,13 @@ class Contents_Controller extends Base_Controller {
         }
     }
 
+    /**
+     * @param $destinationFolder
+     * @param $sourceContentID
+     * @param $targetContentID
+     * @param $targetContentFileID
+     * @return string|void
+     */
     public function get_copyContent($destinationFolder, $sourceContentID, $targetContentID, $targetContentFileID) {
         // /***** HEDEF CONTENTIN SAYFALARI OLUSUTURLMUS OLMALI YANI INTERAKTIF TASARLAYICISI ACILMIS OLMALI!!!*****/
         // TAŞINACAK CONTENT'IN FILE ID'SI
@@ -583,20 +592,20 @@ class Contents_Controller extends Base_Controller {
                 if ($destinationFolder != "null") { /* kopyalanacak icerigin sayfalari yok ise olusturur */
                     foreach ($contentFilePage as $ocfp) {
                         $ncfp = new ContentFilePage();
-                        $ncfp->ContentFileID = $targetContentFileID;
-                        $ncfp->No = $ocfp->No;
-                        $ncfp->Width = $ocfp->Width;
-                        $ncfp->Height = $ocfp->Height;
-                        $ncfp->FilePath = 'files/customer_' . $targetCustomerID->CustomerID . '/application_' . $targetApplicationID->ApplicationID . '/content_' . $targetContentID . '/file_' . $targetContentFileID;
-                        $ncfp->FileName = $ocfp->FileName;
-                        $ncfp->FileName2 = $ocfp->FileName2;
-                        $ncfp->FileSize = $ocfp->FileSize;
-                        $ncfp->StatusID = $ocfp->StatusID;
-                        $ncfp->CreatorUserID = $ocfp->CreatorUserID;
+                        $ncfp->ContentFileID = (int)$targetContentFileID;
+                        $ncfp->No = (int)$ocfp->No;
+                        $ncfp->Width = (int)$ocfp->Width;
+                        $ncfp->Height = (int)$ocfp->Height;
+                        $ncfp->FilePath = (string)'files/customer_' . $targetCustomerID->CustomerID . '/application_' . $targetApplicationID->ApplicationID . '/content_' . $targetContentID . '/file_' . $targetContentFileID;
+                        $ncfp->FileName = (string)$ocfp->FileName;
+                        $ncfp->FileName2 = (string)$ocfp->FileName2;
+                        $ncfp->FileSize = (int)$ocfp->FileSize;
+                        $ncfp->StatusID = (int)$ocfp->StatusID;
+                        $ncfp->CreatorUserID = (int)$ocfp->CreatorUserID;
                         $ncfp->DateCreated = new DateTime();
                         $ncfp->ProcessUserID = $ocfp->CreatorUserID;
                         $ncfp->ProcessDate = new DateTime();
-                        $ncfp->ProcessTypeID = eProcessTypes::Insert;
+                        $ncfp->ProcessTypeID = (int)eProcessTypes::Insert;
                         $ncfp->save();
                     }
                     if (!File::exists($destinationFolder . '/file_' . $targetContentFileID)) {

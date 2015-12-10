@@ -44,7 +44,7 @@ if (Auth::User() != NULL && (int) Auth::User()->UserTypeID == eUserTypes::Custom
     		    if (!(appID > 0)) {
     			return;
     		    }
-    		    if (document.location.href.indexOf(bannersController) > -1 || document.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
+    		    if (window.location.href.indexOf(bannersController) > -1 || window.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
     			$(".page-navigation ul#allSettings li a").each(function (index) {
     			    var match = $(this).attr('href').match(/\d+/);
     			    if (match.length > 0 && parseInt(match[0]) === appID) {

@@ -145,7 +145,10 @@ class Banners_Controller extends Base_Controller {
 	return View::make("pages." . Str::lower($this->table) . "detail", $data)->nest('filterbar', 'sections.filterbar', $data);
     }
 
-    public function get_delete() {
+	/**
+	 * @return string
+     */
+	public function get_delete() {
 	$banner = Banner::find((int) Input::get('id'));
 	if (!$banner) {
 	    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));

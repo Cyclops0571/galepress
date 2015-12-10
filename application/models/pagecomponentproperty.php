@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * @property int ProcessTypeID
+ * @property DateTime ProcessDate
+ * @property DateTime DateCreated
+ * @property int StatusID
+ * @property  Value
+ * @property string Value
+ * @property int Value
+ * @property  Name
+ * @property mixed PageComponentID
+ * @property  Name
+ */
 class PageComponentProperty extends Eloquent {
 
     public static $timestamps = false;

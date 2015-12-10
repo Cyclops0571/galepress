@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @property int $RequestTypeID Description
  * @property int $CustomerID Description
@@ -19,6 +20,7 @@
  * @property int $ProcessUserID Description
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
+ * @property mixed RequestID
  */
 class Requestt extends Eloquent
 {

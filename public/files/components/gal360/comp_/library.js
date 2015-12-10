@@ -36,7 +36,7 @@ d=(g>=528)}}}return d};var f;var a=function(){if(typeof(f)==="undefined"){if(!AC
 }else{if(AC.Detector.isFirefox()){var h=navigator.userAgent.toLowerCase();var g=parseInt(parseFloat(h.substring(h.lastIndexOf("firefox/")+8)),10);
 f=(g>=4)}}}return f};var b;var e=function(){if(typeof(b)==="undefined"){if(!AC.Detector.isIEStrict()){b=false
 }else{if(AC.Detector.isIEStrict()){var h=navigator.userAgent.toLowerCase();var g=parseFloat(h.substring(h.lastIndexOf("msie")+5));
-b=(g>=9)}}}return b};if(document.location.toString().match(/\/html5\/showcase\//)){if(!(c()||AC.Detector.isiPad()||AC.Detector.isMobile()||a()||e())){document.location="/html5/"
+b=(g>=9)}}}return b};if(window.location.toString().match(/\/html5\/showcase\//)){if(!(c()||AC.Detector.isiPad()||AC.Detector.isMobile()||a()||e())){window.location="/html5/"
 }}})();(function(){Event.onDOMReady(function(){if(AC.Detector.isiPad()||AC.Detector.isMobile()){var a=document.querySelectorAll('a[href*="/html5/showcase/"]');
 for(var b=a.length-1;b>=0;b--){a[b].href+="#html5-showcase"}}})})();if(typeof Apple==="undefined"){window.Apple={}
 }Apple.browser={FF:(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)),SAFARI:(/Safari[\/\s](\d+\.\d+)/.test(navigator.userAgent)),SAFARI5:!AC.Detector.isChrome()&&parseFloat(navigator.userAgent.substring(navigator.userAgent.lastIndexOf("Safari/")+7))>=533,IE:(navigator.appName=="Microsoft Internet Explorer")};

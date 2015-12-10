@@ -1,13 +1,34 @@
 <?php
 
+/**
+ * Class ContentPasswords_Controller
+ */
 class ContentPasswords_Controller extends Base_Controller {
 
+	/**
+	 * @var bool
+     */
 	public $restful = true;
+	/**
+	 * @var string
+     */
 	public $page = '';
+	/**
+	 * @var \Laravel\Lang|string
+     */
 	public $route = '';
+	/**
+	 * @var string
+     */
 	public $table = '';
+	/**
+	 * @var string
+     */
 	public $pk = '';
 
+	/**
+	 * ContentPasswords_Controller constructor.
+     */
 	public function __construct() {
 		parent::__construct();
 		$this->page = 'contentpasswords';
@@ -16,6 +37,10 @@ class ContentPasswords_Controller extends Base_Controller {
 		$this->pk = 'ContentPasswordID';
 	}
 
+	/**
+	 * @return int|\Laravel\View
+	 * @throws Exception
+     */
 	public function get_index() {
 		$currentUser = Auth::User();
 
@@ -71,7 +96,9 @@ class ContentPasswords_Controller extends Base_Controller {
 		}
 	}
 
-	//POST
+	/**
+	 * @return string
+     */
 	public function post_save() {
 		$currentUser = Auth::User();
 
@@ -105,6 +132,8 @@ class ContentPasswords_Controller extends Base_Controller {
 			$s = ContentPassword::find($id);
 		}
 		//$s->ApplicationID = (int)Input::get('CategoryApplicationID');
+
+		/** @var  $s ContentPassword */
 		$s->ContentID = $contentID;
 		$s->Name = Input::get('ContentPasswordName');
 		if (strlen(trim(Input::get('ContentPasswordPassword'))) > 0) {
@@ -127,6 +156,9 @@ class ContentPasswords_Controller extends Base_Controller {
 		return "success=" . base64_encode("true");
 	}
 
+	/**
+	 * @return string
+     */
 	public function post_delete() {
 		$currentUser = Auth::User();
 

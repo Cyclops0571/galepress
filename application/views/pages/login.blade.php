@@ -145,7 +145,7 @@
                                               accessToken: accessToken
                                           }
                                       }).success(function(msg) {
-                                        document.location.href = "{{__('route.home')}}";
+                                          window.location = "{{__('route.home')}}";
                                       }).fail(function(msg) {
 										  ;
                                       });

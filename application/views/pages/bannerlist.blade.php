@@ -85,7 +85,7 @@ if (FALSE) {
 	    <div class="content controls">
 		<div class="form-row row-save">
 		    <div class="col-md-3 col-md-offset-8">
-			<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cBanner.settingSave(<?php echo $application->ApplicationID ?>);" />
+			<input type="button" class="btn my-btn-success" name="save" value="{{ __('common.detailpage_update') }}" onclick="cBanner.settingSave();" />
 		    </div>           
 		</div>
 	    </div>

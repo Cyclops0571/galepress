@@ -252,7 +252,7 @@ foreach ($languages as $currentLanguage) {
                 $success = Input::upload('Filedata', $filePath, $tempFile);
                 if ($success) {
                     $ret = Uploader::ContentsUploadFile($tempFile);
-                    return "success=" . base64_encode("true") . "&filename=" . base64_encode($ret['fileName']) . "&coverimagefilename=" . base64_encode($ret['imageFile']);
+                    return "success=" . base64_encode("true") . "&filename=" . base64_encode($ret['fileName']) . "&imageFile=" . base64_encode($ret['imageFile']);
                 }
                 return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('');
             } else {

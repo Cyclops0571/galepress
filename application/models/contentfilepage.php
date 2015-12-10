@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * @property int ProcessTypeID
+ * @property int ContentFileID
+ * @property int No
+ * @property int Width
+ * @property int Height
+ * @property string FilePath
+ * @property string FileName
+ * @property string FileName2
+ * @property int FileSize
+ * @property int StatusID
+ * @property DateTime ProcessDate
+ * @property int ProcessUserID
+ * @property DateTime DateCreated
+ * @property int CreatorUserID
+ */
 class ContentFilePage extends Eloquent {
 
     public static $timestamps = false;

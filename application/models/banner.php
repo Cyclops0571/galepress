@@ -22,7 +22,7 @@ class Banner extends Eloquent {
 
     /**
      * 
-     * @param type $bannerID
+     * @param int $bannerID
      * @return Banner
      */
     public static function find($bannerID) {
@@ -31,7 +31,7 @@ class Banner extends Eloquent {
 
     /**
      * 
-     * @param type $applicationID
+     * @param int $applicationID
      * @return Banner
      */
     public static function getAppBanner($applicationID) {

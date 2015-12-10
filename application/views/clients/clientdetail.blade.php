@@ -221,7 +221,7 @@ if (isset($row)) {
 		fsuccess = function(ret) {
 		    newObjectID = ret.getValue("id");
 		    cNotification.success();
-		    document.location.href = '/' + currentLanguage + '/' + route[_self.objectName] + '/' + newObjectID;
+		    window.location = '/' + currentLanguage + '/' + route[_self.objectName] + '/' + newObjectID;
 		};
 	    }
 	    cCommon.save(this.objectName, fsuccess, undefined, contentIDSet);

@@ -4,6 +4,7 @@
  * Class Auth
  * @method static \User User()
  * @method static \User guest()
+ * @method static \User check()
  * @package Laravel
  *
  */

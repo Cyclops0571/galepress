@@ -10,12 +10,11 @@ class Crop_Controller extends Base_Controller {
 	}
 
 	public function get_image() {
+        /** @var Crop[] $cropSet */
 		$cropSet = Crop::get();
-		$cropSet instanceof Crop;
 		$contentID = (int) Input::get("contentID", 0);
-
-		$contentFile = DB::table('ContentFile')
-						->where('ContentID', '=', $contentID)
+        /** @var ContentFile $contentFile */
+		$contentFile = ContentFile::where('ContentID', '=', $contentID)
 						->where('StatusID', '=', eStatus::Active)
 						->order_by('ContentFileID', 'DESC')->first();
 
@@ -23,15 +22,14 @@ class Crop_Controller extends Base_Controller {
 			return Redirect::to($this->errorPage);
 		}
 
-		$contentFile instanceof ContentFile;
-		$ccif = DB::table('ContentCoverImageFile')
-						->where('ContentFileID', '=', $contentFile->ContentFileID)
+        /** @var ContentCoverImageFile $ccif */
+		$ccif = ContentCoverImageFile::where('ContentFileID', '=', $contentFile->ContentFileID)
 						->where('StatusID', '=', eStatus::Active)
 						->order_by('ContentCoverImageFileID', 'DESC')->first();
 		if (!$ccif) {
 			return Redirect::to($this->errorPage);
 		}
-		$ccif instanceof ContentCoverImageFile;
+
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
 		$imagePath = $contentFile->FilePath . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
@@ -54,14 +52,15 @@ class Crop_Controller extends Base_Controller {
 		$widthSet = Input::get("widthSet");
 		$cropIDSet = Input::get("cropIDSet");
 		$contentID = (int) Input::get("contentID", 0);
-		$contentFile = DB::table('ContentFile')
-						->where('ContentID', '=', $contentID)
-						->where('StatusID', '=', eStatus::Active)
-						->order_by('ContentFileID', 'DESC')->first();
+		/** @var ContentFile $contentFile */
+        $contentFile = ContentFile::where('ContentID', '=', $contentID)
+            ->where('StatusID', '=', eStatus::Active)
+            ->order_by('ContentFileID', 'DESC')->first();
 		if (!$contentFile) {
 			return Redirect::to($this->errorPage);
 		}
-		$contentFile instanceof ContentFile;
+
+        /** @var ContentCoverImageFile $ccif */
 		$ccif = ContentCoverImageFile::where('ContentFileID', '=', $contentFile->ContentFileID)
 				->where('StatusID', '=', eStatus::Active)
 				->order_by('ContentCoverImageFileID', 'DESC')
@@ -71,7 +70,6 @@ class Crop_Controller extends Base_Controller {
 			return Redirect::to($this->errorPage);
 		}
 		
-		$ccif instanceof ContentCoverImageFile;
 		//bu contentin imageini bulalim....
 		//calculate the absolute path of the source image
 		$sourceImagePath = $contentFile->FilePath . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
@@ -89,11 +87,11 @@ class Crop_Controller extends Base_Controller {
 		}
 
 		for ($i = 0; $i < count($xCoordinateSet); $i++) {
+            /** @var Crop $crop */
 			$crop = Crop::find($cropIDSet[$i]);
 			if (!$crop) {
 				continue;
 			}
-			$crop instanceof Crop;
 
 			$im = new Imagick($imageInfo->absolutePath);
 			$im->cropimage($widthSet[$i], $heightSet[$i], $xCoordinateSet[$i], $yCoordinateSet[$i]);

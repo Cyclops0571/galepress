@@ -14,6 +14,11 @@ function with($object)
     return $object;
 }
 class Asset_Container extends Laravel\Asset_Container{};
+
+/**
+ * @property int HasCreated
+ * @property int Interactivity
+ */
 class Query extends Laravel\Database\Query{};
 class Auth extends Laravel\Auth{};
 abstract class Authenticator extends Laravel\Auth\Drivers\Driver{};
@@ -43,6 +48,12 @@ class DB extends Laravel\Database{
      * @return array
      */
     public function query($sql, $bindings = array()) {}
+
+    /**
+     * @param string $table
+     * @return Laravel\Database\Query
+     */
+    public static function Table($table){}
 
 };
 class Eloquent extends Laravel\Database\Eloquent\Model{
@@ -98,7 +109,7 @@ class Eloquent extends Laravel\Database\Eloquent\Model{
      * @param  string  $connector
      * @return Query
      */
-    public function where($column, $operator = null, $value = null, $connector = 'AND') {}
+    public static function where($column, $operator = null, $value = null, $connector = 'AND') {}
 
     /**
      * Add a where in condition to the query.

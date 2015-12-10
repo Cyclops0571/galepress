@@ -23,6 +23,7 @@
  * @property int $ProcessUserID Description
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
+ * @property int $CreatorUserID
  */
 class ContentFile extends Eloquent {
 
