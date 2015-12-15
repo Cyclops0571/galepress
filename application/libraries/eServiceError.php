@@ -17,6 +17,8 @@ class eServiceError {
     const ClientInvalidPasswordAttemptsLimit = 162;
     const GenericError = 400;
 
+    const ContentNotFoundMessage = 'İçerik bulunamadı.';
+
     /**
      * 
      * @param type $errorNo
@@ -31,7 +33,7 @@ class eServiceError {
 		$exception = new Exception("Hatalı parola!", $errorNo);
 		break;
 	    case eServiceError::ContentNotFound:
-		$exception = new Exception("İçerik bulunamadı.", $errorNo);
+		$exception = new Exception(self::ContentNotFoundMessage, $errorNo);
 		break;
 	    case eServiceError::ContentBlocked:
 		$exception = new Exception("İçerik engellenmiş.", $errorNo);

@@ -142,7 +142,7 @@ class Eloquent extends Laravel\Database\Eloquent\Model{
     /**
      * Find a record by the primary key.
      *
-     * @param  int     $id
+     * @param  int|string     $id
      * @param  array   $columns
      * @return Query
      */

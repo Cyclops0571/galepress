@@ -147,4 +147,7 @@ return array(
     'banners_order' => 'banners/order/',
     
     'my_ticket' => 'biletlerim',
+
+    'managements_list' => 'managements/list',
+    'managements_save' => 'managements/save',
 );

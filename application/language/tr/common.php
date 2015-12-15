@@ -445,12 +445,6 @@ return array(
 	'reports_refresh' => 'Yenile',
 	'reports_excel' => 'Excel olarak indir',
 	'reports_viewonmap' => 'Harita üzerinde göster',
-	/*
-	'reports_customer_report' => 'MÜŞTERİ RAPORU',
-	'reports_application_report' => 'UYGULAMA RAPORU',
-	'reports_content_report' => 'İÇERİK RAPORU',
-	'reports_device_report' => 'CİHAZ RAPORU',
-	*/
 	'reports_date1' => 'Tarih:',
 	'reports_print' => 'Yazdır',
 	'reports_device' => 'Cihaz',

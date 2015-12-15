@@ -147,4 +147,6 @@ return array(
 
     'my_ticket' => 'mytickets',
 
+    'managements_list' => 'managements/list',
+    'managements_save' => 'managements/save',
 );

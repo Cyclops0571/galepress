@@ -199,8 +199,10 @@ class Banners_Controller extends Base_Controller {
 	    $banner->OrderNo = $order;
 	    $banner->Status = eStatus::Passive;
 	    $banner->save();
-	    $sourceFile = path('public') . 'images/upload_image.png';
 	    $destinationFolder = path('public') . 'files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/';
+        if(!File::exists($destinationFolder)) {
+            File::mkdir($destinationFolder);
+        }
 	    File::copy(path('public') . 'images/upload_image.png', $destinationFolder . $banner->BannerID . IMAGE_EXTENSION);
 	} else {
 	    $banner = Banner::find((int) Input::get("pk"));

@@ -86,6 +86,60 @@ class Webservice_Applications_Controller extends Base_Controller {
 		});
 	}
 
+    /**
+     * Control for force update of application
+     * @param type $ServiceVersion
+     * @param type $applicationID
+     * @return Laravel\Response
+     */
+    public function post_detail($ServiceVersion, $applicationID) {
+        return webService::render(function() use ($ServiceVersion, $applicationID) {
+            /*
+              INFO: Force | guncellemeye zorlanip zorlanmayacagini selimin tablosundan sorgula!
+              0: Zorlama
+              1: Uyari goster
+              2: Zorla
+              3: Sil ve zorla
+             */
+            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            /* @var $application Application */
+            $application = webService::getCheckApplication($ServiceVersion, $applicationID);
+            $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
+
+//INFO:Save token method come from get_contents
+            webService::saveToken($ServiceVersion, $customer->CustomerID, $applicationID);
+
+            return Response::json(array(
+                'status' => 0,
+                'error' => "",
+                'CustomerID' => (int) $customer->CustomerID,
+                'CustomerName' => $customer->CustomerName,
+                'ApplicationID' => (int) $application->ApplicationID,
+                'ApplicationName' => $application->Name,
+                'ApplicationDetail' => $application->Detail,
+                'ApplicationExpirationDate' => $application->ExpirationDate,
+                'IOSVersion' => $application->IOSVersion,
+                'IOSLink' => $application->IOSLink,
+                'AndroidVersion' => $application->AndroidVersion,
+                'AndroidLink' => $application->AndroidLink,
+                'PackageID' => $application->PackageID,
+                'ApplicationBlocked' => ((int) $application->Blocked == 1 ? true : false),
+                'ApplicationStatus' => ((int) $application->Status == 1 ? true : false),
+                'ApplicationVersion' => (int) $application->Version,
+                'Force' => (int) $application->Force,
+                'SubscriptionWeekActive' => (int) $application->SubscriptionWeekActive,
+                'SubscriptionWeekIdentifier' => $application->SubscriptionIdentifier(Subscription::week),
+                'SubscriptionMonthActive' => (int) $application->SubscriptionMonthActive,
+                'SubscriptionMonthIdentifier' => $application->SubscriptionIdentifier(Subscription::mounth),
+                'SubscriptionYearActive' => (int) $application->SubscriptionYearActive,
+                'SubscriptionYearIdentifier' => $application->SubscriptionIdentifier(Subscription::year),
+                'WeekPrice' => '',
+                'MonthPrice' => '',
+                'YearPrice' => '',
+            ));
+        });
+    }
+
 	/**
 	 * 
 	 * @param type $ServiceVersion
@@ -133,7 +187,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 	 * @return Laravel\Response
 	 */
 	public function get_contents($ServiceVersion, $applicationID) {
-//get user token here then return acourdin to this 571571
+        //get user token here then return acourdin to this 571571
 		return webService::render(function() use ($ServiceVersion, $applicationID) {
 			$isTest = Input::get('isTest', 0) ? TRUE : FALSE;
 			$accessToken = Input::get('accessToken', "");
@@ -150,10 +204,17 @@ class Webservice_Applications_Controller extends Base_Controller {
 			$serviceData["isTest"] = $isTest;
 			$serviceData["accessToken"] = $accessToken;
 			$contents = webService::getCheckApplicationContents($serviceData);
+            $status = 0;
+            $error = "";
+
+            if(empty($contents)) {
+                $status = eServiceError::ContentNotFound;
+                $error = eServiceError::ContentNotFoundMessage;
+            }
 
 			return Response::json(array(
-				'status' => 0,
-				'error' => "",
+				'status' => $status,
+				'error' => $error,
 				'ThemeBackground' => $application->ThemeBackground,
 				'ThemeForeground' => $application->getThemeColor(),
 				'BannerActive' => $application->BannerActive,

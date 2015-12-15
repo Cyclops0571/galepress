@@ -1,16 +1,14 @@
 <?php
 
 /**
+ * @property int PageComponentPropertyID
+ * @property int PageComponentID
+ * @property string Name
+ * @property string Value
  * @property int ProcessTypeID
  * @property DateTime ProcessDate
  * @property DateTime DateCreated
  * @property int StatusID
- * @property  Value
- * @property string Value
- * @property int Value
- * @property  Name
- * @property mixed PageComponentID
- * @property  Name
  */
 class PageComponentProperty extends Eloquent {
 

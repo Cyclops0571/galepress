@@ -318,7 +318,6 @@ class Bundle {
 	public static function name($identifier)
 	{
 		list($bundle, $element) = static::parse($identifier);
-
 		return $bundle;
 	}
 
@@ -427,7 +426,7 @@ class Bundle {
 	 * @param  string  $bundle
 	 * @param  string  $option
 	 * @param  mixed   $default
-	 * @return mixed
+	 * @return callable
 	 */
 	public static function option($bundle, $option, $default = null)
 	{

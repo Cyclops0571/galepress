@@ -456,6 +456,11 @@ foreach ($languages as $currentLanguage) {
 //	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }
 
+// <editor-fold defaultstate="collapsed" desc="managements">
+Laravel\Routing\Route::get(__('route.managements_list')->get(), array('as' => 'managements_list', 'uses' => 'managements@list'));
+Laravel\Routing\Route::post(__('route.managements_save')->get(), array('as' => 'managements_save', 'uses' => 'managements@save'));
+// </editor-fold>
+
 
 Laravel\Routing\Route::post('/banners/imageupload', array('as' => 'banners_imageupload', 'uses' => 'banners@imageupload'));
 Laravel\Routing\Route::post('clients/clientregister', array('as' => 'clientsregistersave', 'uses' => 'clients@clientregister'));
@@ -534,6 +539,7 @@ Route::post('ws/v102/statistics', array('uses' => 'ws.v102.statistics@create'));
 // <editor-fold defaultstate="collapsed" desc="New Webservice Routes">
 Route::get('webservice/(:num)/applications/(:num)/version', array('uses' => 'webservice.applications@version'));
 Route::get('webservice/(:num)/applications/(:num)/detail', array('uses' => 'webservice.applications@detail'));
+Route::post('webservice/(:num)/applications/(:num)/detail', array('uses' => 'webservice.applications@detail'));
 Route::get('webservice/(:num)/applications/(:num)/categories', array('uses' => 'webservice.applications@categories'));
 Route::get('webservice/(:num)/applications/(:num)/categories/(:num)/detail', array('uses' => 'webservice.applications@categoryDetail'));
 

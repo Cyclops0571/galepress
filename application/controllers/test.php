@@ -60,6 +60,37 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+//        LaravelLang::writeToDB();
+        LaravelLang::Export();
+        echo date('Y-m-d H:i:s');
+        exit;
+
+        echo __('common.month_names');
+        $langFiles = array(
+            'clients',
+            'common',
+            'content',
+            'error',
+            'interactivity',
+            'javascriptlang',
+            'notification',
+            'pagination',
+            'route',
+            'validation',
+            'website',
+        );
+
+        $langs = array(
+            'en', 'tr', 'de', 'usa'
+        );
+
+        foreach($langFiles as $langFile) {
+            foreach($langs as $lang) {
+                Laravel\Lang::load('application', $lang, $langFile);
+            }
+        }
+        var_dump(Laravel\Lang::$lines);
+        exit;
         echo phpinfo();
         return;
         dd(dd3::make());
