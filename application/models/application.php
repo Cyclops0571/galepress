@@ -194,7 +194,7 @@ class Application extends Eloquent
     public function BannerPage()
     {
         if ($this->BannerCustomerActive) {
-            return $this->BannerCustomerUrl . "?ver=" . $this->Version;
+            return $this->BannerCustomerUrl;
         }
         return Config::get('custom.url') . "/banners/service_view/" . $this->ApplicationID . "?ver=" . $this->Version;
     }

@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * @property mixed UID
+ * @property int Type
+ * @property mixed Time
+ * @property bool|string RequestDate
+ * @property mixed Lat
+ * @property mixed Long
+ * @property mixed DeviceID
+ * @property int CustomerID
+ * @property int ApplicationID
+ * @property int ContentID
+ * @property int Page
+ * @property mixed Param5
+ * @property mixed Param6
+ * @property mixed Param7
+ */
 class Statistic extends Eloquent {
 
     public static $timestamps = false;

@@ -9,11 +9,11 @@ use Laravel\Database\Query\Grammars\SQLServer;
 
 /**
  * Class Query
- * @method int count($parameters)
- * @method int min($parameters)
- * @method int max($parameters)
- * @method int avg($parameters)
- * @method int sum($parameters)
+ * @method int count($parameters = null)
+ * @method int min($parameters = null)
+ * @method int max($parameters = null)
+ * @method int avg($parameters = null)
+ * @method int sum($parameters = null)
  * @package Laravel\Database
  */
 class Query {
