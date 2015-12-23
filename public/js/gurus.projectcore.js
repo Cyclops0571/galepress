@@ -1703,8 +1703,65 @@ var cAjax = new function () {
         }).responseText;
     };
 
+    this.doAsyncRequestNew = function (u, t, d, funcSuccess, funcError) {
+        cNotification.hide();
+        cNotification.loader();
+        if (t === undefined) {
+            t = 'POST';
+        }
+
+        if (d === undefined) {
+            d = {};
+        }
+
+        if (funcSuccess === undefined) {
+            funcSuccess = function (ret) {
+                if (typeof ret.successMsg !== "undefined") {
+                    cNotification.success(ret.successMsg);
+                } else {
+                    cNotification.success();
+                }
+                setTimeout(function () {
+                    cNotification.hide()
+                }, 3000);
+            }
+        }
+        if (funcError === undefined) {
+            funcError = function (ret) {
+                if (ret.errorMsg !== undefined) {
+                    cNotification.failure(ret.errorMsg);
+                } else {
+                    cNotification.failure();
+                }
+            };
+        }
+        $.ajax({
+            type: t,
+            url: u,
+            data: d,
+            success: function (ret) {
+                var retJson = JSON.parse(ret);
+                if (t === 'GET') {
+                    funcSuccess(retJson);
+                    return;
+                }
+
+                if (retJson.success) {
+                    funcSuccess(retJson);
+                } else {
+                    funcError(retJson);
+                }
+            },
+            error: funcError
+        });
+    };
+
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError, checkIfUserLoggedIn) {
         updatePageRequestTime();
+
+        if (typeof funcSuccess === "undefined") {
+            funcSuccess = cNotification.success();
+        }
 
         if (typeof funcError === "undefined") {
             funcError = function (ret) {
@@ -1734,7 +1791,6 @@ var cAjax = new function () {
                     cUser.go2Login();
                 } else {
                     if (ret.getValue("success") == "true") {
-
                         funcSuccess(ret);
                     } else {
                         funcError(ret);
@@ -2054,7 +2110,8 @@ var cTemplate = new function () {
             layout: 'fillwidth',
             fillMode: 'stretch',
             speed: Speed,
-            autoplay: Autoplay
+            autoplay: Autoplay,
+            loop: true
         });
         var gallery = new MSGallery('ms-gallery-1', slider);
         gallery.setup();

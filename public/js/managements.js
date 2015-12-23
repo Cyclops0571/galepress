@@ -1,31 +1,24 @@
 /**
  * Created by Serdar Saygili on 15.12.2015.
  */
+
 var cManagement = new function () {
-    var _self = this;
     this.objectName = "cManagement";
-
-    this.settingSave = function () {
-        cCommon.save('banners_setting', undefined, 'bannerForm');
-    };
-
-    this.createNewBanner = function (applicationID) {
-        cCommon.save(
-            this.objectName,
-            function () {
-                cNotification.success();
-                window.location = '/' + currentLanguage + '/' + route[_self.objectName] + '?applicationID=' + applicationID;
-            },
-            undefined,
-            "&newBanner=1"
-        );
-    };
 
     this.delete = function (id) {
         var url = "/banners/delete";
         var rowIDPrefix = "bannerIDSet_";
         cCommon.delete(url, id, rowIDPrefix);
     };
+
+    this.exportLanguagesFromDB = function () {
+        cAjax.doAsyncRequestNew('/' + currentLanguage + '/managements/export');
+    };
+
+    this.importLanguagesToDb = function () {
+        cAjax.doAsyncRequestNew('/' + currentLanguage + '/managements/import');
+    };
+
 
     //this.saveFromList = function (id) {
     //
@@ -42,3 +35,4 @@ var cManagement = new function () {
     //  }
     // };
 };
+jQuery('#adfasdf').css('backgroun-color', 'yellow');

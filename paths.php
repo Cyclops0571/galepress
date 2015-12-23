@@ -7,7 +7,6 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  * @link     http://laravel.com
  */
-
 /*
 |----------------------------------------------------------------
 | Application Environments
@@ -153,7 +152,7 @@ function set_path($path, $value)
 define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
-define("APP_VER", 56);
+define("APP_VER", 57);
 define("NORMAL_IMAGE_FILE", 1101);
 define("SMALL_IMAGE_FILE", 1102);
 define("PDF_FILE", 1001);

@@ -458,7 +458,9 @@ foreach ($languages as $currentLanguage) {
 
 // <editor-fold defaultstate="collapsed" desc="managements">
 Laravel\Routing\Route::get(__('route.managements_list')->get(), array('as' => 'managements_list', 'uses' => 'managements@list'));
-Laravel\Routing\Route::post(__('route.managements_save')->get(), array('as' => 'managements_save', 'uses' => 'managements@save'));
+Laravel\Routing\Route::get('managements/import', array('as' => 'managements_importlanguages', 'uses' => 'managements@importlanguages'));
+Laravel\Routing\Route::post('managements/import', array('as' => 'managements_importlanguages', 'uses' => 'managements@importlanguages'));
+Laravel\Routing\Route::post('managements/export', array('as' => 'managements_exportlanguages', 'uses' => 'managements@exportlanguages'));
 // </editor-fold>
 
 

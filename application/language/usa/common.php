@@ -633,4 +633,8 @@ return array(
 	'active' => 'Active',
 	'passive' => 'Passive',
 	'price' => 'Price',
+
+    'management' => 'Server Management',
+    'import_languages' => 'Import Languages To Database',
+    'export_languages' => 'Export Languages From Database',
 );

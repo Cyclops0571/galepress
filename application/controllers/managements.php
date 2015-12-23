@@ -13,20 +13,30 @@ class Managements_Controller extends Base_Controller {
     {
         parent::__construct();
         $currentUser = Auth::User();
-        if($currentUser != eUserTypes::Manager) {
-            return Response::error(404);
+        if (!$currentUser || $currentUser->UserTypeID != eUserTypes::Manager) {
+            echo Response::error(404);
+            exit;
         }
     }
 
     public function get_list() {
+        $customerSizes = Customer::CustomerFileSize();
+//        dd($customerSizes);
         $data = array();
+        $data['rows'] = $customerSizes;
         return View::make(Laravel\Request::$route->controller . '.' . Str::lower($this->table) . 'list', $data);
     }
 
-    public function post_save() {
-        echo "zzzzz";
-        var_dump($_POST);
-        exit;
+    public function post_importlanguages()
+    {
+        LaravelLang::Import();
+        return ajaxResponse::success("Import işlemi başarıyla tamamlandı.");
+    }
+
+    public function post_exportlanguages()
+    {
+        LaravelLang::Export();
+        return ajaxResponse::success("Export işlemi başarıyla tamamlandı.");
     }
 
 

@@ -20,14 +20,14 @@ class dd1
         return new static(5);
     }
 
-    public static function who()
-    {
-        echo __CLASS__;
-    }
-
     public static function test()
     {
         static::who();
+    }
+
+    public static function who()
+    {
+        echo __CLASS__;
     }
 }
 
@@ -60,8 +60,35 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-//        LaravelLang::writeToDB();
-        LaravelLang::Export();
+        $command = 'du -ha ' . path('public') . 'files/ --max-depth=1| sort -hr';
+        $folderStructure = shell_exec($command);
+        $folders = explode(PHP_EOL, $folderStructure);
+        $folderSizes = array();
+        foreach ($folders as $folder) {
+            $list = explode("\t", $folder);
+            if (count($list) == 2) {
+                if (strpos($list[1], "customer_")) {
+                    $folderSizes[$list[1]] = $list[0];
+                }
+            }
+        }
+
+        dd($folderSizes);
+        exit;
+        var_dump($z1);
+        echo Laravel\Request::env();
+        exit;
+        echo "aaaa";
+        try {
+
+            $z1 = shell_exec('ls');
+            var_dump($z1);
+            $zz = shell_exec(' du -ha /home/admin/domains/galepress.com/public_html/public/files/ --max-depth=1| sort -hr');
+            var_dump($zz);
+            exit;
+        } catch (Exception $e) {
+            dd($e);
+        }
         echo date('Y-m-d H:i:s');
         exit;
 
@@ -84,8 +111,8 @@ class Test_Controller extends Base_Controller
             'en', 'tr', 'de', 'usa'
         );
 
-        foreach($langFiles as $langFile) {
-            foreach($langs as $lang) {
+        foreach ($langFiles as $langFile) {
+            foreach ($langs as $lang) {
                 Laravel\Lang::load('application', $lang, $langFile);
             }
         }

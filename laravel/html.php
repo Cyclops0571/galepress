@@ -20,25 +20,12 @@ class HTML {
 	 * Registers a custom macro.
 	 *
 	 * @param  string   $name
-	 * @param  Closure  $macro
+	 * @param  Mixed  $macro
 	 * @return void
 	 */
 	public static function macro($name, $macro)
 	{
 		static::$macros[$name] = $macro;
-	}
-
-	/**
-	 * Convert HTML characters to entities.
-	 *
-	 * The encoding specified in the application configuration file will be used.
-	 *
-	 * @param  string  $value
-	 * @return string
-	 */
-	public static function entities($value)
-	{
-		return htmlentities($value, ENT_QUOTES, static::encoding(), false);
 	}
 
 	/**
@@ -50,6 +37,16 @@ class HTML {
 	public static function decode($value)
 	{
 		return html_entity_decode($value, ENT_QUOTES, static::encoding());
+	}
+
+	/**
+	 * Get the appliction.encoding without needing to request it from Config::get() each time.
+	 *
+	 * @return string
+	 */
+	protected static function encoding()
+	{
+		return static::$encoding ?: static::$encoding = Config::get('application.encoding');
 	}
 
 	/**
@@ -85,6 +82,45 @@ class HTML {
 		$url = URL::to_asset($url);
 
 		return '<script src="'.$url.'"'.static::attributes($attributes).'></script>'.PHP_EOL;
+	}
+
+	/**
+	 * Build a list of HTML attributes from an array.
+	 *
+	 * @param  array   $attributes
+	 * @return string
+	 */
+	public static function attributes($attributes)
+	{
+		$html = array();
+
+		foreach ((array) $attributes as $key => $value)
+		{
+			// For numeric keys, we will assume that the key and the value are the
+			// same, as this will convert HTML attributes such as "required" that
+			// may be specified as required="required", etc.
+			if (is_numeric($key)) $key = $value;
+
+			if ( ! is_null($value))
+			{
+				$html[] = $key.'="'.static::entities($value).'"';
+			}
+		}
+
+		return (count($html) > 0) ? ' '.implode(' ', $html) : '';
+	}
+
+	/**
+	 * Convert HTML characters to entities.
+	 *
+	 * The encoding specified in the application configuration file will be used.
+	 *
+	 * @param  string  $value
+	 * @return string
+	 */
+	public static function entities($value)
+	{
+		return htmlentities($value, ENT_QUOTES, static::encoding(), false);
 	}
 
 	/**
@@ -128,6 +164,19 @@ class HTML {
 	}
 
 	/**
+	 * Generate a HTTPS HTML link.
+	 *
+	 * @param  string  $url
+	 * @param  string  $title
+	 * @param  array   $attributes
+	 * @return string
+	 */
+	public static function link_to_secure($url, $title = null, $attributes = array())
+	{
+		return static::link($url, $title, $attributes, true);
+	}
+
+	/**
 	 * Generate a HTML link.
 	 *
 	 * <code>
@@ -154,16 +203,16 @@ class HTML {
 	}
 
 	/**
-	 * Generate a HTTPS HTML link.
+	 * Generate an HTTPS HTML link to an asset.
 	 *
 	 * @param  string  $url
 	 * @param  string  $title
 	 * @param  array   $attributes
 	 * @return string
 	 */
-	public static function link_to_secure($url, $title = null, $attributes = array())
+	public static function link_to_secure_asset($url, $title = null, $attributes = array())
 	{
-		return static::link($url, $title, $attributes, true);
+		return static::link_to_asset($url, $title, $attributes, true);
 	}
 
 	/**
@@ -180,23 +229,10 @@ class HTML {
 	public static function link_to_asset($url, $title = null, $attributes = array(), $https = null)
 	{
 		$url = URL::to_asset($url, $https);
-		
+
 		if (is_null($title)) $title = $url;
 
 		return '<a href="'.$url.'"'.static::attributes($attributes).'>'.static::entities($title).'</a>';
-	}
-
-	/**
-	 * Generate an HTTPS HTML link to an asset.
-	 *
-	 * @param  string  $url
-	 * @param  string  $title
-	 * @param  array   $attributes
-	 * @return string
-	 */
-	public static function link_to_secure_asset($url, $title = null, $attributes = array())
-	{
-		return static::link_to_asset($url, $title, $attributes, true);
 	}
 
 	/**
@@ -293,6 +329,39 @@ class HTML {
 	}
 
 	/**
+	 * Obfuscate a string to prevent spam-bots from sniffing it.
+	 *
+	 * @param  string  $value
+	 * @return string
+	 */
+	protected static function obfuscate($value)
+	{
+		$safe = '';
+
+		foreach (str_split($value) as $letter)
+		{
+			// To properly obfuscate the value, we will randomly convert each
+			// letter to its entity or hexadecimal representation, keeping a
+			// bot from sniffing the randomly obfuscated letters.
+			switch (rand(1, 3))
+			{
+				case 1:
+					$safe .= '&#'.ord($letter).';';
+					break;
+
+				case 2:
+					$safe .= '&#x'.dechex(ord($letter)).';';
+					break;
+
+				case 3:
+					$safe .= $letter;
+			}
+		}
+
+		return $safe;
+	}
+
+	/**
 	 * Generate an HTML image element.
 	 *
 	 * @param  string  $url
@@ -317,18 +386,6 @@ class HTML {
 	public static function ol($list, $attributes = array())
 	{
 		return static::listing('ol', $list, $attributes);
-	}
-
-	/**
-	 * Generate an un-ordered list of items.
-	 *
-	 * @param  array   $list
-	 * @param  array   $attributes
-	 * @return string
-	 */
-	public static function ul($list, $attributes = array())
-	{
-		return static::listing('ul', $list, $attributes);
 	}
 
 	/**
@@ -371,6 +428,18 @@ class HTML {
 	}
 
 	/**
+	 * Generate an un-ordered list of items.
+	 *
+	 * @param  array   $list
+	 * @param  array   $attributes
+	 * @return string
+	 */
+	public static function ul($list, $attributes = array())
+	{
+		return static::listing('ul', $list, $attributes);
+	}
+
+	/**
 	 * Generate a definition list.
 	 *
 	 * @param  array   $list
@@ -390,75 +459,6 @@ class HTML {
 		}
 
 		return '<dl'.static::attributes($attributes).'>'.$html.'</dl>';
-	}
-
-	/**
-	 * Build a list of HTML attributes from an array.
-	 *
-	 * @param  array   $attributes
-	 * @return string
-	 */
-	public static function attributes($attributes)
-	{
-		$html = array();
-
-		foreach ((array) $attributes as $key => $value)
-		{
-			// For numeric keys, we will assume that the key and the value are the
-			// same, as this will convert HTML attributes such as "required" that
-			// may be specified as required="required", etc.
-			if (is_numeric($key)) $key = $value;
-
-			if ( ! is_null($value))
-			{
-				$html[] = $key.'="'.static::entities($value).'"';
-			}
-		}
-
-		return (count($html) > 0) ? ' '.implode(' ', $html) : '';
-	}
-
-	/**
-	 * Obfuscate a string to prevent spam-bots from sniffing it.
-	 *
-	 * @param  string  $value
-	 * @return string
-	 */
-	protected static function obfuscate($value)
-	{
-		$safe = '';
-
-		foreach (str_split($value) as $letter)
-		{
-			// To properly obfuscate the value, we will randomly convert each
-			// letter to its entity or hexadecimal representation, keeping a
-			// bot from sniffing the randomly obfuscated letters.
-			switch (rand(1, 3))
-			{
-				case 1:
-					$safe .= '&#'.ord($letter).';';
-					break;
-
-				case 2:
-					$safe .= '&#x'.dechex(ord($letter)).';';
-					break;
-
-				case 3:
-					$safe .= $letter;
-			}
-		}
-
-		return $safe;
-	}
-
-	/**
-	 * Get the appliction.encoding without needing to request it from Config::get() each time.
-	 *
-	 * @return string
-	 */
-	protected static function encoding()
-	{
-		return static::$encoding ?: static::$encoding = Config::get('application.encoding');
 	}
 
 	/**

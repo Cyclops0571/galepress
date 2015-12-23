@@ -628,4 +628,8 @@ return array(
 	'active' => 'Aktif',
 	'passive' => 'Pasif',
 	'price' => 'Fiyat',
+
+    'management' => 'Server Yönetimi',
+    'import_languages' => 'Dilleri DBye yazdir',
+    'export_languages' => 'DBdeki dillerin ciktisini al',
 );

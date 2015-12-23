@@ -25,6 +25,34 @@ class Auth {
 	public static $registrar = array();
 
 	/**
+	 * Register a third-party authentication driver.
+	 *
+	 * @param  string   $driver
+	 * @param  Closure  $resolver
+	 * @return void
+	 */
+	public static function extend($driver, Closure $resolver)
+	{
+		static::$registrar[$driver] = $resolver;
+	}
+
+	/**
+	 * Magic Method for calling the methods on the default cache driver.
+	 *
+	 * <code>
+	 *		// Call the "user" method on the default auth driver
+	 *		$user = Auth::user();
+	 *
+	 *		// Call the "check" method on the default auth driver
+	 *		Auth::check();
+	 * </code>
+	 */
+	public static function __callStatic($method, $parameters)
+	{
+		return call_user_func_array(array(static::driver(), $method), $parameters);
+	}
+
+	/**
 	 * Get an authentication driver instance.
 	 *
 	 * @param  string  $driver
@@ -69,37 +97,4 @@ class Auth {
 				throw new \Exception("Auth driver {$driver} is not supported.");
 		}
 	}
-
-	/**
-	 * Register a third-party authentication driver.
-	 *
-	 * @param  string   $driver
-	 * @param  Closure  $resolver
-	 * @return void
-	 */
-	public static function extend($driver, Closure $resolver)
-	{
-		static::$registrar[$driver] = $resolver;
-	}
-
-	/**
-	 * Magic Method for calling the methods on the default cache driver.
-	 *
-	 * <code>
-	 *		// Call the "user" method on the default auth driver
-	 *		$user = Auth::user();
-	 *
-	 *		// Call the "check" method on the default auth driver
-	 *		Auth::check();
-	 * </code>
-	 */
-	public static function __callStatic($method, $parameters)
-	{
-		return call_user_func_array(array(static::driver(), $method), $parameters);
-	}
-
-    public static function deneme111() {
-        echo 'asdfasdfadsf';
-    }
-
 }

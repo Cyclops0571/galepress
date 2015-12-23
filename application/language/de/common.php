@@ -637,4 +637,8 @@ return array(
 	'active' => 'Activ',
 	'passive' => 'Passiv',
 	'price' => 'Kurs',
+
+    'management' => 'Server Management',
+    'import_languages' => 'Dilleri DBye yazdir',
+    'export_languages' => 'DBdeki dillerin ciktisini al',
 );

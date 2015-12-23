@@ -395,8 +395,8 @@ var sCommon = new function () {
     this.save = function (url, fSuccess, formID) {
 	if (typeof fSuccess !== 'function') {
 	    fSuccess = function (response) {
-		if(typeof response !== 'undefined' && typeof response.succesMsg !== 'undefined') {
-		    sNotification.success(response.succesMsg);
+            if (typeof response !== 'undefined' && typeof response.successMsg !== 'undefined') {
+                sNotification.success(response.successMsg);
 		} else {
 		    sNotification.success();
 		}

@@ -31,8 +31,10 @@ class LaravelLang extends Eloquent
         'en', 'tr', 'de', 'usa'
     );
 
-
-    public static function writeToDB()
+    /**
+     * Imports Laravel Language Files To DB
+     */
+    public static function Import()
     {
         set_time_limit(0);
 
@@ -85,8 +87,12 @@ class LaravelLang extends Eloquent
         return $result;
     }
 
+    /**
+     * Exports|Creates Laravel Language Files From Database
+     */
     public static function Export()
     {
+        set_time_limit(0);
         $starter = "<?php \n return array(";
         $ender = "\n);";
         $path = path('public');

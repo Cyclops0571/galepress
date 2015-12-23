@@ -65,6 +65,13 @@ class webService
                 'CategoryName' => $r->Name
             ));
         }
+        if($applicationID == 10 || $applicationID == 146) {
+            foreach($categories as &$category) {
+                if($category["CategoryName"] == 'Genel') {
+                    $category["CategoryName"] = "General";
+                }
+            }
+        }
         return $categories;
     }
 

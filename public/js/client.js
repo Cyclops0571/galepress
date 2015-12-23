@@ -23,9 +23,9 @@ var sClient = new function () {
 	}
 
 	var fsuccess = function (response) {
-	    if (typeof response !== "undefined" && response.succesMsg !== "undefined") {
+        if (typeof response !== "undefined" && response.successMsg !== "undefined") {
 		sNotification.success();
-		document.location.href = response.succesMsg;
+            document.location.href = response.successMsg;
 	    }
 
 	};
@@ -45,10 +45,10 @@ var sClient = new function () {
 	    return false;
 	}
 	var fsuccess = function (response) {
-	    if (typeof response !== "undefined" && response.succesMsg !== "undefined") {
+        if (typeof response !== "undefined" && response.successMsg !== "undefined") {
 		sNotification.success();
 		//if opereation success go to login
-		document.location.href = response.succesMsg;
+            document.location.href = response.successMsg;
 	    }
 
 	};
