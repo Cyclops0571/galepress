@@ -1,6 +1,6 @@
 <?php
 
 return array(
-    'select' => 'Wählen...',
-    'no_results' => 'Keine Ergebnisse gefunden.',
+    'select' => 'Ihre Auswahl',
+    'no_results' => 'Es konnten keine Ergebnisse gefunden werden.',
 );

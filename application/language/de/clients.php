@@ -1,60 +1,59 @@
 <?php
 
 return array(
-    "invalid_excel_file_two_rows" => "Ungültige Excel-Datei. (Es MOST mindestens zwei Reihen sein)",
-    "invalid_excel_file_seven_columns" => "Ungültige Excel-Datei. (Es meisten sieben Spalten sein.)",
-    "invalid_application_id_at_row" => "Unauthorized Anwendungs-ID in Reihe:",
-    "inserted_mobile_user_count" => "Eingefügt Benutzeranzahl: ",
-    "updated_mobile_user_count" => "Aktualisiert Benutzeranzahl: ",
-    "username_must_be_unique" => "Benutzername bereits registriert.",
-    "email_must_be_unique" => "E-Mail ist bereits registriert.",
-    "user_not_found" => "A registered user was not found.",
-    "client_application_invalid" => "Klient und Anwendung nicht übereinstimmt",
+    "invalid_excel_file_two_rows" => "Ungültige Excel-Datei (die Liste muß mindestens 2 Zeilen enthalten).",
+    "invalid_excel_file_seven_columns" => "Ungültige Excel-Datei (die Liste muß genau 7 Spalten enthalten).",
+    "invalid_application_id_at_row" => "Sie verwenden eine unberchtigte App-ID in Zeile:",
+    "inserted_mobile_user_count" => "Hinzugefügte Benutzer: ",
+    "updated_mobile_user_count" => "Aktualisierte Benutzer: ",
+    "username_must_be_unique" => "Der Benutzername existiert bereits.",
+    "email_must_be_unique" => "Die E-mail ist bereits registriert.",
+    "user_not_found" => "Der registrierte Benutzer konnte nicht gefunden werden.",
+    "client_application_invalid" => "Der Benutzer und die App stimmen nicht überein",
     "invalid_password" => "Ungültiges Passwort",
-    'password_does_not_match' => 'Kennwort nicht Kennwort bestätigen lassen.',
+    'password_does_not_match' => 'Die Passwörter stimmen nicht überein.',
     'forgot_password' => 'Passwort vergessen',
     'personol_info' => 'Persönliche Informationen',
-    'reset_password' => 'Password Reset Seite',
-    'registered_email_subject' => ':Application Anwendungsregistrierung',
+    'reset_password' => 'Passwort zurücksetzen',
+    'registered_email_subject' => ':App-Registrierung',
     'registered_email_message' => "".
-							    "Ehrenwert :firstname :lastname, \n\n".
-							    "Ihre Anmeldung für: :Application Anwendung erfolgreich abgeschlossen.\n" .
-							    "Ihr Benutzername :username, \n\n" .
-							    "Ihr Passwort :pass in der geänderten Fassung. \n\n".
-							    "Grüße, \n".
-							    "Galepress",
-    
-    'login_email_subject' => 'Email zum Zurücksetzen  des Passworts für :Application',
-    'login_email_message' => "".
-							    "Ihr Benutzername :username, \n\n" .
-							    "Sie können auf den folgenden Link klicken, um Ihr Passwort zurückzusetzen fur :Application Anwendung. Wenn Sie einen solchen Antrag haben, ignorieren Sie bitte diese E-Mail, die Sie.\n".
-							    ":url\n\n".
-							    "Grüße, \n".
-							    "Galepress",
-    'login_resetpassword_email_subject' => ':Application Application password resetting e-mail',
-    'login_resetpassword_email_message' => "".
-							    "Ehrenwert :firstname :lastname, \n\n".
-							    "Ihr :Application Anwendung Passwort geändert \n" .
-							    "Ihr Benutzername :username, \n\n" .
-							    "Ihr Passwort :pass in der geänderten Fassung. \n\n".
-							    "Grüße, \n".
-							    "Galepress",
-    'selected_content_name' => 'ausgewählte Inhalte',
-    'selectable_content_name' => 'Wählbare Inhalt',
-    'week_subscription' => 'Wöchentliche Abonnement',
-    'month_subscription' => 'Monatliches Abo',
-    'year_subscription' => 'Jahresabo',
-    'active_info_week_subscription' => 'Uygulamanızda paralı haftalık üyelik oluşturmak için bu özelliği seçmelisiniz.',
-    'active_info_month_subscription' => 'Uygulamanızda paralı aylık üyelik oluşturmak için bu özelliği seçmelisiniz.',
-    'active_info_year_subscription' => 'Uygulamanızda paralı yıllık üyelik oluşturmak için bu özelliği seçmelisiniz.',
-    'price_info_week_subscription' => 'Uygulamanızda haftalık üyelik ücreti.',
-    'price_info_month_subscription' => 'Uygulamanızda aylık üyelik ücreti.',
-    'price_info_year_subscription' => 'Uygulamanızda yıllık üyelik ücreti.',
-    'identifier_info_week_subscription' => 'Haftalık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
-    'identifier_info_month_subscription' => 'Aylık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
-    'identifier_info_year_subscription' => 'Yıllık üyeliği aktifleştirmek için bu kodu Appstore ve Playstore\'a girmeniz gerekiyor.',
-    'identifier' => 'Tanımlayıcı',
-    'drop_contents_here' => 'Drop Ihre Inhalte hier',
-    
-);
+        "Sehr geehrte(r) :firstname :lastname, \n\n".
+        "Ihre App Anmeldung ist abgeschlossen.\n" .
+        "Ihr Benutzername :username, \n\n" .
+        "Ihr Passwort :pass. \n\n".
+        " \n".
+        "MMD-Team",
 
+    'login_email_subject' => 'Email zum Zurücksetzen des Passworts für :Application App',
+    'login_email_message' => "".
+        "Ihr Benutzername :username, \n\n" .
+        "Klicken Sie auf folgenden Link, um Ihr :Application App Passwort zurückzusetzen. Wenn Sie Ihr Passwort nicht zurücksetzen möchten, ignorieren Sie bitte diese E-mail.\n".
+        ":url\n\n".
+        " \n".
+        "Ihr MMD Team",
+    'login_resetpassword_email_subject' => ':Application App Passwort zurücksetzen E-mail',
+    'login_resetpassword_email_message' => "".
+        "Sehr geehrte(r)  :firstname :lastname, \n\n".
+        "Ihr :Application App Passwort wurde geändert. \n" .
+        "Ihr Benutzername :username, \n\n" .
+        "Ihr Passwort :pass \n\n".
+        " \n".
+        "Ihr MMD Team",
+    'selected_content_name' => 'Ausgewählte Inhalte',
+    'selectable_content_name' => 'Wählbare Inhalt',
+    'week_subscription' => 'Wochen-Abo',
+    'month_subscription' => 'Monats-Abo',
+    'year_subscription' => 'Jahres-Abo',
+    'active_info_week_subscription' => 'Wählen Sie diese Option, wenn Sie kostenpflichtige Wochen-Abos anbieten möchten.',
+    'active_info_month_subscription' => 'Wählen Sie diese Option, wenn Sie kostenpflichtige Monats-Abos anbieten möchten.',
+    'active_info_year_subscription' => 'Wählen Sie diese Option, wenn Sie kostenpflichtige Jahres-Abos anbieten möchten.',
+    'price_info_week_subscription' => 'Preis des Wochen-Abos.',
+    'price_info_month_subscription' => 'Preis des Monats-Abos.',
+    'price_info_year_subscription' => 'Preis des Jahres-Abos.',
+    'identifier_info_week_subscription' => 'Für die Aktivierung des Wochen-Abos geben Sie bitte folgenden Code im Appstore und Playstore ein.',
+    'identifier_info_month_subscription' => 'Für die Aktivierung des Monats-Abos geben Sie bitte folgenden Code im Appstore und Playstore ein.',
+    'identifier_info_year_subscription' => 'Für die Aktivierung des Jahres-Abos geben Sie bitte folgenden Code im Appstore und Playstore ein. ',
+    'identifier' => 'Kennung',
+    'drop_contents_here' => 'Ziehen Sie Ihre Inhalte hier hin',
+
+);

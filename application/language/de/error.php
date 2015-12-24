@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 return array(
 
-	'unauthorized_user_attempt' => 'Nicht autorisierter Benutzer versucht',
-	'auth_interactivity' => 'WARNUNG Sie nicht die erforderlichen Rechte um die interaktiven PDFs nutzen!',
-	'auth_max_pdf' => 'WARNUNG max ist Ihre pdf SA abgelaufen ist!',
-	'interactivity_conflict' => 'Interactive-Datei erstellt wird, versuchen Sie es später noch einmal!'
+    'unauthorized_user_attempt' => 'Unberechtigter Benutzer-Login',
+    'auth_interactivity' => 'WARNUNG...Sie haben nicht die erforderlichen Rechte, um den interaktiven Editor zu verwenden!',
+    'auth_max_pdf' => 'WARNUNG...Sie haben die maximale Anzahl an PDF Dokumenten erreicht!',
+    'interactivity_conflict' => 'Interaktive Datei wird erstellt; versuchen Sie es später noch einmal!'
 );
