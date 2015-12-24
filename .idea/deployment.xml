@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Galetest" overwriteAll="false" traceLevel="DETAILS" filePermissions="509" folderPermissions="493">
+  <component name="PublishConfigData" serverName="Galetest" overwriteAll="false" traceLevel="DETAILS" uploadOnCheckin="c31d5c7b-c23f-4e62-8665-4dad7cdbdcd7" filePermissions="509" folderPermissions="493">
     <serverData>
       <paths name="GalepressProduction">
         <serverdata>
@@ -45,5 +45,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="GalepressProduction" />
   </component>
 </project>
