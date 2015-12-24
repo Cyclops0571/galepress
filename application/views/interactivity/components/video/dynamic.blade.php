@@ -64,6 +64,23 @@ else {
 	.vjs-control-bar{
 		position: fixed !important;
 	}
+	/*Video JS Css*/
+    .vjs-default-skin .vjs-big-play-button {
+      left: 50%;
+      margin-top: -22px;
+      margin-left: -22px;
+      top: 50%;
+      font-size: 2em;
+      width: 2em;
+      height: 2em;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+    }
+    .vjs-default-skin .vjs-big-play-button:before {
+      line-height: 1.5em;
+    }
+
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function($)
