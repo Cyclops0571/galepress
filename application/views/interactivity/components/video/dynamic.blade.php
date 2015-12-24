@@ -56,6 +56,7 @@ else {
 	}
 	body{
 		margin: 0 !important;
+
 	}
 	.video-js{
 		position: fixed !important;
