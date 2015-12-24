@@ -15,7 +15,7 @@ class PaymentUser_Task
             );
             Common::sendErrorMail($msg);
         }
-    }
+    } 
 
     public function getPayment()
     {
