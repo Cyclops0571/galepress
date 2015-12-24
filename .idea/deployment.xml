@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="Galetest" overwriteAll="false" traceLevel="DETAILS" filePermissions="509" folderPermissions="493">
+    <serverData>
+      <paths name="GalepressProduction">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/public/files" />
+            <excludedPath path="/storage" />
+            <excludedPath path="/public/files" />
+            <excludedPath path="/lock" />
+            <excludedPath path="/_cgi-bin" />
+            <excludedPath path="/public/.htaccess" />
+            <excludedPath local="true" path="$PROJECT_DIR$/lock" />
+            <excludedPath path="/laravel" />
+            <excludedPath path="/php-amqplib" />
+            <excludedPath local="true" path="$PROJECT_DIR$/laravel" />
+            <excludedPath local="true" path="$PROJECT_DIR$/php-amqplib" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Galetest">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/public/files" />
+            <excludedPath local="true" path="$PROJECT_DIR$/lock" />
+            <excludedPath path="/storage" />
+            <excludedPath path="/public/files" />
+            <excludedPath path="/lock" />
+            <excludedPath path="/_cgi-bin" />
+            <excludedPath path="/public/.htaccess" />
+            <excludedPath path="/laravel" />
+            <excludedPath path="/php-amqplib" />
+            <excludedPath local="true" path="$PROJECT_DIR$/php-amqplib" />
+            <excludedPath local="true" path="$PROJECT_DIR$/laravel" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/flipbook" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/ticket" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
