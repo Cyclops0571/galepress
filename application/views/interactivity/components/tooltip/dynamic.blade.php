@@ -111,7 +111,7 @@ $rgb = array($r, $g, $b);
 		overflow-x: hidden;
 		z-index:0;
 		background: rgba({{$rgb[0]}},{{$rgb[1]}},{{$rgb[2]}},{{ $boxopacity }});
-		text-align:center;
+		/*text-align:center;*/
 	}
 	#myScrollableDiv > .myContent:first-child{
 		padding: 5% 14% 9% 7%;

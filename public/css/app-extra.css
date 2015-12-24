@@ -25,6 +25,10 @@
 	position:relative;
 }
 
+#page div.modal-component iframe, #page div.tooltip-trigger iframe body{
+   overflow: hidden;
+}
+
 .properties .coordinates {
   margin-top:0px !important;
 }
