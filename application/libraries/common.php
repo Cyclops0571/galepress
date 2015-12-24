@@ -92,37 +92,6 @@ class Common
         return false;
     }
 
-    public static function CheckContentPasswordOwnership($contentPasswordID)
-    {
-        $currentUser = Auth::User();
-
-        if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
-            $count = DB::table('Customer AS c')
-                ->join('Application AS a', function ($join) {
-                    $join->on('a.CustomerID', '=', 'c.CustomerID');
-                    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->join('Content AS cn', function ($join) {
-                    $join->on('cn.ApplicationID', '=', 'a.ApplicationID');
-                    $join->on('cn.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->join('ContentPassword AS cp', function ($join) use ($contentPasswordID) {
-                    $join->on('cp.ContentPasswordID', '=', DB::raw($contentPasswordID));
-                    $join->on('cp.ContentID', '=', 'cn.ContentID');
-                    $join->on('cp.StatusID', '=', DB::raw(eStatus::Active));
-                })
-                ->where('c.CustomerID', '=', $currentUser->CustomerID)
-                ->where('c.StatusID', '=', eStatus::Active)
-                ->count();
-            if ($count > 0) {
-                return true;
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public static function CheckApplicationOwnership($applicationID)
     {
         $currentUser = Auth::User();
@@ -154,24 +123,30 @@ class Common
         return false;
     }
 
-    public static function CheckContentOwnership($contentID)
+    public static function CheckContentPasswordOwnership($contentPasswordID)
     {
         $currentUser = Auth::User();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
-            $o = Content::find($contentID);
-            if ($o) {
-                if ((int)$o->StatusID == eStatus::Active) {
-                    $a = $o->Application();
-                    if ((int)$a->StatusID == eStatus::Active) {
-                        $c = $a->Customer();
-                        if ((int)$c->StatusID == eStatus::Active) {
-                            if ((int)$currentUser->CustomerID == (int)$c->CustomerID) {
-                                return true;
-                            }
-                        }
-                    }
-                }
+            $count = DB::table('Customer AS c')
+                ->join('Application AS a', function ($join) {
+                    $join->on('a.CustomerID', '=', 'c.CustomerID');
+                    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+                })
+                ->join('Content AS cn', function ($join) {
+                    $join->on('cn.ApplicationID', '=', 'a.ApplicationID');
+                    $join->on('cn.StatusID', '=', DB::raw(eStatus::Active));
+                })
+                ->join('ContentPassword AS cp', function ($join) use ($contentPasswordID) {
+                    $join->on('cp.ContentPasswordID', '=', DB::raw($contentPasswordID));
+                    $join->on('cp.ContentID', '=', 'cn.ContentID');
+                    $join->on('cp.StatusID', '=', DB::raw(eStatus::Active));
+                })
+                ->where('c.CustomerID', '=', $currentUser->CustomerID)
+                ->where('c.StatusID', '=', eStatus::Active)
+                ->count();
+            if ($count > 0) {
+                return true;
             }
             return false;
         } else {
@@ -601,7 +576,7 @@ class Common
 
     /**
      * Sends Error Email to custom.admin_email_set and Logs it
-     * @param error $msg
+     * @param string $msg
      */
     public static function sendErrorMail($msg)
     {
@@ -771,6 +746,18 @@ class Common
         return date($format, $timestamp);
     }
 
+    public static function dateWrite($date, $useLocal = true)
+    {
+        if (empty($date)) {
+            $date = date("Y-m-d");
+        }
+        $ret = date('Y-m-d H:i:s', strtotime($date));
+        if ($useLocal) {
+            $ret = Common::convert2Localzone($ret, true);
+        }
+        return $ret;
+    }
+
     public static function convert2Localzone($d, $write = false)
     {
         //2009-07-14 04:27:16
@@ -825,39 +812,6 @@ class Common
             //var_dump($d);
         }
         return $d;
-    }
-
-    public static function dateRead($date, $format, $useLocal = true)
-    {
-        if (empty($date)) {
-            $date = date("Y-m-d");
-        }
-        $ret = "";
-        if ($useLocal) {
-            $date = Common::convert2Localzone($date);
-        }
-        if (Laravel\Config::get('application.language') == 'usa') {
-            if ($format == 'd.m.Y') {
-                $format = 'm/d/Y';
-            } else if ($format == 'd.m.Y H:i') {
-                $format = 'm/d/Y H:i';
-            } else if ($format == 'd.m.Y H:i:s') {
-                $format = 'm/d/Y H:i:s';
-            }
-        }
-        return date($format, strtotime($date));
-    }
-
-    public static function dateWrite($date, $useLocal = true)
-    {
-        if (empty($date)) {
-            $date = date("Y-m-d");
-        }
-        $ret = date('Y-m-d H:i:s', strtotime($date));
-        if ($useLocal) {
-            $ret = Common::convert2Localzone($ret, true);
-        }
-        return $ret;
     }
 
     public static function getFormattedData($data, $type)
@@ -928,6 +882,27 @@ class Common
         return (substr($haystack, 0, $length) === $needle);
     }
 
+    public static function dateRead($date, $format, $useLocal = true)
+    {
+        if (empty($date)) {
+            $date = date("Y-m-d");
+        }
+        $ret = "";
+        if ($useLocal) {
+            $date = Common::convert2Localzone($date);
+        }
+        if (Laravel\Config::get('application.language') == 'usa') {
+            if ($format == 'd.m.Y') {
+                $format = 'm/d/Y';
+            } else if ($format == 'd.m.Y H:i') {
+                $format = 'm/d/Y H:i';
+            } else if ($format == 'd.m.Y H:i:s') {
+                $format = 'm/d/Y H:i:s';
+            }
+        }
+        return date($format, strtotime($date));
+    }
+
     public static function endsWith($haystack, $needle)
     {
         $length = strlen($needle);
@@ -996,6 +971,31 @@ class Common
             ->get($column);
 
         return $rs;
+    }
+
+    public static function CheckContentOwnership($contentID)
+    {
+        $currentUser = Auth::User();
+
+        if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
+            $o = Content::find($contentID);
+            if ($o) {
+                if ((int)$o->StatusID == eStatus::Active) {
+                    $a = $o->Application();
+                    if ((int)$a->StatusID == eStatus::Active) {
+                        $c = $a->Customer();
+                        if ((int)$c->StatusID == eStatus::Active) {
+                            if ((int)$currentUser->CustomerID == (int)$c->CustomerID) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public static function toExcel($twoDimensionalArray, $toFile)
