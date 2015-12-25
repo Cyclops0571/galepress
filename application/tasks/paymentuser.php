@@ -25,8 +25,9 @@ class PaymentUser_Task
         foreach ($paymentAccounts as $paymentAccount) {
             $errorReason = "";
             //eger accounttan 1 son bir ay icinde odeme alinmis ise odeme alma.
-            $lastPaymentFlag = $paymentAccount->last_payment_day < date("Y-m-d", strtotime("-1 month -1 day"));
+            $lastPaymentFlag = $paymentAccount->last_payment_day < date("Y-m-d", strtotime("-1 month +1 day"));
             if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d") && $lastPaymentFlag) {
+                sleep(60);
                 $paymentResult = FALSE;
                 // <editor-fold defaultstate="collapsed" desc="first bin check">
                 $binCheckData = array();
@@ -131,17 +132,15 @@ class PaymentUser_Task
                         //not paid
                         $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
                         $paymentTransaction->CustomerID = $paymentAccount->CustomerID;
-                        $paymentTransaction->transaction_id = $transaction['transaction']['transaction_id'];
-                        $paymentTransaction->external_id = $transaction['transaction']['external_id'];
-                        $paymentTransaction->reference_id = $transaction['transaction']['reference_id'];
-                        $paymentTransaction->state = $transaction['transaction']['state'];
+                        if (isset($transaction['transaction'])) {
+                            $paymentTransaction->transaction_id = $transaction['transaction']['transaction_id'];
+                            $paymentTransaction->external_id = $transaction['transaction']['external_id'];
+                            $paymentTransaction->reference_id = $transaction['transaction']['reference_id'];
+                            $paymentTransaction->state = $transaction['transaction']['state'];
+                        }
                         $paymentTransaction->save();
                         $errorReason = !empty($transaction["response"]["error_message_tr"]) ? $transaction["response"]["error_message_tr"] : $transaction["response"]["error_message"];
                     }
-                } else {
-                    $errorReason = "Sistemin hesabınızdan otomatik para tahsilatı yapmasını istiyorsanız lütfen bankamatik kartı yerine kredi kartı tanımlayınız. \n\r"
-                        . "Eğer kredi kartınız ile otomatik ödeme yapmak istemiyorsanız panelden bankamatik kartınız ile manuel ödeme yapabilirsiniz. \n\r"
-                        . "Lütfen en kısa zamanda ödemenizi yapınız. \n\r";
                 }
 
                 // <editor-fold defaultstate="collapsed" desc="prepare warning mail list">
