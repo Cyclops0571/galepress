@@ -27,6 +27,7 @@ class PaymentUser_Task
             //eger accounttan 1 son bir ay icinde odeme alinmis ise odeme alma.
             $lastPaymentFlag = $paymentAccount->last_payment_day < date("Y-m-d", strtotime("-1 month +1 day"));
             if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d") && $lastPaymentFlag) {
+                //sleep before getting blocked ...
                 sleep(60);
                 $paymentResult = FALSE;
                 // <editor-fold defaultstate="collapsed" desc="first bin check">

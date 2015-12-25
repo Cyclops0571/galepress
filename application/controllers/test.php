@@ -60,6 +60,9 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo date("Y-m-d", strtotime("-1 month +1 day"));
+        dd('2015-11-25' < date("Y-m-d", strtotime("-1 month +1 day")));
+        exit;
         $command = 'du -ha ' . path('public') . 'files/ --max-depth=1| sort -hr';
         $folderStructure = shell_exec($command);
         $folders = explode(PHP_EOL, $folderStructure);
