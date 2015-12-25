@@ -60,6 +60,9 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        Log::info('denemedirDeneme');
+        throw new Exception('benim deneme hatam');
+        echo path('storage'); exit;
         echo date("Y-m-d", strtotime("-1 month +1 day"));
         dd('2015-11-25' < date("Y-m-d", strtotime("-1 month +1 day")));
         exit;

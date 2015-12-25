@@ -13,64 +13,65 @@ class Log {
 		static::write('error', static::exception_line($e));
 	}
 
+    /**
+     * Write a message to the log file.
+     *
+     * <code>
+     *        // Write an "error" message to the log file
+     *        Log::write('error', 'Something went horribly wrong!');
+     *
+     *        // Write an "error" message using the class' magic method
+     *        Log::error('Something went horribly wrong!');
+     *
+     *        // Log an arrays data
+     *        Log::write('info', array('name' => 'Sawny', 'passwd' => '1234', array(1337, 21, 0)), true);
+     *      //Result: Array ( [name] => Sawny [passwd] => 1234 [0] => Array ( [0] => 1337 [1] => 21 [2] => 0 ) )
+     *      //If we had omit the third parameter the result had been: Array
+     * </code>
+     *
+     * @param  string $type
+     * @param  string $message
+     * @return void
+     */
+    public static function write($type, $message, $pretty_print = false)
+    {
+        $message = ($pretty_print) ? print_r($message, true) : $message;
+
+        // If there is a listener for the log event, we'll delegate the logging
+        // to the event and not write to the log files. This allows for quick
+        // swapping of log implementations for debugging.
+        if (Event::listeners('laravel.log')) {
+            Event::fire('laravel.log', array($type, $message));
+        }
+
+        $message = static::format($type, $message);
+
+        File::append(path('storage') . 'logs/' . date('Y-m-d') . '.log', $message);
+        chown(path('storage') . 'logs/' . date('Y-m-d') . '.log', 'apache');
+        chgrp(path('storage') . 'logs/' . date('Y-m-d') . '.log', 'apache');
+    }
+
 	/**
-	 * Format a log friendly message from the given exception.
+     * Format a log message for logging.
 	 *
-	 * @param  Exception  $e
+     * @param  string $type
+     * @param  string $message
 	 * @return string
 	 */
-	protected static function exception_line($e)
+    protected static function format($type, $message)
 	{
-		return $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
+        return date('Y-m-d H:i:s') . ' ' . Str::upper($type) . " - {$message}" . PHP_EOL;
 	}
 
 	/**
-	 * Write a message to the log file.
+     * Format a log friendly message from the given exception.
 	 *
-	 * <code>
-	 *		// Write an "error" message to the log file
-	 *		Log::write('error', 'Something went horribly wrong!');
-	 *
-	 *		// Write an "error" message using the class' magic method
-	 *		Log::error('Something went horribly wrong!');
-	 *
-	 *		// Log an arrays data
-	 *		Log::write('info', array('name' => 'Sawny', 'passwd' => '1234', array(1337, 21, 0)), true);
-	 *      //Result: Array ( [name] => Sawny [passwd] => 1234 [0] => Array ( [0] => 1337 [1] => 21 [2] => 0 ) )
-	 *      //If we had omit the third parameter the result had been: Array
-	 * </code>
-	 *
-	 * @param  string  $type
-	 * @param  string  $message
-	 * @return void
-	 */
-	public static function write($type, $message, $pretty_print = false)
-	{
-		$message = ($pretty_print) ? print_r($message, true) : $message;
-
-		// If there is a listener for the log event, we'll delegate the logging
-		// to the event and not write to the log files. This allows for quick
-		// swapping of log implementations for debugging.
-		if (Event::listeners('laravel.log'))
-		{
-			Event::fire('laravel.log', array($type, $message));
-		}
-
-		$message = static::format($type, $message);
-
-		File::append(path('storage').'logs/'.date('Y-m-d').'.log', $message);
-	}
-
-	/**
-	 * Format a log message for logging.
-	 *
-	 * @param  string  $type
-	 * @param  string  $message
+     * @param  Exception $e
 	 * @return string
 	 */
-	protected static function format($type, $message)
+    protected static function exception_line($e)
 	{
-		return date('Y-m-d H:i:s').' '.Str::upper($type)." - {$message}".PHP_EOL;
+        return $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
 	}
 
 	/**
