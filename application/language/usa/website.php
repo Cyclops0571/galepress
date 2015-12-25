@@ -417,7 +417,7 @@ return array(
 
 	'tryit_form_error_required_firstname' => 'Your name is required.',
 	'tryit_form_error_required_lastname' => 'Your last name is required.',
-	'tryit_form_error_required_email' => 'Your e-mail address is required',
+    'tryit_form_error_required_email' => 'A valid e-mail address is required',
 	'tryit_form_error_required_appname' => 'Your application name is required.',
 	'tryit_form_error_required_username' => 'Your user name is required.',
 	'tryit_form_error_required_pass' => 'Password is required.',
