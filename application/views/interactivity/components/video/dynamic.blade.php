@@ -111,8 +111,9 @@ else {
 	</script>
 </head>
 <body>
+<?php $posterAttr = empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'; ?>
 	<video id="example_video_1" onclick="startVideo()" class="video-js vjs-default-skin" {{($videoinit=='onload' ? 'autoplay' : '')}} {{($showcontrols==1 ? 'controls' : '')}} {{($restartwhenfinished==1 ? 'loop' : '')}} {{($mute==1 ? 'mute' : '')}} preload="auto" width="{{$w}}" height="{{$h}}"
-	      poster="{{$vPosterImageFile}}"
+           {{$posterAttr}}
 	      data-setup="{}" style="position:fixed; height:100% !important;">
 	    <source src="{{ ($option==1 ? $vFile : $url) }}" type='video/mp4' />
 	</video>
