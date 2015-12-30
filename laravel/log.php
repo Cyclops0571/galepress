@@ -47,8 +47,10 @@ class Log {
         $message = static::format($type, $message);
 
         File::append(path('storage') . 'logs/' . date('Y-m-d') . '.log', $message);
-        chown(path('storage') . 'logs/' . date('Y-m-d') . '.log', 'apache');
-        chgrp(path('storage') . 'logs/' . date('Y-m-d') . '.log', 'apache');
+        if (\Request::env() !== ENV_LOCAL) {
+            chown(path('storage') . 'logs/' . date('Y-m-d') . '.log', 'apache');
+            chgrp(path('storage') . 'logs/' . date('Y-m-d') . '.log', 'apache');
+        }
     }
 
 	/**

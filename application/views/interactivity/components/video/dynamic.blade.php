@@ -88,36 +88,6 @@ else {
         }
 
     </style>
-    <script type="text/javascript">
-        $(document).ready(function ($) {
-            if ({{$modal}}==1
-            )
-            {
-                $("*").css('opacity', '0');
-                $("html").css('background', 'black');
-                $("html").css('opacity', '1');
-            }
-
-            if ({{$videodelay}}!=
-            0
-            )
-            {
-                setTimeout(function () {
-                    $("video")[0].play();
-                }, {{$videodelay}});
-            }
-        });
-
-        function startVideo() {
-            var o = videojs('example_video_1');
-            if (o.paused()) {
-                o.play();
-            }
-            else {
-                o.pause();
-            }
-        }
-    </script>
 </head>
 <body>
 <?php $posterAttr = empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'; ?>
@@ -128,14 +98,48 @@ else {
        data-setup="{}" style="position:fixed; height:100% !important;">
     <source src="{{ ($option==1 ? $vFile : $url) }}" type='video/mp4'/>
 </video>
+
 <script type="text/javascript">
+    var myModal = <?php echo json_encode($modal); ?>;
+    var videoDelay = <?php echo json_encode($videodelay) ?>;
+    function startVideo() {
+        var o = videojs('example_video_1');
+        if (o.paused()) {
+            o.play();
+        } else {
+            o.pause();
+        }
+    }
+
     $(document).ready(function ($) {
-        $('#example_video_1').css('width', '100%');
-        $('#example_video_1').css('height', '100%');
+        var videoElement = $('#example_video_1');
+        var allElements = $("*");
+        var htmlElements = $('html');
+        if (myModal == 1) {
+            allElements.css('opacity', '0');
+            htmlElements.css({
+                'background': 'black',
+                'opacity': '1'
+            });
+        }
+
+        if (videoDelay != 0) {
+            var playVideo = function () {
+                $("video")[0].play();
+            };
+            setTimeout(playVideo, videoDelay);
+        }
+
+        videoElement.css({
+            'width': '100%',
+            'height': '100%'
+        });
         setTimeout(function () {
-            $('#example_video_1').css('width', '100%');
-            $('#example_video_1').css('height', '100%');
-            $("*").delay(200).animate({opacity: 1}, 300);
+            videoElement.css({
+                'width': '100%',
+                'height': '100%'
+            });
+            allElements.delay(200).animate({opacity: 1}, 300);
         }, 150);
     });
 </script>

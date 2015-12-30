@@ -3,6 +3,7 @@
 class CreateInteractivePDF_Task {
 
 	public function run() {
+//        Common::sendEmail(Config::get('custom.admin_email_set'), 'Serdar Saygili', 'Interactive Local', 'Start');
 		try {
 			$cf = DB::table('ContentFile')
 					->where('Interactivity', '=', 1)
@@ -65,8 +66,8 @@ class CreateInteractivePDF_Task {
 			if (!File::exists($basePath)) {
 				File::mkdir($basePath);
 			}
-			//Couldn't open PDF file '/home/admin/domains/galepress.com/public_html/public/files/customer_1/application_1/content_451/file_740/output/file.pdf' for writing (no such directory)
-			$fileOutput = $basePath . "/" . $pdfFile;
+
+            $fileOutput = $basePath . "/" . $pdfFile;
 			//-----------------------------------------------------------------------------------------------
 			$p = new pdflib();
 			$p->set_option("license=" . Config::get('custom.pdflib_license'));

@@ -3,8 +3,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // INTERACTIVITY
 var cInteractivity = new function () {
-
-    this.objectName = "interactivity";
     this.objectName = "interactivity";
 
     this.doRequest = function (t, u, d, funcError) {
@@ -16,40 +14,25 @@ var cInteractivity = new function () {
     };
 
     this.clickOk = function () {
-        var id = $("#modal-editor").attr("opener");
+        var modalEditor = $("#modal-editor");
+        var id = modalEditor.attr("opener");
         var content = CKEDITOR.instances.editor.getData();
         $("#comp-" + id + "-content").val(content);
-        $("#modal-editor").addClass("hide");
         $("#modal-mask").addClass("hide");
-        $("#modal-editor").append($('.action'));
+        modalEditor.addClass("hide").append($('.action'));
         CKEDITOR.instances.editor.destroy();
         $('#wrapper').css('position', 'static');
         $('body').css('overflow', 'auto');
     };
 
     this.clickCancel = function () {
-        $("#modal-editor").addClass("hide");
+        var modalEditor = $("#modal-editor");
         $("#modal-mask").addClass("hide");
-        $("#modal-editor").append($('.action'));
+        modalEditor.addClass("hide").append($('.action'));
         CKEDITOR.instances.editor.destroy();
         $('#wrapper').css('position', 'static');
         $('body').css('overflow', 'auto');
     };
-
-    //   this.clickOk = function () {
-    // var id = $("#modal-editor").attr("opener");
-    // var content = $("#editor").val();
-    // $("#comp-" + id + "-content").val(content);
-    // $("#modal-editor").addClass("hide");
-    // $("#modal-mask").addClass("hide");
-    // $("#editor").destroyEditor();
-    //   };
-
-    //   this.clickCancel = function () {
-    // $("#modal-editor").addClass("hide");
-    // $("#modal-mask").addClass("hide");
-    // $("#editor").destroyEditor();
-    //   };
 
     this.openTransferModal = function (e) {
 

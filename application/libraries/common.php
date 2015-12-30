@@ -583,7 +583,6 @@ class Common
         $toEmailSet = Config::get('custom.admin_email_set');
         $subject = __('common.task_subject');
         Log::info($msg);
-        Laravel\Log::write($type, $message);
         Bundle::start('messages');
         foreach ($toEmailSet as $toEmail) {
             Message::send(function ($m) use ($toEmail, $subject, $msg) {
@@ -685,6 +684,7 @@ class Common
     public static function sendEmail($toEmail, $toDisplayName, $subject, $msg)
     {
         try {
+            Bundle::start('messages');
             Message::send(function ($m) use ($toEmail, $toDisplayName, $subject, $msg) {
                 $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
                 //$m->to($toEmail);
