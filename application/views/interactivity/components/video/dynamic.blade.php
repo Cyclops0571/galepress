@@ -91,7 +91,7 @@ else {
 </head>
 <body>
 <?php $posterAttr = empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'; ?>
-<video id="example_video_1" onclick="startVideo()" class="video-js vjs-default-skin"
+<video id="example_video_1" class="video-js vjs-default-skin"
        {{($videoinit=='onload' ? 'autoplay' : '')}} {{($showcontrols==1 ? 'controls' : '')}} {{($restartwhenfinished==1 ? 'loop' : '')}} {{($mute==1 ? 'mute' : '')}} preload="auto"
        width="{{$w}}" height="{{$h}}"
        {{$posterAttr}}
@@ -102,16 +102,8 @@ else {
 <script type="text/javascript">
     var myModal = <?php echo json_encode($modal); ?>;
     var videoDelay = <?php echo json_encode($videodelay) ?>;
-    function startVideo() {
-        var o = videojs('example_video_1');
-        if (o.paused()) {
-            o.play();
-        } else {
-            o.pause();
-        }
-    }
 
-    $(document).ready(function ($) {
+    $(function () {
         var videoElement = $('#example_video_1');
         var allElements = $("*");
         var htmlElements = $('html');
