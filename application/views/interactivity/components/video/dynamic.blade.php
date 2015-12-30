@@ -61,7 +61,7 @@ else {
 
         .video-js {
             position: fixed !important;
-            width,
+            width: 100% !important;
             height: 100% !important;
         }
 

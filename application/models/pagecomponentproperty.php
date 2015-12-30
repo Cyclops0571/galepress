@@ -9,12 +9,25 @@
  * @property DateTime ProcessDate
  * @property DateTime DateCreated
  * @property int StatusID
+ * @property int CreatorUserID
+ * @property int ProcessUserID
  */
 class PageComponentProperty extends Eloquent {
 
     public static $timestamps = false;
     public static $table = 'PageComponentProperty';
     public static $key = 'PageComponentPropertyID';
+
+    public static function batchInsert($pageComponentID, array $nameValueSet)
+    {
+        foreach ($nameValueSet as $name => $value) {
+            $pcp = new PageComponentProperty();
+            $pcp->PageComponentID = $pageComponentID;
+            $pcp->Name = $name;
+            $pcp->Value = $value;
+            $pcp->save();
+        }
+    }
 
     public function save() {
 	if (!$this->dirty()) {
@@ -37,16 +50,6 @@ class PageComponentProperty extends Eloquent {
 	$this->ProcessUserID = $userID;
 	$this->ProcessDate = new DateTime();
 	parent::save();
-    }
-
-    public static function batchInsert($pageComponentID, array $nameValueSet) {
-	foreach ($nameValueSet as $name => $value) {
-	    $pcp = new PageComponentProperty();
-	    $pcp->PageComponentID = $pageComponentID;
-	    $pcp->Name = $name;
-	    $pcp->Value = $value;
-	    $pcp->save();
-	}
     }
 
 }
