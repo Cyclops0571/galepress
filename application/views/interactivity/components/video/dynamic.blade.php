@@ -90,11 +90,15 @@ else {
     </style>
 </head>
 <body>
-<?php $posterAttr = empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'; ?>
+<?php //var_dump($modal XOR (!$showcontrols)); ?>
 <video id="example_video_1" class="video-js vjs-default-skin"
-       {{($videoinit=='onload' ? 'autoplay' : '')}} {{($showcontrols==1 ? 'controls' : '')}} {{($restartwhenfinished==1 ? 'loop' : '')}} {{($mute==1 ? 'mute' : '')}} preload="auto"
+       {{($videoinit=='onload' ? 'autoplay' : '')}}
+       {{($showcontrols==1 ? 'controls' : '')}}
+       {{($restartwhenfinished==1 ? 'loop' : '')}}
+       preload="auto"
        width="{{$w}}" height="{{$h}}"
-       {{$posterAttr}}
+       {{empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'}}
+       {{ ($modal XOR (!$showcontrols)) ? 'onclick="startVideo()"' : ''}}
        data-setup="{}" style="position:fixed; height:100% !important;">
     <source src="{{ ($option==1 ? $vFile : $url) }}" type='video/mp4'/>
 </video>
@@ -102,6 +106,23 @@ else {
 <script type="text/javascript">
     var myModal = <?php echo json_encode($modal); ?>;
     var videoDelay = <?php echo json_encode($videodelay) ?>;
+    var mute = <?php echo json_encode($mute); ?>;
+    var o = videojs('example_video_1');
+
+    function startVideo() {
+        if (o.paused()) {
+            o.play();
+        } else {
+            o.pause();
+        }
+    }
+
+    o.ready(function () {
+        if (mute) {
+            this.volume(0);
+        }
+    });
+
 
     $(function () {
         var videoElement = $('#example_video_1');
