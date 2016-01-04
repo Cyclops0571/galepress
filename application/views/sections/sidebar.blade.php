@@ -33,7 +33,7 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
         </li>
         <li>
             @if(count($applicationSet) == 1)
-                <a href="{{__('route.contents') . '?applicationID=' . $applicationSet[0]->ApplicationID}}" {{$applicationSet[0]->sidebarClass(true)}}>
+                <a href="{{URL::to(__('route.contents') . '?applicationID=' . $applicationSet[0]->ApplicationID)}}" {{$applicationSet[0]->sidebarClass(true)}}>
                     <span class="icon-dropbox"></span>{{ $applicationSet[0]->Name }}
                 </a>
             @else
@@ -63,7 +63,7 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
         </li>
         <li>
             @if(count($applicationSet) == 1)
-                <a href="{{str_replace('(:num)', $applicationSet[0]->ApplicationID, __('route.applications_usersettings'))}}">
+                <a href="{{URL::to(str_replace('(:num)', $applicationSet[0]->ApplicationID, __('route.applications_usersettings')))}}">
                     <span class="icon-cogs"></span>{{__('common.application_settings_caption_detail')}}
                 </a>
             @else
