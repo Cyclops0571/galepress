@@ -8,7 +8,6 @@
  * @property int $ThemeBackground Description
  * @property int $ThemeForeground Description
  * @property int $Price Description
-
  * @property string $BundleText Description
  * @property int $StartDate Description
  * @property int $ExpirationDate Description
@@ -52,11 +51,13 @@ class Application extends Eloquent
 
     /**
      *
-     * @return Customer
+     * @param int $applicationID
+     * @param array $columns
+     * @return Application
      */
-    public function Customer()
+    public static function find($applicationID, $columns = array('*'))
     {
-        return $this->belongs_to('Customer', 'CustomerID')->first();
+        return Application::where(self::$key, "=", $applicationID)->first($columns);
     }
 
     public function ApplicationStatus($languageID)
@@ -106,17 +107,6 @@ class Application extends Eloquent
 
     /**
      *
-     * @return Tab[]
-     */
-    public function Tabs()
-    {
-        return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)
-            ->take(TAB_COUNT)
-            ->get();
-    }
-
-    /**
-     *
      * @return Content
      */
     public function getContentSet()
@@ -125,17 +115,6 @@ class Application extends Eloquent
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('Name', 'ASC')
             ->get();
-    }
-
-    /**
-     *
-     * @param int $applicationID
-     * @param array $columns
-     * @return Application
-     */
-    public static function find($applicationID, $columns = array('*'))
-    {
-        return Application::where(self::$key, "=", $applicationID)->first($columns);
     }
 
     public function CheckOwnership()
@@ -158,31 +137,13 @@ class Application extends Eloquent
         }
     }
 
-    public function save($IncrementVersion = TRUE)
+    /**
+     *
+     * @return Customer
+     */
+    public function Customer()
     {
-        if (!$this->dirty()) {
-            return true;
-        }
-
-        $userID = -1;
-        if (Auth::User()) {
-            $userID = Auth::User()->UserID;
-        }
-
-        if ((int)$this->ApplicationID == 0) {
-            $this->DateCreated = new DateTime();
-            $this->ProcessTypeID = eProcessTypes::Insert;
-            $this->CreatorUserID = $userID;
-            $this->StatusID = eStatus::Active;
-        } else {
-            $this->ProcessTypeID = eProcessTypes::Update;
-        }
-        $this->ProcessUserID = $userID;
-        $this->ProcessDate = new DateTime();
-        if ($IncrementVersion) {
-            $this->Version = (int)$this->Version + 1;
-        }
-        parent::save();
+        return $this->belongs_to('Customer', 'CustomerID')->first();
     }
 
     public function incrementAppVersion()
@@ -219,6 +180,17 @@ class Application extends Eloquent
             }
         }
         return $tabsForService;
+    }
+
+    /**
+     *
+     * @return Tab[]
+     */
+    public function Tabs()
+    {
+        return $this->has_many('Tab', $this->key())->where('StatusID', '=', eStatus::Active)
+            ->take(TAB_COUNT)
+            ->get();
     }
 
     /**
@@ -266,6 +238,33 @@ class Application extends Eloquent
         return $this->$fieldName;
     }
 
+    public function save($IncrementVersion = TRUE)
+    {
+        if (!$this->dirty()) {
+            return true;
+        }
+
+        $userID = -1;
+        if (Auth::User()) {
+            $userID = Auth::User()->UserID;
+        }
+
+        if ((int)$this->ApplicationID == 0) {
+            $this->DateCreated = new DateTime();
+            $this->ProcessTypeID = eProcessTypes::Insert;
+            $this->CreatorUserID = $userID;
+            $this->StatusID = eStatus::Active;
+        } else {
+            $this->ProcessTypeID = eProcessTypes::Update;
+        }
+        $this->ProcessUserID = $userID;
+        $this->ProcessDate = new DateTime();
+        if ($IncrementVersion) {
+            $this->Version = (int)$this->Version + 1;
+        }
+        parent::save();
+    }
+
     /**
      *
      * @param int $key
@@ -298,12 +297,13 @@ class Application extends Eloquent
         return $result;
     }
 
-    public function sidebarClass()
+    public function sidebarClass($returnAsString = false)
     {
-        if ($this->ExpirationDate < date("Y-m-d")) {
-            return array("class" => 'expired-app');
+        if ($returnAsString) {
+            return $this->ExpirationDate < date("Y-m-d") ? 'class="expired-app"' : '';
+        } else {
+            return $this->ExpirationDate < date("Y-m-d") ? array("class" => 'expired-app') : array();
         }
-        return array();
     }
 
     public function getThemeColor()
