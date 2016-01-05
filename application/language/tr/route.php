@@ -98,7 +98,6 @@ return array(
     'interactivity_check' => 'etkilesimli-pdf/kontrolet',
     'interactivity_save' => 'etkilesimli-pdf/kaydet',
     'interactivity_transfer' => 'etkilesimli-pdf/aktar',
-    //'interactivity_delete' => 'etkilesimli-pdf/sil',
     'interactivity_upload' => 'etkilesimli-pdf/yukle',
     'interactivity_upload2' => 'etkilesimli-pdf/yukle2',
     'interactivity_loadpage' => 'etkilesimli-pdf/sayfayukle',
