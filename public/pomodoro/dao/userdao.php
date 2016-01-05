@@ -28,6 +28,8 @@ class UserDao extends Dao
     public function update($user)
     {
         $db = $this->get_connection();
+
+
         if ($stmt = $db->prepare("UPDATE user SET status = ?, begin = ? WHERE username = ?")) {
             $stmt->bind_param('sss', $user->status, $user->begin, $user->username);
             $stmt->execute();
@@ -51,18 +53,16 @@ class UserDao extends Dao
     {
         $user = null;
         $db = $this->get_connection();
-        if ($stmt = $db->prepare("SELECT user.status, user.begin, record.* FROM user INNER JOIN record on user.username = record.username WHERE record.date = ?  user.username = ?")) {
+        if ($stmt = $db->prepare("SELECT user.username, user.status, user.begin, record.success FROM user LEFT JOIN record on user.username = record.username AND record.date = ? WHERE user.username = ?")) {
             $stmt->bind_param('ss', date('Y-m-d'), $username);
             $stmt->execute();
-            $stmt->bind_result($status, $begin, $username, $date, $success, $fail);
+            $stmt->bind_result($username, $status, $begin, $success);
             if ($stmt->fetch()) {
                 $user = new User();
                 $user->username = $username;
                 $user->status = $status;
                 $user->begin = $begin;
-                $user->date = $date;
-                $user->success = $success;
-                $user->fail = $fail;
+                $user->success = (int)$success;
       }
             $stmt->close();
         }
@@ -73,18 +73,16 @@ class UserDao extends Dao
     {
         $users = array();
         $db = $this->get_connection();
-        if ($stmt = $db->prepare("SELECT user.status, user.begin, record.* FROM user INNER JOIN record on user.username = record.username WHERE record.date = ? ORDER BY user.username")) {
+        if ($stmt = $db->prepare("SELECT user.username, user.status, user.begin, record.success FROM user LEFT JOIN record on user.username = record.username AND record.date = ? ORDER BY user.username")) {
             $stmt->bind_param('s', date('Y-m-d'));
             $stmt->execute();
-            $stmt->bind_result($status, $begin, $username, $date, $success, $fail);
+            $stmt->bind_result($username, $status, $begin, $success);
             while ($stmt->fetch()) {
                 $user = new User();
                 $user->username = $username;
                 $user->status = $status;
                 $user->begin = $begin;
-                $user->date = $date;
-                $user->success = $success;
-                $user->fail = $fail;
+                $user->success = (int)$success;
                 $users[] = $user;
             }
             $stmt->close();

@@ -22,7 +22,6 @@ class PomodoroService
     {
         $statuses = array();
         $users = $this->user_dao->get_all();
-
         foreach ($users as $user) {
             $statuses[] = $this->get_status($user->username);
         }
@@ -37,7 +36,6 @@ class PomodoroService
         $status = null;
 
         $user = $this->user_dao->get($username);
-
         if (is_null($user)) {
             $user = new User();
             $user->username = $username;
@@ -197,6 +195,7 @@ class PomodoroService
 
             $status = $this->get_status($user->username);
         } else {
+
             $status = new Status();
             $status->error = true;
             $status->error_message = "There is no such user named : " . $username;
