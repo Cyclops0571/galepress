@@ -54,7 +54,7 @@ class UserDao extends Dao
         if ($stmt = $db->prepare("SELECT user.status, user.begin, record.* FROM user INNER JOIN record on user.username = record.username WHERE record.date = ?  user.username = ?")) {
             $stmt->bind_param('ss', date('Y-m-d'), $username);
             $stmt->execute();
-            $stmt->bind_result($username, $status, $begin, $date, $success, $fail);
+            $stmt->bind_result($status, $begin, $username, $date, $success, $fail);
             if ($stmt->fetch()) {
                 $user = new User();
                 $user->username = $username;
@@ -76,7 +76,7 @@ class UserDao extends Dao
         if ($stmt = $db->prepare("SELECT user.status, user.begin, record.* FROM user INNER JOIN record on user.username = record.username WHERE record.date = ? ORDER BY user.username")) {
             $stmt->bind_param('s', date('Y-m-d'));
             $stmt->execute();
-            $stmt->bind_result($username, $status, $begin, $date, $success, $fail);
+            $stmt->bind_result($status, $begin, $username, $date, $success, $fail);
             while ($stmt->fetch()) {
                 $user = new User();
                 $user->username = $username;
