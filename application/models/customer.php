@@ -50,8 +50,8 @@ class Customer extends Eloquent
 
     /**
      *
-     * @param type $customerID
-     * @param type $columns
+     * @param int $customerID
+     * @param array $columns
      * @return Customer
      */
     public static function find($customerID, $columns = array('*'))
@@ -62,7 +62,7 @@ class Customer extends Eloquent
     /**
      *
      * @param int $statusID
-     * @return Application
+     * @return Application[]
      */
     public function Applications($statusID)
     {
