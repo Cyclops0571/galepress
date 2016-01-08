@@ -11,17 +11,17 @@ namespace sts;
 	SITE ID should always be 1	
 */
 if (!defined(__NAMESPACE__ . '\SEC_DB_LOADED')) {
-	$config =
-		array(
-			'database_hostname'		=> 'localhost',
-			'database_username'		=> 'root',
-			'database_password'		=> '',
-			'database_name'			=> 'galepress_ticket',
-			'database_type'			=> 'mysql',
-			'database_charset'		=> 'UTF8',
-			'database_table_prefix'	=> '',
-			'site_id'					=> 1,
-			'salt'					=> 'F4ECz6v9oCWOYeVAD705RDGgoXqgmFmg'
-		);
+    $config =
+        array(
+            'database_hostname' => 'localhost',
+            'database_username' => 'root',
+            'database_password' => ':Ekt4eca',
+            'database_name' => 'galepress_ticket',
+            'database_type' => 'mysql',
+            'database_charset' => 'UTF8',
+            'database_table_prefix' => '',
+            'site_id' => 1,
+            'salt' => 'F4ECz6v9oCWOYeVAD705RDGgoXqgmFmg'
+        );
 }
 ?>
