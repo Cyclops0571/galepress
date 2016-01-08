@@ -1,5 +1,6 @@
 <?php
 
+
 return array(
 
 	/*
@@ -30,7 +31,7 @@ return array(
 	|
 	*/
 
-	'detail' => true,
+    'detail' => Laravel\Request::env() != ENV_LIVE,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,7 +64,13 @@ return array(
 
 	'logger' => function($exception)
 	{
-		Log::exception($exception);
+        $serverErrorLog = new ServerErrorLog();
+        $serverErrorLog->Header = 500;
+        $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
+        $serverErrorLog->ErrorMessage = $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine();
+        $serverErrorLog->Url = \Laravel\Request::uri();
+        $serverErrorLog->save();
+        //Log::exception($exception);
 	},
 
 );

@@ -1,125 +1,123 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Error 404 - Not Found</title>
-	<meta name="viewport" content="width=device-width">
-	<style type="text/css">
-		@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+    <meta charset="utf-8" />
+    <title>404</title>
+    <meta name="author" content="ukieweb" />
+    <meta name="keywords" content="404 page, worker, css3, template, html5 template" />
+    <meta name="description" content="404 - Page Template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- Libs CSS -->
+    <link type="text/css" media="all" href="/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Template CSS -->
+    <link type="text/css" media="all" href="/css/error404.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+<!--    <link type="text/css" media="all" href="/css/respons.css" rel="stylesheet" />-->
 
-		article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
-		audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
-		audio:not([controls]) { display: none; }
-		[hidden] { display: none; }
-		html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-		html, button, input, select, textarea { font-family: sans-serif; color: #222; }
-		body { margin: 0; font-size: 1em; line-height: 1.4; }
-		::-moz-selection { background: #E37B52; color: #fff; text-shadow: none; }
-		::selection { background: #E37B52; color: #fff; text-shadow: none; }
-		a { color: #00e; }
-		a:visited { color: #551a8b; }
-		a:hover { color: #06e; }
-		a:focus { outline: thin dotted; }
-		a:hover, a:active { outline: 0; }
-		abbr[title] { border-bottom: 1px dotted; }
-		b, strong { font-weight: bold; }
-		blockquote { margin: 1em 40px; }
-		dfn { font-style: italic; }
-		hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-		ins { background: #ff9; color: #000; text-decoration: none; }
-		mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
-		pre, code, kbd, samp { font-family: monospace, serif; _font-family: 'courier new', monospace; font-size: 1em; }
-		pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
-		q { quotes: none; }
-		q:before, q:after { content: ""; content: none; }
-		small { font-size: 85%; }
-		sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
-		sup { top: -0.5em; }
-		sub { bottom: -0.25em; }
-		ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
-		dd { margin: 0 0 0 40px; }
-		nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
-		img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
-		svg:not(:root) { overflow: hidden; }
-		figure { margin: 0; }
-		form { margin: 0; }
-		fieldset { border: 0; margin: 0; padding: 0; }
-		label { cursor: pointer; }
-		legend { border: 0; *margin-left: -7px; padding: 0; white-space: normal; }
-		button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
-		button, input { line-height: normal; }
-		button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
-		button[disabled], input[disabled] { cursor: default; }
-		input[type="checkbox"], input[type="radio"] { box-sizing: border-box; padding: 0; *width: 13px; *height: 13px; }
-		input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
-		input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
-		button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
-		textarea { overflow: auto; vertical-align: top; resize: vertical; }
-		input:valid, textarea:valid {  }
-		input:invalid, textarea:invalid { background-color: #f0dddd; }
-		table { border-collapse: collapse; border-spacing: 0; }
-		td { vertical-align: top; }
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/favicon144x144.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/favicon114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/favicon72x72.png" />
+    <link rel="apple-touch-icon" href="/img/favicons/favicon57x57.png" />
+    <link rel="shortcut icon" href="/img/favicons/favicon.png" />
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,800italic,800,700italic,700,600italic,600,400italic,300' rel='stylesheet' type='text/css' />
+    <!-- Scripts -->
+    <script src="/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/modernizr.js" type="text/javascript"></script>
+    <script src="/js/jquery.nicescroll.min.js" type="text/javascript"></script>
 
-		body
-		{
-			font-family:'Droid Sans', sans-serif;
-			font-size:10pt;
-			color:#555;
-			line-height: 25px;
-		}
-
-		.wrapper
-		{
-			width:760px;
-			margin:0 auto 5em auto;
-		}
-
-		.main
-		{
-			overflow:hidden;
-		}
-
-		.error-spacer
-		{
-			height:4em;
-		}
-
-		a, a:visited
-		{
-			color:#2972A3;
-		}
-
-		a:hover
-		{
-			color:#72ADD4;
-		}
-	</style>
 </head>
 <body>
-	<div class="wrapper">
-		<div class="error-spacer"></div>
-		<div role="main" class="main">
-			<?php $messages = array('We need a map.', 'I think we\'re lost.', 'We took a wrong turn.'); ?>
 
-			<h1><?php echo $messages[mt_rand(0, 2)]; ?></h1>
+<!-- Load page -->
+<div class="animationload">
+    <div class="loader">
+    </div>
+</div>
+<!-- End load page -->
 
-			<h2>Server Error: 404 (Not Found)</h2>
 
-			<hr>
+<!-- Content Wrapper -->
+<div id="wrapper">
+    <div class="container">
 
-			<h3>What does this mean?</h3>
+        <!-- brick of wall -->
+        <div class="brick"></div>
+        <!-- end brick of wall -->
 
-			<p>
-				We couldn't find the page you requested on our servers. We're really sorry
-				about that. It's our fault, not yours. We'll work hard to get this page
-				back online as soon as possible.
-			</p>
+        <!-- Number -->
+        <div class="number">
+            <div class="four"></div>
+            <div class="zero">
+                <div class="nail"></div>
+            </div>
+            <div class="four"></div>
+        </div>
+        <!-- end Number -->
 
-			<p>
-				Perhaps you would like to go to our <?php echo HTML::link('/', 'home page'); ?>?
-			</p>
-		</div>
-	</div>
+        <!-- Info -->
+        <div class="info">
+            <h2><?php echo __('error.something_went_wrong'); ?></h2>
+            <p><?php echo __('error.your_page_not_found'); ?></p>
+            <a href="/" class="btn" style="text-transform: uppercase"><?php echo __('route.home'); ?></a>
+        </div>
+        <!-- end Info -->
+
+
+    </div>
+    <!-- end container -->
+</div>
+<!-- end Content Wrapper -->
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <!-- Worker -->
+        <div class="worker"></div>
+        <!-- Tools -->
+        <div class="tools"></div>
+    </div>
+    <!-- end container -->
+</footer>
+<!-- end Footer -->
+<script type="text/javascript">
+    $(function () {
+        "use strict";
+        $(".loader").delay(400).fadeOut();
+        $(".animationload").delay(400).fadeOut("fast");
+    });
+
+    /*
+     ----------------------------------------------------------------------
+     Nice scroll
+     ----------------------------------------------------------------------
+     */
+    $("html").niceScroll({
+        cursorcolor: '#fff',
+        cursoropacitymin: '0',
+        cursoropacitymax: '1',
+        cursorwidth: '2px',
+        zindex: 999999,
+        horizrailenabled: false,
+        enablekeyboard: false
+    });
+
+
+</script>
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
 </body>
 </html>

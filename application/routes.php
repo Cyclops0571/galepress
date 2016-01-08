@@ -370,11 +370,6 @@ foreach ($languages as $currentLanguage) {
     // </editor-fold>
 
 
-
-
-
-
-
     // <editor-fold defaultstate="collapsed" desc="Interactivity">
     Route::get(__('route.interactivity_preview')->get($currentLanguage), array('as' => 'interactivity_preview', 'before' => 'auth', 'uses' => 'interactivity@preview'));
     Route::get(__('route.interactivity_show')->get($currentLanguage), array('as' => 'interactivity_show', 'before' => 'auth', 'uses' => 'interactivity@show'));
@@ -577,6 +572,11 @@ Route::post('webservice/(:num)/statistics', array('uses' => 'webservice.statisti
 */
 
 Event::listen('404', function () {
+    $serverErrorLog = new ServerErrorLog();
+    $serverErrorLog->Header = 404;
+    $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
+    $serverErrorLog->Url = \Laravel\Request::uri();
+    $serverErrorLog->save();
     return Response::error('404');
 });
 

@@ -16,7 +16,6 @@ $(function()
 function initPdfPage()
 {
 	cInteractivity.showPage("1", true);
-	
 	$("#pdf-page")
 		.blur(function()
 		{

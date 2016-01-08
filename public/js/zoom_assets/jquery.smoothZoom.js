@@ -86,7 +86,8 @@
 	};
 
 	function Zoomer($elem, params) {
-		
+		//console.log($elem);
+		//console.log(params);
 		var self = this;
 		this.$elem = $elem;
 		var op = $.extend({}, defaults, params);
@@ -265,7 +266,7 @@
 		if (this.image_url == '') {
 			this.$image = $elem;
 			this.id = this.$image.attr('id');
-		
+
 		//Case 2: Image url specificed through parameter:
 		} else {
 			var img = new Image();
@@ -275,14 +276,12 @@
 			if (this.image_height) {
 				img.height = this.image_height;
 			}
-			img.src = this.image_url;			
+			img.src = this.image_url;
 			this.$image = $(img).appendTo($elem);
-		}		
-		
-		
+		}
+
 		//Prepare container div (Basically the element that masks image with overflow hidden)
-		this.setContainer();	
-		
+		this.setContainer();
 		//Get button icon image's url
 		var testOb;
 		if (!this.bu_icon) {
@@ -310,9 +309,7 @@
 
 		//Modified by uet
 		var imageUrl = this.$image.css('background-image'); //url(http://localhost/files/customer_1/application_1/content_888/file_1393/file_1.jpg)
-		//imageUrl = imageUrl.substring(5, imageUrl.length - 2);
-		imageUrl = imageUrl.substring(4, imageUrl.length - 1);
-		//http://localhost/tr/etkilesimli-pdf/%22http://localhost/files/customer_1/application_1/content_889/file_1394/file_4.jpg%22
+		imageUrl = imageUrl.substring(4, imageUrl.length - 1).replace(/"|\s+/g, '');
 		this.$image.hide();
 		this.imgList = [
 			{loaded: false, src: this.bu_icon || '/js/zoom_assets/icons.png'}, //Icon image
@@ -320,7 +317,7 @@
 			//{loaded: false, src: this.image_url == ''? this.$image.attr('src') : this.image_url} // Main image
 		];
 
-		$.each(this.imgList, function (i){
+        $.each(this.imgList, function (i){
 			var _img = new Image();	
 			$(_img) .bind('load', {id:i, self: self}, self.loadComplete)
 					.bind('error', {id:i, self: self}, self.loadComplete); //Allow initiation even if image is not there :(
@@ -2419,8 +2416,8 @@
 	}
 
 
-	$.fn.smoothZoom = function (params) {		
-		var self = this;		
+	$.fn.smoothZoom = function (params) {
+		var self = this;
 		var l = self.length;
 		
 		//For single or more than one plugin instance
@@ -2439,9 +2436,9 @@
 			} else {	
 
 				// getZoomData - Returns {sourceX, sourceY, sourceWidth, sourceHeight, distX, distY, distWidth, distHeight, centerX, centerY, ratio}				
-				if (params == "getZoomData") {				
+				if (params == "getZoomData") {
 					return instance[params].apply(instance, Array.prototype.slice.call(arguments, 1));
-					
+
 				// destroy | focusTo | zoomIn | zoomOut | moveRight| moveLeft | moveUp | moveDown | Reset | addLandmark | removeLandmark | attachLandmark | refreshAllLandmarks
 				} else if (instance[params]) {
 					instance[params].apply(instance, Array.prototype.slice.call(arguments, 1));

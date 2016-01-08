@@ -60,6 +60,10 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        $x = new Date("Y-m-d");
+        echo $x; exit;
+        throw new Exception('asdfasdfasdf');
+        exit;
         Log::info('denemedirDeneme');
         throw new Exception('benim deneme hatam');
         echo path('storage'); exit;

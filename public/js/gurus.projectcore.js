@@ -191,29 +191,30 @@ var cInteractivity = new function () {
             this.saveCurrentPage();
         }
 
+        var pageElm = $("#page");
+        var sliderElm = $("div.thumblist ul.slideshow-slides li.each-slide");
         $("#pdf-container").addClass("loading");
-        $("#page").css("display", "none");
+        pageElm.css("display", "none");
 
         //remove active class
-        $("div.thumblist ul.slideshow-slides li.each-slide").each(function () {
+        sliderElm.each(function () {
             $(this).removeClass('active');
         });
         //add active class to current page
         $("div.thumblist ul.slideshow-slides li.each-slide a[pageno='" + pageno + "']").parents("li:first").addClass('active');
 
-        var pageCount = $("div.thumblist ul.slideshow-slides li.each-slide").length;
+        var pageCount = sliderElm.length;
 
         $("#pageno").val(pageno);
         $("#pdf-page").val(pageno + '/' + pageCount);
 
         var src = $("div.thumblist ul.slideshow-slides li.each-slide a[pageno='" + pageno + "'] img").attr("src");
 
-        $("#page").smoothZoom('destroy');
+        pageElm.smoothZoom('destroy');
 
         var img = new Image();
         img.onload = function () {
-            $("#page")
-                .css("background", "url('" + src + "') no-repeat top left")
+            pageElm.css("background", "url('" + src + "') no-repeat top left")
                 .css("width", img.width + "px")
                 .css("height", img.height + "px");
 
@@ -243,8 +244,9 @@ var cInteractivity = new function () {
     };
 
     this.clearPage = function () {
-        $("#pdf-container .tooltip-trigger").remove();
-        $("#pdf-container .modal-component").remove();
+        var pdfContainer = $("#pdf-container");
+        pdfContainer.find(".tooltip-trigger").remove();
+        pdfContainer.find(".modal-component").remove();
 
         $("#component-container").html("");
     };
@@ -2012,7 +2014,7 @@ var cTemplate = new function () {
             $('.templateScreen .footer').css('right', '0');
         });
 
-        $('.templateExtrasScreen. .title-drop').click(function () {
+        $('.templateExtrasScreen .title-drop').click(function () {
             $(this).parent().parent().next().toggleClass('panelClose');
         });
 

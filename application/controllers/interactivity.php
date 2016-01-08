@@ -306,7 +306,6 @@ class Interactivity_Controller extends Base_Controller
     {
         try {
             $url = Input::get('url');
-
             $connectable = false;
             $handle = curl_init($url);
             if ($handle !== false) {

@@ -81,7 +81,7 @@
 	{{ HTML::style('css/jquery-ui.min.css?v=' . APP_VER, array('media' => 'screen')); }}
 
         <!-- Begin JavaScript -->
-        {{ HTML::script('js/jquery-1.7.2.min.js'); }}
+        {{ HTML::script('js/jquery-2.1.4.min.js'); }}
         {{ HTML::script('js/jquery-ui-1.10.4.custom.min.js'); }}
         {{ HTML::script('js/bootstrap.min.js'); }}
         {{ HTML::script('js/jquery.uniform.min.js'); }}
