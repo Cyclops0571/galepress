@@ -663,9 +663,8 @@ class Common_Controller extends Base_Controller
         include(path('public') . "ticket/bootstrap.php");
         //find out if user exists
         $users = sts\singleton::get('sts\users');
+        /** @var User $laravelUser */
         $laravelUser = Laravel\Auth::User();
-        $laravelUser->
-        $laravelUser instanceof User;
         $ticketUserExists = $users->is_user($laravelUser->Username);
         if (!$ticketUserExists) {
             //add user to the system
