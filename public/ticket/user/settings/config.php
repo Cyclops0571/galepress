@@ -14,7 +14,7 @@ if (!defined(__NAMESPACE__ . '\SEC_DB_LOADED')) {
     $config =
         array(
             'database_hostname' => 'localhost',
-            'database_username' => 'root',
+            'database_username' => 'galepress_ticket',
             'database_password' => ':Ekt4eca',
             'database_name' => 'galepress_ticket',
             'database_type' => 'mysql',
