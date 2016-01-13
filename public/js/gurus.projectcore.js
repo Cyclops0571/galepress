@@ -1520,7 +1520,7 @@ var cCommon = new function () {
         var qs = "";
         var customerID = "";
         var applicationID = "";
-        var url = window.location;
+        var url = window.location.toString();
 
         //kullanici ve uygulama listesinde customerID olabilir
         if (url.indexOf(route["users"]) > -1 || url.indexOf(route["applications"]) > -1) {
@@ -2296,11 +2296,58 @@ var cBanner = new function () {
     };
 
     this.createNewBanner = function (applicationID) {
+        /* global appID */
         cCommon.save(
             this.objectName,
-            function () {
+            function (ret) {
                 cNotification.success();
-                window.location = '/' + currentLanguage + '/' + route[_self.objectName] + '?applicationID=' + applicationID;
+                var BannerID = ret.getValue('BannerID');
+                var BannerImagePath = ret.getValue('BannerImagePath');
+                var ActiveText = ret.getValue('ActiveText');
+                var PassiveText = ret.getValue('PassiveText');
+                var htmlRow =
+                    '<tr id="bannerIDSet_' + BannerID + '" class="odd" style="background-color: #7f8c8d">'
+                    + '<td style="cursor:pointer;"><span class="icon-resize-vertical list-draggable-icon"></span></td><td>'
+                    + '<img id="bannerImage_' + BannerID + '" src="' + BannerImagePath + '" width="60px" height="30px" style="cursor: pointer" onclick="fileUpload(this)">'
+                    + '<div id="uploadProgress_' + BannerID + '" class="myProgress hide">'
+                    + '<a href="javascript:void(0);" class="editable editable-click">İptal <i class="icon-remove"></i></a>'
+                    + '<label for="scale"></label>'
+                    + '<div class="scrollbox dot">'
+                    + '<div class="scale" style="width: 0"></div>'
+                    + '</div></div></td><td>'
+                    + '<a href="#" id="' + BannerID + '" data-name="TargetUrl" data-type="text" data-pk="' + BannerID + '" data-title="Hedef Url:"></a>'
+                    + '</td><td><div class="toggle_div">'
+                    + '<input type="checkbox" title="BannerStatus" class="toggleCheckbox" style="color: white" id="BannerStatus_' + BannerID + '" />'
+                    + '</div></td><td>' + BannerID + '</td>'
+                    + '<td style="alignment-adjust: middle"><div style="padding-top: 8px;">'
+                    + '<span style=" cursor: pointer; font-size: 30px;" class="icon-remove-sign" onclick="cBanner.delete(' + BannerID + ');"></span></div></td></tr>'
+                var DataTable = $('#DataTables_Table_1');
+                DataTable.find('tbody').prepend(htmlRow);
+                DataTable.find('tbody a').editable({
+                    emptytext: '. . . . .',
+                    url: route['banners_save'],
+                    params: {'applicationID': appID},
+                    ajaxOptions: {
+                        beforeSend: function () {
+                            cNotification.loader();
+                        }
+                    },
+                    success: function () {
+                        cNotification.success();
+                        setTimeout(function () {
+                            cNotification.hide();
+                        }, 1000);
+                    }
+                });
+
+                $('#BannerStatus_' + BannerID).bootstrapToggle({
+                    size: 'mini',
+                    on: ActiveText,
+                    off: PassiveText,
+                    offstyle: 'danger',
+                    onstyle: 'info',
+                    style: 'ios'
+                });
             },
             undefined,
             "&newBanner=1"

@@ -850,7 +850,8 @@ class Contents_Controller extends Base_Controller {
 
     /**
      * Contenti yayindan kaldirip mobilden de kaldirilma flagini 1 yapar
-     * @param type $contentID
+     * @param int $contentID
+     * @return string
      */
     public function get_remove_from_mobile($contentID) {
         $chk = Common::CheckContentOwnership($contentID);

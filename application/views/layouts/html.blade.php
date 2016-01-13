@@ -80,14 +80,7 @@
         {{ HTML::script('js/jqplot/jqplot.dateAxisRenderer.min.js'); }}
         {{ HTML::script('js/jqplot/jqplot.categoryAxisRenderer.min.js'); }}
 	
-	{{ HTML::script('js/bootstrap-toggle.min.js'); }}
-        <!-- Begin pngfix-->
-        <!--[if lt IE 7]>
-        {{ HTML::script('js/DD_belatedPNG_0.0.8a.js'); }}
-        <script>
-        DD_belatedPNG.fix('.modify, .arrow, a.extend, li.add a, li.remove a, #site_info a');
-        </script>
-        <![endif]-->
+	    {{ HTML::script('js/bootstrap-toggle.min.js'); }}
 @yield_section
 </head>
 @_yield('body')

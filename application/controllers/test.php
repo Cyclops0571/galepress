@@ -60,6 +60,7 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        return \Laravel\View::make('test.checkboxtest');
         $x = new Date("Y-m-d");
         echo $x; exit;
         throw new Exception('asdfasdfasdf');

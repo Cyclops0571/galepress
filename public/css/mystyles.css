@@ -36,7 +36,9 @@ text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 .myBreadCrumb{
 background: url('../img/background/bt_cubs.png') left top repeat;
 background-color: rgba(29,29,29,1);
-width: 345px; margin:0px auto; margin-top:-20px; 
+    width: 345px;
+    margin: 0px auto;
+    margin-top: -20px;
 -webkit-border-radius: 3px;
 -webkit-border-top-left-radius: 0px;
 -webkit-border-top-right-radius: 0px;
@@ -49,8 +51,8 @@ border-top-right-radius: 0px;
 }
 
 ul.statistics{
-padding-left: 10px; 
-background-color: rgba(0, 0, 0, 0.0980392); 
+    padding-left: 10px;
+    background-color: rgba(0, 0, 0, 0.0980392);
 }
 
 .tipr{
@@ -104,7 +106,7 @@ background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJ
   font-size: 14px;
   font-family: Helvetica;
   line-height: 2.49;
-  
+
 }
 #cssmenu {
   width: auto;
@@ -180,17 +182,17 @@ margin-right:10px;
 text-shadow:none !important;
 }
 .datePerValue{
-font-size:10px; 
+    font-size: 10px;
 padding:3px;
 }
 .userBlock{
-  margin-bottom:5px; 
-  margin-top:5px; 
+    margin-bottom: 5px;
+    margin-top: 5px;
   background: url('../img/background/bt_cubs.png') left top repeat;
 }
 .usrBlckIcnDrpbx{
-color:#1681bf; 
-font-size:36px; 
+    color: #1681bf;
+    font-size: 36px;
 line-height:50px;
 }
 #monthHideIcon{
@@ -420,7 +422,7 @@ td:hover .list-draggable-icon{
     position: relative;
 }
 .left-inner-addon input {
-    padding-left: 22px;    
+    padding-left: 22px;
 }
 .left-inner-addon span {
     position: absolute;
@@ -432,7 +434,7 @@ td:hover .list-draggable-icon{
     position: relative;
 }
 .right-inner-addon input {
-    padding-right: 30px;    
+    padding-right: 30px;
 }
 .right-inner-addon span {
     position: absolute;
@@ -446,13 +448,12 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 
 .sortableDiv{max-height: 400px; overflow-y: auto; overflow-x: hidden}
 
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {    
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     #imgPreview{width:100px;}
 }
 
 @media only screen and (min-width : 321px) {
-    
+
 }
 
 @media only screen and (max-width : 320px) {
@@ -462,22 +463,30 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 @media only screen and (max-width: 767px){
     .container{padding-left: 0px; padding-right: 0px;}
         .row{margin-left: 0px; margin-right: 0px;}
-        
+
     .navbar{-moz-border-radius: 0px; -webkit-border-radius: 0px; border-radius: 0px;}
     .navbar-collapse{background: #444; border: 0px;}
-        .navbar-collapse .nav,.navbar-collapse .nav li a{border: 0px; width: 100%; text-align: left;}        
+
+    .navbar-collapse .nav, .navbar-collapse .nav li a {
+        border: 0px;
+        width: 100%;
+        text-align: left;
+    }
         .navbar-collapse .navbar-form {float: left; width: 100%; margin: 0px;}
             .navbar-collapse .navbar-form .form-group{padding: 2px 5px;}
-            
+
         .navbar-nav .open .dropdown-menu{width: 100%; float: left;}
         .navbar-nav .open .dropdown-menu > li > a{padding: 8px 15px 8px 25px;}
             .navbar-nav .open .dropdown-menu > li > a:hover{background: url('../img/background/bt_cubs_a.png') left top repeat transparent;}
                 .dropdown-menu > li > a .icon-angle-right{display: none;}
-                
-        .navbar-collapse .dropdown-submenu{position: relative; display: block; float: left; left: auto; background: transparent; padding-left: 25px;
+
+    .navbar-collapse .dropdown-submenu{position: relative; display: block; float: left; left: auto; background: transparent; padding-left: 25px;
                                            -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; width: 100%;}
-    .registration-block{width: auto;}    
-    
+
+    .registration-block {
+        width: auto;
+    }
+
     .block > div,.block.block-drop-shadow{-moz-border-radius: 0px !important; -webkit-border-radius: 0px !important; border-radius: 0px !important;}
 }
 
@@ -491,7 +500,7 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 }
 
 @media only screen and (max-width: 992px){
-    
+
 }
 
 @media only screen and (max-width: 1150px){
@@ -504,7 +513,7 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 }
 
 @media only screen and (max-width: 1279px) {
-    
+
 }
 
 
@@ -524,7 +533,6 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 .toggle-on{position:absolute;top:0;bottom:0;left:0;right:50%;margin:0;border:0;border-radius:0}
 .toggle-off{position:absolute;top:0;bottom:0;left:50%;right:0;margin:0;border:0;border-radius:0}
 .toggle-handle{position:relative;margin:0 auto;padding-top:0;padding-bottom:0;height:100%;width:0;border-width:0 1px}
-.toggle.btn{min-width:59px;min-height:34px}
 .toggle-on.btn{padding-right:24px}
 .toggle-off.btn{padding-left:24px}
 .toggle.btn-lg{min-width:79px;min-height:45px}
@@ -532,12 +540,28 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 .toggle-off.btn-lg{padding-left:31px}
 .toggle-handle.btn-lg{width:40px}
 .toggle.btn-sm{min-width:50px;min-height:30px}
-.toggle-on.btn-sm{padding-right:20px}
+
+.toggle-on.btn-sm {
+    padding-right: 20px;
+    color: white;
+    background-color: #2F84B1;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 .toggle-off.btn-sm{padding-left:20px}
 .toggle.btn-xs{min-width:35px;min-height:22px}
 .toggle-on.btn-xs{padding-right:12px; color: white; background-color: #2F84B1; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
 .toggle-off.btn-xs{padding-left:12px; }
 .btn.btn-danger.btn-xs.active.toggle-off {color: white; background-color: #af2f2f; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
+
+.btn.btn-danger.btn-sm.active.toggle-off {
+    color: white;
+    background-color: #af2f2f;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
 .toggle.ios .toggle-handle { border-radius: 20px; }
 .toggle_div div span{background: rgba(0,0,0,0)}
@@ -545,3 +569,7 @@ table a.sort_up{background:url(../images_pres/arrow2.png) no-repeat right center
 /*.banner-setting-link {color: #dcdcde; background-color: #1e1e1e; border: 1px solid #141414; border-radius: 4px; padding: 0px 9px 0px 15px; max-width: 100%}*/
 .banner-setting-link {color: #fff; background-color: #1e1e1e; border: 1px solid #141414; border-radius: 4px; padding: 0px 9px 0px 9px; display: block; float: right; margin-right: 11.5%}
 .banner-setting-link:hover{color:#ebaf3c;}
+
+.label-grey {
+    color: #dddddd;
+}
