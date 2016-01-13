@@ -95,8 +95,10 @@ $(function () {
 	var e = $(this).parents('div.block:first').next();
 	if ($(this).is(':checked')) {
 	    e.addClass("disabledFields");
-	    $("#IsProtected").prop("checked", false).parent().removeClass("checked");
-	    $("#IsProtected").click();
+        var IsProtected = $("#IsProtected");
+        if (IsProtected.is(':checked')) {
+            IsProtected.click();
+        }
 	    $('#Password').val('');
 	    $('input', e).attr('disabled', 'disabled');
 	}
@@ -108,19 +110,15 @@ $(function () {
 
     $("#IsUnpublishActive").click(function () {
 	if ($(this).is(':checked')) {
-	    $('#UnpublishDate').removeAttr('disabled', 'disabled');
-	    $('#UnpublishDate').removeClass('disabledFields');
+        $('#UnpublishDate').removeAttr('disabled', 'disabled').removeClass('disabledFields');
 	} else {
-	    $('#UnpublishDate').attr('disabled', 'disabled');
-	    $('#UnpublishDate').addClass('disabledFields');
-
+        $('#UnpublishDate').attr('disabled', 'disabled').addClass('disabledFields');
 	}
     });
 
     $("#IsBuyable").click(function () {
 	if ($(this).is(':checked')) {
 	    $("#Price").addClass("required");
-	    //$("#CurrencyID").addClass("required");
 	    $("label[for='Price']").html('Fiyat: <span class="error">*</span>');
 	    $("label[for='CurrencyID']").html('Para Birimi: <span class="error">*</span>');
 	}
@@ -334,7 +332,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     //İndirilme Sayısı
     function labelFormatter(label, series) {
-	return "<div style='text-shadow: 1px 2px 1px rgba(0,0,0,0.2); font-size: 11px; text-align:center; padding:2px; color: #FFF; line-height: 13px;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+        return "<div style='text-shadow: 1px 2px 1px rgba(0,0,0,0.2); font-size: 11px; text-align:center; padding:2px; color: #FFF; line-height: 13px;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
     }
 
     function showTooltip(x, y, contents) {
