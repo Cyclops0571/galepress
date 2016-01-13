@@ -13,13 +13,15 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                            <input type="text" id="start-date" class="datepicker form-control" value="01.01.<?php echo date("Y"); ?>" />
+                            <input type="text" id="start-date" class="datepicker form-control"
+                                   value="<?php echo Common::dateRead(date("d.m.Y", strtotime("- 1 Year")), 'd.m.Y'); ?>"/>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                            <input type="text" id="end-date" class="datepicker form-control" value="31.12.<?php echo date("Y"); ?>" />
+                            <input type="text" id="end-date" class="datepicker form-control"
+                                   value="<?php echo Common::dateRead(date("d.m.Y", strtotime("+1 Day")), 'd.m.Y'); ?>"/>
                         </div>
                     </div>
                 </div> 
