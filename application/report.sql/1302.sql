@@ -27,7 +27,7 @@ FROM (
 		cu.`CustomerID`, cu.`CustomerNo`, cu.`CustomerName`, cu.`DateCreated`,
 		ap.`ApplicationID`, ap.`Name` AS `ApplicationName`, ap.`ExpirationDate`,
 		cn.`ContentID`,
-		cn.`Name` AS `ContentName`
+		cn.`Name` AS `ContentName`,
 		IFNULL(st.`Country`, '') AS `Country`,
 		IFNULL(st.`City`, '') AS `City`,
 		IFNULL(st.`District`, '') AS `District`,
