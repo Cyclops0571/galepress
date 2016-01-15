@@ -15,34 +15,61 @@
  * @property mixed Param5
  * @property mixed Param6
  * @property mixed Param7
+ * @property mixed StatisticID
+ * @property DateTime DateCreated
+ * @property int ProcessTypeID
+ * @property int CreatorUserID
+ * @property int StatusID
+ * @property int ProcessUserID
+ * @property DateTime ProcessDate
  */
-class Statistic extends Eloquent {
+class Statistic extends Eloquent
+{
 
     public static $timestamps = false;
     public static $table = 'Statistic';
     public static $key = 'StatisticID';
 
-    public function save() {
-	if (!$this->dirty()) {
-	    return true;
-	}
+    public function save()
+    {
+        /*
+        applicationActive = 1;
+        applicationPassive = 2;
+        applicationTerminated = 3;
+        contentDownloaded = 10;
+        contentUpdated = 11;
+        contentOpened = 12;
+        contentClosed = 13;
+        contentDeleted = 14;
+        pageOpenedPortrait = 21;
+        pageOpenedLandscape = 22;
+         */
 
-	$userID = -1;
-	if (Auth::User()) {
-	    $userID = Auth::User()->UserID;
-	}
+        if (!$this->dirty()) {
+            return true;
+        }
 
-	if ((int) $this->StatisticID == 0) {
-	    $this->DateCreated = new DateTime();
-	    $this->ProcessTypeID = eProcessTypes::Insert;
-	    $this->CreatorUserID = $userID;
-	    $this->StatusID = eStatus::Active;
-	} else {
-	    $this->ProcessTypeID = eProcessTypes::Update;
-	}
-	$this->ProcessUserID = $userID;
-	$this->ProcessDate = new DateTime();
-	parent::save();
+        $validTypes = array(1, 2, 3, 10, 11, 12, 13, 14, 21, 22);
+        if (!in_array($this->Type, $validTypes)) {
+            throw new Exception('Invalid file type!');
+        }
+
+        $userID = -1;
+        if (Auth::User()) {
+            $userID = Auth::User()->UserID;
+        }
+
+        if ((int)$this->StatisticID == 0) {
+            $this->DateCreated = new DateTime();
+            $this->ProcessTypeID = eProcessTypes::Insert;
+            $this->CreatorUserID = $userID;
+            $this->StatusID = eStatus::Active;
+        } else {
+            $this->ProcessTypeID = eProcessTypes::Update;
+        }
+        $this->ProcessUserID = $userID;
+        $this->ProcessDate = new DateTime();
+        parent::save();
     }
 
 }
