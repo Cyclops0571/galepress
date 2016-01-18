@@ -612,6 +612,7 @@ return array(
 	'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz.',
 	'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
 	'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
+    'tabs_info_active' => 'Yanlızca aktif tablar mobil uygulamada gösterilecektir',
 	'tabs_dont_use_feature' => 'Bu özelliği kullanma',
 	
 	'tabs_tab_status' => 'Tab Durumu',

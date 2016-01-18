@@ -8,7 +8,7 @@
         <title>{{ Config::get('custom.companyname') }}</title>
         <!-- Meta tags -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta http-equiv="content-Language" content="tr" />
+        <meta http-equiv="content-Language" content="{{Common::metaContentLanguage()}}" />
         <meta http-equiv="imagetoolbar" content="false" />
         <meta name="MSSmartTagsPreventParsing" content="true" />
         <meta name="revisit-after" content="3 days" />

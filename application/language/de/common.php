@@ -258,7 +258,7 @@ return array(
 	'contents_interactive_file_has_been_created' => 'Interaktive Datei erstellt',
 	'contents_interactive_file_hasnt_been_created' => 'Interaktive Datei noch nicht erstellt',
 	'contents_filelink' => 'Klicken Sie hier im die Datei herunterzuladen',
-	'contents_transfer' => 'Eski interaktif içeriği yeni pdf dosyasına aktar!',
+    'contents_transfer' => 'Move old interactive content to new pdf file!',
 	'contents_coverimage' => 'Deckblattvorschau ',
 	'contents_coverimage_select' => 'Bild wählen...',
 	'contents_isprotected' => 'Passwortschutz:',
@@ -621,6 +621,7 @@ return array(
 	'tabs_info_url' => 'Sie können einen Link zur mobilen kompatibel eingeben.',
 	'tabs_info_inhouse_url' => 'Sie können Galepress Feature auswählen (Storelocator vs..)',
 	'tabs_info_icon' => 'Icon wird in Anwendung angezeigt werden',
+    'tabs_info_active' => 'Only active tabs will be displayed in the mobile application',
 	'tabs_dont_use_feature' => 'Dont verwenden Sie diese Funktion',
 	
 	'tabs_tab_status' => 'Tab Status',

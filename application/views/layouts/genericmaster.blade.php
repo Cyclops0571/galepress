@@ -5,7 +5,7 @@
     <title>{{ Config::get('custom.companyname') }}</title>
     <!-- Meta tags -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="content-Language" content="tr"/>
+    <meta http-equiv="content-Language" content="{{Common::metaContentLanguage()}}"/>
     <meta http-equiv="imagetoolbar" content="false"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,13 +25,13 @@
 </head>
 <body>
 <script>
-    var currentLanguage = <?php echo json_encode(Session::get('language')); ?>;
+    var currentLanguage = <?php echo json_encode(Config::get('application.language')); ?>;
 </script>
 <style>
     /* statusbar */
     .statusbar {
         position: fixed;
-        bottom: 0px;
+        bottom: 0;
         width: 100%;
         padding: 10px;
         background: rgba(0, 0, 0, 0.70);
@@ -41,7 +41,7 @@
     .statusbar .statusbar-icon {
         float: left;
         margin-right: 10px;
-        padding: 3px 0px;
+        padding: 3px 0;
     }
 
     .statusbar .statusbar-icon [class^=icon] {

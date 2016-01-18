@@ -14,7 +14,9 @@ $components = DB::table('Component')
             <div id="tabs-1" class="tab-element">
                 <ul class="components">
                 	@foreach($components as $component)
-                    <li componentid="0" componentname="{{ $component->Class }}"><a href="javascript:void(0);" id="comp-{{ $component->Class }}"><span>{{ $component->Name }}</span></a></li>
+                        <li componentid="0" componentname="{{ $component->Class }}"><a href="javascript:void(0);"
+                                                                                       id="comp-{{ $component->Class }}"><span>{{ __('interactivity.'.$component->Class . '_name'); }}</span></a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -29,7 +31,7 @@ $components = DB::table('Component')
         <div class="component-info">
         	@foreach($components as $component)
             <div id="info-{{ $component->Class }}" class="invisible">
-                <h3><span></span>{{ $component->Name }}</h3>
+                <h3><span></span>{{ __('interactivity.'.$component->Class . '_name'); }}</h3>
                 <p>{{ __('interactivity.'.$component->Class.'_component_description') }}</p>
             </div>
             @endforeach

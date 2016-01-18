@@ -196,7 +196,7 @@ if (false) {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_icon') }}"><span
+                <div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_active') }}"><span
                                 class="icon-info-sign"></span></a></div>
             </div>
             <?php $tabNo++; ?>

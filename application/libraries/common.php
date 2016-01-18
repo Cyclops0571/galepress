@@ -1058,4 +1058,17 @@ class Common
         return str_replace(",", ".", str_replace(".", "", Input::get($inputName)));
     }
 
+    public static function metaContentLanguage() {
+        switch(Config::get('application.language')) {
+            case 'tr':
+                return 'tr';
+            case 'en':
+            case 'usa':
+                return 'en';
+            case 'de':
+                return 'de';
+            default:
+                return 'en';
+        }
+    }
 }
