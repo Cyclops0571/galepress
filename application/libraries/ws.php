@@ -20,8 +20,8 @@ class Ws {
     }
 
     /**
-     * 
-     * @param type $customerID
+     *
+     * @param int $customerID
      * @return Customer
      * @throws Exception
      */
@@ -34,8 +34,8 @@ class Ws {
     }
 
     /**
-     * 
-     * @param type $applicationID
+     *
+     * @param int $applicationID
      * @return Application
      * @throws Exception
      */

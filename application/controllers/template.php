@@ -32,7 +32,7 @@ class Template_Controller extends Base_Controller {
 		$data = array();
 		$data['application'] = $application;
 		$data["templateResults"] = $templateResults;
-		$data['bannerSet'] = Banner::getAppBanner($applicationID);
+        $data['bannerSet'] = Banner::getAppBanner($applicationID, FALSE);
 		return View::make('sections.templatepreview', $data);
 	}
 

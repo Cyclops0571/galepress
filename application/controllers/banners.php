@@ -68,6 +68,8 @@ class Banners_Controller extends Base_Controller
             ->nest('commandbar', 'sections.commandbar', $data);
     }
 
+
+    /** Bu Fonksiyon artik kullanilmiyor sanirim???? */
     public function get_new()
     {
         $applicationID = (int)Input::get('applicationID', '0');
@@ -347,7 +349,7 @@ class Banners_Controller extends Base_Controller
         $upload_handler = new UploadHandler($options);
 
         if (!Request::ajax()) {
-            return;
+            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
         }
 
         $upload_handler->post(false);
@@ -373,7 +375,7 @@ class Banners_Controller extends Base_Controller
     public function get_service_view($applicationID)
     {
         $application = Application::find($applicationID);
-        $bannerSet = Banner::getAppBanner($applicationID);
+        $bannerSet = Banner::getAppBanner($applicationID, FALSE);
         if (!$application || !$bannerSet) {
             return "";
         }

@@ -7,7 +7,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 	public function get_version($applicationID) {
 		return Ws::render(function() use ($applicationID) {
 					$application = Ws::getApplication($applicationID);
-					$customer = Ws::getCustomer($application->CustomerID);
+            Ws::getCustomer($application->CustomerID);
 					return Response::json(array(
 								'status' => 0,
 								'error' => "",
@@ -21,20 +21,19 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 
 	public function get_detail($applicationID) {
 		return Ws::render(function() use ($applicationID) {
-					$deviceType = Input::get('deviceType', 'ios');
-					$deviceDetail = '';
-					$osVersion = '';
-					$appBuildVersion = '';
-					/*
-					  INFO: Force | guncellemeye zorlanip zorlanmayacagini selimin tablosundan sorgula!
-					  0: Zorlama
-					  1: Uyari goster
-					  2: Zorla
-					  3: Sil ve zorla
-					 */
+            /*
+            $deviceType = Input::get('deviceType', 'ios');
+            $deviceDetail = '';
+            $osVersion = '';
+            $appBuildVersion = '';
+              INFO: Force | guncellemeye zorlanip zorlanmayacagini selimin tablosundan sorgula!
+              0: Zorlama
+              1: Uyari goster
+              2: Zorla
+              3: Sil ve zorla
+             */
 
 					$application = Ws::getApplication($applicationID);
-					$application instanceof Application;
 					$customer = Ws::getCustomer($application->CustomerID);
 
 					//INFO:Save token method come from get_contents
@@ -65,7 +64,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 	public function get_categories($applicationID) {
 		return Ws::render(function() use ($applicationID) {
 					$application = Ws::getApplication($applicationID);
-					$customer = Ws::getCustomer($application->CustomerID);
+            Ws::getCustomer($application->CustomerID);
 					$categories = Ws::getApplicationCategories($applicationID);
 					return Response::json(array(
 								'status' => 0,
@@ -78,7 +77,7 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 	//categoryID
 	public function get_categoryDetail($applicationID, $categoryID) {
 		return Ws::render(function() use ($applicationID, $categoryID) {
-					Ws::getApplication($applicationID);
+            $application = Ws::getApplication($applicationID);
 					Ws::getCustomer($application->CustomerID);
 					$category = Ws::getApplicationCategoryDetail($applicationID, $categoryID);
 					return Response::json(array(
@@ -117,7 +116,6 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 		return Ws::render(function() {
 					$username = Input::get('username');
 					$password = Input::get('password');
-					$applicationSet = array();
 					$userFacebookID = Input::get('userFacebookID');
 					$userFbEmail = Input::get('userFbEmail');
 					$user = null;
@@ -162,8 +160,8 @@ class Ws_v102_Applications_Controller extends Base_Controller {
 								->get();
 					}
 
-					foreach ($applicationSet as $application) {
-						$application instanceof Application;
+            foreach ($applicationSet as $application) {
+                /** @var Application $application */
 						$responseSet[] = array(
 							'ApplicationID' => $application->ApplicationID,
 							'Name' => $application->Name
