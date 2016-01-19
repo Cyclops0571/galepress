@@ -367,7 +367,7 @@ class Content extends Eloquent
         foreach ($rs as $r) {
             array_push($categories, array(
                 'CategoryID' => (int)$r->CategoryID,
-                'CategoryName' => ((int)$r->CategoryID === 0 ? Lang::line('common.contents_category_list_general', array(), $this->Application()->ApplicationLanguage) : $r->Name)
+                'CategoryName' => ((int)$r->CategoryID === 0 ? (string)Lang::line('common.contents_category_list_general', array(), $this->Application()->ApplicationLanguage) : $r->Name)
             ));
         }
         return $categories;
