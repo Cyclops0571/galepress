@@ -5,6 +5,7 @@
  * @property int $CustomerID Description
  * @property int $Name Description
  * @property int $Detail Description
+ * @property int $ApplicationLanguage Description
  * @property int $ThemeBackground Description
  * @property int $ThemeForeground Description
  * @property int $Price Description

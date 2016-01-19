@@ -202,6 +202,7 @@ return array(
 	'application_settings_subscription' => 'Üyelik Ayarları',
     
 	'application_payment' => 'Ödeme',
+    'application_language' => 'Uygulama Dili',
 
 	'applications_list_blocked1' => 'Evet',
 	'applications_list_blocked0' => 'Hayır',
@@ -211,7 +212,6 @@ return array(
 	'applications_applicationname' => 'Uygulama Adı:',
 	'applications_detail' => 'Detay:',
 	'applications_price' => 'Fiyat(Aylık):',
-	'applications_placeholder_price' => 'Fiyat(Aylık):',
 	'applications_placeholder_price' => 'Fiyat(Aylık):',
 	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Başlangıç Tarihi (gg.aa.yyyy):',

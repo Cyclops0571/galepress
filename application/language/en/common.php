@@ -202,6 +202,7 @@ return array(
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
     
 	'application_payment' => 'Application Payment',
+	'application_language' => 'Application Language',
 
 	'applications_list_blocked1' => 'Yes',
 	'applications_list_blocked0' => 'No',

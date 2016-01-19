@@ -54,15 +54,6 @@ class Content extends Eloquent
       }
      */
 
-    /**
-     *
-     * @return Application
-     */
-    public function Application()
-    {
-        return $this->belongs_to('Application', 'ApplicationID')->first();
-    }
-
     public function Currency($languageID)
     {
         //return $this->belongs_to('GroupCode', 'GroupCodeID')->first();
@@ -76,17 +67,6 @@ class Content extends Eloquent
     public function Files($statusID)
     {
         return $this->has_many('ContentFile', $this->key())->where('StatusID', '=', $statusID)->get();
-    }
-
-    /**
-     *
-     * @param int $contentID
-     * @param array $columns
-     * @return Content
-     */
-    public static function find($contentID, $columns = array('*'))
-    {
-        return Content::where(self::$key, "=", $contentID)->first($columns);
     }
 
     public function ActiveFile()
@@ -155,6 +135,50 @@ class Content extends Eloquent
                 }
             }
         }
+    }
+
+    /**
+     *
+     * @param int $contentID
+     * @param array $columns
+     * @return Content
+     */
+    public static function find($contentID, $columns = array('*'))
+    {
+        return Content::where(self::$key, "=", $contentID)->first($columns);
+    }
+
+    public function save($updateAppVersion = TRUE)
+    {
+        if (!$this->dirty()) {
+            return true;
+        }
+        $userID = -1;
+        if (Auth::User()) {
+            $userID = Auth::User()->UserID;
+        }
+
+        if ((int)$this->ContentID == 0) {
+            $this->DateCreated = new DateTime();
+            $this->ProcessTypeID = eProcessTypes::Insert;
+            $this->CreatorUserID = $userID;
+            $this->StatusID = eStatus::Active;
+            $this->PdfVersion = 1;
+            $this->CoverImageVersion = 1;
+        } else {
+            $this->ProcessTypeID = eProcessTypes::Update;
+        }
+
+        $this->ProcessUserID = $userID;
+        $this->Version = (int)$this->Version + 1;
+        $this->ProcessDate = new DateTime();
+        if ($updateAppVersion) {
+            $contentApp = Application::find($this->ApplicationID);
+            if ($contentApp) {
+                $contentApp->incrementAppVersion();
+            }
+        }
+        parent::save();
     }
 
     public function setCategory($selectedCategories)
@@ -298,39 +322,6 @@ class Content extends Eloquent
         }
     }
 
-    public function save($updateAppVersion = TRUE)
-    {
-        if (!$this->dirty()) {
-            return true;
-        }
-        $userID = -1;
-        if (Auth::User()) {
-            $userID = Auth::User()->UserID;
-        }
-
-        if ((int)$this->ContentID == 0) {
-            $this->DateCreated = new DateTime();
-            $this->ProcessTypeID = eProcessTypes::Insert;
-            $this->CreatorUserID = $userID;
-            $this->StatusID = eStatus::Active;
-            $this->PdfVersion = 1;
-            $this->CoverImageVersion = 1;
-        } else {
-            $this->ProcessTypeID = eProcessTypes::Update;
-        }
-
-        $this->ProcessUserID = $userID;
-        $this->Version = (int)$this->Version + 1;
-        $this->ProcessDate = new DateTime();
-        if ($updateAppVersion) {
-            $contentApp = Application::find($this->ApplicationID);
-            if ($contentApp) {
-                $contentApp->incrementAppVersion();
-            }
-        }
-        parent::save();
-    }
-
     public function getIdentifier($refreshIdentifier = false)
     {
         if (empty($this->Identifier) || $refreshIdentifier) {
@@ -348,4 +339,38 @@ class Content extends Eloquent
         }
         return $this->Identifier;
     }
+
+    /**
+     *
+     * @return Application
+     */
+    public function Application()
+    {
+        return $this->belongs_to('Application', 'ApplicationID')->first();
+    }
+
+    /**
+     * @desc Returns content categories for webservice
+     * @param int $ServiceVersion
+     * @return array
+     */
+    public function WebserviceCategories($ServiceVersion)
+    {
+        $categories = array();
+        $sql = '' .
+            'SELECT ct.CategoryID, ct.Name ' .
+            'FROM `ContentCategory` cc ' .
+            'LEFT OUTER JOIN `Category` ct ON cc.`CategoryID` = ct.`CategoryID` AND ct.`StatusID` = 1 ' .
+            'WHERE cc.`ContentID`=' . (int)$this->ContentID . ' ' .
+            'ORDER BY ct.`Name` ASC';
+        $rs = DB::query($sql);
+        foreach ($rs as $r) {
+            array_push($categories, array(
+                'CategoryID' => (int)$r->CategoryID,
+                'CategoryName' => ((int)$r->CategoryID === 0 ? Lang::line('common.contents_category_list_general', array(), $this->Application()->ApplicationLanguage) : $r->Name)
+            ));
+        }
+        return $categories;
+    }
+
 }

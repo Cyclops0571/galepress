@@ -202,6 +202,7 @@ return array(
 	'application_settings_subscription' => 'Abonnement-Einstellungen',
     
 	'application_payment' => 'Anwendungs Zahlung',
+    'application_language' => 'Anwendungssprache',
 
 	'applications_list_blocked1' => 'Ja',
 	'applications_list_blocked0' => 'Nein',

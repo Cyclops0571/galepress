@@ -183,25 +183,6 @@ class webService
         return $content;
     }
 
-    public static function getContentCategories($ServiceVersion, $contentID)
-    {
-        $categories = array();
-        $sql = '' .
-            'SELECT ct.CategoryID, ct.Name ' .
-            'FROM `ContentCategory` cc ' .
-            'LEFT OUTER JOIN `Category` ct ON cc.`CategoryID` = ct.`CategoryID` AND ct.`StatusID` = 1 ' .
-            'WHERE cc.`ContentID`=' . (int)$contentID . ' ' .
-            'ORDER BY ct.`Name` ASC';
-        $rs = DB::query($sql);
-        foreach ($rs as $r) {
-            array_push($categories, array(
-                'CategoryID' => (int)$r->CategoryID,
-                'CategoryName' => ((int)$r->CategoryID === 0 ? 'Genel' : $r->Name)
-            ));
-        }
-        return $categories;
-    }
-
     // Check User credential
     public static function checkUserCredential($ServiceVersion, $customerID)
     {

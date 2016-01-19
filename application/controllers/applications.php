@@ -326,7 +326,8 @@ class Applications_Controller extends Base_Controller
                 'CustomerID' => 'required',
                 'Name' => 'required',
                 'ExpirationDate' => 'required',
-                'PackageID' => 'required|integer'
+                'PackageID' => 'required|integer',
+                'ApplicationLanguage' => 'required',
             );
             $v = Validator::make(Input::all(), $rules);
             if ($v->passes()) {
@@ -350,6 +351,7 @@ class Applications_Controller extends Base_Controller
                 $s->CustomerID = (int)Input::get('CustomerID');
                 $s->Name = Input::get('Name');
                 $s->Detail = Input::get('Detail');
+                $s->ApplicationLanguage = Input::get('ApplicationLanguage');
                 $s->Price = Input::get('Price');
                 $s->BundleText = strtolower(Input::get('BundleText'));
                 $s->StartDate = new DateTime(Common::dateWrite(Input::get('StartDate')));

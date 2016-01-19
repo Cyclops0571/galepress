@@ -367,11 +367,6 @@ class Banners_Controller extends Base_Controller
         return Response::json($ret);
     }
 
-    public function post_imageupload_ltie10()
-    {
-
-    }
-
     public function get_service_view($applicationID)
     {
         $application = Application::find($applicationID);

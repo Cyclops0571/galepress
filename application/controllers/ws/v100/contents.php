@@ -25,14 +25,13 @@ class Ws_v100_Contents_Controller extends Base_Controller
 		return Ws::render(function() use ($contentID)
 		{
 			$content = Ws::getContent($contentID);
-			$categories = Ws::getContentCategories($contentID);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
 				'ContentID' => (int)$content->ContentID,
 				'ContentName' => $content->Name,
 				'ContentDetail' => $content->Detail,
-				'ContentCategories' => $categories,
+                'ContentCategories' => $content->WebserviceCategories(100),
 				'ContentMonthlyName' => $content->MonthlyName,
 				'ContentIsProtected' => ((int)$content->IsProtected == 1 ? true : false),
 				'ContentIsBuyable' => ((int)$content->IsBuyable == 1 ? true : false),

@@ -24,15 +24,7 @@ class Webservice_Contents_Controller extends Base_Controller
         return Ws::render(function () use ($contentID, $serviceVersion) {
             /** @var Content $content */
             $content = Ws::getContent($contentID, $serviceVersion);
-            $categories = Ws::getContentCategories($contentID);
 
-            if($content->ApplicationID == 10 || $content->ApplicationID == 146) {
-                foreach($categories as &$category) {
-                    if($category['CategoryName'] == 'Genel') {
-                        $category['CategoryName'] = 'General';
-                    }
-                }
-            }
             return Response::json(array(
                 'status' => 0,
                 'error' => "",
@@ -40,7 +32,7 @@ class Webservice_Contents_Controller extends Base_Controller
                 'ContentOrderNo' => (int)$content->OrderNo,
                 'ContentName' => $content->Name,
                 'ContentDetail' => $content->Detail,
-                'ContentCategories' => $categories,
+                'ContentCategories' => $content->WebserviceCategories($serviceVersion),
                 'ContentMonthlyName' => $content->MonthlyName,
                 'ContentIsProtected' => ((int)$content->IsProtected == 1 ? true : false),
                 'ContentIsBuyable' => ((int)$content->IsBuyable == 1 ? true : false),
