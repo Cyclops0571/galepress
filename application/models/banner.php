@@ -88,31 +88,6 @@ class Banner extends Eloquent
     public function Application()
     {
         return $this->belongs_to('Application', 'ApplicationID')->first();
-    }    /**
-     *
-     * @return void
-     */
-    public function processImage($tmpFileName)
-    {
-        $application = $this->Application();
-        $tmpFilePath = path('public') . PATH_TEMP_FILE . '/' . $tmpFileName;
-        $destinationFolder = path('public') . 'files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/';
-        $sourcePicturePath = $destinationFolder . Auth::User()->UserID . '_' . date("YmdHis") . '_' . $tmpFileName;
-        if (!is_file($tmpFilePath)) {
-            return;
-        }
-
-        if (!File::exists($destinationFolder)) {
-            File::mkdir($destinationFolder);
-        }
-
-        File::move($tmpFilePath, $sourcePicturePath);
-
-        $pictureInfoSet = array();
-        $pictureInfoSet[] = array("width" => 740, "height" => 320, "imageName" => $this->BannerID);
-        foreach ($pictureInfoSet as $pInfo) {
-            imageClass::cropImage($sourcePicturePath, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
-        }
     }
 
     public function save($updateAppVersion = TRUE)
