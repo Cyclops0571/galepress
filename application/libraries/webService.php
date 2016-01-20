@@ -52,11 +52,12 @@ class webService
 
     public static function getCheckApplicationCategories($ServiceVersion, $applicationID)
     {
+        $application = Application::find($applicationID);
         $categories = array();
         //add general
         array_push($categories, array(
             'CategoryID' => 0,
-            'CategoryName' => 'Genel'
+            'CategoryName' => (string)Lang::line('common.contents_category_list_general', array(), $application->ApplicationLanguage)
         ));
         $rs = Category::where('ApplicationID', '=', $applicationID)->where('StatusID', '=', eStatus::Active)->order_by('Name', 'ASC')->get();
         foreach ($rs as $r) {
@@ -64,13 +65,6 @@ class webService
                 'CategoryID' => (int)$r->CategoryID,
                 'CategoryName' => $r->Name
             ));
-        }
-        if($applicationID == 10 || $applicationID == 146) {
-            foreach($categories as &$category) {
-                if($category["CategoryName"] == 'Genel') {
-                    $category["CategoryName"] = "General";
-                }
-            }
         }
         return $categories;
     }
