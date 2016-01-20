@@ -54,11 +54,10 @@ class Ws_v100_Applications_Controller extends Base_Controller
 		{
 			$application = Ws::getApplication($applicationID);
 			$customer = Ws::getCustomer($application->CustomerID);
-			$categories = Ws::getApplicationCategories($applicationID);
 			return Response::json(array(
 				'status' => 0,
 				'error' => "",
-				'Categories' => $categories
+                'Categories' => $application->getServiceCategories()
 			));
 		});
 	}

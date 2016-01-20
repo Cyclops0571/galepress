@@ -54,33 +54,16 @@ class Ws
         return $application;
     }
 
-    public static function getApplicationCategories($applicationID)
-    {
-        $categories = array();
-        //add general
-        array_push($categories, array(
-            'CategoryID' => 0,
-            'CategoryName' => 'Genel'
-        ));
-        $rs = Category::where('ApplicationID', '=', $applicationID)->where('StatusID', '=', eStatus::Active)->order_by('Name', 'ASC')->get();
-        foreach ($rs as $r) {
-            array_push($categories, array(
-                'CategoryID' => (int)$r->CategoryID,
-                'CategoryName' => $r->Name
-            ));
-        }
-        return $categories;
-    }
-
     public static function getApplicationCategoryDetail($applicationID, $categoryID)
     {
-        $category = Category::where('CategoryID', '=', $categoryID)
+        $categories = Category::where('CategoryID', '=', $categoryID)
             ->where('ApplicationID', '=', $applicationID)
             ->where('StatusID', '=', eStatus::Active)->first();
-        if (!$category) {
+        if (!$categories) {
             throw eServiceError::getException(eServiceError::CategoryNotFound);
         }
-        return $category;
+
+        return $categories;
     }
 
     public static function getApplicationContents($applicationID, $isTest = False)

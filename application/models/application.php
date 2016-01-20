@@ -325,4 +325,21 @@ class Application extends Eloquent
         }
     }
 
+    public function getServiceCategories()
+    {
+        $categories = array();
+        array_push($categories, array(
+            'CategoryID' => 0,
+            'CategoryName' => (string)Lang::line('common.contents_category_list_general', array(), $this->ApplicationLanguage)
+        ));
+
+        $rs = Category::where('ApplicationID', '=', $this->ApplicationID)->where('StatusID', '=', eStatus::Active)->order_by('Name', 'ASC')->get();
+        foreach ($rs as $r) {
+            array_push($categories, array(
+                'CategoryID' => (int)$r->CategoryID,
+                'CategoryName' => $r->Name
+            ));
+        }
+        return $categories;
+    }
 }
