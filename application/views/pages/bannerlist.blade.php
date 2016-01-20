@@ -38,15 +38,17 @@
                                     class="icon-info-sign"></span></a></div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-3"><label class="label-grey"
-                                                 for="BannerCustomerActive"><?php echo __("common.banner_use_costomer_banner"); ?></label>
+                    <div class="col-md-3">
+                        <label class="label-grey" for="BannerCustomerActive">
+                            <?php echo __("common.banner_use_costomer_banner"); ?>
+                        </label>
                     </div>
                     <div class="col-md-8">
                         <div class="input-group">
-			    <span class="input-group-addon">
-				<input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1"
-                       <?php echo $application->BannerCustomerActive ? 'checked' : ''; ?> onclick="cApplication.BannerCustomerActive()">
-			    </span>
+                            <span class="input-group-addon">
+                                <input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1"
+                                       <?php echo $application->BannerCustomerActive ? 'checked' : ''; ?> onclick="cApplication.BannerCustomerActive()">
+                            </span>
                             <input type="text" name="BannerCustomerUrl"
                                    value="<?php echo $application->BannerCustomerUrl; ?>" placeholder="http://">
 			    <span class="input-group-btn">

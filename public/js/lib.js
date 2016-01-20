@@ -195,6 +195,12 @@ $(document).ready(function () {
     if ($("input[type=checkbox]").length > 0 || $("input[type=radio]").length > 0) {
         if (!$("input[type=checkbox]").hasClass("toggleCheckbox")) {
             $("input[type=checkbox], input[type=radio]").uniform();
+        } else {
+            $.each($("input[type=checkbox], input[type=radio]"), function () {
+                if (!$(this).hasClass("toggleCheckbox")) {
+                    $(this).uniform();
+                }
+            });
         }
     }
 
