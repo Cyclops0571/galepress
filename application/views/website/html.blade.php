@@ -125,8 +125,8 @@
 
     <script type="text/javascript">
     var SelectedLanguage = <?php echo json_encode(Session::get('language')); ?>;
+    var Languages = <?php echo json_encode(Laravel\Config::get('application.languages')); ?>;
     $(function(){
-	var Languages = ['usa', 'tr', 'de', 'en'];
 	var j = 1;
 	for(var i = 0; i < Languages.length; i++) {
 	    if(SelectedLanguage === Languages[i]) {
