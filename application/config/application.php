@@ -93,14 +93,14 @@ return array(
     'languages' => array(
 	'usa',
 	'tr', 
-	'en', 
-	'de', 
+	'en',
+//	'de',
     ),
     // Languages with ID for quick lookup
     'langs' => array(
 	'tr' => 1,
 	'en' => 2,
-	'de' => 3,
+//	'de' => 3,
 	'usa' => 4,
     ),
     /*
