@@ -60,6 +60,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo Lang::line('common.contents_category_list_general', array(), 'tr');
+        exit;
         return \Laravel\View::make('test.checkboxtest');
         $x = new Date("Y-m-d");
         echo $x; exit;
