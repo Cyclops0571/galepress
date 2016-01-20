@@ -39,7 +39,7 @@ class Crop_Controller extends Base_Controller {
 			$imageInfo = new imageInfoEx($imagePath);
 		}
 		$data = array();
-		$data['cropSet'] = $cropSet;
+        $data['cropSet'] = $cropSet;
 		$data['imageInfo'] = $imageInfo;
 		return View::make('pages.cropview', $data);
 	}
@@ -52,6 +52,7 @@ class Crop_Controller extends Base_Controller {
 		$widthSet = Input::get("widthSet");
 		$cropIDSet = Input::get("cropIDSet");
 		$contentID = (int) Input::get("contentID", 0);
+
 		/** @var ContentFile $contentFile */
         $contentFile = ContentFile::where('ContentID', '=', $contentID)
             ->where('StatusID', '=', eStatus::Active)
@@ -93,11 +94,17 @@ class Crop_Controller extends Base_Controller {
 				continue;
 			}
 
+            $RespectRatio = ($imageInfo->width / 500);
 			$im = new Imagick($imageInfo->absolutePath);
-			$im->cropimage($widthSet[$i], $heightSet[$i], $xCoordinateSet[$i], $yCoordinateSet[$i]);
+            $im->cropimage($widthSet[$i] * $RespectRatio, $heightSet[$i] * $RespectRatio, $xCoordinateSet[$i] * $RespectRatio, $yCoordinateSet[$i] * $RespectRatio);
 			$im->resizeImage($crop->Width, $crop->Height, Imagick::FILTER_LANCZOS, 1, TRUE);
 			$im->writeImage(path('public') . $contentFile->FilePath . "/" . IMAGE_CROPPED_NAME . "_" . $crop->Width . "x" . $crop->Height . ".jpg");
 			$im->destroy();
+//            var_dump($imageInfo); exit;
+//            echo $widthSet[$i] . " -- " . $heightSet[$i] . " -- " . $xCoordinateSet[$i] . " -- " . $yCoordinateSet[$i], PHP_EOL;
+//            echo "Resize:" . $crop->Width . " -- " . $crop->Height, PHP_EOL;
+//            echo "imagePath:" . path('public') . $contentFile->FilePath . "/" . IMAGE_CROPPED_NAME . "_" . $crop->Width . "x" . $crop->Height . ".jpg", PHP_EOL;
+//            exit;
 		}
 		
 		$content = Content::find($contentID);

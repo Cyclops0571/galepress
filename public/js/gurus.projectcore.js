@@ -193,7 +193,8 @@ var cInteractivity = new function () {
 
         var pageElm = $("#page");
         var sliderElm = $("div.thumblist ul.slideshow-slides li.each-slide");
-        $("#pdf-container").addClass("loading");
+        var pdfContainer = $("#pdf-container");
+        pdfContainer.addClass("loading");
         pageElm.css("display", "none");
 
         //remove active class
@@ -222,7 +223,7 @@ var cInteractivity = new function () {
             cInteractivity.loadPage(pageno, func, obj);
 
             if (!$("html").hasClass("lt-ie9")) {
-                var h = $(window).innerHeight() - $("#pdf-container").offset().top - $("footer").outerHeight();
+                var h = $(window).innerHeight() - pdfContainer.offset().top - $("footer").outerHeight();
 
                 $('#page').smoothZoom({
                     width: '100%',
