@@ -343,8 +343,9 @@ class Interactivity_Controller extends Base_Controller
 
     public function post_save()
     {
-        //return "success=".base64_encode("false");
         try {
+            $i = 1;
+            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
             $currentUser = Auth::User();
 
             $included = (int)Input::get('included');
@@ -361,13 +362,17 @@ class Interactivity_Controller extends Base_Controller
                 throw new Exception(__('error.auth_interactivity'));
             }
 
+            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+
             DB::transaction(/**
              * @throws Exception
              */
-                function () use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included) {
+                function () use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included, $i) {
                     $closing = Input::get('closing');
                     $pageNo = (int)Input::get('pageno');
-                    $ids = Input::get('compid');
+                    $ids = (array)Input::get('compid');
+                    var_dump($ids);
+                    return;
                     //find current page id
                     $ContentFilePageID = 0;
 
@@ -402,9 +407,9 @@ class Interactivity_Controller extends Base_Controller
                         $cf->ProcessTypeID = eProcessTypes::Update;
                         $cf->save();
                     }
-
-                    if ($ids !== null) {
-                        foreach ($ids as $id) {
+                    //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+                    foreach ($ids as $id) {
+                        //echo 'ids -- ' . 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
                             $clientComponentID = (int)Input::get('comp-' . $id . '-id', '0');
                             $clientPageComponentID = (int)Input::get('comp-' . $id . '-pcid', '0');
                             $clientProcess = Input::get('comp-' . $id . '-process', '');
@@ -622,9 +627,14 @@ class Interactivity_Controller extends Base_Controller
                                 //TODO:Delete current file
                             }
                         }
-                    }
+
+                    //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
                 });
-            interactivityQueue::trigger();
+            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+            if (Laravel\Request::env() == ENV_LIVE && Input::get('closing') == "true") {
+                interactivityQueue::trigger();
+            }
+            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
             return "success=" . base64_encode("true");
         } catch (Exception $e) {
             Log::info($e->getMessage());
