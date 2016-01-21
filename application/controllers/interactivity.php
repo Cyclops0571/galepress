@@ -371,8 +371,6 @@ class Interactivity_Controller extends Base_Controller
                     $closing = Input::get('closing');
                     $pageNo = (int)Input::get('pageno');
                     $ids = (array)Input::get('compid');
-                    var_dump($ids);
-                    return;
                     //find current page id
                     $ContentFilePageID = 0;
 
