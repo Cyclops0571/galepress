@@ -16,10 +16,11 @@
 //support-settings-button 
 
 //echo Laravel\Lang:: ?>
+<?php if(Laravel\Config::get('application.language') != 'de'): ?>
 <div class="support-settings">
     <div class="support-settings-button vertical" onclick="location.href='<?php echo route('my_ticket') ?>'">
 	<span class="icon-question-sign"></span> 
 	<?php echo __('common.support');?>
     </div>
 </div>
-
+<?php endif; ?>

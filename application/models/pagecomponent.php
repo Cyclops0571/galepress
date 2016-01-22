@@ -2,6 +2,7 @@
 
 /**
  * Class PageComponent
+ * @method static PageComponent find(int $ID)
  * @property mixed PageComponentID
  * @property int ProcessTypeID
  * @property DateTime ProcessDate
@@ -10,6 +11,8 @@
  * @property int No
  * @property int ComponentID
  * @property int ContentFilePageID
+ * @property int CreatorUserID
+ * @property int ProcessUserID
  */
 class PageComponent extends Eloquent {
 

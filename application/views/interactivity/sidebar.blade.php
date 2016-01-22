@@ -43,6 +43,7 @@ $components = DB::table('Component')
             <input type="hidden" id="included" name="included" value="{{ $included }}">
             <input type="hidden" id="contentfileid" name="contentfileid" value="{{ $ContentFileID }}">
             <input type="hidden" id="pageno" name="pageno" value="">
+            <input type="hidden" id="closing" name="closing" value="false" />
         	<div id="component-container"></div>
         </form>
         <!-- end component-container --> 
