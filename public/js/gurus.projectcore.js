@@ -85,6 +85,7 @@ var cInteractivity = new function () {
         var from = $("#transferFrom").val();
         var to = $("#transferTo").val();
         this.saveCurrentPage();
+        cInteractivity.showPage($("#pageno").val());
 
         var t = 'POST';
         var u = '/' + currentLanguage + '/' + route["interactivity_transfer"];
@@ -151,12 +152,12 @@ var cInteractivity = new function () {
     };
 
     this.selectComponent = function (obj) {
-
         var currentPageNo = $("#pageno").val();
         var pageNo = obj.parents("li.page:first").attr("pageno");
 
         if (pageNo !== currentPageNo) {
-            this.showPage(pageNo, false, cInteractivity.selectComponentOnCurrentPage, obj);
+            this.saveCurrentPage();
+            this.showPage(pageNo, cInteractivity.selectComponentOnCurrentPage, obj);
         } else {
             this.selectComponentOnCurrentPage(obj);
         }
@@ -168,10 +169,10 @@ var cInteractivity = new function () {
         var tool = $("#tool-" + id);
         if (!tool.hasClass("selected")) {
             //hide all other components
-            $("#component-container .component").addClass("hide");
+            $('#component-container').find('.component').addClass("hide");
 
             //show only selected components
-            $("#component-container #prop-" + id).removeClass("hide");
+            $('component-container').find('#prop-' + id).removeClass("hide");
 
             $(".gselectable").removeClass("selected");
             tool.addClass("selected");
@@ -185,12 +186,7 @@ var cInteractivity = new function () {
         });
     };
 
-    this.showPage = function (pageno, dontSave, func, obj) {
-        dontSave = (typeof dontSave == "undefined") ? false : dontSave;
-        if (!dontSave) {
-            this.saveCurrentPage();
-        }
-
+    this.showPage = function (pageno, func, obj) {
         var pageElm = $("#page");
         var sliderElm = $("div.thumblist ul.slideshow-slides li.each-slide");
         var pdfContainer = $("#pdf-container");
@@ -221,25 +217,22 @@ var cInteractivity = new function () {
 
             cInteractivity.clearPage();
             cInteractivity.loadPage(pageno, func, obj);
+            var h = $(window).innerHeight() - pdfContainer.offset().top - $("footer").outerHeight();
 
-            if (!$("html").hasClass("lt-ie9")) {
-                var h = $(window).innerHeight() - pdfContainer.offset().top - $("footer").outerHeight();
-
-                $('#page').smoothZoom({
-                    width: '100%',
-                    height: h + 'px',
-                    responsive: true,
-                    pan_BUTTONS_SHOW: "NO",
-                    pan_LIMIT_BOUNDARY: "NO",
-                    button_SIZE: 24,
-                    button_ALIGN: "top right",
-                    zoom_MAX: 500,
-                    border_TRANSPARENCY: 0,
-                    container: 'pdf-container',
-                    max_WIDTH: '',
-                    max_HEIGHT: ''
-                });
-            }
+            $('#page').smoothZoom({
+                width: '100%',
+                height: h + 'px',
+                responsive: true,
+                pan_BUTTONS_SHOW: "NO",
+                pan_LIMIT_BOUNDARY: "NO",
+                button_SIZE: 24,
+                button_ALIGN: "top right",
+                zoom_MAX: 500,
+                border_TRANSPARENCY: 0,
+                container: 'pdf-container',
+                max_WIDTH: '',
+                max_HEIGHT: ''
+            });
         };
         img.src = src;
     };
@@ -310,12 +303,10 @@ var cInteractivity = new function () {
         });
     };
 
-    this.saveCurrentPage = function (closing) {
-        closing = (typeof closing == "undefined") ? false : closing;
-
+    this.saveCurrentPage = function () {
         var t = 'POST';
         var u = '/' + currentLanguage + '/' + route["interactivity_save"];
-        var d = $("#pagecomponents").serialize() + "&closing=" + (closing ? 'true' : 'false');
+        var d = $("#pagecomponents").serialize();
         var ret = cInteractivity.doRequest(t, u, d);
 
         var d = new Date();
@@ -326,14 +317,11 @@ var cInteractivity = new function () {
             .replace("{minute}", m);
 
         $("#pdf-save span.save-info").html(s);
-
-        if (!closing) {
-            cInteractivity.showPage($("#pageno").val(), true);
-        }
     };
 
     this.saveAndClose = function () {
-        this.saveCurrentPage(true);
+        $('#closing').val('true');
+        this.saveCurrentPage();
         this.close();
     };
 
@@ -404,7 +392,15 @@ var cUser = new function () {
                 if (getParameterByName("shopping")) {
                     window.location.href = '/' + currentLanguage + '/shop';
                 } else {
-                    window.location.href = '/' + currentLanguage + '/' + route["home"];
+                    try {
+                        if (window.top != window) {
+                            window.top.location.href = '/' + currentLanguage + '/' + route["home"];
+                        } else {
+                            window.location.href = '/' + currentLanguage + '/' + route["home"];
+                        }
+                    } catch (err) {
+                        window.location.href = '/' + currentLanguage + '/' + route["home"];
+                    }
                 }
             });
 

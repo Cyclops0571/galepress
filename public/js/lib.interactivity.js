@@ -15,7 +15,7 @@ $(function()
 
 function initPdfPage()
 {
-	cInteractivity.showPage("1", true);
+	cInteractivity.showPage(1);
 	$("#pdf-page")
 		.blur(function()
 		{
@@ -31,6 +31,7 @@ function initPdfPage()
 			if(val > pageCount) {
 				val = pageCount;
 			}
+            cInteractivity.saveCurrentPage();
 			cInteractivity.showPage(val);
 		})
 		.keydown(function (e)
@@ -48,6 +49,7 @@ function initPdfPage()
 				if(val > pageCount) {
 					val = pageCount;
 				}
+                cInteractivity.saveCurrentPage();
 				cInteractivity.showPage(val);
 			}
 		});
@@ -69,9 +71,9 @@ function initTree()
 function initPageClickEvent()
 {
 	$("div.thumblist ul.slideshow-slides li.each-slide a").click(function(){
-		
 		if(parseInt($(this).attr("pageno")) !== parseInt($("#pageno").val())) {
-			cInteractivity.showPage($(this).attr("pageno"));	
+            cInteractivity.saveCurrentPage();
+			cInteractivity.showPage($(this).attr("pageno"));
 		}
 	});
 }
@@ -178,9 +180,8 @@ function initPreview()
 		if ($(this).hasClass("off"))
 		{
 			//console.log('off');
-			$("#page").removeClass("preview");
-			$("#page").droppable("enable");
-			
+			$("#page").removeClass("preview").droppable("enable");
+
 			$("ul.components li").draggable("enable");
 			
 			$("#page div.modal-component, #page div.tooltip-trigger").each(function(){
@@ -207,11 +208,8 @@ function initPreview()
 		else
 		{
 			//console.log('on');
-			$("#page").addClass("preview");
-			$("#page").droppable("disable");
-			
+			$("#page").addClass("preview").droppable("disable");
 			$("ul.components li").draggable("disable");
-			
 			$("#page div.modal-component, #page div.tooltip-trigger").each(function(){
 				
 				var componentID = $(this).attr("componentid");

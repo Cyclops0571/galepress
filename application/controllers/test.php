@@ -60,7 +60,13 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        echo Lang::line('common.contents_category_list_general', array(), 'tr');
+        return \Laravel\View::make('test.iframelogin');
+        $a = null;
+        var_dump((array)$a);
+        foreach ((array)$a as $b) {
+            echo "Asdfasdf";
+        }
+        echo microtime(true);
         exit;
         return \Laravel\View::make('test.checkboxtest');
         $x = new Date("Y-m-d");
