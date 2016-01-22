@@ -17,7 +17,7 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
     <?php
     /** @var Application[] $applicationSet */
     $applicationSet = Auth::User()->Customer()->Applications(eStatus::Active);
-    $reportLinks = array(301, 1001, 1301, 1302);
+    $reportLinks = array(1001, 1301, 1302);
     $customer = Auth::User()->Customer();
     $title = Auth::User()->FirstName . " " . Auth::User()->LastName;
     $showPaymentLink = false;
