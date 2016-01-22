@@ -284,17 +284,21 @@ class Contents_Controller extends Base_Controller {
         $showCropPage = Cookie::get(SHOW_IMAGE_CROP, 0);
         Cookie::put(SHOW_IMAGE_CROP, 0);
         $row = Content::find($id);
-        $contentList = DB::table('Content')
-                ->where('ApplicationID', '=', $row->ApplicationID)
-                ->where('ContentID', '<>', $id)
-                ->where('StatusID', '=', eStatus::Active)
-                ->get(array('ContentID', 'Name', 'ApplicationID'));
+
         if (((int) $currentUser->UserTypeID == eUserTypes::Manager)) {
             $contentList = DB::table('Content')
                     // ->where('ApplicationID', '=', $row->ApplicationID)
                     ->where('ContentID', '<>', $id)
                     // ->where('StatusID', '=', eStatus::Active)
                     ->get(array('ContentID', 'Name', 'ApplicationID'));
+        } else {
+            //musteriler icin interactive oge kopyalamayi kapatiyorum.
+//            $contentList = DB::table('Content')
+//                ->where('ApplicationID', '=', $row->ApplicationID)
+//                ->where('ContentID', '<>', $id)
+//                ->where('StatusID', '=', eStatus::Active)
+//                ->get(array('ContentID', 'Name', 'ApplicationID'));
+            $contentList = array();
         }
         if ($row) {
             if (Common::CheckContentOwnership($id)) {
