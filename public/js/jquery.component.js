@@ -66,27 +66,27 @@
 				//if changed via property window
 				if(from == 'prop')
 				{
-					//tool.css('transform', 'translate(' + x.toFixed(0) + 'px, ' + y.toFixed(0) + 'px) scale(1)');
-					if($("html").hasClass("lt-ie9"))
-					{
-						tool.css("left", x.toFixed(14) + "px");
-						tool.css("top", y.toFixed(14) + "px");
-					}
-					else
-					{
-						if(jQuery.browser.msie)
-						{
-							tool.css("-ms-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-						} 
-						else if(jQuery.browser.mozilla)
-						{
-							tool.css("transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-						} 
-						else if(jQuery.browser.webkit)
-						{
-							tool.css("-webkit-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-						}		
-					}
+                    tool.css("transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
+                    //if($("html").hasClass("lt-ie9"))
+                    //{
+                    //	tool.css("left", x.toFixed(14) + "px");
+                    //	tool.css("top", y.toFixed(14) + "px");
+                    //}
+                    //else
+                    //{
+                    //	if(jQuery.browser.msie)
+                    //	{
+                    //		tool.css("-ms-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
+                    //	}
+                    //	else if(jQuery.browser.mozilla)
+                    //	{
+                    //		tool.css("transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
+                    //	}
+                    //	else if(jQuery.browser.webkit)
+                    //	{
+                    //		tool.css("-webkit-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
+                    //	}
+                    //}
 				}
 			},
 			sizeChanged: function(tool, prop, from, w, h)
@@ -926,7 +926,7 @@
 					{
 						if(componentName == "video")
 						{
-							valid = url.endsWith(".mp4") || url.indexOf("www.youtube.com/embed") > -1 || url.indexOf("www.youtube.com/watch") > -1;
+                            valid = url.endsWith(".mp4") || url.indexOf("www.youtube.com/embed") > -1 || url.indexOf("www.youtube.com/watch") > -1 || url.indexOf("player.vimeo.com/video") > -1;
 						}
 						else if(componentName == "audio")
 						{

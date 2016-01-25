@@ -126,7 +126,10 @@ class Interactivity_Controller extends Base_Controller
                     if (!(strpos($url, 'www.youtube.com/embed') === false)) {
                         return Redirect::to($data['url']);
                     }
-                    // var_dump($data);
+
+                    if (!(strpos($url, 'player.vimeo.com/video') === false)) {
+                        return Redirect::to($data['url']);
+                    }
 
                     return View::make('interactivity.components.' . $componentName . '.dynamic', $data);
                 } elseif ($componentName == 'map') {
