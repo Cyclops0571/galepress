@@ -205,92 +205,56 @@
                         <input type="hidden" name="hdnCkPemName" id="hdnCkPemName" value="{{ $CkPem }}"/>
                         <script type="text/javascript">
                             $(function () {
-
-                                if ($("html").hasClass("lt-ie10")) {
-                                    $("#CkPem").uploadify({
-                                        'swf': '/uploadify/uploadify.swf',
-                                        'uploader': '/' + currentLanguage + '/' + route["applications_uploadfile2"],
-                                        'cancelImg': '/uploadify/uploadify-cancel.png',
-                                        'fileTypeDesc': 'PEM Files',
-                                        'fileTypeExt': '*.pem',
-                                        'buttonText': "{{ __('common.applications_file_select') }}",
-                                        'multi': false,
-                                        'auto': true,
-                                        'successTimeout': 300,
-                                        'onSelect': function (file) {
+                                $("#CkPem").fileupload({
+                                    url: '/' + currentLanguage + '/' + route["applications_uploadfile"],
+                                    dataType: 'json',
+                                    sequentialUploads: true,
+                                    formData: {
+                                        'element': 'CkPem'
+                                    },
+                                    add: function (e, data) {
+                                        if (/\.(pem)$/i.test(data.files[0].name)) {
                                             $('#hdnCkPemSelected').val("1");
-                                            $("[for='CkPem']").removeClass("hide");
-                                        },
-                                        'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                                            var progress = totalBytesUploaded / totalBytesTotal * 100;
-                                            $("[for='CkPem'] label").html(progress.toFixed(0) + '%');
-                                            $("[for='CkPem'] div.scale").css('width', progress.toFixed(0) + '%');
-                                        },
-                                        'onUploadSuccess': function (file, data, response) {
+                                            var ckPem = $("[for='CkPem']");
+                                            ckPem.removeClass("hide");
 
-                                            if (data.getValue("success") == "true") {
-                                                var fileName = data.getValue("filename");
+                                            data.context = ckPem;
+                                            data.context.find('a').click(function (e) {
+                                                e.preventDefault();
+                                                data = ckPem.data('data') || {};
+                                                if (data.jqXHR) {
+                                                    data.jqXHR.abort();
+                                                }
+                                            });
+                                            var xhr = data.submit();
+                                            data.context.data('data', {jqXHR: xhr});
+                                        }
+                                    },
+                                    progressall: function (e, data) {
+                                        var progress = data.loaded / data.total * 100;
+                                        var ckPem = $("[for='CkPem']");
 
-                                                $('#hdnCkPemName').val(fileName);
-                                                $("[for='CkPem']").addClass("hide");
-                                            }
-                                        },
-                                        'onCancel': function (file) {
+                                        ckPem.find('label').html(progress.toFixed(0) + '%');
+                                        ckPem.find('div.scale').css('width', progress.toFixed(0) + '%');
+                                    },
+                                    done: function (e, data) {
+                                        if (data.textStatus == 'success') {
+                                            var fileName = data.result['CkPem'][0].name;
+
+                                            $('#hdnCkPemName').val(fileName);
                                             $("[for='CkPem']").addClass("hide");
                                         }
-                                    });
-                                }
-                                else {
-                                    $("#CkPem").fileupload({
-                                        url: '/' + currentLanguage + '/' + route["applications_uploadfile"],
-                                        dataType: 'json',
-                                        sequentialUploads: true,
-                                        formData: {
-                                            'element': 'CkPem'
-                                        },
-                                        add: function (e, data) {
-                                            if (/\.(pem)$/i.test(data.files[0].name)) {
-                                                $('#hdnCkPemSelected').val("1");
-                                                $("[for='CkPem']").removeClass("hide");
+                                    },
+                                    fail: function (e, data) {
+                                        $("[for='CkPem']").addClass("hide");
+                                    }
+                                });
 
-                                                data.context = $("[for='CkPem']");
-                                                data.context.find('a').click(function (e) {
-                                                    e.preventDefault();
-                                                    var template = $("[for='CkPem']");
-                                                    data = template.data('data') || {};
-                                                    if (data.jqXHR) {
-                                                        data.jqXHR.abort();
-                                                    }
-                                                });
-                                                var xhr = data.submit();
-                                                data.context.data('data', {jqXHR: xhr});
-                                            }
-                                        },
-                                        progressall: function (e, data) {
-                                            var progress = data.loaded / data.total * 100;
+                                //select file
+                                $("#CkPemButton").removeClass("hide").click(function () {
 
-                                            $("[for='CkPem'] label").html(progress.toFixed(0) + '%');
-                                            $("[for='CkPem'] div.scale").css('width', progress.toFixed(0) + '%');
-                                        },
-                                        done: function (e, data) {
-                                            if (data.textStatus == 'success') {
-                                                var fileName = data.result['CkPem'][0].name;
-
-                                                $('#hdnCkPemName').val(fileName);
-                                                $("[for='CkPem']").addClass("hide");
-                                            }
-                                        },
-                                        fail: function (e, data) {
-                                            $("[for='CkPem']").addClass("hide");
-                                        }
-                                    });
-
-                                    //select file
-                                    $("#CkPemButton").removeClass("hide").click(function () {
-
-                                        $("#CkPem").click();
-                                    });
-                                }
+                                    $("#CkPem").click();
+                                });
 
                             });
                         </script>

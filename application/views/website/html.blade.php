@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--[if lte IE 10]>
+<script type="text/javascript">
+    window.location = "http://browser-update.org/update.html";
+</script>
+<![endif]-->
 <html class="no-js">
   <head>
     <meta charset="utf-8">

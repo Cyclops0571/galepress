@@ -38,38 +38,37 @@ var cInteractivity = new function () {
 
         var componentID = e.parents("li:first").attr("componentid");
         var pageNo = e.parents("li.page:first").attr("pageno");
-
-        $(".transfer-modal .all, .transfer-modal .one").addClass("hide");
+        var transferModal = $('.transfer-modal');
 
         if (typeof componentID === "undefined") {
-            $(".transfer-modal .all").removeClass("hide");
-        }
-        else {
-            var componentName = $("div.tree a[componentid='" + componentID + "']").html();
-            var o = $(".transfer-modal .one span");
+            transferModal.find('.one').addClass("hide");
+            transferModal.find('.all').removeClass("hide");
+        } else {
+            transferModal.find('.all').addClass("hide");
+            transferModal.find('.one').removeClass("hide");
+            var componentName = $("a[componentid='" + componentID + "']").html();
+            var o = transferModal.find('.one span');
             var t = o.attr("text");
             t = t.replace("{component}", componentName);
             o.html(t);
-            $(".transfer-modal .one").removeClass("hide");
         }
 
         $("#transferComponentID").val(componentID);
         $("#transferFrom").val(pageNo);
-        $(".transfer-modal div p strong em").html(pageNo);
-
-        $(".transfer-modal select option")
+        transferModal.find('div p strong em').html(pageNo);
+        transferModal.find('select option')
             .removeAttr("disabled")
             .eq(parseInt(pageNo) - 1)
             .attr("disabled", "disabled")
             .next()
             .prop('selected', true);
 
-        if ($("#transferTo").hasClass('chzn-done')) {
-            $("#transferTo").removeClass('chzn-done');
-            $("#transferTo").next().remove();
+        var transferTo = $("#transferTo");
+        if (transferTo.hasClass('chzn-done')) {
+            transferTo.removeClass('chzn-done').next().remove();
         }
-        $("#transferTo").chosen();
-        $(".transfer-modal").removeClass("hide");
+        transferTo.chosen();
+        transferModal.removeClass("hide");
         $("#modal-mask").removeClass("hide");
     };
 
@@ -112,10 +111,11 @@ var cInteractivity = new function () {
         dontUpdate = (typeof dontUpdate == "undefined") ? false : dontUpdate;
 
         if (!dontUpdate) {
-            $(".compression-settings div.checkbox").removeClass("checked");
+            var compressionSettingsCheckbox = $(".compression-settings div.checkbox");
+            compressionSettingsCheckbox.removeClass("checked");
 
             if ($("#included").val() == "1") {
-                $(".compression-settings div.checkbox").addClass("checked");
+                compressionSettingsCheckbox.addClass("checked");
             }
         }
 
@@ -124,11 +124,11 @@ var cInteractivity = new function () {
     };
 
     this.saveSettings = function () {
-
-        $("#included").val(0);
+        var included = $("#included");
+        included.val(0);
 
         if ($(".compression-settings div.checkbox").hasClass("checked")) {
-            $("#included").val(1);
+            included.val(1);
         }
 
         this.closeSettings(true);
@@ -531,8 +531,7 @@ var cCustomer = new function () {
         var u = '/' + currentLanguage + '/' + route["customers"];
         var d = "option=1";
         cCustomer.doAsyncRequest(t, u, d, function (ret) {
-            $("#ddlCustomer").html(ret);
-            $('#ddlCustomer').trigger('chosen:updated');
+            $("#ddlCustomer").html(ret).trigger('chosen:updated');
         });
     };
 
@@ -1047,160 +1046,70 @@ cContent = new function () {
     };
 
     this.addFileUpload = function () {
-        if ($("html").hasClass("lt-ie10")) {
-            $("#File").uploadify({
-                'swf': '/uploadify/uploadify.swf',
-                'uploader': '/' + currentLanguage + '/' + route["contents_uploadfile2"],
-                'cancelImg': '/uploadify/uploadify-cancel.png',
-                'fileTypeDesc': 'PDF Files',
-                'fileTypeExts': '*.pdf',
-                'buttonText': "{{ __('common.contents_file_select') }}",
-                'multi': false,
-                'auto': true,
-                'successTimeout': 300,
-                'onSelect': function () {
+
+        $("#File").fileupload({
+            url: '/' + currentLanguage + '/' + route["contents_uploadfile"],
+            dataType: 'json',
+            sequentialUploads: true,
+            formData: {
+                'element': 'File'
+            },
+            add: function (e, data) {
+                if (/\.(pdf)$/i.test(data.files[0].name)) {
                     $('#hdnFileSelected').val("1");
-                    $("[for='File']").removeClass("hide");
-                },
-                'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                    var progress = totalBytesUploaded / totalBytesTotal * 100;
-                    if (progress > 99) {
-                        progress = 100;
-                    }
                     var $forFile = $("[for='File']");
-                    $forFile.find("label").html(progress.toFixed(0) + '%');
-                    $forFile.find("div.scale").html(progress.toFixed(0) + '%');
-                },
-                'onUploadSuccess': function (file, data) {
-                    if (data.getValue("success") == "true") {
-                        var fileName = data.getValue("filename");
-
-                        $('#hdnFileName').val(fileName);
-                        $("[for='File']").addClass("hide");
-
-                        $('#hdnCoverImageFileSelected').val("1");
-                        $('#hdnCoverImageFileName').val(data.getValue("imageFile"));
-                        $('#imgPreview').attr("src", "/files/temp/" + data.getValue("imageFile"));
-
-                        $("div.rightbar").removeClass("hidden");
-
-                        //auto save
-                        if (parseInt($("#ContentID").val()) > 0) {
-                            cContent.save();
+                    $forFile.removeClass("hide");
+                    data.context = $forFile;
+                    data.context.find('a').click(function (e) {
+                        e.preventDefault();
+                        data = $forFile.data('data') || {};
+                        if (data.jqXHR) {
+                            data.jqXHR.abort();
                         }
-                    }
-                },
-                'onCancel': function () {
-                    $("[for='File']").addClass("hide");
+                    });
+                    var xhr = data.submit();
+                    data.context.data('data', {jqXHR: xhr});
                 }
-            });
-        } else {
-            $("#File").fileupload({
-                url: '/' + currentLanguage + '/' + route["contents_uploadfile"],
-                dataType: 'json',
-                sequentialUploads: true,
-                formData: {
-                    'element': 'File'
-                },
-                add: function (e, data) {
-                    if (/\.(pdf)$/i.test(data.files[0].name)) {
-                        $('#hdnFileSelected').val("1");
-                        var $forFile = $("[for='File']");
-                        $forFile.removeClass("hide");
-                        data.context = $forFile;
-                        data.context.find('a').click(function (e) {
-                            e.preventDefault();
-                            data = $forFile.data('data') || {};
-                            if (data.jqXHR) {
-                                data.jqXHR.abort();
-                            }
-                        });
-                        var xhr = data.submit();
-                        data.context.data('data', {jqXHR: xhr});
-                    }
-                },
-                progressall: function (e, data) {
-                    var progress = data.loaded / data.total * 100;
-                    var $forFile = $("[for='File']");
-                    $forFile.find('label').html(progress.toFixed(0) + '%');
-                    $forFile.find('div.scale').css('width', progress.toFixed(0) + '%');
-                },
-                done: function (e, data) {
-                    if (data.textStatus == 'success') {
-                        var fileName = data.result.fileName;
-                        var imageFile = data.result.imageFile;
+            },
+            progressall: function (e, data) {
+                var progress = data.loaded / data.total * 100;
+                var $forFile = $("[for='File']");
+                $forFile.find('label').html(progress.toFixed(0) + '%');
+                $forFile.find('div.scale').css('width', progress.toFixed(0) + '%');
+            },
+            done: function (e, data) {
+                if (data.textStatus == 'success') {
+                    var fileName = data.result.fileName;
+                    var imageFile = data.result.imageFile;
 
-                        $('#hdnFileName').val(fileName);
-                        $("[for='File']").addClass("hide");
-
-                        $('#hdnCoverImageFileSelected').val("1");
-                        $('#hdnCoverImageFileName').val(imageFile);
-                        $('#imgPreview').attr("src", "/files/temp/" + imageFile);
-
-                        $("div.rightbar").removeClass("hidden");
-
-                        //auto save
-                        if (parseInt($("#ContentID").val()) > 0) {
-                            cContent.save();
-                        }
-                    }
-                },
-                fail: function () {
+                    $('#hdnFileName').val(fileName);
                     $("[for='File']").addClass("hide");
-                }
-            });
 
-            //select file
-            $("#FileButton").removeClass("hide").click(function () {
-                $("#File").click();
-            });
-        }
+                    $('#hdnCoverImageFileSelected').val("1");
+                    $('#hdnCoverImageFileName').val(imageFile);
+                    $('#imgPreview').attr("src", "/files/temp/" + imageFile);
+
+                    $("div.rightbar").removeClass("hidden");
+
+                    //auto save
+                    if (parseInt($("#ContentID").val()) > 0) {
+                        cContent.save();
+                    }
+                }
+            },
+            fail: function () {
+                $("[for='File']").addClass("hide");
+            }
+        });
+
+        //select file
+        $("#FileButton").removeClass("hide").click(function () {
+            $("#File").click();
+        });
     };
 
     this.addImageUpload = function () {
         var $CoverImageFile = $("#CoverImageFile");
-        if ($("html").hasClass("lt-ie10")) {
-            $CoverImageFile.uploadify({
-                'swf': '/uploadify/uploadify.swf',
-                'uploader': '/' + currentLanguage + '/' + route["contents_uploadcoverimage2"],
-                'cancelImg': '/uploadify/uploadify-cancel.png',
-                'fileTypeDesc': 'Image Files',
-                'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
-                'buttonText': "Choose Image...",
-                'multi': false,
-                'auto': true,
-                'successTimeout': 300,
-                'onSelect': function (file) {
-                    $('#hdnCoverImageFileSelected').val("1");
-                    $("[for='CoverImageFile']").removeClass("hide");
-                },
-                'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                    var progress = totalBytesUploaded / totalBytesTotal * 100;
-                    $("[for='CoverImageFile'] label").html(progress.toFixed(0) + '%');
-                    $("[for='CoverImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
-                },
-                'onUploadSuccess': function (file, data) {
-
-                    if (data.getValue("success") == "true") {
-                        var fileName = data.getValue("filename");
-
-                        $('#hdnCoverImageFileName').val(fileName);
-                        $('#imgPreview').attr("src", "/files/temp/" + fileName);
-                        $("[for='CoverImageFile']").addClass("hide");
-
-                        //auto save
-                        if (parseInt($("#ContentID").val()) > 0) {
-                            cContent.save();
-                        }
-                    }
-                },
-                'onCancel': function () {
-                    $("[for='CoverImageFile']").addClass("hide");
-                }
-            });
-            return;
-        }
-
         $CoverImageFile.fileupload({
             url: '/' + currentLanguage + '/' + route["contents_uploadcoverimage"],
             dataType: 'json',
@@ -2159,110 +2068,69 @@ var cBanner = new function () {
     this.objectName = "banners";
 
     this.addImageUpload = function () {
-        if ($("html").hasClass("lt-ie10")) {
-            $("#ImageFile").uploadify({
-                'swf': '/uploadify/uploadify.swf',
-                'uploader': '/' + currentLanguage + '/common/imageupload_ltie10',
-                'cancelImg': '/uploadify/uploadify-cancel.png',
-                'fileTypeDesc': 'Image Files',
-                'fileTypeExts': '*.jpg;*.png;*.gif;*.jpeg',
-                'buttonText': "Choose Image...",
-                'multi': false,
-                'auto': true,
-                'successTimeout': 300,
-                'onSelect': function (file) {
+
+        $("#ImageFile").fileupload({
+            url: '/' + currentLanguage + '/common/imageupload',
+            dataType: 'json',
+            sequentialUploads: true,
+            formData: {
+                'element': 'ImageFile'
+            },
+            add: function (e, data) {
+                if (/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name)) {
                     $('#hdnImageFileSelected').val("1");
                     $("[for='ImageFile']").removeClass("hide");
-                },
-                'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                    var progress = totalBytesUploaded / totalBytesTotal * 100;
-                    $("[for='ImageFile'] label").html(progress.toFixed(0) + '%');
-                    $("[for='ImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
-                },
-                'onUploadSuccess': function (file, data, response) {
 
-                    if (data.getValue("success") == "true") {
-                        var fileName = data.getValue("filename");
-
-                        $('#hdnImageFileName').val(fileName);
-                        $('#imgPreview').attr("src", "/files/temp/" + fileName);
-                        $("[for='ImageFile']").addClass("hide");
-
-                        //auto save
-                        if (parseInt($("#ContentID").val()) > 0) {
-                            cContent.save();
+                    data.context = $("[for='ImageFile']");
+                    data.context.find('a').click(function (e) {
+                        e.preventDefault();
+                        var template = $("[for='ImageFile']");
+                        data = template.data('data') || {};
+                        if (data.jqXHR) {
+                            data.jqXHR.abort();
                         }
-                        $('.my-btn-success').removeClass("noTouch").css('background-color', '#2e2e2e').css('background', '');
-                    }
-                },
-                'onCancel': function (file) {
-                    $("[for='ImageFile']").addClass("hide");
+                    });
+                    var xhr = data.submit();
+                    data.context.data('data', {jqXHR: xhr});
                 }
-            });
-        } else {
-            $("#ImageFile").fileupload({
-                url: '/' + currentLanguage + '/common/imageupload',
-                dataType: 'json',
-                sequentialUploads: true,
-                formData: {
-                    'element': 'ImageFile'
-                },
-                add: function (e, data) {
-                    if (/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name)) {
-                        $('#hdnImageFileSelected').val("1");
-                        $("[for='ImageFile']").removeClass("hide");
+            },
+            progressall: function (e, data) {
+                var progress = data.loaded / data.total * 100;
 
-                        data.context = $("[for='ImageFile']");
-                        data.context.find('a').click(function (e) {
-                            e.preventDefault();
-                            var template = $("[for='ImageFile']");
-                            data = template.data('data') || {};
-                            if (data.jqXHR) {
-                                data.jqXHR.abort();
-                            }
-                        });
-                        var xhr = data.submit();
-                        data.context.data('data', {jqXHR: xhr});
-                    }
-                },
-                progressall: function (e, data) {
-                    var progress = data.loaded / data.total * 100;
-
-                    $("[for='ImageFile'] label").html(progress.toFixed(0) + '%');
-                    $("[for='ImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
-                },
-                done: function (e, data) {
-                    if (data.textStatus == 'success') {
-                        var fileName = data.result.fileName;
-                        var $myButtonSuccess = $('.my-btn-success');
-                        $('#hdnImageFileName').val(fileName);
-                        $('#imgPreview').attr("src", "/files/temp/" + fileName);
-                        $("[for='ImageFile']").addClass("hide");
-
-                        //auto save
-                        if (parseInt($("#ContentID").val()) > 0) {
-                            cContent.save();
-                        }
-
-                        $myButtonSuccess.removeClass("noTouch").css('background', '');
-
-                        var url = $('#TargetUrl').val();
-                        if (url.length > 0 && !isUrlReachable(url)) {
-                            $(".input-group + span.urlError").removeClass("hide");
-                            $myButtonSuccess.addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
-                        }
-                    }
-                },
-                fail: function () {
+                $("[for='ImageFile'] label").html(progress.toFixed(0) + '%');
+                $("[for='ImageFile'] div.scale").css('width', progress.toFixed(0) + '%');
+            },
+            done: function (e, data) {
+                if (data.textStatus == 'success') {
+                    var fileName = data.result.fileName;
+                    var $myButtonSuccess = $('.my-btn-success');
+                    $('#hdnImageFileName').val(fileName);
+                    $('#imgPreview').attr("src", "/files/temp/" + fileName);
                     $("[for='ImageFile']").addClass("hide");
-                }
-            });
 
-            //select file
-            $("#ImageFileButton").removeClass("hide").click(function () {
-                $("#ImageFile").click();
-            });
-        }
+                    //auto save
+                    if (parseInt($("#ContentID").val()) > 0) {
+                        cContent.save();
+                    }
+
+                    $myButtonSuccess.removeClass("noTouch").css('background', '');
+
+                    var url = $('#TargetUrl').val();
+                    if (url.length > 0 && !isUrlReachable(url)) {
+                        $(".input-group + span.urlError").removeClass("hide");
+                        $myButtonSuccess.addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+                    }
+                }
+            },
+            fail: function () {
+                $("[for='ImageFile']").addClass("hide");
+            }
+        });
+
+        //select file
+        $("#ImageFileButton").removeClass("hide").click(function () {
+            $("#ImageFile").click();
+        });
     };
 
     this.checkUrl = function () {

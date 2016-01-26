@@ -122,44 +122,8 @@
 
     function getTransform(e)
     {
-        var arr = new Array();
-        var t = '';
-
-        //ie
-        if ($("html").hasClass("lt-ie9"))
-        {
-            arr[0] = 1;
-            arr[1] = 1;
-            arr[2] = 1;
-            arr[3] = 1;
-            arr[4] = (e.css("left") != "auto" ? parseFloat(e.css("left").replace("px", "")) : 0);
-            arr[5] = (e.css("top") != "auto" ? parseFloat(e.css("top").replace("px", "")) : 0);
-        }
-        else
-        {
-            if (jQuery.browser.msie)
-            {
-                t = e.css("-ms-transform");
-            }
-            //firefox
-            else if (jQuery.browser.mozilla)
-            {
-                t = e.css("transform");
-            }
-            //chrome
-            else if (jQuery.browser.webkit)
-            {
-                t = e.css("-webkit-transform");
-            }
-            //opera
-            else if (jQuery.browser.opera)
-            {
-                t = e.css("-o-transform");
-            }
-            arr = t.substr(7, t.length - 8).split(', ');
-        }
-        //else if(e.css("-webkit-transform") != null)
-        return arr;
+        var t = e.css("transform");
+        return t.substr(7, t.length - 8).split(', ');
     }
 
     function getScale()

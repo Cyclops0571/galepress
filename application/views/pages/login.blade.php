@@ -5,7 +5,6 @@
     <?php
 	   $cookie = Cookie::get('DSCATALOG_USERNAME', '');
 	?>
-
     {{ Form::open(__('route.login'), 'POST') }}
         {{ Form::token() }}
         <div class="container">
@@ -23,7 +22,10 @@
             			            <div class="input-group-addon">
             						  <span class="icon-user" id="login-icon-user" style="font-size:15px;"></span>
             						</div>
-            			            <input class="form-control txt required" type="text" placeholder="{{ __('common.users_username') }}" id="Username" name="Username" onKeyPress="return cUser.loginEvent(event, cUser.login);" value="{{ $cookie }}" /> </input>
+                                    <input class="form-control txt required" type="text"
+                                           placeholder="{{ __('common.users_username') }}" id="Username" name="Username"
+                                           onKeyPress="return cUser.loginEvent(event, cUser.login);"
+                                           value="{{ $cookie }}"/>
             						{{ $errors->first('Username', '<p class="error">:message</p>') }}
             			        </div>
             			    </div>

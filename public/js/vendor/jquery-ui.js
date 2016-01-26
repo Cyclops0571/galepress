@@ -1202,36 +1202,9 @@ $.widget("ui.draggable", $.ui.mouse, {
 			
 			x = x / scale;
 			y = (y + scrollTop) / scale;
-			
-			if($("html").hasClass("lt-ie9"))
-			{
-				if(!this.options.axis || this.options.axis !== "y") {
-					this.helper[0].style.left = this.position.left+"px";
-				}
-				if(!this.options.axis || this.options.axis !== "x") {
-					this.helper[0].style.top = this.position.top+"px";
-				}	
-			}
-			else
-			{
-				if(jQuery.browser.msie)
-				{
-					$("#" + this.helper[0].id).css("-ms-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-				} 
-				else if(jQuery.browser.mozilla)
-				{
-					$("#" + this.helper[0].id).css("transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-				} 
-				else if(jQuery.browser.webkit)
-				{
-					$("#" + this.helper[0].id).css("-webkit-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-				}
-				else if(jQuery.browser.opera)
-				{
-					$("#" + this.helper[0].id).css("-o-transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
-				}
-			}
-		}
+
+            $("#" + this.helper[0].id).css("transform", 'translate(' + x.toFixed(14) + 'px, ' + y.toFixed(14) + 'px) scale(1)');
+        }
 		else 
 		{
 			if(!this.options.axis || this.options.axis !== "y") {

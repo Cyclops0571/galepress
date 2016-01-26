@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <title>Document</title>
     <style type="text/css">
         body, html {
@@ -26,22 +25,5 @@
     <iframe id="galepressIframe" width="100%" height="100%" frameborder="0"
             src="http://www.galepress.com/en/login"></iframe>
 </div>
-<script type="text/javascript">
-    $('#galepressIframe').load(function () {
-        var loginUrl = ['/login', '/anmelden', '/login'];
-        var redirectToIframeUrl = true;
-        for (var i = 0; i < loginUrl.length; i++) {
-            if (window.frames[0].location.href.indexOf(loginUrl[i]) != -1) {
-                redirectToIframeUrl = false;
-            }
-        }
-        if (redirectToIframeUrl) {
-            window.location.href = window.frames[0].location.href;
-        }
-
-    });
-</script>
-
-
 </body>
 </html>
