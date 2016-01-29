@@ -4,6 +4,7 @@
 // INTERACTIVITY
 var cInteractivity = new function () {
     this.objectName = "interactivity";
+    var smoothZoomInitialized = false;
 
     this.doRequest = function (t, u, d, funcError) {
         return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
@@ -207,8 +208,6 @@ var cInteractivity = new function () {
 
         var src = $("div.thumblist ul.slideshow-slides li.each-slide a[pageno='" + pageno + "'] img").attr("src");
 
-        pageElm.smoothZoom('destroy');
-
         var img = new Image();
         img.onload = function () {
             pageElm.css("background", "url('" + src + "') no-repeat top left")
@@ -219,20 +218,26 @@ var cInteractivity = new function () {
             cInteractivity.loadPage(pageno, func, obj);
             var h = $(window).innerHeight() - pdfContainer.offset().top - $("footer").outerHeight();
 
-            $('#page').smoothZoom({
-                width: '100%',
-                height: h + 'px',
-                responsive: true,
-                pan_BUTTONS_SHOW: "NO",
-                pan_LIMIT_BOUNDARY: "NO",
-                button_SIZE: 24,
-                button_ALIGN: "top right",
-                zoom_MAX: 500,
-                border_TRANSPARENCY: 0,
-                container: 'pdf-container',
-                max_WIDTH: '',
-                max_HEIGHT: ''
-            });
+
+            if (smoothZoomInitialized) {
+                pageElm.smoothZoom('Reset');
+            } else {
+                smoothZoomInitialized = true;
+                $('#page').smoothZoom({
+                    width: '100%',
+                    height: h + 'px',
+                    responsive: true,
+                    pan_BUTTONS_SHOW: "NO",
+                    pan_LIMIT_BOUNDARY: "NO",
+                    button_SIZE: 24,
+                    button_ALIGN: "top right",
+                    zoom_MAX: 500,
+                    border_TRANSPARENCY: 0,
+                    container: 'pdf-container',
+                    max_WIDTH: '',
+                    max_HEIGHT: ''
+                });
+            }
         };
         img.src = src;
     };
