@@ -178,6 +178,7 @@ foreach($files as $file)
 				//echo '<img src="'.$vFile.'" />';
 
 				echo '<img src="'.$vFile.'"/>';
+
 			}
 		}
 		?>
@@ -187,22 +188,36 @@ foreach($files as $file)
 		jQuery(document).ready(function($) {
 
 			@if((int)$modal == 1)
+			window.addEventListener("orientationchange", function () {
+                $.each($('img'), function (i, obj) {
+                    var imgHeight = $(obj).height();
+                    if (imgHeight < $(document).height()) {
+                        var verticalCalc = ($(document).height() - imgHeight) / 2;
+                        //$('img').animate({marginTop:verticalCalc});
+                        $('img').css('marginTop', verticalCalc);
+                    } else {
+                        $('img').css('marginTop', 0);
+                    }
+                });
+            });
+
 			$.extend($.rsProto, {
 				_initGlobalCaption: function() {
 					var self = this;
-					self.ev.on('rsAfterInit', function() {
-						setTimeout(function() {
-
-							var imgHeight = $('.rsMainSlideImage').height();
-
-			     			if(imgHeight < $( document ).height())
-			     			{
-			     				var verticalCalc = ($( document ).height() - imgHeight) / 2;
-					     		//$('img').animate({marginTop:verticalCalc});
-					     		$('img').css('marginTop', verticalCalc);
-			     			}
-		     			}, 200);
-					});
+                    var i = 0;
+                    self.ev.on('rsAfterContentSet', function (e, slideObject) {
+                        i++
+                        if (i == $('img').length) {
+                            $.each($('img'), function (i, obj) {
+                                var imgHeight = $(obj).height();
+                                if (imgHeight < $(document).height()) {
+                                    var verticalCalc = ($(document).height() - imgHeight) / 2;
+                                    //$('img').animate({marginTop:verticalCalc});
+                                    $('img').css('marginTop', verticalCalc);
+                                }
+                            });
+                        }
+                    });
 				}
 			});
 			$.rsModules.globalCaption = $.rsProto._initGlobalCaption;
