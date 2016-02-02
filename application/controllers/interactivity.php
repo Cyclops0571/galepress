@@ -347,8 +347,7 @@ class Interactivity_Controller extends Base_Controller
     public function post_save()
     {
         try {
-            $i = 1;
-            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+            //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
             $currentUser = Auth::User();
 
             $included = (int)Input::get('included');
@@ -365,12 +364,11 @@ class Interactivity_Controller extends Base_Controller
                 throw new Exception(__('error.auth_interactivity'));
             }
 
-            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
-
+            //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
             DB::transaction(/**
              * @throws Exception
              */
-                function () use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included, $i) {
+                function () use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included) {
                     $closing = Input::get('closing');
                     $pageNo = (int)Input::get('pageno');
                     $ids = (array)Input::get('compid');
@@ -408,230 +406,212 @@ class Interactivity_Controller extends Base_Controller
                         $cf->ProcessTypeID = eProcessTypes::Update;
                         $cf->save();
                     }
-                    //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+
+                    $postedData = Input::get();
+                    $componentProperties = array();
+                    $ignoredProperties = array('id', 'process', 'fileselected', 'posterimageselected', 'modaliconselected');
                     foreach ($ids as $id) {
-                        //echo 'ids -- ' . 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
-                            $clientComponentID = (int)Input::get('comp-' . $id . '-id', '0');
-                            $clientPageComponentID = (int)Input::get('comp-' . $id . '-pcid', '0');
-                            $clientProcess = Input::get('comp-' . $id . '-process', '');
-
-                            if ($clientProcess == 'new' || $clientProcess == 'loaded') {
-                                $tPageComponentExists = false;
-                                $tPageComponentID = 0;
-
-                                if ($clientProcess == 'loaded' && $clientPageComponentID > 0) {
-                                    $tPageComponentExists = true;
-                                    $tPageComponentID = $clientPageComponentID;
-                                } else {
-                                    $current = DB::table('PageComponent')
-                                        ->where('ContentFilePageID', '=', $ContentFilePageID)
-                                        ->where('No', '=', $id)
-                                        ->where('StatusID', '=', eStatus::Active)
-                                        ->first();
-                                    if ($current) {
-                                        $tPageComponentExists = true;
-                                        $tPageComponentID = $current->PageComponentID;
-                                    }
-                                }
-
-                                if (!$tPageComponentExists) {
-                                    $pc = new PageComponent();
-                                } else {
-                                    $pc = PageComponent::find($tPageComponentID);
-
-                                    if ($ContentFilePageID != (int)$pc->ContentFilePageID) {
-                                        throw new Exception("Unauthorized user attempt");
-                                    }
-                                }
-                                $pc->ContentFilePageID = $ContentFilePageID;
-                                $pc->ComponentID = $clientComponentID;
-                                $pc->No = $id;
-                                $pc->StatusID = eStatus::Active;
-                                if (!$tPageComponentExists) {
-                                    $pc->CreatorUserID = $currentUser->UserID;
-                                    $pc->DateCreated = new DateTime();
-                                }
-                                $pc->ProcessUserID = $currentUser->UserID;
-                                $pc->ProcessDate = new DateTime();
-                                if (!$tPageComponentExists) {
-                                    $pc->ProcessTypeID = eProcessTypes::Insert;
-                                } else {
-                                    $pc->ProcessTypeID = eProcessTypes::Update;
-                                }
-                                $pc->save();
-
-                                $pageComponentID = $pc->PageComponentID;
-
-                                if ($tPageComponentExists) {
-                                    DB::table('PageComponentProperty')
-                                        ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $pageComponentID . ' AND `ContentFilePageID`=' . $ContentFilePageID . ' AND `StatusID`=1)'))
-                                        ->where('StatusID', '=', eStatus::Active)
-                                        ->update(
-                                            array(
-                                                'StatusID' => eStatus::Deleted,
-                                                'ProcessUserID' => $currentUser->UserID,
-                                                'ProcessDate' => new DateTime(),
-                                                'ProcessTypeID' => eProcessTypes::Update
-                                            )
-                                        );
-                                }
-
-                                $postedData = Input::get();
-                                foreach ($postedData as $name => $value) {
-                                    if (Common::startsWith($name, 'comp-' . $id)) {
-
-                                        $name = str_replace('comp-' . $id . '-', "", $name);
-
-                                        if ($name !== "id" && $name !== "process" && $name !== "fileselected" && $name !== "posterimageselected" && $name !== "modaliconselected") {
-                                            //slideshow || gallery360
-                                            if (($name == 'file' || $name == 'filename' || $name == 'filename2') && is_array($value)) {
-                                                $index = 1;
-
-                                                foreach ($value as $v) {
-                                                    if (Str::length($v) > 0) {
-                                                        $sourcePath = 'files/temp';
-                                                        $sourcePathFull = path('public') . $sourcePath;
-                                                        $sourceFile = $v;
-                                                        $sourceFileNameFull = $sourcePathFull . '/' . $sourceFile;
-
-                                                        $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pageComponentID;
-                                                        $targetPathFull = path('public') . $targetPath;
-                                                        $targetFile = $currentUser->UserID . '_' . date("YmdHis") . '_' . $v;
-                                                        //360
-                                                        if ($clientComponentID == 9) {
-                                                            $targetFile = ($index < 10 ? '0' . $index : '' . $index) . '.jpg';
-                                                        }
-                                                        $targetFileNameFull = $targetPathFull . '/' . $targetFile;
-
-                                                        if (!File::exists($targetPathFull)) {
-                                                            File::mkdir($targetPathFull);
-                                                        }
-
-                                                        if (File::exists($sourceFileNameFull)) {
-                                                            File::move($sourceFileNameFull, $targetFileNameFull);
-                                                            $v = $targetPath . '/' . $targetFile;
-                                                        } else {
-                                                            $oldValue = DB::table('PageComponentProperty')
-                                                                ->where('PageComponentID', '=', $pc->PageComponentID)
-                                                                ->where('Name', '=', $name)
-                                                                ->where('Value', 'LIKE', '%' . $v)
-                                                                ->where('StatusID', '=', eStatus::Deleted)
-                                                                ->order_by('PageComponentPropertyID', 'DESC')
-                                                                ->first(array('Value'));
-                                                            if ($oldValue) {
-                                                                $v = $oldValue->Value;
-                                                            } else {
-                                                                $v = $targetPath . '/' . $v;
-                                                            }
-                                                            //TODO:kaydete bastiktan sonra ikinci kez kaydete basilirsa veriler bozuluyor !!!
-                                                            //$v = $targetPath.'/'.$v;
-                                                        }
-
-                                                        $pcp = new PageComponentProperty();
-                                                        $pcp->PageComponentID = $pc->PageComponentID;
-                                                        $pcp->Name = $name;
-                                                        $pcp->Value = $v;
-                                                        $pcp->StatusID = eStatus::Active;
-                                                        $pcp->CreatorUserID = $currentUser->UserID;
-                                                        $pcp->DateCreated = new DateTime();
-                                                        $pcp->ProcessUserID = $currentUser->UserID;
-                                                        $pcp->ProcessDate = new DateTime();
-                                                        $pcp->ProcessTypeID = eProcessTypes::Insert;
-                                                        $pcp->save();
-
-                                                        $index = $index + 1;
-                                                    }
-                                                }
-                                            } else {
-                                                if (($name == 'file' || $name == 'filename' || $name == 'filename2' || $name == 'posterimagename' || $name == 'modaliconname') && Str::length($value) > 0) {
-                                                    $sourcePath = 'files/temp';
-                                                    $sourcePathFull = path('public') . $sourcePath;
-                                                    $sourceFile = $value;
-                                                    $sourceFileNameFull = $sourcePathFull . '/' . $sourceFile;
-
-                                                    $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pageComponentID;
-                                                    $targetPathFull = path('public') . $targetPath;
-                                                    $targetFile = $currentUser->UserID . '_' . date("YmdHis") . '_' . $value;
-                                                    $targetFileNameFull = $targetPathFull . '/' . $targetFile;
-
-                                                    if (!File::exists($targetPathFull)) {
-                                                        File::mkdir($targetPathFull);
-                                                    }
-
-                                                    if (File::exists($sourceFileNameFull)) {
-                                                        File::move($sourceFileNameFull, $targetFileNameFull);
-                                                        $value = $targetPath . '/' . $targetFile;
-                                                    } else {
-                                                        $oldValue = DB::table('PageComponentProperty')
-                                                            ->where('PageComponentID', '=', $pc->PageComponentID)
-                                                            ->where('Name', '=', $name)
-                                                            ->where('StatusID', '=', eStatus::Deleted)
-                                                            ->order_by('PageComponentPropertyID', 'DESC')
-                                                            ->first(array('Value'));
-
-                                                        if ($oldValue) {
-                                                            $value = $oldValue->Value;
-                                                        } else {
-                                                            $value = $targetPath . '/' . $value;
-                                                        }
-                                                        //TODO:kaydete bastiktan sonra ikinci kez kaydete basilirsa veriler bozuluyor !!!
-                                                        //$value = $targetPath.'/'.$value;
-                                                    }
-                                                }
-
-                                                if ($name == 'url' && !Common::startsWith($value, 'http://') && !Common::startsWith($value, 'https://') && !empty($value)) {
-                                                    $value = 'http://' . $value;
-                                                }
-                                                $value = str_replace("www.youtube.com/watch?v=", "www.youtube.com/embed/", $value);
-
-                                                $pcp = new PageComponentProperty();
-                                                $pcp->PageComponentID = $pc->PageComponentID;
-                                                $pcp->Name = $name;
-                                                $pcp->Value = $value;
-                                                $pcp->StatusID = eStatus::Active;
-                                                $pcp->CreatorUserID = $currentUser->UserID;
-                                                $pcp->DateCreated = new DateTime();
-                                                $pcp->ProcessUserID = $currentUser->UserID;
-                                                $pcp->ProcessDate = new DateTime();
-                                                $pcp->ProcessTypeID = eProcessTypes::Insert;
-                                                $pcp->save();
-                                            }
-                                        }
-                                    }
-                                }
-                            } elseif ($clientProcess == 'removed' && $clientPageComponentID > 0) {
-                                DB::table('PageComponentProperty')
-                                    ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $clientPageComponentID . ' AND `ContentFilePageID`=' . $ContentFilePageID . ' AND `StatusID`=1)'))
-                                    ->where('StatusID', '=', eStatus::Active)
-                                    ->update(
-                                        array(
-                                            'StatusID' => eStatus::Deleted,
-                                            'ProcessUserID' => $currentUser->UserID,
-                                            'ProcessDate' => new DateTime(),
-                                            'ProcessTypeID' => eProcessTypes::Update
-                                        )
-                                    );
-
-                                DB::table('PageComponent')
-                                    ->where('PageComponentID', '=', $clientPageComponentID)
-                                    ->where('ContentFilePageID', '=', $ContentFilePageID)
-                                    ->where('StatusID', '=', eStatus::Active)
-                                    ->update(
-                                        array(
-                                            'StatusID' => eStatus::Deleted,
-                                            'ProcessUserID' => $currentUser->UserID,
-                                            'ProcessDate' => new DateTime(),
-                                            'ProcessTypeID' => eProcessTypes::Update
-                                        )
-                                    );
-
-                                //TODO:Delete current file
+                        $properties = array();
+                        foreach ($postedData as $name => $value) {
+                            if (Common::startsWith($name, 'comp-' . $id) && !in_array($name, $ignoredProperties)) {
+                                $properties[$name] = $value;
                             }
                         }
+                        $componentProperties[$id] = $properties;
+                    }
 
-                    //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+                    //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
+
+
+                    foreach ($ids as $id) {
+                        //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
+                        $clientComponentID = (int)Input::get('comp-' . $id . '-id', '0');
+                        $clientPageComponentID = (int)Input::get('comp-' . $id . '-pcid', '0');
+                        $clientProcess = Input::get('comp-' . $id . '-process', '');
+
+                        if ($clientProcess == 'new' || $clientProcess == 'loaded') {
+                            $tPageComponentExists = false;
+
+                            if ($clientProcess == 'loaded' && $clientPageComponentID > 0) {
+                                $tPageComponentExists = true;
+                                $pc = PageComponent::find($clientPageComponentID);
+                            } else {
+                                $pc = new PageComponent();
+                            }
+
+                            $pc->ContentFilePageID = $ContentFilePageID;
+                            $pc->ComponentID = $clientComponentID;
+                            $pc->No = $id;
+                            $pc->save();
+
+                            //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
+                            if ($tPageComponentExists) {
+                                //wtf neden statusu deleted yapiyor ????
+                                DB::table('PageComponentProperty')
+                                    ->where('PageComponentID', '=', $pc->PageComponentID)
+                                    ->where('StatusID', '=', eStatus::Active)
+                                    ->update(
+                                        array(
+                                            'StatusID' => eStatus::Deleted,
+                                            'ProcessUserID' => $currentUser->UserID,
+                                            'ProcessDate' => new DateTime(),
+                                            'ProcessTypeID' => eProcessTypes::Update
+                                        )
+                                    );
+                            }
+                            //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
+
+                            foreach ($componentProperties[$id] as $name => $value) {
+                                Log::info('line:' . __LINE__ . ' comp:' . $name . ' time:' . microtime());
+                                $name = str_replace('comp-' . $id . '-', "", $name);
+
+                                //slideshow || gallery360
+                                if (($name == 'file' || $name == 'filename' || $name == 'filename2') && is_array($value)) {
+                                    $index = 1;
+
+                                    foreach ($value as $v) {
+                                        if (Str::length($v) > 0) {
+                                            $sourcePath = 'files/temp';
+                                            $sourcePathFull = path('public') . $sourcePath;
+                                            $sourceFile = $v;
+                                            $sourceFileNameFull = $sourcePathFull . '/' . $sourceFile;
+
+                                            $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pc->PageComponentID;
+                                            $targetPathFull = path('public') . $targetPath;
+                                            $targetFile = $currentUser->UserID . '_' . date("YmdHis") . '_' . $v;
+                                            //360
+                                            if ($clientComponentID == 9) {
+                                                $targetFile = ($index < 10 ? '0' . $index : '' . $index) . '.jpg';
+                                            }
+                                            $targetFileNameFull = $targetPathFull . '/' . $targetFile;
+
+                                            if (!File::exists($targetPathFull)) {
+                                                File::mkdir($targetPathFull);
+                                            }
+
+                                            if (File::exists($sourceFileNameFull)) {
+                                                File::move($sourceFileNameFull, $targetFileNameFull);
+                                                $v = $targetPath . '/' . $targetFile;
+                                            } else {
+                                                $oldValue = DB::table('PageComponentProperty')
+                                                    ->where('PageComponentID', '=', $pc->PageComponentID)
+                                                    ->where('Name', '=', $name)
+                                                    ->where('Value', 'LIKE', '%' . $v)
+                                                    ->where('StatusID', '=', eStatus::Deleted)
+                                                    ->order_by('PageComponentPropertyID', 'DESC')
+                                                    ->first(array('Value'));
+                                                if ($oldValue) {
+                                                    $v = $oldValue->Value;
+                                                } else {
+                                                    $v = $targetPath . '/' . $v;
+                                                }
+                                                //TODO:kaydete bastiktan sonra ikinci kez kaydete basilirsa veriler bozuluyor !!!
+                                                //$v = $targetPath.'/'.$v;
+                                            }
+
+                                            $pcp = new PageComponentProperty();
+                                            $pcp->PageComponentID = $pc->PageComponentID;
+                                            $pcp->Name = $name;
+                                            $pcp->Value = $v;
+                                            $pcp->StatusID = eStatus::Active;
+                                            $pcp->CreatorUserID = $currentUser->UserID;
+                                            $pcp->DateCreated = new DateTime();
+                                            $pcp->ProcessUserID = $currentUser->UserID;
+                                            $pcp->ProcessDate = new DateTime();
+                                            $pcp->ProcessTypeID = eProcessTypes::Insert;
+                                            $pcp->save();
+
+                                            $index = $index + 1;
+                                        }
+                                    }
+                                } else {
+                                    if (($name == 'file' || $name == 'filename' || $name == 'filename2' || $name == 'posterimagename' || $name == 'modaliconname') && Str::length($value) > 0) {
+                                        $sourcePath = 'files/temp';
+                                        $sourcePathFull = path('public') . $sourcePath;
+                                        $sourceFile = $value;
+                                        $sourceFileNameFull = $sourcePathFull . '/' . $sourceFile;
+
+                                        $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pc->PageComponentID;
+                                        $targetPathFull = path('public') . $targetPath;
+                                        $targetFile = $currentUser->UserID . '_' . date("YmdHis") . '_' . $value;
+                                        $targetFileNameFull = $targetPathFull . '/' . $targetFile;
+
+                                        if (!File::exists($targetPathFull)) {
+                                            File::mkdir($targetPathFull);
+                                        }
+
+                                        if (File::exists($sourceFileNameFull)) {
+                                            File::move($sourceFileNameFull, $targetFileNameFull);
+                                            $value = $targetPath . '/' . $targetFile;
+                                        } else {
+                                            $oldValue = DB::table('PageComponentProperty')
+                                                ->where('PageComponentID', '=', $pc->PageComponentID)
+                                                ->where('Name', '=', $name)
+                                                ->where('StatusID', '=', eStatus::Deleted)
+                                                ->order_by('PageComponentPropertyID', 'DESC')
+                                                ->first(array('Value'));
+
+                                            if ($oldValue) {
+                                                $value = $oldValue->Value;
+                                            } else {
+                                                $value = $targetPath . '/' . $value;
+                                            }
+                                            //TODO:kaydete bastiktan sonra ikinci kez kaydete basilirsa veriler bozuluyor !!!
+                                            //$value = $targetPath.'/'.$value;
+                                        }
+                                    }
+
+                                    if ($name == 'url' && !Common::startsWith($value, 'http://') && !Common::startsWith($value, 'https://') && !empty($value)) {
+                                        $value = 'http://' . $value;
+                                    }
+                                    $value = str_replace("www.youtube.com/watch?v=", "www.youtube.com/embed/", $value);
+
+                                    $pcp = new PageComponentProperty();
+                                    $pcp->PageComponentID = $pc->PageComponentID;
+                                    $pcp->Name = $name;
+                                    $pcp->Value = $value;
+                                    $pcp->StatusID = eStatus::Active;
+                                    $pcp->CreatorUserID = $currentUser->UserID;
+                                    $pcp->DateCreated = new DateTime();
+                                    $pcp->ProcessUserID = $currentUser->UserID;
+                                    $pcp->ProcessDate = new DateTime();
+                                    $pcp->ProcessTypeID = eProcessTypes::Insert;
+                                    $pcp->save();
+                                }
+
+                            }
+                        } elseif ($clientProcess == 'removed' && $clientPageComponentID > 0) {
+                            DB::table('PageComponentProperty')
+                                ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $clientPageComponentID . ' AND `ContentFilePageID`=' . $ContentFilePageID . ' AND `StatusID`=1)'))
+                                ->where('StatusID', '=', eStatus::Active)
+                                ->update(
+                                    array(
+                                        'StatusID' => eStatus::Deleted,
+                                        'ProcessUserID' => $currentUser->UserID,
+                                        'ProcessDate' => new DateTime(),
+                                        'ProcessTypeID' => eProcessTypes::Update
+                                    )
+                                );
+
+                            DB::table('PageComponent')
+                                ->where('PageComponentID', '=', $clientPageComponentID)
+                                ->where('ContentFilePageID', '=', $ContentFilePageID)
+                                ->where('StatusID', '=', eStatus::Active)
+                                ->update(
+                                    array(
+                                        'StatusID' => eStatus::Deleted,
+                                        'ProcessUserID' => $currentUser->UserID,
+                                        'ProcessDate' => new DateTime(),
+                                        'ProcessTypeID' => eProcessTypes::Update
+                                    )
+                                );
+
+                            //TODO:Delete current file
+                        }
+                    }
+                    //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
                 });
-            //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
+            //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
             if (Laravel\Request::env() == ENV_LIVE && Input::get('closing') == "true") {
                 interactivityQueue::trigger();
             }
