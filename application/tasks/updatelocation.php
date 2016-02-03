@@ -54,7 +54,8 @@ class UpdateLocation_Task {
 							if($apiIndex > 9) {
 								$apiIndex = 1;
 							}
-							$apiKey = Config::get('custom.api_key'.$apiIndex);
+//							$apiKey = Config::get('custom.api_key'.$apiIndex);
+                        $apiKey = Config::get('custom.google_api_key');
 							$apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 							$url = sprintf('%s?latlng=%s,%s&sensor=false&key=%s',
 		                       $apiUrl,

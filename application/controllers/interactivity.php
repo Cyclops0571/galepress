@@ -159,25 +159,10 @@ class Interactivity_Controller extends Base_Controller
                      */
                     $zoom = 1000 * (float)$data['zoom'];
                     $z = (19 * $zoom / 100);
-                    //$z = $data['zoom'];
-                    //return Redirect::to('http://maps.google.com/?ie=UTF8&ll='.$data['lat'].','.$data['lon'].'&spn=0.029332,0.061455&t='.$type.'&z='.$z.'&output=embed');
-                    return Redirect::to('https://www.google.com/maps/embed/v1/view?maptype=' . $type . '&zoom=' . $z . '&center=' . $data['lat'] . ',' . $data['lon'] . '&key=AIzaSyBGyONehKJ2jCRF9YekkvWDXOI_UVxeVE4');
-                    //return Redirect::to('https://www.google.com/maps/embed/v1/view?maptype='.$type.'&zoom='.$z.'&center='.$data['lat'].','.$data['lon'].'&key=AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY');
+                    return Redirect::to('https://www.google.com/maps/embed/v1/view?maptype=' . $type . '&zoom=' . $z . '&center=' . $data['lat'] . ',' . $data['lon'] . '&key=' . Config::get('custom.google_api_key'));
                 } elseif ($componentName == 'link') {
                     return '';
                 } elseif ($componentName == 'webcontent') {
-                    //https://www.google.com/maps/preview?ll=40.995374,29.108083&z=15&t=m&hl=tr-TR&gl=US&mapclient=embed&cid=9770296505447935381
-                    //https://www.google.com/maps/preview?ll=40.995374,29.108083&z=15&t=m&hl=tr-TR&gl=US&mapclient=embed&cid=9770296505447935381
-                    //return $data['url'];
-                    //return Redirect::to('https://www.google.com/maps/place/Teknik+Yap%C4%B1+Holding/@40.995374,29.108083,17z/data=!3m1!4b1!4m2!3m1!1s0x0:0x879710e80d76ed95?hl=en-US&key=AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY');
-                    //return Redirect::to('https://www.google.com/maps/embed/v1/view?maptype=satellite&zoom=1&center=59,-123&key=AIzaSyBGyONehKJ2jCRF9YekkvWDXOI_UVxeVE4');
-                    //return Response::make('<iframe src="'.$data['url'].'&output=embed'.'"></iframe>', 200);
-                    //return Response::make('<script type="text/javascript">setTimeout(function () { alert("emre"); document.location.href = "'.$data['url'].'"; }, 500);</script>', 200);
-                    //return Response::make('<script type="text/javascript">setTimeout(function() { alert("emre"); document.location.href = "'.$data['url'].'&output=embed&key=AIzaSyBGyONehKJ2jCRF9YekkvWDXOI_UVxeVE4'.'"; }, 500);</script><script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>', 200);
-                    //return Response::make('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>', 200);
-                    //return Redirect::to('https://www.google.com/maps/embed/v1/view?maptype=satellite&center=40.995374,29.108083&key=AIzaSyBGyONehKJ2jCRF9YekkvWDXOI_UVxeVE4');
-                    //return Response::make('<a href="'.$data['url'].'" rel="noreferrer" id="autoclick">go</a><script1>document.getElementById("autoclick").click();</script1>', 200);
-                    //return Response::make('<html><head><meta http-equiv="refresh" content="3;url='.$data['url'].'"/></head><body>Please wait, while redirecting...<script type="text/javascript"></body></html>', 200);
                     return Redirect::to($data['url']);
                 } elseif ($componentName == 'bookmark') {
                     return '';
