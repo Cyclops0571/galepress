@@ -45,22 +45,23 @@ if(isset($Properties))
     </div>
     
     <div class="upload">
-    
-        <div class="radiogroup">
+
+        <!-- <div class="radiogroup">
             <div class="radio {{ ($option == 1 ? 'checked ' : '') }}js-radio" optionvalue="1">{{ __('interactivity.audio_upload_option1') }}</div>
             <div class="radio {{ ($option == 2 ? 'checked ' : '') }}js-radio" optionvalue="2">{{ __('interactivity.audio_upload_option2') }}</div>
             <input type="hidden" name="comp-{id}-option" id="comp-{id}-option" value="{{ $option }}" />
-        </div>
+        </div> -->
         <!-- end radiogroup-->
-		
+        <input type="hidden" name="comp-{id}-option" id="comp-{id}-option" value="1"/>
+        <?php $option = 1; ?>
         <div class="local{{ ($fileSelected == 1 || $option == 2 ? ' hide' : '') }}">
         	<input type="file" name="comp-{id}-file" id="comp-{id}-file" class="hiddenFileHeight hidden" />
             <input type="hidden" name="comp-{id}-fileselected" id="comp-{id}-fileselected" value="{{ $fileSelected }}" />
 			<input type="hidden" name="comp-{id}-filename" id="comp-{id}-filename" class="required" value="{{ $filename }}" />
 	        <a class="btn expand uploadfile">{{ __('interactivity.audio_upload_text') }} <i class="icon-upload"></i></a>
         </div>
-        
-    	<div class="web{{ ($option == 1 ? ' hide' : '') }}">
+
+        <!--<div class="web{{ ($option == 1 ? ' hide' : '') }}">
             <div class="text dark inline-primary">
                 <input type="text" name="comp-{id}-url" id="comp-{id}-url" placeholder="http://www.galepress.com/test.mp3" class="prefix" value="{{ $url }}">
             </div>
@@ -69,7 +70,7 @@ if(isset($Properties))
             </div>
             <span class="success hide"><i class="icon-ok-sign"></i>{{ __('interactivity.audio_url_success') }}</span>
             <span class="error hide"><i class="icon-exclamation-sign"></i>{{ __('interactivity.audio_url_fail') }}</span>
-        </div>
+        </div> -->
         
         <div class="progress hide">
         	<a href="javascript:void(0);">{{ __('interactivity.cancel') }} <i class="icon-remove"></i></a>
