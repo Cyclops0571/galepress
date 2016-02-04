@@ -398,15 +398,16 @@ class Interactivity_Controller extends Base_Controller
                     foreach ($ids as $id) {
                         $properties = array();
                         foreach ($postedData as $name => $value) {
-                            if (Common::startsWith($name, 'comp-' . $id) && !in_array($name, $ignoredProperties)) {
-                                $properties[$name] = $value;
+                            if (Common::startsWith($name, 'comp-' . $id)) {
+                                $name = str_replace('comp-' . $id . '-', "", $name);
+                                if (!in_array($name, $ignoredProperties)) {
+                                    $properties[$name] = $value;
+                                }
                             }
                         }
                         $componentProperties[$id] = $properties;
+                        //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
                     }
-
-                    //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
-
 
                     foreach ($ids as $id) {
                         //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
@@ -448,7 +449,6 @@ class Interactivity_Controller extends Base_Controller
 
                             foreach ($componentProperties[$id] as $name => $value) {
                                 //Log::info('line:' . __LINE__ . ' comp:' . $name . ' time:' . microtime());
-                                $name = str_replace('comp-' . $id . '-', "", $name);
 
                                 //slideshow || gallery360
                                 if (($name == 'file' || $name == 'filename' || $name == 'filename2') && is_array($value)) {
