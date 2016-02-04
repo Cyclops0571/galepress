@@ -212,6 +212,8 @@ return array(
 	'applications_applicationname' => 'Application Name:',
 	'applications_detail' => 'Detail:',
 	'applications_price' => 'Price(For Mounth):',
+    'applications_in_app_purchase_active' => 'In App Purchase Aktive:',
+    'applications_flipboard_active' => 'Flipboard Aktive:',
 	'applications_placeholder_price' => 'Price(For Mounth):',
 	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Starting Date (gg.aa.yyyy):',

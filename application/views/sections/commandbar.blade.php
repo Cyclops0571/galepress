@@ -15,9 +15,12 @@
         <a href="#modalPushNotification" title="Push Notification" data-toggle="modal"
            data-target="#modalPushNotification" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span
                     class="icon-bullhorn"></span></a>
-        <!--<a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook"
-           class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span
-                    class="icon-book"></span></a> -->
+            <?php $application = Application::find(Input::get('applicationID', 0)); ?>
+            <?php if($application && $application->FlipboardActive): ?>
+            <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook"
+               class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span
+                        class="icon-book"></span></a>
+            <?php endif; ?>
         <a href="{{ URL::to(__('route.maps').'?applicationID='.Input::get('applicationID', 0)) }}"
            title="{{__('common.map_title')}}" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span
                     class="icon-map-marker" style="font-size:14px;"></span></a>

@@ -159,6 +159,7 @@ class Test_Controller extends Base_Controller
                         ->where('StatusID', '=', eStatus::Active)
                         ->order_by('No', 'ASC')
                         ->get();
+
                     foreach ($pc as $c) {
                         //get componenet property
                         $trigger_x = 0;
@@ -374,6 +375,7 @@ class Test_Controller extends Base_Controller
                                 $action = $p->create_action("URI", "url {" . $propertyUrl . "}");
                                 $p->create_annotation($x, $y, $x + $w, $y + $h, "Link", "linewidth=0 action {activate $action}");
                             } else {
+
                                 $content = View::make('interactivity.components.' . $componentClass . '.dynamic', $data)->render();
                                 File::put($outputPath . '/comp_' . $c->PageComponentID . '.html', $content);
                                 //File::put($componentPath.'/'.$bladeTemplate[$componentClass], $content);
@@ -816,4 +818,5 @@ class Test_Controller extends Base_Controller
         }
         return new Application();
     }
+
 }

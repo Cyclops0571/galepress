@@ -21,9 +21,14 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
     $customer = Auth::User()->Customer();
     $title = Auth::User()->FirstName . " " . Auth::User()->LastName;
     $showPaymentLink = false;
+    $showInAppPuchaseLink = false;
+
     foreach ($applicationSet as $app) {
         if ($app->Price > 0) {
             $showPaymentLink = true;
+        }
+        if($app->InAppPurchaseActive) {
+            $showInAppPuchaseLink = true;
         }
     }
     ?>
@@ -77,11 +82,13 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
                 </ul>
             @endif
         </li>
+        @if($showInAppPuchaseLink)
         <li>
             <a href="<?php echo Laravel\URL::to(__('route.clients')) ?>">
                 <span class="icon-mobile-phone"></span><?php echo __('common.client_list') ?>
             </a>
         </li>
+        @endif
         @if($showPaymentLink)
             <li>
                 <a href="{{URL::to(__('route.shop'))}}"><span

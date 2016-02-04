@@ -80,28 +80,6 @@ class PushNotification_Task {
 	}
     }
 
-    public function ios($args) {
-	$applicationID = $args[0];
-	$message = $args[1];
-	$deviceToken = $args[2];
-
-	$app = DB::table('Application')
-		->where('ApplicationID', '=', (int) $applicationID)
-		->first();
-	if (!$app) {
-	    throw new Exception('Application not found!');
-	}
-	$cert = path('public') . 'files/customer_' . $app->CustomerID . '/application_' . $app->ApplicationID . '/' . $app->CkPem;
-	echo $this->iosInternal($cert, $message, $deviceToken);
-    }
-
-    public function android($args) {
-	$applicationID = $args[0];
-	$message = $args[1];
-	$deviceToken = $args[2];
-	echo $this->androidInternal($message, $deviceToken);
-    }
-
     public function iosInternal($cert, $message, $deviceToken) {
 //	$appID = 424;
 //	$udid1 = 'E6A7CFD9-FE39-4C33-B7F4-6651404ED040';
@@ -150,7 +128,6 @@ class PushNotification_Task {
 
     public function androidInternal($message, $deviceToken) {
 	$success = false;
-	//$googleAPIKey = 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY';
 	$googleAPIKey = Config::get('custom.google_api_key');
 
 	$data = array(
@@ -202,6 +179,28 @@ class PushNotification_Task {
 	}
 	curl_close($ch);
 	return $success;
+    }
+
+    public function ios($args) {
+	$applicationID = $args[0];
+	$message = $args[1];
+	$deviceToken = $args[2];
+
+	$app = DB::table('Application')
+		->where('ApplicationID', '=', (int) $applicationID)
+		->first();
+	if (!$app) {
+	    throw new Exception('Application not found!');
+	}
+	$cert = path('public') . 'files/customer_' . $app->CustomerID . '/application_' . $app->ApplicationID . '/' . $app->CkPem;
+	echo $this->iosInternal($cert, $message, $deviceToken);
+    }
+
+    public function android($args) {
+	$applicationID = $args[0];
+	$message = $args[1];
+	$deviceToken = $args[2];
+	echo $this->androidInternal($message, $deviceToken);
     }
 
     public function run_backup() {
@@ -297,7 +296,6 @@ class PushNotification_Task {
 		    }
 		    //android
 		    elseif ($n->DeviceType === 'android') {
-			//$googleAPIKey = 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY';
 			$googleAPIKey = Config::get('custom.google_api_key');
 
 			$data = array(

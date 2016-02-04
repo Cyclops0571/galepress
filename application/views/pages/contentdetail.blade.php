@@ -3,8 +3,8 @@
 @section('content')
 
     <?php
+    /** @var Application $app */
     $ContentID = 0;
-    $ApplicationID = 0;
     $Name = '';
     $Detail = '';
     $MonthlyName = '';
@@ -30,7 +30,6 @@
 
     if (isset($row)) {
         $ContentID = (int)$row->ContentID;
-        $ApplicationID = (int)$row->ApplicationID;
         $Name = e($row->Name);
         $Detail = $row->Detail;
         $MonthlyName = $row->MonthlyName;
@@ -70,12 +69,9 @@
             $IsProtected = 0;
             $Password = '';
         }
-    } else {
-        $ApplicationID = (int)Input::get('applicationID', 0);
     }
-
-    $authInteractivity = Common::AuthInteractivity($ApplicationID);
-    $authMaxPDF = Common::AuthMaxPDF($ApplicationID);
+    $authInteractivity = (1 == (int)$app->Package()->Interactive);
+    $authMaxPDF = Common::AuthMaxPDF($app->ApplicationID);
 
     $applications = DB::table('Application')
             ->where('StatusID', '=', eStatus::Active)
@@ -83,7 +79,7 @@
             ->get();
 
     $categories = DB::table('Category')
-            ->where('ApplicationID', '=', $ApplicationID)
+            ->where('ApplicationID', '=', $app->ApplicationID)
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('Name', 'ASC')
             ->get();
@@ -118,25 +114,7 @@
 
                 <input type="hidden" name="ContentID" id="ContentID" value="{{ $ContentID }}"/>
                 @if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
-                    <input type="hidden" name="ApplicationID" id="ApplicationID" value="{{ $ApplicationID }}"/>
-                @endif
-                @if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
-                    <div class="form-row">
-                        <div class="col-md-3">{{ __('common.contents_application') }} <span class="error">*</span></div>
-                        {{ $errors->first('ApplicationID', '<p class="error">:message</p>') }}
-                        <div class="col-md-8">
-                            <select style="width: 100%;" tabindex="-1" id="ApplicationID" name="ApplicationID"
-                                    class="form-control select2 required">
-                                <option value=""{{ ($ApplicationID == 0 ? ' selected="selected"' : '') }}></option>
-                                @foreach ($applications as $application)
-                                    <option value="{{ $application->ApplicationID }}"{{ ($ApplicationID == $application->ApplicationID ? ' selected="selected"' : '') }}>{{ $application->Name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-1"><a class="tipr"
-                                                 title="{{ __('common.contents_tooltip_application') }}"><span
-                                        class="icon-info-sign"></span></a></div>
-                    </div>
+                    <input type="hidden" name="ApplicationID" id="ApplicationID" value="{{ $app->ApplicationID }}"/>
                 @endif
                 <div class="form-row">
                     <div class="col-md-3">{{ __('common.contents_name') }} <span class="error">*</span></div>
@@ -417,6 +395,7 @@
                 </div>
             </div>
         </div>
+        <?php if($app->InAppPurchaseActive):?>
         <div class="block">
             <div class="content controls" style="overflow:visible">
                 <div class="form-row <?php echo ($ContentID && $IsBuyable) > 0 ? "" : 'disabledFields hide' ?>">
@@ -463,6 +442,8 @@
                 </div>
             </div>
         </div>
+
+        <?php endif;?>
         <div class="block disabledFields hide">
             <div class="content controls" style="overflow:visible">
                 <div class="form-row">

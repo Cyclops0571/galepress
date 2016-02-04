@@ -212,6 +212,8 @@ return array(
 	'applications_applicationname' => 'Uygulama Adı:',
 	'applications_detail' => 'Detay:',
 	'applications_price' => 'Fiyat(Aylık):',
+    'applications_in_app_purchase_active' => 'In App Purchase Aktif:',
+    'applications_flipboard_active' => 'Flipboard Aktif:',
 	'applications_placeholder_price' => 'Fiyat(Aylık):',
 	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Başlangıç Tarihi (gg.aa.yyyy):',

@@ -232,24 +232,16 @@ class Contents_Controller extends Base_Controller {
             'showCropPage' => 0,
         );
         $applicationID = Input::get('applicationID', '0');
-        $appCount = DB::table('Application')
-                ->where('CustomerID', '=', Auth::User()->CustomerID)
-                ->where('ApplicationID', '=', $applicationID)
-                ->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
-                ->count();
-
-        if ($appCount == 0) {
-
-            $app = Application::find($applicationID);
-            if (!$app) {
-                return Redirect::to(__('route.home'));
-            }
-
-            $data = array_merge($data, array('appName' => $app->Name));
-
+        $app = Application::find($applicationID);
+        if (!$app) {
+            return Redirect::to(__('route.home'));
+        } else if($app->ExpirationDate < date('Y-m-d')) {
+            $data['appName'] = $app->Name;
             return View::make('pages.expiredpage', $data)
-                            ->nest('filterbar', 'sections.filterbar', $data);
+                ->nest('filterbar', 'sections.filterbar', $data);
         }
+
+        $data['app'] = $app;
         return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
                         ->nest('filterbar', 'sections.filterbar', $data);
     }
@@ -279,26 +271,21 @@ class Contents_Controller extends Base_Controller {
             if (Common::CheckContentOwnership($id)) {
                 $this->route = __('route.' . $this->page) . '?applicationID=' . $row->ApplicationID;
 
+                $app = $row->Application();
                 $data = array(
                     'page' => $this->page,
                     'route' => $this->route,
                     'caption' => $this->caption,
                     'detailcaption' => $this->detailcaption,
                     'row' => $row,
+                    'app' => $app,
                     'showCropPage' => $showCropPage,
                     'contentList' => $contentList,
                 );
 
                 if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
-                    $appCount = DB::table('Application')
-                            ->where('CustomerID', '=', Auth::User()->CustomerID)
-                            ->where('ApplicationID', '=', $row->ApplicationID)
-                            ->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
-                            ->count();
-
-                    if ($appCount == 0) {
-                        return View::make('pages.expiredpage', $data)
-                                        ->nest('filterbar', 'sections.filterbar', $data);
+                    if ($app->ExpirationDate < date('Y-m-d')) {
+                        return View::make('pages.expiredpage', $data)->nest('filterbar', 'sections.filterbar', $data);
                     }
                 }
                 return View::make('pages.' . Str::lower($this->table) . 'detail', $data)

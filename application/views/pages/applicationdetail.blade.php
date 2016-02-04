@@ -24,6 +24,8 @@
     $Version = 0;
     $NotificationText = '';
     $CkPem = '';
+    $InAppPurchaseActive = 0;
+    $FlipboardActive = 0;
 
     if (isset($row)) {
         /** @var Application $row */
@@ -33,6 +35,8 @@
         $Detail = $row->Detail;
         $ApplicationLanguage = $row->ApplicationLanguage;
         $Price = $row->Price;
+        $InAppPurchaseActive = $row->InAppPurchaseActive;
+        $FlipboardActive = $row->FlipboardActive;
         $BundleText = $row->BundleText;
         $StartDate = $row->StartDate;
         $ExpirationDate = $row->ExpirationDate;
@@ -137,6 +141,20 @@
                                    placeholder="{{__('common.applications_placeholder_price')}}" value="{{ $Price }}"/>
                             <span class="input-group-addon">TL + (KDV)</span>
                         </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_in_app_purchase_active') }}</div>
+                    <div class="col-md-9">
+                        <input type="checkbox" name="InAppPurchaseActive" id="InAppPurchaseActive"
+                               value="1"{{ $InAppPurchaseActive ? ' checked="checked"' : '' }} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_flipboard_active') }}</div>
+                    <div class="col-md-9">
+                        <input type="checkbox" name="FlipboardActive" id="FlipboardActive"
+                               value="1"{{ $FlipboardActive ? ' checked="checked"' : '' }} />
                     </div>
                 </div>
                 <div class="form-row">

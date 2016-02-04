@@ -353,6 +353,8 @@ class Applications_Controller extends Base_Controller
                 $s->Detail = Input::get('Detail');
                 $s->ApplicationLanguage = Input::get('ApplicationLanguage');
                 $s->Price = Input::get('Price');
+                $s->InAppPurchaseActive = Input::get('InAppPurchaseActive');
+                $s->FlipboardActive = Input::get('FlipboardActive');
                 $s->BundleText = strtolower(Input::get('BundleText'));
                 $s->StartDate = new DateTime(Common::dateWrite(Input::get('StartDate')));
                 $s->ExpirationDate = new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
@@ -496,9 +498,12 @@ class Applications_Controller extends Base_Controller
             $tabs[$i]->save();
         }
 
-        foreach (Subscription::types() as $key => $subscription) {
-            $application->subscriptionStatus($key, Input::get("SubscriptionStatus_" . $key));
+        if ($application->InAppPurchaseActive) {
+            foreach (Subscription::types() as $key => $subscription) {
+                $application->subscriptionStatus($key, Input::get("SubscriptionStatus_" . $key));
+            }
         }
+
         if (!$application->dirty()) {
             $application->incrementAppVersion();
         } else {

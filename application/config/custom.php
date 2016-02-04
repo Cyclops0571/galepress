@@ -50,7 +50,6 @@ return array(
     //'admin_email' => 'enes.taskiran@detaysoft.com',
     //'admin_email' => 'adem.karakollu@detaysoft.com',
     'pdflib_license' => 'L900202-010503-800050-T58UH2-3ASLA2',
-    //'api_key' => 'AIzaSyBGyONehKJ2jCRF9YekkvWDXOI_UVxeVE4',
     'api_key1' => 'AIzaSyA7xMDIVl2332zCKP70HceFTuq2gdwBwx0',
     'api_key2' => 'AIzaSyCFt9FNEys_tXed-VHu5CaI2_9bezEiaJY',
     'api_key3' => 'AIzaSyDUt1iTUfNJ0V9gQolAkkCwGqxNaijJgdw',

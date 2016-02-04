@@ -9,6 +9,8 @@
  * @property int $ThemeBackground Description
  * @property int $ThemeForeground Description
  * @property int $Price Description
+ * @property int $InAppPurchaseActive Description
+ * @property int $FlipboardActive Description
  * @property string $BundleText Description
  * @property int $StartDate Description
  * @property int $ExpirationDate Description

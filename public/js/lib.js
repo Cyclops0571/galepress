@@ -116,6 +116,7 @@ $(function () {
 	}
     });
 
+    /*
     $("#IsBuyable").click(function () {
 	if ($(this).is(':checked')) {
 	    $("#Price").addClass("required");
@@ -130,7 +131,7 @@ $(function () {
 	}
     });
 
-    /*
+
      $("#dialog-category-form").dialog({
      autoOpen: false,
      height: 350,

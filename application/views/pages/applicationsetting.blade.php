@@ -70,12 +70,12 @@ if (false) {
                     {{ __('common.application_settings_caption_banner') }}
                 </div>
                 <div class="col-xs-2" style="padding: 0">
-                        <a class="banner-setting-link"
-                           href="<?php echo Laravel\URL::to(__('route.banners') . '?applicationID=' . $application->ApplicationID); ?>"
-                           title="Banner" class=" page-navigation">
+                    <a class="banner-setting-link"
+                       href="<?php echo Laravel\URL::to(__('route.banners') . '?applicationID=' . $application->ApplicationID); ?>"
+                       title="Banner" class=" page-navigation">
                                     <span class="icon-arrow-right">
                                     </span>
-                        </a>
+                    </a>
 
                 </div>
             </div>
@@ -204,6 +204,7 @@ if (false) {
         </div>
     </div>
 
+    <?php if($application->InAppPurchaseActive): ?>
     <div class="block block-drop-shadow">
         <div class="header" style="border-bottom: 1px solid #000000">
             <h2>{{ __('common.application_settings_subscription') }}</h2>
@@ -243,6 +244,7 @@ if (false) {
             <?php endforeach; ?>
         </div>
     </div>
+    <?php endif; ?>
 
     <div class="block block-drop-shadow">
         <div class="content controls">
