@@ -381,6 +381,9 @@
                 opt.sizeChanged(tool, prop, 'tool', opt.width, opt.height);
             }
             opt.selected(tool, prop);
+            if (!tool.attr("componentid") && toolt.attr('componentid') > 0) {
+                $(opt.propContainer + " #prop-" + toolt.attr('componentid')).removeClass("hide");
+            }
             ///////////////////////////////////////////////////////////////////////////////////////////////
             //modal
             var modalElement = $("#prop-" + id + " [name='comp-" + id + "-modal']");

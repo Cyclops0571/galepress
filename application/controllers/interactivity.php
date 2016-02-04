@@ -159,7 +159,13 @@ class Interactivity_Controller extends Base_Controller
                      */
                     $zoom = 1000 * (float)$data['zoom'];
                     $z = (19 * $zoom / 100);
-                    return Redirect::to('https://www.google.com/maps/embed/v1/view?maptype=' . $type . '&zoom=' . $z . '&center=' . $data['lat'] . ',' . $data['lon'] . '&key=' . Config::get('custom.google_api_key'));
+
+                    return Redirect::to('https://www.google.com/maps/embed/v1/search?'
+                        . 'maptype=' . $type
+                        . '&q=' . $data['lat'] . ',' . $data['lon']
+                        . '&zoom=' . $z
+                        . '&key=' . Config::get('custom.google_api_key')
+                    );
                 } elseif ($componentName == 'link') {
                     return '';
                 } elseif ($componentName == 'webcontent') {
