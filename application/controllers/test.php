@@ -60,6 +60,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo microtime();
+        return 'asdfasdf';
         return \Laravel\View::make('test.iframelogin');
         $a = null;
         var_dump((array)$a);
