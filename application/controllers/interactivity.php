@@ -447,7 +447,7 @@ class Interactivity_Controller extends Base_Controller
                             //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
 
                             foreach ($componentProperties[$id] as $name => $value) {
-                                Log::info('line:' . __LINE__ . ' comp:' . $name . ' time:' . microtime());
+                                //Log::info('line:' . __LINE__ . ' comp:' . $name . ' time:' . microtime());
                                 $name = str_replace('comp-' . $id . '-', "", $name);
 
                                 //slideshow || gallery360
