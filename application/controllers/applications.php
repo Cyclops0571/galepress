@@ -353,8 +353,8 @@ class Applications_Controller extends Base_Controller
                 $s->Detail = Input::get('Detail');
                 $s->ApplicationLanguage = Input::get('ApplicationLanguage');
                 $s->Price = Input::get('Price');
-                $s->InAppPurchaseActive = Input::get('InAppPurchaseActive');
-                $s->FlipboardActive = Input::get('FlipboardActive');
+                $s->InAppPurchaseActive = Input::get('InAppPurchaseActive', 0);
+                $s->FlipboardActive = Input::get('FlipboardActive', 0);
                 $s->BundleText = strtolower(Input::get('BundleText'));
                 $s->StartDate = new DateTime(Common::dateWrite(Input::get('StartDate')));
                 $s->ExpirationDate = new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
