@@ -201,7 +201,8 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                     <div class="templateExtrasScreen hide" style="opacity:0; overflow:hidden;">
                         <div class="container">
                             <div class="form-row">
-                                <div class="col-md-12"><img src="/img/template-chooser/logo.png" width="100%"></div>
+                                <div class="col-md-12"><img src="/img/template-chooser/logo.png?{{APP_VER}}"
+                                                            width="100%"></div>
                             </div>
                             <div class="form-row" style="margin-top:17px;">
                                 <div class="col-md-12">
