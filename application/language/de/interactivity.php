@@ -14,7 +14,7 @@ return array(
 	
 	'setting' => 'EINSTELLUNGEN',
 	'help' => 'HILFE',
-	'exit' => 'AUSLOGGEN',
+    'back_to_panel' => 'AUSLOGGEN',
 	'exitalert' => 'Sind Sie sicher, dass Sie ohne Speichern verlassen möchten?',
 	'save' => 'SPEICHERN',
 	'saveandclose' => 'SCHLIESSEN UND VERÖFFENTLICHEN',

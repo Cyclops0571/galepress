@@ -14,7 +14,7 @@ return array(
 	
 	'setting' => 'SETTINGS',
 	'help' => 'HELP',
-	'exit' => 'EXIT',
+    'back_to_panel' => 'BACK TO PANEL',
 	'exitalert' => 'Are you sure you want to exit without saving?',
 	'save' => 'SAVE',
 	'saveandclose' => 'CLOSE AND PUBLISH',

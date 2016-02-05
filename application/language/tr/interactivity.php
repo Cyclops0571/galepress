@@ -14,7 +14,7 @@ return array(
 	
 	'setting' => 'AYARLAR',
 	'help' => 'YARDIM',
-	'exit' => 'ÇIKIŞ',
+    'back_to_panel' => 'PANELE DÖN',
 	'exitalert' => 'Kaydetmeden çıkmak istediğinize emin misiniz?',
 	'save' => 'KAYDET',
 	'saveandclose' => 'KAPAT VE YAYINLA',
