@@ -75,7 +75,7 @@ class Banner extends Eloquent
         File::move($tmpFilePath, $sourcePicturePath);
 
         $pictureInfoSet = array();
-        $pictureInfoSet[] = array("width" => 740, "height" => 320, "imageName" => $this->BannerID);
+        $pictureInfoSet[] = array("width" => 1480, "height" => 640, "imageName" => $this->BannerID);
         foreach ($pictureInfoSet as $pInfo) {
             imageClass::cropImage($sourcePicturePath, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
         }
