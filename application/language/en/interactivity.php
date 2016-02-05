@@ -11,8 +11,8 @@ return array(
 	'y' => 'Y:',
 	'w' => 'Gen:',
 	'h' => 'Yük:',
-	
-	'setting' => 'SETTINGS',
+
+    'import' => 'IMPORT TO PDF',
 	'help' => 'HELP',
     'back_to_panel' => 'BACK TO PANEL',
 	'exitalert' => 'Are you sure you want to exit without saving?',

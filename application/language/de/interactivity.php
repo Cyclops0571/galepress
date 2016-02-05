@@ -11,8 +11,8 @@ return array(
 	'y' => 'Y:',
 	'w' => 'Breite:',
 	'h' => 'Höhe:',
-	
-	'setting' => 'EINSTELLUNGEN',
+
+    'import' => 'IMPORT TO PDF',
 	'help' => 'HILFE',
     'back_to_panel' => 'AUSLOGGEN',
 	'exitalert' => 'Sind Sie sicher, dass Sie ohne Speichern verlassen möchten?',

@@ -4,9 +4,16 @@
         <div id="user-settings">
             <ul>
                 <!--<li><a href="javascript:void(0);"><i class="icon-question-sign"></i>{{ __('interactivity.help') }}</a></li>-->
-                <li><a href="javascript:void(0);" onclick="cInteractivity.openSettings();"><i class="icon-cog"></i>{{ __('interactivity.setting') }}</a></li>
-                <li><a href="javascript:void(0);" onclick="cInteractivity.exitWithoutSave();"><i
-                                class="icon-backward"></i>{{ __('interactivity.back_to_panel') }}</a></li>
+                <li>
+                    <a href="javascript:void(0);" onclick="cInteractivity.openSettings();">
+                        <i class="icon-download-alt"></i>{{ __('interactivity.import') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="cInteractivity.exitWithoutSave();">
+                        <i class="icon-backward"></i>{{ __('interactivity.back_to_panel') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

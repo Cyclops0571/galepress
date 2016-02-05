@@ -11,8 +11,8 @@ return array(
 	'y' => 'Y:',
 	'w' => 'Gen:',
 	'h' => 'Yük:',
-	
-	'setting' => 'AYARLAR',
+
+    'import' => 'İÇERİ AKTAR',
 	'help' => 'YARDIM',
     'back_to_panel' => 'PANELE DÖN',
 	'exitalert' => 'Kaydetmeden çıkmak istediğinize emin misiniz?',
