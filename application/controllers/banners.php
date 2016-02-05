@@ -22,7 +22,7 @@ class Banners_Controller extends Base_Controller
         $this->caption = __('common.applications_caption');
         $this->detailcaption = __('common.banners_caption_detail');
         $this->fields = array();
-        $this->fields[] = __('common.image');
+        $this->fields[] = __('common.image') . ' (1480x740)';
         $this->fields[] = __('common.banner_list_customer');
         $this->fields[] = __('common.banner_list_application');
         $this->fields[] = __('common.banner_form_target_url');
@@ -34,7 +34,7 @@ class Banners_Controller extends Base_Controller
 
         if (Auth::User() && (int)Auth::User()->UserTypeID == eUserTypes::Customer) {
             $this->fields = array();
-            $this->fields[] = __('common.image');
+            $this->fields[] = __('common.image') . ' (1480x740)';
             $this->fields[] = __('common.banner_form_target_url');
 //	    $this->fields[] = __('common.banner_form_target_content');
 //	    $this->fields[] = __('common.banner_description');
