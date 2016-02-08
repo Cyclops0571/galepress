@@ -68,6 +68,7 @@ return array(
 	'video_restartwhenfinished' => 'Beginning at end of play',
 	'video_mute' => 'Sound Off Play',
 	'video_import' => 'Import to PDF',
+    'video_autoplay' => 'Autoplay',
 	'video_modal' => 'Modal',
 	'video_poster' => 'Poster Of Video',
 	'video_poster_tooltip' => 'Only .png or .jpeg format downloadable.',

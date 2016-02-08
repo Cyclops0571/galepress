@@ -68,6 +68,7 @@ return array(
 	'video_restartwhenfinished' => 'Erneutes Abspielen nach der Beendigung',
 	'video_mute' => 'Stummes abspielen',
 	'video_import' => 'Import to PDF',
+	'video_autoplay' => 'Autoplay',
 	'video_modal' => 'Modal',
 	'video_poster' => 'Videoplakat',
 	'video_poster_tooltip' => 'Können nur die Formate .png und .jpeg hochgeladen werden.',

@@ -4,35 +4,40 @@ $files = '';
 $fileSelected = 0;
 $transparent = 0;
 $bgcolor = '#151515';
-
+$autoplay = 0;
 if(isset($Properties))
 {
 	$index = 0;
-	
 	foreach($Properties as $prop)
 	{
-		if($prop->Name == 'filename')
-		{
-			$index += 1;
-			
-			$filename = path('public').$prop->Value;
-			if(File::exists($filename) && is_file($filename)) {
-				$fname = File::name($filename);
-				$fext = File::extension($filename);
-				$filename = $fname.'.'.$fext;
-			}
-			else {
-				$filename = '';
-			}
-			
-			if(Str::length($filename) > 0)
-			{
-				$fileSelected = 1;
-				$files .= '<li>'.($index > 9 ? "".$index: "0".$index).' - '.Str::limit_exact($filename, 20).'<input type="hidden" name="comp-{id}-filename[]" class="required" value="'.$filename.'" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
-			}
-		}
-        if($prop->Name == 'transparent') $transparent = (int)$prop->Value;
-        if($prop->Name == 'bgcolor') $bgcolor = $prop->Value;
+        switch ($prop->Name) {
+            case 'filename':
+                $index += 1;
+
+                $filename = path('public') . $prop->Value;
+                if (File::exists($filename) && is_file($filename)) {
+                    $fname = File::name($filename);
+                    $fext = File::extension($filename);
+                    $filename = $fname . '.' . $fext;
+                } else {
+                    $filename = '';
+                }
+
+                if (Str::length($filename) > 0) {
+                    $fileSelected = 1;
+                    $files .= '<li>' . ($index > 9 ? "" . $index : "0" . $index) . ' - ' . Str::limit_exact($filename, 20) . '<input type="hidden" name="comp-{id}-filename[]" class="required" value="' . $filename . '" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
+                }
+                break;
+            case 'transparent':
+                $transparent = (int)$prop->Value;
+                break;
+            case 'bgcolor':
+                $bgcolor = $prop->Value;
+                break;
+            case 'autoplay':
+                $autoplay = $prop->Value;
+                break;
+        }
 	}
 }
 ?>
@@ -49,6 +54,11 @@ if(isset($Properties))
     <div class="settings">
         <div class="component-panel">
             <h5 title="{{ __('interactivity.slideshow_playerpreferences_tooltip') }}" class="tooltip">{{ __('interactivity.slideshow_playerpreferences') }} <i class="icon-info-sign"></i></h5>
+
+            <div class="checkbox js-checkbox{{ ($autoplay == 1 ? ' checked' : '') }}">
+                {{ __('interactivity.video_autoplay') }}<input type="hidden" name="comp-{id}-autoplay"
+                                                               value="{{ $autoplay }}"/>
+            </div>
             @include('interactivity.components.import')
             @include('interactivity.components.modal')
             <div class="checkbox js-checkbox{{ ($transparent == 1 ? ' checked' : '') }}">{{ __('interactivity.slideshow_transparent') }}<input type="hidden" name="comp-{id}-transparent" value="{{ $transparent }}" /></div>

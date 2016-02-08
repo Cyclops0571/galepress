@@ -68,6 +68,7 @@ return array(
 	'video_restartwhenfinished' => 'Sonlanınca Baştan Oynat',
 	'video_mute' => 'Sesi Kapalı Oynat',
 	'video_import' => 'PDF İçerisine Aktar',
+    'video_autoplay' => 'Autoplay',
 	'video_modal' => 'Modal',
 	'video_poster' => 'Video Posteri',
 	'video_poster_tooltip' => 'Sadece .png veya .jpeg formatındaki imajlar yüklenebilir.',

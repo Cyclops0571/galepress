@@ -236,9 +236,16 @@ foreach($files as $file)
 				loopRewind: false,
 				numImagesToPreload: 6,
 				keyboardNavEnabled: true,
-				autoScaleSlider: false,  
-				autoScaleHeight: false
-				/*
+				autoScaleSlider: false,
+                        autoScaleHeight: false,
+                        <?php if((int)$autoplay): ?>
+                        autoPlay: {
+                            // autoplay options go gere
+                            enabled: true,
+                            pauseOnHover: true
+                        }
+                        <?php endif; ?>
+                        /*
 				imgWidth: {{ $newWidth }},
 				imgHeight: {{ $newHeight }}
 				*/
