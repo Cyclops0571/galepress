@@ -83,6 +83,24 @@ if (false) {
     </div>
 
     <div class="block block-drop-shadow">
+        <div class="content controls">
+            <div class="form-row">
+                <div class="col-xs-10">
+                    {{ __('common.application_settings_store_locator') }}
+                </div>
+                <div class="col-xs-2" style="padding: 0">
+                    <a class="banner-setting-link"
+                       href="<?php echo Laravel\URL::to(__('route.maps') . '?applicationID=' . $application->ApplicationID); ?>"
+                       title="Store Locator" class=" page-navigation">
+                                    <span class="icon-arrow-right">
+                                    </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block block-drop-shadow">
         <div class="header">
             <h2>{{ __('common.application_settings_caption_tab') }}</h2>
         </div>

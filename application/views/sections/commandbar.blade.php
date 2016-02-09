@@ -21,9 +21,6 @@
                class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span
                         class="icon-book"></span></a>
             <?php endif; ?>
-        <a href="{{ URL::to(__('route.maps').'?applicationID='.Input::get('applicationID', 0)) }}"
-           title="{{__('common.map_title')}}" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span
-                    class="icon-map-marker" style="font-size:14px;"></span></a>
         <?php endif; ?>
 
 

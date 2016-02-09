@@ -196,6 +196,7 @@ return array(
 	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
 	'application_settings_caption_template' => 'TEMPLATE SETTINGS',
 	'application_settings_caption_banner' => 'BANNER SETTINGS',
+    'application_settings_store_locator' => 'Store Locator',
 	'application_settings_caption_tab' => 'TAB SETTINGS',
 	'application_settings_subscription' => 'SUBSCRIPTION SETTINGS',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',

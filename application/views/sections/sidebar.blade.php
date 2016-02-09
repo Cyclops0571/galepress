@@ -145,6 +145,7 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
     var contentsUrl = '<?php echo __('route.contents'); ?>';
     var applicationSettingRoute = "<?php echo __("route.applications_usersettings"); ?>";
     var bannersController = "<?php echo __("route.banners"); ?>";
+    var mapsController = "<?php echo __("route.maps"); ?>";
 
     function getURLParameter(url, name) {
         return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
@@ -164,7 +165,7 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
         if (!(appID > 0)) {
             return;
         }
-        if (window.location.href.indexOf(bannersController) > -1 || window.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
+        if (window.location.href.indexOf(bannersController) > -1 || window.location.href.indexOf(mapsController) > -1 || window.location.href.match(new RegExp(applicationSettingRouteExp, "i"))) {
             $(".page-navigation ul#allSettings li a").each(function (index) {
                 var match = $(this).attr('href').match(/\d+/);
                 if (match.length > 0 && parseInt(match[0]) === appID) {
