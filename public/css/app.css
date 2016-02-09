@@ -3364,7 +3364,6 @@ div#pdf-save p {
   text-align: right;
   margin: 10px 0 4px;
   font-size: 10px;
-  padding-right: 12px;
   height: 12px;
   line-height: 12px;
   overflow: hidden;
@@ -3375,7 +3374,6 @@ div#pdf-save span {
     color: #f38621;
   float: right;
   margin-top: 4px;
-  padding-right: 12px;
 }
 /* line 216, ../sass/app.scss */
 div#pdf-save div.seperator {
