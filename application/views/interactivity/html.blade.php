@@ -20,14 +20,6 @@
 <link rel="stylesheet" href="/css/redactor.css?v=<?php echo APP_VER; ?>" type="text/css">
 <link rel="stylesheet" href="/css/colorpicker.css?v=<?php echo APP_VER; ?>" type="text/css">
 <link rel="stylesheet" href="/uploadify/uploadify.css?v=<?php echo APP_VER; ?>" type="text/css">
-<!--[if lt IE 9]>
-<link rel="stylesheet" href="/css/ie.css" type="text/css">
-<![endif]-->
-
-<!--[if lt IE 8]>
-<p class="chromeframe">Çok eski bir tarayıcı kullanıyorsunuz (IE6). Daha iyi bir deneyim için<a href="http://browsehappy.com/">tarayıcınızı güncelleyin </a> veya <a href="http://www.google.com/chromeframe/?redirect=true">Google Chrome yükleyin</a></p>
-<![endif]-->
-
 @include('js.language')
 <script src="/js/modernizr.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script><!-- IE Fix for HTML5 Tags -->
 

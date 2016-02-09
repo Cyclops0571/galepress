@@ -90,7 +90,7 @@ var cInteractivity = new function () {
         var t = 'POST';
         var u = '/' + currentLanguage + '/' + route["interactivity_transfer"];
         var d = "contentfileid=" + contentFileID + "&componentid=" + componentID + "&from=" + from + "&to=" + to;
-        var ret = cInteractivity.doRequest(t, u, d);
+        var ret = cInteractivity.doAsyncRequest(t, u, d);
         if (ret.getValue("success") == "true") {
             this.refreshTree();
             this.clearPage();
@@ -257,8 +257,9 @@ var cInteractivity = new function () {
         var d = cForm.serialize(frm);
         cInteractivity.doAsyncRequest(t, u, d, function (ret) {
             //Sayfa henuz yuklenmeden degistirilirse eski icerikleri gosterme!
-            if (parseInt($("#pageno").val()) !== parseInt(pageno))
+            if (parseInt($("#pageno").val()) !== parseInt(pageno)) {
                 return;
+            }
 
             $("#page").append(ret.getValue("tool"));
             $("#component-container").html(ret.getValue("prop"));
@@ -305,23 +306,32 @@ var cInteractivity = new function () {
             if (func && (typeof func == "function")) {
                 func(obj);
             }
+            //$('#saveAndExitBtn').removeAttr("disabled");
+            $('#saveAndExitBtn').show();
+            $('#saveProgressBar').hide();
+            var d = new Date();
+            var h = (d.getHours() > 9 ? "" + d.getHours() : "0" + d.getHours());
+            var m = (d.getMinutes() > 9 ? "" + d.getMinutes() : "0" + d.getMinutes());
+            var second = (d.getSeconds() > 9 ? "" + d.getSeconds() : "0" + d.getSeconds());
+            var s = interactivity["autosave"]
+                .replace("{hour}", h)
+                .replace("{minute}", m)
+                .replace("{second}", second);
+            $("#pdf-save span.save-info").html(s);
         });
     };
 
     this.saveCurrentPage = function () {
+        //$('#saveAndExitBtn').attr("disabled", true);
+        $("#pdf-save span.save-info").html('');
+        $('#saveAndExitBtn').hide();
+        $('#saveProgressBar').show();
         var t = 'POST';
         var u = '/' + currentLanguage + '/' + route["interactivity_save"];
         var d = $("#pagecomponents").serialize();
-        var ret = cInteractivity.doRequest(t, u, d);
+        cInteractivity.doAsyncRequest(t, u, d, function () {
 
-        var d = new Date();
-        var h = (d.getHours() > 9 ? "" + d.getHours() : "0" + d.getHours());
-        var m = (d.getMinutes() > 9 ? "" + d.getMinutes() : "0" + d.getMinutes());
-        var s = interactivity["autosave"]
-            .replace("{hour}", h)
-            .replace("{minute}", m);
-
-        $("#pdf-save span.save-info").html(s);
+        })
     };
 
     this.saveAndClose = function () {

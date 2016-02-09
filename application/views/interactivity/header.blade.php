@@ -44,11 +44,13 @@
     <!-- end pdf-controls -->
     <div id="pdf-save">
         <div class="seperator"> </div>
-        <p>{{ $filename }}</p>
-        <div class="btn-group">
-            <button class="btn btn-mini" onclick="cInteractivity.saveCurrentPage();">{{ __('interactivity.save') }} <i class="icon-check"></i></button>
-            <button class="btn btn-mini" onclick="cInteractivity.saveAndClose();">{{ __('interactivity.saveandclose') }} <i class="icon-signout"></i></button>
+        <p>{{$content->Name}}</p>
+        <button id="saveAndExitBtn" class="btn btn-success btn-block"
+                onclick="cInteractivity.saveAndClose();">{{ __('interactivity.saveandclose') }} </button>
+        <div id="saveProgressBar" class="progress progress-striped active"
+             style="display: none; margin: 0 0 0 0; height: 30px">
+            <div class="progress-bar progress-bar-success" role="progressbar" style="width: 100%"></div>
         </div>
-        <span class="save-info"></span>
+        <span id="saveInfoTime" class="save-info"></span>
 	</div>
 </header>

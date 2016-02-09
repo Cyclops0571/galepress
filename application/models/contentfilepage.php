@@ -1,9 +1,11 @@
 <?php
 
 /**
+ * @property int ContentFilePageID
  * @property int ProcessTypeID
  * @property int ContentFileID
  * @property int No
+ * @property int OperationStatus
  * @property int Width
  * @property int Height
  * @property string FilePath

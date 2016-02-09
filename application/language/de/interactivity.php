@@ -18,7 +18,7 @@ return array(
 	'exitalert' => 'Sind Sie sicher, dass Sie ohne Speichern verlassen möchten?',
 	'save' => 'SPEICHERN',
 	'saveandclose' => 'SCHLIESSEN UND VERÖFFENTLICHEN',
-	'autosave' => '{hour}:{minute} - Automatisch gespeichert.',
+    'autosave' => '{hour}:{minute}:{second} - Automatisch gespeichert.',
 	'page' => 'SEITE',
 	'edit' => 'Text bearbeiten',
 	'cancel' => 'Cancel',

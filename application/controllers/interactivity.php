@@ -199,6 +199,7 @@ class Interactivity_Controller extends Base_Controller
             return View::make('interactivity.error', $data);
         }
 
+        $content = Content::find($ContentID);
         $cf = ContentFile::find($contentFileID);
 
         $oldContentFileID = 0;
@@ -229,6 +230,7 @@ class Interactivity_Controller extends Base_Controller
             ->get();
 
         $data = array(
+            'content' => $content,
             'ContentID' => $cf->ContentID,
             'ContentFileID' => $cf->ContentFileID,
             'included' => (int)$cf->Included,
@@ -342,7 +344,7 @@ class Interactivity_Controller extends Base_Controller
             $currentUser = Auth::User();
 
             $included = (int)Input::get('included');
-            $contentFileID = (int)Input::get('contentfileid');
+            $contentFileID = (int)Input::get('contentfileid', 0);
             $contentID = (int)ContentFile::find($contentFileID)->ContentID;
             $applicationID = (int)Content::find($contentID)->ApplicationID;
             $customerID = (int)Application::find($applicationID)->CustomerID;
@@ -355,48 +357,47 @@ class Interactivity_Controller extends Base_Controller
                 throw new Exception(__('error.auth_interactivity'));
             }
 
+            /** @var ContentFilePage $contentFilePage */
+            $contentFilePage = ContentFilePage::where('ContentFileID', '=', $contentFileID)
+                ->where('No', '=', Input::get('pageno'))
+                ->where('StatusID', '=', eStatus::Active)
+                ->first();
+
+            if (!$contentFilePage) {
+                return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('ContentFilePage not found');
+            } else {
+                if ($contentFilePage->OperationStatus) {
+                    return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('Previous save operation not complete');
+                } else {
+                    $contentFilePage->OperationStatus = 1;
+                    $contentFilePage->save();
+                }
+            }
+
+
+            $contentFilePageID = $contentFilePage->ContentFilePageID;
+
             //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
-            DB::transaction(/**
-             * @throws Exception
-             */
-                function () use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $included) {
+            DB::transaction(
+                function () use ($currentUser, $customerID, $applicationID, $contentID, $contentFileID, $contentFilePageID, $included) {
                     $closing = Input::get('closing');
-                    $pageNo = (int)Input::get('pageno');
                     $ids = (array)Input::get('compid');
+
                     //find current page id
-                    $ContentFilePageID = 0;
 
-                    $cfp = DB::table('ContentFilePage')
-                        ->where('ContentFileID', '=', $contentFileID)
-                        ->where('No', '=', $pageNo)
-                        ->where('StatusID', '=', eStatus::Active)
-                        ->first();
-                    if ($cfp) {
-                        $ContentFilePageID = (int)$cfp->ContentFilePageID;
-                    }
 
+                    $contentFile = ContentFile::find($contentFileID);
+                    $contentFile->Included = ($included == 1 ? 1 : 0);
                     if ($closing == "true") {
-                        $cf = ContentFile::find($contentFileID);
-                        $cf->Interactivity = 1;
-                        $cf->HasCreated = 0;
-                        $cf->ErrorCount = 0;
-                        $cf->InteractiveFilePath = '';
-                        $cf->InteractiveFileName = '';
-                        $cf->InteractiveFileName2 = '';
-                        $cf->InteractiveFileSize = 0;
-                        $cf->Included = ($included == 1 ? 1 : 0);
-                        $cf->ProcessUserID = $currentUser->UserID;
-                        $cf->ProcessDate = new DateTime();
-                        $cf->ProcessTypeID = eProcessTypes::Update;
-                        $cf->save();
-                    } else {
-                        $cf = ContentFile::find($contentFileID);
-                        $cf->Included = ($included == 1 ? 1 : 0);
-                        $cf->ProcessUserID = $currentUser->UserID;
-                        $cf->ProcessDate = new DateTime();
-                        $cf->ProcessTypeID = eProcessTypes::Update;
-                        $cf->save();
+                        $contentFile->Interactivity = 1;
+                        $contentFile->HasCreated = 0;
+                        $contentFile->ErrorCount = 0;
+                        $contentFile->InteractiveFilePath = '';
+                        $contentFile->InteractiveFileName = '';
+                        $contentFile->InteractiveFileName2 = '';
+                        $contentFile->InteractiveFileSize = 0;
                     }
+                    $contentFile->save();
 
                     $postedData = Input::get();
                     $componentProperties = array();
@@ -426,21 +427,21 @@ class Interactivity_Controller extends Base_Controller
 
                             if ($clientProcess == 'loaded' && $clientPageComponentID > 0) {
                                 $tPageComponentExists = true;
-                                $pc = PageComponent::find($clientPageComponentID);
+                                $pageComponent = PageComponent::find($clientPageComponentID);
                             } else {
-                                $pc = new PageComponent();
+                                $pageComponent = new PageComponent();
                             }
 
-                            $pc->ContentFilePageID = $ContentFilePageID;
-                            $pc->ComponentID = $clientComponentID;
-                            $pc->No = $id;
-                            $pc->save();
+                            $pageComponent->ContentFilePageID = $contentFilePageID;
+                            $pageComponent->ComponentID = $clientComponentID;
+                            $pageComponent->No = $id;
+                            $pageComponent->save();
 
                             //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
                             if ($tPageComponentExists) {
                                 //wtf neden statusu deleted yapiyor ????
                                 DB::table('PageComponentProperty')
-                                    ->where('PageComponentID', '=', $pc->PageComponentID)
+                                    ->where('PageComponentID', '=', $pageComponent->PageComponentID)
                                     ->where('StatusID', '=', eStatus::Active)
                                     ->update(
                                         array(
@@ -467,7 +468,7 @@ class Interactivity_Controller extends Base_Controller
                                             $sourceFile = $v;
                                             $sourceFileNameFull = $sourcePathFull . '/' . $sourceFile;
 
-                                            $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pc->PageComponentID;
+                                            $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pageComponent->PageComponentID;
                                             $targetPathFull = path('public') . $targetPath;
                                             $targetFile = $currentUser->UserID . '_' . date("YmdHis") . '_' . $v;
                                             //360
@@ -485,7 +486,7 @@ class Interactivity_Controller extends Base_Controller
                                                 $v = $targetPath . '/' . $targetFile;
                                             } else {
                                                 $oldValue = DB::table('PageComponentProperty')
-                                                    ->where('PageComponentID', '=', $pc->PageComponentID)
+                                                    ->where('PageComponentID', '=', $pageComponent->PageComponentID)
                                                     ->where('Name', '=', $name)
                                                     ->where('Value', 'LIKE', '%' . $v)
                                                     ->where('StatusID', '=', eStatus::Deleted)
@@ -501,7 +502,7 @@ class Interactivity_Controller extends Base_Controller
                                             }
 
                                             $pcp = new PageComponentProperty();
-                                            $pcp->PageComponentID = $pc->PageComponentID;
+                                            $pcp->PageComponentID = $pageComponent->PageComponentID;
                                             $pcp->Name = $name;
                                             $pcp->Value = $v;
                                             $pcp->StatusID = eStatus::Active;
@@ -522,7 +523,7 @@ class Interactivity_Controller extends Base_Controller
                                         $sourceFile = $value;
                                         $sourceFileNameFull = $sourcePathFull . '/' . $sourceFile;
 
-                                        $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pc->PageComponentID;
+                                        $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pageComponent->PageComponentID;
                                         $targetPathFull = path('public') . $targetPath;
                                         $targetFile = $currentUser->UserID . '_' . date("YmdHis") . '_' . $value;
                                         $targetFileNameFull = $targetPathFull . '/' . $targetFile;
@@ -536,7 +537,7 @@ class Interactivity_Controller extends Base_Controller
                                             $value = $targetPath . '/' . $targetFile;
                                         } else {
                                             $oldValue = DB::table('PageComponentProperty')
-                                                ->where('PageComponentID', '=', $pc->PageComponentID)
+                                                ->where('PageComponentID', '=', $pageComponent->PageComponentID)
                                                 ->where('Name', '=', $name)
                                                 ->where('StatusID', '=', eStatus::Deleted)
                                                 ->order_by('PageComponentPropertyID', 'DESC')
@@ -558,7 +559,7 @@ class Interactivity_Controller extends Base_Controller
                                     $value = str_replace("www.youtube.com/watch?v=", "www.youtube.com/embed/", $value);
 
                                     $pcp = new PageComponentProperty();
-                                    $pcp->PageComponentID = $pc->PageComponentID;
+                                    $pcp->PageComponentID = $pageComponent->PageComponentID;
                                     $pcp->Name = $name;
                                     $pcp->Value = $value;
                                     $pcp->StatusID = eStatus::Active;
@@ -573,7 +574,7 @@ class Interactivity_Controller extends Base_Controller
                             }
                         } elseif ($clientProcess == 'removed' && $clientPageComponentID > 0) {
                             DB::table('PageComponentProperty')
-                                ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $clientPageComponentID . ' AND `ContentFilePageID`=' . $ContentFilePageID . ' AND `StatusID`=1)'))
+                                ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $clientPageComponentID . ' AND `ContentFilePageID`=' . ContentFilePageID . ' AND `StatusID`=1)'))
                                 ->where('StatusID', '=', eStatus::Active)
                                 ->update(
                                     array(
@@ -586,7 +587,7 @@ class Interactivity_Controller extends Base_Controller
 
                             DB::table('PageComponent')
                                 ->where('PageComponentID', '=', $clientPageComponentID)
-                                ->where('ContentFilePageID', '=', $ContentFilePageID)
+                                ->where('ContentFilePageID', '=', $contentFilePageID)
                                 ->where('StatusID', '=', eStatus::Active)
                                 ->update(
                                     array(
@@ -607,11 +608,18 @@ class Interactivity_Controller extends Base_Controller
                 interactivityQueue::trigger();
             }
             //echo 'breakPoint: ' . $i++ . " -- " . microtime(true), PHP_EOL;
-            return "success=" . base64_encode("true");
         } catch (Exception $e) {
             Log::info($e->getMessage());
+            if ($contentFilePage) {
+                $contentFilePage->OperationStatus = 0;
+                $contentFilePage->save();
+            }
             return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
         }
+
+        $contentFilePage->OperationStatus = 0;
+        $contentFilePage->save();
+        return "success=" . base64_encode("true");
     }
 
     public function post_transfer()
@@ -619,7 +627,6 @@ class Interactivity_Controller extends Base_Controller
         //return "success=".base64_encode("false");
         try {
             $currentUser = Auth::User();
-
             $pageFrom = (int)Input::get('from', '0');
             $pageTo = (int)Input::get('to', '0');
             $componentID = (int)Input::get('componentid', '0');
