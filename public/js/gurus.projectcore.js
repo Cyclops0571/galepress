@@ -321,7 +321,7 @@ var cInteractivity = new function () {
         });
     };
 
-    this.saveCurrentPage = function () {
+    this.saveCurrentPage = function (successFunction) {
         //$('#saveAndExitBtn').attr("disabled", true);
         $("#pdf-save span.save-info").html('');
         $('#saveAndExitBtn').hide();
@@ -329,15 +329,16 @@ var cInteractivity = new function () {
         var t = 'POST';
         var u = '/' + currentLanguage + '/' + route["interactivity_save"];
         var d = $("#pagecomponents").serialize();
-        cInteractivity.doAsyncRequest(t, u, d, function () {
-
-        })
+        var onSuccess = successFunction ? successFunction : function () {
+        };
+        cInteractivity.doAsyncRequest(t, u, d, onSuccess);
     };
 
     this.saveAndClose = function () {
         $('#closing').val('true');
-        this.saveCurrentPage();
-        this.close();
+        this.saveCurrentPage(function () {
+            cInteractivity.close();
+        });
     };
 
     this.close = function () {
