@@ -574,7 +574,7 @@ class Interactivity_Controller extends Base_Controller
                             }
                         } elseif ($clientProcess == 'removed' && $clientPageComponentID > 0) {
                             DB::table('PageComponentProperty')
-                                ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $clientPageComponentID . ' AND `ContentFilePageID`=' . ContentFilePageID . ' AND `StatusID`=1)'))
+                                ->where('PageComponentID', 'IN', DB::raw('(SELECT `PageComponentID` FROM `PageComponent` WHERE `PageComponentID`=' . $clientPageComponentID . ' AND `ContentFilePageID`=' . $contentFilePageID . ' AND `StatusID`=1)'))
                                 ->where('StatusID', '=', eStatus::Active)
                                 ->update(
                                     array(
