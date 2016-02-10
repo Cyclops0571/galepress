@@ -148,6 +148,28 @@
 
         var opt = $.extend(defaults, options);
 
+        var createEditor = function (languageCode) {
+            CKEDITOR.replace('editor', {
+                language: languageCode,
+                on: {
+                    'instanceReady': function (evt) {
+                        evt.editor.execCommand('maximize');
+                        $('html,body').css('width', '100%').css('height', '100%');
+                        // $('#wrapper').css('position','fixed').css('display','none');
+                        $('.cke_button__maximize').css('display', 'none');
+
+                        $('.cke_top.cke_reset_all').append($(".action"));
+                        $(".action").addClass('ckeditorConfirm');
+                        $('.cke_maximized').css('top', '0').css('position', 'fixed');
+                        $("#modal-editor").removeClass("hide");
+                        $("#modal-mask").removeClass("hide");
+                    }
+                }
+            });
+            CKEDITOR.instances.editor.setData(content);
+            CKEDITOR.instances.editor.addContentsCss("/css/ckeditor/fonts/fonts.css");
+        }
+
         return this.each(function () {
             ///////////////////////////////////////////////////////////////////////////////////////////////
             var isNew = false;
@@ -1003,33 +1025,7 @@
                     $("#modal-editor").attr("opener", id);
                     // $("#editor").redactor();
                     // console.log(content);
-                    function createEditor(languageCode) {
-                        CKEDITOR.replace('editor', {
-                            language: languageCode,
-                            on: {
-                                'instanceReady': function (evt) {
-                                    evt.editor.execCommand('maximize');
-                                    $('html,body').css('width', '100%').css('height', '100%');
-                                    // $('#wrapper').css('position','fixed').css('display','none');
-                                    $('.cke_button__maximize').css('display', 'none');
-
-                                    $('.cke_top.cke_reset_all').append($(".action"));
-                                    $(".action").addClass('ckeditorConfirm');
-                                    $('.cke_maximized').css('top', '0').css('position', 'fixed');
-                                    $("#modal-editor").removeClass("hide");
-                                    $("#modal-mask").removeClass("hide");
-                                }
-                            }
-                        });
-                        CKEDITOR.instances.editor.setData(content);
-                        CKEDITOR.instances.editor.addContentsCss("/css/ckeditor/fonts/fonts.css");
-                    }
-
-                    createEditor('tr');
-                    // setTimeout(function(){
-                    // 	$('#wrapper').fadeIn(500);
-                    // },1000);
-                    // });
+                    createEditor(currentLanguage);
                 });
 
                 $("#prop-" + id + " div.upload div.radiogroup div.js-radio").click(function () {
@@ -1244,28 +1240,6 @@
                     $("#modal-editor").attr("opener", id);
                     // $("#editor").redactor();
                     // console.log(content);
-                    function createEditor(languageCode) {
-                        CKEDITOR.replace('editor', {
-                            language: languageCode,
-                            on: {
-                                'instanceReady': function (evt) {
-                                    evt.editor.execCommand('maximize');
-                                    $('html,body').css('width', '100%').css('height', '100%');
-                                    // $('#wrapper').css('position','fixed').css('display','none');
-                                    $('.cke_button__maximize').css('display', 'none');
-
-                                    $('.cke_top.cke_reset_all').append($(".action"));
-                                    $(".action").addClass('ckeditorConfirm');
-                                    $('.cke_maximized').css('top', '0').css('position', 'fixed');
-                                    $("#modal-editor").removeClass("hide");
-                                    $("#modal-mask").removeClass("hide");
-                                }
-                            }
-                        });
-                        CKEDITOR.instances.editor.setData(content);
-                        CKEDITOR.instances.editor.addContentsCss("/css/ckeditor/fonts/fonts.css");
-                    }
-
                     createEditor(currentLanguage);
                     // setTimeout(function(){
                     // 	$('#wrapper').fadeIn(500);
