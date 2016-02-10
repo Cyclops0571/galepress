@@ -149,6 +149,9 @@
         var opt = $.extend(defaults, options);
 
         var createEditor = function (languageCode) {
+            if (languageCode = 'usa') {
+                languageCode = 'en';
+            }
             CKEDITOR.replace('editor', {
                 language: languageCode,
                 on: {
