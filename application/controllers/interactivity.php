@@ -167,7 +167,7 @@ class Interactivity_Controller extends Base_Controller
                     $zoom = 1000 * (float)$data['zoom'];
                     $z = (19 * $zoom / 100);
 
-                    return Redirect::to('https://www.google.com/maps/embed/v1/search?'
+                    return Redirect::to('https://www.google.com/maps/embed/v1/place?'
                         . 'maptype=' . $type
                         . '&q=' . $data['lat'] . ',' . $data['lon']
                         . '&zoom=' . $z
@@ -304,7 +304,6 @@ class Interactivity_Controller extends Base_Controller
         return View::make('flipbook.index', $data);
     }
 
-    //POST
     public function post_check()
     {
         try {
