@@ -100,6 +100,7 @@ class Interactivity_Controller extends Base_Controller
 
                 if (isset($data['modal'])) {
                     if ((int)$data['modal'] == 1) {
+                        $fullUrl = Laravel\URL::full();
                         $image_url = path('public') . $data["modaliconname"];
                         if (File::exists($image_url) && is_file($image_url)) {
                             $image_url = "/" . $data["modaliconname"];
@@ -107,7 +108,13 @@ class Interactivity_Controller extends Base_Controller
                             $image_url = "/files/components/" . $componentName . "/icon.png";
                         }
                         // height="52"
-                        return '<html><head></head><body style="margin:0px; padding:0px;"><img src="' . $image_url . '" width="100%"></body></html>';
+                        $urlSrc = str_replace('-modal=1', '-modal=0', $fullUrl);
+                        return '<html><head></head><body style="margin:0px; padding:0px;">
+                            <a href="' . $urlSrc . '" target="_blank" />
+                                <img src="' . $image_url . '" width="100%">
+                            </a>
+                            </body>
+                            </html>';
                         //return '<html><head></head><body style="margin:0px; padding:0px;"><img src="/files/components/'.$componentName.'/icon.png"></body></html>';
                     }
                 }

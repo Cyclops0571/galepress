@@ -232,10 +232,6 @@
             var _self = this;
             this.objectName = "clients";
 
-            this.doRequest = function (t, u, d, funcError) {
-                return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-            };
-
             this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
                 cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
             };

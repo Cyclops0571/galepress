@@ -194,23 +194,7 @@ var sNotification = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // AJAX
 var sAjax = new function () {
-    this.doSyncRequest = function (t, u, d, funcError) {
-	updatePageRequestTime();
-	if (typeof funcError === "undefined") {
-	    funcError = function (ret) {
-		sNotification.failure(ret.getValue("errmsg"));
-	    };
-	}
 
-	return $.ajax({
-	    async: false,
-	    type: t,
-	    url: u,
-	    data: d,
-	    error: funcError
-	}).responseText;
-    };
-    
     /**
      * 
      * @param {type} url

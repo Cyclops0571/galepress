@@ -5,11 +5,6 @@
 var cInteractivity = new function () {
     this.objectName = "interactivity";
     var smoothZoomInitialized = false;
-
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
-
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
     };
@@ -362,11 +357,6 @@ var cInteractivity = new function () {
 // USER
 var cUser = new function () {
     this.objectName = "users";
-
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
-
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
     };
@@ -530,12 +520,7 @@ var cUser = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // CUSTOMER
 var cCustomer = new function () {
-
     this.objectName = "customers";
-
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
@@ -573,12 +558,7 @@ var cCustomer = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // APPLICATION
 var cApplication = new function () {
-
     this.objectName = "applications";
-
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
@@ -1242,13 +1222,7 @@ cContent = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // ORDER
 var cOrder = new function () {
-
     this.objectName = "orders";
-
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
-
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
     };
@@ -1266,12 +1240,7 @@ var cOrder = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // REPORT
 var cReport = new function () {
-
     this.objectName = "reports";
-
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcSuccess, funcError, true);
@@ -1371,9 +1340,6 @@ var cReport = new function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 // COMMON
 var cCommon = new function () {
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, d, funcError);
-    };
 
     this.doAsyncRequest = function (t, u, d, funcSuccess, funcError) {
         cAjax.doAsyncRequest(t, u, d, funcSuccess, funcError, true);
@@ -1793,10 +1759,6 @@ var modalform = new function () {
 
 var cGoogleMap = new function () {
     this.objectName = "maps";
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
-
     this.save = function () {
         cCommon.save(this.objectName);
     };
@@ -1808,9 +1770,6 @@ var cTemplate = new function () {
     this.newbackground = 1;
     this.newforeground = 1;
     this.objectName = "contents_template";
-    this.doRequest = function (t, u, d, funcError) {
-        return cAjax.doSyncRequest(t, u, "obj=" + this.objectName + "&" + d, funcError);
-    };
 
     this.save = function () {
         var fsuccess = function (ret) {
