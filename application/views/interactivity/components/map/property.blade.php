@@ -28,7 +28,6 @@ if(isset($Properties))
     <div class="settings">
         <div class="component-panel">
             <h5 title="{{ __('interactivity.map_type_tooltip') }}" class="tooltip">{{ __('interactivity.map_type') }} <i class="icon-info-sign"></i></h5>
-            @include('interactivity.components.modal')
             <div class="radiogroup">
                 <div class="radio {{ ($type == 1 ? 'checked ' : '') }}js-radio" optionvalue="1">{{ __('interactivity.map_option1') }}</div>
                 <div class="radio {{ ($type == 2 ? 'checked ' : '') }}js-radio" optionvalue="2">{{ __('interactivity.map_option2') }}</div>
