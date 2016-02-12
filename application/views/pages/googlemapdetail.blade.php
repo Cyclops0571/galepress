@@ -89,7 +89,7 @@ if ($googleMap) {
                 draggable: true
             });
         }
-        myListener = google.maps.event.addListener(map, 'mouseup', function (event) {
+        myListener = google.maps.event.addListener(map, 'rightclick', function (event) {
             placeMarker(event.latLng);
         });
 
