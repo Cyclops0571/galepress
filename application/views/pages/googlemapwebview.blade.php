@@ -88,8 +88,12 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript">
 		var initialLocation;
-		var turkey = new google.maps.LatLng(38.9574155, 35.2415759);
-		var browserSupportFlag = new Boolean();
+                <?php if(count($googleMapSet)): ?>
+                    var turkey = new google.maps.LatLng(<?php echo $googleMapSet[0]->Latitude ;?>, <?php echo $googleMapSet[0]->Longitude ?>);
+                <?php else: ?>
+                    var turkey = new google.maps.LatLng(38.9574155, 35.2415759);
+                <?php endif; ?>
+                var browserSupportFlag = new Boolean();
 
 		function initialize() {
 			var myOptions = {
@@ -198,12 +202,14 @@
 			function handleNoGeolocation(errorFlag) {
 				if (errorFlag === true) {
 					$("#zoomBtn").hide();
-					alert("Geolocation service failed. We've placed you in Turkey.");
+                    alert("Geolocation service failed. We've showing you the first store.");
 					initialLocation = turkey;
+                    map.setCenter(initialLocation);
 				} else {
 					$("#zoomBtn").hide();
-					alert("Your browser doesn't support geolocation. We've placed you in Turkey.");
+                    alert("Your browser doesn't support geolocation. We've showing you the first store.");
 					initialLocation = turkey;
+                    map.setCenter(initialLocation);
 				}
 			}
 		}
