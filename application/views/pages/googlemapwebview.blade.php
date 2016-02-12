@@ -85,7 +85,7 @@
         {{ HTML::script('js/jquery-ui-1.10.4.custom.min.js'); }}
         {{ HTML::script('js/bootstrap.min.js'); }}
         {{ HTML::script('js/jquery.uniform.min.js'); }}
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+      <script src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript">
 		var initialLocation;
                 <?php if(count($googleMapSet)): ?>
