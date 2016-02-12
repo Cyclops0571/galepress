@@ -83,7 +83,7 @@ if (FALSE) {
     function initialize() {
         var myOptions = {
             zoom: 10,
-            mapTypeId: google.maps.MapTypeId.HYBRID
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 		var markerSet = [];

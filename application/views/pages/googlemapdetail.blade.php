@@ -77,7 +77,7 @@ if ($googleMap) {
     function initialize() {
         var myOptions = {
             zoom: 6,
-            mapTypeId: google.maps.MapTypeId.HYBRID
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
