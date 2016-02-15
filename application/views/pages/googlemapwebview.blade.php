@@ -172,34 +172,20 @@
             if (navigator.geolocation) {
                 browserSupportFlag = true;
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    initialMarker = new google.maps.Marker({
-                        position: initialLocation,
-                        map: map,
-                        draggable: false,
-                        icon: locationImage,
-                    });
-                    map.setCenter(initialLocation);
-                }, function () {
-                    handleNoGeolocation(browserSupportFlag);
-                });
+                            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                            initialMarker = new google.maps.Marker({
+                                position: initialLocation,
+                                map: map,
+                                draggable: false,
+                                icon: locationImage,
+                            });
+                            map.setCenter(initialLocation);
+                        }, function () {
+                            handleNoGeolocation(browserSupportFlag);
+                        },
+                        {maximumAge: 600000, timeout: 3000}
+                );
                 // Try Google Gears Geolocation
-            } else if (google.gears) {
-                browserSupportFlag = true;
-                var geo = google.gears.factory.create('beta.geolocation');
-                geo.getCurrentPosition(function (position) {
-                    initialLocation = new google.maps.LatLng(position.latitude, position.longitude);
-                    initialMarker = new google.maps.Marker({
-                        position: initialLocation,
-                        map: map,
-                        draggable: false,
-                        icon: locationImage,
-                    });
-                    map.setCenter(initialLocation);
-                }, function () {
-                    handleNoGeoLocation(browserSupportFlag);
-                });
-                // Browser doesn't support Geolocation
             } else {
                 browserSupportFlag = false;
                 handleNoGeolocation(browserSupportFlag);
@@ -210,9 +196,10 @@
                     google.maps.event.addListener(map, 'bounds_changed', function () {
                         $('#zoomBtn').removeClass('clicked');
                     });
-                    if (initialLocation) {
-                        map.setCenter(initialLocation);
+                    if (!initialLocation) {
+                        initialLocation = turkey;
                     }
+                    map.setCenter(initialLocation);
                     smoothZoom(map, 14, map.getZoom());
                     setTimeout(function () {
                         $('#zoomBtn').addClass('clicked');
