@@ -84,6 +84,11 @@
             color: #fff !important;
         }
 
+        .myArrowDiv {
+            display: inline-block;
+            margin: 9px 0 0 5px;
+        }
+
         @media screen and ( max-height: 500px ) {
             #zoomBtn {
                 bottom: 15%;
@@ -92,6 +97,7 @@
 
     </style>
     <!-- Begin CSS-->
+    <link rel="stylesheet" href="/css/font-awesome.min.css?v=<?php echo APP_VER; ?>" type="text/css">
     {{ HTML::style('css/bootstrap.min.css?v=' . APP_VER, array('media' => 'screen')); }}
     {{ HTML::style('css/jquery-ui.min.css?v=' . APP_VER, array('media' => 'screen')); }}
 
@@ -241,7 +247,10 @@
 </head>
 <body>
 <div id="map_canvas"></div>
-<a href="#" id="zoomBtn" class="widget-icon widget-icon-large widget-icon-circle"><span
-            class="icon-location-arrow"></span></a>
+<a href="#" id="zoomBtn" class="widget-icon widget-icon-large widget-icon-circle">
+    <div class="myArrowDiv">
+        <span class="icon-location-arrow"></span>
+    </div>
+</a>
 </body>
 </html>
