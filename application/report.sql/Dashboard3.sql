@@ -27,15 +27,17 @@ FROM (
 				END
 				) AS `Device`
 			FROM `Customer` cu 
-				INNER JOIN `Application` ap ON ap.`CustomerID`=cu.`CustomerID` AND ap.`StatusID`=1 
-				INNER JOIN `Content` cn ON cn.`ApplicationID`=ap.`ApplicationID` AND cn.`StatusID`=1 
-				INNER JOIN `Request` rq ON rq.`ContentID`=cn.`ContentID` AND rq.`RequestTypeID`=1001 AND rq.`Percentage`=100 AND rq.`RequestDate` BETWEEN CONCAT_WS('-', DATE_FORMAT(DATE_ADD('{DATE}', INTERVAL(-5) MONTH),'%Y-%m'), '01 00:00:00') AND CONCAT_WS(' ', LAST_DAY(DATE_ADD('{DATE}', INTERVAL(-1) MONTH)), '23:59:59')
-				/*INNER JOIN `Log` rq ON rq.`ContentID`=cn.`ContentID` AND rq.`Url` LIKE '%?RequestTypeID=1001%' AND rq.`Date` BETWEEN CONCAT_WS('-', DATE_FORMAT(DATE_ADD('{DATE}', INTERVAL(-5) MONTH),'%Y-%m'), '01 00:00:00') AND CONCAT_WS(' ', LAST_DAY(DATE_ADD('{DATE}', INTERVAL(-1) MONTH)), '23:59:59')*/
-				/*INNER JOIN `Statistic` st ON st.`ContentID`=cn.`ContentID` AND st.`Type`='10' AND st.`Time` BETWEEN CONCAT_WS('-', DATE_FORMAT(DATE_ADD('{DATE}', INTERVAL(-5) MONTH),'%Y-%m'), '01 00:00:00') AND CONCAT_WS(' ', LAST_DAY(DATE_ADD('{DATE}', INTERVAL(-1) MONTH)), '23:59:59')*/
+				INNER JOIN `Request` rq ON rq.`CustomerID`=cu.`CustomerID`
+
 			WHERE
-				cu.`CustomerID`=COALESCE({CUSTOMERID}, cu.`CustomerID`) AND 
-				ap.`ApplicationID`=COALESCE({APPLICATIONID}, ap.`ApplicationID`) AND 
-				cn.`ContentID`=COALESCE({CONTENTID}, cn.`ContentID`) AND 
+				rq.`CustomerID`=COALESCE({CUSTOMERID}, rq.`CustomerID`) AND
+				rq.`RequestTypeID`=1001 AND
+				rq.`Percentage`=100 AND
+				rq.`RequestDate`
+				    BETWEEN CONCAT_WS('-', DATE_FORMAT(DATE_ADD('{DATE}', INTERVAL(-5) MONTH),'%Y-%m'), '01 00:00:00')
+				    AND CONCAT_WS(' ', LAST_DAY(DATE_ADD('{DATE}', INTERVAL(-1) MONTH)), '23:59:59') AND
+				rq.`ApplicationID`=COALESCE({APPLICATIONID}, rq.`ApplicationID`) AND
+				rq.`ContentID`=COALESCE({CONTENTID}, rq.`ContentID`) AND
 				cu.`StatusID`=1
 		) t
 		WHERE `Device` IN ('iOS', 'Android')
