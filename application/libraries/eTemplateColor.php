@@ -5,23 +5,18 @@ class eTemplateColor
     private static $imageFolder = 'img/template-chooser/';
     private static $imageGeneratedFolder = 'img/template-generated/';
 
-    /**
-     * Returns Key(int) => Colorname(string)
-     * @return array
-     */
-    public static function colorSet()
-    {
-        return array(
-            self::blue => "blue",
-            self::green => "green",
-            self::yellow => "yellow",
-            self::red => "red",
-            self::orange => "orange",
-            self::grey => "grey",
-            self::grey => "carmen_red",
-            self::grey => "galibarda",
-        );
-    }
+    private static $requiredImageSet = array(
+        'menu1.png',
+        'home_selected1.png',
+        'library_selected1.png',
+        'download_selected1.png',
+        'info_selected1.png',
+        'left_menu_category_icon1.png',
+        'left_menu_down1.png',
+        'left_menu_link1.png',
+        'reader_menu1.png',
+        'reader_share1.png',
+    );
 
     public static function templateCss($fileName)
     {
