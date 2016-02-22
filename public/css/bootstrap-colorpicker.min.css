@@ -250,3 +250,12 @@
     border-right: 0;
     border-left: 0
 }
+
+/* Alpha bari sakladim */
+.colorpicker-alpha {
+    display: none !important;
+}
+
+.colorpicker {
+    min-width: 128px !important;
+}
