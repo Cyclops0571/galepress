@@ -50,9 +50,9 @@
 		if(isAndroid && isMobile) {
 			// document.body.style.fontSize = "30%";
 			$('*').each(function(){
-	        	var k =  parseInt($(this).css('font-size')); 
+	        	var k =  parseInt($(this).css('font-size'));
 	        	var redSize = ((k*90)/100) ; //here, you can give the percentage( now it is reduced to 90%)
-	        	$(this).css('font-size',redSize);  
+	        	$(this).css('font-size',redSize);
 	       });
 		}
 		else if(isAndroid){ //KARICALANMA PROBLEMİ İÇİN...

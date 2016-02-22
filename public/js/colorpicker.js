@@ -9,7 +9,7 @@
  * @todo Update DOCS
  */
 
-(function(factory) {
+(function (factory) {
     "use strict";
     if (typeof exports === 'object') {
         module.exports = factory(window.jQuery);
@@ -19,11 +19,11 @@
         factory(window.jQuery);
     }
 }
-(function($) {
+(function ($) {
     'use strict';
 
     // Color object
-    var Color = function(val, customColors) {
+    var Color = function (val, customColors) {
         this.value = {
             h: 0,
             s: 0,
@@ -191,7 +191,7 @@
             "yellowgreen": "#9acd32",
             "transparent": "transparent"
         },
-        _sanitizeNumber: function(val) {
+        _sanitizeNumber: function (val) {
             if (typeof val === 'number') {
                 return val;
             }
@@ -203,18 +203,18 @@
             }
             return 1;
         },
-        isTransparent: function(strVal) {
+        isTransparent: function (strVal) {
             if (!strVal) {
                 return false;
             }
             strVal = strVal.toLowerCase().trim();
             return (strVal === 'transparent') || (strVal.match(/#?00000000/)) || (strVal.match(/(rgba|hsla)\(0,0,0,0?\.?0\)/));
         },
-        rgbaIsTransparent: function(rgba) {
+        rgbaIsTransparent: function (rgba) {
             return ((rgba.r === 0) && (rgba.g === 0) && (rgba.b === 0) && (rgba.a === 0));
         },
         //parse a string to HSB
-        setColor: function(strVal) {
+        setColor: function (strVal) {
             strVal = strVal.toLowerCase().trim();
             if (strVal) {
                 if (this.isTransparent(strVal)) {
@@ -234,7 +234,7 @@
                 }
             }
         },
-        stringToHSB: function(strVal) {
+        stringToHSB: function (strVal) {
             strVal = strVal.toLowerCase();
             var alias;
             if (typeof this.colors[strVal] !== 'undefined') {
@@ -243,7 +243,7 @@
             }
             var that = this,
                 result = false;
-            $.each(this.stringParsers, function(i, parser) {
+            $.each(this.stringParsers, function (i, parser) {
                 var match = parser.re.exec(strVal),
                     values = match && parser.parse.apply(that, [match]),
                     format = alias || parser.format || 'rgba';
@@ -260,19 +260,19 @@
             });
             return result;
         },
-        setHue: function(h) {
+        setHue: function (h) {
             this.value.h = 1 - h;
         },
-        setSaturation: function(s) {
+        setSaturation: function (s) {
             this.value.s = s;
         },
-        setBrightness: function(b) {
+        setBrightness: function (b) {
             this.value.b = 1 - b;
         },
-        setAlpha: function(a) {
+        setAlpha: function (a) {
             this.value.a = parseInt((1 - a) * 100, 10) / 100;
         },
-        toRGB: function(h, s, b, a) {
+        toRGB: function (h, s, b, a) {
             if (!h) {
                 h = this.value.h;
                 s = this.value.s;
@@ -296,14 +296,14 @@
                 a: a || this.value.a
             };
         },
-        toHex: function(h, s, b, a) {
+        toHex: function (h, s, b, a) {
             var rgb = this.toRGB(h, s, b, a);
             if (this.rgbaIsTransparent(rgb)) {
                 return 'transparent';
             }
             return '#' + ((1 << 24) | (parseInt(rgb.r) << 16) | (parseInt(rgb.g) << 8) | parseInt(rgb.b)).toString(16).substr(1);
         },
-        toHSL: function(h, s, b, a) {
+        toHSL: function (h, s, b, a) {
             h = h || this.value.h;
             s = s || this.value.s;
             b = b || this.value.b;
@@ -328,7 +328,7 @@
                 a: isNaN(a) ? 0 : a
             };
         },
-        toAlias: function(r, g, b, a) {
+        toAlias: function (r, g, b, a) {
             var rgb = this.toHex(r, g, b, a);
             for (var alias in this.colors) {
                 if (this.colors[alias] === rgb) {
@@ -337,7 +337,7 @@
             }
             return false;
         },
-        RGBtoHSB: function(r, g, b, a) {
+        RGBtoHSB: function (r, g, b, a) {
             r /= 255;
             g /= 255;
             b /= 255;
@@ -355,7 +355,7 @@
                 a: this._sanitizeNumber(a)
             };
         },
-        HueToRGB: function(p, q, h) {
+        HueToRGB: function (p, q, h) {
             if (h < 0) {
                 h += 1;
             } else if (h > 1) {
@@ -371,7 +371,7 @@
                 return p;
             }
         },
-        HSLtoRGB: function(h, s, l, a) {
+        HSLtoRGB: function (h, s, l, a) {
             if (s < 0) {
                 s = 0;
             }
@@ -393,7 +393,7 @@
             var b = Math.round(this.HueToRGB(p, q, tb) * 255);
             return [r, g, b, this._sanitizeNumber(a)];
         },
-        toString: function(format) {
+        toString: function (format) {
             format = format || 'rgba';
             var c = false;
             switch (format) {
@@ -444,7 +444,7 @@
         stringParsers: [{
             re: /rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*?\)/,
             format: 'rgb',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     execResult[1],
                     execResult[2],
@@ -454,7 +454,7 @@
         }, {
             re: /rgb\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*?\)/,
             format: 'rgb',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     2.55 * execResult[1],
                     2.55 * execResult[2],
@@ -464,7 +464,7 @@
         }, {
             re: /rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
             format: 'rgba',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     execResult[1],
                     execResult[2],
@@ -474,7 +474,7 @@
         }, {
             re: /rgba\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
             format: 'rgba',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     2.55 * execResult[1],
                     2.55 * execResult[2],
@@ -484,7 +484,7 @@
         }, {
             re: /hsl\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*?\)/,
             format: 'hsl',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     execResult[1] / 360,
                     execResult[2] / 100,
@@ -494,7 +494,7 @@
         }, {
             re: /hsla\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
             format: 'hsla',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     execResult[1] / 360,
                     execResult[2] / 100,
@@ -504,7 +504,7 @@
         }, {
             re: /#?([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/,
             format: 'hex',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     parseInt(execResult[1], 16),
                     parseInt(execResult[2], 16),
@@ -514,7 +514,7 @@
         }, {
             re: /#?([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/,
             format: 'hex',
-            parse: function(execResult) {
+            parse: function (execResult) {
                 return [
                     parseInt(execResult[1] + execResult[1], 16),
                     parseInt(execResult[2] + execResult[2], 16),
@@ -522,7 +522,7 @@
                     1];
             }
         }],
-        colorNameToHex: function(name) {
+        colorNameToHex: function (name) {
             if (typeof this.colors[name.toLowerCase()] !== 'undefined') {
                 return this.colors[name.toLowerCase()];
             }
@@ -585,7 +585,7 @@
         colorSelectors: null
     };
 
-    var Colorpicker = function(element, options) {
+    var Colorpicker = function (element, options) {
         this.element = $(element).addClass('colorpicker-element');
         this.options = $.extend(true, {}, defaults, this.element.data(), options);
         this.component = this.options.component;
@@ -626,9 +626,9 @@
         }
         if (this.options.colorSelectors) {
             var colorpicker = this;
-            $.each(this.options.colorSelectors, function(name, color) {
+            $.each(this.options.colorSelectors, function (name, color) {
                 var $btn = $('<i />').css('background-color', color).data('class', name);
-                $btn.click(function() {
+                $btn.click(function () {
                     colorpicker.setValue($(this).css('background-color'));
                 });
                 colorpicker.picker.find('.colorpicker-selectors').append($btn);
@@ -680,7 +680,7 @@
         }
         this.update();
 
-        $($.proxy(function() {
+        $($.proxy(function () {
             this.element.trigger('create');
         }, this));
     };
@@ -689,7 +689,7 @@
 
     Colorpicker.prototype = {
         constructor: Colorpicker,
-        destroy: function() {
+        destroy: function () {
             this.picker.remove();
             this.element.removeData('colorpicker').off('.colorpicker');
             if (this.input !== false) {
@@ -703,7 +703,7 @@
                 type: 'destroy'
             });
         },
-        reposition: function() {
+        reposition: function () {
             if (this.options.inline !== false || this.options.container) {
                 return false;
             }
@@ -718,7 +718,7 @@
                 left: offset.left
             });
         },
-        show: function(e) {
+        show: function (e) {
             if (this.isDisabled()) {
                 return false;
             }
@@ -741,7 +741,7 @@
                 color: this.color
             });
         },
-        hide: function() {
+        hide: function () {
             this.picker.addClass('colorpicker-hidden').removeClass('colorpicker-visible');
             $(window).off('resize.colorpicker', this.reposition);
             $(document).off({
@@ -753,12 +753,12 @@
                 color: this.color
             });
         },
-        updateData: function(val) {
+        updateData: function (val) {
             val = val || this.color.toString(this.format);
             this.element.data('color', val);
             return val;
         },
-        updateInput: function(val) {
+        updateInput: function (val) {
             val = val || this.color.toString(this.format);
             if (this.input !== false) {
                 if (this.options.colorSelectors) {
@@ -772,7 +772,7 @@
             }
             return val;
         },
-        updatePicker: function(val) {
+        updatePicker: function (val) {
             if (val !== undefined) {
                 this.color = new Color(val, this.options.colorSelectors);
             }
@@ -799,7 +799,7 @@
             this.picker.find('.colorpicker-color, .colorpicker-color div').css('backgroundColor', this.color.toString(this.format));
             return val;
         },
-        updateComponent: function(val) {
+        updateComponent: function (val) {
             val = val || this.color.toString(this.format);
             if (this.component !== false) {
                 var icn = this.component.find('i').eq(0);
@@ -815,7 +815,7 @@
             }
             return val;
         },
-        update: function(force) {
+        update: function (force) {
             var val;
             if ((this.getValue(false) !== false) || (force === true)) {
                 // Update input/data only if the current value is not empty
@@ -827,7 +827,7 @@
             return val;
 
         },
-        setValue: function(val) { // set color manually
+        setValue: function (val) { // set color manually
             this.color = new Color(val, this.options.colorSelectors);
             this.update(true);
             this.element.trigger({
@@ -836,7 +836,7 @@
                 value: val
             });
         },
-        getValue: function(defaultValue) {
+        getValue: function (defaultValue) {
             defaultValue = (defaultValue === undefined) ? '#000000' : defaultValue;
             var val;
             if (this.hasInput()) {
@@ -850,16 +850,16 @@
             }
             return val;
         },
-        hasInput: function() {
+        hasInput: function () {
             return (this.input !== false);
         },
-        isDisabled: function() {
+        isDisabled: function () {
             if (this.hasInput()) {
                 return (this.input.prop('disabled') === true);
             }
             return false;
         },
-        disable: function() {
+        disable: function () {
             if (this.hasInput()) {
                 this.input.prop('disabled', true);
                 this.element.trigger({
@@ -871,7 +871,7 @@
             }
             return false;
         },
-        enable: function() {
+        enable: function () {
             if (this.hasInput()) {
                 this.input.prop('disabled', false);
                 this.element.trigger({
@@ -888,7 +888,7 @@
             left: 0,
             top: 0
         },
-        mousedown: function(e) {
+        mousedown: function (e) {
             if (!e.pageX && !e.pageY && e.originalEvent) {
                 e.pageX = e.originalEvent.touches[0].pageX;
                 e.pageY = e.originalEvent.touches[0].pageY;
@@ -930,7 +930,7 @@
             }
             return false;
         },
-        mousemove: function(e) {
+        mousemove: function (e) {
             if (!e.pageX && !e.pageY && e.originalEvent) {
                 e.pageX = e.originalEvent.touches[0].pageX;
                 e.pageY = e.originalEvent.touches[0].pageY;
@@ -980,7 +980,7 @@
             });
             return false;
         },
-        mouseup: function(e) {
+        mouseup: function (e) {
             e.stopPropagation();
             e.preventDefault();
             $(document).off({
@@ -991,10 +991,10 @@
             });
             return false;
         },
-        change: function(e) {
+        change: function (e) {
             this.keyup(e);
         },
-        keyup: function(e) {
+        keyup: function (e) {
             if ((e.keyCode === 38)) {
                 if (this.color.value.a < 1) {
                     this.color.value.a = Math.round((this.color.value.a + 0.01) * 100) / 100;
@@ -1029,11 +1029,11 @@
 
     $.colorpicker = Colorpicker;
 
-    $.fn.colorpicker = function(option) {
+    $.fn.colorpicker = function (option) {
         var pickerArgs = arguments,
             rv;
 
-        var $returnValue = this.each(function() {
+        var $returnValue = this.each(function () {
             var $this = $(this),
                 inst = $this.data('colorpicker'),
                 options = ((typeof option === 'object') ? option : {});

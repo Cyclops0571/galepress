@@ -36,11 +36,6 @@
     background-repeat: no-repeat !important; min-width: 25px; max-width:35px; height:20px;
     cursor: pointer;
 }
-.templateScreen .header .header-extras{
-    background: url(/img/template-chooser/header-extras-blue.png) center right;
-    background-size: 60% auto !important;
-    background-repeat: no-repeat !important; min-width: 25px; max-width:35px; height:22px;
-}
 .templateScreen > .container{
     height: 100%;
     background: #1E1E20;

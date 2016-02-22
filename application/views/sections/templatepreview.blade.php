@@ -333,10 +333,8 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
 
 {{ HTML::script('js/chosen_v1.0.0/chosen.jquery.min.js'); }}
 <script type="text/javascript">
-    var background = <?php echo $templateResults[0]->ThemeBackground; ?>;
-    var foreground = <?php echo $templateResults[0]->ThemeForeground; ?>;
     $(document).ready(function () {
-	cTemplate.initialize(background, foreground);
+	cTemplate.initialize();
 	$('.tabletIcons span:eq(0)').click(function () {
 	    $('.tabletIcons span').removeClass('tabletActive');
 	    $(this).addClass('tabletActive');

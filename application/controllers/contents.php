@@ -764,29 +764,6 @@ class Contents_Controller extends Base_Controller {
         return Response::json($ret);
     }
 
-    public function post_template_save() {
-        $applicationID = Input::get("applicationID");
-        $ThemeBackground = Input::get("templateBackground");
-        $ThemeForeground = Input::get("templateForeground");
-        $chk = Common::CheckApplicationOwnership($applicationID);
-        $rules = array(
-            'applicationID' => 'required|integer|min:1',
-            'templateBackground' => 'required|integer|min:1',
-            'templateForeground' => 'required|integer|min:1',
-        );
-        $v = Validator::make(Input::all(), $rules);
-        if (!$v->passes() || !$chk) {
-            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
-        }
-
-        $application = Application::find($applicationID);
-        $application instanceof Application;
-
-        $application->ThemeBackground = $ThemeBackground;
-        $application->ThemeForeground = $ThemeForeground;
-        $application->save();
-        return "success=" . base64_encode("true");
-    }
 
     public function post_order($applicationID) {
         $chk = Common::CheckApplicationOwnership($applicationID);
@@ -800,7 +777,6 @@ class Contents_Controller extends Base_Controller {
         foreach ($contentIDSet as $contentID) {
             $content = Content::where("ApplicationID", "=", $applicationID)->find($contentID);
             if ($content) {
-                $content instanceof Content;
                 $content->OrderNo = $i++;
                 $content->save(FALSE);
                 //appversionu altte tek bir kere artiracagim icin burada artirmiyorum.

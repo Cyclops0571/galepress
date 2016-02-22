@@ -1767,37 +1767,30 @@ var cGoogleMap = new function () {
 var cTemplate = new function () {
     var background = 1;
     var foreground = 1;
-    this.newbackground = 1;
-    this.newforeground = 1;
     this.objectName = "contents_template";
 
     this.save = function () {
         var fsuccess = function (ret) {
-            background = $('.templateBackgroundChange:checked').val();
-            foreground = $('.templateForegroundChange:checked').val();
             cNotification.success();
         };
         cCommon.save(this.objectName, fsuccess, "templateForm");
     };
 
-    this.loadCss = function (bg, fg) {
-        background = bg;
-        foreground = fg;
+    this.loadCss = function (background, foreground) {
         $('.app-background-templates').remove();
+        var $head = $('head');
         switch (background) {
             case 1:
-                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
+                $head.append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
                 break;
             case 2:
-                $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
+                $head.append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
                 break;
         }
-        $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/csstemplates/' + foreground + '.css" type="text/css" />');
+        $head.append('<link rel="stylesheet" class="app-foreground-templates" href="/csstemplates/' + foreground + '.css" type="text/css" />');
     };
 
-    this.initialize = function (bg, fg) {
-        background = bg;
-        foreground = fg;
+    this.initialize = function () {
         function openHomePage() {
             $('#templateChooserBox .site-settings').addClass('active');
             $('.templateScreen .footer').css('left', '0');
@@ -1828,9 +1821,6 @@ var cTemplate = new function () {
                     $('.templateScreen').removeClass('hide').fadeTo("slow", 1);
                 });
             });
-            setSelected();
-            $('.templateBackgroundChange').trigger("change");
-            $('.templateForegroundChange').trigger("change");
         }
 
         if ($('#modalTemplateChooser').length < 1) {
@@ -1850,24 +1840,6 @@ var cTemplate = new function () {
                     $('.templateScreen').removeClass('hide').fadeTo("slow", 1);
                 });
             }
-        });
-
-        $('.templateBackgroundChange').on('change', function (e) {
-            $('.app-background-templates').remove();
-            switch (parseInt($('.templateBackgroundChange:checked').val())) {
-                case 1:
-                    $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-dark.css" type="text/css" />');
-                    break;
-                case 2:
-                    $('head').append('<link rel="stylesheet" class="app-background-templates" href="/css/template-chooser/background-template-light.css" type="text/css" />');
-                    break;
-            }
-        });
-
-        $('.templateForegroundChange').on('change', '', function (e) {
-            $('.app-foreground-templates').remove();
-            var cssName = parseInt($('.templateForegroundChange:checked').val());
-            $('head').append('<link rel="stylesheet" class="app-foreground-templates" href="/csstemplates/' + cssName + '.css" type="text/css" />');
         });
 
         $('#modalTemplateChooser').on('shown.bs.modal', function () {
@@ -1924,49 +1896,23 @@ var cTemplate = new function () {
 
     };
 
-    function setSelected() {
-        var elemBackSet = $('.templateBackgroundChange');
-        var elemForeSet = $('.templateForegroundChange');
-        for (var i = 0; i < elemBackSet.length; i++) {
-            var jQueryElem = $(elemBackSet[i]);
-            if (jQueryElem.val() == background) {
-                jQueryElem.parent().addClass('checked');
-                jQueryElem.attr('checked', 'checked');
-            } else {
-                jQueryElem.removeAttr("checked");
-                jQueryElem.parent().removeClass('checked');
-            }
-        }
-
-        for (var j = 0; j < elemForeSet.length; j++) {
-            var jQueryElem = $(elemForeSet[j]);
-            if (jQueryElem.val() == foreground) {
-                jQueryElem.parent().addClass('checked');
-                jQueryElem.attr('checked', 'checked');
-            } else {
-                jQueryElem.removeAttr("checked");
-                jQueryElem.parent().removeClass('checked');
-            }
-        }
-    }
-
-    this.show = function (ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed) {
+    this.show = function (ApplicationID, ThemeBackground, ThemeForegroundColor, Autoplay, Speed) {
         $.ajax({
             async: false,
             type: 'GET',
             url: '/template/' + ApplicationID,
             success: function (response) {
                 $('#ipadView').html(response);
-                cTemplate.initMySlider(parseInt(ThemeBackground), parseInt(ThemeForeground), parseInt(+Autoplay), parseInt(Speed));
+                if ($('#imgPreview').attr('src') == "/img/bannerSlider/defaultPreview.jpg" || $('#imgPreview').attr('src') == "") {
+                    $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
+                }
+                cTemplate.loadCss(parseInt(ThemeBackground), ThemeForegroundColor.replace('#', ''));
+                cTemplate.initMySlider(parseInt(+Autoplay), parseInt(Speed));
             }
         });
     };
 
-    this.initMySlider = function (ThemeBackground, ThemeForeground, Autoplay, Speed) {
-        cTemplate.loadCss(ThemeBackground, ThemeForeground);
-        if ($('#imgPreview').attr('src') == "/img/bannerSlider/defaultPreview.jpg" || $('#imgPreview').attr('src') == "") {
-            $('.my-btn-success').addClass('noTouch').css('background', 'rgba(52, 52, 52, 0)');
-        }
+    this.initMySlider = function (Autoplay, Speed) {
         var slider = new MasterSlider();
         slider.setup('masterslider', {
             // width: 380,

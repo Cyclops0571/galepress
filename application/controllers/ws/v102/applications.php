@@ -108,7 +108,7 @@ class Ws_v102_Applications_Controller extends Base_Controller
                 'status' => 0,
                 'error' => "",
                 'ThemeBackground' => $application->ThemeBackground,
-                'ThemeForeground' => $application->getThemeColor(),
+                'ThemeForeground' => $application->ThemeForegroundColor,
                 'BannerActive' => $application->BannerActive,
                 'BannerPage' => $application->BannerPage(),
                 'Tabs' => $application->TabsForService(),

@@ -8,6 +8,7 @@
  * @property int $ApplicationLanguage Description
  * @property int $ThemeBackground Description
  * @property int $ThemeForeground Description
+ * @property int $ThemeForegroundColor Description
  * @property int $Price Description
  * @property int $InAppPurchaseActive Description
  * @property int $FlipboardActive Description
@@ -306,24 +307,6 @@ class Application extends Eloquent
             return $this->ExpirationDate < date("Y-m-d") ? 'class="expired-app"' : '';
         } else {
             return $this->ExpirationDate < date("Y-m-d") ? array("class" => 'expired-app') : array();
-        }
-    }
-
-    public function getThemeColor()
-    {
-        switch ($this->ThemeForeground) {
-            case 2:
-                return \Laravel\Config::get('custom.api_color_green');
-            case 3:
-                return \Laravel\Config::get('custom.api_color_yellow');
-            case 4:
-                return \Laravel\Config::get('custom.api_color_red');
-            case 5:
-                return \Laravel\Config::get('custom.api_color_orange');
-            case 6:
-                return \Laravel\Config::get('custom.api_color_grey');
-            default:
-                return \Laravel\Config::get('custom.api_color_blue');
         }
     }
 

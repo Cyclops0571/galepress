@@ -49,13 +49,12 @@ if (false) {
             <div class="form-row">
                 <div class="col-md-3">{{ __('common.template_chooser_foreground') }}</div>
                 <div class="col-md-8">
-                    <select name="ThemeForeground" class="form-control select2" style="width: 100%;" tabindex="-1">
-                        <?php foreach(eTemplateColor::colorSet() as $colorKey => $colorName): ?>
-                        <option value="<?php echo $colorKey; ?>" <?php echo $application->ThemeForeground == $colorKey ? "selected" : ''; ?> >
-                            <?php echo eTemplateColor::colorName($colorKey); ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="input-group ThemeForegroundColor">
+                        <input type="text" name="ThemeForegroundColor"
+                               value="<?php echo $application->ThemeForegroundColor ? $application->ThemeForegroundColor : '#0082CA' ?>"
+                               class="form-control"/>
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
                 </div>
                 <div class="col-md-1"><a class="tipr"
                                          title="{{ __('common.application_settings_template_foreground_tip') }}"><span
@@ -300,14 +299,18 @@ if (false) {
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="/css/bootstrap-colorpicker.min.css?v=<?php echo APP_VER; ?>" type="text/css">
+<script src="/js/colorpicker.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
         var ApplicationID = $('input[name=ApplicationID]').val();
         var ThemeBackground = $('select[name=ThemeBackground] option:selected').val();
-        var ThemeForeground = $('select[name=ThemeForeground] option:selected').val();
+        var ThemeForegroundColor = $('input[name=ThemeForegroundColor]').val();
         var Autoplay = $('input[name=BannerAutoplay]').is(':checked');
         var Speed = $('input[name=BannerTransitionRate]').val();
-        cTemplate.show(ApplicationID, ThemeBackground, ThemeForeground, Autoplay, Speed);
+        $('.ThemeForegroundColor').colorpicker();
+        cTemplate.show(ApplicationID, ThemeBackground, ThemeForegroundColor, Autoplay, Speed);
         cApplication.setSelectInputActive();
         cApplication.BannerActive();
         cApplication.BannerCustomerActive();

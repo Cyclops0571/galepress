@@ -59,7 +59,6 @@ return array(
     'contents_show' => 'inhalte/(:num)',
     'contents_save' => 'inhalte/speichern',
     'contents_delete' => 'inhalte/loeschen',
-    'contents_template_save' => 'inhalte/Vorlagespeichern',
     'contents_uploadfile' => 'inhalte/Dateihochladen',
     'contents_uploadfile2' => 'inhalte/datei2hochladen',
     'contents_uploadcoverimage' => 'deckblatthochladen',

@@ -473,13 +473,23 @@ class Applications_Controller extends Base_Controller
      */
     public function post_applicationSetting()
     {
+        $rules = array(
+            "ThemeForegroundColor" => 'match:/^#[A-Fa-f0-9]{6}$/'
+        );
+
+        $v = Laravel\Validator::make(Input::all(), $rules);
+        if (!$v->passes()) {
+            $errMsg = $v->errors->first();
+            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($errMsg);
+        }
+
         $application = Application::find((int)Input::get("ApplicationID", 0));
         if (!$application || !$application->CheckOwnership()) {
             return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('error.unauthorized_user_attempt'));
         }
 
         $application->ThemeBackground = (int)Input::get("ThemeBackground", 1);
-        $application->ThemeForeground = (int)Input::get("ThemeForeground", 1);
+        $application->ThemeForegroundColor = Input::get("ThemeForegroundColor");
         $application->TabActive = (int)Input::get("TabActive", 0);
 
         $tabs = $application->Tabs();

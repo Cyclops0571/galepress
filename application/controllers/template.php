@@ -15,7 +15,7 @@ class Template_Controller extends Base_Controller {
 		}
 		/* START SQL FOR TEMPLATE-CHOOSER */
 		$sqlTemlateChooser = 'SELECT * FROM ('
-				. 'SELECT a.Name AS ApplicationName, a.ThemeBackground,a.ThemeForeground, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
+            . 'SELECT a.Name AS ApplicationName, c.ContentID, c.Name, c.Detail, c.MonthlyName, '
 				. 'cf.ContentFileID,cf.FilePath, cf.InteractiveFilePath, '
 				. 'ccf.ContentCoverImageFileID, ccf.FileName '
 				. 'FROM `Application` AS a '

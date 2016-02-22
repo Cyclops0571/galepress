@@ -5,31 +5,32 @@ class Webservice_Applications_Controller extends Base_Controller {
 	public static $availableServices = array(103);
 	public $restful = true;
 
+    /**
+     *
+     * @param type $ServiceVersion
+     * @param type $applicationID
+     * @return Laravel\Response
+     */
+    public function get_version($ServiceVersion, $applicationID)
+    {
+        return webService::render(function () use ($ServiceVersion, $applicationID) {
+            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            $application = webService::getCheckApplication($ServiceVersion, $applicationID);
+            return Response::json(array(
+                'status' => 0,
+                'error' => "",
+                'ApplicationID' => (int)$application->ApplicationID,
+                'ApplicationBlocked' => ((int)$application->Blocked == 1 ? true : false),
+                'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
+                'ApplicationVersion' => (int)$application->Version
+            ));
+        });
+    }
+
 	public static function checkServiceVersion($ServiceVersion) {
 		if (!in_array($ServiceVersion, self::$availableServices)) {
 			throw eServiceError::getException(eServiceError::ServiceNotFound);
 		}
-	}
-
-	/**
-	 * 
-	 * @param type $ServiceVersion
-	 * @param type $applicationID
-	 * @return Laravel\Response
-	 */
-	public function get_version($ServiceVersion, $applicationID) {
-		return webService::render(function() use ($ServiceVersion, $applicationID) {
-			Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-			$application = webService::getCheckApplication($ServiceVersion, $applicationID);
-			return Response::json(array(
-				'status' => 0,
-				'error' => "",
-				'ApplicationID' => (int) $application->ApplicationID,
-				'ApplicationBlocked' => ((int) $application->Blocked == 1 ? true : false),
-				'ApplicationStatus' => ((int) $application->Status == 1 ? true : false),
-				'ApplicationVersion' => (int) $application->Version
-			));
-		});
 	}
 
 	/**
@@ -216,7 +217,7 @@ class Webservice_Applications_Controller extends Base_Controller {
 				'status' => $status,
 				'error' => $error,
 				'ThemeBackground' => $application->ThemeBackground,
-				'ThemeForeground' => $application->getThemeColor(),
+                'ThemeForeground' => $application->ThemeForegroundColor,
 				'BannerActive' => $application->BannerActive,
 				'BannerPage' => $application->BannerPage(),
 				'Tabs' => $application->TabsForService(),
