@@ -43,7 +43,7 @@
                         <label class="label-grey" for="BannerCustomerActive">
                             <?php echo __("common.banner_use_costomer_banner"); ?>
                         </label>
-                    </div>
+                    </div> 
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon">
