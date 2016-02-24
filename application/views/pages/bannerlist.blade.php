@@ -37,30 +37,7 @@
                         <a class="tipr" title="{{ __('common.banners_info_banner_active') }}"><span
                                     class="icon-info-sign"></span></a></div>
                 </div>
-                <div class="form-row">
-                    <div class="col-md-3">
-                        <label class="label-grey" for="BannerCustomerActive">
-                            <?php echo __("common.banner_use_costomer_banner"); ?>
-                        </label>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="checkbox" name="BannerCustomerActive" id="BannerCustomerActive" value="1"
-                                       <?php echo $application->BannerCustomerActive ? 'checked' : ''; ?> onclick="cApplication.BannerCustomerActive()">
-                            </span>
-                            <input type="text" name="BannerCustomerUrl"
-                                   value="<?php echo $application->BannerCustomerUrl; ?>" placeholder="http://">
-			    <span class="input-group-btn">
-				<button class="btn btn-primary urlCheck" type="button" onclick="cApplication.checkUrl(this);"><span
-                            class="icon-ok"></span></button>
-			    </span>
-                        </div>
-                    </div>
-                    <div class="col-md-1"><a class="tipr"
-                                             title="{{ __('common.banners_info_use_customer_banner') }}"><span
-                                    class="icon-info-sign"></span></a></div>
-                </div>
+                <!--
                 <div class="form-row">
                     <div class="col-md-3"><label class="label-grey"
                                                  for="BannerAutoplay">{{__('common.banners_autoplay')}}</label></div>
@@ -82,6 +59,7 @@
                                     class="icon-info-sign"></span></a>
                     </div>
                 </div>
+                !-->
                 <div class="form-row">
                     <div class="col-md-3"><label class="label-grey"
                                                  for="BannerIntervalTime">{{__('common.banners_autoplay_interval')}}</label>
