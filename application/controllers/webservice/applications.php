@@ -377,4 +377,18 @@ class Webservice_Applications_Controller extends Base_Controller {
 		});
 	}
 
+    public function post_receipt($ServiceVersion, $applicationID)
+    {
+        Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+        $application = webService::getCheckApplication($ServiceVersion, $applicationID);
+        $accessToken = Input::get('accessToken', "");
+        $accessToken = Input::get('clientReceipt', "");
+        $accessToken = Input::get('platfrom', "Android");
+//        $serviceData["ServiceVersion"] = $ServiceVersion;
+//        $serviceData["applicationID"] = $applicationID;
+//        $serviceData["isTest"] = $isTest;
+//        $serviceData["accessToken"] = $accessToken;
+        return Laravel\Response::json(json_encode(Input::all()));
+    }
+
 }

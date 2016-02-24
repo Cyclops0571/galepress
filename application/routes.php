@@ -540,6 +540,7 @@ Route::get('webservice/(:num)/applications/(:num)/categories', array('uses' => '
 Route::get('webservice/(:num)/applications/(:num)/categories/(:num)/detail', array('uses' => 'webservice.applications@categoryDetail'));
 
 Route::get('webservice/(:num)/applications/(:num)/contents', array('uses' => 'webservice.applications@contents'));
+Route::post('webservice/(:num)/applications/(:num)/receipt', array('uses' => 'webservice.applications@receipt'));
 
 
 Route::get('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
