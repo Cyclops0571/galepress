@@ -60,23 +60,46 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        $cf = DB::table('ContentFile')
-            ->where('ContentID', '=', 3495)
-            ->get();
+        echo time();
+        exit;
+        try {
+            require_once path('bundle') . '/google/src/Google/autoload.php';
+            $client = new Google_Client();
 
-        foreach ($cf as $f) {
-            try {
-                $this->create($f->ContentFileID, (int)$f->Included);
-            } catch (Exception $e) {
-                $msg = __('common.task_message', array(
-                        'task' => '`CreateInteractivePDF`',
-                        'detail' => $e->getMessage()
-                    )
-                );
-                Common::sendErrorMail($msg);
-            }
+            // set Application Name to the name of the mobile app
+            $client->setApplicationName("Uni Saç");
+
+            // get p12 key file
+            //echo path('public') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12'; exit;
+            $key = file_get_contents(path('public') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
+
+            // create assertion credentials class and pass in:
+            // - service account email address
+            // - query scope as an array (which APIs the call will access)
+            // - the contents of the key file
+            $cred = new Google_Auth_AssertionCredentials(
+                '552236962262-compute@developer.gserviceaccount.com',
+                'https://www.googleapis.com/auth/androidpublisher',
+                $key
+            );
+            // add the credentials to the client
+            $client->setAssertionCredentials($cred);
+
+            // create a new Android Publisher service class
+            $service = new Google_Service_AndroidPublisher($client);
+
+            // set the package name and subscription id
+            $packageName = "ak.detaysoft.unisac";
+            $subscriptionId = "android.test.purchased";
+            $purchaseToken = "inapp:ak.detaysoft.unisac:android.test.purchased";
+            // use the purchase token to make a call to Google to get the subscription info
+            $subscription = $service->purchases_subscriptions->get($packageName, $subscriptionId, $purchaseToken);
+            var_dump($subscription);
+        } catch (Google_Auth_Exception $e) {
+            // if the call to Google fails, throw an exception
+            var_dump($e);
+            //throw new Exception('Error validating transaction', 500);
         }
-
     }
 
     public function create($ContentFileID, $Included)

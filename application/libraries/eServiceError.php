@@ -21,7 +21,7 @@ class eServiceError {
 
     /**
      * 
-     * @param type $errorNo
+     * @param Int $errorNo
      * @return \Exception
      */
     public static function getException($errorNo, $errorMsg = "") {

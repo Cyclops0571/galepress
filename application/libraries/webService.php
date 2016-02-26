@@ -83,11 +83,12 @@ class webService
     public static function getCheckApplicationContents($data = null)
     {
         $ServiceVersion = isset($data["ServiceVersion"]) ? $data["ServiceVersion"] : False;
-        $applicationID = isset($data["applicationID"]) ? $data["applicationID"] : False;
+        /** @var Application $application */
+        $application = $data["application"];
         $accessToken = isset($data["accessToken"]) ? $data["accessToken"] : False;
         $isTest = isset($data["isTest"]) ? $data["isTest"] : False;
 
-        $query = Content::where('ApplicationID', '=', $applicationID)
+        $query = Content::where('ApplicationID', '=', $application->ApplicationID)
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('OrderNo', 'DESC')
             ->order_by('MonthlyName', 'ASC')
@@ -116,14 +117,9 @@ class webService
                 //check if client has an access to wanted content.
                 $clientBoughtContent = FALSE;
                 /* @var $client Client */
-                $client = Client::where("Token", "=", $accessToken)->where("StatusID", "=", eStatus::Active)->first();
-                if (!empty($accessToken) && !$client) {
-                    throw eServiceError::getException(eServiceError::ClientNotFound);
-                }
+                $client = webService::getClientFromAccessToken($accessToken);
                 if (!$client) {
                     $clientBoughtContent = FALSE;
-                } else if ($client->PaidUntil) {
-                    $clientBoughtContent = TRUE;
                 } else {
                     $boughtContentIDSet = explode(",", $client->ContentIDSet);
                     if (in_array($r->ContentID, $boughtContentIDSet)) {
@@ -154,6 +150,22 @@ class webService
     }
 
     /**
+     * @param $accessToken
+     * @return Client
+     * @throws Exception
+     */
+    public static function getClientFromAccessToken($accessToken)
+    {
+        $client = Client::where("Token", "=", $accessToken)->where("StatusID", "=", eStatus::Active)->first();
+        if (!empty($accessToken) && !$client) {
+            throw eServiceError::getException(eServiceError::ClientNotFound);
+        }
+        return $client;
+    }
+
+    // Check User credential
+
+    /**
      * RemoveFromMobilei aktif olanlari veya StatusID eStatus::Active olanlari doner.
      * @param int $contentID
      * @return Content
@@ -177,7 +189,8 @@ class webService
         return $content;
     }
 
-    // Check User credential
+    // Save token
+
     public static function checkUserCredential($ServiceVersion, $customerID)
     {
         $username = Input::get('username', '');
@@ -196,7 +209,6 @@ class webService
         return $user;
     }
 
-    // Save token
     public static function saveToken($ServiceVersion, $customerID, $applicationID)
     {
         $UDID = Input::get('udid', '');
