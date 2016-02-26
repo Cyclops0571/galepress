@@ -117,7 +117,7 @@ class webService
                 //check if client has an access to wanted content.
                 $clientBoughtContent = FALSE;
                 /* @var $client Client */
-                $client = webService::getClientFromAccessToken($accessToken);
+                $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
                 if (!$client) {
                     $clientBoughtContent = FALSE;
                 } else {
@@ -151,12 +151,13 @@ class webService
 
     /**
      * @param $accessToken
+     * @param $applicationID
      * @return Client
      * @throws Exception
      */
-    public static function getClientFromAccessToken($accessToken)
+    public static function getClientFromAccessToken($accessToken, $applicationID)
     {
-        $client = Client::where("Token", "=", $accessToken)->where("StatusID", "=", eStatus::Active)->first();
+        $client = Client::where("Token", "=", $accessToken)->where('ApplicationID', '=', $applicationID)->where("StatusID", "=", eStatus::Active)->first();
         if (!empty($accessToken) && !$client) {
             throw eServiceError::getException(eServiceError::ClientNotFound);
         }

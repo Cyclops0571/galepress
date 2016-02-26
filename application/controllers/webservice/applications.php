@@ -224,7 +224,7 @@ class Webservice_Applications_Controller extends Base_Controller
             $subscriptionEndDate = date("Y-m-d H:i:s", strtotime("-1 year"));
             $remainingDay = 0;
             if (!empty($accessToken)) {
-                $client = webService::getClientFromAccessToken($accessToken);
+                $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
                 if ($client->PaidUntil > date("Y-m-d H:i:s")) {
                     $activeSubscription = true;
                     $subscriptionEndDate = $client->PaidUntil;
@@ -429,9 +429,7 @@ class Webservice_Applications_Controller extends Base_Controller
             $productID = \Laravel\Input::get('productId'); //subscriptionIdentifier
             $platformType = \Laravel\Input::get('platformType');
 
-            $myClient = webService::getClientFromAccessToken($accessToken);
-
-
+            $myClient = webService::getClientFromAccessToken($accessToken, $applicationID);
             switch ($platformType) {
                 case 'android':
 
