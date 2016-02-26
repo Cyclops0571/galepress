@@ -416,7 +416,6 @@ class Webservice_Applications_Controller extends Base_Controller
                 'packageName' => 'required',
                 'productId' => 'required',
                 'platformType' => 'required|in:android,ios',
-                'mobileApplicationName' => 'required',
             );
 
             $v = Laravel\Validator::make(\Laravel\Input::all(), $rules);
@@ -439,7 +438,7 @@ class Webservice_Applications_Controller extends Base_Controller
                     require_once path('bundle') . '/google/src/Google/autoload.php';
                     $client = new Google_Client();
                     // set Application Name to the name of the mobile app
-                    $client->setApplicationName($application->Name);
+                    $client->setApplicationName("Uni Saç");
                     // get p12 key file
                     //echo path('public') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12'; exit;
                     $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');

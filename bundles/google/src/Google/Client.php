@@ -48,9 +48,9 @@ class Google_Client
     private $config;
 
     /** @var array $scopes */
-    // Scopes requested by the client  /**
-* @var Google_Logger_Abstract $logger
-*/
+    // Scopes requested by the client
+
+    /** @var Google_Logger_Abstract $logger */
     private $logger;
 
     // definitions of services that are discovered.
