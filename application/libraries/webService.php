@@ -334,4 +334,33 @@ class webService
         return $client;
     }
 
+    public static function buildAppleJSONReceiptObject($receipt, $password = NULL)
+    {
+        $preObject['receipt-data'] = $receipt;
+        if ($password) {
+            $preObject['password'] = $password;
+        }
+        return json_encode($preObject);
+    }
+
+    public static function makeAppleReceiptRequest($endpoint, $receiptObject)
+    {
+        $options = array();
+        $options['http'] = array(
+            'header' => "Content-type: application/x-www-form-urlencoded",
+            'method' => 'POST',
+            'content' => $receiptObject
+        );
+
+        // see: http://php.net/manual/en/function.stream-context-create.php
+        $context = stream_context_create($options);
+        // see: http://php.net/manual/en/function.file-get-contents.php
+        $result = file_get_contents($endpoint, FALSE, $context);
+        if ($result === FALSE) {
+            throw new ServerErrorException('Error validating transaction.', 560);
+        }
+        // Decode json object (TRUE variable decodes as an associative array)
+        return json_decode($result, TRUE);
+    }
+
 }

@@ -428,11 +428,24 @@ class Webservice_Applications_Controller extends Base_Controller
             $packageName = \Laravel\Input::get('packageName');
             $productID = \Laravel\Input::get('productId'); //subscriptionIdentifier
             $platformType = \Laravel\Input::get('platformType');
-
             $myClient = webService::getClientFromAccessToken($accessToken, $applicationID);
+
+            //ise baslamadan gonderilen receipti kaydedelim...
+            $clientReceipt = ClientReceipt::where("ClientID", '=', $myClient->ClientID)
+                ->where("SubscriptionID", '=', $productID)
+                ->where("Receipt", "=", $purchaseToken)
+                ->first();
+            if (!$clientReceipt) {
+                $clientReceipt = new ClientReceipt();
+            }
+            $clientReceipt->ClientID = $myClient->ClientID;
+            $clientReceipt->SubscriptionID = $productID;
+            $clientReceipt->PackageName = $packageName;
+            $clientReceipt->Receipt = $purchaseToken;
+            $clientReceipt->save();
+
             switch ($platformType) {
                 case 'android':
-
                     require_once path('bundle') . '/google/src/Google/autoload.php';
                     $client = new Google_Client();
                     // set Application Name to the name of the mobile app
@@ -458,23 +471,19 @@ class Webservice_Applications_Controller extends Base_Controller
                     $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
                     if ($content) {
                         $product = $service->purchases_products->get($packageName, $productID, $purchaseToken);
+                        var_dump($product);
+                        exit;
+                        //content ise valide edip contenti erişebilir content listesine koyacağız...
                     } else {
                         $subscription = $service->purchases_subscriptions->get($packageName, $productID, $purchaseToken);
                         if (is_null($subscription) || !$subscription->getExpiryTimeMillis() > 0) {
                             throw eServiceError::getException(eServiceError::GenericError, 'Error validating transaction.');
                         }
 
-                        $clientReceipt = ClientReceipt::where("ClientID", '=', $myClient->ClientID)->where("SubscriptionID", '=', $productID)->first();
-                        if (!$clientReceipt) {
-                            $clientReceipt = new ClientReceipt();
-                        }
-                        $clientReceipt->ClientID = $myClient->ClientID;
-                        $clientReceipt->SubscriptionID = $productID;
-                        $clientReceipt->PackageName = $packageName;
+                        //validate oldu tekrar kaydedelim...
                         $clientReceipt->SubscriptionType = $subscription->getKind();
                         $clientReceipt->SubscriptionStartDate = date("Y-m-d H:i:s", $subscription->getStartTimeMillis() / 1000);
                         $clientReceipt->SubscriptionEndDate = date("Y-m-d H:i:s", $subscription->getExpiryTimeMillis() / 1000);
-                        $clientReceipt->Receipt = $purchaseToken;
                         $clientReceipt->save();
 
                         if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $clientReceipt->SubscriptionEndDate) {
@@ -485,7 +494,34 @@ class Webservice_Applications_Controller extends Base_Controller
 
                     break;
                 case 'ios':
-                    return \Laravel\Input::all();
+                    //validate olursa $clientReceipt'i ona gore kaydedicegiz...
+                    $appleReceiptValidationUrl = 'https://sandbox.itunes.apple.com/verifyReceipt'; //571571
+                    //$appleReceiptValidationUrl = 'https://buy.itunes.apple.com/verifyReceipt';
+
+                    $receiptObject = webService::buildAppleJSONReceiptObject($purchaseToken);
+                    $response = webService::makeAppleReceiptRequest($appleReceiptValidationUrl, $receiptObject);
+                    var_dump($response);
+                    //571571 renewal icin appledan alinacak password lazim
+                    // eger applicationlarda farkli farkliysa applicationa kaydedilmesi lazim...
+                    exit;
+
+                    $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
+                    if ($content) {
+                        $product = $service->purchases_products->get($packageName, $productID, $purchaseToken);
+                        //content ise valide edip contenti erişebilir content listesine koyacağız...
+                    } else {
+                        $clientReceipt->SubscriptionType = 571571;
+                        $clientReceipt->SubscriptionStartDate = 571571;
+                        $clientReceipt->SubscriptionEndDate = 571571;
+
+                        if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $clientReceipt->SubscriptionEndDate) {
+                            $myClient->PaidUntil = $clientReceipt->SubscriptionEndDate;
+                            $myClient->save();
+                        }
+                    }
+
+
+
                     break;
             }
             return Response::json(array('status' => 0, 'error' => "",));
