@@ -468,12 +468,27 @@ class Webservice_Applications_Controller extends Base_Controller
                     // create a new Android Publisher service class
                     $service = new Google_Service_AndroidPublisher($client);
                     // use the purchase token to make a call to Google to get the subscription info
+                    /** @var Content $content */
                     $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
                     if ($content) {
-                        $product = $service->purchases_products->get($packageName, $productID, $purchaseToken);
-                        var_dump($product);
-                        exit;
                         //content ise valide edip contenti erişebilir content listesine koyacağız...
+                        $productPurchaseResponse = $service->purchases_products->get($packageName, $productID, $purchaseToken);
+                        $clientReceipt->SubscriptionType = $productPurchaseResponse->getKind();
+                        $clientReceipt->MarketResponse = json_encode($productPurchaseResponse->toSimpleObject());
+                        $clientReceipt->save();
+
+                        if ($productPurchaseResponse->consumptionState == webService::GoogleConsumptionStatePurchased) {
+                            //Content bought so save content to clients purchased products
+                            $contentIDSet = explode(',', $myClient->ContentIDSet);
+                            array_push($contentIDSet, $content->ContentID);
+                            $contentIDSet = array_unique($contentIDSet);
+                            sort($contentIDSet);
+                            $myClient->ContentIDSet = implode(",", $contentIDSet);
+                            $myClient->save();
+                        } else {
+                            throw eServiceError::getException(eServiceError::GenericError, 'Content Not Bought.');
+                        }
+
                     } else {
                         $subscription = $service->purchases_subscriptions->get($packageName, $productID, $purchaseToken);
                         if (is_null($subscription) || !$subscription->getExpiryTimeMillis() > 0) {
@@ -484,6 +499,7 @@ class Webservice_Applications_Controller extends Base_Controller
                         $clientReceipt->SubscriptionType = $subscription->getKind();
                         $clientReceipt->SubscriptionStartDate = date("Y-m-d H:i:s", $subscription->getStartTimeMillis() / 1000);
                         $clientReceipt->SubscriptionEndDate = date("Y-m-d H:i:s", $subscription->getExpiryTimeMillis() / 1000);
+                        $clientReceipt->MarketResponse = json_encode($subscription->toSimpleObject());
                         $clientReceipt->save();
 
                         if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $clientReceipt->SubscriptionEndDate) {
@@ -491,7 +507,6 @@ class Webservice_Applications_Controller extends Base_Controller
                             $myClient->save();
                         }
                     }
-
                     break;
                 case 'ios':
                     //validate olursa $clientReceipt'i ona gore kaydedicegiz...

@@ -3,6 +3,10 @@
 class webService
 {
 
+    const GoogleConsumptionStatePurchased = 0;
+    const GoogleConsumptionStateCanceled = 1;
+    const GoogleConsumptionStateRefunded = 2;
+
     /**
      * If there is a exception then catches it and returns a valid Response else returns what the Closure returns
      * @param Closure $cb

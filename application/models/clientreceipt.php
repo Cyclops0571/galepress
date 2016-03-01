@@ -9,6 +9,7 @@
  * @property int $SubscriptionStartDate Description
  * @property int $SubscriptionEndDate Description
  * @property int $Receipt Description
+ * @property int $MarketResponse Description
  * @property int $StatusID Description
  */
 class ClientReceipt extends Laravel\Database\Eloquent\Model
