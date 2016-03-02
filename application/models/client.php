@@ -30,8 +30,8 @@ class Client extends Laravel\Database\Eloquent\Model
     public static $key = 'ClientID';
 
     /**
-     *
-     * @param int $ClientID
+     * @param $clientID
+     * @param array $columns
      * @return Client
      */
     public static function find($clientID, $columns = array('*'))

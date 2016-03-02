@@ -257,7 +257,8 @@ class Webservice_Applications_Controller extends Base_Controller
             $remainingDay = 0;
             if (!empty($accessToken)) {
                 $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
-                if ($client->PaidUntil > date("Y-m-d H:i:s")) {
+                if ($client->PaidUntil > date("Y-m-d H:i:s", strtotime("-1 day"))) {
+                    //bir gun fazladan verdim...
                     $activeSubscription = true;
                     $subscriptionEndDate = $client->PaidUntil;
                     $remainingDay = ceil((strtotime($client->PaidUntil) - time()) / 86400);
@@ -463,12 +464,14 @@ class Webservice_Applications_Controller extends Base_Controller
             $myClient = webService::getClientFromAccessToken($accessToken, $applicationID);
 
             //ise baslamadan gonderilen receipti kaydedelim...
-            $clientReceipt = ClientReceipt::where("ClientID", '=', $myClient->ClientID)
-                ->where("SubscriptionID", '=', $productID)
-                ->where("Receipt", "=", $purchaseToken)
-                ->first();
+            /** @var ClientReceipt $clientReceipt */
+            $clientReceipt = ClientReceipt::where("Receipt", "=", $purchaseToken)->first();
             if (!$clientReceipt) {
                 $clientReceipt = new ClientReceipt();
+            } else {
+                if ($clientReceipt->SubscriptionID != $productID || $clientReceipt->ClientID != $myClient->ClientID) {
+                    throw eServiceError::getException(eServiceError::GenericError, 'Receipt used for another product or client');
+                }
             }
             $clientReceipt->ClientID = $myClient->ClientID;
             $clientReceipt->SubscriptionID = $productID;
