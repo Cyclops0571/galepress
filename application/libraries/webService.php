@@ -367,4 +367,41 @@ class webService
         return json_decode($result, TRUE);
     }
 
+    public static function checkIosResponse($response)
+    {
+        if (!isset($response["receipt"])) {
+            if (isset($response["status"])) {
+                switch ($response["status"]) {
+                    case 21000:
+                        return 'The App Store could not read the JSON object you provided.';
+                    case 21002:
+                        return 'The App Store could not read the JSON object you provided.';
+                    case 21003:
+                        return 'The receipt could not be authenticated.';
+                    case 21004:
+                        return 'The shared secret you provided does not match the shared secret on file for your account.Only returned for iOS 6 style transaction receipts for auto-renewable subscriptions.';
+                    case 21005:
+                        return 'The receipt server is not currently available.';
+                    case 21006:
+                        return 'This receipt is valid but the subscription has expired.';
+                    case 21007:
+                        return 'This receipt is a sandbox receipt, but it was sent to the production server.';
+                    case 21008:
+                        return 'This receipt is a production receipt, but it was sent to the sandbox server.';
+                    default:
+                        return 'Receipt not set.';
+                }
+            }
+            return 'Receipt not set.';
+        } elseif (!isset($response["receipt"]["in_app"])) {
+            return 'In-app not set.';
+        } elseif (!isset($response["status"])) {
+            return 'Response status not set';
+        } elseif ($response["status"] != 0) {
+            return 'Provided Receipt not valid.';
+        } else {
+            return null;
+        }
+    }
+
 }

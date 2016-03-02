@@ -549,18 +549,10 @@ class Webservice_Applications_Controller extends Base_Controller
                     $receiptObject = webService::buildAppleJSONReceiptObject($purchaseToken, $application->IOSHexPasswordForSubscription);
                     $response = webService::makeAppleReceiptRequest($appleReceiptValidationUrl, $receiptObject);
                     $clientReceipt->MarketResponse = json_encode($response);
-                    if (!isset($response["receipt"])) {
+                    $errorMsg = webService::checkIosResponse($response);
+                    if (!empty($errorMsg)) {
                         $clientReceipt->save();
-                        throw eServiceError::getException(eServiceError::GenericError, 'Receipt not set.');
-                    } elseif (!isset($response["receipt"]["in_app"])) {
-                        $clientReceipt->save();
-                        throw eServiceError::getException(eServiceError::GenericError, 'In-app not set.');
-                    } elseif (!isset($response["status"])) {
-                        $clientReceipt->save();
-                        throw eServiceError::getException(eServiceError::GenericError, 'Response status not set');
-                    } elseif ($response["status"] != 0) {
-                        $clientReceipt->save();
-                        throw eServiceError::getException(eServiceError::GenericError, 'Provided Receipt not valid.');
+                        throw eServiceError::getException(eServiceError::GenericError, $errorMsg);
                     }
 
                     //apple icin butun receiptleri donup direk restore edicem...
