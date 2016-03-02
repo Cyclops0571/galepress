@@ -37,8 +37,8 @@ class webService
 
     /**
      *
-     * @param type $ServiceVersion
-     * @param type $applicationID
+     * @param int $ServiceVersion
+     * @param int $applicationID
      * @return Application
      * @throws Exception
      */

@@ -7,13 +7,14 @@ class Webservice_Applications_Controller extends Base_Controller
     public $restful = true;
 
     /**
-     *
-     * @param type $ServiceVersion
-     * @param type $applicationID
+     * *****THIS FUNCTION IS DEPRECATED DONT USE THIS***
+     * @param int $ServiceVersion
+     * @param int $applicationID
      * @return Laravel\Response
      */
     public function get_version($ServiceVersion, $applicationID)
     {
+
         return webService::render(function () use ($ServiceVersion, $applicationID) {
             Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
@@ -36,9 +37,40 @@ class Webservice_Applications_Controller extends Base_Controller
     }
 
     /**
+     *
+     * @param int $ServiceVersion
+     * @param int $applicationID
+     * @return Laravel\Response
+     */
+    public function post_version($ServiceVersion, $applicationID)
+    {
+        return webService::render(function () use ($ServiceVersion, $applicationID) {
+            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            $application = webService::getCheckApplication($ServiceVersion, $applicationID);
+            $accessToken = Input::get('accessToken', "");
+            $clientVersion = 0;
+            if (!empty($accessToken)) {
+                $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
+                $clientVersion = $client->Version;
+            }
+
+            //Bu responsedaki Application Version Application tablosundaki Versiyon degildir.
+            //Client icin ozel olusturulan Application Versiondur.
+            return Response::json(array(
+                'status' => 0,
+                'error' => "",
+                'ApplicationID' => (int)$application->ApplicationID,
+                'ApplicationBlocked' => ((int)$application->Blocked == 1 ? true : false),
+                'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
+                'ApplicationVersion' => (int)($application->Version + $clientVersion)
+            ));
+        });
+    }
+
+    /**
      * Control for force update of application
-     * @param type $ServiceVersion
-     * @param type $applicationID
+     * @param int $ServiceVersion
+     * @param int $applicationID
      * @return Laravel\Response
      */
     public function get_detail($ServiceVersion, $applicationID)
@@ -92,8 +124,8 @@ class Webservice_Applications_Controller extends Base_Controller
 
     /**
      * Control for force update of application
-     * @param type $ServiceVersion
-     * @param type $applicationID
+     * @param int $ServiceVersion
+     * @param int $applicationID
      * @return Laravel\Response
      */
     public function post_detail($ServiceVersion, $applicationID)
@@ -147,8 +179,8 @@ class Webservice_Applications_Controller extends Base_Controller
 
     /**
      *
-     * @param type $ServiceVersion
-     * @param type $applicationID
+     * @param int $ServiceVersion
+     * @param int $applicationID
      * @return Laravel\Response
      */
     public function get_categories($ServiceVersion, $applicationID)
@@ -167,9 +199,9 @@ class Webservice_Applications_Controller extends Base_Controller
 
     /**
      *
-     * @param type $ServiceVersion
-     * @param type $applicationID
-     * @param type $categoryID
+     * @param int $ServiceVersion
+     * @param int $applicationID
+     * @param int $categoryID
      * @return Laravel\Response
      */
     public function get_categoryDetail($ServiceVersion, $applicationID, $categoryID)
@@ -189,8 +221,8 @@ class Webservice_Applications_Controller extends Base_Controller
 
     /**
      *
-     * @param type $ServiceVersion
-     * @param type $applicationID
+     * @param int $ServiceVersion
+     * @param int $applicationID
      * @return Laravel\Response
      */
     public function get_contents($ServiceVersion, $applicationID)
@@ -251,7 +283,7 @@ class Webservice_Applications_Controller extends Base_Controller
     /**
      * This function is used for Gp Viewer Application
      * Other Applications dont use this function
-     * @param type $ServiceVersion
+     * @param int $ServiceVersion
      * @return type
      */
     public function post_authorized_application_list($ServiceVersion)
@@ -479,19 +511,17 @@ class Webservice_Applications_Controller extends Base_Controller
 
                         if ($productPurchaseResponse->consumptionState == webService::GoogleConsumptionStatePurchased) {
                             //Content bought so save content to clients purchased products
-                            $contentIDSet = explode(',', $myClient->ContentIDSet);
-                            array_push($contentIDSet, $content->ContentID);
-                            $contentIDSet = array_unique($contentIDSet);
-                            sort($contentIDSet);
-                            $myClient->ContentIDSet = implode(",", $contentIDSet);
-                            $myClient->save();
+                            $myClient->addPurchasedItem($content->ContentID);
                         } else {
                             throw eServiceError::getException(eServiceError::GenericError, 'Content Not Bought.');
                         }
 
                     } else {
+                        //applicationda $productID var mi kontrol edecegiz...
                         $subscription = $service->purchases_subscriptions->get($packageName, $productID, $purchaseToken);
+                        $clientReceipt->MarketResponse = json_encode($subscription->toSimpleObject());
                         if (is_null($subscription) || !$subscription->getExpiryTimeMillis() > 0) {
+                            $clientReceipt->save();
                             throw eServiceError::getException(eServiceError::GenericError, 'Error validating transaction.');
                         }
 
@@ -499,8 +529,8 @@ class Webservice_Applications_Controller extends Base_Controller
                         $clientReceipt->SubscriptionType = $subscription->getKind();
                         $clientReceipt->SubscriptionStartDate = date("Y-m-d H:i:s", $subscription->getStartTimeMillis() / 1000);
                         $clientReceipt->SubscriptionEndDate = date("Y-m-d H:i:s", $subscription->getExpiryTimeMillis() / 1000);
-                        $clientReceipt->MarketResponse = json_encode($subscription->toSimpleObject());
                         $clientReceipt->save();
+
 
                         if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $clientReceipt->SubscriptionEndDate) {
                             $myClient->PaidUntil = $clientReceipt->SubscriptionEndDate;
@@ -513,30 +543,50 @@ class Webservice_Applications_Controller extends Base_Controller
                     $appleReceiptValidationUrl = 'https://sandbox.itunes.apple.com/verifyReceipt'; //571571
                     //$appleReceiptValidationUrl = 'https://buy.itunes.apple.com/verifyReceipt';
 
-                    $receiptObject = webService::buildAppleJSONReceiptObject($purchaseToken);
+                    $receiptObject = webService::buildAppleJSONReceiptObject($purchaseToken, $application->IOSHexPasswordForSubscription);
                     $response = webService::makeAppleReceiptRequest($appleReceiptValidationUrl, $receiptObject);
-                    var_dump($response);
-                    //571571 renewal icin appledan alinacak password lazim
-                    // eger applicationlarda farkli farkliysa applicationa kaydedilmesi lazim...
-                    exit;
-
-                    $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
-                    if ($content) {
-                        $product = $service->purchases_products->get($packageName, $productID, $purchaseToken);
-                        //content ise valide edip contenti erişebilir content listesine koyacağız...
-                    } else {
-                        $clientReceipt->SubscriptionType = 571571;
-                        $clientReceipt->SubscriptionStartDate = 571571;
-                        $clientReceipt->SubscriptionEndDate = 571571;
-
-                        if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $clientReceipt->SubscriptionEndDate) {
-                            $myClient->PaidUntil = $clientReceipt->SubscriptionEndDate;
-                            $myClient->save();
-                        }
+                    $clientReceipt->MarketResponse = json_encode($response);
+                    if (!isset($response["receipt"])) {
+                        $clientReceipt->save();
+                        throw eServiceError::getException(eServiceError::GenericError, 'Receipt not set.');
+                    } elseif (!isset($response["receipt"]["in_app"])) {
+                        $clientReceipt->save();
+                        throw eServiceError::getException(eServiceError::GenericError, 'In-app not set.');
+                    } elseif (!isset($response["status"])) {
+                        $clientReceipt->save();
+                        throw eServiceError::getException(eServiceError::GenericError, 'Response status not set');
+                    } elseif ($response["status"] != 0) {
+                        $clientReceipt->save();
+                        throw eServiceError::getException(eServiceError::GenericError, 'Provided Receipt not valid.');
                     }
 
+                    //apple icin butun receiptleri donup direk restore edicem...
+                    foreach ($response["receipt"]["in_app"] as $key => $inApp) {
+                        if (!isset($inApp['expires_date_ms'])) {
+                            //expires_date_ms set edilmemis ise product satin almadir.
+                            if (isset($inApp["product_id"])) {
+                                $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
+                                if (isset($content)) {
+                                    $myClient->addPurchasedItem($content->ContentID, false);
+                                }
+                            }
+                        } else {
+                            //expires_date_ms set edilmis subscription satin alinmis.
+                            $clientReceipt->SubscriptionType = "iospublisher#subscriptionPurchase";
+                            $inAppExpiresDate = date("Y-m-d H:i:s", $inApp["expires_date_ms"] / 1000);
+                            if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $inAppExpiresDate) {
+                                $myClient->PaidUntil = $inAppExpiresDate;
+                            }
 
-
+                            if ($key == count($response["receipt"]["in_app"]) - 1) {
+                                //en son alinmis receipti kaydedelim...
+                                $clientReceipt->SubscriptionStartDate = date("Y-m-d H:i:s", $inApp["purchase_date_ms"] / 1000);
+                                $clientReceipt->SubscriptionEndDate = $inAppExpiresDate;
+                                $clientReceipt->save();
+                            }
+                        }
+                    }
+                    $myClient->save();
                     break;
             }
             return Response::json(array('status' => 0, 'error' => "",));

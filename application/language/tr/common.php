@@ -226,6 +226,7 @@ return array(
 	'applications_applicationstatus' => 'Uygulama Durumu:',
 	'applications_iosversion' => 'IOS Version:',
 	'applications_ioslink' => 'IOS Link:',
+    'applications_subscription_password' => 'IOS Subscription Password:',
 	'applications_androidversion' => 'Android Version:',
 	'applications_androidlink' => 'Android Link:',
 	'applications_package' => 'Paket:',

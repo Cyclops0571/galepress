@@ -303,17 +303,6 @@ class Clients_Controller extends Base_Controller
         sort($contentIDSet);
         $client->ContentIDSet = implode(",", $contentIDSet);
         $client->save();
-        $VersionIncrementAppSet = array();
-        foreach ($contentIDSet as $contentID) {
-            if ($contentID == 0) {
-                continue;
-            }
-            $content = Content::find($contentID);
-            if ($content && !in_array($content->ApplicationID, $VersionIncrementAppSet)) {
-                $VersionIncrementAppSet[] = $content->ApplicationID;
-                $content->Application()->incrementAppVersion();
-            }
-        }
         return "success=" . base64_encode("true") . "&id=" . base64_encode($client->ClientID);
     }
 
@@ -361,11 +350,6 @@ class Clients_Controller extends Base_Controller
         $data = new Spreadsheet_Excel_Reader($filePath);
         $rowCount = $data->rowcount();
         $columnCount = $data->colcount();
-        $includeAppColumn = 0;
-        if (count($appIDSet) > 1) {
-            $includeAppColumn = 1;
-        }
-
 
         if ($rowCount < 2) {
             $responseMsg = Common::localize("invalid_excel_file_two_rows");

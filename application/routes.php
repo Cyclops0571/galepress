@@ -549,6 +549,7 @@ Route::post('webservice/(:num)/applications/login_application', array('uses' => 
 Route::post('webservice/(:num)/applications/fblogin', array('uses' => 'webservice.applications@fblogin'));
 // WS-Contents
 Route::get('webservice/(:num)/contents/(:num)/version', array('uses' => 'webservice.contents@version'));
+Route::post('webservice/(:num)/contents/(:num)/version', array('uses' => 'webservice.contents@version'));
 Route::get('webservice/(:num)/contents/(:num)/detail', array('uses' => 'webservice.contents@detail'));
 Route::get('webservice/(:num)/contents/(:num)/cover-image', array('uses' => 'webservice.contents@coverImage'));
 Route::get('webservice/(:num)/contents/(:num)/file', array('uses' => 'webservice.contents@file'));

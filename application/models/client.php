@@ -16,6 +16,7 @@
  * @property int $InvalidPasswordAttempts Description
  * @property int $PWRecoveryCode Description
  * @property int $PWRecoveryDate Description
+ * @property int Version
  * @property int $StatusID Description
  * @property int $CreatorUserID Description
  * @property int $created_at Description
@@ -60,7 +61,7 @@ class Client extends Laravel\Database\Eloquent\Model
         if (!$this->dirty()) {
             return true;
         }
-
+        $this->Version = (int)$this->Version + 1;
         parent::save();
     }
 
@@ -85,4 +86,17 @@ class Client extends Laravel\Database\Eloquent\Model
         }
         return $contents;
     }
+
+    public function addPurchasedItem($contentID, $save = true)
+    {
+        $contentIDSet = explode(',', $this->ContentIDSet);
+        array_push($contentIDSet, $contentID);
+        $contentIDSet = array_unique($contentIDSet);
+        sort($contentIDSet);
+        $this->ContentIDSet = implode(",", $contentIDSet);
+        if ($save) {
+            $this->save();
+        }
+    }
+
 }

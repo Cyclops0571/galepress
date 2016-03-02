@@ -18,6 +18,7 @@
  * @property int $ApplicationStatusID Description
  * @property int $IOSVersion Description
  * @property int $IOSLink Description
+ * @property int $IOSHexPasswordForSubscription Description
  * @property int $AndroidVersion Description
  * @property int $AndroidLink Description
  * @property int $Blocked Description

@@ -15,6 +15,7 @@
     $ApplicationStatusID = 0;
     $IOSVersion = 0;
     $IOSLink = '';
+    $IOSHexPasswordForSubscription = "";
     $AndroidVersion = 0;
     $AndroidLink = '';
     $PackageID = 0;
@@ -43,6 +44,7 @@
         $ApplicationStatusID = (int)$row->ApplicationStatusID;
         $IOSVersion = (int)$row->IOSVersion;
         $IOSLink = $row->IOSLink;
+        $IOSHexPasswordForSubscription = $row->IOSHexPasswordForSubscription;
         $AndroidVersion = (int)$row->AndroidVersion;
         $AndroidLink = $row->AndroidLink;
         $PackageID = (int)$row->PackageID;
@@ -148,6 +150,13 @@
                     <div class="col-md-9">
                         <input type="checkbox" name="InAppPurchaseActive" id="InAppPurchaseActive"
                                value="1"{{ $InAppPurchaseActive ? ' checked="checked"' : '' }} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_subscription_password') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="IOSHexPasswordForSubscription" id="IOSHexPasswordForSubscription" class="form-control textbox"
+                               value="{{ $IOSHexPasswordForSubscription }}"/>
                     </div>
                 </div>
                 <div class="form-row">
