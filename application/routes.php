@@ -534,6 +534,7 @@ Route::post('ws/v102/statistics', array('uses' => 'ws.v102.statistics@create'));
 
 // <editor-fold defaultstate="collapsed" desc="New Webservice Routes">
 Route::get('webservice/(:num)/applications/(:num)/version', array('uses' => 'webservice.applications@version'));
+Route::post('webservice/(:num)/applications/(:num)/version', array('uses' => 'webservice.applications@version'));
 Route::get('webservice/(:num)/applications/(:num)/detail', array('uses' => 'webservice.applications@detail'));
 Route::post('webservice/(:num)/applications/(:num)/detail', array('uses' => 'webservice.applications@detail'));
 Route::get('webservice/(:num)/applications/(:num)/categories', array('uses' => 'webservice.applications@categories'));
@@ -549,7 +550,6 @@ Route::post('webservice/(:num)/applications/login_application', array('uses' => 
 Route::post('webservice/(:num)/applications/fblogin', array('uses' => 'webservice.applications@fblogin'));
 // WS-Contents
 Route::get('webservice/(:num)/contents/(:num)/version', array('uses' => 'webservice.contents@version'));
-Route::post('webservice/(:num)/contents/(:num)/version', array('uses' => 'webservice.contents@version'));
 Route::get('webservice/(:num)/contents/(:num)/detail', array('uses' => 'webservice.contents@detail'));
 Route::get('webservice/(:num)/contents/(:num)/cover-image', array('uses' => 'webservice.contents@coverImage'));
 Route::get('webservice/(:num)/contents/(:num)/file', array('uses' => 'webservice.contents@file'));

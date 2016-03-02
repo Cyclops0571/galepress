@@ -312,7 +312,6 @@ class Clients_Controller extends Base_Controller
      */
     public function post_excelupload()
     {
-        $VersionIncrementAppSet = array();
         $selectableContentIDSet = NULL;
         $responseMsg = "";
         $status = "Failed";
@@ -430,21 +429,14 @@ class Clients_Controller extends Base_Controller
                         }
                     }
                     $client->ContentIDSet = implode(",", $filteredContentIDSet);
-                    foreach ($client->ContentIDSet as $contentID) {
-                        $content = Content::find($contentID);
-                        if ($content && !in_array($content->Application()->ApplicationID, $VersionIncrementAppSet)) {
-                            $VersionIncrementAppSet[] = $content->Application()->ApplicationID;
-                            $content->Application()->incrementAppVersion();
-                        }
-                    }
                 }
-
                 $client->save();
             }
 
             $responseMsg .= Common::localize('inserted_mobile_user_count') . $addedUserCount . " " . Common::localize('updated_mobile_user_count') . $updatedUserCount;
             $status = 'success';
         }
+
         $json = get_object_vars($object);
         $arr = $json[$element];
         $obj = $arr[0];
@@ -459,7 +451,7 @@ class Clients_Controller extends Base_Controller
      * urlEN: clients/register/ApplicationID
      * urlDU: klient/registrieren/ApplicationID
      * urlTR: mobil-kullanici/kayitol/ApplicationID
-     * @param type $applicationID
+     * @param int $applicationID
      * @return HTML
      */
     public function get_clientregister($applicationID)

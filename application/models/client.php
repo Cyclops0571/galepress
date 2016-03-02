@@ -11,7 +11,7 @@
  * @property int $Name Description
  * @property int $Surname Description
  * @property int $PaidUntil Description
- * @property int $ContentIDSet Description
+ * @property string $ContentIDSet Description
  * @property int $LastLoginDate Description
  * @property int $InvalidPasswordAttempts Description
  * @property int $PWRecoveryCode Description
