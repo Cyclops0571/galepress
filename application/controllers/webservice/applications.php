@@ -253,7 +253,7 @@ class Webservice_Applications_Controller extends Base_Controller
             }
 
             $activeSubscription = false;
-            $subscriptionEndDate = date("Y-m-d H:i:s", strtotime("-1 year"));
+            $subscriptionEndDate = date("Y-m-d H:i:s");
             $remainingDay = 0;
             if (!empty($accessToken)) {
                 $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
