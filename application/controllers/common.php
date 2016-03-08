@@ -167,32 +167,34 @@ class Common_Controller extends Base_Controller
         $rules = array(
             'Email' => 'required|email',
             'Code' => 'required',
-            'Password' => 'required|min:6|max:12',
-            'Password2' => 'required|min:6|max:12|same:Password'
+            'Password' => 'required|min:4|max:12',
+            'Password2' => 'required|min:4|max:12|same:Password'
         );
         $v = Validator::make(Input::all(), $rules);
-        if ($v->passes()) {
-            $user = DB::table('User')
-                ->where('Email', '=', $email)
-                ->where('PWRecoveryCode', '=', $code)
-                ->where('PWRecoveryDate', '>', DB::raw('ADDDATE(CURDATE(), INTERVAL -7 DAY)'))
-                ->where('StatusID', '=', 1)
-                ->first();
+        if (!$v->passes()) {
+            $errMsg = $v->errors->first();
+            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($errMsg);
+        }
 
-            if ($user) {
-                $s = User::find($user->UserID);
-                $s->Password = Hash::make($password);
-                $s->ProcessUserID = $user->UserID;
-                $s->ProcessDate = new DateTime();
-                $s->ProcessTypeID = eProcessTypes::Update;
-                $s->save();
 
-                return "success=" . base64_encode("true") . "&msg=" . base64_encode(__('common.login_passwordhasbeenchanged'));
-            } else {
-                return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.login_ticketnotfound'));
-            }
+        $user = DB::table('User')
+            ->where('Email', '=', $email)
+            ->where('PWRecoveryCode', '=', $code)
+            ->where('PWRecoveryDate', '>', DB::raw('ADDDATE(CURDATE(), INTERVAL -7 DAY)'))
+            ->where('StatusID', '=', 1)
+            ->first();
+
+        if ($user) {
+            $s = User::find($user->UserID);
+            $s->Password = Hash::make($password);
+            $s->ProcessUserID = $user->UserID;
+            $s->ProcessDate = new DateTime();
+            $s->ProcessTypeID = eProcessTypes::Update;
+            $s->save();
+
+            return "success=" . base64_encode("true") . "&msg=" . base64_encode(__('common.login_passwordhasbeenchanged'));
         } else {
-            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
+            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.login_ticketnotfound'));
         }
     }
 
