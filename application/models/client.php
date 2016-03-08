@@ -175,6 +175,7 @@ class Client extends Eloquent
 
     public function addPurchasedItem($contentID)
     {
+        $contentIDSet = $this->ContentIDSet;
         if (empty($contentIDSet)) {
             $contentIDSet = array($contentID);
         } else {
