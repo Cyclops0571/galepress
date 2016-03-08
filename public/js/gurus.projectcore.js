@@ -430,6 +430,9 @@ var cUser = new function () {
             var d = cForm.serialize(frm);
             cUser.doAsyncRequest(t, u, d, function (ret) {
                 cNotification.success(null, ret.getValue("msg"));
+                setTimeout(function () {
+                    window.location = '/' + currentLanguage + '/' + route["login"];
+                }, 1000);
             });
         } else {
             cNotification.validation();

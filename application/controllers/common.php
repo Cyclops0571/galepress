@@ -115,9 +115,10 @@ class Common_Controller extends Base_Controller
                 $user->ProcessTypeID = eProcessTypes::Update;
                 $user->save();
 
+                $applications = $user->Application();
                 $subject = __('common.login_email_subject');
                 $msg = __('common.login_email_message', array(
-                        'Application' => $user->Application()->Name,
+                        'Application' => $applications[0]->Name,
                         'firstname' => $user->FirstName,
                         'lastname' => $user->LastName,
                         'username' => $user->Username,
