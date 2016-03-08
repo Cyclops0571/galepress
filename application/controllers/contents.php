@@ -271,20 +271,20 @@ class Contents_Controller extends Base_Controller {
             if (Common::CheckContentOwnership($id)) {
                 $this->route = __('route.' . $this->page) . '?applicationID=' . $row->ApplicationID;
 
-                $app = $row->Application();
+
                 $data = array(
                     'page' => $this->page,
                     'route' => $this->route,
                     'caption' => $this->caption,
                     'detailcaption' => $this->detailcaption,
                     'row' => $row,
-                    'app' => $app,
+                    'app' => $row->Application,
                     'showCropPage' => $showCropPage,
                     'contentList' => $contentList,
                 );
 
                 if (((int) $currentUser->UserTypeID == eUserTypes::Customer)) {
-                    if ($app->ExpirationDate < date('Y-m-d')) {
+                    if ($row->Application->ExpirationDate < date('Y-m-d')) {
                         return View::make('pages.expiredpage', $data)->nest('filterbar', 'sections.filterbar', $data);
                     }
                 }

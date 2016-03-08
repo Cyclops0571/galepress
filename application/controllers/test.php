@@ -6,47 +6,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of test
- *
- * @author Detay
- */
-class dd1
-{
-    const ASdf = 5;
-
-    public static function make()
-    {
-        return new static(5);
-    }
-
-    public static function test()
-    {
-        static::who();
-    }
-
-    public static function who()
-    {
-        echo __CLASS__;
-    }
-}
-
-class dd2 extends dd1
-{
-    public static function who()
-    {
-        echo __CLASS__;
-    }
-}
-
-class dd3 extends dd2
-{
-    public function __construct($a)
-    {
-        var_dump("a:::" . $a);
-    }
-}
-
 class Test_Controller extends Base_Controller
 {
 
@@ -60,7 +19,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-
+        $client = Client::find(1);
+        var_dump($client->Application);
         echo date("Y-m-d H:i:s", 1456503997000 / 1000);
         exit;
         echo time();

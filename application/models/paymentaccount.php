@@ -28,6 +28,7 @@
  * @property int $card_verification Description
  * @property int $mail_send Description
  * @property int $selected_at Description
+ * @property Application $Application Description
  */
 class PaymentAccount extends Eloquent {
 
@@ -47,7 +48,7 @@ class PaymentAccount extends Eloquent {
      * @return Application
      */
     public function Application() {
-	return $this->belongs_to('Application', 'ApplicationID')->first();
+        return $this->belongs_to('Application', 'ApplicationID');
     }
 
     public function save() {

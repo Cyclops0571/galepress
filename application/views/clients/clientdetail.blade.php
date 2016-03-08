@@ -131,7 +131,16 @@
                             </thead>
                             <tbody>
                             <?php foreach ($contents as $content): ?>
-			    <?php endforeach; ?>
+                            <?php /* @var $selectableContent Content */ ?>
+                            <tr id="contentIDSet_<?php echo $content->ContentID; ?>">
+                                <td>
+                                    <?php echo $content->Name; ?>
+                                </td>
+                                <td>
+                                    <?php echo $content->ContentID; ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                             <?php if(empty($contents)): ?>
                             <tr id="contentIDSet_0">
                                 <td colspan="2">

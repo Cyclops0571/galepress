@@ -978,12 +978,11 @@ class Common
         $currentUser = Auth::User();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
-            $o = Content::find($contentID);
-            if ($o) {
-                if ((int)$o->StatusID == eStatus::Active) {
-                    $a = $o->Application();
-                    if ((int)$a->StatusID == eStatus::Active) {
-                        $c = $a->Customer();
+            $content = Content::find($contentID);
+            if ($content) {
+                if ((int)$content->StatusID == eStatus::Active) {
+                    if ((int)$content->Application->StatusID == eStatus::Active) {
+                        $c = $content->Application->Customer();
                         if ((int)$c->StatusID == eStatus::Active) {
                             if ((int)$currentUser->CustomerID == (int)$c->CustomerID) {
                                 return true;

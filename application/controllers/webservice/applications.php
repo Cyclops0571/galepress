@@ -441,7 +441,7 @@ class Webservice_Applications_Controller extends Base_Controller
     {
         return webService::render(function () use ($ServiceVersion, $applicationID) {
             Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
-            $application = webService::getCheckApplication($ServiceVersion, $applicationID);
+            webService::getCheckApplication($ServiceVersion, $applicationID);
 
             $rules = array(
                 'accessToken' => 'required',
@@ -475,115 +475,12 @@ class Webservice_Applications_Controller extends Base_Controller
             }
             $clientReceipt->ClientID = $myClient->ClientID;
             $clientReceipt->SubscriptionID = $productID;
+            $clientReceipt->Platform = $platformType;
             $clientReceipt->PackageName = $packageName;
             $clientReceipt->Receipt = $purchaseToken;
             $clientReceipt->save();
 
-            switch ($platformType) {
-                case 'android':
-                    require_once path('bundle') . '/google/src/Google/autoload.php';
-                    $client = new Google_Client();
-                    // set Application Name to the name of the mobile app
-                    $client->setApplicationName("Uni Saç");
-                    // get p12 key file
-                    //echo path('public') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12'; exit;
-                    $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
-
-                    // create assertion credentials class and pass in:
-                    // - service account email address
-                    // - query scope as an array (which APIs the call will access)
-                    // - the contents of the key file
-                    $cred = new Google_Auth_AssertionCredentials(
-                        '552236962262-compute@developer.gserviceaccount.com',
-                        array('https://www.googleapis.com/auth/androidpublisher'),
-                        $key
-                    );
-                    // add the credentials to the client
-                    $client->setAssertionCredentials($cred);
-                    // create a new Android Publisher service class
-                    $service = new Google_Service_AndroidPublisher($client);
-                    // use the purchase token to make a call to Google to get the subscription info
-                    /** @var Content $content */
-                    $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
-                    if ($content) {
-                        //content ise valide edip contenti erişebilir content listesine koyacağız...
-                        $productPurchaseResponse = $service->purchases_products->get($packageName, $productID, $purchaseToken);
-                        $clientReceipt->SubscriptionType = $productPurchaseResponse->getKind();
-                        $clientReceipt->MarketResponse = json_encode($productPurchaseResponse->toSimpleObject());
-                        $clientReceipt->save();
-
-                        if ($productPurchaseResponse->consumptionState == webService::GoogleConsumptionStatePurchased) {
-                            //Content bought so save content to clients purchased products
-                            $myClient->addPurchasedItem($content->ContentID);
-                        } else {
-                            throw eServiceError::getException(eServiceError::GenericError, 'Content Not Bought.');
-                        }
-
-                    } else {
-                        //applicationda $productID var mi kontrol edecegiz...
-                        $subscription = $service->purchases_subscriptions->get($packageName, $productID, $purchaseToken);
-                        $clientReceipt->MarketResponse = json_encode($subscription->toSimpleObject());
-                        if (is_null($subscription) || !$subscription->getExpiryTimeMillis() > 0) {
-                            $clientReceipt->save();
-                            throw eServiceError::getException(eServiceError::GenericError, 'Error validating transaction.');
-                        }
-
-                        //validate oldu tekrar kaydedelim...
-                        $clientReceipt->SubscriptionType = $subscription->getKind();
-                        $clientReceipt->SubscriptionStartDate = date("Y-m-d H:i:s", $subscription->getStartTimeMillis() / 1000);
-                        $clientReceipt->SubscriptionEndDate = date("Y-m-d H:i:s", $subscription->getExpiryTimeMillis() / 1000);
-                        $clientReceipt->save();
-
-
-                        if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $clientReceipt->SubscriptionEndDate) {
-                            $myClient->PaidUntil = $clientReceipt->SubscriptionEndDate;
-                            $myClient->save();
-                        }
-                    }
-                    break;
-                case 'ios':
-                    //validate olursa $clientReceipt'i ona gore kaydedicegiz...
-                    $appleReceiptValidationUrl = 'https://sandbox.itunes.apple.com/verifyReceipt'; //571571
-                    //$appleReceiptValidationUrl = 'https://buy.itunes.apple.com/verifyReceipt';
-
-                    $receiptObject = webService::buildAppleJSONReceiptObject($purchaseToken, $application->IOSHexPasswordForSubscription);
-                    $response = webService::makeAppleReceiptRequest($appleReceiptValidationUrl, $receiptObject);
-                    $clientReceipt->MarketResponse = json_encode($response);
-                    $errorMsg = webService::checkIosResponse($response);
-                    if (!empty($errorMsg)) {
-                        $clientReceipt->save();
-                        throw eServiceError::getException(eServiceError::GenericError, $errorMsg);
-                    }
-
-                    //apple icin butun receiptleri donup direk restore edicem...
-                    foreach ($response["receipt"]["in_app"] as $key => $inApp) {
-                        if (!isset($inApp['expires_date_ms'])) {
-                            //expires_date_ms set edilmemis ise product satin almadir.
-                            if (isset($inApp["product_id"])) {
-                                $content = Content::where("Identifier", '=', $productID)->where("ApplicationID", '=', $applicationID)->first();
-                                if (isset($content)) {
-                                    $myClient->addPurchasedItem($content->ContentID, false);
-                                }
-                            }
-                        } else {
-                            //expires_date_ms set edilmis subscription satin alinmis.
-                            $clientReceipt->SubscriptionType = "iospublisher#subscriptionPurchase";
-                            $inAppExpiresDate = date("Y-m-d H:i:s", $inApp["expires_date_ms"] / 1000);
-                            if (empty($myClient->PaidUntil) || $myClient->PaidUntil < $inAppExpiresDate) {
-                                $myClient->PaidUntil = $inAppExpiresDate;
-                            }
-
-                            if ($key == count($response["receipt"]["in_app"]) - 1) {
-                                //en son alinmis receipti kaydedelim...
-                                $clientReceipt->SubscriptionStartDate = date("Y-m-d H:i:s", $inApp["purchase_date_ms"] / 1000);
-                                $clientReceipt->SubscriptionEndDate = $inAppExpiresDate;
-                                $clientReceipt->save();
-                            }
-                        }
-                    }
-                    $myClient->save();
-                    break;
-            }
+            $myClient->CheckReceipt($clientReceipt);
             return Response::json(array('status' => 0, 'error' => "",));
         });
     }

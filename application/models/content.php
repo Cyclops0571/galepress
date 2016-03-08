@@ -34,6 +34,7 @@
  * @property int $ProcessUserID Description
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
+ * @property Application $Application Description
  */
 class Content extends Eloquent
 {
@@ -325,10 +326,10 @@ class Content extends Eloquent
     public function getIdentifier($refreshIdentifier = false)
     {
         if (empty($this->Identifier) || $refreshIdentifier) {
-            if (empty($this->Application()->BundleText)) {
+            if (empty($this->Application->BundleText)) {
                 $identifier = "www.galepress.com." . $this->ContentID . "t" . time();
             } else {
-                $identifier = strtolower($this->Application()->BundleText) . "." . $this->ContentID . "t" . time();
+                $identifier = strtolower($this->Application->BundleText) . "." . $this->ContentID . "t" . time();
             }
             if (empty($this->Identifier)) {
                 $this->Identifier = $identifier;
@@ -346,7 +347,7 @@ class Content extends Eloquent
      */
     public function Application()
     {
-        return $this->belongs_to('Application', 'ApplicationID')->first();
+        return $this->belongs_to('Application', 'ApplicationID');
     }
 
     /**
@@ -367,7 +368,7 @@ class Content extends Eloquent
         foreach ($rs as $r) {
             array_push($categories, array(
                 'CategoryID' => (int)$r->CategoryID,
-                'CategoryName' => ((int)$r->CategoryID === 0 ? (string)Lang::line('common.contents_category_list_general', array(), $this->Application()->ApplicationLanguage) : $r->Name)
+                'CategoryName' => ((int)$r->CategoryID === 0 ? (string)Lang::line('common.contents_category_list_general', array(), $this->Application->ApplicationLanguage) : $r->Name)
             ));
         }
         return $categories;

@@ -78,7 +78,7 @@ class PaymentUser_Task
                     $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
                     $postData['type'] = "DB";
 
-                    $application = $paymentAccount->Application();
+                    $application = $paymentAccount->Application;
                     $paymentAmount = $application->Price * 1.18;
                     $postData['amount'] = (int)($paymentAmount * 100);
                     $postData['card_token'] = $paymentAccount->card_token;

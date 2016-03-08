@@ -14,6 +14,7 @@
  * @property int $StatusID Description
  * @property int $created_at Description
  * @property int $updated_at Description
+ * @property Application $Application Description
  */
 class Banner extends Eloquent
 {
@@ -60,7 +61,7 @@ class Banner extends Eloquent
      */
     public function processImage($tmpFileName)
     {
-        $application = $this->Application();
+        $application = $this->Application;
         $tmpFilePath = path('public') . PATH_TEMP_FILE . '/' . $tmpFileName;
         $destinationFolder = path('public') . 'files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/';
         $sourcePicturePath = $destinationFolder . Auth::User()->UserID . '_' . date("YmdHis") . '_' . $tmpFileName;
@@ -87,7 +88,7 @@ class Banner extends Eloquent
      */
     public function Application()
     {
-        return $this->belongs_to('Application', 'ApplicationID')->first();
+        return $this->belongs_to('Application', 'ApplicationID');
     }
 
     public function save($updateAppVersion = TRUE)
@@ -116,7 +117,7 @@ class Banner extends Eloquent
 
     public function getImagePath()
     {
-        return '/files/customer_' . $this->Application()->CustomerID . '/application_' . $this->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
+        return '/files/customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
     }
 
 }

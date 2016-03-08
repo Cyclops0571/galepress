@@ -4,6 +4,7 @@
  * @property int $ClientReceiptID Description
  * @property int $ClientID Description
  * @property int $SubscriptionID Description
+ * @property string $Platform Description
  * @property mixed PackageName
  * @property int $SubscriptionType Description
  * @property int $SubscriptionStartDate Description
@@ -12,7 +13,7 @@
  * @property int $MarketResponse Description
  * @property int $StatusID Description
  */
-class ClientReceipt extends Laravel\Database\Eloquent\Model
+class ClientReceipt extends Eloquent
 {
 
     public static $table = 'ClientReceipt';

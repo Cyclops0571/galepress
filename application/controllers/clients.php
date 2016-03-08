@@ -473,7 +473,7 @@ class Clients_Controller extends Base_Controller
             return Redirect::to(str_replace("(:num)", $applicationID, __("route.clients_register")));
         }
         $data = array();
-        $data["application"] = $client->Application();
+        $data["application"] = $client->Application;
         $data["client"] = $client;
 
         return View::make(Laravel\Request::$route->controller . '.clientregister', $data);

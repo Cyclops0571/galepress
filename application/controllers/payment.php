@@ -103,7 +103,6 @@ class Payment_Controller extends Base_Controller
         if (!$paymentAccount) {
             return Redirect::to('shop');
         }
-        $application = $paymentAccount->Application();
 
 
         //eger kullanici bugun icinde bir odeme yapmis ise baska bir odeme almayalim...
@@ -147,7 +146,7 @@ class Payment_Controller extends Base_Controller
         $postData['customer_presentation_usage'] = 'GalepressAylikOdeme_' . date('YmdHisu');
         $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
         $postData['type'] = "DB";
-        $postData['amount'] = $application->Price * 118;
+        $postData['amount'] = $paymentAccount->Application->Price * 118;
         $postData['installment_count'] = NULL;
         $postData['currency'] = "TRY";
         $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
