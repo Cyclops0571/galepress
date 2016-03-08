@@ -715,6 +715,7 @@ class Clients_Controller extends Base_Controller
 
         $subject = __('clients.login_resetpassword_email_subject', array('Application' => $application->Name,));
         $msg = __('clients.login_resetpassword_email_message', array(
+                'Application' => $application->Name,
                 'firstname' => $client->Name,
                 'lastname' => $client->Surname,
                 'username' => $client->Username,

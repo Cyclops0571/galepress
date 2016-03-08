@@ -201,6 +201,7 @@ class Users_Controller extends Base_Controller {
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    $id = (int) Input::get($this->pk, '0');
 
+        /** @var User $s */
 	    $s = User::find($id);
 	    if ($s) {
 		$pass = Common::generatePassword();
@@ -211,8 +212,9 @@ class Users_Controller extends Base_Controller {
 		$s->ProcessTypeID = eProcessTypes::Update;
 		$s->save();
 
-		$subject = __('common.login_resetpassword_email_subject');
+            $subject = __('common.login_resetpassword_email_subject', array('Application' => $s->Application()->Name,));
 		$msg = __('common.login_resetpassword_email_message', array(
+                'Application' => $s->Application()->Name,
 		    'firstname' => $s->FirstName,
 		    'lastname' => $s->LastName,
 		    'username' => $s->Username,

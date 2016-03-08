@@ -101,27 +101,26 @@ class Common_Controller extends Base_Controller
         );
         $v = Validator::make(Input::all(), $rules);
         if ($v->passes()) {
-            $user = DB::table('User')
-                ->where('Email', '=', $email)
+            /** @var User $user */
+            $user = User::where('Email', '=', $email)
                 ->where('StatusID', '=', 1)
                 ->first();
-
             if ($user) {
                 $pass = Common::generatePassword();
-                /* @var $s User */
-                $s = User::find($user->UserID);
-                $s->PWRecoveryCode = $pass;
-                $s->PWRecoveryDate = new DateTime();
-                $s->ProcessUserID = $user->UserID;
-                $s->ProcessDate = new DateTime();
-                $s->ProcessTypeID = eProcessTypes::Update;
-                $s->save();
+                /** @var User $s */
+                $user->PWRecoveryCode = $pass;
+                $user->PWRecoveryDate = new DateTime();
+                $user->ProcessUserID = $user->UserID;
+                $user->ProcessDate = new DateTime();
+                $user->ProcessTypeID = eProcessTypes::Update;
+                $user->save();
 
                 $subject = __('common.login_email_subject');
                 $msg = __('common.login_email_message', array(
+                        'Application' => $user->Application()->Name,
                         'firstname' => $user->FirstName,
                         'lastname' => $user->LastName,
-                        'username' => $s->Username,
+                        'username' => $user->Username,
                         'url' => Config::get('custom.url') . "/" . Config::get('application.language') . '/' . __('route.resetmypassword') . '?email=' . $user->Email . '&code=' . $pass
                     )
                 );

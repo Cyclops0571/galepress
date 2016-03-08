@@ -23,7 +23,7 @@ return array(
 							    "Kullanıcı Adınız is :username, \n" .
 							    "Parolanız :pass. \n\n".
 							    "Saygılarımızla, \n".
-							    "Galepress",
+        ":Application",
     
     'login_email_subject' => ':Application uygulaması parola sıfırlama e-postası',
     'login_email_message' => "".
@@ -33,7 +33,7 @@ return array(
 							    "Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n".
 							    ":url\n\n".
 							    "Saygılarımızla, \n".
-							    "Galepress",
+        ":Application",
     'login_resetpassword_email_subject' => ':Application parola sıfırlama e-postası',
     'login_resetpassword_email_message' => "".
 							    "Sayın :firstname :lastname, \n\n".
@@ -41,7 +41,7 @@ return array(
 							    "Kullanıcı Adınız :username, \n" .
 							    "Parolanız :pass olarak değiştirilmiştir. \n\n".
 							    "Saygılarımızla, \n".
-							    "Galepress",
+        ":Application",
     'selected_content_name' => 'Seçilmiş İçerikler',
     'selectable_content_name' => 'Seçilebilir İçerikler',
     'week_subscription' => 'Haftalık Üyelik',

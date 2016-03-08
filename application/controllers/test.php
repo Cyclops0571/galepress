@@ -19,6 +19,12 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        $mycontentIDSet = '3704';
+        $contentIDSet = explode(',', $mycontentIDSet);
+        array_push($contentIDSet, 1000);
+        var_dump($contentIDSet);
+        var_dump($returnResult);
+        exit;
         $client = Client::find(1);
         var_dump($client->Application);
         echo date("Y-m-d H:i:s", 1456503997000 / 1000);
