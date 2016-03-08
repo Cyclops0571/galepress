@@ -90,19 +90,6 @@ class Client extends Eloquent
         return $contents;
     }
 
-    public function addPurchasedItem($contentID)
-    {
-        if (empty($contentIDSet)) {
-            $contentIDSet = array($contentID);
-        } else {
-            $contentIDSet = explode(',', $this->ContentIDSet);
-            array_push($contentIDSet, $contentID);
-        }
-        $contentIDSet = array_unique($contentIDSet);
-        sort($contentIDSet);
-        $this->ContentIDSet = trim(implode(",", $contentIDSet), ',');
-    }
-
     /**
      * @param ClientReceipt $receipt
      * @throws Exception
@@ -118,57 +105,6 @@ class Client extends Eloquent
                 $this->checkReceiptIos($receipt);
                 break;
         }
-        $this->save();
-    }
-
-    public function CheckReceiptCLI()
-    {
-        /** @var ClientReceipt[] $clientReceipts */
-        $clientReceipts = ClientReceipt::where('clientID', 'clientID')
-            ->where_in('SubscriptionType', array('iospublisher#subscriptionPurchase', 'androidpublisher#subscriptionPurchase'))
-            ->get();
-
-        foreach ($clientReceipts as $clientReceipt) {
-            try {
-                switch ($clientReceipt->Platform) {
-                    case 'android':
-                        $this->checkReceiptGoogle($clientReceipt);
-                        break;
-                    case 'ios':
-                        $this->checkReceiptIos($clientReceipt);
-                        break;
-                }
-            } catch (Exception $e) {
-                Log::error($e->getMessage() . ' - Receipt ID: ' . $clientReceipt->ClientReceiptID);
-            }
-        }
-        $this->Version++;
-        $this->save();
-    }
-
-
-    public function CheckReceiptCLI()
-    {
-        /** @var ClientReceipt[] $clientReceipts */
-        $clientReceipts = ClientReceipt::where('clientID', 'clientID')
-            ->where_in('SubscriptionType', array('iospublisher#subscriptionPurchase', 'androidpublisher#subscriptionPurchase'))
-            ->get();
-
-        foreach ($clientReceipts as $clientReceipt) {
-            try {
-                switch ($clientReceipt->Platform) {
-                    case 'android':
-                        $this->checkReceiptGoogle($clientReceipt);
-                        break;
-                    case 'ios':
-                        $this->checkReceiptIos($clientReceipt);
-                        break;
-                }
-            } catch (Exception $e) {
-                Log::error($e->getMessage() . ' - Receipt ID: ' . $clientReceipt->ClientReceiptID);
-            }
-        }
-        $this->Version++;
         $this->save();
     }
 
@@ -237,9 +173,17 @@ class Client extends Eloquent
         }
     }
 
-    protected function Application()
+    public function addPurchasedItem($contentID)
     {
-        return $this->belongs_to('Application', 'ApplicationID');
+        if (empty($contentIDSet)) {
+            $contentIDSet = array($contentID);
+        } else {
+            $contentIDSet = explode(',', $this->ContentIDSet);
+            array_push($contentIDSet, $contentID);
+        }
+        $contentIDSet = array_unique($contentIDSet);
+        sort($contentIDSet);
+        $this->ContentIDSet = trim(implode(",", $contentIDSet), ',');
     }
 
     /**
@@ -292,5 +236,35 @@ class Client extends Eloquent
                 }
             }
         }
+    }
+
+    public function CheckReceiptCLI()
+    {
+        /** @var ClientReceipt[] $clientReceipts */
+        $clientReceipts = ClientReceipt::where('clientID', 'clientID')
+            ->where_in('SubscriptionType', array('iospublisher#subscriptionPurchase', 'androidpublisher#subscriptionPurchase'))
+            ->get();
+
+        foreach ($clientReceipts as $clientReceipt) {
+            try {
+                switch ($clientReceipt->Platform) {
+                    case 'android':
+                        $this->checkReceiptGoogle($clientReceipt);
+                        break;
+                    case 'ios':
+                        $this->checkReceiptIos($clientReceipt);
+                        break;
+                }
+            } catch (Exception $e) {
+                Log::error($e->getMessage() . ' - Receipt ID: ' . $clientReceipt->ClientReceiptID);
+            }
+        }
+        $this->Version++;
+        $this->save();
+    }
+
+    protected function Application()
+    {
+        return $this->belongs_to('Application', 'ApplicationID');
     }
 }
