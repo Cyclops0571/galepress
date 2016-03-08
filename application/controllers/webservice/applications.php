@@ -443,6 +443,7 @@ class Webservice_Applications_Controller extends Base_Controller
             Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
 
+            $errorIdentifier = array();
             $rules = array(
                 'accessToken' => 'required',
                 'purchaseTokens' => 'required',
@@ -481,9 +482,13 @@ class Webservice_Applications_Controller extends Base_Controller
                 $clientReceipt->PackageName = $packageName;
                 $clientReceipt->Receipt = $purchaseToken;
                 $clientReceipt->save();
-                $myClient->CheckReceipt($clientReceipt);
+                try {
+                    $myClient->CheckReceipt($clientReceipt);
+                } catch (Exception $e) {
+                    array_push($errorIdentifier, $productID);
+                }
             }
-            return Response::json(array('status' => 0, 'error' => "",));
+            return Response::json(array('status' => 0, 'error' => "", 'errorIdentifier' => json_encode($errorIdentifier)));
         });
     }
 
