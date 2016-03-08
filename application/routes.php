@@ -542,6 +542,7 @@ Route::get('webservice/(:num)/applications/(:num)/categories/(:num)/detail', arr
 
 Route::get('webservice/(:num)/applications/(:num)/contents', array('uses' => 'webservice.applications@contents'));
 Route::post('webservice/(:num)/applications/(:num)/receipt', array('uses' => 'webservice.applications@receipt'));
+Route::post('webservice/(:num)/applications/(:num)/androidrestore', array('uses' => 'webservice.applications@androidrestore'));
 
 
 Route::get('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));

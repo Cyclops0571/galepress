@@ -437,6 +437,56 @@ class Webservice_Applications_Controller extends Base_Controller
         });
     }
 
+    public function post_androidrestore($ServiceVersion, $applicationID)
+    {
+        return webService::render(function () use ($ServiceVersion, $applicationID) {
+            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::getCheckApplication($ServiceVersion, $applicationID);
+
+            $rules = array(
+                'accessToken' => 'required',
+                'purchaseTokens' => 'required',
+                'packageName' => 'required',
+                'productIds' => 'required',
+                'platformType' => 'required|in:android,ios',
+            );
+
+            $v = Laravel\Validator::make(\Laravel\Input::all(), $rules);
+            if ($v->invalid()) {
+                throw eServiceError::getException(eServiceError::GenericError, $v->errors->first());
+            }
+
+            $productIds = json_decode(\Laravel\Input::get('productIds'));
+            $purchaseTokens = json_decode(\Laravel\Input::get('purchaseTokens'));
+            $accessToken = \Laravel\Input::get('accessToken');
+            $myClient = webService::getClientFromAccessToken($accessToken, $applicationID);
+            $platformType = \Laravel\Input::get('platformType');
+            $packageName = \Laravel\Input::get('packageName');
+            for ($i = 0; $i < count($productIds); $i++) {
+                $purchaseToken = $purchaseTokens[$i]; //receiptToken
+                $productID = $productIds[$i]; //subscriptionIdentifier
+                //ise baslamadan gonderilen receipti kaydedelim...
+                /** @var ClientReceipt $clientReceipt */
+                $clientReceipt = ClientReceipt::where("Receipt", "=", $purchaseToken)->first();
+                if (!$clientReceipt) {
+                    $clientReceipt = new ClientReceipt();
+                } else {
+                    if ($clientReceipt->SubscriptionID != $productID || $clientReceipt->ClientID != $myClient->ClientID) {
+                        throw eServiceError::getException(eServiceError::GenericError, 'Receipt used for another product or client');
+                    }
+                }
+                $clientReceipt->ClientID = $myClient->ClientID;
+                $clientReceipt->SubscriptionID = $productID;
+                $clientReceipt->Platform = $platformType;
+                $clientReceipt->PackageName = $packageName;
+                $clientReceipt->Receipt = $purchaseToken;
+                $clientReceipt->save();
+                $myClient->CheckReceipt($clientReceipt);
+            }
+            return Response::json(array('status' => 0, 'error' => "",));
+        });
+    }
+
     public function post_receipt($ServiceVersion, $applicationID)
     {
         return webService::render(function () use ($ServiceVersion, $applicationID) {
