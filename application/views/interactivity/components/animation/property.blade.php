@@ -30,7 +30,17 @@ if(isset($Properties))
 			$filename = path('public').$prop->Value;
 			if(File::exists($filename) && is_file($filename)) {
 				$fileSelected = 1;
-				$fileSize = round((File::size($filename) / (1024 * 1024)), 1).' MB';
+                $fileAbsoluteSize = File::size($filename);
+                if ($fileAbsoluteSize > 1024 * 1024) {
+                    $fileSize = round($fileAbsoluteSize / (1024 * 1024), 1) . " MB";
+                } else if ($fileAbsoluteSize > 1024) {
+                    $fileSize = round($fileAbsoluteSize / 1024, 1) . " KB";
+                } else if ($fileAbsoluteSize > 0) {
+                    $fileSize = $fileAbsoluteSize . " Bytes";
+                } else {
+                    $fileSize = "0 Bytes";
+                }
+
 				$fname = File::name($filename);
 				$fext = File::extension($filename);
 				$filename = $fname.'.'.$fext;

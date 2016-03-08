@@ -19,6 +19,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo 1 / 2;
+        exit;
         $mycontentIDSet = '3704';
         $contentIDSet = explode(',', $mycontentIDSet);
         array_push($contentIDSet, 1000);

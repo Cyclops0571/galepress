@@ -738,7 +738,18 @@
 
                             $("#prop-" + id + " input#comp-" + id + "-filename").val(data.result['comp-' + id + '-file'][0].name);
                             $("#prop-" + id + " div.settings div.properties div.file-header h4").html(shortenFileName);
-                            $("#prop-" + id + " div.settings div.properties div.file-header span").html((data.result['comp-' + id + '-file'][0].size / (1024 * 1024)).toFixed(1) + " MB");
+                            var fileSize = '';
+                            if (data.result['comp-' + id + '-file'][0].size > 1024 * 1024) {
+                                fileSize = (data.result['comp-' + id + '-file'][0].size / (1024 * 1024)).toFixed(1) + " MB";
+                            } else if (data.result['comp-' + id + '-file'][0].size > 1024) {
+                                fileSize = (data.result['comp-' + id + '-file'][0].size / 1024 ).toFixed(1) + " KB";
+                            } else if (data.result['comp-' + id + '-file'][0].size > 0) {
+                                fileSize = data.result['comp-' + id + '-file'][0].size + " Bytes";
+                            } else {
+                                fileSize = "0 Bytes";
+                            }
+
+                            $("#prop-" + id + " div.settings div.properties div.file-header span").html(fileSize);
                             $("#prop-" + id + " div.upload div.progress").addClass("hide");
                             $("#prop-" + id + " div.settings div.properties").removeClass("hide");
                         }
