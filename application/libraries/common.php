@@ -444,6 +444,10 @@ class Common
 
     public static function downloadImage($ContentID, $RequestTypeID, $Width, $Height)
     {
+        if ($Width < 300) {
+            $Width = ceil(1.4 * $Width);
+            $Height = ceil(1.4 * $Height);
+        }
         $content = DB::table('Customer AS c')
             ->join('Application AS a', function ($join) {
                 $join->on('a.CustomerID', '=', 'c.CustomerID');

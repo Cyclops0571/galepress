@@ -19,6 +19,25 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+
+        $gsCommand = array();
+        $gsCommand[] = 'gs';
+        $gsCommand[] = '-o /vagrant/public/files/customer_60/application_58/content_2007/file_2673/deneme.jpg';
+        $gsCommand[] = '-sDEVICE=jpeg';
+        $gsCommand[] = '-sPAPERSIZE=a1';
+//        $gsCommand[] = '-dDEVICEWIDTHPOINTS=1536 -dDEVICEHEIGHTPOINTS=2048';
+        $gsCommand[] = '-dUseCropBox';
+        $gsCommand[] = '-dFirstPage=1';
+        $gsCommand[] = '-dLastPage=1';
+        $gsCommand[] = '-dPDFFitPage=true';
+
+        $gsCommand[] = '-dJPEGQ=100';
+        $gsCommand[] = '-r72x72';
+        $gsCommand[] = "'/vagrant/public/files/customer_60/application_58/content_2007/file_2673/file.pdf'";
+
+        shell_exec(implode(" ", $gsCommand));
+
+
         echo 1 / 2;
         exit;
         $mycontentIDSet = '3704';

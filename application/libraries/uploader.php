@@ -41,11 +41,12 @@ class Uploader
         $gsCommand[] = 'gs';
         $gsCommand[] = '-o ' . $filePath . "/" . $tempImageFile;
         $gsCommand[] = '-sDEVICE=jpeg';
+        $gsCommand[] = '-sPAPERSIZE=a1';
         $gsCommand[] = '-dUseCropBox';
         $gsCommand[] = '-dFirstPage=1';
         $gsCommand[] = '-dLastPage=1';
         $gsCommand[] = '-dJPEGQ=100';
-        $gsCommand[] = '-r196x196';
+        $gsCommand[] = '-r72x72';
         $gsCommand[] = "'" . $filePath . "/" . $tempPdfFile . "'";
 
 //	    echo implode(" ", $gsCommand), PHP_EOL;
