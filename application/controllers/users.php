@@ -130,7 +130,7 @@ class Users_Controller extends Base_Controller
                     'route' => $this->route,
                     'caption' => $this->caption,
                     'detailcaption' => $this->detailcaption,
-                    'row' => $row
+                    'row' => $row,
                 );
                 return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
                     ->nest('filterbar', 'sections.filterbar', $data);

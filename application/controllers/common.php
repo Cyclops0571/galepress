@@ -393,6 +393,7 @@ class Common_Controller extends Base_Controller
         );
         $v = Validator::make(Input::all(), $rules);
         if ($v->passes()) {
+            /** @var User $s */
             $s = User::find(Auth::User()->UserID);
             $s->FirstName = $firstName;
             $s->LastName = $lastName;

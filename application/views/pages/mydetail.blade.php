@@ -48,17 +48,6 @@
                             <input class="form-control" type="password" name="Password2" id="Password2" value="" />
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-3">{{ __('common.users_timezone') }}</div>
-                        <div class="col-md-9">
-                            <select class="form-control select2" style="width: 100%;" tabindex="-1" id="Timezone" name="Timezone">
-                                <option value=""{{ (Auth::User()->Timezone == '' ? ' selected="selected"' : '') }}></option>
-                                @foreach ($timezones as $timezone)
-                                <option value="{{ $timezone->Value }}"{{ (Auth::User()->Timezone == $timezone->Value ? ' selected="selected"' : '') }}>{{ $timezone->Text }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                 </div>
             {{ Form::close() }}
             <div class="footer tar">
