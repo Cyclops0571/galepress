@@ -328,4 +328,16 @@ class Application extends Eloquent
         }
         return $categories;
     }
+
+    public function getExpireTimeMessage() {
+//        {{ $expApp->Name }} {{$diff->days}}
+        $date1 = new DateTime($this->ExpirationDate);
+        $date2 = new DateTime(date('Y-m-d'));
+        $diff = $date1->diff($date2);
+        if($diff->days == 0) {
+            return __('applicationlang.expiretime0days', array('ApplicationName' => $this->Name));
+        } else {
+            return __('applicationlang.expiretime15days', array('ApplicationName' => $this->Name, 'RemainingDays' => $diff->days));
+        }
+    }
 }

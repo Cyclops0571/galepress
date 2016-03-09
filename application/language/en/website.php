@@ -436,4 +436,5 @@ return array(
         'webinar_form_submit' => 'Register To Tutorial',
         'webinar_accept_email' => 'I accept to getting email from this Galepress Digital Publishing Company',
 
+    'categories' => 'Categories',
 );

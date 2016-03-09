@@ -35,6 +35,9 @@ class Test_Controller extends Base_Controller
         $gsCommand[] = '-r72x72';
         $gsCommand[] = "'/vagrant/public/files/customer_60/application_58/content_2007/file_2673/file.pdf'";
 
+        echo implode(" ", $gsCommand);
+        exit;
+
         shell_exec(implode(" ", $gsCommand));
 
 

@@ -208,7 +208,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="icon-search"></span></div>
-                                        <input type="text" class="form-control" placeholder="Ara...">
+                                        <input type="text" class="form-control" placeholder="{{__('website.search')}}">
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +217,7 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                                     <div class="extra-bar-icon"></div>
                                 </div>
                                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 title">
-                                    Kategoriler
+                                    <?php echo __('common.categories'); ?>
                                 </div>
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                     <div class="title-drop"></div>
