@@ -649,4 +649,6 @@ return array(
     'export_languages' => 'DBdeki dillerin ciktisini al',
 
     'categories' => 'Kategorien',
+    'links' => 'Links',
+
 );

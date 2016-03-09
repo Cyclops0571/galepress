@@ -429,12 +429,10 @@ return array(
 
 	'blog_news' => 'News and Activities',
 	'blog_tutorials' => 'Tutorials',
-    
-        'webinar_phone' => 'Phone',
-        'webinar_form_name_surname_placeholder' => 'Enter your name and surname...',
-        'webinar_form_phone_placeholder' => 'Enter your phone number...',
-        'webinar_form_submit' => 'Register To Tutorial',
-        'webinar_accept_email' => 'I accept to getting email from this Galepress Digital Publishing Company',
 
-    'categories' => 'Categories',
+    'webinar_phone' => 'Phone',
+    'webinar_form_name_surname_placeholder' => 'Enter your name and surname...',
+    'webinar_form_phone_placeholder' => 'Enter your phone number...',
+    'webinar_form_submit' => 'Register To Tutorial',
+    'webinar_accept_email' => 'I accept to getting email from this Galepress Digital Publishing Company',
 );

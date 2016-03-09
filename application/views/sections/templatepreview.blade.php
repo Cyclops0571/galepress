@@ -226,15 +226,19 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <ul style="list-style:none;">
-					<?php if (empty($categorySet)): ?>
-    					<li><span class="category-active"></span><span> Genel</span></li>
-					<?php else: ?>
-					    <?php $categoryClass = "category-active"; ?>
-					    <?php foreach ($categorySet as $category): ?>
-						<li><span class="<?php echo $categoryClass; ?>"></span><span>{{$category->Name;}}</span></li>
-						<?php $categoryClass = "category-disable"; ?>
-					    <?php endforeach; ?>
-					<?php endif; ?>
+                                        <?php if (empty($categorySet)): ?>
+                                        <li>
+                                            <span class="category-active"></span><span> <?php echo __('common.contents_password_list_general'); ?></span>
+                                        </li>
+                                        <?php else: ?>
+                                        <?php $categoryClass = "category-active"; ?>
+                                        <?php foreach ($categorySet as $category): ?>
+                                        <li>
+                                            <span class="<?php echo $categoryClass; ?>"></span><span>{{$category->Name;}}</span>
+                                        </li>
+                                        <?php $categoryClass = "category-disable"; ?>
+                                        <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>

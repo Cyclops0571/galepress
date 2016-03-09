@@ -645,4 +645,6 @@ return array(
     'export_languages' => 'Export Languages From Database',
 
     'categories' => 'Categories',
+    'links' => 'Links',
+
 );

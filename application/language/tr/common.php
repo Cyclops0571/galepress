@@ -637,5 +637,7 @@ return array(
     'management' => 'Server Yönetimi',
     'import_languages' => 'Dilleri DBye yazdir',
     'export_languages' => 'DBdeki dillerin ciktisini al',
+
     'categories' => 'Kategoriler',
+    'links' => 'Bağlantılar',
 );
