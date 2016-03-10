@@ -23,14 +23,14 @@ return array(
 								"Sie können auf den folgenden Link klicken, um Ihr Passwort zurückzusetzen. Wenn Sie einen solchen Antrag haben, ignorieren Sie bitte diese E-Mail, die Sie.\n\n".
 								":url\n\n".
 								"Grüße, \n".
-        ":Application",
+								"Galepress",
 	'login_resetpassword_email_subject' => 'Email zum Zurücksetzen  des Passworts für Galepress.com',
 	'login_resetpassword_email_message' => "".
 								"Ehrenwert :firstname :lastname, \n\n".
 								"Ihr Benutzername :username, \n\n" .
 								"Ihr Passwort :pass in der geänderten Fassung. \n\n".
 								"Grüße, \n".
-        ":Application",
+								"Galepress",
 	'login_emailsent' => 'Der Link zum Zurücksetzen  des Passworts wurde zu Ihrer Email-Adresse geschickt.',
 	'login_emailnotfound' => 'Keine gespeicherte Email-Adresse vorhanden!',
 	'login_ticketnotfound' => 'Keine Anforderung zum Zurücksetzen  des Passworts vorhanden!',
@@ -50,7 +50,7 @@ return array(
 	'menu_contents' => 'Inhalte',
 	'menu_orders' => 'Bestellungen',
 	'menu_users' => 'Benutzer',
-	'menu_mydetail' => 'Benutzerdaten',
+	'menu_mydetail' => 'Benutzer Informationen',
 	'menu_pushnotify' => 'Push Notification',
 	'menu_logout' => 'Ausloggen',
 	
@@ -95,7 +95,7 @@ return array(
 	
 	'file_notfound' => 'Keine Datei gefunden!',
 	
-	'detailpage_caption' => 'Eintragungsseite',
+	'detailpage_caption' => 'ANMELDE INFORMATIONEN',
 	'detailpage_save' => 'Speichern',
 	'detailpage_update' => 'Aktualisieren',
 	'detailpage_delete' => 'Löschen',
@@ -124,13 +124,13 @@ return array(
 	'users_list_column6' => 'ID',
 	'users_usertype' => 'Benutzerart',
 	'users_customer' => 'Kunde',
-	'users_firstname' => 'Vornamen',
-	'users_lastname' => 'Soyad',
-	'users_email' => 'Email',
+	'users_firstname' => 'Vorname:',
+	'users_lastname' => 'Nachname:',
+	'users_email' => 'E-Mail',
 	'users_username' => 'Benutzername',
 	'users_password' => 'Passwort',
-	'users_password2' => 'Passwort (erneut)',
-	'users_timezone' => 'Timezone',
+	'users_password2' => 'Passwort wiederholen',
+	'users_timezone' => 'Zeitzone',
     
     	'clients_caption' => 'Kullanıcılar',
 	'clients_caption_detail' => 'Kullanıcı Detayı',
@@ -192,14 +192,14 @@ return array(
 	'applications_list_column10' => 'ID',
 	'applications_list_column11' => 'Ist Abgelaufen?',
 
-	'application_settings_caption_detail' => 'Anwendungs Einstellungen',
-	'application_settings_caption_detail_big' => 'ANWENDUNGS EINSTELLUNGEN',
-	'application_settings_caption_template' => 'Vorlagen Einstellungen',
+	'application_settings_caption_detail' => 'App Einstellungen',
+	'application_settings_caption_detail_big' => 'APP EINSTELLUNGEN',
+	'application_settings_caption_template' => 'Template Einstellungen',
 	'application_settings_caption_banner' => 'Banner Einstellungen',
-    'application_settings_store_locator' => 'Store Locator',
+    'application_settings_store_locator' => 'Händer-Suche',
 	'application_settings_caption_tab' => 'Tab Einstellungen',
-	'application_settings_template_background_tip' => 'Er vertritt Anwendung \'s Hintergrundfarbe.',
-	'application_settings_template_foreground_tip' => 'Er vertritt Anwendung \'s Vordergrundfarbe.',
+	'application_settings_template_background_tip' => 'Bestimmt die Hintergrundfarbe in der App.',
+	'application_settings_template_foreground_tip' => 'Bestimmit die Vordergroundfarbe in der App.',
 	'application_settings_subscription' => 'Abonnement-Einstellungen',
     
 	'application_payment' => 'Anwendungs Zahlung',
@@ -213,7 +213,7 @@ return array(
 	'applications_applicationname' => 'Applikationsbezeichnung:',
 	'applications_detail' => 'Einzelheiten:',
 	'applications_price' => 'Price(For Mounth):',
-    'applications_in_app_purchase_active' => 'In App Purchase Active:',
+    'applications_in_app_purchase_active' => 'In App Purchase Aktive:',
     'applications_flipboard_active' => 'Flipboard Aktive:',
 	'applications_bundle' => 'IOS Bundle:',
 	'applications_startdate' => 'Anfangsdatum (TT.MM.JJJJ):',
@@ -225,7 +225,6 @@ return array(
 	'applications_applicationstatus' => 'Applikationsstatus:',
 	'applications_iosversion' => 'IOS Version:',
 	'applications_ioslink' => 'IOS Link:',
-	'applications_subscription_password' => 'IOS Subscription Password:',
 	'applications_androidversion' => 'Android Version:',
 	'applications_androidlink' => 'Android Link:',
 	'applications_package' => 'Package:',
@@ -237,11 +236,11 @@ return array(
 	'contents_caption_detail' => 'Inhaltseinzelheiten',
 	'contents_list_customer' => 'Kunde',
 	'contents_list_application' => 'Applikation',
-	'contents_list_content_name' => 'Inhaltsbezeichnung',
+	'contents_list_content_name' => 'Content Bezeichnung',
 	'contents_list_content_category' => 'Kategorie',
 	'contents_list_content_publishdate' => 'Veröffentlichungsdatum',
-	'contents_list_content_unpublishdate' => 'Unpublishing Date',
-	'contents_list_content_bloke' => 'Blockiert',
+	'contents_list_content_unpublishdate' => 'Ende der Veröffentlichung',
+	'contents_list_content_bloke' => 'Gesperrt',
 	'contents_list_status' => 'zustand',
 	'contents_list_content_id' => 'ID',
 	'contents_list_blocked1' => 'Ja',
@@ -573,13 +572,13 @@ return array(
 
 	'template_chooser_title' => 'Ändern Anwendung Theme',
 	'template_chooser_background' => 'Hintergrund',
-	'template_chooser_foreground' => 'Schriftarten, Buttons',
+	'template_chooser_foreground' => 'Schrift-, Schaltflächenfarben',
 	'template_chooser_backcolor1' => 'Dunkelheit',
-	'template_chooser_backcolor2' => 'Licht',
+	'template_chooser_backcolor2' => 'Hell',
 	'template_chooser_frontcolor1' => 'Grün',
 	'template_chooser_frontcolor2' => 'Gelb',
 	'template_chooser_frontcolor3' => 'Blau',
-	'template_chooser_frontcolor4' => 'Rote',
+	'template_chooser_frontcolor4' => 'Rot',
 	'template_chooser_frontcolor5' => 'Orange',
 	'template_chooser_frontcolor6' => 'Grau',
 	'template_chooser_close' => 'In der Nähe',
@@ -617,20 +616,20 @@ return array(
 	'banners_list_status1' => 'Publish',
 	'banners_list_status0' => 'Not Publicationed',
 	
-	'tabs_url' => 'Mobile kompatible Web-Link',
-	'tabs_title' => 'Tab Title',
-	'tabs_inhouse_url' => 'Tab Feature',
+	'tabs_url' => 'Mobile compatible web link',
+		'tabs_title' => 'Tab-Titel',
+	'tabs_inhouse_url' => 'Tab-Funktion',
 	'tabs_icon' => 'Symbol',
-	'tabs_active' => 'Tab Aktiv',
+	'tabs_active' => 'Tab aktivieren',
 	
-	'tabs_info_url' => 'Sie können einen Link zur mobilen kompatibel eingeben.',
-	'tabs_info_inhouse_url' => 'Sie können Galepress Feature auswählen (Storelocator vs..)',
-	'tabs_info_icon' => 'Icon wird in Anwendung angezeigt werden',
-    'tabs_info_active' => 'Only active tabs will be displayed in the mobile application',
+	'tabs_info_url' => 'Geben Sie die Internet-Adresse ein.',
+	'tabs_info_inhouse_url' => 'Wählen Sie eine aus den vorgegebenen Funktionen aus.',
+	'tabs_info_icon' => 'Das Symbol wird in der App angezeigt.',
+    'tabs_info_active' => 'Nur aktivierte Tabs werden in der App angezeigt.',
 	'tabs_dont_use_feature' => 'Dont verwenden Sie diese Funktion',
 	
 	'tabs_tab_status' => 'Tab Status',
-	'tabs_info_tab_status' => 'Tabs erscheint in meiner Anwendung. Sie können bis zu 3 Registerkarten auf Ihre Anwendung hinzufügen.',
+	'tabs_info_tab_status' => 'Tabs erscheinen in der App. Es können maximal 2 Tabs verwendet werden.',
 
 	'tabs_warning_url' => 'eine gültige Internet-Adresse nicht eingetragen ist.',
 	
@@ -639,7 +638,7 @@ return array(
 
 	'client_list' => 'Mobile Users',
 	
-	'sort' => 'Sortieren',
+	'sort' => 'Reihenfolge',
 	'active' => 'Activ',
 	'passive' => 'Passiv',
 	'price' => 'Kurs',
@@ -647,8 +646,4 @@ return array(
     'management' => 'Server Management',
     'import_languages' => 'Dilleri DBye yazdir',
     'export_languages' => 'DBdeki dillerin ciktisini al',
-
-    'categories' => 'Kategorien',
-    'links' => 'Links',
-
 );
