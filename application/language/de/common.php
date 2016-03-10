@@ -23,14 +23,14 @@ return array(
 								"Sie können auf den folgenden Link klicken, um Ihr Passwort zurückzusetzen. Wenn Sie einen solchen Antrag haben, ignorieren Sie bitte diese E-Mail, die Sie.\n\n".
 								":url\n\n".
 								"Grüße, \n".
-								"Galepress",
+        ":Application",
 	'login_resetpassword_email_subject' => 'Email zum Zurücksetzen  des Passworts für Galepress.com',
 	'login_resetpassword_email_message' => "".
 								"Ehrenwert :firstname :lastname, \n\n".
 								"Ihr Benutzername :username, \n\n" .
 								"Ihr Passwort :pass in der geänderten Fassung. \n\n".
 								"Grüße, \n".
-								"Galepress",
+        ":Application",
 	'login_emailsent' => 'Der Link zum Zurücksetzen  des Passworts wurde zu Ihrer Email-Adresse geschickt.',
 	'login_emailnotfound' => 'Keine gespeicherte Email-Adresse vorhanden!',
 	'login_ticketnotfound' => 'Keine Anforderung zum Zurücksetzen  des Passworts vorhanden!',

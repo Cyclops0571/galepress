@@ -104,8 +104,8 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 
     'address' => 'Adresse:',
     'address_istanbul' => 'Alemdağ Cad. No: 109, 34692 Üsküdar / İstanbul / Türkiye<br />',
-    'address_usa' => 'North Tustin/ CA  <br />',
-    'address_usa2' => 'Denver / CO  <br />',
+    'address_usa' => 'Tustin, CA / USA<br />',
+    'address_usa2' => 'Denver, CO / USA<br />',
     'phone' => 'Telefon:',
     'fax' => 'Fax:',
 

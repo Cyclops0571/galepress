@@ -22,7 +22,7 @@ return array(
         "Ihr Benutzername :username, \n\n" .
         "Ihr Passwort :pass. \n\n".
         " \n".
-        "MMD-Team",
+        ":Application",
 
     'login_email_subject' => 'Email zum Zurücksetzen des Passworts für :Application App',
     'login_email_message' => "".
@@ -30,7 +30,7 @@ return array(
         "Klicken Sie auf folgenden Link, um Ihr :Application App Passwort zurückzusetzen. Wenn Sie Ihr Passwort nicht zurücksetzen möchten, ignorieren Sie bitte diese E-mail.\n".
         ":url\n\n".
         " \n".
-        "Ihr MMD Team",
+        "Ihr :Application",
     'login_resetpassword_email_subject' => ':Application App Passwort zurücksetzen E-mail',
     'login_resetpassword_email_message' => "".
         "Sehr geehrte(r)  :firstname :lastname, \n\n".
@@ -38,7 +38,7 @@ return array(
         "Ihr Benutzername :username, \n\n" .
         "Ihr Passwort :pass \n\n".
         " \n".
-        "Ihr MMD Team",
+        "Ihr :Application",
     'selected_content_name' => 'Ausgewählte Inhalte',
     'selectable_content_name' => 'Wählbare Inhalt',
     'week_subscription' => 'Wochen-Abo',
