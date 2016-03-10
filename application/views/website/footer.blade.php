@@ -11,6 +11,7 @@ switch(Config::get('application.language')) {
 	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepresstr/';
     break;
     default :
+        $socialMediaLinks['fa-linkedin'] = 'https://www.linkedin.com/company/gale-press-usa?trk=biz-brand-tree-co-name';
 	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepressusa/';
 	$socialMediaLinks['fa-twitter'] = 'https://twitter.com/galepressusa';
 	$socialMediaLinks['fa-facebook'] = 'https://www.facebook.com/GalePress-USA-1530611593895881/?ref=hl';
