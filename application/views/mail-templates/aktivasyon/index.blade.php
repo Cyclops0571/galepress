@@ -263,7 +263,7 @@
                             <tr>
                                 <td align="left"
                                     style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
-                                    <?php echo __('mail.tryitactivationmail', array('USERNAME' => $name, SURNAME => $surname)); ?>
+                                    <?php echo __('maillang.tryitactivationmail', array('USERNAME' => $name, SURNAME => $surname)); ?>
                                 </td>
                             </tr>
                             <!--end content-->
@@ -278,7 +278,7 @@
                                         <tr>
                                             <td class="textbutton" height="45"
                                                 style="font-family: Verdana, Arial, sans-serif; color:#FFFFFF; font-size:14px; line-height: 28px;padding-left: 15px;padding-right: 15px;">
-                                                <a href="{{$url}}">Üyeliğinizi aktive edin!</a>
+                                                <a href="{{$url}}"><?php echo __('maillang.activatesubscription'); ?></a>
                                             </td>
                                         </tr>
                                     </table>

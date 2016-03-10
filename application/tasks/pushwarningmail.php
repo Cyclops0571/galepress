@@ -6,8 +6,8 @@ class PushWarningMail_Task
     public function run()
     {
         try {
-            $apps = DB::table('Application')
-                ->where(function ($query) {
+            /** @var Application[] $apps */
+            $apps = Application::where(function ($query) {
                     $query->where('ExpirationDate', '=', DB::raw('CURDATE()+15')); //son 15
                     $query->or_where('ExpirationDate', '=', DB::raw('CURDATE()+7')); //son hafta
                     $query->or_where('ExpirationDate', '=', DB::raw('CURDATE()')); //son gun
@@ -27,18 +27,21 @@ class PushWarningMail_Task
                     ->where('StatusID', '=', 1)
                     ->get();
                 foreach ($users as $user) {
-                    //$toEmail = "info@galepress.com"; //$user->Email;
                     $toEmail = array(
                         "info@galepress.com",
                         $user->Email
                     );
-                    $subject = "Uygulamanızın Geçerlilik Süresi Sonlanmak Üzere"; //__('common.task_subject');
-                    //$subject = __('common.task_subject');
-                    //$subject = str_replace(':pass', $diff->days, $subject);
+                    $subject = __('maillang.subscription_expire_notice_subject', array(), $app->ApplicationLanguage);
+                    $replacements = array(
+                        'FIRSTNAME' => $user->FirstName,
+                        'LASTNAME' => $user->LastName,
+                        'APPLICATIONNAME' => $app->Name,
+                        'REMAINIGDAYS' => $diff->days
+                    );
                     if ($diff->days > 0) {
-                        $msg = "Sayın " . $user->FirstName . " " . $user->LastName . ",\n" . $app->Name . " uygulamanızın geçerlilik süresinin sonlanmasına " . $diff->days . " gün kaldı.\n\nSaygılarımızla,\nGalePress";
+                        $msg = __('maillang.subscription_expire_notice_15days_body', $replacements, $app->ApplicationLanguage);
                     } else {
-                        $msg = "Sayın " . $user->FirstName . " " . $user->LastName . ",\n" . $app->Name . " uygulamanızın geçerlilik süresi bugün sonlanacaktır.\n\nSaygılarımızla,\nGalePress";
+                        $msg = __('maillang.subscription_expire_notice_0days_body', $replacements, $app->ApplicationLanguage);
                     }
 
                     Bundle::start('messages');
