@@ -646,4 +646,7 @@ return array(
     'management' => 'Server Management',
     'import_languages' => 'Dilleri DBye yazdir',
     'export_languages' => 'DBdeki dillerin ciktisini al',
+
+    'categories' => 'Kategorien',
+    'links' => 'Links',
 );
