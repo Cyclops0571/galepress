@@ -242,7 +242,7 @@ class Client extends Eloquent
     public function CheckReceiptCLI()
     {
         /** @var ClientReceipt[] $clientReceipts */
-        $clientReceipts = ClientReceipt::where('clientID', 'clientID')
+        $clientReceipts = ClientReceipt::where('clientID', '=', $this->ClientID)
             ->where_in('SubscriptionType', array('iospublisher#subscriptionPurchase', 'androidpublisher#subscriptionPurchase'))
             ->get();
 
