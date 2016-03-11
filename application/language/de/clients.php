@@ -16,28 +16,28 @@ return array(
     'personol_info' => 'Persönliche Informationen',
     'reset_password' => 'Passwort zurücksetzen',
     'registered_email_subject' => ':App-Registrierung',
-    'registered_email_message' => "".
-        "Sehr geehrte(r) :firstname :lastname, \n\n".
+    'registered_email_message' => "" .
+        "Sehr geehrte(r) :firstname :lastname, \n\n" .
         "Ihre App Anmeldung ist abgeschlossen.\n" .
         "Ihr Benutzername :username, \n\n" .
-        "Ihr Passwort :pass. \n\n".
-        " \n".
+        "Ihr Passwort :pass. \n\n" .
+        " \n" .
         ":Application",
 
     'login_email_subject' => 'Email zum Zurücksetzen des Passworts für :Application App',
-    'login_email_message' => "".
+    'login_email_message' => "" .
         "Ihr Benutzername :username, \n\n" .
-        "Klicken Sie auf folgenden Link, um Ihr :Application App Passwort zurückzusetzen. Wenn Sie Ihr Passwort nicht zurücksetzen möchten, ignorieren Sie bitte diese E-mail.\n".
-        ":url\n\n".
-        " \n".
+        "Klicken Sie auf folgenden Link, um Ihr :Application App Passwort zurückzusetzen. Wenn Sie Ihr Passwort nicht zurücksetzen möchten, ignorieren Sie bitte diese E-mail.\n" .
+        ":url\n\n" .
+        " \n" .
         "Ihr :Application",
     'login_resetpassword_email_subject' => ':Application App Passwort zurücksetzen E-mail',
-    'login_resetpassword_email_message' => "".
-        "Sehr geehrte(r)  :firstname :lastname, \n\n".
+    'login_resetpassword_email_message' => "" .
+        "Sehr geehrte(r)  :firstname :lastname, \n\n" .
         "Ihr :Application App Passwort wurde geändert. \n" .
         "Ihr Benutzername :username, \n\n" .
-        "Ihr Passwort :pass \n\n".
-        " \n".
+        "Ihr Passwort :pass \n\n" .
+        " \n" .
         "Ihr :Application",
     'selected_content_name' => 'Ausgewählte Inhalte',
     'selectable_content_name' => 'Wählbare Inhalt',

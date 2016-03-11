@@ -16,30 +16,27 @@ return array(
     'personol_info' => 'Personal Informations',
     'reset_password' => 'Password Reset Page',
     'registered_email_subject' => ':Application Application Registration',
-    'registered_email_message' => "".
-							    "Esteemed :firstname :lastname, \n\n".
-							    "Your registration for :Application Application succesfully completed.\n".
-							    "Your Username is :username, \n" .
-							    "Your Password is :pass. \n\n".
-							    "Regards, \n".
-        ":Application",
+    'registered_email_message' => ":firstname :lastname, \n\n" .
+        "Your registration for :Application Application succesfully completed.\n" .
+        "Your Username is :username, \n" .
+        "Your Password is :pass. \n\n" .
+        "Regards, \n" .
+        "GalePress USA",
 
     'login_email_subject' => ':Application Application password resetting e-mail',
-    'login_email_message' => "".
-							    "Esteemed :firstname :lastname, \n\n".
-							    "Your Username is :username, \n\n" .
-							    "Click under the link for reset your :Application applicaton password. If you don't want it, please don't regard this e-mail.\n\n".
-							    ":url\n\n".
-							    "Regards, \n".
-        ":Application",
+    'login_email_message' => ":firstname :lastname, \n\n" .
+        "Your :Application application Username is :username, \n" .
+        "Click under the link for reset your :Application applicaton password. If you don't want it, please don't regard this e-mail.\n\n" .
+        ":url\n\n" .
+        "Regards, \n" .
+        "GalePress USA",
     'login_resetpassword_email_subject' => ':Application Application password resetting e-mail',
-    'login_resetpassword_email_message' => "".
-							    "Esteemed :firstname :lastname, \n\n".
-							    "Your :Application Application password changed \n" .
-							    "Your Username is :username, \n" .
-							    "Password is changed as :pass. \n\n".
-							    "Regards, \n".
-        ":Application",
+    'login_resetpassword_email_message' => ":firstname :lastname, \n\n" .
+        "Your :Application Application password changed \n" .
+        "Your Username is :username, \n" .
+        "Password is changed as :pass. \n\n" .
+        "Regards, \n" .
+        "GalePress USA",
     'selected_content_name' => 'Selected Contents',
     'selectable_content_name' => 'Selectable Contents',
     'week_subscription' => 'Weekly Subscription',

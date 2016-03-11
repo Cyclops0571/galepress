@@ -17,20 +17,21 @@ return array(
 	'login_error' => 'You have entered an incorrect user information!',
 	'login_error_expiration' => 'The period of validity of your application terminated!',
 	'login_email_subject' => 'Galepress.com password resetting e-mail',
-	'login_email_message' => "".
-								"Esteemed :firstname :lastname, \n\n".
-								"Your Username is :username, \n\n" .
-								"Click under the link for reset your password. If you don't want it, please don't regard this e-mail.\n\n".
-								":url\n\n".
-								"Regards, \n".
-                                ":Application",
-	'login_resetpassword_email_subject' => 'Galepress.com password resetting e-mail',
-	'login_resetpassword_email_message' => "".
-								"Esteemed :firstname :lastname, \n\n".
-								"Your Username is :username, \n\n" .
-								"Password is changed as :pass. \n\n".
-								"Regards, \n".
-        ":Application",
+    'login_email_message' => ":firstname :lastname, \n\n"
+        . "Your :Application application Username is :username, \n"
+        . "Click under the link for reset your password.\n"
+        . ":url\n\n"
+        . "Click this link to bypass Password Reset and login to GalePress:\n"
+        . "http://www.galepress.com/usa/\n\n"
+        . "Regards, \n"
+        . "GalePress",
+    'login_resetpassword_email_subject' => 'Galepress.com password resetting e-mail',
+    'login_resetpassword_email_message' => "" .
+        ":firstname :lastname, \n\n" .
+        "Your :Application application Username is :username, \n\n" .
+        "Password is changed as :pass. \n\n" .
+        "Regards, \n" .
+        "GalePress",
 	'login_emailsent' => 'Password reset link has been sent to your e-mail.',
 	'login_emailnotfound' => "A registered E-mail adress hasn't been found!",
 	'login_ticketnotfound' => 'Password reset demand is not found!',
