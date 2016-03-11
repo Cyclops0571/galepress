@@ -62,7 +62,7 @@ table[class="fade"] { background: none !important; }
 		<tr>
 			<td align="center">
 				<table align="center" class="table-inner" width="600" border="0" cellspacing="0" cellpadding="0">
-					
+
 					<tr>
 						<td height="10"></td>
 					</tr>
@@ -98,7 +98,7 @@ table[class="fade"] { background: none !important; }
 					<tr>
 						<td height="20"></td>
 					</tr>
-					
+
 					<tr>
 						<td height="35"></td>
 					</tr>
@@ -108,13 +108,17 @@ table[class="fade"] { background: none !important; }
 
 								<!--title-->
 								<tr>
-									<td align="center" style="font-family: 'Century Gothic', Arial, sans-serif; color:#414a51; font-size:24px;font-weight: bold; letter-spacing: 2px;">Hoşgeldiniz</td>
+                                    <td align="center"
+                                        style="font-family: 'Century Gothic', Arial, sans-serif; color:#414a51; font-size:24px;font-weight: bold; letter-spacing: 2px;">
+                                        <?php echo __('common.welcome');?>
+                                    </td>
 								</tr>
 								<!--end title-->
 								<tr>
 									<td height="20"></td>
 								</tr>
-								<tr>
+
+                                <tr>
 									<td align="center">
 										<table bgcolor="#1f86c0" style="border-radius:5px;" width="50" border="0" align="center" cellpadding="0" cellspacing="0">
 											<tr>
@@ -123,41 +127,43 @@ table[class="fade"] { background: none !important; }
 										</table>
 									</td>
 								</tr>
-								<tr>
+
+                                <tr>
 									<td height="15"></td>
 								</tr>
 								<!--content-->
 								<tr>
 									<td align="left" style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
-										Merhaba {{$name}}&nbsp;{{$surname}}, 
-                                        </br></br>
-                                        Aramıza hoşgeldin! Artık bir Galepress kullanıcısısın. Bu mail’ın sonunda bulacağın linke tıklayıp kullanıcı adı ve şifren ile giriş yapabilirsin. 
-Herhangi bir kodlama bilgisine sahip olmadan kendi tasarladığın uygulamayı yayınlayabilir, bu uygulamaya sana öğreteceğimiz metodları kullanarak interaktif öğeler ile süsleyebilirsin.</br></br>
-                                        Ardından yaptığın düzenlemeleri canlıya aldığında görebilmek için App Store’dan GP Viewer’ı indirip mobil cihazına kurman gerekiyor. GP Viewer sadece deneme sürümü sırasında yaptığın değişiklikleri izlemen için kurulmuş bir altyapıdır.</br></br>
-                                        İlk tasarımını yayınlamak için ihtiyacın olan bütün bilgileri Galepress’in sana hazırladığı “İlk tasarımımı yayınlıyorum” videosundan edinebilirsin.</br></br>
-                                        <img style="display:block; line-height:0px; font-size:0px; border:0px;" class="img1" src="http://www.galepress.com/img/mail-templates/hosgeldiniz/img.png" alt="img" width="500" height="250" /></br></br>
-                                        
-                                        Daha fazlasını öğrenmek istiyorum diyorsan aşağıdaki linke tıklayarak Galepress’in bütün eğitim videolarına ulaşabilirsin. Şimdi çalışma vakti! Bir sonraki mail’ımızda sana aylık webinar’ımız ile ilgili bilgileri vereceğiz. Webinar’a katılarak aklına gelen bütün soruların cevaplarını bulabileceksin. Görüşmek üzere.
-                                        
+                                        <?php echo __('maillang.subscription_welcome_part1', array("NAME" => $name, "SURNAME" => $surname)); ?>
+                                        <a href="https://www.youtube.com/channel/UCIJuAlRjVwV6OdCK9uzoN5w">
+                                            <img style="display:block; line-height:0px; font-size:0px; border:0px;"
+                                                 class="img1"
+                                                 src="http://www.galepress.com/img/mail-templates/hosgeldiniz/img.png"
+                                                 alt="img" width="500" height="250"/></br></br>
+                                        </a>
+
+                                        <?php echo __('maillang.subscription_welcome_part2', array("NAME" => $name, "SURNAME" => $surname)); ?>
 									</td>
 								</tr>
 								<!--end content-->
-                                
-								<tr>
-									<td height="25"></td>
-								</tr>
-								<!--button-->
-								<tr>
-									<td align="center">
-										<table class="table-full" bgcolor="#1f86c0" style="border-radius:4px;" border="0" cellspacing="0" cellpadding="0">
-											<tr>
-												<td class="textbutton" height="45" style="font-family: Verdana, Arial, sans-serif; color:#FFFFFF; font-size:14px; line-height: 28px;padding-left: 15px;padding-right: 15px;">
-													<a href="{{$url}}">Blog</a>
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
+
+                                <tr>
+                                    <td height="25"></td>
+                                </tr>
+                                <!--button-->
+                                <tr>
+                                    <td align="center">
+                                        <table class="table-full" bgcolor="#1f86c0" style="border-radius:4px;"
+                                               border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="textbutton" height="45"
+                                                    style="font-family: Verdana, Arial, sans-serif; color:#FFFFFF; font-size:14px; line-height: 28px;padding-left: 15px;padding-right: 15px;">
+                                                    <a href="{{$url}}"><?php echo __('website.menu_login');?></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
 								<!--end button-->
 							</table>
 						</td>
@@ -176,19 +182,19 @@ Herhangi bir kodlama bilgisine sahip olmadan kendi tasarladığın uygulamayı y
 								<!--social-->
 								<tr>
 									<td align="center" style="line-height: 0px;">
-										<a href="#">
+                                        <a href="<?php echo __('common.fa-facebook'); ?>">
 											<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/hosgeldiniz/facebook.png" width="5" height="11"  alt="img"/>
 										</a>
 									</td>
 									<td width="10"></td>
 									<td align="center" style="line-height: 0px;">
-										<a href="#">
+                                        <a href="<?php echo __('common.fa-twitter'); ?>">
 											<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/hosgeldiniz/twitter.png" width="14" height="11"  alt="img"/>
 										</a>
 									</td>
 									<td width="10"></td>
 									<td align="center" style="line-height: 0px;">
-										<a href="#">
+                                        <a href="<?php echo __('common.fa-linkedin'); ?>">
 											<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/hosgeldiniz/linkedin.png" width="11" height="11"  alt="img"/>
 										</a>
 									</td>

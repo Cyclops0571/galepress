@@ -21,4 +21,14 @@ return array(
         . "If you would like to continue use of GalePress, please click the link to register "
         . "and pay for your subscription. http://www.galepress.com/usa/shop\n\n"
         . "Sincerely \nGalePress",
+    'subscription_welcome_part1' => "Dear :NAME&nbsp;:SURNAME,</br></br>"
+        . "Welcome to Galepress Digital Publishing Platform. At the end of this email you will find the login button"
+        . "where you can enter to the system with your password and username."
+        . "You can publish your own designed application without any coding knowledge."
+        . "This application can be decorated with interactive elements with the knowledge we will teach you.</br></br>"
+        . "After publishing your application, to view your application you need to download GP Viewer from App Store or Google Play Store and install to your cell phone"
+        . "GP Viewer application is only for previewing the changes that you made from control panel.</br></br>",
+    'subscription_welcome_part2' => "Now you can watch the tutorial videos that is made for you.</br></br>"
+        . "Sincerely </br>GalePress",
+
 );

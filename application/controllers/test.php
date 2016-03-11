@@ -19,6 +19,12 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        $mailData = array(
+            'name' => 'Serdar',
+            'surname' => 'Saygili',
+            'url' => Config::get("custom.url") . '/' . Config::get('application.language') . '/blog',
+        );
+        return View::make('mail-templates.hosgeldiniz.index')->with($mailData)->render();
 
         $gsCommand = array();
         $gsCommand[] = 'gs';

@@ -6,9 +6,9 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
 <div class="page-navigation-panel"
      style="background: url('/img/background/bt_cubs.png') left top repeat;background-color: rgba(29,29,29,1);">
     @if(Str::length($title) < 17)
-        <div class="name">{{ __('common.dashboard_welcome') }}, {{ $title }}</div>
+        <div class="name">{{ __('common.welcome') }}, {{ $title }}</div>
     @else
-        <div class="name">{{ __('common.dashboard_welcome') }},<br/> {{ $title }}</div>
+        <div class="name">{{ __('common.welcome') }},<br/> {{ $title }}</div>
     @endif
     <div class="control"><a href="#" class="psn-control"><span class="icon-reorder" style="color:#1681bf;"></span></a>
     </div>

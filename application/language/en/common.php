@@ -495,7 +495,7 @@ return array(
 	
 	'dashboard_title' => 'CONTENT DOWNLOAD',
 	'dashboard_total' => 'Total',
-	'dashboard_welcome' => 'Welcome',
+	'welcome' => 'Welcome',
 	'dashboard_lastlogin_time' => 'Previous Login Time:',
 	'dashboard_app_count' => 'Application Count',
 	'dashboard_content_count' => 'Content Count',
@@ -648,4 +648,9 @@ return array(
 
     'categories' => 'Categories',
     'links' => 'Links',
+
+    'fa-linkedin' => 'https://www.linkedin.com/company/gale-press-usa?trk=biz-brand-tree-co-name',
+    'fa-instagram' => 'https://www.instagram.com/galepressusa/',
+    'fa-twitter' => 'https://twitter.com/galepressusa',
+    'fa-facebook' => 'https://www.facebook.com/GalePress-USA-1530611593895881/?ref=hl',
 );

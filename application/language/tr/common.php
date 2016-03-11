@@ -485,7 +485,7 @@ return array(
 
     'dashboard_title' => 'İÇERİK İNDİRİLME',
     'dashboard_total' => 'Toplam',
-    'dashboard_welcome' => 'Hoşgeldiniz',
+    'welcome' => 'Hoşgeldiniz',
     'dashboard_lastlogin_time' => 'Önceki Giriş Saati:',
     'dashboard_app_count' => 'Uygulama Adeti',
     'dashboard_content_count' => 'İçerik Adeti',
@@ -638,4 +638,9 @@ return array(
 
     'categories' => 'Kategoriler',
     'links' => 'Bağlantılar',
+
+    'fa-linkedin' => 'https://www.linkedin.com/company/galepress',
+    'fa-instagram' => 'https://twitter.com/GalePress',
+    'fa-twitter' => 'https://www.facebook.com/pages/Galepress/267455253374597?fref=ts',
+    'fa-facebook' => 'https://www.instagram.com/galepresstr/',
 );

@@ -3,20 +3,10 @@
 <!-- Tickets: Live Chat Bar Finish -->
 <?php
 $socialMediaLinks = array();
-switch(Config::get('application.language')) {
-    case 'tr':
-	$socialMediaLinks['fa-linkedin'] = 'https://www.linkedin.com/company/galepress';
-	$socialMediaLinks['fa-twitter'] = 'https://twitter.com/GalePress';
-	$socialMediaLinks['fa-facebook'] = 'https://www.facebook.com/pages/Galepress/267455253374597?fref=ts';
-	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepresstr/';
-    break;
-    default :
-        $socialMediaLinks['fa-linkedin'] = 'https://www.linkedin.com/company/gale-press-usa?trk=biz-brand-tree-co-name';
-	$socialMediaLinks['fa-instagram'] = 'https://www.instagram.com/galepressusa/';
-	$socialMediaLinks['fa-twitter'] = 'https://twitter.com/galepressusa';
-	$socialMediaLinks['fa-facebook'] = 'https://www.facebook.com/GalePress-USA-1530611593895881/?ref=hl';
-	
-}
+$socialMediaLinks['fa-linkedin'] = __('common.fa-linkedin');
+$socialMediaLinks['fa-twitter'] = __('common.fa-twitter');
+$socialMediaLinks['fa-facebook'] = __('common.fa-facebook');
+$socialMediaLinks['fa-instagram'] = __('common.fa-instagram');
 ?>
 <footer id="footer">
     <div class="inner sep-bottom-sm">

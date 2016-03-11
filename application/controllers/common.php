@@ -443,7 +443,7 @@ class Common_Controller extends Base_Controller
                 $mailData = array(
                     'name' => $s->FirstName,
                     'surname' => $s->LastName,
-                    'url' => Config::get("custom.url") . '/' . Config::get('application.language') . '/blog',
+                    'url' => Config::get("custom.url") . '/' . Config::get('application.language') . __('route.login'),
                 );
                 $msg = View::make('mail-templates.hosgeldiniz.index')->with($mailData)->render();
                 $mailStatus = Common::sendHtmlEmail($s->Email, $s->FirstName . ' ' . $s->LastName, $subject, $msg);
