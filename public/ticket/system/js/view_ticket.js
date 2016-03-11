@@ -23,7 +23,6 @@ $(document).ready(function () {
 	
 	$('body').on('click', '.insert_canned_response', function(e){
 		e.preventDefault();
-				
 		$('#ticket_reply_description').redactor('insert.html', $(this).data('canned_response'));
 		
 	});

@@ -23,5 +23,9 @@ if (!defined(__NAMESPACE__ . '\SEC_DB_LOADED')) {
             'site_id' => 1,
             'salt' => 'F4ECz6v9oCWOYeVAD705RDGgoXqgmFmg'
         );
+    if(isset($_SERVER['HTTP_HOST'])) {
+        $config['database_username'] = 'root';
+        $config['database_password'] = '';
+    }
 }
 ?>

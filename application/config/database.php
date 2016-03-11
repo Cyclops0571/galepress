@@ -10,9 +10,9 @@ if(Laravel\Request::env() == ENV_LOCAL) {
 	$dbName = "db";
 	$dbUserName = "root";
 	$dbPassword = "";
-        $dbNameTicket = 'galepress_ticket';
-        $dbUsernameTicket = 'root';
-        $dbPasswordTicket = '';
+    $dbNameTicket = 'galepress_ticket';
+    $dbUsernameTicket = 'root';
+    $dbPasswordTicket = '';
 }
 
 
