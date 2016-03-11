@@ -22,14 +22,14 @@ define(__NAMESPACE__ . '\SYSTEM', ROOT . '/system');
 if (isset($_COOKIE['ticket_user_lang'])) {
     switch ($_COOKIE['ticket_user_lang']) {
         case 'tr':
-            define(__CURRENT_LANGUAGE__, 'tr');
+            define('__CURRENT_LANGUAGE__', 'tr');
             break;
         default:
-            define(__CURRENT_LANGUAGE__, 'en');
+            define('__CURRENT_LANGUAGE__', 'en');
             break;
     }
 } else {
-    define(__CURRENT_LANGUAGE__, 'en');
+    define('__CURRENT_LANGUAGE__', 'en');
 }
 /**
  * Loader does all the important startup stuff.
