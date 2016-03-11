@@ -516,19 +516,19 @@ td[class="contact-button"] { border-top: 0px !important; }
 											<!-- social-->
 											<tr>
 												<td align="center" style="line-height: 0px;">
-													<a href="#">
+                                                    <a href="<?php echo __('common.fa-facebook'); ?>">
 														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/facebook.png" width="5" height="11" alt="img" />
 													</a>
 												</td>
 												<td width="10"></td>
 												<td align="center" style="line-height: 0px;">
-													<a href="#">
+                                                    <a href="<?php echo __('common.fa-twitter'); ?>">
 														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/twitter.png" width="14" height="11" alt="img" />
 													</a>
 												</td>
 												<td width="10"></td>
 												<td align="center" style="line-height: 0px;">
-													<a href="#">
+                                                    <a href="<?php echo __('common.fa-linkedin'); ?>">
 														<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://www.galepress.com/img/mail-templates/newfeature/linkedin.png" width="11" height="11" alt="img" />
 													</a>
 												</td>

@@ -141,7 +141,6 @@ table[class="fade"] { background: none !important; }
                                                  src="http://www.galepress.com/img/mail-templates/hosgeldiniz/img.png"
                                                  alt="img" width="500" height="250"/></br></br>
                                         </a>
-
                                         <?php echo __('maillang.subscription_welcome_part2', array("NAME" => $name, "SURNAME" => $surname)); ?>
 									</td>
 								</tr>
