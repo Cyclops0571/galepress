@@ -290,15 +290,15 @@ feature you want to add.',
     'home_interactive_editor' => 'INTERACTIVE EDITOR',
     'home_interactive_editor_word1' => 'INTERACTIVE',
     'home_interactive_editor_word2' => 'EDITOR',
-    'home_interactive_editor_text' => 'Add photo galleries, audio files, videos and animations to enrich your written material and help your
-content cut through the digital noise by becoming interactive.',
+    'home_interactive_editor_text' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
+feature you want to add.',
     'home_interactive_compenents' => 'INTERACTIVE COMPONENTS',
     'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations to enrich your written material and let them cut through the digital noise.',
     'home_push_notification' => 'PUSH NOTIFICATION',
     'home_push_notification_text' => 'No more unnoticed or ignored messages! With push notifications your customers can learn of your
 new initiatives or developments immediately. Directly reach your most interested parties and achieve
 better results with short term campaigns.',
-    'home_reports' => 'REPORTING',
+    'home_reports' => 'REPORTING/ANALYTICS',
     'home_reports_text' => 'Are you frustrated with the inability to monitor and analyze your digital efforts? The sophisticated
 reporting interface provided by GalePress can help inform and shape your marketing with cutting
 edge analytics. Location based data, time spent on content and myriad other variables are available
@@ -321,7 +321,7 @@ opportunities worldwide!',
     'footer_detaysoft_more' => 'More info...',
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Contact',
-    'footer_copyright' => 'Copyright 2013 © Her hakkı Detay Danışmalık A.Ş. All rights reserved.',
+    'footer_copyright' => 'Copyright 2013 © Detay Danışmalık A.Ş. All rights reserved.',
     'footer_livechat' => 'Live Support',
 
     'howitworks_title' => 'Easily 3 steps, The chance to be published in 155 countries !',
@@ -445,7 +445,7 @@ options, saving both parties valuable time.
 Give your clients the option to complete a “cyber 360* tour” of their future home, which saves time
 and shortens the buying cycle.</p>',
 
-    'pharmaceutical_title' => 'PHARMACEUTICAL',
+    'pharmaceutical_title' => 'B2B',
     'pharmaceutical_subtitle' => 'No more borders between the field and the headquarters.',
     'pharmaceutical_clause1' => 'Streamline your product presentations by giving your sales team a mobile tool on the go!',
     'pharmaceutical_clause2' => 'Go mobile in order to cut back on print overhead and streamline delivery times.',
