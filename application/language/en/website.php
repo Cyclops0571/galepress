@@ -271,7 +271,7 @@ us today and use GalePress to bring the mobile world to your fingertips.',
     'home_sectors_hr' => 'Human Resources',
     'home_sectors_education' => 'Education',
     'home_sectors_realestate' => 'Real Estate',
-    'home_sectors_pharmaceutical' => 'Pharmaceutical',
+    'home_sectors_pharmaceutical' => 'B2B',
     'home_sectors_retail' => 'Retail',
 
     'home_stars_carrefour' => 'Acquiring GalePress wasn’t a cost for us; it turned out to be a method to increase our revenues.',
@@ -363,7 +363,7 @@ knowledge.',
     'showcase_filters_hr' => 'Human Resources',
     'showcase_filters_education' => 'Education',
     'showcase_filters_realestate' => 'Real Estate',
-    'showcase_filters_medicine' => 'Pharmaceutical',
+    'showcase_filters_medicine' => 'B2B',
     'showcase_filters_digitalpublishing' => 'Digital Publishing',
 
     'contact_form_name' => 'Name',
@@ -384,10 +384,12 @@ knowledge.',
 
     'dp_title' => 'DIGITAL PUBLISHING',
     'dp_subtitle' => 'No more printing costs.',
-    'dp_clause1' => 'Publish your periodic brochures as online catalogues. Never worry about changing prices, models or product details again as you can update them as you see fit.',
-    'dp_clause2' => 'Supercharge your sales with the addition of the sales tool inside your online catalogue application where you can present your products to great detail.',
-    'dp_clause3' => 'Increase your revenue with in app sales.',
-    'dp_clause4' => 'Place interactive commercials within your periodicals to stand out among ad publishers.',
+    'dp_clause1' => 'Publish your printed materials frequently and update easily through the GalePress homepage.',
+    'dp_clause2' => 'By presenting your catalog and products in great detail, you provide an easy mobile purchasing
+platform for your customers and a new sales channel for your organization.',
+    'dp_clause3' => 'Leverage the GalePress platform by creating a new revenue stream for your advertisers with exciting
+and interactive features',
+    'dp_clause4' => 'Save money and help the environment by eliminating expensive printing costs.',
     'dp_description' => 'Print material is going fully digital. Bridge the digital gap and deliver your brochures, catalogs and
 periodicals to your readers via your own branded mobile application. Present your products to the
 tiniest detail on your mobile app and use the online sales tool to boost revenue. Adding interactive
@@ -396,41 +398,85 @@ ad revenue.',
 
     'hr_title' => 'HUMAN RESOURCES',
     'hr_subtitle' => 'Expand your talent pool.',
-    'hr_clause1' => 'Use mobile technology to boost your internal communication and be in touch with your employees any time.',
-    'hr_clause2' => 'Publish a periodical newsletter in application form in order to create a bond between your employees and your company and to boost internal communication.',
-    'hr_clause3' => 'Instead of using third party sites, use your own mobile platform for the recruitment process. Put your vacant position announcements and check the application through mobile and enter the digital recruitment world.',
-    'hr_clause4' => 'Move your departmental performance reports to the digital environment.',
-    'hr_description' => 'All business processes are now on mobile so why not move HR to mobile as well? Instead of using third parties to put your vacant position announcements and to check the applications, develop your own mobile application and move the recruitment process to digital. With your mobile app, this process would get faster and you can check applications immediately. Upload your business performance reports to your mobile app and let the managers access them easily. Moreover, you can publish periodical newsletters through your mobile app for your employees. Create a difference from your competitors and offer an incentive to your employees to be committed to your company.',
+    'hr_clause1' => 'Separate your business from its competitors and create a culture of communication and cohesion.',
+    'hr_clause2' => 'Use mobile technology to boost internal communications and keep your employees within your
+digital reach.',
+    'hr_clause3' => 'Publish an internal digital newsletter on your mobile app and watch your employees grow as a team.',
+    'hr_clause4' => 'Leverage GalePress to bridge the digital gap and bring efficiency and cohesion to your HR
+department.',
+    'hr_description' => 'Essentially all business processes have migrated to mobile, so why not HR as well? Instead of paying
+third parties to post and process your job applicants, develop your own mobile application and move
+the recruitment process to your mobile app. Impress applicants while making the process more
+efficient for both parties.
+Also share performance reports with management and publish company wide newsletters to keep
+everyone connected and informed. Send them directly to employees using the “push notification”
+feature.',
 
     'education_title' => 'EDUCATION',
     'education_subtitle' => 'Constant education with mobile.',
-    'education_clause1' => 'Publish your class presentations and announcements through a mobile application which allows students to reach via their mobile devices. Move the education process to digital.',
-    'education_clause2' => 'Create interactive content which fits to the digital age and increase your students’ attention span.',
-    'education_clause3' => 'Increase the effectiveness of off-campus studying success! Let your students be able to reach class materials anywhere, anytime.',
-    'education_clause4' => 'Update your class and educational materials easily and this way your curriculum can keep up with the requirements of the digital age.',
-    'education_description' => 'Why not make your students use their smartphones and tablet devices for their education? You can increase your students’ attention span by creating interactive content which fits the digital age. Now students can access class materials anywhere, anytime and can study even better at home. As you can update application contents such as announcements and class notes anytime, your students are going to be notified of them immediately with the push notification feature.',
+    'education_clause1' => 'Make the classroom digital and allow each classroom or department their own mobile application to
+publish assignments, lesson plans and more.',
+    'education_clause2' => 'Create interactive content to engage students in the digital language they already speak.',
+    'education_clause3' => 'Increase the effectiveness of “home work” assignments by making them accessible via the app and
+sharing them with parents in a simple and effective way.',
+    'education_clause4' => 'Maintain a digital curriculum and give your students the tools to thrive in the rapidly developing
+digital/mobile world!',
+    'education_description' => 'Why not invite your students to use their smartphones and tablets for their education? Bridge the
+digital gap and transform a distraction into a learning device. Hold your students’ attention by
+creating interactive content which fits the digital age. Now students can access class materials and
+assignments anywhere, anytime, from their mobile device. Send announcements via “push
+notification” to parents, students and faculty with ease. With GalePress on your team, everyone stays
+up to date.',
 
     'realestate_title' => 'REAL ESTATE',
     'realestate_subtitle' => 'One step ahead of the competition.',
     'realestate_clause1' => 'Move the marketing of your estates and residences to mobile.',
     'realestate_clause2' => 'Share the details of your construction projects through your own mobile application.',
     'realestate_clause3' => 'Now you can share the details of your ready to sale residence projects digitally and offer your customers the chance to do a cyber tour. With the 360° tour feature boost your sales and marketing channels.',
-    'realestate_description' => 'It is inevitable to ignore the rise of the real estate sector. Wouldn’t you want to create a difference in this sector which has a high-competition? Now you can market your ready to sell estates and residences through mobile devices. Share the details of your projects on your application and let the customers do a 360° tour which can help them save them meanwhile you boost your sales and marketing channels. Take a step to the world of remarketing after the field activities.',
+    'realestate_description' => 'It is impossible to ignore the rise of the real estate sector. It is equally impossible to ignore
+the rise of the digital revolution in real estate. Now you can affordably market your real estate listings
+to the mobile audience. Having a mobile application is standard practice for this industry and if you
+have not made the jump, GalePress is your best opportunity. Share all the details of your listings and
+let the shopper tour via the 360* feature. Save your clients time and give them a product they will
+easily navigate through. Allow them to sort the properties they like the most and only visit viable
+options, saving both parties valuable time.
+<p>Save printing costs and move the marketing of your properties to the mobile world. </p>
+<p>Share the details and progress of your new development projects in real time.
+Give your clients the option to complete a “cyber 360* tour” of their future home, which saves time
+and shortens the buying cycle.</p>',
 
     'pharmaceutical_title' => 'PHARMACEUTICAL',
     'pharmaceutical_subtitle' => 'No more borders between the field and the headquarters.',
-    'pharmaceutical_clause1' => 'Streamline your product presentation process. Let your pharmaceutical sales representatives do their presentations on mobile.',
-    'pharmaceutical_clause2' => 'Go mobile in order to cut back on the sales and delivery times. Empower your clients by letting them place orders through the app that allows access to the details of your product.',
-    'pharmaceutical_clause3' => 'Supercharge your sales potential with the online sales tool that you can add to your digital catalogue.',
-    'pharmaceutical_description' => 'Your sales representatives can unleash the power of mobile applications when doing their presentations to healthcare personnel. Convert your brochures, order forms to digital and let healthcare personnel examine your portfolio to its full extent and order through your mobile system. Cut back on brochure print costs and delivery times. With the cutting edge data collecting mechanism, easily get information such as where your content is viewed from, how many times it was seen and other relevant data. Supercharge your field presence with the power of data collected through your mobile app.',
+    'pharmaceutical_clause1' => 'Streamline your product presentations by giving your sales team a mobile tool on the go!',
+    'pharmaceutical_clause2' => 'Go mobile in order to cut back on print overhead and streamline delivery times.',
+    'pharmaceutical_clause3' => 'Empower your clients by letting them access the details of your product on their mobile device at a
+time most convenient for them.',
+    'pharmaceutical_clause4' => 'Supercharge your sales potential with the online sales tool built into your mobile catalog.',
+    'pharmaceutical_description' => 'Your sales representatives can unleash the power of mobile apps when doing their presentations.
+Easily link the mobile device to a larger screen for quick and simple sharing. Convert your brochures
+and order forms to digital and let clients examine your portfolio and purchase your products in a
+manner most convenient for them. Cut back on print costs and streamline order taking with the same
+tool, GalePress. With our cutting edge analytics available, your marketing team can easily gather data
+that was impossible to discern with traditional print methods. You will know who looked at what,
+where they were when they were looking, how long they looked and more. Supercharge your field
+presence with the power of data collected through your mobile app.',
 
     'retail_title' => 'RETAIL',
     'retail_subtitle' => 'Every second counts.',
-    'retail_clause1' => 'Publish your periodical brochures in the digital platform as online catalogues.',
-    'retail_clause2' => 'With the aid of e-commerce and online ordering applications, connect with your customers through mobile platform and stand out amongst your competitors.',
-    'retail_clause3' => ' Let your branch communication get stronger with location based tools.',
+    'retail_clause1' => 'Publish all your print advertising campaigns with your mobile app',
+    'retail_clause2' => 'Bridge the digital gap and let your customers shop your products from the comfort of their own
+device at their leisure',
+    'retail_clause3' => 'Geographically target customers with “push notification” feature for short term strategies',
     'retail_clause4' => 'Decrease your printed material costs.',
-    'retail_description' => 'We live in an era in which time is extremely valuable to all of us. Every second is important both to the employees and the users. Offer them a mobile application which can help them save time and let them reach you and your products any time they desire. Furthermore, decrease your printed material costs by switching to digital. Through the mobile platform, you can offer e-commerce and online ordering options which can help you communicate with your customers and stand out amongst your competitors. With location based tools your branches can directly communicate with clients.',
+    'retail_description' => 'Time has never been more valuable. Every second is vital both to our employees and our customers.
+GalePress offers a mobile solution which can save you time while allowing your customers the
+ultimate shopping convenience. They have access to what you offer at any time, on any device.
+Through our mobile platform, you can offer e‐commerce and online ordering options to better serve
+your customers. GalePress offers the opportunity to stand out from your competitors, or at least to
+stay competitive in the rapidly digitized mobile world.</br>
+In addition to saving money on printing catalogues and brochures, you can market to and target
+customers geographically using our location based services.</br>
+Go mobile! Don’t let your competitors beat you to the future of digital marketing.',
 
     'tryit_form_title' => 'Create Application',
     'tryit_form_subtitle' => 'It Is Free!',
@@ -481,4 +527,5 @@ ad revenue.',
     'webinar_form_phone_placeholder' => 'Enter your phone number...',
     'webinar_form_submit' => 'Register To Tutorial',
     'webinar_accept_email' => 'I accept to getting email from this Galepress Digital Publishing Company',
+    'medikalpnglocation' => '/website/img/sectors/new/b2b.png'
 );
