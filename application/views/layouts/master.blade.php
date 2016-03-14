@@ -48,6 +48,7 @@
                         <div class="form-row">
                             <div class="col-md-12">
 				<?php foreach(Laravel\Config::get('application.languages') as $lang): ?>
+                                <?php if($lang != 'tr'):?>
                                 <div class="checkbox">
                                     <label>
 					<div class="radio">
@@ -58,6 +59,7 @@
 					<img src="/img/flags/<?php echo $lang;?>_icon.png" />
 				    </label>
                                 </div>
+                                <?php endif; ?>
 				<?php endforeach; ?>
                             </div>
                         </div>

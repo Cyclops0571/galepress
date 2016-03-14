@@ -12,6 +12,27 @@ return array(
 	'description' => 'GalePress - Dijital Yayıncılık Platformu',
 
 	'page_home' => 'Anasayfa',
+    'about_us' => 'Hakkımızda',
+    'contanct' => 'İletişim',
+    'galepressphone' => '+90 (216) 443 13 29',
+    'contract' => 'Sözleşme ve Şartlar',
+    'read' => 'OKU',
+    'monthly' => 'Aylık',
+    'buy' => 'Satın Al',
+    'price_change' => 'Fiyatlar mobil uygulamaya göre değişmektedir',
+    'shop_properties' => '<li><b>IOS, Android</b> mobil uygulama</li>
+					<li><b>6 Adet</b> Pdf yükleme</li>
+					<li><b>1000</b> Aylık İndirme Sayısı</li>
+					<li><b>100 MB</b> Pdf Boyutu</li>',
+    'packeges' => 'Paketler',
+    'interactive_packeges' => 'İnteraktif Paketler',
+    'galepress_packeges' => 'GalePress Paketler',
+    'shop_description' => '<p class="lead">
+				PDF üzerine video, ses, 3D resim galeri, 360˚, animasyon, harita gibi <span class="alternative-font">interaktifliği</span> sağlayan medyalar eklenebilir.
+			    </p>
+			    <p class="lead">
+				Bu paket yanlızca <b>bireysel anlaşma yapmış olan müşterilerimiz</b> için geçerlidir.
+			    </p>',
 	'page_galepress' => 'GalePress',
 	'page_products' => 'Ürünler',
 	'page_advantages' => 'Avantajlar',

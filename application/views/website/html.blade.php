@@ -137,7 +137,7 @@
 	    if(SelectedLanguage === Languages[i]) {
 		$('.dropdown.languageChange > a').attr('href','/' + Languages[i]);
 		$('.dropdown.languageChange > a img').attr('src','/website/img/flags/' + Languages[i] + 'Flag.png');
-	    } else {
+        } else if (Languages[i] != 'tr') {
 		$('.dropdown.languageChange ul li:nth-child(' + j + ') a').attr('href','/' + Languages[i]);
 		$('.dropdown.languageChange ul li:nth-child(' + j + ') a img').attr('src','/website/img/flags/' + Languages[i] + 'Flag.png');
 		j++;

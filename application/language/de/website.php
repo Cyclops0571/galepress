@@ -12,6 +12,27 @@ return array(
     'description' => 'GalePress - Digitale Publikationsplattform',
 
     'page_home' => 'Startseite',
+    'about_us' => 'About Us',
+    'contanct' => 'Contact',
+    'galepressphone' => '+1-949-836-7342',
+    'contract' => 'Agreement Contract',
+    'read' => 'READ',
+    'monthly' => 'Monthly',
+    'buy' => 'Buy',
+    'price_change' => 'Prices changes according to mobile application',
+    'shop_properties' => '<li><b>IOS, Android</b> mobile application</li>
+					<li><b>6 times</b> Pdf upload</li>
+					<li><b>1000 times</b> Month Download</li>
+					<li><b>100 MB</b> Pdf Size</li>',
+    'packeges' => 'Packages',
+    'interactive_packeges' => 'Interactive Packeges',
+    'galepress_packeges' => 'GalePress Packeges',
+    'shop_description' => '<p class="lead">
+				You can add 3D image galeri, video, audio, animation, map for making  PDF <span class="alternative-font">interactive</span>.
+			    </p>
+			    <p class="lead">
+				This package is only valid for <b>personal customers</b>.
+			    </p>',
     'page_galepress' => 'GalePress',
     'page_products' => 'Produkte',
     'page_advantages' => 'Vorteile',
