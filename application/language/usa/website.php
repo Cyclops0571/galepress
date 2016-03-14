@@ -261,7 +261,11 @@ return array(
 
     'home_video_title' => 'The Mobile world is now at your fingertips!',
 	'home_intro_title' => 'One Platform To Rule Them All',
-	'home_intro_text' => 'The solution that your company needs might be increasing customer interaction, boost sales activity, hiring more qualified personnel or decreasing printing costs. Now you can have all these solutions and many more with the agile structure of GalePress. Thanks to the software renting model, you won’t need any personnel, an office or consulting for your mobile solutions department. Mobile world is now at your fingertips.',
+    'home_intro_text' => 'The solution that your organization needs may be increasing customer interaction and loyalty,
+boosting sales activity, hiring additional personnel or decreasing printing costs. Now you can bridge
+the digital gap and realize these solutions with the agile structure of GalePress. Thanks to the
+GalePress software leasing model, you won’t need an internal mobile solutions department. Contact
+us today and use GalePress to bring the mobile world to your fingertips.',
 	'home_sectors_title' => 'For Every Sector',
 	'home_sectors_digitalpublishing' => 'Digital Publishing',
 	'home_sectors_hr' => 'Human Resources',
@@ -280,8 +284,9 @@ return array(
 	'home_stars_pleon_subtitle' => 'Process Management',
 	'home_stars_mopas' => 'We’re glad that we are using a platform which has the same principle we have; supplying the best quality for the best price. Thanks to GalePress, we’ve created a win-win situation where we can notify our customers on spot.',
 	'home_stars_mopas_subtitle' => 'Insert Distribution',
-    
-	'home_interactive_editor_description' => 'Watch your visuals come to life with animated content.',
+
+    'home_interactive_editor_description' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
+feature you want to add.',
 	'home_interactive_editor' => 'INTERACTIVE EDITOR',
 	'home_interactive_editor_word1' => 'INTERACTIVE',
 	'home_interactive_editor_word2' => 'EDITOR',
@@ -310,11 +315,15 @@ return array(
 	'howitworks_title' => 'Easily 3 steps, The chance to be published in 155 countries !',
 
 	'howitworks_upload' => 'Upload',
-	'howitworks_upload_text' => 'Upload your pdf content into the system with a single click, using “Galepress Document Management System”',
+    'howitworks_upload_text' => 'Upload your pdf documents into the system with a single click, using the Gale Press <b>C</b>ontent
+<b>M</b>anagement <b>S</b>ystem, or “ CMS .”',
 	'howitworks_makeinteractive' => 'Use Interactive Tools',
-	'howitworks_makeinteractive_text' => 'Insert interactive features (Audio, Video, Text, Image, 360, Map etc.) into your uploaded content in order to make them come to life.',
+    'howitworks_makeinteractive_text' => 'Insert interactive features like...Audio, front or background Video, Scrolling Text, Revolving Images,
+360 viewer, Maps and more! Watch your content come to life with a combination of interactive tools
+from GalePress.',
 	'howitworks_publish' => 'Publish',
-	'howitworks_publish_text' => 'Publish your content for the entire world to see with ease and without any coding knowledge.',
+    'howitworks_publish_text' => 'Close the digital gap and easily publish your content to the entire world without requiring coding
+knowledge.',
 	'howitworks_follow' => 'Follow',
 	'howitworks_comp_video' => 'Video',
 	'howitworks_comp_video_text' => 'Highlight your message by adding videos.',
