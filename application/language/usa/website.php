@@ -283,7 +283,7 @@ us today and use GalePress to bring the mobile world to your fingertips.',
 	'home_stars_pleon' => 'When our customers started finding the information they’ve been looking for in our app they stopped calling us on the phone. With GalePress we have started saving the only thing you can’t replace when you lose it: Time.',
 	'home_stars_pleon_subtitle' => 'Process Management',
 	'home_stars_mopas' => 'We’re glad that we are using a platform which has the same principle we have; supplying the best quality for the best price. Thanks to GalePress, we’ve created a win-win situation where we can notify our customers on spot.',
-	'home_stars_mopas_subtitle' => 'Insert Distribution',
+    'home_stars_mopas_subtitle' => 'Insert Distribution ',
 
     'home_interactive_editor_description' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
 feature you want to add.',
