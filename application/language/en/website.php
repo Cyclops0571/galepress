@@ -283,26 +283,38 @@ us today and use GalePress to bring the mobile world to your fingertips.',
     'home_stars_pleon' => 'When our customers started finding the information they’ve been looking for in our app they stopped calling us on the phone. With GalePress we have started saving the only thing you can’t replace when you lose it: Time.',
     'home_stars_pleon_subtitle' => 'Process Management',
     'home_stars_mopas' => 'We’re glad that we are using a platform which has the same principle we have; supplying the best quality for the best price. Thanks to GalePress, we’ve created a win-win situation where we can notify our customers on spot.',
-    'home_stars_mopas_subtitle' => 'Insert Distribution ',
+    'home_stars_mopas_subtitle' => 'Insert Distribution',
 
     'home_interactive_editor_description' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
 feature you want to add.',
     'home_interactive_editor' => 'INTERACTIVE EDITOR',
     'home_interactive_editor_word1' => 'INTERACTIVE',
     'home_interactive_editor_word2' => 'EDITOR',
-    'home_interactive_editor_text' => 'Adding interactive content to your documents have never been so easy! You can drag and drop the feature you want to add to your documents.',
+    'home_interactive_editor_text' => 'Add photo galleries, audio files, videos and animations to enrich your written material and help your
+content cut through the digital noise by becoming interactive.',
     'home_interactive_compenents' => 'INTERACTIVE COMPONENTS',
     'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations to enrich your written material and let them cut through the digital noise.',
     'home_push_notification' => 'PUSH NOTIFICATION',
-    'home_push_notification_text' => 'No more unnoticed messages! With push notifications your customers can know about your new campaigns and developments right away. Directly reach out to your customers and have campaigns with better results.',
+    'home_push_notification_text' => 'No more unnoticed or ignored messages! With push notifications your customers can learn of your
+new initiatives or developments immediately. Directly reach your most interested parties and achieve
+better results with short term campaigns.',
     'home_reports' => 'REPORTING',
-    'home_reports_text' => 'Are you complaining about not being able to analyze your digital communication outcomes? The sophisticated reporting interface of GalePress can help you boost your marketing with cutting edge location based data, time spent on content and numerous other variables.',
+    'home_reports_text' => 'Are you frustrated with the inability to monitor and analyze your digital efforts? The sophisticated
+reporting interface provided by GalePress can help inform and shape your marketing with cutting
+edge analytics. Location based data, time spent on content and myriad other variables are available
+for your constant evaluation and critiquing.',
     'home_security' => 'SECURITY',
-    'home_security_text' => 'Do you want to transfer confidential data through your mobile app? You don’t have to worry about security anymore. With cloud servers and encryption feature you can share confidential data with your business partners.',
+    'home_security_text' => 'Do you have confidential and sensitive data to transfer through your mobile app? Don’t worry about
+security with GalePress. Utilizing cloud servers and encryption features, safely share sensitive data
+with your business partners in the mobile arena.',
     'home_speed' => 'SPEED',
-    'home_speed_text' => 'Don’t let updating your content slow you down. Your strategic updates can keep up with the digital age’s speed with the speed oriented system of GalePress.',
+    'home_speed_text' => 'Don’t let updating your content slow you down. With the speed oriented system of GalePress, your
+strategic updates will be at the pace of our digital age.',
     'home_speed_theworldisyours' => 'THE WORLD IS YOURS',
-    'home_speed_theworldisyours_text' => 'With GalePress you can enter new app markets and remove the borders from your competition environment. With new markets you can gain new opportunities and sales.',
+    'home_speed_theworldisyours_text' => 'With GalePress you can enter the app market and remove the borders from your competitive
+environment. Expand and deepen the conversation with your customer base by speaking to them in
+the mobile language they already understand. When ready, add new app markets and expand your
+opportunities worldwide!',
 
     'footer_detaysoft' => 'Detaysoft',
     'footer_detaysoft_text' => 'Detaysoft has provided customer-satisfaction focused and privileged services to over 200 global sector-leading organizations for more than 14 years.',
@@ -376,7 +388,11 @@ knowledge.',
     'dp_clause2' => 'Supercharge your sales with the addition of the sales tool inside your online catalogue application where you can present your products to great detail.',
     'dp_clause3' => 'Increase your revenue with in app sales.',
     'dp_clause4' => 'Place interactive commercials within your periodicals to stand out among ad publishers.',
-    'dp_description' => 'Print material is going full digital. Deliver your content including brochures, catalogue and periodicals to your readers through your branded mobile app. Present your products to the tiniest detail on your mobile app and use the online sales tool to boost your revenues. Adding interactive material to your in-magazine commercials will make you stand out among your competition. To top everything off, relieve yourself of your print material costs.',
+    'dp_description' => 'Print material is going fully digital. Bridge the digital gap and deliver your brochures, catalogs and
+periodicals to your readers via your own branded mobile application. Present your products to the
+tiniest detail on your mobile app and use the online sales tool to boost revenue. Adding interactive
+material to your in]magazine commercials with help separate you from the competition and increase
+ad revenue.',
 
     'hr_title' => 'HUMAN RESOURCES',
     'hr_subtitle' => 'Expand your talent pool.',
