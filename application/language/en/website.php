@@ -259,7 +259,7 @@ return array(
 	'menu_login' => 'LOGIN',
 	'menu_explore' => 'Explore',
 
-	'home_video_title' => 'Mobile world is now at your fingertips!',	
+    'home_video_title' => 'The Mobile world is now at your fingertips!',
 	'home_intro_title' => 'One Platform To Rule Them All',
 	'home_intro_text' => 'The solution that your company needs might be increasing customer interaction, boost sales activity, hiring more qualified personnel or decreasing printing costs. Now you can have all these solutions and many more with the agile structure of GalePress. Thanks to the software renting model, you won’t need any personnel, an office or consulting for your mobile solutions department. Mobile world is now at your fingertips.',
 	'home_sectors_title' => 'For Every Sector',
