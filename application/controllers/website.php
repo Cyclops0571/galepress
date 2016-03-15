@@ -40,6 +40,11 @@ class Website_Controller extends Base_Controller
         return View::make('website.pages.contact');
     }
 
+    public function post_contactform()
+    {
+        return View::make('website.contactform');
+    }
+
     public function get_sitemap()
     {
         return View::make('website.pages.sitemap');

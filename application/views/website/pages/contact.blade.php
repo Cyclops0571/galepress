@@ -20,7 +20,8 @@
                   <p><i class="fa fa-exclamation-triangle fa-2x"></i></p>
                   <p>{{__('website.contact_form_required_message')}}</p>
                 </div>
-                <form id="contactForm" action="/website/php/contact.php" method="post" class="form-gray-fields validate">
+                  <form id="contactForm" action="<?php echo URL::to('contactmail'); ?>" method="post"
+                        class="form-gray-fields validate">
                   <div class="row">
                     <div class="col-md-6 sep-top-xs">
                       <div class="form-group">

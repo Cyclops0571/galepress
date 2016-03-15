@@ -8,6 +8,11 @@ $iyzicoApiID = 'im015089500879819fdc991436189064';
 $iyzicoSecret = 'im015536200eaf0002c8d01436189064';
 $paymentAmount = 100;
 $csrf = "|csrf";
+
+if (\Laravel\Config::get('application.language') == 'usa') {
+    $mailEmail = 'usa@galepress.com';
+}
+
 if (Laravel\Request::env() == ENV_TEST) {
     $iyzicoApiID = 'im095675100e6b443315841436188424';
     $iyzicoSecret = 'im09762570052d771a4b2d1436188424';
@@ -27,6 +32,7 @@ if (Laravel\Request::env() == ENV_TEST) {
     $mailEmail = 'info@galetest.com';
     $paymentAmount = 1;
 }
+
 
 //
 //$paymentEnv = 'live';
