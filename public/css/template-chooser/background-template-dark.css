@@ -12,21 +12,7 @@
 .templateScreen .footer{
     background: rgba(30,30,32,0.9) !important;
 }
-/*************************************************/
-.templateReadScreen{
-    background: #1E1E20 !important;
-    border-bottom: 10px solid #1E1E20 !important;
-}
-/********************************************************/
-.templateContentScreen .header{
-    background: rgba(30,30,32,0.9) !important;
-}
-.templateContentScreen .footer{
-    background: rgba(30,30,32,0.9) !important;
-}
-.templateContentScreen .thumbnails{
-    background: rgba(30,30,32,0.9) !important;
-}
+
 /********************************************************/
 .templateExtrasScreen .container .form-control::-webkit-input-placeholder {
    color: #333333 !important;

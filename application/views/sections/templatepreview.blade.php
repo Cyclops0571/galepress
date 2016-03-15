@@ -267,68 +267,6 @@ $defaultSliderImage = '/img/bannerSlider/defaultPreview.jpg';
                             </div>
                         </div>
                     </div>
-                    <div class="templateReadScreen hide" style="opacity:0;">
-                        <div class="loading"></div>
-                        <div id="loading-text"><i class="icon-remove"></i> %82</div>
-                        <div class="container">
-                            <div class="form-row" style="height:55px;">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:-8px;">
-                                    <p style="overflow:hidden; height:13px;">{{$templateResults[0]->Detail}}</p>
-                                    <p style="overflow:hidden; margin-bottom:7px; font-family: Avenir Medium !important;">{{$templateResults[0]->Name}}</p>
-                                    <p style="overflow:hidden; width:90%; height:13px;">{{$templateResults[0]->MonthlyName}}</p>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-row">
-                                        <div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-                                            <input type="button" class="btn" id="templateBtnUpdate" value="Güncelle" style="cursor:default; margin-top:-15px;">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-                                            <input type="button" class="btn" id="templateBtnRead" value="Oku" style="margin-left:-6px;">
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content-buttons">
-                                            <input type="button" class="btn" id="templateBtnDelete" value="Sil" style="cursor:default;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <img src="" width="100%"> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="templateContentScreen hide" style="opacity:0;">
-                        <div class="header clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-                                <div class="header-table-of-contents"></div>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center app-name">{{$templateResults[0]->ApplicationName}}</div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right">
-                                <div class="header-share"></div>
-                            </div>
-                        </div>
-                        <div class="content-page">
-                            <img src="/img/template-chooser/content-pages/file_1.jpg" width="100%">
-                        </div>
-                        <div class="thumbnails">
-                            <div class="triangle"><span>283</span></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_1.jpg"></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_2.jpg"></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_3.jpg"></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_4.jpg"></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_5.jpg"></div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/img/template-chooser/content-pages/file_6.jpg"></div>
-                        </div>
-                        <div class="footer text-center">
-                            <div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-home footerBtnHome"></div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-library"></div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-download"></div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-info"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
