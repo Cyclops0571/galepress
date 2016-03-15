@@ -9,8 +9,8 @@ return array(
 	*/
 	'x' => 'X:',
 	'y' => 'Y:',
-	'w' => 'Gen:',
-	'h' => 'Yük:',
+    'w' => 'Width:',
+    'h' => 'Height:',
 
     'import' => 'IMPORT TO PDF',
 	'help' => 'HELP',
