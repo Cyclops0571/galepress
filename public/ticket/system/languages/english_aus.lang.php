@@ -510,7 +510,7 @@ class lang {
 		//3.5+
 		$language_array['Reset']												= 'Reset';
 		$language_array['Merge']												= 'Merge';
-	
+        $language_array['route_home'] = '/usa/home';
 		
 		$this->lang_array 			= $language_array;
 		

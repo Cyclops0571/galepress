@@ -554,7 +554,8 @@ class lang {
 		$language_array['Finished'] = 'Bitiş';
 		$language_array['Messages'] = 'Mesajlar';
 		$language_array['Chat Ended'] = 'Sohbet Bitti';
-		
+        $language_array['route_home'] = '/tr/anasayfa';
+
 
 		
 		

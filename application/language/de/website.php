@@ -503,5 +503,4 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'webinar_form_phone_placeholder' => 'Geben Sie Ihre Telefonnummer ein...',
     'webinar_form_submit' => 'Für Schulung anmelden',
     'webinar_accept_email' => 'Ich bin mit der Zusendung von Informationen über Ihre Dienstleistungen einverstanden. Diese Einwilligung kann ich jederzeit schriftlich z.B. per E-Mail an <marketing@mmd.biz> mit Wirkung für die Zukunft widerrufen.',
-    'medikalpnglocation' => '/website/img/sectors/new/medikal.png'
 );

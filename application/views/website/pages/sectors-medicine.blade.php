@@ -26,7 +26,7 @@
                                  style="visibility: visible; -webkit-animation-delay: 0.5s;">
                                 <div class="icon-box icon-horizontal icon-md">
                                     <div class="icon-content img-circle">
-                                        <img src="<?php echo __('website.medikalpnglocation'); ?>"
+                                        <img src="<?php echo __('filelang.medikal-or-b2b'); ?>"
                                              data-wow-delay="1.5s"
                                              class="wow fadeInUp">
                                     </div>

@@ -527,5 +527,4 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'webinar_form_phone_placeholder' => 'Enter your phone number...',
     'webinar_form_submit' => 'Register To Tutorial',
     'webinar_accept_email' => 'I accept to getting email from this Galepress Digital Publishing Company',
-    'medikalpnglocation' => '/website/img/sectors/new/b2b.png'
 );

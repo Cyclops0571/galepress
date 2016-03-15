@@ -33,9 +33,9 @@ $components = DB::table('Component')
 
         <div class="component-info">
             @foreach($components as $component)
-                <div id="info-{{ $component->Class }}" class="invisible">
+                <div id="info-{{ $component->Class }}" class="invisible"
+                     style='background: url("<?php echo __('filelang.drag-drop');?>") no-repeat center 80px #212121;'>
                     <h3><span></span>{{ __('interactivity.'.$component->Class . '_name'); }}</h3>
-
                     <p>{{ __('interactivity.'.$component->Class.'_component_description') }}</p>
                 </div>
             @endforeach

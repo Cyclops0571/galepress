@@ -455,6 +455,4 @@ return array(
     'webinar_form_phone_placeholder' => 'Telefon numaranızı girin...',
     'webinar_form_submit' => 'Eğitime Kaydol',
     'webinar_accept_email' => 'Bana tanıtım emaili göndermenizi kabul ediyorum.',
-
-    'medikalpnglocation' => '/website/img/sectors/new/medikal.png'
 );

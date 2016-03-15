@@ -3778,7 +3778,6 @@ ul.components li.active > a span {
   top: 0;
   left: 0;
   height: auto;
-  background: url("/img/drag-drop.png") no-repeat center 80px #212121;
   padding-bottom: 700px;
   z-index: 10;
   padding-left: 16px;

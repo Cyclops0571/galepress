@@ -254,7 +254,7 @@ return array(
     'contents_category' => 'Kategorie:',
     'contents_monthlyname' => 'Zahl:',
     'contents_publishdate' => 'Veröffentlichungsdatum:',
-    'contents_unpublishdate' => 'Unpublishing Date:',
+    'contents_unpublishdate' => 'Expiration Date:',
     'contents_file' => 'Datei:',
     'contents_file_select' => 'PDF wählen ...',
     'contents_file_interactive_label' => 'Interaktiver Gestalter',

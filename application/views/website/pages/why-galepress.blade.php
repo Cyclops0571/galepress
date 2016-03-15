@@ -26,7 +26,7 @@
                   </div>
                   <div data-wow-delay="0.5s" class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
                       <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_medicine')}}">
-                          <img src="<?php echo __('website.medikalpnglocation'); ?>" data-wow-delay="1.5s"
+                          <img src="<?php echo __('filelang.medikal-or-b2b'); ?>" data-wow-delay="1.5s"
                                class="wow fadeInUp">
                       </a>
                     <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_medicine')}}"><p data-wow-delay="1.5s" class="lead x2 wow fadeInLeft">{{__('website.home_sectors_pharmaceutical')}}</p></a>

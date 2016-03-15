@@ -139,7 +139,8 @@ if ($auth->logged_in() && $config->get('database_version') > 9) {
 	<?php } ?>
 	
 		<div class="navbar-header">
-		    <a style="padding: 0 0 0 0" class="navbar-brand" href="http://<?php echo $config->get('domain'); ?>/tr/anasayfa">
+            <a style="padding: 0 0 0 0" class="navbar-brand"
+               href="http://<?php echo $config->get('domain') . $language->get('route_home'); ?>">
 			<img style="height: 50px"
 			alt="<?php echo safe_output($config->get('name')); ?>"
 			src='<?php echo $config->get('address'); ?>/user/themes/<?php echo safe_output(CURRENT_THEME); ?>/images/ticketIcon.png' >
