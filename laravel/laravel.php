@@ -144,6 +144,11 @@ foreach ($languages as $language)
 	if (preg_match("#^{$language}(?:$|/)#i", $uri))
 	{
 		Config::set('application.language', $language);
+        if ($language == 'usa') {
+            Config::set('application.languages', array('usa'));
+            Config::set('application.langs', array('usa' => 4));
+        }
+
 
 		//Added by u@
 		Session::put('language', $language);

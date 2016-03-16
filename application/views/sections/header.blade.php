@@ -44,10 +44,10 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
             }
             ?>
         @endif
-        
+
         {{-- HTML::link_to_language('tr', 'Turkish version') --}}
         {{-- HTML::link_to_language('en', 'English version') --}}
-        
+
     </div>
     <!-- end date-->
 </div>
@@ -57,7 +57,7 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
 <div id="header-background"></div>
 <nav class="navbar brb" role="navigation">
     <div class="col-md-2">
-        <a href="{{URL::to(__('route.home'))}}" style="line-height:55px; float:left;"><img src="/img/myLogo4.png" /></a>
+        <a href="{{URL::to(__('route.home'))}}" style="line-height:55px; float:left;"><img src="/img/myLogo4.png"/></a>
     </div>
 
     <?php
@@ -81,7 +81,9 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
             <li class='active' id="tr"><a href='index.html'></a></li>
             <li id="en"><a href='#'></a></li>
             -->
+            <?php if(count(Config::get('application.languages')) > 1): ?>
             <li id="lang-settings"><a href="#modalChangeLanguage" onclick="modalOpen()"></a></li>
+            <?php endif; ?>
             <li class='last' id="logout"><a href="{{URL::to(__('route.logout'))}}"></a></li>
         </ul>
     </div>

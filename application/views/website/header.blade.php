@@ -31,20 +31,18 @@
                     <a href="/{{ Session::get('language') }}/{{__('route.login')}}"><i class="fa fa-mobile fa-lg"></i>&nbsp;<span
                                 class="badge">{{__('website.menu_login')}}</span></a>
                 </li>
+                <?php if(count(Config::get('application.languages')) > 1): ?>
                 <li class="dropdown languageChange">
-                    <?php
-                    foreach (Laravel\Config::get('application.languages') as $lang): ?>
-                    <?php if (Session::get('language') == $lang): ?>
-                    <a href="/<?php echo $lang ?>" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Portfolio"
+                    <a href="/<?php echo Config::get('application.language') ?>" data-toggle="dropdown"
+                       data-hover="dropdown" id="menu_item_Portfolio"
                        data-ref="#" class="dropdown-toggle">
-                        <img src="/website/img/flags/<?php echo $lang; ?>Flag.png"/><span class="caret"></span>
+                        <img src="/website/img/flags/<?php echo Config::get('application.language'); ?>Flag.png"/><span
+                                class="caret"></span>
                     </a>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
                     <ul aria-labelledby="menu_item_Portfolio" class="dropdown-menu"
                         style="min-width:52px !important;width:52px !important;">
-                        <?php foreach (Laravel\Config::get('application.languages') as $lang): ?>
-                        <?php if (Session::get('language') != $lang && $lang != 'tr'): ?>
+                        <?php foreach (Config::get('application.languages') as $lang): ?>
+                        <?php if (Config::get('application.language') != $lang): ?>
                         <li>
                             <a href="/<?php echo $lang ?>" data-ref="#">
                                 <img src="/website/img/flags/<?php echo $lang ?>Flag.png" class="noTouch"/>
@@ -54,6 +52,7 @@
                         <?php endforeach; ?>
                     </ul>
                 </li>
+                <?php endif; ?>
             </ul>
             <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
             <ul class="nav yamm navbar-nav navbar-left main-nav">
