@@ -137,9 +137,7 @@ return array(
 
     'references' => 'References',
 
-
     'search' => 'Search...',
-    'copyright' => '© Copyright 2013 Detaysoft. All rights reserved',
 
     //WHAT IS GALEPRESS
     'whatis' => 'What is GalePress?',
@@ -321,7 +319,7 @@ opportunities worldwide!',
     'footer_detaysoft_more' => 'More info...',
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Contact',
-    'footer_copyright' => 'Copyright 2013 © Detay Danışmalık A.Ş. All rights reserved.',
+    'footer_copyright' => '',
     'footer_livechat' => 'Live Support',
 
     'howitworks_title' => 'Easily 3 steps, The chance to be published in 155 countries !',

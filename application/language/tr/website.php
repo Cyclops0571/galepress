@@ -138,7 +138,6 @@ return array(
 
 
     'search' => 'Arama yapın...',
-    'copyright' => '© Copyright 2013 Detaysoft. Tüm hakları saklıdır.',
 
     //WHAT IS GALEPRESS
     'whatis' => 'Nedir?',

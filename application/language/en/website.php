@@ -139,7 +139,6 @@ return array(
 
 
     'search' => 'Search...',
-    'copyright' => '© Copyright 2013 Detaysoft. All rights reserved',
 
     //WHAT IS GALEPRESS
     'whatis' => 'What is GalePress?',

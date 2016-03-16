@@ -386,13 +386,8 @@ $tabIndex = 1;
         <div class="footer-copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-1" style="padding:0; margin-top:3px;">
-                        <a href="http://www.detaysoft.com/" class="logo">
-                            <img alt="Detaysoft" class="img-responsive" src="/website/img/logo-footer.png">
-                        </a>
-                    </div>
-                    <div class="col-md-7">
-                        <p>© Copyright 2014. All Rights Reserved.</p>
+                    <div class="col-md-8" style="padding:0; margin-top:3px;">
+                        <?php echo __('website.footer_copyright'); ?>
                     </div>
                     <div class="col-md-4">
                         <nav id="sub-menu">

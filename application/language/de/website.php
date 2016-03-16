@@ -137,7 +137,6 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 
 
     'search' => 'Suchen...',
-    'copyright' => '© Copyright 2013 Detaysoft. Alle Rechte vorbehalten.',
 
 
     //WHAT IS GALEPRESS
