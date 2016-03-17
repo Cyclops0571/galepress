@@ -501,8 +501,8 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
 
     'tryit_form_message_mail' => 'You activate your account by clicking on the link sent to your email address.',
     'tryit_form_error_email' => 'Please enter a valid e-mail address.',
-    'tryit_form_error2_email' => 'E-mail address is already exist.',
-    'tryit_form_error_user' => 'User name is already exist.',
+    'tryit_form_error2_email' => 'E-mail address is already exists.',
+    'tryit_form_error_user' => 'User name is already exists.',
     'tryit_form_error_pass' => 'Passwords are not match.',
     'tryit_form_error_securitycode' => 'The entered code is not valid.',
 
@@ -510,6 +510,7 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'tryit_form_error_required_lastname' => 'Your last name is required.',
     'tryit_form_error_required_email' => 'A valid e-mail address is required',
     'tryit_form_error_required_appname' => 'Your application name is required.',
+    'tryit_form_error_appname_exist' => 'Application name is already exists.',
     'tryit_form_error_required_username' => 'Your user name is required.',
     'tryit_form_error_required_pass' => 'Password is required.',
     'tryit_form_error_required_pass2' => 'Re-enter password is required.',

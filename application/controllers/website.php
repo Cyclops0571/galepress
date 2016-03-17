@@ -155,8 +155,14 @@ class Website_Controller extends Base_Controller
             $errors['email'] = __('website.tryit_form_error_required_email');
         }
 
-        if (empty($appName) || $appName == "undefined")
+        if (empty($appName) || $appName == "undefined") {
             $errors['app_name'] = __('website.tryit_form_error_required_appname');
+        } else {
+            $applicatonExits = Application::where('Name', '=', $appName)->first();
+            if ($applicatonExits) {
+                $errors['app_name'] = __('website.tryit_form_error_appname_exist');
+            }
+        }
 
         if (empty($userName) || $userName == "undefined")
             $errors['user_name'] = __('website.tryit_form_error_required_username');
@@ -188,11 +194,10 @@ class Website_Controller extends Base_Controller
 
         //$errors['customerLastName'] = $customerLastName;
 
-        $emailExist = DB::table('User')
-            ->where('Email', '=', $email)
-            ->first();
+        $userExists = User::where()->where('Email', '=', $email)->first();
+        $customerExists = Customer::where('Email', '=', $email)->first();
 
-        if ($emailExist && !empty($email)) {
+        if ($userExists || $customerExists) {
             $errors['email_exist'] = __('website.tryit_form_error2_email');
         }
 

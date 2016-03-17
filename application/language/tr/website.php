@@ -438,6 +438,7 @@ return array(
     'tryit_form_error_required_lastname' => 'Soyadınız gerekiyor.',
     'tryit_form_error_required_email' => 'Geçerli bir e-mail adresiniz gerekiyor.',
     'tryit_form_error_required_appname' => 'Uygulama adınız gerekiyor.',
+    'tryit_form_error_appname_exist' => 'Bu uygulama adı kullanılıyor.',
     'tryit_form_error_required_username' => 'Kullanıcı adınız gerekiyor.',
     'tryit_form_error_required_pass' => 'Şifre gerekiyor.',
     'tryit_form_error_required_pass2' => 'Şifre tekrar girilmeli.',
