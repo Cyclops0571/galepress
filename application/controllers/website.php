@@ -144,40 +144,40 @@ class Website_Controller extends Base_Controller
 
 
         if (empty($customerName) || $customerName == "undefined")
-            $errors['name'] = __('website.tryit_form_error_required_firstname');
+            $errors['name'] = (string)__('website.tryit_form_error_required_firstname');
 
         if (empty($customerLastName) || $customerLastName == "undefined")
-            $errors['last_name'] = __('website.tryit_form_error_required_lastname');
+            $errors['last_name'] = (string)__('website.tryit_form_error_required_lastname');
 
         $rule = array('email' => 'required|email');
         $validationEmail = Validator::make(Input::all(), $rule);
         if ($validationEmail->invalid()) {
-            $errors['email'] = __('website.tryit_form_error_required_email');
+            $errors['email'] = (string)__('website.tryit_form_error_required_email');
         }
 
         if (empty($appName) || $appName == "undefined") {
-            $errors['app_name'] = __('website.tryit_form_error_required_appname');
+            $errors['app_name'] = (string)__('website.tryit_form_error_required_appname');
         } else {
             $applicatonExits = Application::where('Name', '=', $appName)->first();
             if ($applicatonExits) {
-                $errors['app_name'] = __('website.tryit_form_error_appname_exist');
+                $errors['app_name'] = (string)__('website.tryit_form_error_appname_exist');
             }
         }
 
         if (empty($userName) || $userName == "undefined")
-            $errors['user_name'] = __('website.tryit_form_error_required_username');
+            $errors['user_name'] = (string)__('website.tryit_form_error_required_username');
 
         if (empty($password) || $password == "undefined")
-            $errors['password'] = __('website.tryit_form_error_required_pass');
+            $errors['password'] = (string)__('website.tryit_form_error_required_pass');
 
         if (empty($password_verify) || $password_verify == "undefined")
-            $errors['password_verify'] = __('website.tryit_form_error_required_pass2');
+            $errors['password_verify'] = (string)__('website.tryit_form_error_required_pass2');
 
         if ($password != $password_verify)
-            $errors['password_verify'] = __('website.tryit_form_error_required_passmatch');
+            $errors['password_verify'] = (string)__('website.tryit_form_error_required_passmatch');
 
         if (empty($captcha) || $captcha == "undefined")
-            $errors['captcha'] = __('website.tryit_form_error_required_securitycode');
+            $errors['captcha'] = (string)__('website.tryit_form_error_required_securitycode');
 
         if (\Laravel\Request::env() != ENV_LOCAL) {
             $rules = array(
@@ -187,7 +187,7 @@ class Website_Controller extends Base_Controller
             if ($validation->valid()) {
                 //$errors['captcha'] = 'Invalid captcha';
             } else if ($captcha && !empty($captcha)) {
-                $errors['captcha_invalid'] = __('website.tryit_form_error_required_invalidcaptcha');
+                $errors['captcha_invalid'] = (string)__('website.tryit_form_error_required_invalidcaptcha');
             }
         }
 
@@ -198,7 +198,7 @@ class Website_Controller extends Base_Controller
         $customerExists = Customer::where('Email', '=', $email)->first();
 
         if ($userExists || $customerExists) {
-            $errors['email_exist'] = __('website.tryit_form_error2_email');
+            $errors['email_exist'] = (string)__('website.tryit_form_error2_email');
         }
 
         $userNameExist = DB::table('User')
@@ -206,14 +206,14 @@ class Website_Controller extends Base_Controller
             ->first();
 
         if ($userNameExist && !empty($userName)) {
-            $errors['user_name_exist'] = __('website.tryit_form_error_user');
+            $errors['user_name_exist'] = (string)__('website.tryit_form_error_user');
         }
 
         // if there are errors
         if (!empty($errors)) {
             $data['success'] = false;
             $data['errors'] = $errors;
-            $data['messageError'] = __('website.tryit_form_error_required_checkfields');
+            $data['messageError'] = (string)__('website.tryit_form_error_required_checkfields');
         } else {
 
             //$data['userNameExist'] = $userNameExist;

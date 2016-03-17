@@ -498,7 +498,7 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'tryit_form_submit' => 'Create Application',
     'tryit_form_return' => 'Return To Login',
 
-    'tryit_form_message_mail' => 'You activate your account by clicking on the link sent to your email address.',
+    'tryit_form_message_mail' => 'Please check your e-mail to activate your account.',
     'tryit_form_error_email' => 'Please enter a valid e-mail address.',
     'tryit_form_error2_email' => 'E-mail address is already exists.',
     'tryit_form_error_user' => 'User name is already exists.',
