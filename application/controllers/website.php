@@ -194,7 +194,7 @@ class Website_Controller extends Base_Controller
 
         //$errors['customerLastName'] = $customerLastName;
 
-        $userExists = User::where()->where('Email', '=', $email)->first();
+        $userExists = User::where('Email', '=', $email)->first();
         $customerExists = Customer::where('Email', '=', $email)->first();
 
         if ($userExists || $customerExists) {
