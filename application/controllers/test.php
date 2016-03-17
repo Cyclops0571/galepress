@@ -19,6 +19,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo phpinfo();
+        exit;
         $mailData = array(
             'name' => 'Serdar',
             'surname' => 'Saygili',

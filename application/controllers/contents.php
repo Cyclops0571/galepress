@@ -330,9 +330,9 @@ class Contents_Controller extends Base_Controller {
                     $content->Name = Input::get('Name');
                     $content->Detail = Input::get('Detail');
                     $content->MonthlyName = Input::get('MonthlyName');
-                    $content->PublishDate = new DateTime(Common::dateWrite(Input::get('PublishDate')));
+                    $content->PublishDate = new DateTime('Y-m-d', strtotime(Input::get('PublishDate')));
                     $content->IsUnpublishActive = (int) Input::get('IsUnpublishActive');
-                    $content->UnpublishDate = new DateTime(Common::dateWrite(Input::get('UnpublishDate')));
+                    $content->UnpublishDate = new DateTime('Y-m-d', strtotime(Input::get('UnpublishDate')));
                     $content->IsProtected = (int) Input::get('IsProtected');
                     $content->IsBuyable = (int) Input::get('IsBuyable');
                     $content->CurrencyID = (int) Input::get('CurrencyID');
