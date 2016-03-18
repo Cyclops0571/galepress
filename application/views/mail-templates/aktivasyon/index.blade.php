@@ -239,7 +239,7 @@
                             <tr>
                                 <td align="center"
                                     style="font-family: 'Century Gothic', Arial, sans-serif; color:#414a51; font-size:24px;font-weight: bold; letter-spacing: 2px;">
-                                    Aktivasyon
+                                    <?php echo __('maillang.activation'); ?>
                                 </td>
                             </tr>
                             <!--end title-->
