@@ -122,6 +122,9 @@ class Website_Controller extends Base_Controller
 
     public function post_tryit()
     {
+        $data['success'] = true;
+        echo json_encode($data);
+        exit;
         //date_default_timezone_set('Europe/Istanbul');
         $errors = array();
         $data = array();

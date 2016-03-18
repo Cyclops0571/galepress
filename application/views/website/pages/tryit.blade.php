@@ -494,15 +494,25 @@
                                 $scope.errorPasswordVerify = data.errors.password_verify;
                                 $scope.errorCaptcha = data.errors.captcha;
                                 $scope.errorCaptchaInvalid = data.errors.captcha_invalid;
-
+                                $("#succesMessage").hide();
 
                             } else {
+                                $scope.errorName = false;
+                                $scope.errorLastName = false;
+                                $scope.errorEmail = false;
+                                $scope.errorUserName = false
+                                $scope.errorAppName = false;
                                 $scope.userExist = false;
-                                //$scope.reset($scope.form);
+                                $scope.emailExist = false;
+                                $scope.errorPassword = false;
+                                $scope.errorPasswordVerify = false;
+                                $scope.errorCaptcha = false;
+                                $scope.errorCaptchaInvalid = false;
                                 $("#succesMessage").show();
                                 setTimeout(function () {
                                     window.location.href = '<?php echo URL::to(__('route.login'));?>';
                                 }, 3000);
+
 
                                 /*Google Code for Website Conversion Galepress Conversion*/
                                 /* <![CDATA[ */
