@@ -894,7 +894,7 @@
                 $('#areaCoverImg').addClass('noTouch');
             }
             coverImageIframe.load(function () {
-                $('#coverImageModalBody').css('height', coverImageIframe.contents().find('.jcrop-holder').height() + 35 + 'px');
+                $('#coverImageModalBody').css('height', coverImageIframe.contents().find('.jcrop-holder').height() + 55 + 'px');
             });
 
             coverImageModalBody.on('resize', function () {

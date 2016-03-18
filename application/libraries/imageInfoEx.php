@@ -1,6 +1,6 @@
 <?php
 class imageInfoEx {
-
+    const CropPageWidth = 250;
 	public $width = 0;
 	public $height = 0;
 	public $type = "";

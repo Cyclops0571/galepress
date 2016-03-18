@@ -94,7 +94,7 @@ class Crop_Controller extends Base_Controller {
 				continue;
 			}
 
-            $RespectRatio = ($imageInfo->width / 500);
+            $RespectRatio = ($imageInfo->width / ImageClass::CropPageWidth);
 			$im = new Imagick($imageInfo->absolutePath);
             $im->cropimage($widthSet[$i] * $RespectRatio, $heightSet[$i] * $RespectRatio, $xCoordinateSet[$i] * $RespectRatio, $yCoordinateSet[$i] * $RespectRatio);
 			$im->resizeImage($crop->Width, $crop->Height, Imagick::FILTER_LANCZOS, 1, TRUE);

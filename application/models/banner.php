@@ -78,7 +78,7 @@ class Banner extends Eloquent
         $pictureInfoSet = array();
         $pictureInfoSet[] = array("width" => 1480, "height" => 640, "imageName" => $this->BannerID);
         foreach ($pictureInfoSet as $pInfo) {
-            imageClass::cropImage($sourcePicturePath, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
+            ImageClass::cropImage($sourcePicturePath, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
         }
     }
 

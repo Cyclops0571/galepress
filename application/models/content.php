@@ -290,7 +290,7 @@ class Content extends Eloquent
             $pictureInfoSet[] = array("width" => 110, "height" => 157, "imageName" => $targetMainFileName);
             $pictureInfoSet[] = array("width" => 468, "height" => 667, "imageName" => $targetThumbFileName);
             foreach ($pictureInfoSet as $pInfo) {
-                imageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
+                ImageClass::cropImage($targetFileNameFull, $destinationFolder, $pInfo["width"], $pInfo["height"], $pInfo["imageName"], FALSE);
             }
 
             /** @var Crop[] $cropSet */
@@ -298,7 +298,7 @@ class Content extends Eloquent
             $sourceFile = $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION;
             foreach ($cropSet as $crop) {
                 //create neccessary image versions
-                imageClass::cropImage($sourceFile, $destinationFolder, $crop->Width, $crop->Height);
+                ImageClass::cropImage($sourceFile, $destinationFolder, $crop->Width, $crop->Height);
             }
 
             $this->CoverImageVersion += 1;

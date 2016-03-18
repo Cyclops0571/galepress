@@ -1,7 +1,8 @@
 <?php
 
-class imageClass {
-
+class ImageClass
+{
+    const CropPageWidth = 250;
 // <editor-fold defaultstate="collapsed" desc="private properties">
     public $isValid = false;
     private $img_id;
@@ -11,8 +12,9 @@ class imageClass {
 // </editor-fold>
     private $ownerName;
 
-    public function __construct() {
-	;
+    public function __construct()
+    {
+        ;
     }
 
 // <editor-fold defaultstate="collapsed" desc="getter-setter">
@@ -67,7 +69,7 @@ class imageClass {
         $result = &$query->result_array();
         foreach ($result as $dbImage) {
             $imageSet[] = self::convertToImage($dbImage);
-	}
+        }
         return isset($imageSet[0]) ? $imageSet[0] : new ImageClass();
     }
 
@@ -90,18 +92,18 @@ class imageClass {
             $im->cropImage($geo['width'], floor($height * $geo['width'] / $width), 0, (($geo['height'] - ($height * $geo['width'] / $width)) / 2));
         } else {
             $im->cropImage(ceil($width * $geo['height'] / $height), $geo['height'], (($geo['width'] - ($width * $geo['height'] / $height)) / 2), 0);
-	}
+        }
         $im->ThumbnailImage($width, $height, true);
 
         if (substr($destinationFolder, -1) != "/") {
             $destinationFolder = $destinationFolder . "/";
-	}
+        }
 
         if ($addHeightWidth) {
             $imageAbsolutePath = $destinationFolder . $outputImageName . "_" . $width . "x" . $height . IMAGE_EXTENSION;
         } else {
             $imageAbsolutePath = $destinationFolder . $outputImageName . IMAGE_EXTENSION;
-	}
+        }
 
         $im->writeImages($imageAbsolutePath, true);
         $im->clear();
@@ -116,7 +118,7 @@ class imageClass {
     {
         if ($imgID != null && (int)$imgID > 0) {
             $this->img_id = (int)$imgID;
-	}
+        }
         return $this->img_id;
     }
 
@@ -136,7 +138,7 @@ class imageClass {
                     break;
                 //TODO: add for other objects
             }
-	}
+        }
         return $this->ownerName;
     }
 
@@ -166,7 +168,7 @@ class imageClass {
             case SerieClass::OBJECT_TYPE:
                 $object = SerieClass::cachedObject($this->imgObjectID());
                 break;
-	}
+        }
         return $object;
     }
 
@@ -179,7 +181,7 @@ class imageClass {
     {
         if ($objectID != null && (int)$objectID > 0) {
             $this->img_element_id = (int)$objectID;
-	}
+        }
         return $this->img_element_id;
     }
 
@@ -193,32 +195,34 @@ class imageClass {
         get_class();
         if ($typeID != null && (int)$typeID > 0) {
             $this->img_type_id = (int)$typeID;
-	}
+        }
         return $this->img_type_id;
     }
 
-    public function controlCMYK() {
-	//TODO:check if it is cmyk if cmyk throw an exception
-	;
+    public function controlCMYK()
+    {
+        //TODO:check if it is cmyk if cmyk throw an exception
+        ;
     }
 
     /**
      *
      * @return string starts without a slash and finishes with a slash
      */
-    public function dateFolder() {
-	$imageSourceSet = explode('/', $this->imgSource());
-	if (count($imageSourceSet) != 7) {
-	    throw new Exception('Folder count doesnt match at file:' . __FILE__ . ' line: ' . __LINE__); //TODO: do a better exception class-jist steal it
-	}
-	return $imageSourceSet[2] . '/' . $imageSourceSet[3] . '/' . $imageSourceSet[4] . '/';
+    public function dateFolder()
+    {
+        $imageSourceSet = explode('/', $this->imgSource());
+        if (count($imageSourceSet) != 7) {
+            throw new Exception('Folder count doesnt match at file:' . __FILE__ . ' line: ' . __LINE__); //TODO: do a better exception class-jist steal it
+        }
+        return $imageSourceSet[2] . '/' . $imageSourceSet[3] . '/' . $imageSourceSet[4] . '/';
     }
 
     public function imgSource($source = null)
     {
         if (!empty($source)) {
             $this->img_source = (int)$source;
-	}
+        }
         return $this->img_source;
     }
 
