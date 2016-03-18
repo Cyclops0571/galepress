@@ -545,6 +545,7 @@
                                  width="200"/>
                         </a>
                     </div>
+                    <?php if($ContentID): ?>
                     <div class="fileupload_container text-center">
                         <div class="input-group file" style="margin: 0 auto; display:inline-block;">
                             <input type="file" name="CoverImageFile" id="CoverImageFile" class="hidden"/>
@@ -567,9 +568,10 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="hdnCoverImageFileSelected" id="hdnCoverImageFileSelected" value="0"/>
-                        <input type="hidden" name="hdnCoverImageFileName" id="hdnCoverImageFileName" value=""/>
                     </div>
+                    <?php endif; ?>
+                    <input type="hidden" name="hdnCoverImageFileSelected" id="hdnCoverImageFileSelected" value="0"/>
+                    <input type="hidden" name="hdnCoverImageFileName" id="hdnCoverImageFileName" value=""/>
                 </div>
             </div>
         </div>
