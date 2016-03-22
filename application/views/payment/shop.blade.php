@@ -198,11 +198,11 @@ $tabIndex = 1;
             <nav>
                 <ul class="nav nav-pills nav-top">
                     <li>
-                        <a href="http://www.detaysoft.com/kurumsal/" target="_blank"><i
+                        <a href="<?php echo __('website.about_us_url');?>" target="_blank"><i
                                     class="icon icon-angle-right"></i><?php echo __('website.about_us');?></a>
                     </li>
                     <li>
-                        <a href="http://www.detaysoft.com/iletisim/" target="_blank"><i
+                        <a href="<?php echo __('website.contact_url');?>" target="_blank"><i
                                     class="icon icon-angle-right"></i><?php echo __('website.contact'); ?></a>
                     </li>
                     <li class="phone">
@@ -342,7 +342,6 @@ $tabIndex = 1;
                 <div class="col-md-5">
                     <div class="newsletter">
                         <h4><?php echo __('website.about_us');?></h4>
-
                         <p>Detaysoft, 13 yılı aşkın bir süredir, yazılım uygulamaları ve yenilikçi geliştirme konusunda,
                             personel sayısı 200'ü aşan ve kendi sektöründe lider kuruluşlara danışmanlık hizmeti
                             vermektedir.</p>
@@ -448,16 +447,17 @@ $tabIndex = 1;
                             );
                         }
                     </script>
-                    <h5 class="col-xs-12">UYGULAMA SEÇİMİ</h5>
+                        <h5 class="col-xs-12"><?php echo strtoupper((string)__('website.application_selection'));?></h5>
 
                     <div class="form-group">
-                        <label for="applicationID" class="control-label col-xs-3" style="padding-top: 16px;">Uygulama
-                            Seçimi</label>
+                        <label for="applicationID" class="control-label col-xs-3"
+                               style="padding-top: 16px;"><?php echo __('website.application_selection');?></label>
 
                         <div class="col-xs-9">
                             <select id="applicationID" onchange="setUIPrice();" class="form-control required"
                                     name="applicationID" tabindex="{{$tabIndex++}}" required>
-                                <option data-price='0.00' selected="selected">Uygulama Seçiniz</option>
+                                <option data-price='0.00'
+                                        selected="selected"><?php echo __('website.application_select') ?></option>
                                 <?php foreach ($applications as $application): ?>
                                 <option data-application='<?php echo json_encode($application, TRUE); ?>'
                                         value="{{$application->ApplicationID}}" <?php echo $application->ApplicationID == $paymentAccount->ApplicationID ? 'selected="selected"' : ''; ?> >{{$application->Name}}</option>
@@ -489,11 +489,11 @@ $tabIndex = 1;
                     <input type="hidden" name="applicationID" value="<?php echo $applications[0]->ApplicationID; ?>"/>
                     <?php endif; ?>
 
-                    <h5 class="col-xs-12">KULLANICI BİLGİLERİ</h5>
-                    <?php $bireysel_kurumsal = $paymentAccount->kurumsal ? 'data-on="Kurumsal" data-off="Bireysel"' : 'data-on="Bireysel" data-off="Kurumsal"'; ?>
+                        <h5 class="col-xs-12"><?php echo __('website.user_info');?></h5>
                     <div class="form-group">
-                        <label for="customerType" class="control-label col-xs-3" style="padding-top: 16px;">Bireysel /
-                            Kurumsal</label>
+                        <label for="customerType" class="control-label col-xs-3" style="padding-top: 16px;">
+                            <?php echo __('website.individual') . '/' . __('website.company');?>
+                        </label>
 
                         <div class="col-xs-9">
                             <input class="form-control required" type="checkbox"
@@ -501,14 +501,15 @@ $tabIndex = 1;
                                    id="customerType" name="customerType"
                                    data-onstyle="success"
                                    data-offstyle="info"
-                                   data-on="Bireysel"
-                                   data-off="Kurumsal"
+                                   data-on="<?php echo __('website.individual');?>"
+                                   data-off="<?php echo __('website.company');?>"
                                    data-width="200"
                             >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3">Email Adresi</label>
+                        <label for="email"
+                               class="control-label col-xs-3"><?php echo __('website.email_address');?></label>
 
                         <div class="col-xs-9">
                             <input id="email" class="form-control required" maxlength="50" name="email" size="50"
@@ -517,7 +518,7 @@ $tabIndex = 1;
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="phone" class="control-label col-xs-3">Telefon</label>
+                        <label for="phone" class="control-label col-xs-3"><?php echo __('website.phone');?></label>
 
                         <div class="col-xs-9">
                             <input id="phone" maxlength="14" name="phone" size="20" type="text"
@@ -526,19 +527,21 @@ $tabIndex = 1;
                         </div>
                     </div>
                     <hr>
-                    <h5 class="col-xs-12">FATURA BİLGİLERİ</h5>
+                        <h5 class="col-xs-12"><?php echo __('website.billing_info');?></h5>
 
                     <div class="form-group">
-                        <label for="customerTitle" class="control-label col-xs-3">İsim / Ünvan</label>
+                        <label for="customerTitle"
+                               class="control-label col-xs-3"><?php echo __('website.contact_form_name');?></label>
 
                         <div class="col-xs-9">
                             <input id="customerTitle" class="form-control required" maxlength="100" name="customerTitle"
                                    size="20" type="text" tabindex="6" value="<?php echo $paymentAccount->title; ?>"
-                                   placeholder="Birey veya Şirket Unvanı" required>
+                                   placeholder="<?php echo __('website.username_company_name');?>" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tc" class="control-label col-xs-3">Tc Kimlik No</label>
+                        <label for="tc"
+                               class="control-label col-xs-3"><?php echo __('website.identification_number');?></label>
 
                         <div class="col-xs-9">
                             <input class="form-control required" id="tc" name="tc" type="text" maxlength="11"
@@ -547,40 +550,44 @@ $tabIndex = 1;
                         </div>
                     </div>
                     <div class="form-group hide">
-                        <label for="taxOffice" class="control-label col-xs-3">Vergi Dairesi</label>
+                        <label for="taxOffice"
+                               class="control-label col-xs-3"><?php echo __('website.tax_administration');?></label>
 
                         <div class="col-xs-9">
                             <input id="taxOffice" class="form-control required" maxlength="100" name="taxOffice"
                                    size="20" type="text" tabindex="7"
-                                   value="<?php echo $paymentAccount->vergi_dairesi; ?>" placeholder="Vergi Dairesi"
+                                   value="<?php echo $paymentAccount->vergi_dairesi; ?>"
+                                   placeholder="<?php echo __('website.tax_administration');?>"
                                    required>
                         </div>
                     </div>
                     <div class="form-group hide">
-                        <label for="taxNo" class="control-label col-xs-3">Vergi No</label>
+                        <label for="taxNo" class="control-label col-xs-3"><?php echo __('website.tax_number');?></label>
 
                         <div class="col-xs-9">
                             <input id="taxNo" class="form-control required" maxlength="100" name="taxNo" size="20"
                                    type="text" tabindex="8" value="<?php echo $paymentAccount->vergi_no; ?>"
-                                   placeholder="Vergi Numarası" required>
+                                   placeholder="<?php echo __('website.tax_number');?>" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="country" class="control-label col-xs-3">Ülke</label>
+                        <label for="country" class="control-label col-xs-3"><?php echo __('website.country');?></label>
 
                         <div class="col-xs-9">
                             <input id="country" class="form-control required" maxlength="25" name="country" size="20"
-                                   type="text" tabindex="4" value="Türkiye" placeholder="Ülke Bilgisi" required
+                                   type="text" tabindex="4" value="Türkiye"
+                                   placeholder="<?php echo __('website.country');?>" required
                                    disabled>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="city" class="control-label col-xs-3">Şehir</label>
+                        <label for="city" class="control-label col-xs-3"><?php echo __('website.city');?></label>
 
                         <div class="col-xs-9">
                             <select id="city" class="form-control required" name="city" tabindex="6"
-                                    placeholder="Şehir Bilgisi" required>
-                                <option selected="selected" disabled="disabled">Şehir Seçiniz</option>
+                                    placeholder="<?php echo __('website.city');?>" required>
+                                <option selected="selected"
+                                        disabled="disabled"><?php echo __('website.select_city');?></option>
                                 @foreach($city as $c)
                                     <option value="{{$c->CityID}}" <?php echo $c->CityID == $paymentAccount->CityID ? 'selected="selected"' : ''; ?> >{{$c->CityName}}</option>
                                 @endforeach
@@ -588,20 +595,22 @@ $tabIndex = 1;
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address" class="control-label col-xs-3">Adres</label>
+                        <label for="address" class="control-label col-xs-3"><?php echo __('website.address');?></label>
 
                         <div class="col-xs-9">
                             <textarea id="address" class="form-control required" maxlength="100" name="address"
-                                      size="20" tabindex="6" placeholder="Adres Bilgisi, Sok. No, Konut No" required
+                                      size="20" tabindex="6" placeholder="<?php echo __('website.address_info');?>"
+                                      required
                                       rows="4"><?php echo $paymentAccount->address; ?></textarea>
                         </div>
                     </div>
                     <div class="form-group errorMsg hide" style="color:#CA0101; text-align:center; font-size:18px;">
-                        <span>Lütfen bilgilerinizi kontrol edin...</span>
+                        <span><?php echo __('website.check_your_info');?></span>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" id="payBtn" type="submit">Devam Et</button>
+                    <button class="btn btn-primary" id="payBtn"
+                            type="submit"><?php echo __('website.continue');?></button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -672,27 +681,22 @@ $tabIndex = 1;
             var mailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
             if (phone.length < 14 || !phonePattern.test(phone)) {
-                $('.errorMsg').removeClass('hide').text('Lütfen geçerli bir telefon adresi girin.');
+                $('.errorMsg').removeClass('hide').text('<?php echo __('website.valid_phone');?>');
                 $('#phone').focus();
                 return false;
             }
             else if (email == "" || !mailPattern.test(email)) {
-                $('.errorMsg').removeClass('hide').text('Lütfen geçerli bir email adresi girin.');
+                $('.errorMsg').removeClass('hide').text('<?php echo __('website.valid_email');?>');
                 $('#email').focus();
                 return false;
             }
             else if ($("#tc").val().length < 11 && $('#customerType').prop('checked')) {
-                $('.errorMsg').removeClass('hide').text('Lütfen geçerli bir tc kimlik numarası girin.');
+                $('.errorMsg').removeClass('hide').text('<?php echo __('website.valid_identification_number');?>');
                 $('#tc').focus();
                 return false;
             }
-            // else if($("#region").val()==null){
-            // 	$('.errorMsg').removeClass('hide').text('Lütfen bölge seçiniz.');
-            // 	$('#region').focus();
-            // 	return false;
-            // }
             else if ($("#city").val() == null) {
-                $('.errorMsg').removeClass('hide').text('Lütfen şehir seçiniz.');
+                $('.errorMsg').removeClass('hide').text('<?php echo __('website.select_city');?>');
                 $('#city').focus();
                 return false;
             }

@@ -124,13 +124,15 @@
 					<nav>
 						<ul class="nav nav-pills nav-top">
 							<li>
-								<a href="http://www.detaysoft.com/kurumsal/" target="_blank"><i class="icon icon-angle-right"></i>Hakkımızda</a>
+                                <a href="<?php echo __('website.about_us_url');?>" target="_blank"><i
+                                            class="icon icon-angle-right"></i><?php echo __('website.about_us');?></a>
 							</li>
 							<li>
-								<a href="http://www.detaysoft.com/iletisim/" target="_blank"><i class="icon icon-angle-right"></i>İletişim</a>
+                                <a href="<?php echo __('website.contact_url');?>" target="_blank"><i
+                                            class="icon icon-angle-right"></i><?php echo __('website.contact'); ?></a>
 							</li>
 							<li class="phone">
-								<span><i class="icon icon-phone"></i>+90 (216) 443 13 29</span>
+                                <span><i class="icon icon-phone"></i><?php echo __('website.galepressphone'); ?></span>
 							</li>
 						</ul>
 					</nav>
@@ -144,7 +146,7 @@
 							<ul class="nav nav-pills nav-main" id="mainMenu">
 								<li class="dropdown mega-menu-item mega-menu-fullwidth active">
 									<a class="dropdown-toggle" href="#">
-										Sözleşme ve Şartlar
+                                        <?php echo __('website.contract'); ?>
 										<i class="icon icon-angle-down"></i>
 									</a>
 									<ul class="dropdown-menu">
@@ -194,8 +196,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<ul class="breadcrumb">
-									<li><a href="/">Anasayfa</a></li>
-									<li class="active">Ödeme Sayfası</li>
+                                    <li><a href="/"><?php echo __('website.page_home'); ?></a></li>
+                                    <li class="active"><?php echo __('website.packeges'); ?></li>
 								</ul>
 							</div>
 						</div>

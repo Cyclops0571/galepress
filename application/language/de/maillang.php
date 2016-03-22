@@ -32,5 +32,5 @@ return array(
     'activation' => 'Aktivation',
     'contactform_recipient' => 'Galepress',
     'contactform_subject' => 'Galepress Contact Form',
-    'contanct_email' => 'info@galepress.com',
+    'contanct_email' => 'info@galepress.com', //sifre: detay2006
 );
