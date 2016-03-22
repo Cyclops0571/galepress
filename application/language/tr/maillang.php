@@ -27,4 +27,6 @@ return array(
     'subscription_welcome_part2' => "İlk tasarımını yayınlamak için ihtiyacın olan bütün bilgileri Galepress’in senin"
         . "için hazırladı videolardan öğrenebilirsin.</br></br>",
     'activation' => 'Aktivation',
+    'contactform_recipient' => 'Galepress',
+    'contactform_subject' => 'Galepress İletişim Formu',
 );

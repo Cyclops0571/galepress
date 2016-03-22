@@ -42,7 +42,46 @@ class Website_Controller extends Base_Controller
 
     public function post_contactform()
     {
-        return View::make('website.contactform');
+        $rules = array(
+            "senderName" => 'required',
+            "senderEmail" => 'email',
+            "phone" => 'required',
+            "comment" => 'required',
+        );
+        //company comment
+
+        $v = \Laravel\Validator::make(\Laravel\Input::all(), $rules);
+        if (!$v->passes()) {
+            return $v->errors->first();
+        }
+
+        $body = '';
+        $body .= "<b>Sender Name: </b>" . \Laravel\Input::get('senderName') . '<br/>';
+        $body .= "<b>Sender Phone: </b>" . \Laravel\Input::get('phone') . '<br/>';
+        if (Input::get('company', '')) {
+            $body .= "<b>Company: </b>" . Input::get('company', '') . '<br/>';
+        }
+        $body .= "<b>Comment: </b>" . \Laravel\Input::get('comment') . '<br/>';
+        $toEmail = Config::get('custom.mail_email');
+        $toName = (string)__('maillang.contactform_recipient');
+        $subject = (string)__('maillang.contactform_subject');
+        $senderEmail = Input::get('senderEmail');
+        $senderName = Input::get('senderName');
+        if (Message::send(function ($m) use ($toEmail, $toName, $senderEmail, $senderName, $subject, $body) {
+            /** @var  $m \Swiftmailer\Drivers\SMTP */
+            $m->from($senderEmail, $senderName);
+            //$m->to($toEmail);
+            $m->to($toEmail, $toName);
+            $m->subject($subject);
+            $m->body($body);
+            $m->html(true);
+        })
+        ) {
+            $success = 'success';
+        } else {
+            $success = 'error: incomplete data';
+        }
+        echo $success;
     }
 
     public function get_sitemap()

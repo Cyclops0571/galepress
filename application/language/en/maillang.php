@@ -30,4 +30,6 @@ return array(
     'subscription_welcome_part2' => "Now you can watch the tutorial videos that is made for you.</br></br>"
         . "Sincerely </br>GalePress",
     'activation' => 'Aktivation',
+    'contactform_recipient' => 'Galepress',
+    'contactform_subject' => 'Galepress Contact Form',
 );
