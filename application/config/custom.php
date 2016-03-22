@@ -9,7 +9,8 @@ $iyzicoSecret = 'im015536200eaf0002c8d01436189064';
 $paymentAmount = 100;
 $csrf = "|csrf";
 
-if (\Laravel\Config::get('application.language') == 'usa') {
+
+if (\Laravel\Session::get('language') == 'usa') {
     $mailEmail = 'usa@galepress.com';
 }
 
@@ -19,7 +20,6 @@ if (Laravel\Request::env() == ENV_TEST) {
     $paymentEnv = 'test';
     $iyzicoReturnUrl = 'https://www.galetest.com';
     $serverUrl = 'http://galetest.com';
-    $mailEmail = 'info@galepress.com';
     $paymentAmount = 1;
     $csrf = "";
 } else if (Laravel\Request::env() == ENV_LOCAL) {
@@ -29,7 +29,6 @@ if (Laravel\Request::env() == ENV_TEST) {
     $paymentEnv = 'test';
     $iyzicoReturnUrl = 'http://localhost';
     $serverUrl = 'http://localhost';
-    $mailEmail = 'info@galepress.com';
     $paymentAmount = 1;
 }
 

@@ -35,6 +35,7 @@ if ($senderName && $senderEmail && $comment) {
         $toEmail = Config::get('custom.mail_email');
         $toName = RECIPIENT_NAME;
         if (Message::send(function ($m) use ($toEmail, $toName, $senderEmail, $senderName, $subject, $comment) {
+            /** @var  $m \Swiftmailer\Drivers\SMTP */
             $m->from($senderEmail, $senderName);
             //$m->to($toEmail);
             $m->to($toEmail, $toName);
