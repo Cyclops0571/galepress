@@ -1,6 +1,6 @@
 <footer>
     <div id="credits">
-        <p>{{ __('interactivity.footer_copyright') }} </p>
+        <p>{{ __('website.footer_copyright') }} </p>
     </div>
     <div id="preview">
         <div class="switch">
