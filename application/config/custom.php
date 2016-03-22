@@ -10,7 +10,7 @@ $paymentAmount = 100;
 $csrf = "|csrf";
 
 
-if (\Laravel\Session::get('language') == 'usa') {
+if (\Laravel\Config::get('language') == 'usa') {
     $mailEmail = 'usa@galepress.com';
 }
 
