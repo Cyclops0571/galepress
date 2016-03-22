@@ -20,6 +20,7 @@ $socialMediaLinks['fa-instagram'] = __('common.fa-instagram');
                             <li><a href="<?php echo $url ?>" class="fa <?php echo $faIcon ?> fa-lg"></a></li>
                             <?php endforeach; ?>
                         </ul>
+                        <?php if( Config::get("application.language") != 'usa'): ?>
                         <ul class="social-icon sep-top-xs">
                             <li>
                                 <small class="sep-top-xs sep-bottom-md">{{__('website.get_in_touch_desc')}}<br/>
@@ -34,15 +35,17 @@ $socialMediaLinks['fa-instagram'] = __('common.fa-instagram');
                                             <input type="text" name="email" id="email"
                                                    class="form-control newsletter-text-input"
                                                    aria-label="email registration">
-					    <span class="input-group-btn">
-						<button class="btn btn-default newsletter"
-                                type="submit">{{__('website.newsletter_subscription')}}</button>
-					    </span>
+                                                <span class="input-group-btn">
+                                                <button class="btn btn-default newsletter"
+                                                        type="submit">{{__('website.newsletter_subscription')}}</button>
+                                                </span>
                                         </div>
                                     </form>
                                 </small>
                             </li>
                         </ul>
+                        <?php endif; ?>
+
                     </div>
                 </div>
                 <div class="col-md-8">
