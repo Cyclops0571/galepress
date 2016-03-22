@@ -230,7 +230,7 @@ $tabIndex = 1;
                                             <div class="col-md-3">
                                                 <ul class="sub-menu">
                                                     <li>
-                                                        <span class="read">OKU</span>
+                                                        <span class="read"><?php echo __('website.read'); ?></span>
                                                         <span class="mega-menu-sub-title">MESAFELİ SATIŞ SÖZLEŞMESİ</span>
                                                         <ul class="sub-menu">
                                                             <li>
