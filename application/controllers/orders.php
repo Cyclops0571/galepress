@@ -356,9 +356,8 @@ class Orders_Controller extends Base_Controller {
 	    );
 	    $subject = "Yeni Bir Uygulama Formu Gönderildi!";
 	    $msg = "Sayın Yetkili, \n\n" . $appName . " uygulaması için " . $orderNo . " siparis numarasına ait uygulama formunu lütfen işleme alınız.";
-
 	    Message::send(function($m) use($toEmail, $subject, $msg) {
-		$m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+            $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
 		$m->to($toEmail);
 		$m->subject($subject);
 		$m->body($msg);

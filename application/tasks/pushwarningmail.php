@@ -47,7 +47,7 @@ class PushWarningMail_Task
                     Bundle::start('messages');
 
                     Message::send(function ($m) use ($toEmail, $subject, $msg) {
-                        $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                        $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                         $m->to($toEmail);
                         $m->subject($subject);
                         $m->body($msg);

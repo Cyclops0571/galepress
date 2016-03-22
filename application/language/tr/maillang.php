@@ -29,4 +29,5 @@ return array(
     'activation' => 'Aktivation',
     'contactform_recipient' => 'Galepress',
     'contactform_subject' => 'Galepress İletişim Formu',
+    'contanct_email' => 'info@galepress.com',
 );

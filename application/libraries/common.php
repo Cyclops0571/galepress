@@ -586,7 +586,7 @@ class Common
         Bundle::start('messages');
         foreach ($toEmailSet as $toEmail) {
             Message::send(function ($m) use ($toEmail, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($toEmail);
                 $m->subject($subject);
                 $m->body($msg);
@@ -602,7 +602,7 @@ class Common
                 . "Galepress Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
                 . "Firmamız adına teşekkür eder iyi günler dileriz.\r\n\r\n\r\n"
                 . "Saygılarımızla Galepress";
-            $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+            $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
             $m->to($email);
             $m->subject("Galepress Dijital Yayin Platformu Otomatik Ödeme Maili");
             $m->body($body);
@@ -643,7 +643,7 @@ class Common
                         break;
                 }
 
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($user["email"]);
                 $m->subject("Galepress Dijital Yayin Platformu Ödeme Hatırlatma Maili");
                 $m->body($msg);
@@ -657,7 +657,7 @@ class Common
         Bundle::start('messages');
         foreach ($adminMailSet as $adminMail) {
             Message::send(function ($m) use ($adminMail, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($adminMail);
                 $m->subject("Galepress Ödeme Hatırlatma Maili");
                 $m->body($msg);
@@ -673,7 +673,7 @@ class Common
         Bundle::start('messages');
         foreach ($toEmailSet as $toEmail) {
             Message::send(function ($m) use ($toEmail, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($toEmail);
                 $m->subject($subject);
                 $m->body($msg);
@@ -686,7 +686,7 @@ class Common
         try {
             Bundle::start('messages');
             Message::send(function ($m) use ($toEmail, $toDisplayName, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 //$m->to($toEmail);
                 $m->to($toEmail, $toDisplayName);
                 $m->subject($subject);
@@ -703,7 +703,7 @@ class Common
         try {
             Bundle::start('messages');
             Message::send(function ($m) use ($toEmail, $toDisplayName, $subject, $msg) {
-                $m->from(Config::get('custom.mail_email'), Config::get('custom.mail_displayname'));
+                $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 //$m->to($toEmail);
                 $m->to($toEmail, $toDisplayName);
                 $m->subject($subject);

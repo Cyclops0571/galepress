@@ -28,11 +28,11 @@ $comment = isset($_POST['comment'])
 
 // If all values exist, send the email
 if ($senderName && $senderEmail && $comment) {
-    $recipient = RECIPIENT_NAME . " <" . \Laravel\Config::get('custom.mail_email') . ">";
+    $recipient = RECIPIENT_NAME . " <" . (string)__('maillang.contanct_email') . ">";
     $headers = "From: " . $senderName . " <" . $senderEmail . ">";
     try {
         Bundle::start('messages');
-        $toEmail = Config::get('custom.mail_email');
+        $toEmail = (string)__('maillang.contanct_email');
         $toName = RECIPIENT_NAME;
         if (Message::send(function ($m) use ($toEmail, $toName, $senderEmail, $senderName, $subject, $comment) {
             /** @var  $m \Swiftmailer\Drivers\SMTP */

@@ -62,7 +62,7 @@ class Website_Controller extends Base_Controller
             $body .= "<b>Company: </b>" . Input::get('company', '') . '<br/>';
         }
         $body .= "<b>Comment: </b>" . \Laravel\Input::get('comment') . '<br/>';
-        $toEmail = Config::get('custom.mail_email');
+        $toEmail = (string)__('maillang.contanct_email');
         $toName = (string)__('maillang.contactform_recipient');
         $subject = (string)__('maillang.contactform_subject');
         $senderEmail = Input::get('senderEmail');
