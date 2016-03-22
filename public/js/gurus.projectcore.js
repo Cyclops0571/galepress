@@ -230,7 +230,8 @@ var cInteractivity = new function () {
                     border_TRANSPARENCY: 0,
                     container: 'pdf-container',
                     max_WIDTH: '',
-                    max_HEIGHT: ''
+                    max_HEIGHT: '',
+                    animation_SPEED_ZOOM: 0,
                 });
             }
         };

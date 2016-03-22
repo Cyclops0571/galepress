@@ -1,14 +1,3 @@
-/*
- * Custom selectable control v1.0.0
- *
- * Copyright (c) Emre Terzi @ Gurus Technology (http://www.gurus.com.tr)
- *
- * Date: 03/30/2013
- *  
- * $License : GPL, so any change to the code you should copy and paste this section, and would be nice to report this to me(emre.terzi@gurus.com.tr).
- *
- *
- */
 (function($){
 	$.fn.gselectable = function(options) {
 		
