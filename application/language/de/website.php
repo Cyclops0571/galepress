@@ -295,9 +295,6 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'home_speed_theworldisyours_text' => 'Mit der MAKING MEDIA DIGITAL App bieten Sie Ihren Kunden eine global verfügbare Lösung.',
 
 
-    'footer_detaysoft' => 'Detaysoft',
-    'footer_detaysoft_text' => 'Detaysoft bietet seit über 13 Jahren innovative Software-Anwendungen und Entwicklungen sowie Beratungsleistungen für mittelständische und Groß-Unternehmen und beschäftigt über 200 Mitarbeiter.',
-    'footer_detaysoft_more' => 'Weitere Informationen...',
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Kontakt',
     'footer_copyright' => '© 2013 Detaysoft  - Alle Rechte vorbehalten',

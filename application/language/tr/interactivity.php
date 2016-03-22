@@ -241,7 +241,6 @@ return array(
 		'easeOutBack' => 'İleriden Geriye', 
 		'easeInOutBack' => 'Geriden İleriye, İleriden Geriye'
 	),
-	'footer_detaysoft' => 'Tüm Hakları Saklıdır - © 2013 Detaysoft Galepress',
 	'preview' => 'Önizleme',
 	'preview_on' => 'Açık',
 	'preview_off' => 'Kapalı',

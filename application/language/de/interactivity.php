@@ -241,7 +241,6 @@ return array(
 		'easeOutBack' => 'Ab dem nächsten an Rücken', 
 		'easeInOutBack' => 'Von hinten nach Ende, ab dem nächsten an Rücken'
 	),
-	'footer_detaysoft' => 'Alle Rechte Vorbehalten - © 2013 Detaysoft Galepress',
 	'preview' => 'Vorschau',
 	'preview_on' => 'Auf',
 	'preview_off' => 'Aus',

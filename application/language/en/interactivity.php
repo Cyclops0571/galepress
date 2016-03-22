@@ -241,7 +241,6 @@ return array(
 		'easeOutBack' => 'From Next to Backward', 
 		'easeInOutBack' => 'From Back to Forward, From Next to Backward'
 	),
-	'footer_detaysoft' => 'All Rights Reserved - © 2013 Detaysoft Galepress',
 	'preview' => 'Preview',
 	'preview_on' => 'On',
 	'preview_off' => 'Off',

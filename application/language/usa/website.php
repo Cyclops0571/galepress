@@ -314,9 +314,6 @@ environment. Expand and deepen the conversation with your customer base by speak
 the mobile language they already understand. When ready, add new app markets and expand your
 opportunities worldwide!',
 
-    'footer_detaysoft' => 'Detaysoft',
-    'footer_detaysoft_text' => 'Detaysoft has provided customer-satisfaction focused and privileged services to over 200 global sector-leading organizations for more than 14 years.',
-    'footer_detaysoft_more' => 'More info...',
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Contact',
     'footer_copyright' => '',

@@ -298,8 +298,6 @@ return array(
     'home_speed_theworldisyours_text' => 'GalePress sayesinde giriş yapacağınız aplikasyon pazarları ile rekabet ortamınızın sınırlarını kaldırın. Yeni pazarlar sayesinde yeni fırsatlar ve satışlar elde edin.',
 
     'footer_detaysoft' => 'Detaysoft',
-    'footer_detaysoft_text' => 'Detaysoft, 13 yılı aşkın bir süredir, yazılım uygulamaları ve yenilikçi geliştirme konusunda, personel sayısı 200\'ü aşan ve kendi sektöründe lider kuruluşlara danışmanlık hizmeti vermektedir.',
-    'footer_detaysoft_more' => 'Detaylı bilgi...',
     'footer_socialmedia' => 'Sosyal Medya',
     'footer_contact' => 'İletişim',
     'footer_copyright' => 'Copyright 2013 © Her hakkı Detay Danışmalık A.Ş.\'ye aittir',
