@@ -63,9 +63,8 @@ Route::get('test/v(:num)', 'test@routetest');
 Route::post("client/excelupload", "clients@excelupload");
 $languages = Config::get('application.languages', array());
 
+Route::post('/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));
 foreach ($languages as $currentLanguage) {
-    Route::post($currentLanguage . '/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));
-
     // <editor-fold defaultstate="collapsed" desc="website">
     Route::get(__('route.website_products')->get($currentLanguage), array('as' => 'website_products_get', 'uses' => 'website@products'));
     Route::get(__('route.website_advantages')->get($currentLanguage), array('as' => 'website_advantages_get', 'uses' => 'website@advantages'));

@@ -1,7 +1,7 @@
 <?php
 
 $serverUrl = 'http://www.galepress.com';
-$mailEmail = 'info@galepress.com';
+$mailEmail = 'info@galepress.com'; //sifre: detay2006
 $paymentEnv = 'live';
 $iyzicoReturnUrl = 'https://www.galepress.com';
 $iyzicoApiID = 'im015089500879819fdc991436189064';
@@ -19,7 +19,7 @@ if (Laravel\Request::env() == ENV_TEST) {
     $paymentEnv = 'test';
     $iyzicoReturnUrl = 'https://www.galetest.com';
     $serverUrl = 'http://galetest.com';
-    $mailEmail = 'info@galetest.com';
+    $mailEmail = 'info@galepress.com';
     $paymentAmount = 1;
     $csrf = "";
 } else if (Laravel\Request::env() == ENV_LOCAL) {
@@ -29,7 +29,7 @@ if (Laravel\Request::env() == ENV_TEST) {
     $paymentEnv = 'test';
     $iyzicoReturnUrl = 'http://localhost';
     $serverUrl = 'http://localhost';
-    $mailEmail = 'info@galetest.com';
+    $mailEmail = 'info@galepress.com';
     $paymentAmount = 1;
 }
 

@@ -27,18 +27,31 @@ $comment = isset($_POST['comment'])
         : '';
 
 // If all values exist, send the email
-if ($senderName && $senderEmail && $comment) :
+if ($senderName && $senderEmail && $comment) {
     $recipient = RECIPIENT_NAME . " <" . \Laravel\Config::get('custom.mail_email') . ">";
     $headers = "From: " . $senderName . " <" . $senderEmail . ">";
     try {
-        mail($recipient, $subject, $comment, $headers);
-        $success = 'success';
+        Bundle::start('messages');
+        $toEmail = Config::get('custom.mail_email');
+        $toName = RECIPIENT_NAME;
+        if (Message::send(function ($m) use ($toEmail, $toName, $senderEmail, $senderName, $subject, $comment) {
+            $m->from($senderEmail, $senderName);
+            //$m->to($toEmail);
+            $m->to($toEmail, $toName);
+            $m->subject($subject);
+            $m->body($comment);
+        })
+        ) {
+            $success = 'success';
+        } else {
+            $success = 'error: incomplete data';
+        }
     } catch (Exception $e) {
         $success = $e->getMessage();
     }
-else:
+} else {
     $success = 'error: incomplete data';
-endif;
+}
 
 // Return an appropriate response to the browser
 if ( $xhr ) : // AJAX Request
