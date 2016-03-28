@@ -361,7 +361,6 @@ class Applications_Controller extends Base_Controller
                 $s->ApplicationStatusID = (int)Input::get('ApplicationStatusID');
                 $s->IOSVersion = (int)Input::get('IOSVersion');
                 $s->IOSLink = Input::get('IOSLink', '');
-                $s->IOSHexPasswordForSubscription = Input::get('IOSHexPasswordForSubscription', '');
                 $s->AndroidVersion = (int)Input::get('AndroidVersion');
                 $s->AndroidLink = Input::get('AndroidLink', '');
                 $s->PackageID = (int)Input::get('PackageID');
@@ -510,6 +509,7 @@ class Applications_Controller extends Base_Controller
         }
 
         if ($application->InAppPurchaseActive) {
+            $application->IOSHexPasswordForSubscription = Input::get('IOSHexPasswordForSubscription', '');
             foreach (Subscription::types() as $key => $subscription) {
                 $application->subscriptionStatus($key, Input::get("SubscriptionStatus_" . $key));
             }

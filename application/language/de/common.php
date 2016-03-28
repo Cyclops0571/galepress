@@ -225,6 +225,8 @@ return array(
     'applications_applicationstatus' => 'Applikationsstatus:',
     'applications_iosversion' => 'IOS Version:',
     'applications_ioslink' => 'IOS Link:',
+    'applications_subscription_password' => 'IOS Hex Passsword:',
+    'applications_subscription_password_info' => 'Ios Hex Password for Subscription. You can find it from iTunes Connect -> Features.',
     'applications_androidversion' => 'Android Version:',
     'applications_androidlink' => 'Android Link:',
     'applications_package' => 'Package:',
