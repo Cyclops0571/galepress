@@ -233,9 +233,11 @@ if (false) {
                     <input type="text" name="IOSHexPasswordForSubscription" id="IOSHexPasswordForSubscription"
                            class="form-control textbox"
                            value="<?php echo $application->IOSHexPasswordForSubscription; ?>"/>
-                    <div class="col-md-1"><a class="tipr"
-                                             title="<?php echo __('clients.applications_subscription_password_info') ?>"><span
-                                    class="icon-info-sign"></span></a></div>
+                </div>
+                <div class="col-md-1">
+                    <a class="tipr" title="<?php echo __('clients.applications_subscription_password_info') ?>">
+                        <span class="icon-info-sign"></span>
+                    </a>
                 </div>
             </div>
             <?php foreach (Subscription::types() as $key => $value): ?>
