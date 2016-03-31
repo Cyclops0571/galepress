@@ -473,4 +473,5 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'valid_phone' => 'Please enter a valid phone number.',
     'valid_email' => 'Please enter a valid email address.',
     'valid_identification_number' => 'Please enter a valid identification number.',
+    'towards_payment_page' => 'Ödeme Sayfasına Doğru...',
 );

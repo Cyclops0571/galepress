@@ -64,7 +64,7 @@
 
         <!-- Info -->
         <div class="info">
-            <h2><?php echo __('error.something_went_wrong'); ?></h2>
+            <h3><?php echo __('error.something_went_wrong'); ?></h3>
             <p><?php echo __('error.your_page_not_found'); ?></p>
             <a href="/" class="btn" style="text-transform: uppercase"><?php echo __('route.home'); ?></a>
         </div>

@@ -547,4 +547,5 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'valid_phone' => 'Please enter a valid phone number.',
     'valid_email' => 'Please enter a valid email address.',
     'valid_identification_number' => 'Please enter a valid identification number.',
+    'towards_payment_page' => 'Towards Payment Page...',
 );

@@ -19,8 +19,26 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        echo phpinfo();
+        if (Request::env() == ENV_LIVE) {
+            exit;
+        }
+
+        $paymentAccounts = PaymentAccount::where('StatusID', '=', eStatus::Active)->get();
+        var_dump($paymentAccounts);
         exit;
+
+        $test = new Application();
+//        var_dump($test->asdfasdfasdf); exit;
+        var_dump($test);
+        $test2 = Application::find(10);
+        var_dump($test2);
+//        if($test) {
+//            echo '1111';
+//        }  else {
+//            echo '22222';
+//        }
+        exit;
+        echo phpinfo();
         $mailData = array(
             'name' => 'Serdar',
             'surname' => 'Saygili',

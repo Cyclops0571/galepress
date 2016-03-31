@@ -23,10 +23,17 @@ class Payment_Controller extends Base_Controller
             $paymentAccount = new PaymentAccount();
         }
 
+        if ($paymentAccount->PaymentAccountID) {
+            $selectedApp = $paymentAccount->Application;
+        } else {
+            $selectedApp = $applications[0];
+        }
+
         $customerData = array();
         $customerData['city'] = City::all();
         $customerData['paymentAccount'] = $paymentAccount;
         $customerData['applications'] = $applications;
+        $customerData['selectedApp'] = $selectedApp;
 
         return View::make('payment.shop', $customerData);
     }
@@ -78,6 +85,7 @@ class Payment_Controller extends Base_Controller
         $paymentAccount->vergi_dairesi = Input::get('taxOffice');
         $paymentAccount->vergi_no = Input::get('taxNo');
         $paymentAccount->selected_at = date("Y-m-d H:i:s");
+        $paymentAccount->StatusID = eStatus::Active;
         $paymentAccount->save();
 
         $data = array();

@@ -10,6 +10,7 @@
  * @property int $ThemeForeground Description
  * @property int $ThemeForegroundColor Description
  * @property int $Price Description
+ * @property int $Installment Description
  * @property int $InAppPurchaseActive Description
  * @property int $FlipboardActive Description
  * @property string $BundleText Description
@@ -49,10 +50,20 @@
  */
 class Application extends Eloquent
 {
+    const InstallmentCount = 24;
 
     public static $timestamps = false;
     public static $table = 'Application';
     public static $key = 'ApplicationID';
+
+    public function __construct($attributes = array(), $exists = false)
+    {
+        parent::__construct($attributes, $exists);
+        if (!$this->ApplicationID) {
+            $this->CustomerID = Auth::User()->CustomerID;
+            $this->Installment = Application::InstallmentCount;
+        }
+    }
 
     /**
      *
@@ -339,5 +350,10 @@ class Application extends Eloquent
         } else {
             return __('applicationlang.expiretime15days', array('ApplicationName' => $this->Name, 'RemainingDays' => $diff->days));
         }
+    }
+
+    public function getCkPemPath()
+    {
+        return '/files/customer_' . $this->CustomerID . '/application_' . $this->ApplicationID . '/' . $this->CkPem;
     }
 }
