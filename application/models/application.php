@@ -59,7 +59,7 @@ class Application extends Eloquent
     public function __construct($attributes = array(), $exists = false)
     {
         parent::__construct($attributes, $exists);
-        if (!$this->ApplicationID) {
+        if (!$this->ApplicationID && Auth::User()) {
             $this->CustomerID = Auth::User()->CustomerID;
             $this->Installment = Application::InstallmentCount;
         }
