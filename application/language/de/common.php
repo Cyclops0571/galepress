@@ -193,7 +193,6 @@ return array(
     'applications_list_column11' => 'Ist Abgelaufen?',
 
     'application_settings_caption_detail' => 'App Einstellungen',
-    'application_settings_caption_detail_big' => 'APP EINSTELLUNGEN',
     'application_settings_caption_template' => 'Template Einstellungen',
     'application_settings_caption_banner' => 'Banner Einstellungen',
     'application_settings_store_locator' => 'Händer-Suche',

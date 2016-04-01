@@ -19,6 +19,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        var_dump(\Laravel\Auth::User());
+        exit;
         if (Request::env() == ENV_LIVE) {
             exit;
         }

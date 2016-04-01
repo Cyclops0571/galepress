@@ -16,10 +16,6 @@ class GoogleMap extends Eloquent{
 	public static $table = 'GoogleMap';
 	public static $key = 'GoogleMapID';
 	
-	public function CheckOwnership($appID) {
-		return $this->ApplicationID == $appID;
-	}
-	
 	/**
 	 * 
 	 * @param type $googleMapID
@@ -28,4 +24,26 @@ class GoogleMap extends Eloquent{
 	public static function find($googleMapID) {
 		return GoogleMap::where(self::$key, '=', $googleMapID)->where("StatusID", '=', eStatus::Active)->first();
 	}
+
+    public static function getSampleXmlUrl()
+    {
+        return "/files/sampleFiles/SampleMapExcel_" . Laravel\Config::get("application.language") . ".xls";
+    }
+
+    public function CheckOwnership($appID)
+    {
+        return $this->ApplicationID == $appID;
+    }
+
+    public function save()
+    {
+        if (!$this->dirty()) {
+            return true;
+        }
+
+        if (!$this->GoogleMapID) {
+            $this->StatusID = eStatus::Active;
+        }
+        parent::save();
+    }
 }

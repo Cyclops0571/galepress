@@ -362,6 +362,31 @@ margin-left: 20px;
     font-size: 8px;
     margin-top: -4px;
 }
+
+.location-icon-triplet-first {
+    font-size: 12px;
+    color: white;
+}
+
+.location-icon-triplet-second {
+    position: absolute;
+    font-size: 9px;
+    margin-left: -14px;
+    color: #0475BA;
+}
+
+.location-icon-triplet-third {
+    position: absolute;
+    font-size: 8px;
+    margin-left: 2px;
+    margin-top: -4px;
+    color: #DB3838;
+}
+
+.commandbar-search {
+    float: right;
+    max-width: 300px;
+}
 /* Chrome, Safari, Opera */
 @-webkit-keyframes dragLi {
     0%   {margin-top:0px;}

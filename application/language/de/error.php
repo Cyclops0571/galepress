@@ -9,4 +9,6 @@ return array(
     'something_went_wrong' => 'Sorry, something went wrong :(',
     'will_notify_team' => 'Looks like our team takes a nap. <br />Dont worry, I will poke them to death.',
     'your_page_not_found' => 'We couldn\'t find the page you were looking for',
+    "invalid_excel_file" => "Invalid Excel-Datei",
+    "invalid_excel_file_two_rows" => "Ungültige Excel-Datei (die Liste muß mindestens 2 Zeilen enthalten).",
 );

@@ -312,6 +312,11 @@ class Clients_Controller extends Base_Controller
      */
     public function post_excelupload()
     {
+//        $obj = new stdClass();
+//        $obj->responseMsg = (string)'asdfasdf';
+//        $obj->status = 'success';
+//        return Response::json($obj);
+
         $selectableContentIDSet = NULL;
         $responseMsg = "";
         $status = "Failed";
@@ -359,7 +364,7 @@ class Clients_Controller extends Base_Controller
             $updatedUserCount = 0;
             for ($row = 2; $row <= $rowCount; $row++) {
                 $colNo = 1;
-                $applicationID = $data->val($row, $colNo++);
+                $applicationID = (int)$data->val($row, $colNo++);
                 $username = $data->val($row, $colNo++);
                 $password = $data->val($row, $colNo++);
                 $email = $data->val($row, $colNo++);
@@ -367,6 +372,9 @@ class Clients_Controller extends Base_Controller
                 $surname = $data->val($row, $colNo++);
                 $paidUntil = date("Y-m-d", strtotime($data->val($row, $colNo++)));
                 $contentIDSetNew = explode(",", $data->val($row, $colNo++));
+                if ($applicationID <= 0) {
+                    continue;
+                }
 
                 if (!in_array($applicationID, $appIDSet)) {
                     $responseMsg .= Common::localize("invalid_application_id_at_row") . $row;

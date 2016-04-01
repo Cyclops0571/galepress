@@ -60,7 +60,9 @@ Route::get('test/v(:num)', 'test@routetest');
 // </editor-fold>
 
 
-Route::post("client/excelupload", "clients@excelupload");
+Route::post("clients/excelupload", "clients@excelupload", array('before' => 'auth'));
+Route::post("maps/excelupload/(:num)", "maps@excelupload", array('before' => 'auth'));
+Route::get("maps/delete", "maps@delete", array('before' => 'auth'));
 $languages = Config::get('application.languages', array());
 
 Route::post('/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));

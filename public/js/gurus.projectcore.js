@@ -1441,6 +1441,41 @@ var cCommon = new function () {
         }
         return qs;
     };
+
+    this.fileUploadInit = function (uploadUrl, fsuccess) {
+        $("#File").fileupload({
+            url: uploadUrl,
+            dataType: 'json',
+            sequentialUploads: true,
+            multipart: true,
+            formData: {
+                'element': 'File'
+            },
+            done: function (e, data) {
+                console.log(data);
+                if (data.textStatus.valueOf() === 'success'.valueOf()) {
+                    var result = data.result;
+                    if (data.result !== null) {
+                        if (result.status.valueOf() === 'success'.valueOf()) {
+                            fsuccess(result);
+                        } else {
+                            cNotification.validation(result.responseMsg);
+                        }
+                    } else {
+                        cNotification.failure(notification['failure']);
+                    }
+                }
+            },
+            fail: function (e, data) {
+                cNotification.failure(notification['failure']);
+            }
+        });
+
+        //select file
+        $("#FileButton").click(function () {
+            $("#File").click();
+        });
+    }
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1766,6 +1801,12 @@ var cGoogleMap = new function () {
     this.save = function () {
         cCommon.save(this.objectName);
     };
+
+    this.delete = function (id) {
+        var url = "/maps/delete";
+        var rowIDPrefix = "googleMapIDSet_";
+        cCommon.delete(url, id, rowIDPrefix);
+    }
 };
 
 var cTemplate = new function () {

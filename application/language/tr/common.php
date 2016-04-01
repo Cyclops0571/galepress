@@ -191,7 +191,6 @@ return array(
     'applications_list_column11' => 'Süresi?',
 
     'application_settings_caption_detail' => 'Uygulama Ayarları',
-    'application_settings_caption_detail_big' => 'UYGULAMA AYARLARI',
     'application_settings_caption_template' => 'Tema Ayarları',
     'application_settings_caption_banner' => 'Banner Ayarları',
     'application_settings_store_locator' => 'Bayi Lokasyonları',
