@@ -48,7 +48,7 @@ $sortDirLink = '&sort_dir=' . ($sort_dir == 'DESC' ? 'ASC' : 'DESC');
                                         } else {
                                             cNotification.success();
                                         }
-                                        window.location = '/' + currentLanguage + '/' + route["maps"] + '?ApplicationID=' + ApplicationID;
+                                        window.location = '/' + currentLanguage + '/' + route["maps"] + '?applicationID=' + ApplicationID;
                                     });
                         </script>
                     </div>
