@@ -262,6 +262,9 @@ class Maps_Controller extends Base_Controller
                     $googleMap = new GoogleMap();
                     $googleMap->ApplicationID = $applicationID;
                     $googleMap->Name = $Name;
+                    $googleMap->StatusID = eStatus::Active;
+                    $googleMap->Address = '';
+                    $googleMap->Description = '';
                     $addedCount++;
                 } else {
                     $updatedCount++;
