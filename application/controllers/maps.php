@@ -257,20 +257,21 @@ class Maps_Controller extends Base_Controller
                 if (!$Name || !$Latitude || !$Longitude) {
                     continue;
                 }
-                $googleMap = GoogleMap::where('ApplicationID', '=', $applicationID)->where('name', '=', $Name)->first();
+                $googleMap = GoogleMap::where('ApplicationID', '=', $applicationID)->where('Latitude', '=', $Latitude)->where("Longitude", "=", $Longitude)->first();
                 if (!$googleMap) {
                     $googleMap = new GoogleMap();
-                    $googleMap->ApplicationID = $applicationID;
                     $addedCount++;
                 } else {
-                    $googleMap->StatusID = eStatus::Active;
                     $updatedCount++;
                 }
 
+                $googleMap->Name = $Name;
+                $googleMap->ApplicationID = $applicationID;
                 $googleMap->Latitude = $Latitude;
                 $googleMap->Longitude = $Longitude;
                 $googleMap->Address = $data->val($row, $colNo++);
                 $googleMap->Description = $data->val($row, $colNo++);
+                $googleMap->StatusID = eStatus::Active;
                 $googleMap->save();
 
 
