@@ -316,353 +316,17 @@ class Spreadsheet_Excel_Reader {
 	var $colindexes = array();
 	var $standardColWidth = 0;
 	var $defaultColWidth = 0;
-
-	function myHex($d) {
-		if ($d < 16) return "0" . dechex($d);
-		return dechex($d);
-	}
-	
-	function dumpHexData($data, $pos, $length) {
-		$info = "";
-		for ($i = 0; $i <= $length; $i++) {
-			$info .= ($i==0?"":" ") . $this->myHex(ord($data[$pos + $i])) . (ord($data[$pos + $i])>31? "[" . $data[$pos + $i] . "]":'');
-		}
-		return $info;
-	}
-
-	function getCol($col) {
-		if (is_string($col)) {
-			$col = strtolower($col);
-			if (array_key_exists($col,$this->colnames)) {
-				$col = $this->colnames[$col];
-			}
-		}
-		return $col;
-	}
-
-	// PUBLIC API FUNCTIONS
-	// --------------------
-
-	function val($row,$col,$sheet=0) {
-		$col = $this->getCol($col);
-		if (array_key_exists($row,$this->sheets[$sheet]['cells']) && array_key_exists($col,$this->sheets[$sheet]['cells'][$row])) {
-			return $this->sheets[$sheet]['cells'][$row][$col];
-		}
-		return "";
-	}
-	function value($row,$col,$sheet=0) {
-		return $this->val($row,$col,$sheet);
-	}
-	function info($row,$col,$type='',$sheet=0) {
-		$col = $this->getCol($col);
-		if (array_key_exists('cellsInfo',$this->sheets[$sheet])
-				&& array_key_exists($row,$this->sheets[$sheet]['cellsInfo'])
-				&& array_key_exists($col,$this->sheets[$sheet]['cellsInfo'][$row])
-				&& array_key_exists($type,$this->sheets[$sheet]['cellsInfo'][$row][$col])) {
-			return $this->sheets[$sheet]['cellsInfo'][$row][$col][$type];
-		}
-		return "";
-	}
-	function type($row,$col,$sheet=0) {
-		return $this->info($row,$col,'type',$sheet);
-	}
-	function raw($row,$col,$sheet=0) {
-		return $this->info($row,$col,'raw',$sheet);
-	}
-	function rowspan($row,$col,$sheet=0) {
-		$val = $this->info($row,$col,'rowspan',$sheet);
-		if ($val=="") { return 1; }
-		return $val;
-	}
-	function colspan($row,$col,$sheet=0) {
-		$val = $this->info($row,$col,'colspan',$sheet);
-		if ($val=="") { return 1; }
-		return $val;
-	}
-	function hyperlink($row,$col,$sheet=0) {
-		$link = $this->sheets[$sheet]['cellsInfo'][$row][$col]['hyperlink'];
-		if ($link) {
-			return $link['link'];
-		}
-		return '';
-	}
-	function rowcount($sheet=0) {
-		return $this->sheets[$sheet]['numRows'];
-	}
-	function colcount($sheet=0) {
-		return $this->sheets[$sheet]['numCols'];
-	}
-	function colwidth($col,$sheet=0) {
-		// Col width is actually the width of the number 0. So we have to estimate and come close
-		return $this->colInfo[$sheet][$col]['width']/9142*200; 
-	}
-	function colhidden($col,$sheet=0) {
-		return !!$this->colInfo[$sheet][$col]['hidden'];
-	}
-	function rowheight($row,$sheet=0) {
-		return $this->rowInfo[$sheet][$row]['height'];
-	}
-	function rowhidden($row,$sheet=0) {
-		return !!$this->rowInfo[$sheet][$row]['hidden'];
-	}
-	
-	// GET THE CSS FOR FORMATTING
-	// ==========================
-	function style($row,$col,$sheet=0,$properties='') {
-		$css = "";
-		$font=$this->font($row,$col,$sheet);
-		if ($font!="") {
-			$css .= "font-family:$font;";
-		}
-		$align=$this->align($row,$col,$sheet);
-		if ($align!="") {
-			$css .= "text-align:$align;";
-		}
-		$height=$this->height($row,$col,$sheet);
-		if ($height!="") {
-			$css .= "font-size:$height"."px;";
-		}
-		$bgcolor=$this->bgColor($row,$col,$sheet);
-		if ($bgcolor!="") {
-			$bgcolor = $this->colors[$bgcolor];
-			$css .= "background-color:$bgcolor;";
-		}
-		$color=$this->color($row,$col,$sheet);
-		if ($color!="") {
-			$css .= "color:$color;";
-		}
-		$bold=$this->bold($row,$col,$sheet);
-		if ($bold) {
-			$css .= "font-weight:bold;";
-		}
-		$italic=$this->italic($row,$col,$sheet);
-		if ($italic) {
-			$css .= "font-style:italic;";
-		}
-		$underline=$this->underline($row,$col,$sheet);
-		if ($underline) {
-			$css .= "text-decoration:underline;";
-		}
-		// Borders
-		$bLeft = $this->borderLeft($row,$col,$sheet);
-		$bRight = $this->borderRight($row,$col,$sheet);
-		$bTop = $this->borderTop($row,$col,$sheet);
-		$bBottom = $this->borderBottom($row,$col,$sheet);
-		$bLeftCol = $this->borderLeftColor($row,$col,$sheet);
-		$bRightCol = $this->borderRightColor($row,$col,$sheet);
-		$bTopCol = $this->borderTopColor($row,$col,$sheet);
-		$bBottomCol = $this->borderBottomColor($row,$col,$sheet);
-		// Try to output the minimal required style
-		if ($bLeft!="" && $bLeft==$bRight && $bRight==$bTop && $bTop==$bBottom) {
-			$css .= "border:" . $this->lineStylesCss[$bLeft] .";";
-		}
-		else {
-			if ($bLeft!="") { $css .= "border-left:" . $this->lineStylesCss[$bLeft] .";"; }
-			if ($bRight!="") { $css .= "border-right:" . $this->lineStylesCss[$bRight] .";"; }
-			if ($bTop!="") { $css .= "border-top:" . $this->lineStylesCss[$bTop] .";"; }
-			if ($bBottom!="") { $css .= "border-bottom:" . $this->lineStylesCss[$bBottom] .";"; }
-		}
-		// Only output border colors if there is an actual border specified
-		if ($bLeft!="" && $bLeftCol!="") { $css .= "border-left-color:" . $bLeftCol .";"; }
-		if ($bRight!="" && $bRightCol!="") { $css .= "border-right-color:" . $bRightCol .";"; }
-		if ($bTop!="" && $bTopCol!="") { $css .= "border-top-color:" . $bTopCol . ";"; }
-		if ($bBottom!="" && $bBottomCol!="") { $css .= "border-bottom-color:" . $bBottomCol .";"; }
-		
-		return $css;
-	}
-	
-	// FORMAT PROPERTIES
-	// =================
-	function format($row,$col,$sheet=0) {
-		return $this->info($row,$col,'format',$sheet);
-	}
-	function formatIndex($row,$col,$sheet=0) {
-		return $this->info($row,$col,'formatIndex',$sheet);
-	}
-	function formatColor($row,$col,$sheet=0) {
-		return $this->info($row,$col,'formatColor',$sheet);
-	}
-	
-	// CELL (XF) PROPERTIES
-	// ====================
-	function xfRecord($row,$col,$sheet=0) {
-		$xfIndex = $this->info($row,$col,'xfIndex',$sheet);
-		if ($xfIndex!="") {
-			return $this->xfRecords[$xfIndex];
-		}
-		return null;
-	}
-	function xfProperty($row,$col,$sheet,$prop) {
-		$xfRecord = $this->xfRecord($row,$col,$sheet);
-		if ($xfRecord!=null) {
-			return $xfRecord[$prop];
-		}
-		return "";
-	}
-	function align($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'align');
-	}
-	function bgColor($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'bgColor');
-	}
-	function borderLeft($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'borderLeft');
-	}
-	function borderRight($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'borderRight');
-	}
-	function borderTop($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'borderTop');
-	}
-	function borderBottom($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'borderBottom');
-	}
-	function borderLeftColor($row,$col,$sheet=0) {
-		return $this->colors[$this->xfProperty($row,$col,$sheet,'borderLeftColor')];
-	}
-	function borderRightColor($row,$col,$sheet=0) {
-		return $this->colors[$this->xfProperty($row,$col,$sheet,'borderRightColor')];
-	}
-	function borderTopColor($row,$col,$sheet=0) {
-		return $this->colors[$this->xfProperty($row,$col,$sheet,'borderTopColor')];
-	}
-	function borderBottomColor($row,$col,$sheet=0) {
-		return $this->colors[$this->xfProperty($row,$col,$sheet,'borderBottomColor')];
-	}
-
-	// FONT PROPERTIES
-	// ===============
-	function fontRecord($row,$col,$sheet=0) {
-	    $xfRecord = $this->xfRecord($row,$col,$sheet);
-		if ($xfRecord!=null) {
-			$font = $xfRecord['fontIndex'];
-			if ($font!=null) {
-				return $this->fontRecords[$font];
-			}
-		}
-		return null;
-	}
-	function fontProperty($row,$col,$sheet=0,$prop) {
-		$font = $this->fontRecord($row,$col,$sheet);
-		if ($font!=null) {
-			return $font[$prop];
-		}
-		return false;
-	}
-	function fontIndex($row,$col,$sheet=0) {
-		return $this->xfProperty($row,$col,$sheet,'fontIndex');
-	}
-	function color($row,$col,$sheet=0) {
-		$formatColor = $this->formatColor($row,$col,$sheet);
-		if ($formatColor!="") {
-			return $formatColor;
-		}
-		$ci = $this->fontProperty($row,$col,$sheet,'color');
-                return $this->rawColor($ci);
-        }
-        function rawColor($ci) {
-		if (($ci <> 0x7FFF) && ($ci <> '')) {
-			return $this->colors[$ci];
-		}
-		return "";
-	}
-	function bold($row,$col,$sheet=0) {
-		return $this->fontProperty($row,$col,$sheet,'bold');
-	}
-	function italic($row,$col,$sheet=0) {
-		return $this->fontProperty($row,$col,$sheet,'italic');
-	}
-	function underline($row,$col,$sheet=0) {
-		return $this->fontProperty($row,$col,$sheet,'under');
-	}
-	function height($row,$col,$sheet=0) {
-		return $this->fontProperty($row,$col,$sheet,'height');
-	}
-	function font($row,$col,$sheet=0) {
-		return $this->fontProperty($row,$col,$sheet,'font');
-	}
-	
-	// DUMP AN HTML TABLE OF THE ENTIRE XLS DATA
-	// =========================================
-	function dump($row_numbers=false,$col_letters=false,$sheet=0,$table_class='excel') {
-		$out = "<table class=\"$table_class\" cellspacing=0>";
-		if ($col_letters) {
-			$out .= "<thead>\n\t<tr>";
-			if ($row_numbers) {
-				$out .= "\n\t\t<th>&nbsp</th>";
-			}
-			for($i=1;$i<=$this->colcount($sheet);$i++) {
-				$style = "width:" . ($this->colwidth($i,$sheet)*1) . "px;";
-				if ($this->colhidden($i,$sheet)) {
-					$style .= "display:none;";
-				}
-				$out .= "\n\t\t<th style=\"$style\">" . strtoupper($this->colindexes[$i]) . "</th>";
-			}
-			$out .= "</tr></thead>\n";
-		}
-		
-		$out .= "<tbody>\n";
-		for($row=1;$row<=$this->rowcount($sheet);$row++) {
-			$rowheight = $this->rowheight($row,$sheet);
-			$style = "height:" . ($rowheight*(4/3)) . "px;";
-			if ($this->rowhidden($row,$sheet)) {
-				$style .= "display:none;";
-			}
-			$out .= "\n\t<tr style=\"$style\">";
-			if ($row_numbers) {
-				$out .= "\n\t\t<th>$row</th>";
-			}
-			for($col=1;$col<=$this->colcount($sheet);$col++) {
-				// Account for Rowspans/Colspans
-				$rowspan = $this->rowspan($row,$col,$sheet);
-				$colspan = $this->colspan($row,$col,$sheet);
-				for($i=0;$i<$rowspan;$i++) {
-					for($j=0;$j<$colspan;$j++) {
-						if ($i>0 || $j>0) {
-							$this->sheets[$sheet]['cellsInfo'][$row+$i][$col+$j]['dontprint']=1;
-						}
-					}
-				}
-				var_dump($this->sheets[$sheet]['cellsInfo'][$row][$col]); exit;
-				if(!$this->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint']) {
-					$style = $this->style($row,$col,$sheet);
-					if ($this->colhidden($col,$sheet)) {
-						$style .= "display:none;";
-					}
-					$out .= "\n\t\t<td style=\"$style\"" . ($colspan > 1?" colspan=$colspan":"") . ($rowspan > 1?" rowspan=$rowspan":"") . ">";
-					$val = $this->val($row,$col,$sheet);
-					if ($val=='') { $val="&nbsp;"; }
-					else { 
-						$val = htmlentities($val); 
-						$link = $this->hyperlink($row,$col,$sheet);
-						if ($link!='') {
-							$val = "<a href=\"$link\">$val</a>";
-						}
-					}
-					$out .= "<nobr>".nl2br($val)."</nobr>";
-					$out .= "</td>";
-				}
-			}
-			$out .= "</tr>\n";
-		}
-		$out .= "</tbody></table>";
-		return $out;
-	}
-	
-	// --------------
-	// END PUBLIC API
-
-
 	var $boundsheets = array();
 	var $formatRecords = array();
 	var $fontRecords = array();
+
+    // PUBLIC API FUNCTIONS
+    // --------------------
 	var $xfRecords = array();
 	var $colInfo = array();
    	var $rowInfo = array();
-	
 	var $sst = array();
 	var $sheets = array();
-
 	var $data;
 	var $_ole;
 	var $_defaultEncoding = "UTF-8";
@@ -670,7 +334,6 @@ class Spreadsheet_Excel_Reader {
 	var $_columnsFormat = array();
 	var $_rowoffset = 1;
 	var $_coloffset = 1;
-
 	/**
 	 * List of default date formats used by Excel
 	 */
@@ -688,7 +351,6 @@ class Spreadsheet_Excel_Reader {
 		0x2e => "H:i:s",
 		0x2f => "i:s.S"
 	);
-
 	/**
 	 * Default number formats used by Excel
 	 */
@@ -715,6 +377,8 @@ class Spreadsheet_Excel_Reader {
 		0x30 => "##0.0E+0"
 	);
 
+    // GET THE CSS FOR FORMATTING
+    // ==========================
     var $colors = Array(
         0x00 => "#000000",
         0x01 => "#FFFFFF",
@@ -793,6 +457,8 @@ class Spreadsheet_Excel_Reader {
         0x7FFF => "#000000"
     );
 
+    // FORMAT PROPERTIES
+    // =================
 	var $lineStyles = array(
 		0x00 => "",
 		0x01 => "Thin",
@@ -808,105 +474,22 @@ class Spreadsheet_Excel_Reader {
 		0x0B => "Thin dash-dot-dotted",
 		0x0C => "Medium dash-dot-dotted",
 		0x0D => "Slanted medium dash-dotted"
-	);	
-
+    );
 	var $lineStylesCss = array(
-		"Thin" => "1px solid", 
-		"Medium" => "2px solid", 
-		"Dashed" => "1px dashed", 
-		"Dotted" => "1px dotted", 
-		"Thick" => "3px solid", 
-		"Double" => "double", 
-		"Hair" => "1px solid", 
-		"Medium dashed" => "2px dashed", 
-		"Thin dash-dotted" => "1px dashed", 
-		"Medium dash-dotted" => "2px dashed", 
-		"Thin dash-dot-dotted" => "1px dashed", 
-		"Medium dash-dot-dotted" => "2px dashed", 
-		"Slanted medium dash-dotte" => "2px dashed" 
+        "Thin" => "1px solid",
+        "Medium" => "2px solid",
+        "Dashed" => "1px dashed",
+        "Dotted" => "1px dotted",
+        "Thick" => "3px solid",
+        "Double" => "double",
+        "Hair" => "1px solid",
+        "Medium dashed" => "2px dashed",
+        "Thin dash-dotted" => "1px dashed",
+        "Medium dash-dotted" => "2px dashed",
+        "Thin dash-dot-dotted" => "1px dashed",
+        "Medium dash-dot-dotted" => "2px dashed",
+        "Slanted medium dash-dotte" => "2px dashed"
 	);
-	
-	function read16bitstring($data, $start) {
-		$len = 0;
-		while (ord($data[$start + $len]) + ord($data[$start + $len + 1]) > 0) $len++;
-		return substr($data, $start, $len);
-	}
-	
-	// ADDED by Matt Kruse for better formatting
-	function _format_value($format,$num,$f) {
-		// 49==TEXT format
-		// http://code.google.com/p/php-excel-reader/issues/detail?id=7
-		if ( (!$f && $format=="%s") || ($f==49) || ($format=="GENERAL") ) { 
-			return array('string'=>$num, 'formatColor'=>null); 
-		}
-
-		// Custom pattern can be POSITIVE;NEGATIVE;ZERO
-		// The "text" option as 4th parameter is not handled
-		$parts = explode(";",$format);
-		$pattern = $parts[0];
-		// Negative pattern
-		if (count($parts)>2 && $num==0) {
-			$pattern = $parts[2];
-		}
-		// Zero pattern
-		if (count($parts)>1 && $num<0) {
-			$pattern = $parts[1];
-			$num = abs($num);
-		}
-
-		$color = "";
-		$matches = array();
-		$color_regex = "/^\[(BLACK|BLUE|CYAN|GREEN|MAGENTA|RED|WHITE|YELLOW)\]/i";
-		if (preg_match($color_regex,$pattern,$matches)) {
-			$color = strtolower($matches[1]);
-			$pattern = preg_replace($color_regex,"",$pattern);
-		}
-		
-		// In Excel formats, "_" is used to add spacing, which we can't do in HTML
-		$pattern = preg_replace("/_./","",$pattern);
-		
-		// Some non-number characters are escaped with \, which we don't need
-		$pattern = preg_replace("/\\\/","",$pattern);
-		
-		// Some non-number strings are quoted, so we'll get rid of the quotes
-		$pattern = preg_replace("/\"/","",$pattern);
-
-		// TEMPORARY - Convert # to 0
-		$pattern = preg_replace("/\#/","0",$pattern);
-
-		// Find out if we need comma formatting
-		$has_commas = preg_match("/,/",$pattern);
-		if ($has_commas) {
-			$pattern = preg_replace("/,/","",$pattern);
-		}
-
-		// Handle Percentages
-		if (preg_match("/\d(\%)([^\%]|$)/",$pattern,$matches)) {
-			$num = $num * 100;
-			$pattern = preg_replace("/(\d)(\%)([^\%]|$)/","$1%$3",$pattern);
-		}
-
-		// Handle the number itself
-		$number_regex = "/(\d+)(\.?)(\d*)/";
-		if (preg_match($number_regex,$pattern,$matches)) {
-			$left = $matches[1];
-			$dec = $matches[2];
-			$right = $matches[3];
-			if ($has_commas) {
-				$formatted = number_format($num,strlen($right));
-			}
-			else {
-				$sprintf_pattern = "%1.".strlen($right)."f";
-				$formatted = sprintf($sprintf_pattern, $num);
-			}
-			$pattern = preg_replace($number_regex, $formatted, $pattern);
-		}
-
-		return array(
-			'string'=>$pattern,
-			'formatColor'=>$color
-		);
-	}
 
 	/**
 	 * Constructor
@@ -916,7 +499,7 @@ class Spreadsheet_Excel_Reader {
 	function Spreadsheet_Excel_Reader($file='',$store_extended_info=true,$outputEncoding='') {
 		$this->_ole = new OLERead();
 		$this->setUTFEncoder('UTF-8');
-		if ($outputEncoding != '') { 
+        if ($outputEncoding != '') {
 			$this->setOutputEncoding($outputEncoding);
 		}
 		for ($i=1; $i<245; $i++) {
@@ -930,12 +513,8 @@ class Spreadsheet_Excel_Reader {
 		}
 	}
 
-	/**
-	 * Set the encoding method
-	 */
-	function setOutputEncoding($encoding) {
-		$this->_defaultEncoding = $encoding;
-	}
+    // CELL (XF) PROPERTIES
+    // ====================
 
 	/**
 	 *  $encoder = 'iconv' or 'mb'
@@ -951,23 +530,12 @@ class Spreadsheet_Excel_Reader {
 		}
 	}
 
-	function setRowColOffset($iOffset) {
-		$this->_rowoffset = $iOffset;
-		$this->_coloffset = $iOffset;
-	}
-
 	/**
-	 * Set the default number format
+     * Set the encoding method
 	 */
-	function setDefaultFormat($sFormat) {
-		$this->_defaultFormat = $sFormat;
-	}
-
-	/**
-	 * Force a column to use a certain format
-	 */
-	function setColumnFormat($column, $sFormat) {
-		$this->_columnsFormat[$column] = $sFormat;
+    function setOutputEncoding($encoding)
+    {
+        $this->_defaultEncoding = $encoding;
 	}
 
 	/**
@@ -1118,7 +686,8 @@ class Spreadsheet_Excel_Reader {
 								$spos += $len;
 							}
 						}
-						$retstr = ($asciiEncoding) ? $retstr : $this->_encodeUTF16($retstr);
+//						$retstr = ($asciiEncoding) ? $retstr : $this->_encodeUTF16($retstr);
+                        $retstr = ($asciiEncoding) ? iconv('cp1250', 'utf-8', $retstr) : $this->_encodeUTF16($retstr);
 
 						if ($richString){
 							$spos += 4 * $formattingRuns;
@@ -1164,7 +733,7 @@ class Spreadsheet_Excel_Reader {
 						    $font = substr($data, $pos+20, $numchars);
 						} else {
 						    $font = substr($data, $pos+20, $numchars*2);
-						    $font =  $this->_encodeUTF16($font); 
+                            $font = $this->_encodeUTF16($font);
 						}
 						$this->fontRecords[] = array(
 								'height' => $height / 20,
@@ -1217,14 +786,14 @@ class Spreadsheet_Excel_Reader {
 						$xf['borderRight'] = $this->lineStyles[($border & 0xF0) >> 4];
 						$xf['borderTop'] = $this->lineStyles[($border & 0xF00) >> 8];
 						$xf['borderBottom'] = $this->lineStyles[($border & 0xF000) >> 12];
-						
+
 						$xf['borderLeftColor'] = ($border & 0x7F0000) >> 16;
 						$xf['borderRightColor'] = ($border & 0x3F800000) >> 23;
 						$border = (ord($data[$pos+18]) | ord($data[$pos+19]) << 8);
 
 						$xf['borderTopColor'] = ($border & 0x7F);
 						$xf['borderBottomColor'] = ($border & 0x3F80) >> 7;
-												
+
 						if (array_key_exists($indexCode, $this->dateFormats)) {
 							$xf['type'] = 'date';
 							$xf['format'] = $this->dateFormats[$indexCode];
@@ -1317,6 +886,46 @@ class Spreadsheet_Excel_Reader {
 		}
 		return true;
 	}
+
+    function _GetInt4d($data, $pos)
+    {
+        $value = ord($data[$pos]) | (ord($data[$pos + 1]) << 8) | (ord($data[$pos + 2]) << 16) | (ord($data[$pos + 3]) << 24);
+        if ($value >= 4294967294) {
+            $value = -2;
+        }
+        return $value;
+    }
+
+    function _encodeUTF16($string)
+    {
+        $result = $string;
+        if ($this->_defaultEncoding) {
+            switch ($this->_encoderFunction) {
+                case 'iconv' :
+                    $result = iconv('UTF-16LE', $this->_defaultEncoding, $string);
+                    break;
+                case 'mb_convert_encoding' :
+                    $result = mb_convert_encoding($string, $this->_defaultEncoding, 'UTF-16LE');
+                    break;
+            }
+        }
+        return $result;
+    }
+
+    function dumpHexData($data, $pos, $length)
+    {
+        $info = "";
+        for ($i = 0; $i <= $length; $i++) {
+            $info .= ($i == 0 ? "" : " ") . $this->myHex(ord($data[$pos + $i])) . (ord($data[$pos + $i]) > 31 ? "[" . $data[$pos + $i] . "]" : '');
+        }
+        return $info;
+    }
+
+    function myHex($d)
+    {
+        if ($d < 16) return "0" . dechex($d);
+        return dechex($d);
+    }
 
 	/**
 	 * Parse a worksheet
@@ -1554,24 +1163,24 @@ class Spreadsheet_Excel_Reader {
 					}
 					$linkdata['desc'] = $udesc;
 					$linkdata['link'] = $this->_encodeUTF16($ulink);
-					for ($r=$row; $r<=$row2; $r++) { 
+                    for ($r = $row; $r <= $row2; $r++) {
 						for ($c=$column; $c<=$column2; $c++) {
 							$this->sheets[$this->sn]['cellsInfo'][$r+1][$c+1]['hyperlink'] = $linkdata;
 						}
 					}
 					break;
 				case SPREADSHEET_EXCEL_READER_TYPE_DEFCOLWIDTH:
-					$this->defaultColWidth  = ord($data[$spos+4]) | ord($data[$spos+5]) << 8; 
+                    $this->defaultColWidth = ord($data[$spos + 4]) | ord($data[$spos + 5]) << 8;
 					break;
 				case SPREADSHEET_EXCEL_READER_TYPE_STANDARDWIDTH:
-					$this->standardColWidth  = ord($data[$spos+4]) | ord($data[$spos+5]) << 8; 
+                    $this->standardColWidth = ord($data[$spos + 4]) | ord($data[$spos + 5]) << 8;
 					break;
 				case SPREADSHEET_EXCEL_READER_TYPE_COLINFO:
 					$colfrom = ord($data[$spos+0]) | ord($data[$spos+1]) << 8;
 					$colto = ord($data[$spos+2]) | ord($data[$spos+3]) << 8;
-					$cw = ord($data[$spos+4]) | ord($data[$spos+5]) << 8; 
-					$cxf = ord($data[$spos+6]) | ord($data[$spos+7]) << 8; 
-					$co = ord($data[$spos+8]); 
+                    $cw = ord($data[$spos + 4]) | ord($data[$spos + 5]) << 8;
+                    $cxf = ord($data[$spos + 6]) | ord($data[$spos + 7]) << 8;
+                    $co = ord($data[$spos + 8]);
 					for ($coli = $colfrom; $coli <= $colto; $coli++) {
 						$this->colInfo[$this->sn][$coli+1] = Array('width' => $cw, 'xf' => $cxf, 'hidden' => ($co & 0x01), 'collapsed' => ($co & 0x1000) >> 12);
 					}
@@ -1589,12 +1198,32 @@ class Spreadsheet_Excel_Reader {
 			 $this->sheets[$this->sn]['numCols'] = $this->sheets[$this->sn]['maxcol'];
 		}
 
-		function isDate($spos) {
-			$xfindex = ord($this->data[$spos+4]) | ord($this->data[$spos+5]) << 8;
-			return ($this->xfRecords[$xfindex]['type'] == 'date');
+    function _GetIEEE754($rknum)
+    {
+        if (($rknum & 0x02) != 0) {
+            $value = $rknum >> 2;
+        } else {
+            //mmp
+            // I got my info on IEEE754 encoding from
+            // http://research.microsoft.com/~hollasch/cgindex/coding/ieeefloat.html
+            // The RK format calls for using only the most significant 30 bits of the
+            // 64 bit floating point value. The other 34 bits are assumed to be 0
+            // So, we use the upper 30 bits of $rknum as follows...
+            $sign = ($rknum & 0x80000000) >> 31;
+            $exp = ($rknum & 0x7ff00000) >> 20;
+            $mantissa = (0x100000 | ($rknum & 0x000ffffc));
+            $value = $mantissa / pow(2, (20 - ($exp - 1023)));
+            if ($sign) {
+                $value = -1 * $value;
+            }
+            //end of changes by mmp
 		}
+        if (($rknum & 0x01) != 0) {
+            $value /= 100;
+        }
+        return $value;
+    }
 
-		// Get the details for a particular cell
 		function _getCellDetails($spos,$numValue,$column) {
 			$xfindex = ord($this->data[$spos+4]) | ord($this->data[$spos+5]) << 8;
 			$xfrecord = $this->xfRecords[$xfindex];
@@ -1659,6 +1288,101 @@ class Spreadsheet_Excel_Reader {
 
 		}
 
+    function _format_value($format, $num, $f)
+    {
+        // 49==TEXT format
+        // http://code.google.com/p/php-excel-reader/issues/detail?id=7
+        if ((!$f && $format == "%s") || ($f == 49) || ($format == "GENERAL")) {
+            return array('string' => $num, 'formatColor' => null);
+        }
+
+        // Custom pattern can be POSITIVE;NEGATIVE;ZERO
+        // The "text" option as 4th parameter is not handled
+        $parts = explode(";", $format);
+        $pattern = $parts[0];
+        // Negative pattern
+        if (count($parts) > 2 && $num == 0) {
+            $pattern = $parts[2];
+        }
+        // Zero pattern
+        if (count($parts) > 1 && $num < 0) {
+            $pattern = $parts[1];
+            $num = abs($num);
+        }
+
+        $color = "";
+        $matches = array();
+        $color_regex = "/^\[(BLACK|BLUE|CYAN|GREEN|MAGENTA|RED|WHITE|YELLOW)\]/i";
+        if (preg_match($color_regex, $pattern, $matches)) {
+            $color = strtolower($matches[1]);
+            $pattern = preg_replace($color_regex, "", $pattern);
+        }
+
+        // In Excel formats, "_" is used to add spacing, which we can't do in HTML
+        $pattern = preg_replace("/_./", "", $pattern);
+
+        // Some non-number characters are escaped with \, which we don't need
+        $pattern = preg_replace("/\\\/", "", $pattern);
+
+        // Some non-number strings are quoted, so we'll get rid of the quotes
+        $pattern = preg_replace("/\"/", "", $pattern);
+
+        // TEMPORARY - Convert # to 0
+        $pattern = preg_replace("/\#/", "0", $pattern);
+
+        // Find out if we need comma formatting
+        $has_commas = preg_match("/,/", $pattern);
+        if ($has_commas) {
+            $pattern = preg_replace("/,/", "", $pattern);
+        }
+
+        // Handle Percentages
+        if (preg_match("/\d(\%)([^\%]|$)/", $pattern, $matches)) {
+            $num = $num * 100;
+            $pattern = preg_replace("/(\d)(\%)([^\%]|$)/", "$1%$3", $pattern);
+        }
+
+        // Handle the number itself
+        $number_regex = "/(\d+)(\.?)(\d*)/";
+        if (preg_match($number_regex, $pattern, $matches)) {
+            $left = $matches[1];
+            $dec = $matches[2];
+            $right = $matches[3];
+            if ($has_commas) {
+                $formatted = number_format($num, strlen($right));
+            } else {
+                $sprintf_pattern = "%1." . strlen($right) . "f";
+                $formatted = sprintf($sprintf_pattern, $num);
+            }
+            $pattern = preg_replace($number_regex, $formatted, $pattern);
+        }
+
+        return array(
+            'string' => $pattern,
+            'formatColor' => $color
+        );
+    }
+
+    // FONT PROPERTIES
+    // ===============
+
+    function addcell($row, $col, $string, $info = null)
+    {
+        $this->sheets[$this->sn]['maxrow'] = max($this->sheets[$this->sn]['maxrow'], $row + $this->_rowoffset);
+        $this->sheets[$this->sn]['maxcol'] = max($this->sheets[$this->sn]['maxcol'], $col + $this->_coloffset);
+        $this->sheets[$this->sn]['cells'][$row + $this->_rowoffset][$col + $this->_coloffset] = $string;
+        if ($this->store_extended_info && $info) {
+            foreach ($info as $key => $val) {
+                $this->sheets[$this->sn]['cellsInfo'][$row + $this->_rowoffset][$col + $this->_coloffset][$key] = $val;
+            }
+        }
+    }
+
+    function isDate($spos)
+    {
+        $xfindex = ord($this->data[$spos + 4]) | ord($this->data[$spos + 5]) << 8;
+        return ($this->xfRecords[$xfindex]['type'] == 'date');
+    }
 
 	function createNumber($spos) {
 		$rknumhigh = $this->_GetInt4d($this->data, $spos + 10);
@@ -1675,62 +1399,448 @@ class Spreadsheet_Excel_Reader {
 		return  $value;
 	}
 
-	function addcell($row, $col, $string, $info=null) {
-		$this->sheets[$this->sn]['maxrow'] = max($this->sheets[$this->sn]['maxrow'], $row + $this->_rowoffset);
-		$this->sheets[$this->sn]['maxcol'] = max($this->sheets[$this->sn]['maxcol'], $col + $this->_coloffset);
-		$this->sheets[$this->sn]['cells'][$row + $this->_rowoffset][$col + $this->_coloffset] = $string;
-		if ($this->store_extended_info && $info) {
-			foreach ($info as $key=>$val) {
-				$this->sheets[$this->sn]['cellsInfo'][$row + $this->_rowoffset][$col + $this->_coloffset][$key] = $val;
+    function read16bitstring($data, $start)
+    {
+        $len = 0;
+        while (ord($data[$start + $len]) + ord($data[$start + $len + 1]) > 0) $len++;
+        return substr($data, $start, $len);
+    }
+
+    function value($row, $col, $sheet = 0)
+    {
+        return $this->val($row, $col, $sheet);
+    }
+
+    function val($row, $col, $sheet = 0)
+    {
+        $col = $this->getCol($col);
+        if (array_key_exists($row, $this->sheets[$sheet]['cells']) && array_key_exists($col, $this->sheets[$sheet]['cells'][$row])) {
+            return $this->sheets[$sheet]['cells'][$row][$col];
+        }
+        return "";
+    }
+
+    function getCol($col)
+    {
+        if (is_string($col)) {
+            $col = strtolower($col);
+            if (array_key_exists($col, $this->colnames)) {
+                $col = $this->colnames[$col];
 			}
 		}
+        return $col;
 	}
 
+    function type($row, $col, $sheet = 0)
+    {
+        return $this->info($row, $col, 'type', $sheet);
+    }
 
-	function _GetIEEE754($rknum) {
-		if (($rknum & 0x02) != 0) {
-				$value = $rknum >> 2;
-		} else {
-			//mmp
-			// I got my info on IEEE754 encoding from
-			// http://research.microsoft.com/~hollasch/cgindex/coding/ieeefloat.html
-			// The RK format calls for using only the most significant 30 bits of the
-			// 64 bit floating point value. The other 34 bits are assumed to be 0
-			// So, we use the upper 30 bits of $rknum as follows...
-			$sign = ($rknum & 0x80000000) >> 31;
-			$exp = ($rknum & 0x7ff00000) >> 20;
-			$mantissa = (0x100000 | ($rknum & 0x000ffffc));
-			$value = $mantissa / pow( 2 , (20- ($exp - 1023)));
-			if ($sign) {
-				$value = -1 * $value;
+    function info($row, $col, $type = '', $sheet = 0)
+    {
+        $col = $this->getCol($col);
+        if (array_key_exists('cellsInfo', $this->sheets[$sheet])
+            && array_key_exists($row, $this->sheets[$sheet]['cellsInfo'])
+            && array_key_exists($col, $this->sheets[$sheet]['cellsInfo'][$row])
+            && array_key_exists($type, $this->sheets[$sheet]['cellsInfo'][$row][$col])
+        ) {
+            return $this->sheets[$sheet]['cellsInfo'][$row][$col][$type];
+        }
+        return "";
+    }
+
+    function raw($row, $col, $sheet = 0)
+    {
+        return $this->info($row, $col, 'raw', $sheet);
+    }
+
+    // DUMP AN HTML TABLE OF THE ENTIRE XLS DATA
+    // =========================================
+
+    function format($row, $col, $sheet = 0)
+    {
+        return $this->info($row, $col, 'format', $sheet);
+    }
+
+    // --------------
+    // END PUBLIC API
+
+    function formatIndex($row, $col, $sheet = 0)
+    {
+        return $this->info($row, $col, 'formatIndex', $sheet);
+    }
+
+    function fontIndex($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'fontIndex');
+    }
+
+    function xfProperty($row, $col, $sheet, $prop)
+    {
+        $xfRecord = $this->xfRecord($row, $col, $sheet);
+        if ($xfRecord != null) {
+            return $xfRecord[$prop];
+        }
+        return "";
+    }
+
+    function dump($row_numbers = false, $col_letters = false, $sheet = 0, $table_class = 'excel')
+    {
+        $out = "<table class=\"$table_class\" cellspacing=0>";
+        if ($col_letters) {
+            $out .= "<thead>\n\t<tr>";
+            if ($row_numbers) {
+                $out .= "\n\t\t<th>&nbsp</th>";
 			}
-			//end of changes by mmp
+            for ($i = 1; $i <= $this->colcount($sheet); $i++) {
+                $style = "width:" . ($this->colwidth($i, $sheet) * 1) . "px;";
+                if ($this->colhidden($i, $sheet)) {
+                    $style .= "display:none;";
+                }
+                $out .= "\n\t\t<th style=\"$style\">" . strtoupper($this->colindexes[$i]) . "</th>";
+            }
+            $out .= "</tr></thead>\n";
 		}
-		if (($rknum & 0x01) != 0) {
-			$value /= 100;
+
+        $out .= "<tbody>\n";
+        for ($row = 1; $row <= $this->rowcount($sheet); $row++) {
+            $rowheight = $this->rowheight($row, $sheet);
+            $style = "height:" . ($rowheight * (4 / 3)) . "px;";
+            if ($this->rowhidden($row, $sheet)) {
+                $style .= "display:none;";
+            }
+            $out .= "\n\t<tr style=\"$style\">";
+            if ($row_numbers) {
+                $out .= "\n\t\t<th>$row</th>";
+            }
+            for ($col = 1; $col <= $this->colcount($sheet); $col++) {
+                // Account for Rowspans/Colspans
+                $rowspan = $this->rowspan($row, $col, $sheet);
+                $colspan = $this->colspan($row, $col, $sheet);
+                for ($i = 0; $i < $rowspan; $i++) {
+                    for ($j = 0; $j < $colspan; $j++) {
+                        if ($i > 0 || $j > 0) {
+                            $this->sheets[$sheet]['cellsInfo'][$row + $i][$col + $j]['dontprint'] = 1;
+                        }
+                    }
+                }
+                var_dump($this->sheets[$sheet]['cellsInfo'][$row][$col]);
+                exit;
+                if (!$this->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint']) {
+                    $style = $this->style($row, $col, $sheet);
+                    if ($this->colhidden($col, $sheet)) {
+                        $style .= "display:none;";
+                    }
+                    $out .= "\n\t\t<td style=\"$style\"" . ($colspan > 1 ? " colspan=$colspan" : "") . ($rowspan > 1 ? " rowspan=$rowspan" : "") . ">";
+                    $val = $this->val($row, $col, $sheet);
+                    if ($val == '') {
+                        $val = "&nbsp;";
+                    } else {
+                        $val = htmlentities($val);
+                        $link = $this->hyperlink($row, $col, $sheet);
+                        if ($link != '') {
+                            $val = "<a href=\"$link\">$val</a>";
+                        }
+                    }
+                    $out .= "<nobr>" . nl2br($val) . "</nobr>";
+                    $out .= "</td>";
+                }
+            }
+            $out .= "</tr>\n";
 		}
-		return $value;
+        $out .= "</tbody></table>";
+        return $out;
 	}
 
-	function _encodeUTF16($string) {
-		$result = $string;
-		if ($this->_defaultEncoding){
-			switch ($this->_encoderFunction){
-				case 'iconv' :	 $result = iconv('UTF-16LE', $this->_defaultEncoding, $string);
-								break;
-				case 'mb_convert_encoding' :	 $result = mb_convert_encoding($string, $this->_defaultEncoding, 'UTF-16LE' );
-								break;
+    function colcount($sheet = 0)
+    {
+        return $this->sheets[$sheet]['numCols'];
+    }
+
+    function colwidth($col, $sheet = 0)
+    {
+        // Col width is actually the width of the number 0. So we have to estimate and come close
+        return $this->colInfo[$sheet][$col]['width'] / 9142 * 200;
+    }
+
+    function colhidden($col, $sheet = 0)
+    {
+        return !!$this->colInfo[$sheet][$col]['hidden'];
+    }
+
+    function rowcount($sheet = 0)
+    {
+        return $this->sheets[$sheet]['numRows'];
+    }
+
+    function rowheight($row, $sheet = 0)
+    {
+        return $this->rowInfo[$sheet][$row]['height'];
+    }
+
+    function rowhidden($row, $sheet = 0)
+    {
+        return !!$this->rowInfo[$sheet][$row]['hidden'];
+    }
+
+    function rowspan($row, $col, $sheet = 0)
+    {
+        $val = $this->info($row, $col, 'rowspan', $sheet);
+        if ($val == "") {
+            return 1;
+        }
+        return $val;
+    }
+
+    function colspan($row, $col, $sheet = 0)
+    {
+        $val = $this->info($row, $col, 'colspan', $sheet);
+        if ($val == "") {
+            return 1;
+        }
+        return $val;
+    }
+
+    function style($row, $col, $sheet = 0, $properties = '')
+    {
+        $css = "";
+        $font = $this->font($row, $col, $sheet);
+        if ($font != "") {
+            $css .= "font-family:$font;";
+        }
+        $align = $this->align($row, $col, $sheet);
+        if ($align != "") {
+            $css .= "text-align:$align;";
+        }
+        $height = $this->height($row, $col, $sheet);
+        if ($height != "") {
+            $css .= "font-size:$height" . "px;";
+        }
+        $bgcolor = $this->bgColor($row, $col, $sheet);
+        if ($bgcolor != "") {
+            $bgcolor = $this->colors[$bgcolor];
+            $css .= "background-color:$bgcolor;";
+        }
+        $color = $this->color($row, $col, $sheet);
+        if ($color != "") {
+            $css .= "color:$color;";
+        }
+        $bold = $this->bold($row, $col, $sheet);
+        if ($bold) {
+            $css .= "font-weight:bold;";
+        }
+        $italic = $this->italic($row, $col, $sheet);
+        if ($italic) {
+            $css .= "font-style:italic;";
+        }
+        $underline = $this->underline($row, $col, $sheet);
+        if ($underline) {
+            $css .= "text-decoration:underline;";
+        }
+        // Borders
+        $bLeft = $this->borderLeft($row, $col, $sheet);
+        $bRight = $this->borderRight($row, $col, $sheet);
+        $bTop = $this->borderTop($row, $col, $sheet);
+        $bBottom = $this->borderBottom($row, $col, $sheet);
+        $bLeftCol = $this->borderLeftColor($row, $col, $sheet);
+        $bRightCol = $this->borderRightColor($row, $col, $sheet);
+        $bTopCol = $this->borderTopColor($row, $col, $sheet);
+        $bBottomCol = $this->borderBottomColor($row, $col, $sheet);
+        // Try to output the minimal required style
+        if ($bLeft != "" && $bLeft == $bRight && $bRight == $bTop && $bTop == $bBottom) {
+            $css .= "border:" . $this->lineStylesCss[$bLeft] . ";";
+        } else {
+            if ($bLeft != "") {
+                $css .= "border-left:" . $this->lineStylesCss[$bLeft] . ";";
+            }
+            if ($bRight != "") {
+                $css .= "border-right:" . $this->lineStylesCss[$bRight] . ";";
+            }
+            if ($bTop != "") {
+                $css .= "border-top:" . $this->lineStylesCss[$bTop] . ";";
+            }
+            if ($bBottom != "") {
+                $css .= "border-bottom:" . $this->lineStylesCss[$bBottom] . ";";
+            }
+        }
+        // Only output border colors if there is an actual border specified
+        if ($bLeft != "" && $bLeftCol != "") {
+            $css .= "border-left-color:" . $bLeftCol . ";";
+        }
+        if ($bRight != "" && $bRightCol != "") {
+            $css .= "border-right-color:" . $bRightCol . ";";
+        }
+        if ($bTop != "" && $bTopCol != "") {
+            $css .= "border-top-color:" . $bTopCol . ";";
+        }
+        if ($bBottom != "" && $bBottomCol != "") {
+            $css .= "border-bottom-color:" . $bBottomCol . ";";
+        }
+
+        return $css;
+    }
+
+    function font($row, $col, $sheet = 0)
+    {
+        return $this->fontProperty($row, $col, $sheet, 'font');
+    }
+
+    function fontProperty($row, $col, $sheet = 0, $prop)
+    {
+        $font = $this->fontRecord($row, $col, $sheet);
+        if ($font != null) {
+            return $font[$prop];
+        }
+        return false;
+    }
+
+    function fontRecord($row, $col, $sheet = 0)
+    {
+        $xfRecord = $this->xfRecord($row, $col, $sheet);
+        if ($xfRecord != null) {
+            $font = $xfRecord['fontIndex'];
+            if ($font != null) {
+                return $this->fontRecords[$font];
 			}
 		}
-		return $result;
+        return null;
 	}
 
-	function _GetInt4d($data, $pos) {
-		$value = ord($data[$pos]) | (ord($data[$pos+1]) << 8) | (ord($data[$pos+2]) << 16) | (ord($data[$pos+3]) << 24);
-		if ($value>=4294967294) {
-			$value=-2;
+    function xfRecord($row, $col, $sheet = 0)
+    {
+        $xfIndex = $this->info($row, $col, 'xfIndex', $sheet);
+        if ($xfIndex != "") {
+            return $this->xfRecords[$xfIndex];
 		}
-		return $value;
+        return null;
+    }
+
+    function align($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'align');
+    }
+
+    function height($row, $col, $sheet = 0)
+    {
+        return $this->fontProperty($row, $col, $sheet, 'height');
+    }
+
+    function bgColor($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'bgColor');
+    }
+
+    function color($row, $col, $sheet = 0)
+    {
+        $formatColor = $this->formatColor($row, $col, $sheet);
+        if ($formatColor != "") {
+            return $formatColor;
+        }
+        $ci = $this->fontProperty($row, $col, $sheet, 'color');
+        return $this->rawColor($ci);
+    }
+
+    // ADDED by Matt Kruse for better formatting
+
+    function formatColor($row, $col, $sheet = 0)
+    {
+        return $this->info($row, $col, 'formatColor', $sheet);
+    }
+
+    function rawColor($ci)
+    {
+        if (($ci <> 0x7FFF) && ($ci <> '')) {
+            return $this->colors[$ci];
+        }
+        return "";
+    }
+
+    function bold($row, $col, $sheet = 0)
+    {
+        return $this->fontProperty($row, $col, $sheet, 'bold');
+    }
+
+    function italic($row, $col, $sheet = 0)
+    {
+        return $this->fontProperty($row, $col, $sheet, 'italic');
+    }
+
+    function underline($row, $col, $sheet = 0)
+    {
+        return $this->fontProperty($row, $col, $sheet, 'under');
+    }
+
+    function borderLeft($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'borderLeft');
+    }
+
+    function borderRight($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'borderRight');
+    }
+
+    function borderTop($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'borderTop');
+    }
+
+    function borderBottom($row, $col, $sheet = 0)
+    {
+        return $this->xfProperty($row, $col, $sheet, 'borderBottom');
+    }
+
+    function borderLeftColor($row, $col, $sheet = 0)
+    {
+        return $this->colors[$this->xfProperty($row, $col, $sheet, 'borderLeftColor')];
+    }
+
+    function borderRightColor($row, $col, $sheet = 0)
+    {
+        return $this->colors[$this->xfProperty($row, $col, $sheet, 'borderRightColor')];
+    }
+
+    // Get the details for a particular cell
+
+    function borderTopColor($row, $col, $sheet = 0)
+    {
+        return $this->colors[$this->xfProperty($row, $col, $sheet, 'borderTopColor')];
+    }
+
+    function borderBottomColor($row, $col, $sheet = 0)
+    {
+        return $this->colors[$this->xfProperty($row, $col, $sheet, 'borderBottomColor')];
+    }
+
+    function hyperlink($row, $col, $sheet = 0)
+    {
+        $link = $this->sheets[$sheet]['cellsInfo'][$row][$col]['hyperlink'];
+        if ($link) {
+            return $link['link'];
+        }
+        return '';
+    }
+
+    function setRowColOffset($iOffset)
+    {
+        $this->_rowoffset = $iOffset;
+        $this->_coloffset = $iOffset;
+    }
+
+    /**
+     * Set the default number format
+     */
+    function setDefaultFormat($sFormat)
+    {
+        $this->_defaultFormat = $sFormat;
+    }
+
+    /**
+     * Force a column to use a certain format
+     */
+    function setColumnFormat($column, $sFormat)
+    {
+        $this->_columnsFormat[$column] = $sFormat;
 	}
 
 }
