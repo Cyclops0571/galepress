@@ -78,6 +78,12 @@
             font-family: 'Open Sans';
         }
 
+        .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
         .myswiper-pagination-bullet-active {
             opacity: 1;
             background: <?php echo $application->getBannerColor(); ?>;
