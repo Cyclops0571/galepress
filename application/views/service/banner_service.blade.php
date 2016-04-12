@@ -52,8 +52,8 @@
         }
 
         .myImage {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 105%;
+            max-height: 105%;
         }
 
         .image-container {
