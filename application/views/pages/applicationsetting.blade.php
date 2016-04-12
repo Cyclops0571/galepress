@@ -33,9 +33,7 @@ if (false) {
             <div class="form-row">
                 <div class="col-md-3">{{ __('common.template_chooser_background') }}</div>
                 <div class="col-md-8">
-                    <select name="BannerSlideAnimation" class="form-control select2" style="width: 100%;" tabindex="-1">
-                        <?php foreach (): ?>
-                        <?php endforeach;?>
+                    <select name="ThemeBackground" class="form-control select2" style="width: 100%;" tabindex="-1">
                         <option value="1" <?php echo $application->ThemeBackground == 1 ? "selected" : ''; ?> >
                             {{ __('common.template_chooser_backcolor1') }}
                         </option>
