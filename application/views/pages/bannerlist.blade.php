@@ -200,6 +200,15 @@
                                 <?php echo $row->TargetUrl; ?>
                             </a>
                         </td>
+                            <td>
+                                <a href="#" id="<?php echo $row->BannerID; ?>"
+                                   data-name="Description"
+                                   data-type="text"
+                                   data-pk="<?php echo $row->BannerID; ?>"
+                                   data-title="<?php echo __("common.banner_description"); ?>">
+                                    <?php echo $row->Description; ?>
+                                </a>
+                            </td>
                         <td>
                             <div class="toggle_div">
                                 <input type="checkbox" title="BannerStatus" class='toggleCheckbox'

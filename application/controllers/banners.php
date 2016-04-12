@@ -27,7 +27,7 @@ class Banners_Controller extends Base_Controller
         $this->fields[] = __('common.banner_list_application');
         $this->fields[] = __('common.banner_form_target_url');
 //	$this->fields[] = __('common.banner_form_target_content');
-//	$this->fields[] = __('common.banner_description');
+        $this->fields[] = __('common.banner_description');
         $this->fields[] = __('common.banners_list_status');
         $this->fields[] = __('common.banner_list_banner_id');
         $this->fields[] = __('common.detailpage_delete');
@@ -37,7 +37,7 @@ class Banners_Controller extends Base_Controller
             $this->fields[] = __('common.image') . ' (1480x640)';
             $this->fields[] = __('common.banner_form_target_url');
 //	    $this->fields[] = __('common.banner_form_target_content');
-//	    $this->fields[] = __('common.banner_description');
+            $this->fields[] = __('common.banner_description');
             $this->fields[] = __('common.banners_list_status');
             $this->fields[] = __('common.banner_list_banner_id');
             $this->fields[] = __('common.detailpage_delete');
@@ -149,17 +149,13 @@ class Banners_Controller extends Base_Controller
                 }
             }
 
-            if (Laravel\Input::has("Description")) {
-                $banner->Description = Input::get("Description");
-            }
-
             if (Laravel\Input::has("Status")) {
                 $banner->Status = (int)Input::get('Status');
             }
 
             if (Laravel\Input::has("name")) {
                 $name = Laravel\Input::get("name");
-                $value = Laravel\Input::get("value", "");
+                $value = (string)Laravel\Input::get("value", "");
                 if ($name == "TargetUrl") {
                     if (!$value) {
                         $banner->TargetUrl = "";
@@ -168,6 +164,8 @@ class Banners_Controller extends Base_Controller
                     } else {
                         $banner->TargetUrl = "http://" . $value;
                     }
+                } else if ($name == "Description") {
+                    $banner->Description = $value;
                 }
             }
             $banner->save();

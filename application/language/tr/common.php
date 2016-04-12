@@ -604,7 +604,7 @@ return array(
     'banners_slide_animation_cube' => 'Küp',
     'banners_slide_animation_coverflow' => 'Kapak Akışı',
     'banners_slide_animation_flip' => 'Döndürerek',
-    'banner_description' => 'Başlık',
+    'banner_description' => 'Metin',
 
     'banner_list_banner_id' => 'Banner ID',
     'banner_list_customer' => 'Müşteri',

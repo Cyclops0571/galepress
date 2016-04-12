@@ -614,7 +614,7 @@ return array(
     'banners_slide_animation_cube' => 'Cube',
     'banners_slide_animation_coverflow' => 'Coverflow',
     'banners_slide_animation_flip' => 'Flip',
-	'banner_description' => 'Title',
+    'banner_description' => 'Text',
 	
 	'banner_list_banner_id' => 'Banner ID',
 	'banner_list_customer' => 'Customer',
