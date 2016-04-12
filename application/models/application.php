@@ -41,6 +41,7 @@
  * @property int $BannerAutoplay Description
  * @property int $BannerIntervalTime Description
  * @property int $BannerTransitionRate Description
+ * @property int $BannerColor Description
  * @property int $TabActive Description
  * @property int $SubscriptionWeekActive Description
  * @property int $SubscriptionMonthActive Description
@@ -51,6 +52,7 @@
 class Application extends Eloquent
 {
     const InstallmentCount = 24;
+    const DefaultApplicationForegroundColor = '#0082CA';
 
     public static $timestamps = false;
     public static $table = 'Application';
@@ -355,5 +357,22 @@ class Application extends Eloquent
     public function getCkPemPath()
     {
         return '/files/customer_' . $this->CustomerID . '/application_' . $this->ApplicationID . '/' . $this->CkPem;
+    }
+
+    public function getBannerColor()
+    {
+        if ($this->BannerColor) {
+            return $this->BannerColor;
+        }
+        return $this->getThemeForegroundColor();
+    }
+
+    public function getThemeForegroundColor()
+    {
+        if ($this->ThemeForegroundColor) {
+            return $this->ThemeForegroundColor;
+        } else {
+            return self::DefaultApplicationForegroundColor;
+        }
     }
 }

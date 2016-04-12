@@ -5,13 +5,19 @@
 
     <title>GALERPESS BANNER SLIDER</title>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/deneme/Swiper-master/dist/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
 
-    <script src="/js/masterslider/jquery-1.10.2.min.js"></script>
+    <script src="/js/jquery-2.1.4.min.js"></script>
     <script src="/deneme/Swiper-master/dist/js/swiper.min.js"></script>
 
     <style>
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -23,15 +29,13 @@
 
         .swiper-container {
             width: 100%;
-            height: 300px;
-            margin: 20px auto;
+            height: 100%;
         }
 
         .swiper-slide {
             text-align: center;
             font-size: 18px;
             background: #fff;
-            width: 90%;
             /* Center slide text vertically */
             display: -webkit-box;
             display: -ms-flexbox;
@@ -46,17 +50,38 @@
             -webkit-align-items: center;
             align-items: center;
         }
+
+        .myImage {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .image-container {
+            position: relative;
+        }
+
+        .myBorder {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            position: absolute;
+            bottom: 15%;
+            width: 100%;
+
+            font-size: large;
+            text-align: left;
+            color: #333333;
+            background-color: rgba(250, 250, 250, 0.6);
+            box-shadow: 0 0 3px 3px rgba(250, 250, 250, 0.6);
+        }
+
+        .myText {
+            margin-left: 5%;
+            font-family: 'Open Sans';
+        }
     </style>
 </head>
 
 <?php
-//opacity 0.7 idi 0 a cektim
-if (false) {
-    $savedBanner = new Banner();
-    $application = new Application();
-}
-$Autoplay = $application->BannerAutoplay;
-$IntervalTime = $application->BannerIntervalTime;
+$IntervalTime = (int)$application->BannerAutoplay * $application->BannerIntervalTime;
 $TransitionRate = $application->BannerTransitionRate;
 ?>
 <body>
@@ -64,22 +89,93 @@ $TransitionRate = $application->BannerTransitionRate;
     <div class="swiper-wrapper">
         <?php foreach ($bannerSet as $savedBanner): ?>
             <div class="swiper-slide">
-                <img src="<?php echo $savedBanner->getImagePath() ?>"/>
+                <div class="image-container">
+                    <?php if (!empty($savedBanner->TargetUrl)) : ?>
+                    <a href="<?php echo $savedBanner->TargetUrl; ?>">
+                        <?php endif; ?>
+                        <img class="myImage" src="<?php echo $savedBanner->getImagePath() ?>"/>
+                        <?php if (!empty($savedBanner->Description)) : ?>
+                            <div class="myBorder">
+					<span class="myText">
+						<?php echo $savedBanner->Description; ?>
+					</span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($savedBanner->TargetUrl)) : ?>
+                    </a>
+                <?php endif; ?>
+                </div>
             </div>
+
         <?php endforeach; ?>
         <!-- Add Pagination -->
     </div>
     <div class="swiper-pagination"></div>
 </div>
-<!-- Initialize Swiper -->
+
 <script>
+    var lastPageX = 0;
+    var lastPageX2 = 0;
+    var myslideNext = false;
+
     var swiper = new Swiper('.swiper-container', {
+        speed: <?php echo $TransitionRate; ?>,
+        autoplay: <?php echo $IntervalTime; ?>,
         pagination: '.swiper-pagination',
-        slidesPerView: 'auto',
+        slidesPerView: '1',
+        allowSwipeToPrev: 'false',
         centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 30
+        freeModeMomentum: true,
+        effect: 'slide',
+        loop: true,
+        longSwipes: false,
+        resistance: false,
+        touchMoveStopPropagation: false,
+        iOSEdgeSwipeDetection: true,
+        iOSEdgeSwipeThreshold: 1,
+        runCallbacksOnInit: false,
+        noSwiping: false,
+        onSlideChangeEnd: function (swiper) {
+            myslideNext = false;
+            swiper.slideTo(swiper.activeIndex, <?php echo $TransitionRate; ?>, false);
+            swiper.startAutoplay();
+        },
+        onSlidePrevStart: function (swiper) {
+            myslideNext = false;
+        },
+        onSlideNextStart: function (swiper) {
+            myslideNext = false;
+        },
+        onTouchMove: function (swiper, event) {
+            if (!event.touches) {
+                return;
+            } else if (!event.touches[0]) {
+                return;
+            }
+
+            if (lastPageX2 != 0 && lastPageX != 0) {
+                if (lastPageX2 > lastPageX && lastPageX > event.touches[0].pageX) {
+                    setTimeout(slideNext, 100);
+                } else if (lastPageX2 < lastPageX && lastPageX < event.touches[0].pageX) {
+                    setTimeout(slidePrev, 100);
+                }
+            }
+            lastPageX2 = lastPageX;
+            lastPageX = event.touches[0].pageX;
+            myslideNext = true;
+        },
     });
+
+    function slideNext() {
+        if (myslideNext) {
+            swiper.slideNext();
+        }
+    }
+    function slidePrev() {
+        if (myslideNext) {
+            swiper.slidePrev();
+        }
+    }
 </script>
 </body>
 </html>

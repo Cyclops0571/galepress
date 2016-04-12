@@ -22,7 +22,7 @@ class Banners_Controller extends Base_Controller
         $this->caption = __('common.applications_caption');
         $this->detailcaption = __('common.banners_caption_detail');
         $this->fields = array();
-        $this->fields[] = __('common.image') . ' (1480x740)';
+        $this->fields[] = __('common.image') . ' (1480x640)';
         $this->fields[] = __('common.banner_list_customer');
         $this->fields[] = __('common.banner_list_application');
         $this->fields[] = __('common.banner_form_target_url');
@@ -34,7 +34,7 @@ class Banners_Controller extends Base_Controller
 
         if (Auth::User() && (int)Auth::User()->UserTypeID == eUserTypes::Customer) {
             $this->fields = array();
-            $this->fields[] = __('common.image') . ' (1480x740)';
+            $this->fields[] = __('common.image') . ' (1480x640)';
             $this->fields[] = __('common.banner_form_target_url');
 //	    $this->fields[] = __('common.banner_form_target_content');
 //	    $this->fields[] = __('common.banner_description');
@@ -193,6 +193,7 @@ class Banners_Controller extends Base_Controller
             "BannerCustomerActive" => 'in:1',
             "BannerIntervalTime" => 'integer|min:1',
             "BannerTransitionRate" => 'integer|min:1',
+            "BannerColor" => 'match:/^#[A-Fa-f0-9]{6}$/',
         );
         if ((int)Input::get("BannerCustomerActive")) {
             $rules["BannerCustomerUrl"] = 'required|min:2';
@@ -204,7 +205,8 @@ class Banners_Controller extends Base_Controller
             "BannerCustomerActive" => __("common.banner_use_costomer_banner"),
             "BannerIntervalTime" => __('common.banners_autoplay_interval'),
             "BannerTransitionRate" => __('common.banners_autoplay_speed'),
-            "BannerCustomerUrl" => __("common.banner_use_costomer_banner")
+            "BannerCustomerUrl" => __("common.banner_use_costomer_banner"),
+            "BannerColor" => __("common.banners_pager_color"),
         );
 
 
@@ -231,6 +233,7 @@ class Banners_Controller extends Base_Controller
         $application->BannerCustomerActive = (int)Input::get("BannerCustomerActive");
         $application->BannerIntervalTime = (int)Input::get("BannerIntervalTime", 0);
         $application->BannerTransitionRate = (int)Input::get("BannerTransitionRate", 0);
+        $application->BannerColor = Input::get('BannerColor');
         $application->save();
         return "success=" . base64_encode("true");
     }

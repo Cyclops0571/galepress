@@ -596,8 +596,8 @@ return array(
 	'banners_active' => 'Banner Active',
 	'banner_use_costomer_banner' => 'Use Web Source',
 	'banners_autoplay' => 'Autoplay',
-	'banners_autoplay_interval' => 'Playback Range (seconds):',
-	'banners_autoplay_speed' => 'Transition Rate (0-100):',
+    'banners_autoplay_interval' => 'Playback Range (millisecond):',
+    'banners_autoplay_speed' => 'Transition Rate (millisecond):',
 	'banners_info_target_content' => 'It will open the relevant content when the image is clicked.',
 	'banners_info_target_address' => 'It will open the relevant address when the image is clicked.',
 	'banners_info_target_desc' => 'It refers to the text, which appear on the image.',
@@ -607,6 +607,7 @@ return array(
 	'banners_info_interval' => 'It refers to the transition time between pictures.',
 	'banners_info_speed' => 'It refers to the transition speed between images.',
 	'banners_info_active' => 'Inactive files are not shown.',
+    'banners_pager_color' => 'Pager Bullet Color',
 	'banner_description' => 'Title',
 	
 	'banner_list_banner_id' => 'Banner ID',

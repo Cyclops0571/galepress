@@ -586,8 +586,8 @@ return array(
     'banners_active' => 'Banner Aktif',
     'banner_use_costomer_banner' => 'Dış Kaynak Kullan',
     'banners_autoplay' => 'Otomatik Oynat',
-    'banners_autoplay_interval' => 'Oynatma Aralığı (Saniye)',
-    'banners_autoplay_speed' => 'Geçiş Hızı (0-100)',
+    'banners_autoplay_interval' => 'Oynatma Aralığı (milisaniye)',
+    'banners_autoplay_speed' => 'Geçiş Hızı (milisaniye)',
     'banners_info_target_content' => 'Resme tıklayınca ilgili içeriğin açılmasını sağlar.',
     'banners_info_target_address' => 'Resme tıklayınca ilgili adrese yönlendirir.',
     'banners_info_target_desc' => 'Resim üzerinde gözükecek olan yazıyı ifade eder.',
@@ -597,6 +597,7 @@ return array(
     'banners_info_interval' => 'Resimler arasındaki geçiş süresini ifade eder.',
     'banners_info_speed' => 'Resimler arasındaki geçiş hızını ifade eder.',
     'banners_info_active' => 'Aktif olmayan resimler gösterilmez.',
+    'banners_pager_color' => 'Aktif İmleç Rengi',
     'banner_description' => 'Başlık',
 
     'banner_list_banner_id' => 'Banner ID',

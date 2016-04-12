@@ -51,7 +51,7 @@ if (false) {
                 <div class="col-md-8">
                     <div class="input-group ThemeForegroundColor">
                         <input type="text" name="ThemeForegroundColor"
-                               value="<?php echo $application->ThemeForegroundColor ? $application->ThemeForegroundColor : '#0082CA' ?>"
+                               value="<?php echo $application->getThemeForegroundColor(); ?>"
                                class="form-control"/>
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -313,8 +313,6 @@ if (false) {
     </div>
 </div>
 
-<link rel="stylesheet" href="/css/bootstrap-colorpicker.min.css?v=<?php echo APP_VER; ?>" type="text/css">
-<script src="/js/colorpicker.js?v=<?php echo APP_VER; ?>" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
         var ApplicationID = $('input[name=ApplicationID]').val();
