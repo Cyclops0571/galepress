@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head style="background: red">
     <meta charset="utf-8"/>
 
     <title>GALERPESS BANNER SLIDER</title>
@@ -77,15 +77,27 @@
             margin-left: 5%;
             font-family: 'Open Sans';
         }
+
+        .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .myswiper-pagination-bullet-active {
+            opacity: 1;
+            background: <?php echo $application->getBannerColor(); ?>;
+        }
     </style>
 </head>
 
 <?php
+/** @var Application $application */
 $IntervalTime = (int)$application->BannerAutoplay * $application->BannerIntervalTime;
 $TransitionRate = $application->BannerTransitionRate;
 ?>
-<body>
-<div class="swiper-container">
+<body style="background: blue">
+<div class="swiper-container" style="background: yellow">
     <div class="swiper-wrapper">
         <?php foreach ($bannerSet as $savedBanner): ?>
             <div class="swiper-slide">
@@ -119,6 +131,7 @@ $TransitionRate = $application->BannerTransitionRate;
     var myslideNext = false;
 
     var swiper = new Swiper('.swiper-container', {
+        bulletActiveClass: 'myswiper-pagination-bullet-active',
         speed: <?php echo $TransitionRate; ?>,
         autoplay: <?php echo $IntervalTime; ?>,
         pagination: '.swiper-pagination',
@@ -126,7 +139,7 @@ $TransitionRate = $application->BannerTransitionRate;
         allowSwipeToPrev: 'false',
         centeredSlides: true,
         freeModeMomentum: true,
-        effect: 'slide',
+        effect: '<?php echo $application->BannerSlideAnimation; ?>',
         loop: true,
         longSwipes: false,
         resistance: false,

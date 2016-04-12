@@ -299,7 +299,7 @@ class Banners_Controller extends Base_Controller
         $data['detailcaption'] = $this->detailcaption;
         $data["application"] = $application;
         $data['bannerSet'] = $bannerSet;
-        if ($applicationID != 158) {
+        if ($applicationID != 10) {
             return View::make("service.banner_service", $data);
         } else {
             return View::make("service.swipertest", $data);
