@@ -607,6 +607,12 @@ return array(
     'banners_info_speed' => 'It refers to the transition speed between images.',
     'banners_info_active' => 'Inactive files are not shown.',
     'banners_pager_color' => 'Pager Bullet Color',
+    'banners_slide_effect' => 'Slide Effect',
+    'banners_slide_animation_slide' => 'Slide',
+    'banners_slide_animation_fade' => 'Fade',
+    'banners_slide_animation_cube' => 'Cube',
+    'banners_slide_animation_coverflow' => 'Coverflow',
+    'banners_slide_animation_flip' => 'Flip',
     'banner_description' => 'Title',
 
     'banner_list_banner_id' => 'Banner ID',

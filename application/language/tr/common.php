@@ -598,6 +598,12 @@ return array(
     'banners_info_speed' => 'Resimler arasındaki geçiş hızını ifade eder.',
     'banners_info_active' => 'Aktif olmayan resimler gösterilmez.',
     'banners_pager_color' => 'Aktif İmleç Rengi',
+    'banners_slide_effect' => 'Slayt Efekti',
+    'banners_slide_animation_slide' => 'Kaydırarak',
+    'banners_slide_animation_fade' => 'Soldurarak',
+    'banners_slide_animation_cube' => 'Küp',
+    'banners_slide_animation_coverflow' => 'Kapak Akışı',
+    'banners_slide_animation_flip' => 'Döndürerek',
     'banner_description' => 'Başlık',
 
     'banner_list_banner_id' => 'Banner ID',

@@ -234,6 +234,7 @@ class Banners_Controller extends Base_Controller
         $application->BannerIntervalTime = (int)Input::get("BannerIntervalTime", 0);
         $application->BannerTransitionRate = (int)Input::get("BannerTransitionRate", 0);
         $application->BannerColor = Input::get('BannerColor');
+        $application->BannerSlideAnimation = Input::get('BannerSlideAnimation');
         $application->save();
         return "success=" . base64_encode("true");
     }

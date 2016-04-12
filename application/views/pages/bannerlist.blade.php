@@ -102,6 +102,22 @@
                     </div>
                     <div class="col-md-1"></div>
                 </div>
+                <div class="form-row">
+                    <div class="col-md-3">
+                        {{__('common.banners_slide_effect')}}
+                    </div>
+                    <div class="col-md-8">
+                        <select name="BannerSlideAnimation" class="form-control select2">
+                            <?php foreach (Banner::$slideAnimations as $slideAnimation): ?>
+                            <option value="{{$slideAnimation}}" {{ ($application->BannerSlideAnimation == $slideAnimation ? ' selected="selected"' : '') }}>
+                                {{__('common.banners_slide_animation_' . $slideAnimation)}}
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+
             </div>
             <div class="content controls">
                 <div class="form-row row-save">

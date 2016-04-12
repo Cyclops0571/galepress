@@ -86,6 +86,7 @@
 </head>
 
 <?php
+/** @var Application $application */
 $IntervalTime = (int)$application->BannerAutoplay * $application->BannerIntervalTime;
 $TransitionRate = $application->BannerTransitionRate;
 ?>
@@ -132,7 +133,7 @@ $TransitionRate = $application->BannerTransitionRate;
         allowSwipeToPrev: 'false',
         centeredSlides: true,
         freeModeMomentum: true,
-        effect: 'slide',
+        effect: '<?php echo $application->BannerSlideAnimation; ?>',
         loop: true,
         longSwipes: false,
         resistance: false,
