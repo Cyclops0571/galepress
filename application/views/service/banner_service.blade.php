@@ -52,7 +52,7 @@
         }
 
         .myImage {
-            max-width: 105%;
+            max-width: 100%;
             max-height: 105%;
         }
 
