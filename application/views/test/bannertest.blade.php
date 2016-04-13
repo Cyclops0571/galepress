@@ -28,8 +28,8 @@
     </style>
 </head>
 <body style="background: red;">
-<iframe style="background: green; border: " width="800px" height="200px"
-        src="http://localhost/banners/service_view/58"/>
+<iframe style="background: green; border: " width="740px" height="319px"
+        src="http://localhost/banners/service_view/10"/>
 
 </body>
 </html>
