@@ -16,6 +16,7 @@
         html, body {
             position: relative;
             height: 100%;
+            min-height: 100% !important;
         }
 
         body {
@@ -53,7 +54,7 @@
 
         .myImage {
             max-width: 100%;
-            max-height: 105%;
+            max-height: 100%;
         }
 
         .image-container {
