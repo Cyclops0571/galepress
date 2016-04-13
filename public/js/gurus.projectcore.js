@@ -2104,9 +2104,14 @@ var cBanner = new function () {
                     + '<label for="scale"></label>'
                     + '<div class="scrollbox dot">'
                     + '<div class="scale" style="width: 0"></div>'
-                    + '</div></div></td><td>'
-                    + '<a href="#" id="' + BannerID + '" data-name="TargetUrl" data-type="text" data-pk="' + BannerID + '" data-title="Hedef Url:"></a>'
-                    + '</td><td><div class="toggle_div">'
+                    + '</div></div></td>' +
+                    '<td>'
+                    + '<a href="#" id="' + BannerID + '" data-name="TargetUrl" data-type="text" data-pk="' + BannerID + '" data-title="Target Url:"></a>'
+                    + '</td>' +
+                    '<td>' +
+                    '<a href="#" id="description_' + BannerID + '"data-name="Description" data-type="text" data-pk="' + BannerID + '"data-title="Text"></a>' +
+                    '</td>' +
+                    '<td><div class="toggle_div">'
                     + '<input type="checkbox" title="BannerStatus" class="toggleCheckbox" style="color: white" id="BannerStatus_' + BannerID + '" />'
                     + '</div></td><td>' + BannerID + '</td>'
                     + '<td style="alignment-adjust: middle"><div style="padding-top: 8px;">'

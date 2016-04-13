@@ -201,7 +201,7 @@
                             </a>
                         </td>
                             <td>
-                                <a href="#" id="<?php echo $row->BannerID; ?>"
+                                <a href="#" id="description_<?php echo $row->BannerID; ?>"
                                    data-name="Description"
                                    data-type="text"
                                    data-pk="<?php echo $row->BannerID; ?>"
