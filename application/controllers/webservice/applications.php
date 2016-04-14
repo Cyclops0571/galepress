@@ -143,7 +143,7 @@ class Webservice_Applications_Controller extends Base_Controller
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
 
-//INFO:Save token method come from get_contents
+            //INFO:Save token method come from get_contents
             webService::saveToken($ServiceVersion, $customer->CustomerID, $applicationID);
 
             return Response::json(array(

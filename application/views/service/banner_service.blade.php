@@ -90,6 +90,10 @@
             opacity: 1;
             background: <?php echo $application->getBannerColor(); ?>;
         }
+
+        .swiper-pagination {
+            z-index: 999999999;
+        }
     </style>
 </head>
 
