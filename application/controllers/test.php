@@ -19,8 +19,7 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        echo json_encode((boolean)1);
-        exit;
+
         return View::make('test.bannertest');
         var_dump(\Laravel\Auth::User());
         exit;

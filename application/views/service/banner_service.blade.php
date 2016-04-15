@@ -13,13 +13,18 @@
     <script src="/deneme/Swiper-master/dist/js/swiper.min.js"></script>
 
     <style>
-        html, body {
+        html {
             position: relative;
+            width: 100%;
             height: 100%;
-            min-height: 100% !important;
+            overflow-x: hidden;
+            overflow-y: hidden;
         }
 
         body {
+            position: relative;
+            width: 100%;
+            height: 100%;
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
@@ -29,14 +34,20 @@
         }
 
         .swiper-container {
-            width: 100%;
-            height: 100%;
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+
+        .swiper-wrapper {
+            max-width: 100% !important;
+            max-height: 100% !important;
         }
 
         .swiper-slide {
+            width: auto;
             text-align: center;
             font-size: 18px;
-            background: #fff;
+            background: transparent;
             /* Center slide text vertically */
             display: -webkit-box;
             display: -ms-flexbox;
@@ -55,7 +66,6 @@
         .myImage {
             max-width: 100%;
             max-height: 100%;
-            margin-top: 4px;
         }
 
         .image-container {
@@ -81,7 +91,7 @@
         }
 
         .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
-            bottom: 0;
+            bottom: 3px;
             left: 0;
             width: 100%;
         }
@@ -89,10 +99,6 @@
         .myswiper-pagination-bullet-active {
             opacity: 1;
             background: <?php echo $application->getBannerColor(); ?>;
-        }
-
-        .swiper-pagination {
-            z-index: 999999999;
         }
     </style>
 </head>
@@ -124,10 +130,9 @@ $TransitionRate = $application->BannerTransitionRate;
                 <?php endif; ?>
             </div>
         </div>
-
         <?php endforeach; ?>
-                <!-- Add Pagination -->
     </div>
+    <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
 </div>
 
@@ -136,22 +141,24 @@ $TransitionRate = $application->BannerTransitionRate;
     var lastPageX2 = 0;
     var myslideNext = false;
 
+    $('.image-container').css('height', $('body').height());
+    $('.swiper-slide').css('width', Math.ceil($('body').height() * 2.3125));
+
     var swiper = new Swiper('.swiper-container', {
+        autoHeight: true,
         bulletActiveClass: 'myswiper-pagination-bullet-active',
         speed: <?php echo $TransitionRate; ?>,
         autoplay: <?php echo $IntervalTime; ?>,
         pagination: '.swiper-pagination',
-        slidesPerView: '1',
-        allowSwipeToPrev: 'false',
-        centeredSlides: true,
-        freeModeMomentum: true,
-        effect: '<?php echo $application->BannerSlideAnimation; ?>',
+        slidesPerView: 'auto',
         loop: true,
+        loopedSlides: 0,
+        centeredSlides: true,
+        spaceBetween: 10,
+        effect: '<?php echo $application->BannerSlideAnimation; ?>',
         longSwipes: false,
         resistance: false,
         touchMoveStopPropagation: false,
-        iOSEdgeSwipeDetection: true,
-        iOSEdgeSwipeThreshold: 1,
         runCallbacksOnInit: false,
         noSwiping: false,
         onSlideChangeEnd: function (swiper) {
@@ -182,8 +189,9 @@ $TransitionRate = $application->BannerTransitionRate;
             lastPageX2 = lastPageX;
             lastPageX = event.touches[0].pageX;
             myslideNext = true;
-        },
+        }
     });
+
 
     function slideNext() {
         if (myslideNext) {
