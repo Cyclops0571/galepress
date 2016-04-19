@@ -232,18 +232,6 @@ foreach ($files as $file) {
 </div>
 <?php if ($modal): ?>
 <script>
-    function arrangeImageTopMargin() {
-        $.each($('img'), function (i, obj) {
-            var imgHeight = $(obj).height();
-            if (imgHeight < $(document).height()) {
-                var verticalCalc = ($(document).height() - imgHeight) / 2;
-                //$('img').animate({marginTop:verticalCalc});
-                $('img').css('marginTop', verticalCalc);
-            } else {
-                $('img').css('marginTop', 0);
-            }
-        });
-    }
     $(function ($) {
         window.addEventListener("orientationchange", function () {
             arrangeImageTopMargin();
@@ -270,9 +258,9 @@ foreach ($files as $file) {
             if (imgHeight < $(document).height()) {
                 var verticalCalc = ($(document).height() - imgHeight) / 2;
                 //$('img').animate({marginTop:verticalCalc});
-                $('img').css('marginTop', verticalCalc);
+                $(obj).css('marginTop', verticalCalc);
             } else {
-                $('img').css('marginTop', 0);
+                $(obj).css('marginTop', 0);
             }
         });
     }
