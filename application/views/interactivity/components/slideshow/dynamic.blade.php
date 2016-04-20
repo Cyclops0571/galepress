@@ -246,7 +246,7 @@ foreach ($files as $file) {
             _initGlobalCaption: function () {
                 var self = this;
                 var i = 0;
-                self.ev.on('rsAfterContentSet', function (e, slideObject) {
+                self.ev.on('rsAfterSlideChange', function (e, slideObject) {
                     arrangeImageTopMargin();
                 });
             }
