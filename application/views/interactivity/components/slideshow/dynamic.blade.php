@@ -3,6 +3,7 @@ $index = 0;
 $newWidth = 0;
 $newHeight = 0;
 if (!isset($files)) $files = array();
+if (!isset($autoplay)) $autoplay = false;
 if (!isset($modal)) $modal = 0;
 if (!isset($transparent)) $transparent = 0;
 if (!isset($bgcolor)) $bgcolor = '#151515';
@@ -234,7 +235,11 @@ foreach ($files as $file) {
 <script>
     $(function ($) {
         window.addEventListener("orientationchange", function () {
-            arrangeImageTopMargin();
+            for (var i = 0; i < 30; i++) {
+                setTimeout(function () {
+                    arrangeImageTopMargin();
+                }, 100 * i);
+            }
         });
 
         $.extend($.rsProto, {
