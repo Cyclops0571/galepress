@@ -246,20 +246,19 @@ foreach ($files as $file) {
             _initGlobalCaption: function () {
                 var self = this;
                 var i = 0;
-                self.ev.on('rsAfterSlideChange', function (e, slideObject) {
+                self.ev.on('rsAfterContentSet', function (e, slideObject) {
                     arrangeImageTopMargin();
                 });
                 self.ev.on('rsBeforeMove', function (e, slideObject) {
-                    arrangeImageTopMargin();
+                    setTimeout(function () {
+                        arrangeImageTopMargin();
+                    }, 100);
                 });
             }
         });
         $.rsModules.globalCaption = $.rsProto._initGlobalCaption;
     });
-</script>
-<?php endif; ?>
-<script id="addJS">
-    var autoplay = <?php echo json_encode((boolean)$autoplay); ?>;
+
     function arrangeImageTopMargin() {
         $.each($('img'), function (i, obj) {
             var imgHeight = $(obj).height();
@@ -272,6 +271,11 @@ foreach ($files as $file) {
             }
         });
     }
+</script>
+<?php endif; ?>
+<script id="addJS">
+    var autoplay = <?php echo json_encode((boolean)$autoplay); ?>;
+
 
     $(function ($) {
         var rsi = $('#slider-in-laptop').royalSlider({
