@@ -249,6 +249,9 @@ foreach ($files as $file) {
                 self.ev.on('rsAfterSlideChange', function (e, slideObject) {
                     arrangeImageTopMargin();
                 });
+                self.ev.on('rsBeforeMove', function (e, slideObject) {
+                    arrangeImageTopMargin();
+                });
             }
         });
         $.rsModules.globalCaption = $.rsProto._initGlobalCaption;
