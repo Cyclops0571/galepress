@@ -97,7 +97,6 @@ class CreateInteractivePDF_Task
                 $p->begin_page_ext(10, 10, "");
 
                 //open page in original document
-                //$pageOriginal = $p->open_pdi_page($docOriginal, ($page + 1), "cloneboxes");
                 $pageOriginal = $p->open_pdi_page($docOriginal, ($page + 1), "pdiusebox=crop");
                 if ($pageOriginal == 0) {
                     throw new Exception($p->get_errmsg());
@@ -444,14 +443,16 @@ class CreateInteractivePDF_Task
             $cf->save();
             //-----------------------------------------------------------------------------------------------
         } catch (PDFlibException $e) {
-            $err = 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg();
+            $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\n";
+            $err .= 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
             $cf->save();
             throw new Exception($err);
         } catch (Exception $e) {
-            $err = $e->getMessage();
+            $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\n";
+            $err .= $e->getMessage();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
@@ -527,5 +528,4 @@ class CreateInteractivePDF_Task
             }
         }
     }
-
 }
