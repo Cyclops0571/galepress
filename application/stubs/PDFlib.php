@@ -8,7 +8,7 @@
  * which is available in the distribution.
  */
 
-class PDFlibException
+class PDFlibException extends Exception
 {
     /**
      * Get the number of the last thrown exception or the reason for a failed function call.

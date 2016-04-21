@@ -443,8 +443,9 @@ class CreateInteractivePDF_Task
             $cf->save();
             //-----------------------------------------------------------------------------------------------
         } catch (PDFlibException $e) {
-            $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\n";
-            $err .= 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg();
+            $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\r\n";
+            $err .= 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg() . "\r\n";
+            $err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
@@ -453,6 +454,7 @@ class CreateInteractivePDF_Task
         } catch (Exception $e) {
             $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\n";
             $err .= $e->getMessage();
+            $err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
