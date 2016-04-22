@@ -445,7 +445,12 @@ class CreateInteractivePDF_Task
         } catch (PDFlibException $e) {
             $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\r\n";
             $err .= 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg() . "\r\n";
-            $err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
+            if (method_exists($e, 'getLine')) {
+                $err .= ' Line: ' . $e->getLine();
+            } else {
+                $err .= ' getLine Method Not Exists';
+            }
+            //$err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
