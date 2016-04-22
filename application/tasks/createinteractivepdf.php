@@ -448,7 +448,7 @@ class CreateInteractivePDF_Task
             if (method_exists($e, 'getLine')) {
                 $err .= ' Line: ' . $e->getLine();
             } else {
-                $err .= ' getLine Method Not Exists';
+                $err .= ' getLine Method Not Exists'; 
             }
             //$err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
