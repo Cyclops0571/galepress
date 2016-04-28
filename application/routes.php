@@ -57,6 +57,7 @@ Route::get("test/download", "test@download");
 Route::post("test/download", "test@download");
 
 Route::get('test/v(:num)', 'test@routetest');
+Route::get('test/interactive', 'test@interactive');
 // </editor-fold>
 
 

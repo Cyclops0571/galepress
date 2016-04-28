@@ -22,19 +22,15 @@
  * @property int $IOSHexPasswordForSubscription Description
  * @property int $AndroidVersion Description
  * @property int $AndroidLink Description
+ * @property int $PackageID
  * @property int $Blocked Description
  * @property int $Status Description
+ * @property int $Trail
  * @property int $Version Description
  * @property int $Force Description
  * @property int $TotalFileSize Description
  * @property int $NotificationText Description
  * @property int $CkPem Description
- * @property int $StatusID Description
- * @property int $CreatorUserID Description
- * @property int $DateCreated Description
- * @property int $ProcessUserID Description
- * @property int $ProcessDate Description
- * @property int $ProcessTypeID Description
  * @property int $BannerActive Description
  * @property int $BannerCustomerActive Description
  * @property int $BannerCustomerUrl Description
@@ -47,8 +43,14 @@
  * @property int $SubscriptionWeekActive Description
  * @property int $SubscriptionMonthActive Description
  * @property int $SubscriptionYearActive Description
- * @property int PackageID
- * @property int Trail
+ * @property int $ShowDashboard Flag for webservice to force user to optional login
+ * @property int $ConfirmationMessage Confirmation Message for continue to application
+ * @property int $StatusID Description
+ * @property int $CreatorUserID Description
+ * @property int $DateCreated Description
+ * @property int $ProcessUserID Description
+ * @property int $ProcessDate Description
+ * @property int $ProcessTypeID Description
  */
 class Application extends Eloquent
 {
@@ -226,7 +228,7 @@ class Application extends Eloquent
      *
      * @param int $type
      * @param int $refreshIdentifier
-     * @return type
+     * @return string
      */
     public function SubscriptionIdentifier($type = 1, $refreshIdentifier = false)
     {

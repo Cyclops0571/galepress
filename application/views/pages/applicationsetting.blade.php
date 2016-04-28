@@ -2,10 +2,9 @@
 
 @section('content')
 <?php
-if (false) {
-    $application = new Application();
-    $tabs = new Tab();
-}
+/** @var array $galepressTabs */
+/** @var Application $application */
+/** @var Tab $tabs */
 ?>
         <!--BANNER SLIDER-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -25,15 +24,20 @@ if (false) {
             <h2>{{ __('common.application_settings_caption_template') }}</h2>
         </div>
         <div class="content controls">
-            <input type="hidden" name="ApplicationID" value="<?php echo $application->ApplicationID; ?>" ?>
+            <input type="hidden" name="ApplicationID" value="<?php echo $application->ApplicationID; ?>"/>
 
             <div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
                 <div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.template_chooser_background') }}</div>
+                <div class="col-md-3">
+                    <label for="ThemeBackground">
+                        {{ __('common.template_chooser_background') }}
+                    </label>
+                </div>
                 <div class="col-md-8">
-                    <select name="ThemeBackground" class="form-control select2" style="width: 100%;" tabindex="-1">
+                    <select name="ThemeBackground" id="ThemeBackground" class="form-control select2"
+                            style="width: 100%;" tabindex="-1">
                         <option value="1" <?php echo $application->ThemeBackground == 1 ? "selected" : ''; ?> >
                             {{ __('common.template_chooser_backcolor1') }}
                         </option>
@@ -47,10 +51,14 @@ if (false) {
                                 class="icon-info-sign"></span></a></div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.template_chooser_foreground') }}</div>
+                <div class="col-md-3">
+                    <label for="ThemeForegroundColor">
+                        {{ __('common.template_chooser_foreground') }}
+                    </label>
+                </div>
                 <div class="col-md-8">
                     <div class="input-group ThemeForegroundColor">
-                        <input type="text" name="ThemeForegroundColor"
+                        <input type="text" name="ThemeForegroundColor" id="ThemeForegroundColor"
                                value="<?php echo $application->getThemeForegroundColor(); ?>"
                                class="form-control"/>
                         <span class="input-group-addon"><i></i></span>
@@ -71,9 +79,8 @@ if (false) {
                 <div class="col-xs-2" style="padding: 0">
                     <a class="banner-setting-link"
                        href="<?php echo Laravel\URL::to(__('route.banners') . '?applicationID=' . $application->ApplicationID); ?>"
-                       title="Banner" class=" page-navigation">
-                                    <span class="icon-arrow-right">
-                                    </span>
+                       title="Banner">
+                        <span class="icon-arrow-right"></span>
                     </a>
 
                 </div>
@@ -90,9 +97,8 @@ if (false) {
                 <div class="col-xs-2" style="padding: 0">
                     <a class="banner-setting-link"
                        href="<?php echo Laravel\URL::to(__('route.maps') . '?applicationID=' . $application->ApplicationID); ?>"
-                       title="Store Locator" class=" page-navigation">
-                                    <span class="icon-arrow-right">
-                                    </span>
+                       title="Store Locator">
+                        <span class="icon-arrow-right"></span>
                     </a>
                 </div>
             </div>
@@ -109,16 +115,14 @@ if (false) {
             </div>
             <!-- Tab Status -->
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.tabs_tab_status') }}</div>
+                <div class="col-md-3">
+                    <label for="TabActive">
+                        {{ __('common.tabs_tab_status') }}
+                    </label>
+                </div>
                 <div class="col-md-8">
-                    <div class="checkbox-inline" style="padding-left:0;">
-                        <div class="checker">
-			    <span>
-				<input name="TabActive" id="TabActive" onchange="cApplication.checkTabStatus()" type="checkbox"
-                       value="1" <?php echo $application->TabActive ? 'checked' : ''; ?>>
-			    </span>
-                        </div>
-                    </div>
+                    <input name="TabActive" id="TabActive" onchange="cApplication.checkTabStatus()" type="checkbox"
+                           value="1" <?php echo $application->TabActive ? 'checked' : ''; ?> />
                 </div>
                 <div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_tab_status') }}"><span
                                 class="icon-info-sign"></span></a></div>
@@ -135,14 +139,22 @@ if (false) {
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.tabs_title')}}</div>
+                <div class="col-md-3">
+                    <label for="TabTitle_<?php echo $tabNo; ?>">
+                        {{ __('common.tabs_title')}}
+                    </label>
+                </div>
                 <div class="col-md-8">
                     <input type="text" name="TabTitle_<?php echo $tabNo; ?>" id="TabTitle_<?php echo $tabNo; ?>"
                            value="<?php echo $tab->TabTitle; ?>" maxlength="12"/>
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.tabs_inhouse_url') }}</div>
+                <div class="col-md-3">
+                    <label for="InhouseUrl_<?php echo $tabNo; ?>">
+                        {{ __('common.tabs_inhouse_url') }}
+                    </label>
+                </div>
                 <div class="col-md-8">
                     <select style="width: 100%;" tabindex="-1" id="InhouseUrl_<?php echo $tabNo; ?>"
                             name="InhouseUrl_<?php echo $tabNo; ?>" class="form-control select2 inhouseUrl"
@@ -198,26 +210,71 @@ if (false) {
                         cApplication.selectedIcon(<?php echo $tabNo; ?>);
                     </script>
                 </div>
-                <div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_icon') }}"><span
-                                class="icon-info-sign"></span></a></div>
+                <div class="col-md-1">
+                    <a class="tipr" title="{{ __('common.tabs_info_icon') }}"><span class="icon-info-sign"></span></a>
+                </div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.tabs_active') }}</div>
+                <div class="col-md-3">
+                    <label for="TabStatus_<?php echo $tabNo; ?>">
+                        {{ __('common.tabs_active') }}
+                    </label>
+                </div>
                 <div class="col-md-8">
-                    <div class="checkbox-inline" style="padding-left:0;">
-                        <div class="checker">
-    			    <span>
-    				<input name="TabStatus_<?php echo $tabNo; ?>" class="tabActiveCheck" type="checkbox"
-                           value="1" <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?>>
-    			    </span>
-                        </div>
-                    </div>
+                    <input name="TabStatus_<?php echo $tabNo; ?>" id="TabStatus_<?php echo $tabNo; ?>"
+                           class="tabActiveCheck" type="checkbox" value="1"
+                    <?php echo $tab->Status == eStatus::Active ? 'checked' : ''; ?> />
                 </div>
                 <div class="col-md-1"><a class="tipr" title="{{ __('common.tabs_info_active') }}"><span
                                 class="icon-info-sign"></span></a></div>
             </div>
             <?php $tabNo++; ?>
             <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="block block-drop-shadow">
+        <div class="header">
+            <h2>{{ __('applicationlang.dashboard_settings') }}</h2>
+        </div>
+        <div class="content controls">
+            <div class="form-row" style="border-bottom: 1px solid #565656; margin-top:0;">
+                <div class="col-md-12 text-center" style="border-bottom: 1px solid black;"></div>
+            </div>
+            <!-- ShowDashboard -->
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label for="ShowDashboard">
+                        {{ __('applicationlang.show_dashboard') }}
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <input name="ShowDashboard" id="ShowDashboard" onchange="cApplication.checkShowDashboard()"
+                           type="checkbox" value="1" <?php echo $application->ShowDashboard ? 'checked' : ''; ?> />
+                </div>
+                <div class="col-md-1">
+                    <a class="tipr" title="{{ __('applicationlang.show_dashboard_info') }}">
+                        <span class="icon-info-sign"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label for="ConfirmationMessage">
+                        {{ __('applicationlang.confirmation_message') }}
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="ConfirmationMessage" id="ConfirmationMessage" rows="2"
+                              cols="15"><?php echo $application->ConfirmationMessage; ?></textarea>
+                </div>
+                <div class="col-md-1">
+                    <a class="tipr" title="{{ __('applicationlang.show_dashboard_info') }}">
+                        <span class="icon-info-sign"></span>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -228,7 +285,11 @@ if (false) {
         </div>
         <div class="content controls">
             <div class="form-row">
-                <div class="col-md-3">{{ __('common.applications_subscription_password') }}</div>
+                <div class="col-md-3">
+                    <label for="IOSHexPasswordForSubscription">
+                        {{ __('common.applications_subscription_password') }}
+                    </label>
+                </div>
                 <div class="col-md-8">
                     <input type="text" name="IOSHexPasswordForSubscription" id="IOSHexPasswordForSubscription"
                            class="form-control textbox"
@@ -245,23 +306,32 @@ if (false) {
                 <div class="col-md-12"> <?php echo __("clients." . $value); ?></div>
             </div>
             <div class="form-row">
-                <div class="col-md-3"><?php echo __('common.active'); ?></div>
+                <div class="col-md-3">
+                    <label for="SubscriptionStatus_<?php echo $key; ?>">
+                        <?php echo __('common.active'); ?>
+                    </label>
+                </div>
                 <div class="col-md-8">
-                    <input name="SubscriptionStatus_<?php echo $key; ?>" type="checkbox"
+                    <input name="SubscriptionStatus_<?php echo $key; ?>" id="SubscriptionStatus_<?php echo $key; ?>"
+                           type="checkbox"
                            value="1" <?php echo $application->subscriptionStatus($key) == eStatus::Active ? 'checked' : ''; ?>>
                 </div>
                 <div class="col-md-1"><a class="tipr" title="<?php echo __('clients.active_info_' . $value) ?>"><span
                                 class="icon-info-sign"></span></a></div>
             </div>
             <div class="form-row">
-                <div class="col-md-3"><?php echo __('clients.identifier'); ?></div>
+                <div class="col-md-3">
+                    <label for="SubscriptionIdenfier_<?php echo $key; ?>">
+                        <?php echo __('clients.identifier'); ?>
+                    </label>
+                </div>
                 <div class="col-md-8">
                     <div class="input-group">
                         <input type="text" id="SubscriptionIdenfier_<?php echo $key; ?>"
                                value="<?php echo $application->SubscriptionIdentifier($key); ?>" readonly="readonly">
     			<span class="input-group-btn">
     			    <button class="btn btn-primary urlCheck" type="button"
-                            onclick="cApplication.refreshSubscriptionIdentifier(<?php echo $application->ApplicationID; ?>, <?php echo $key; ?>);">
+                            onclick="cApplication.refreshSubscriptionIdentifier('<?php echo $application->ApplicationID; ?>', '<?php echo $key; ?>');">
                         <span class="icon-refresh"></span>
                     </button>
     			</span>
@@ -326,10 +396,12 @@ if (false) {
         cApplication.BannerActive();
         cApplication.BannerCustomerActive();
         cApplication.checkTabStatus();
+        cApplication.checkShowDashboard();
         // cApplication.checkHoverBlock();
         $('#dialog-tab-active-warning').on('shown.bs.modal', function () {
-            var text = $('#dialog-tab-active-warning .modal-body').text().replace("[[innerText]]", '{{ __("common.tabs_warning_url")}}');
-            $('#dialog-tab-active-warning .modal-body').text(text);
+            var modalBody = $('#dialog-tab-active-warning').find('.modal-body');
+            var text = modalBody.text().replace("[[innerText]]", '{{ __("common.tabs_warning_url")}}');
+            modalBody.text(text);
         });
 
         $('.money').mask('000.000.000.000.000,00', {reverse: true, placeholder: "00,00"});

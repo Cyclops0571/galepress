@@ -726,12 +726,19 @@ var cApplication = new function () {
         var obj = $("#TabActive");
         if (obj.is(':checked')) {
             obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
-        }
-        else {
+        } else {
             obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
         }
-        $('.row-save').removeClass('noTouchOpacity');
     };
+
+    this.checkShowDashboard = function () {
+        var obj = $("#ShowDashboard");
+        if (obj.is(':checked')) {
+            obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
+        } else {
+            obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
+        }
+    }
 
     this.BannerActive = function () {
         var obj = $("#BannerActive");

@@ -40,8 +40,9 @@
                 <input type="hidden" name="ClientID" id="ClientID" value="<?php echo $ClientID; ?>"/>
                 <?php if (count($applications) > 1): ?>
                 <div class="form-row">
-                    <div class="col-md-3"><?php echo __('common.menu_caption_applications'); ?> <span
-                                class="error">*</span></div>
+                    <div class="col-md-3">
+                        <?php echo __('common.menu_caption_applications'); ?> <span class="error">*</span>
+                    </div>
                     <div class="col-md-8">
                         <select style="width: 100%;" tabindex="-1" id="ApplicationID" name="ApplicationID"
                                 class="form-control select2 required">

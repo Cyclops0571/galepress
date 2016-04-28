@@ -55,10 +55,6 @@ class Webservice_Applications_Controller extends Base_Controller
             }
 
             $showDashboard = (boolean)rand(0, 1);
-            $confirmationMessage = "";
-            if ($showDashboard) {
-                $confirmationMessage = "TobaccoReviews.com does not permit access to minors.Are you at least 18 years old?";
-            }
 
             //Bu responsedaki Application Version Application tablosundaki Versiyon degildir.
             //Client icin ozel olusturulan Application Versiondur.
@@ -69,8 +65,8 @@ class Webservice_Applications_Controller extends Base_Controller
                 'ApplicationBlocked' => ((int)$application->Blocked == 1 ? true : false),
                 'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
                 'ApplicationVersion' => (int)($application->Version + $clientVersion),
-                'ShowDashboard' => $showDashboard,
-                'ConfirmationMessage' => $confirmationMessage,
+                'ShowDashboard' => (boolean)$application->ShowDashboard,
+                'ConfirmationMessage' => $application->ShowDashboard,
             ));
         });
     }

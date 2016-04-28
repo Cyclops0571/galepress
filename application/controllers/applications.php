@@ -533,6 +533,8 @@ class Applications_Controller extends Base_Controller
         $application->ThemeBackground = (int)Input::get("ThemeBackground", 1);
         $application->ThemeForegroundColor = Input::get("ThemeForegroundColor");
         $application->TabActive = (int)Input::get("TabActive", 0);
+        $application->ShowDashboard = (int)Input::get('ShowDashboard', 0);
+        $application->ConfirmationMessage = Input::get("ConfirmationMessage", '');
 
         $tabs = $application->Tabs();
         for ($i = 0; $i < TAB_COUNT; $i++) {
