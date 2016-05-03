@@ -66,7 +66,7 @@ class Webservice_Applications_Controller extends Base_Controller
                 'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
                 'ApplicationVersion' => (int)($application->Version + $clientVersion),
                 'ShowDashboard' => (boolean)$application->ShowDashboard,
-                'ConfirmationMessage' => $application->ShowDashboard,
+                'ConfirmationMessage' => $application->ConfirmationMessage,
             ));
         });
     }
