@@ -397,6 +397,8 @@ class CreateInteractivePDF_Task
                         } elseif ($componentClass == 'bookmark') {
                             //$propertyText
                             $propertyText = pack('H*', 'feff') . mb_convert_encoding($propertyText, 'UTF-16', 'UTF-8');
+                            $trigger_x = $trigger_x > 0 ? $trigger_x : 0;
+                            $trigger_y = $trigger_y > 0 ? $trigger_y : 0;
                             $p->create_bookmark($propertyText, "destination={page=" . ($page + 1) . " type=fixed left=" . $trigger_x . " top=" . $trigger_y . " zoom=1}");
                             //bookmark
                         }
@@ -448,7 +450,7 @@ class CreateInteractivePDF_Task
             if (method_exists($e, 'getLine')) {
                 $err .= ' Line: ' . $e->getLine();
             } else {
-                $err .= ' getLine Method Not Exists'; 
+                $err .= ' getLine Method Not Exists';
             }
             //$err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
