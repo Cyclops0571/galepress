@@ -117,7 +117,7 @@ class Clients_Controller extends Base_Controller
         $currentUser = Auth::User();
         $applications = $currentUser->Application();
         foreach ($applications as $app) {
-            $tmpContents = $app->Contents();
+            $tmpContents = $app->Contents(eStatus::Active);
             foreach ($tmpContents as $tmp) {
                 $selectableContents[] = $tmp;
             }
