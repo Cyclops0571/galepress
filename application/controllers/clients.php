@@ -150,7 +150,7 @@ class Clients_Controller extends Base_Controller
         }
         $applications = $currentUser->Application();
         foreach ($applications as $app) {
-            $tmpContents = $app->Contents();
+            $tmpContents = $app->Contents(eStatus::Active);
             foreach ($tmpContents as $tmp) {
                 $selectableContents[] = $tmp;
             }
@@ -338,7 +338,7 @@ class Clients_Controller extends Base_Controller
         $upload_handler = new UploadHandler($options);
 
         if (!Request::ajax()) {
-            return;
+            return Response::error('404');
         }
 
 
@@ -371,7 +371,7 @@ class Clients_Controller extends Base_Controller
                 $name = $data->val($row, $colNo++);
                 $surname = $data->val($row, $colNo++);
                 $paidUntil = date("Y-m-d", strtotime($data->val($row, $colNo++)));
-                $contentIDSetNew = explode(",", $data->val($row, $colNo++));
+                $contentIDSetNew = explode(",", $data->val($row, $colNo));
                 if ($applicationID <= 0) {
                     continue;
                 }
