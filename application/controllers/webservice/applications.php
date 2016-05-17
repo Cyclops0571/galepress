@@ -231,7 +231,7 @@ class Webservice_Applications_Controller extends Base_Controller
      */
     public function get_contents($ServiceVersion, $applicationID)
     {
-        //get user token here then return acourdin to this 571571
+        //get user token here then return acourding to this 573573
         return webService::render(function () use ($ServiceVersion, $applicationID) {
             $isTest = Input::get('isTest', 0) ? TRUE : FALSE;
             $accessToken = Input::get('accessToken', "");

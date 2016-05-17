@@ -40,7 +40,7 @@ class Clients_Controller extends Base_Controller
             'applicationID' => 'required',
         );
         if (!Laravel\Validator::make(\Laravel\Input::all(), $rules)->passes()) {
-            \Laravel\Redirect::to(__('route.home')); //571571
+            return \Laravel\Response::error('404');
         }
 
         $applicationID = (int)Input::get('applicationID', 0);
@@ -53,7 +53,7 @@ class Clients_Controller extends Base_Controller
             $applications = array();
             $application = Application::find($applicationID);
             if ($application->CustomerID != $currentUser->CustomerID) {
-                \Laravel\Redirect::to(__('route.home')); //571571
+                return Response::error('404');
             }
             $applications[] = $application;
         } else {

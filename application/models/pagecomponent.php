@@ -13,6 +13,7 @@
  * @property int ContentFilePageID
  * @property int CreatorUserID
  * @property int ProcessUserID
+ * @property PageComponentProperty[] PageComponentProperty
  */
 class PageComponent extends Eloquent
 {
@@ -50,4 +51,24 @@ class PageComponent extends Eloquent
         parent::save();
     }
 
+    /**
+     * @param ContentFile $newContentFile
+     * @param ContentFile $oldContentFile
+     */
+    public function moveToNewContentFile(ContentFile $newContentFile, ContentFile $oldContentFile)
+    {
+        $mypath = '/output/comp_' . $this->PageComponentID;
+        if (File::exists($oldContentFile->pdfFolderPathAbsolute() . $mypath)) {
+            File::mvdir($oldContentFile->pdfFolderPathAbsolute() . $mypath, $newContentFile->pdfFolderPathAbsolute() . $mypath);
+        }
+        $myHtml = $mypath . '.html';
+        if (File::exists($oldContentFile->pdfFolderPathAbsolute() . $myHtml)) {
+            File::move($oldContentFile->pdfFolderPathAbsolute() . $myHtml, $newContentFile->pdfFolderPathAbsolute() . $myHtml);
+        }
+    }
+
+    public function PageComponentProperty()
+    {
+        return $this->has_many('PageComponentProperty', $this->key())->where('StatusID', '=', eStatus::Active);
+    }
 }

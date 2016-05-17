@@ -611,7 +611,7 @@ class Common
 
     public static function sendPaymentUserReminderMail($userList)
     {
-        return; //571571
+        return; //573573
         Bundle::start('messages');
         foreach ($userList as $user) {
             if (!in_array($user["warning_mail_phase"], array(1, 2, 3))) {

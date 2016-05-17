@@ -1265,7 +1265,7 @@ class PDFlib
      *
      * @param string $filename
      * @param string $optlist
-     * @return  A PDI document handle.
+     * @return int A PDI document handle.
      */
     function open_pdi_document($filename, $optlist)
     {
@@ -1290,7 +1290,7 @@ class PDFlib
      *
      * @param int $doc
      * @param string $path
-     * @return  The numerical value of the object identified by the pCOS path.
+     * @return float The numerical value of the object identified by the pCOS path.
      */
     function pcos_get_number($doc, $path)
     {

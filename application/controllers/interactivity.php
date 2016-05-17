@@ -183,7 +183,6 @@ class Interactivity_Controller extends Base_Controller
     public function get_show($contentFileID)
     {
         set_time_limit(3000);
-        $currentUser = Auth::User();
         $ContentID = (int)ContentFile::find($contentFileID)->ContentID;
         $ApplicationID = (int)Content::find($ContentID)->ApplicationID;
 
@@ -203,42 +202,29 @@ class Interactivity_Controller extends Base_Controller
 
         $content = Content::find($ContentID);
         $cf = ContentFile::find($contentFileID);
-
-        $oldContentFileID = 0;
-
-        if ((int)$cf->Transferred == 1) {
-            $oldContentFileID = (int)DB::table('ContentFile')
-                ->where('ContentFileID', '<', $contentFileID)
-                ->where('ContentID', '=', $cf->ContentID)
-                ->where('Interactivity', '=', 1)
-                ->where('StatusID', '=', eStatus::Active)
-                ->order_by('ContentFileID', 'DESC')
-                ->take(1)
-                ->only('ContentFileID');
+        if (!$cf) {
+            return View::make('interactivity.error', array('errmsg' => __('error.your_page_not_found')));
         }
 
-        $cfp = DB::table('ContentFilePage')
-            ->where('ContentFileID', '=', $cf->ContentFileID)
-            ->where('StatusID', '=', eStatus::Active);
-
-        //ilk kez aciliyor!
-        if ($cfp->count() == 0) {
-            ContentFile::makeContentInteractive($ContentID, $contentFileID, $oldContentFileID);
+        if ($cf->Interactivity == ContentFile::InteractivityProcessContinues) {
+            return Redirect::to('/' . __('route.contents') . '/' . $cf->ContentID . '?error=' . __('error.interactivity_conflict'));
         }
 
-        $cfp = DB::table('ContentFilePage')
-            ->where('ContentFileID', '=', $cf->ContentFileID)
-            ->where('StatusID', '=', eStatus::Active)
-            ->get();
-
+        $errorMsg = ContentFile::makeContentInteractive($cf);
+        if ($errorMsg) {
+            Common::sendErrorMail($errorMsg);
+            return View::make('interactivity.error', array('errmsg' => $errorMsg));
+        }
+        
         $data = array(
             'content' => $content,
             'ContentID' => $cf->ContentID,
             'ContentFileID' => $cf->ContentFileID,
             'included' => (int)$cf->Included,
             'filename' => $cf->FileName,
-            'pages' => $cfp
+            'pages' => $cf->ContentFilePage
         );
+
         return View::make('interactivity.master', $data)
             ->nest('header', 'interactivity.header', $data)
             ->nest('sidebar', 'interactivity.sidebar', $data)
