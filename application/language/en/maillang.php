@@ -21,12 +21,16 @@ return array(
         . "and pay for your subscription. http://www.galepress.com/usa/shop\n\n"
         . "Sincerely \nGale Press",
     'subscription_welcome_part1' => "Dear :NAME&nbsp;:SURNAME,</br></br>"
-        . "Welcome to Gale Press Digital Publishing Platform. At the end of this email you will find the login button"
-        . "where you can enter to the system with your password and username."
-        . "You can publish your own designed application without any coding knowledge."
-        . "This application can be decorated with interactive elements with the knowledge we will teach you.</br></br>"
-        . "After publishing your application, to view your application you need to download GP Viewer from App Store or Google Play Store and install to your cell phone"
-        . "GP Viewer application is only for previewing the changes that you made from control panel.</br></br>",
+        . "Welcome to the Gale Press Digital Publishing Platform!</br></br>"
+        . "Click on the login button below to enter your username and password.  "
+        . "Without any coding knowledge, you will be able to publish your own personalized application.  "
+        . "Using our training videos, you will learn how to add interactive elements, like videos, to your app."
+        . "You can publish your own designed application without any coding knowledge.</br></br>"
+        . "In order to view your application after publishing, you will need to download the "
+        . "GP Viewer from the Apple Store or Google Play and install to your mobile device.   "
+        . "The GP Viewer application is only for previewing the changes that you made from control panel.</br></br>"
+        . "To download the GP Viewer for Apple, <a href=\"https://www.galepress.com/enterprise/gpviewer/ipa/GalePress.plist\">click here</a></br></br>"
+        . "To download the GP Viewer for Android, <a href=\"https://www.galepress.com/enterprise/gpviewer/ipa/gpviewer.apk\">click here</a></br></br>",
     'subscription_welcome_part2' => "Now you can watch the tutorial videos that is made for you.</br></br>"
         . "Sincerely </br>Gale Press",
     'activation' => 'Aktivation',
