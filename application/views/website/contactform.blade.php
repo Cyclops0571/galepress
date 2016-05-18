@@ -4,8 +4,8 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: text/html;charset=UTF-8');
 
 // Define some constants
-define("RECIPIENT_NAME", "GalePress");
-define("EMAIL_SUBJECT", "GalePress Iletisim Formu");
+define("RECIPIENT_NAME", "Gale Press");
+define("EMAIL_SUBJECT", "Gale Press Iletisim Formu");
 
 // Read the form values
 $success = false;

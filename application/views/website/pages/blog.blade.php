@@ -51,7 +51,7 @@
 							<div class="col-md-12">
 								<div class="post-meta">
 									<span><i class="icon icon-calendar"></i> <?php $m = __('common.month_names')->get(); echo $m[12];?> 23, 2014 </span>
-									<span>&nbsp;<i class="icon icon-user"></i><a href="#"> Galepress</a> </span>
+                                    <span>&nbsp;<i class="icon icon-user"></i><a href="#"> Gale Press</a> </span>
 									<a href="{{__('route.website_article_workflow')}}" class="btn btn-xs btn-primary pull-right">{{__('website.blog_read_more')}}</a>
 								</div>
 							</div>
@@ -77,7 +77,7 @@
 							<div class="col-md-12">
 								<div class="post-meta">
 									<span><i class="icon icon-calendar"></i> <?php $m = __('common.month_names')->get(); echo $m[12];?> 23, 2014 </span>
-									<span>&nbsp;<i class="icon icon-user"></i><a href="#"> Galepress</a> </span>
+                                    <span>&nbsp;<i class="icon icon-user"></i><a href="#"> Gale Press</a> </span>
 									<a href="{{__('route.website_article_whymobile')}}" class="btn btn-xs btn-primary pull-right">{{__('website.blog_read_more')}}</a>
 								</div>
 							</div>
@@ -103,7 +103,7 @@
 							<div class="col-md-12">
 								<div class="post-meta">
 									<span><i class="icon icon-calendar"></i> <?php $m = __('common.month_names')->get(); echo $m[12];?> 23, 2014 </span>
-									<span>&nbsp;<i class="icon icon-user"></i><a href="#"> Galepress</a> </span>
+                                    <span>&nbsp;<i class="icon icon-user"></i><a href="#"> Gale Press</a> </span>
 									<a href="{{__('route.website_article_brandvalue')}}" class="btn btn-xs btn-primary pull-right">{{__('website.blog_read_more')}}</a>
 								</div>
 							</div>

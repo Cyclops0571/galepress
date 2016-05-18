@@ -46,8 +46,8 @@ return array(
       |--------------------------------------------------------------------------
      */
     'csrf' => $csrf,
-    'companyname' => 'GALEPRESS',
-    'mail_displayname' => 'GALEPRESS',
+    'companyname' => 'GALE PRESS',
+    'mail_displayname' => 'GALE PRESS',
     'mail_email' => $mailEmail,
     'url' => $serverUrl,
     'admin_email_set' => array('serdar.saygili@detaysoft.com'),

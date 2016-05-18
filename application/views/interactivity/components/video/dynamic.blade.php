@@ -46,7 +46,7 @@ else {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1">
     <script src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.js"></script>
-    <title>GalePress</title>
+    <title>Gale Press</title>
     <link href="{{ $baseDirectory }}comp_{{ $id }}/css/video-js.css" rel="stylesheet" type="text/css">
     <script src="{{ $baseDirectory }}comp_{{ $id }}/js/video.js" type="text/javascript"></script>
     <style>

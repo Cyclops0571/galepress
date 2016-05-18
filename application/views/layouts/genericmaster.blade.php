@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Serdar Saygılı"/>
-    <meta name="copyright" content="Galepress Technology"/>
+    <meta name="copyright" content="Gale Press Technology"/>
     <meta name="company" content="Detay Danışmanlık Bilgisayar Hiz. San. ve Dış Tic. A.Ş."/>
     <link rel="shortcut icon" href="/website/img/favicon2.ico">
 

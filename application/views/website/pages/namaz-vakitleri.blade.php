@@ -8,7 +8,7 @@
   <title>Namaz Vakitleri</title>
   <meta name="keywords" content="Namaz, Vakit, Kıble, Pusula" />
   <meta name="description" content="Namaz Vakitleri">
-  <meta name="author" content="GalePress">
+    <meta name="author" content="Gale Press">
 
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">

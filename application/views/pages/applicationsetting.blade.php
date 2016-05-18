@@ -174,7 +174,7 @@
                     <div class="input-group file">
                         <input type="text" id="TargetUrl_<?php echo $tabNo; ?>" class="form-control targetUrlCount"
                                name="Url_<?php echo $tabNo; ?>" value="<?php echo $tab->Url; ?>"
-                               placeholder="<?php echo "galepress.com"; ?>" style="height:35px;"/>
+                               placeholder="<?php echo "Gale Press"; ?>" style="height:35px;"/>
     			<span class="input-group-btn">
     			    <button class="btn btn-primary urlCheck" type="button" id="checkUrl_<?php echo $tabNo; ?>"
                             onclick="cApplication.checkUrl(this);"><span class="icon-ok"></span></button>

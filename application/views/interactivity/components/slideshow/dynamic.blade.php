@@ -29,7 +29,7 @@ foreach ($files as $file) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>GalePress</title>
+    <title>Gale Press</title>
     <meta content="Touch-enabled image gallery and content slider plugin, that focuses on providing great user experience on every desktop and mobile device."
           name="description">
     <meta name="keywords" content="content slider, gallery, plugin, jquery, banner rotator">

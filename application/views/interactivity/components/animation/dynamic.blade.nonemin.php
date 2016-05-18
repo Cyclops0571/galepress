@@ -23,7 +23,7 @@ else
 <head>
 	<meta charset='utf-8'/>
 	<meta name="viewport" content="user-scalable=no" />
-	<title>GalePress</title>
+    <title>Gale Press</title>
 	<style type='text/css'>
 		*{margin:0;padding:0;overflow:hidden;}
 		html,body{width:100%;height:100%;}

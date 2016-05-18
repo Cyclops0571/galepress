@@ -22,7 +22,7 @@ else
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>GalePress</title>
+    <title>Gale Press</title>
 	<meta name="viewport" content="user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="{{ $baseDirectory }}comp_{{ $id }}/css/index.css" />
 	<script type="text/javascript" src="{{ $baseDirectory }}comp_{{ $id }}/CrbUI/audio/button/js/jquery.min.js"></script>

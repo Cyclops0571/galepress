@@ -191,7 +191,7 @@ $tabIndex = 1;
         <div class="container">
             <h1 class="logo">
                 <a href="index.html">
-                    <img alt="GalePress" data-sticky-width="252" data-sticky-height="82"
+                    <img alt="Gale Press" data-sticky-width="252" data-sticky-height="82"
                          src="/website/img/logo-dark.png">
                 </a>
             </h1>

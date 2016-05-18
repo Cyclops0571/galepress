@@ -599,12 +599,12 @@ class Common
         Bundle::start('messages');
         Message::send(function ($m) use ($username, $email, $amount) {
             $body = "Sayın " . $username . ", \r\n"
-                . "Galepress Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
+                . "Gale Press Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
                 . "Firmamız adına teşekkür eder iyi günler dileriz.\r\n\r\n\r\n"
-                . "Saygılarımızla Galepress";
+                . "Saygılarımızla Gale Press";
             $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
             $m->to($email);
-            $m->subject("Galepress Dijital Yayin Platformu Otomatik Ödeme Maili");
+            $m->subject("Gale Press Dijital Yayin Platformu Otomatik Ödeme Maili");
             $m->body($body);
         });
     }
@@ -645,7 +645,7 @@ class Common
 
                 $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($user["email"]);
-                $m->subject("Galepress Dijital Yayin Platformu Ödeme Hatırlatma Maili");
+                $m->subject("Gale Press Dijital Yayin Platformu Ödeme Hatırlatma Maili");
                 $m->body($msg);
             });
         }
@@ -659,7 +659,7 @@ class Common
             Message::send(function ($m) use ($adminMail, $msg) {
                 $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($adminMail);
-                $m->subject("Galepress Ödeme Hatırlatma Maili");
+                $m->subject("Gale Press Ödeme Hatırlatma Maili");
                 $m->body($msg);
             });
         }

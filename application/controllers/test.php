@@ -19,6 +19,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo number_format((float)2795.00, 2);
+        exit;
         $test = (boolean)rand(0, 1);
         var_dump($test);
         exit;
@@ -187,8 +189,8 @@ class Test_Controller extends Base_Controller
                 throw new Exception($p->get_errmsg());
             }
 
-            $p->set_info("Creator", "Galepress");
-            $p->set_info("Title", "Galepress Interactive PDF");
+            $p->set_info("Creator", "Gale Press");
+            $p->set_info("Title", "Gale Press Interactive PDF");
             //-----------------------------------------------------------------------------------------------
             //open original document
             $docOriginal = $p->open_pdi_document($fileOriginal, "");

@@ -80,8 +80,8 @@ class CreateInteractivePDF_Task
                 throw new Exception($p->get_errmsg());
             }
 
-            $p->set_info("Creator", "Galepress");
-            $p->set_info("Title", "Galepress Interactive PDF");
+            $p->set_info("Creator", "Gale Press");
+            $p->set_info("Title", "Gale Press Interactive PDF");
             //-----------------------------------------------------------------------------------------------
             //open original document
             $docOriginal = $p->open_pdi_document($fileOriginal, "");

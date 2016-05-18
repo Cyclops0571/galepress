@@ -7,7 +7,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'support' => 'DESTEK',
-    'login_caption' => 'Galepress Login',
+    'login_caption' => 'Gale Press Login',
     'login_remember' => 'Beni hatırla',
     'login_button' => 'Giriş',
     'login_button_resetmypassword' => 'Parolamı sıfırla',
@@ -15,19 +15,19 @@ return array(
     'login_goback' => 'Geri Dön',
     'login_error' => 'Hatalı kullanıcı bilgisi girdiniz!',
     'login_error_expiration' => 'uygulamanızın geçerlilik süresi sonlanmıştır!',
-    'login_email_subject' => 'Galepress.com parola sıfırlama e-postası',
+    'login_email_subject' => 'Gale Press parola sıfırlama e-postası',
     'login_email_message' => "Sayın :firstname :lastname, \n\n" .
         "Kullanıcı Adınız :username, \n\n" .
         ":Application uygulaması parolanızı sıfırlamak için aşağıdaki linke tıklayabilirsiniz. Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n" .
         ":url\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
-    'login_resetpassword_email_subject' => 'Galepress.com parola sıfırlama e-postası',
+        "Gale Press",
+    'login_resetpassword_email_subject' => 'Gale Press parola sıfırlama e-postası',
     'login_resetpassword_email_message' => "Sayın :firstname :lastname, \n\n" .
         ":Application uygulaması icin kullanıcı Adınız :username, \n\n" .
         "Parolanız :pass olarak değiştirilmiştir. \n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
     'login_emailsent' => 'Parolanızı sıfırlayabileceğiniz link e-posta adresinize gönderilmiştir.',
     'login_emailnotfound' => 'Kayıtlı bir e-posta adresi bulunamadı!',
     'login_ticketnotfound' => 'Parola sıfırlama talebiniz bulunamadı!',
@@ -303,7 +303,7 @@ return array(
     'contents_tooltip_autodownload' => 'İşaretli içerikler kullanıcıya sorulmadan direk indirilecektir. Küçük boyutlu içeriklerde kullanılması tavsiye edilir, aksi halde programın başlaması uzun sürecektir.',
     'contents_tooltip_approval' => 'Onay',
     'contents_tooltip_blocked' => 'Bloke.',
-    'contents_tooltip_status' => 'İşaretli içerikler tablet bilgisayarlarda gözükür ve indirilebilir. galepress.com\'a yüklediğiniz ama tablet bilgisayarlarda gözükmesini ve indirilmesini istemediğiniz içerikler için boş bırakın.',
+    'contents_tooltip_status' => 'İşaretli içerikler tablet bilgisayarlarda gözükür ve indirilebilir. Gale Press\'e yüklediğiniz ama tablet bilgisayarlarda gözükmesini ve indirilmesini istemediğiniz içerikler için boş bırakın.',
     'contents_tooltip_interactive' => 'İnteraktif tasarlayıcıyı açar.',
 
     'contents_category_title' => 'Kategorileri düzenle',
@@ -428,7 +428,7 @@ return array(
     'orders_hints_appscreenshots' => 'Uygulamanıza ait farklı çözünürlükteki görüntüler cihazlar bazında görüntülenecektir.',
     'orders_placeholders_orderno' => 'Sipariş Numarası',
     'orders_placeholders_appname' => 'Uygulamanızın Adı',
-    'orders_placeholders_appdescription' => 'GalePress; dergi, gazete, katalog vb. materyallerinizi, kod bilgisi gerektirmeden kolayca dijital ortamda okuyucularınız ile buluşmanızı sağlayan yayın platformudur.',
+    'orders_placeholders_appdescription' => 'Gale Press; dergi, gazete, katalog vb. materyallerinizi, kod bilgisi gerektirmeden kolayca dijital ortamda okuyucularınız ile buluşmanızı sağlayan yayın platformudur.',
     'orders_formfinal' => 'Formu Gönder',
 
     'reports_caption' => 'Raporlar',
@@ -467,22 +467,22 @@ return array(
     'reports_columns_report1301_admin' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "İndirilme Yüzdesi"),
     'reports_columns_report1302' => array("Müşteri No", "Müşteri Adı", "Uygulama Adı", "İçerik Adı", "Ülke", "Şehir", "İlçe", "Sayfa", "Kullanıcı Sayısı", "Süre (Saniye)"),
 
-    'task_subject' => 'Galepress.com görevi esnasında hata oluştu',
-    'task_status' => 'Galepress.com görevi durumu',
+    'task_subject' => 'Gale Press görevi esnasında hata oluştu',
+    'task_status' => 'Gale Press görevi durumu',
     'task_message' => "" .
         "Sayın yetkili, \n\n" .
         ":task görevi yapılırken bir hata oluştu. Hata detayını aşağıda görebilirsiniz.\n\n" .
         ":detail\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
 
-    'task_success_subject' => 'Galepress.com görevi başarıyla tamamlandı',
+    'task_success_subject' => 'Gale Press görevi başarıyla tamamlandı',
     'task_success_message' => "" .
         "Sayın yetkili, \n\n" .
         ":task görevi başarıyla tamamlandı. Ek açıklamaları aşağıda görebilirsiniz.\n\n" .
         ":detail\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
 
     'dashboard_title' => 'İÇERİK İNDİRİLME',
     'dashboard_total' => 'Toplam',
@@ -517,7 +517,7 @@ return array(
         "Hesabınızı onaylamak için aşağıdaki linke tıklayabilirsiniz. Eğer böyle bir talepte bulunmadıysanız lütfen bu e-postayı önemsemeyiniz.\n\n" .
         ":url\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
     'login_accounthasbeenconfirmed' => 'Hesabınız başarıyla onaylandı.',
     'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!',
 
@@ -620,7 +620,7 @@ return array(
     'tabs_active' => 'Tab Active',
 
     'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz.',
-    'tabs_info_inhouse_url' => 'Galepress özelliği secebilirsiniz (Storelocator vs..)',
+    'tabs_info_inhouse_url' => 'Gale Press özelliği secebilirsiniz (Storelocator vs..)',
     'tabs_info_icon' => 'Tab için mobilde gösterilecek ikon',
     'tabs_info_active' => 'Yanlızca aktif tablar mobil uygulamada gösterilecektir',
     'tabs_dont_use_feature' => 'Bu özelliği kullanma',

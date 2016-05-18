@@ -8,7 +8,7 @@ return array(
 	|--------------------------------------------------------------------------
 	*/
     	'support' => 'SUPPORT',
-	'login_caption' => 'Galepress Login',
+    'login_caption' => 'Gale Press Login',
 	'login_remember' => 'Remember me',
 	'login_button' => 'Login',
 	'login_button_resetmypassword' => 'Reset Password',
@@ -16,22 +16,22 @@ return array(
 	'login_goback' => 'Go Back',
 	'login_error' => 'You have entered an incorrect user information!',
 	'login_error_expiration' => 'The period of validity of your application terminated!',
-	'login_email_subject' => 'Galepress.com password resetting e-mail',
+    'login_email_subject' => 'Gale Press password resetting e-mail',
     'login_email_message' => ":firstname :lastname, \n\n"
         . "Your :Application application Username is :username, \n"
         . "Click under the link for reset your password.\n"
         . ":url\n\n"
-        . "Click this link to bypass Password Reset and login to GalePress:\n"
+        . "Click this link to bypass Password Reset and login to Gale Press:\n"
         . "http://www.galepress.com/usa/\n\n"
         . "Regards, \n"
-        . "GalePress",
-    'login_resetpassword_email_subject' => 'Galepress.com password resetting e-mail',
+        . "Gale Press",
+    'login_resetpassword_email_subject' => 'Gale Press password resetting e-mail',
     'login_resetpassword_email_message' => "" .
         ":firstname :lastname, \n\n" .
         "Your :Application application Username is :username, \n\n" .
         "Password is changed as :pass. \n\n" .
         "Regards, \n" .
-        "GalePress",
+        "Gale Press",
 	'login_emailsent' => 'Password reset link has been sent to your e-mail.',
 	'login_emailnotfound' => "A registered E-mail adress hasn't been found!",
 	'login_ticketnotfound' => 'Password reset demand is not found!',
@@ -306,7 +306,7 @@ return array(
 	'contents_tooltip_autodownload' => 'Marked content will be downloaded directly without prompting the user. It is recommended for usage in small-sized content, otherwise it will take longer to start the program.',
 	'contents_tooltip_approval' => 'Confirm',
 	'contents_tooltip_blocked' => 'Blocked.',
-	'contents_tooltip_status' => 'Marked contents appear in tablet computers and are downloadable. Leave it blank for the contents that you have uploaded to galepress.com and that you do not want to be downloaded.',
+    'contents_tooltip_status' => 'Marked contents appear in tablet computers and are downloadable. Leave it blank for the contents that you have uploaded to Gale Press and that you do not want to be downloaded.',
 	'contents_tooltip_interactive' => 'Opens interactive designer.',
 	
 	'contents_category_title' => 'Edit the categories',
@@ -432,7 +432,7 @@ return array(
 	'orders_hints_appscreenshots' => 'Screenshots resolutions will be displayed on different devices.',
 	'orders_placeholders_orderno' => 'Order No',
 	'orders_placeholders_appname' => 'Your Application Name',
-	'orders_placeholders_appdescription' => 'Galepress is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
+    'orders_placeholders_appdescription' => 'Gale Press is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
 	'orders_formfinal' => 'Send Form',
 	
 	'reports_caption' => 'Reports',
@@ -477,22 +477,22 @@ return array(
 	'reports_columns_report1301_admin' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Download Percent"),
 	'reports_columns_report1302' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Page", "User Count", "Duration (Second)"),
 
-	'task_subject' => 'An error occurred during the task galepress.com',
-	'task_status' => 'Task status message of galepress.com',
+    'task_subject' => 'An error occurred at Gale Press during the task ',
+    'task_status' => 'Task status message of Gale Press',
 	'task_message' => "".
 						"Authorized, \n\n".
 						":task mission not succesfully completed. You can see the mistakes below.\n\n".
 						":detail\n\n".
 						"Regards, \n".
-						"Galepress",
-						
-	'task_success_subject' => 'Galepress.com task was completed successfully',
+        "Gale Press",
+
+    'task_success_subject' => 'Gale Press task was completed successfully',
 	'task_success_message' => "".
 						"Authorized, \n\n".
 						":task mission succesfully completed. You can see the annotations below.\n\n".
 						":detail\n\n".
 						"Regards, \n".
-						"Galepress",
+        "Gale Press",
 	
 	'dashboard_title' => 'CONTENT DOWNLOAD',
 	'dashboard_total' => 'Total',
@@ -527,7 +527,7 @@ return array(
 							"To confirm your account, you can click the link below. If you make such a request, please ignore this email.\n\n".
 							":url\n\n".
 							"Best Regards, \n".
-							"Galepress",
+        "Gale Press",
 	'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
 	'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
 
@@ -630,7 +630,7 @@ return array(
 	'tabs_active' => 'Tab Active',
 	
 	'tabs_info_url' => 'You can set a link to the mobile compatible.',
-	'tabs_info_inhouse_url' => 'You can select Galepress feature (Storelocator vs..)',
+    'tabs_info_inhouse_url' => 'You can select Gale Press feature (Storelocator vs..)',
 	'tabs_info_icon' => 'Icon will be displayed in application',
     'tabs_info_active' => 'Only active tabs will be displayed in the mobile application',
 	'tabs_dont_use_feature' => 'Dont use this feature',

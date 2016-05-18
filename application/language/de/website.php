@@ -7,9 +7,9 @@ return array(
     | Website Language Lines
     |--------------------------------------------------------------------------
     */
-    'title' => 'GalePress - Digitale Publikationsplattform',
-    'keywords' => 'GalePress Digitale Publikations',
-    'description' => 'GalePress - Digitale Publikationsplattform',
+    'title' => 'Gale Press - Digitale Publikationsplattform',
+    'keywords' => 'Gale Press Digitale Publikations',
+    'description' => 'Gale Press - Digitale Publikationsplattform',
 
     'page_home' => 'Startseite',
     'about_us' => 'About Us',
@@ -26,14 +26,14 @@ return array(
 					<li><b>100 MB</b> Pdf Size</li>',
     'packeges' => 'Packages',
     'interactive_packeges' => 'Interactive Packeges',
-    'galepress_packeges' => 'GalePress Packeges',
+    'galepress_packeges' => 'Gale Press Packeges',
     'shop_description' => '<p class="lead">
 				You can add 3D image galeri, video, audio, animation, map for making  PDF <span class="alternative-font">interactive</span>.
 			    </p>
 			    <p class="lead">
 				This package is only valid for <b>personal customers</b>.
 			    </p>',
-    'page_galepress' => 'GalePress',
+    'page_galepress' => 'Gale Press',
     'page_products' => 'Produkte',
     'page_advantages' => 'Vorteile',
     'page_customers' => 'Unsere Kunden',
@@ -42,7 +42,7 @@ return array(
     'page_sitemap' => 'Sitemap',
     'page_search' => 'Suchen...',
 
-    'galepress' => 'Was ist GalePress?',
+    'galepress' => 'Was ist Gale Press?',
     'galepress_desc' => 'Ermöglicht den Abruf der Dokumente wie Zeitungen, Zeitschriften, Kataloge und Bücher <br> auf den Tabletcomputern und Smartphones.',
 
     'mobile' => 'MOBILE APPLIKATION',
@@ -96,9 +96,9 @@ return array(
 
     'slide_footer' => 'Integrieren Sie sich in die digitale Welt vor Ihrer Konkurrenten!',
 
-    'galepressdpp' => 'GalePress - Digitale Publikationsplattform',
+    'galepressdpp' => 'Gale Press - Digitale Publikationsplattform',
     'galepressdpp_desc' => 'Informationszugriff auf den Druckmaterialien wird heutzutage immer mehr durch Smaprtphones, multifunktionellen Tabletcomputer, besondere E-Reader und durch die weiteren digitalen Geräte ersetzt. Die neue digitale Publikation, die mit den innovativen Lösungen unseres neuen Zeitalters einhergehen, ist nicht mehr eine Alternative sondern ein Muß. <br>
-GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unser Land betrifft, und bietet neue Lösungen an, die nicht nur für Publisher sondern auch für Leser einen festen Standpunkt ermöglichen.',
+Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch unser Land betrifft, und bietet neue Lösungen an, die nicht nur für Publisher sondern auch für Leser einen festen Standpunkt ermöglichen.',
 
     'login' => 'LOGIN',
     'load' => 'Hochladen',
@@ -110,7 +110,7 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 
     'easy_touch' => 'Einfacher zugriff',
     'get_in_touch' => 'Bleiben Sie auf dem Laufenden!',
-    'get_in_touch_desc' => 'Um die Neuigkeiten von GalePress nicht zu verpassen, tragen Sie sich in die Mailingliste.',
+    'get_in_touch_desc' => 'Um die Neuigkeiten von Gale Press nicht zu verpassen, tragen Sie sich in die Mailingliste.',
 
     'newsletter_success' => '<strong>Erfolgreich!</strong> Ihre Email-Adresse wurde eingetragen.',
     'newsletter_email' => 'Geben Sie Ihre Email-Adresse ein.',
@@ -140,11 +140,11 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 
     //WHAT IS GALEPRESS
     'whatis' => 'Nedir?',
-    'whatis_desc1' => 'GalePress ermöglicht als eine Web-Plattform und eine mobile Applikation den Abruf der Dokumente wie Zeitungen, Zeitschriften, Kataloge, Bücher, Ausbildungsmaterialien, Gebrauchsanweisungen, etc. auf den Tabletcomputern und Smartphones.',
-    'whatis_desc2' => 'Die Technologie wird jeden Tag weiterentwickelt und erhöht die Verfügbarkeit der Smartphones. Die neuen technologischen Möglichkeiten bieten uns auch neue Erlebnisse an. GalePress benutz die neue technologische Infrastruktur und ermöglicht die Publikation bzw. Veröffentlichung und Verteilung der Dokumente über Tabletcomputer und Smartphones.',
+    'whatis_desc1' => 'Gale Press ermöglicht als eine Web-Plattform und eine mobile Applikation den Abruf der Dokumente wie Zeitungen, Zeitschriften, Kataloge, Bücher, Ausbildungsmaterialien, Gebrauchsanweisungen, etc. auf den Tabletcomputern und Smartphones.',
+    'whatis_desc2' => 'Die Technologie wird jeden Tag weiterentwickelt und erhöht die Verfügbarkeit der Smartphones. Die neuen technologischen Möglichkeiten bieten uns auch neue Erlebnisse an. Gale Press benutz die neue technologische Infrastruktur und ermöglicht die Publikation bzw. Veröffentlichung und Verteilung der Dokumente über Tabletcomputer und Smartphones.',
     'whatis_desc3' => 'Mit Hilfe dieser Plattform können die druckfähigen und nicht druckfähigen Dokumente ohne Erfordernis eines Kodes einfach veröffentlicht werden. Kataloge, Gebrauchsanweisungen, Newsletter, Zeitschriften, Zeitungen, Bücher, Ausbildungsmaterialien, Werbebroschüren, Flugzettel, Ausschreibungen, betriebsinterne Dokumente, Preisliten können veröffentlicht werden. Diese Plattform können Sie für die Dokumente für betriebsinterne Zwecke oder für den Endkunden in Anspruch nehmen.',
     'whatis_desc4' => 'Mit den firmenspezifischen Applikationen verfügen unsere Kunden über eine Applikation mit eigenem Logo und mit eigener Firmenbezeichnung. In dieser Applikation befindet sich eine PDF-Bibliothek.',
-    'whatis_desc5' => 'Ferner ist mit Hilfe der firmenspezifischen Benutzerdaten der zugriff zum Dokumentenmanagementsystem von GalePress sowie die Weiterentwicklung, Bearbeitung und Veröffentlichung der PDF-Dateien möglich.',
+    'whatis_desc5' => 'Ferner ist mit Hilfe der firmenspezifischen Benutzerdaten der zugriff zum Dokumentenmanagementsystem von Gale Press sowie die Weiterentwicklung, Bearbeitung und Veröffentlichung der PDF-Dateien möglich.',
     'whatis_desc6' => 'Mit Hilfe der interaktiven Inhalterweiterung als ein Teil des Dokumentenmanagementsystems können die PDFs mit audio-visuellen Elementen versehen werden. Diese Prozesse erfolgen durch Drag & Drop auf einfache Weise. Den Lesern werden auf den mobilen Plattformen qualitative, ausführliche und atraktive Inhalte angeboten.',
     'whatis_technology' => 'Technologie',
     'whatis_sharedoc' => 'Dokument-Sharing',
@@ -206,7 +206,7 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 								<li><i class="icon-time"></i> Cumartesi - Pazar (Kapalı)</li>',
 
     'sitemap_whous' => 'Wer sind wir?',
-    'sitemap_whous_detail' => 'GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unser Land betrifft, und bietet neue Lösungen an, die nicht nur für Publisher sondern auch für Leser einen festen Standpunkt ermöglichen.',
+    'sitemap_whous_detail' => 'Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch unser Land betrifft, und bietet neue Lösungen an, die nicht nur für Publisher sondern auch für Leser einen festen Standpunkt ermöglichen.',
     'sitemap_whous_detail1' => 'Umweltschonende Publikationslösung',
     'sitemap_whous_detail2' => 'Einfach zu bedienen',
     'sitemap_whous_detail3' => 'Veröffentlichung mit einem Button',
@@ -242,7 +242,7 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'article_brandvalue_content' => '<h2>Increase Your Brand Equity With Mobile Apps</h2>
 		<p>Behind the success of strong brands, lie their strong brand equity and the increase of these brands in the market compared to their competitors. Brand awareness and bringing in diversity and innovation are among factors that increase brand equity. </p>
 		<p>Today we live in a digital age, and companies which develop mobile apps and interact with their customers through them stand out among their competitors. For mobile users, two-way communication is much more important and it is possible to achieve this through mobile. There are more than 1 billion websites and the number of mobile apps is only 2.5 millions; this shows that there are many websites and companies have not yet entered the mobile app world. Now, if you go mobile today, you can start interacting with your customers and furthermore you can create a difference and stand out in the market. Besides, after this adaptation to the mobile world your brand equity would increase. </p>
-		<p>Many brands have started developing their own apps to catch the increasing mobile app trend. With Galepress you can start being part of the trend and increase both your brand equity and awareness. Moreover, you don’t need to be a millionaire to develop apps for your brand; with different options and solutions matching your company’s needs you can develop the perfect mobile app.</p>
+		<p>Many brands have started developing their own apps to catch the increasing mobile app trend. With Gale press you can start being part of the trend and increase both your brand equity and awareness. Moreover, you don’t need to be a millionaire to develop apps for your brand; with different options and solutions matching your company’s needs you can develop the perfect mobile app.</p>
 		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>',
 
 
@@ -256,7 +256,11 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
 
     'home_video_title' => 'Ihr Zugang in die mobile Welt!',
     'home_intro_title' => 'Eine Platform für digitale Lösungen',
-    'home_intro_text' => 'Ganz gleich ob Sie die Ihre Kundenkommunikation verbessern, Ihre Umsätze steigern, qualifiziertes Personal suchen oder Ihre Druckkosten senken wollen. Mit der flexiblen Struktur der Galepress CMS Lösung können Sie diese und weitere Szenarien einfach und schnell abbilden. Dank dem Mietmodell von Galepress sparen Sie etwaige Kosten für den Aufbau einer eigenen Abteilung für mobile Lösungen. Im digitalen Zeitalter ist Galepress Ihre Verbindung in die mobile Welt.',
+    'home_intro_text' => 'Ganz gleich ob Sie die Ihre Kundenkommunikation verbessern, Ihre Umsätze steigern,' .
+        ' qualifiziertes Personal suchen oder Ihre Druckkosten senken wollen. Mit der flexiblen Struktur der' .
+        ' Gale Press CMS Lösung können Sie diese und weitere Szenarien einfach und schnell abbilden. ' .
+        ' Dank dem Mietmodell von Gale Press sparen Sie etwaige Kosten für den Aufbau ' .
+        'einer eigenen Abteilung für mobile Lösungen. Im digitalen Zeitalter ist Gale Press Ihre Verbindung in die mobile Welt.',
     'home_sectors_title' => 'Branchenlösungen',
     'home_sectors_digitalpublishing' => 'Digitale Publikationen',
     'home_sectors_hr' => 'Personalwirtschaft',
@@ -265,15 +269,15 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'home_sectors_pharmaceutical' => 'Pharma',
     'home_sectors_retail' => 'Einzelhandel',
 
-    'home_stars_carrefour' => 'Mit der Einführung von Galepress und der damit verbundenen Einsparung unserer Druck- und Verteilkosten hat sich das Mietmodell bereits amortisiert.',
+    'home_stars_carrefour' => 'Mit der Einführung von Gale Press und der damit verbundenen Einsparung unserer Druck- und Verteilkosten hat sich das Mietmodell bereits amortisiert.',
     'home_stars_carrefour_subtitle' => 'Prospekt-Verteilung',
-    'home_stars_zen' => 'Mit Galepress haben wir das geschafft, wo sich alle Marken gleichermaßen schwer tun: den Zugang in die VIP Klientel schaffen. Aus unserer Sicht ist Galepress der "Diamant der digitalen Welt".',
+    'home_stars_zen' => 'Mit Gale Press haben wir das geschafft, wo sich alle Marken gleichermaßen schwer tun: den Zugang in die VIP Klientel schaffen. Aus unserer Sicht ist Gale Press der "Diamant der digitalen Welt".',
     'home_stars_zen_subtitle' => 'Kundenbindung',
-    'home_stars_renovia' => 'Während unsere Mitbewerber durch endlose Meetings mit App-Entwicklern viel Zeit verlieren, haben wir mit Galepress in kürzester Zeit angefangen, unseren Kunden unsere App vorzustellen.',
+    'home_stars_renovia' => 'Während unsere Mitbewerber durch endlose Meetings mit App-Entwicklern viel Zeit verlieren, haben wir mit Gale Press in kürzester Zeit angefangen, unseren Kunden unsere App vorzustellen.',
     'home_stars_renovia_subtitle' => 'Marketing',
-    'home_stars_pleon' => 'Nachdem unsere Kunden in unserer App alle Informationen finden, die sie suchen, hat sich die Zahl der Anrufer an unserer Hotline spürbar reduziert. Mit GalePress haben wir begonnen, das einzige Gut zu sparen, das man nicht ersetzen kann, wenn man es verliert: die Zeit!',
+    'home_stars_pleon' => 'Nachdem unsere Kunden in unserer App alle Informationen finden, die sie suchen, hat sich die Zahl der Anrufer an unserer Hotline spürbar reduziert. Mit Gale Press haben wir begonnen, das einzige Gut zu sparen, das man nicht ersetzen kann, wenn man es verliert: die Zeit!',
     'home_stars_pleon_subtitle' => 'Prozessmanagement',
-    'home_stars_mopas' => 'Wir sind sehr glücklich darüber, daß wir mit Galepress eine Plattform haben, die uns ermöglicht, unseren Kunden jederzeit höchste Qualität zu fairen Preisen anzubieten. Mit Galepress können wir unsere Kunden einfacher und schneller über Sonderaktionen informieren.',
+    'home_stars_mopas' => 'Wir sind sehr glücklich darüber, daß wir mit Gale Press eine Plattform haben, die uns ermöglicht, unseren Kunden jederzeit höchste Qualität zu fairen Preisen anzubieten. Mit Gale Press können wir unsere Kunden einfacher und schneller über Sonderaktionen informieren.',
     'home_stars_mopas_subtitle' => 'Prospekt-Verteilung',
 
     'home_interactive_editor_description' => 'Machen Sie Ihr PDF zum Erlebnis.',
@@ -286,9 +290,9 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'home_push_notification' => 'PUSH-BENACHRICHTIGUNG',
     'home_push_notification_text' => 'Nie wieder Angebote verpassen! Mit Push-Nachrichten können Sie Ihre Kunden ad-hoc über Angebote und Neuigkeiten informieren und bessere Ergebnisse erzielen. ',
     'home_reports' => 'REPORTING',
-    'home_reports_text' => 'Das Reporting Tool von Galepress liefert Ihnen detaillierte Statistiken wie z.B. die Anzahl der Downloads, App-Nutzer, Modelle der Endgeräte sowie die Verweildauer auf den einzelnen Dokumenten-Seiten. Mit diesem Wissen können Sie das Interesse Ihrer Kunden messen und gezielte Werbemaßnahmen durchführen.',
+    'home_reports_text' => 'Das Reporting Tool von Gale Press liefert Ihnen detaillierte Statistiken wie z.B. die Anzahl der Downloads, App-Nutzer, Modelle der Endgeräte sowie die Verweildauer auf den einzelnen Dokumenten-Seiten. Mit diesem Wissen können Sie das Interesse Ihrer Kunden messen und gezielte Werbemaßnahmen durchführen.',
     'home_security' => 'SICHERHEIT',
-    'home_security_text' => 'Die Übertragung Ihrer vertraulichen Daten vom Galepress CMS in Ihre App erfolgt verschlüsselt.',
+    'home_security_text' => 'Die Übertragung Ihrer vertraulichen Daten vom Gale Press CMS in Ihre App erfolgt verschlüsselt.',
     'home_speed' => 'GESCHWINDIGKEIT',
     'home_speed_text' => 'Ihre Publikationen können Sie mit nur einem Klick in Echtzeit veröffentlichen.',
     'home_speed_theworldisyours' => 'GLOBALE LÖSUNG',
@@ -303,7 +307,7 @@ GalePress befindet sich inmitten einer neuen Entwicklung, die weltweit auch unse
     'howitworks_title' => 'In 3 Schritten zur Veröffentlichung in 155 Ländern!',
 
     'howitworks_upload' => 'PDF Hochladen',
-    'howitworks_upload_text' => 'Laden Sie mit einem Klick Ihre PDF-Dokumente ins "Galepress Document Management System".',
+    'howitworks_upload_text' => 'Laden Sie mit einem Klick Ihre PDF-Dokumente ins "Gale Press Document Management System".',
     'howitworks_makeinteractive' => 'Interaktive Gestaltung',
     'howitworks_makeinteractive_text' => 'Mittels "Drag & Drop" reichern Sie Ihre zuvor hochgeladenen Dokumente mit interaktiven Elementen (z.B. Video, Audio, Slider, Scroll-Text, Animation) an.',
     'howitworks_publish' => 'Veröffentlichung',

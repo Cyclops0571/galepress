@@ -8,7 +8,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'support' => 'UNTERSTÜTZUNG',
-    'login_caption' => 'Galepress - Einloggen',
+    'login_caption' => 'Gale Press - Einloggen',
     'login_remember' => 'Sichern',
     'login_button' => 'Einloggen',
     'login_button_resetmypassword' => 'Zurückzusetzen',
@@ -430,7 +430,7 @@ return array(
     'orders_hints_appscreenshots' => 'Screenshots resolutions will be displayed on different devices.',
     'orders_placeholders_orderno' => 'Order No',
     'orders_placeholders_appname' => 'Your Application Name',
-    'orders_placeholders_appdescription' => 'Galepress is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
+    'orders_placeholders_appdescription' => 'Gale Press is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
     'orders_formfinal' => 'Send Form',
 
     'reports_caption' => 'Berichte',
@@ -486,7 +486,7 @@ return array(
         ":task görevi yapılırken bir hata oluştu. Hata detayını aşağıda görebilirsiniz.\n\n" .
         ":detail\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
 
     'task_success_subject' => 'Galepress.com-Aufgabe erfolgreich abgeschlossen.',
     'task_success_message' => "" .
@@ -494,7 +494,7 @@ return array(
         ":task görevi başarıyla tamamlandı. Ek açıklamaları aşağıda görebilirsiniz.\n\n" .
         ":detail\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
 
     'dashboard_title' => 'ANZAHL DER DOWNLOADS',
     'dashboard_total' => 'Gesamt',
@@ -529,7 +529,7 @@ return array(
         "To confirm your account, you can click the link below. If you make such a request, please ignore this email.\n\n" .
         ":url\n\n" .
         "Best Regards, \n" .
-        "Galepress",
+        "Gale Press",
     'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
     'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
 

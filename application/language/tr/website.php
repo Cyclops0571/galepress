@@ -7,9 +7,9 @@ return array(
     | Website Language Lines
     |--------------------------------------------------------------------------
     */
-    'title' => 'GalePress - Dijital Yayın Platformu',
-    'keywords' => 'GalePress Dijital Yayıncılık',
-    'description' => 'GalePress - Dijital Yayıncılık Platformu',
+    'title' => 'Gale Press - Dijital Yayın Platformu',
+    'keywords' => 'Gale Press Dijital Yayıncılık',
+    'description' => 'Gale Press - Dijital Yayıncılık Platformu',
 
     'page_home' => 'Anasayfa',
     'about_us' => 'Hakkımızda',
@@ -26,14 +26,14 @@ return array(
 					<li><b>100 MB</b> Pdf Boyutu</li>',
     'packeges' => 'Paketler',
     'interactive_packeges' => 'İnteraktif Paketler',
-    'galepress_packeges' => 'GalePress Paketler',
+    'galepress_packeges' => 'Gale Press Paketler',
     'shop_description' => '<p class="lead">
 				PDF üzerine video, ses, 3D resim galeri, 360˚, animasyon, harita gibi <span class="alternative-font">interaktifliği</span> sağlayan medyalar eklenebilir.
 			    </p>
 			    <p class="lead">
 				Bu paket yanlızca <b>bireysel anlaşma yapmış olan müşterilerimiz</b> için geçerlidir.
 			    </p>',
-    'page_galepress' => 'GalePress',
+    'page_galepress' => 'Gale Press',
     'page_products' => 'Ürünler',
     'page_advantages' => 'Avantajlar',
     'page_customers' => 'Müşterilerimiz',
@@ -100,8 +100,14 @@ return array(
 
     'slide_footer' => 'Dijital çağa rakiplerinizden önce entegre olun!',
 
-    'galepressdpp' => 'GalePress Dijital Yayın Platformu',
-    'galepressdpp_desc' => 'Günümüzde bilgiye basılı materyallerden ulaşma alışkanlığı yerini hızla akıllı telefonlara, çok amaçlı tabletlere, özel geliştirilmiş e-okuyuculara ve diğer dijital cihazlara bırakıyor. Yeni çağın yenilikçi çözümleriyle birlikte hızla hayatımıza giren dijital yayıncılık artık bir seçenek değil, bir gereklilik olarak karşımıza çıkmaya başladı.<br />GalePress; dünyadan ülkemize hızla yayılan bu oluşumun merkezinde yer alıp, hem yayıncılar hem de okuyucuların bu yeni çağın yayıncılık düzeninde yerlerini almalarını sağlayan çözümler sunmaktadır.',
+    'galepressdpp' => 'Gale Press Dijital Yayın Platformu',
+    'galepressdpp_desc' => 'Günümüzde bilgiye basılı materyallerden ulaşma alışkanlığı ' .
+        'yerini hızla akıllı telefonlara, çok amaçlı tabletlere, özel geliştirilmiş ' .
+        'e-okuyuculara ve diğer dijital cihazlara bırakıyor. Yeni çağın yenilikçi çözümleriyle ' .
+        'birlikte hızla hayatımıza giren dijital yayıncılık artık bir seçenek değil, bir gereklilik ' .
+        'olarak karşımıza çıkmaya başladı.<br />Gale Press; dünyadan ülkemize hızla yayılan bu oluşumun ' .
+        'merkezinde yer alıp, hem yayıncılar hem de okuyucuların bu yeni çağın yayıncılık düzeninde ' .
+        'yerlerini almalarını sağlayan çözümler sunmaktadır.',
 
     'login' => 'LOGIN',
     'load' => 'Yükle',
@@ -113,7 +119,7 @@ return array(
 
     'easy_touch' => 'Kolay Ulaşım',
     'get_in_touch' => 'Haberdar Olun!',
-    'get_in_touch_desc' => 'GalePress yeniliklerinden haberdar olmak için lütfen mail listemize kaydolun.',
+    'get_in_touch_desc' => 'Gale Press yeniliklerinden haberdar olmak için lütfen mail listemize kaydolun.',
 
     'newsletter_success' => '<strong>Başarılı!</strong> E-mail adresiniz listemize kaydedildi.',
     'newsletter_email' => 'Email Adresinizi Yazın',
@@ -139,14 +145,28 @@ return array(
 
     'search' => 'Arama yapın...',
 
-    //WHAT IS GALEPRESS
+    //WHAT IS Gale Press
     'whatis' => 'Nedir?',
-    'whatis_desc1' => 'GalePress, gazete, dergi, katalog, kitap, eğitim dökümanı, kullanıcı klavuzu,  gibi dokümanların, tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlayan WEB platformu ve Mobil Uygulamasıdır.',
-    'whatis_desc2' => 'Teknoloji hergün gelişmekte ve akıllı cihazların ulaşılabilirliği artmaktadır. Teknolojinin bize sunduğu yeni imkanlar ise yeni tecrübeler yaşamamıza sebep olmaktadır. Yeni teknoloji altyapısını kullanan GalePress; dokümanların, tablet bilgisayarlar ve akıllı telefonlar üzerinden basımını, yayınlamasını ve dağıtımını sağlamaktadır.',
-    'whatis_desc3' => 'Bu platform ile matbu baskı alınan veya alınmayan dokümanlar kod bilgisi gerektirmeden, kolayca yayınlanabilir. Katalog, kullanıcı kılavuzu, bülten, dergi, gazete, kitap, eğitim dokümanı, tanıtım broşürü, flyer, kampanya duyuruları, şirket içi dokümanlar, fiyat listeleri yayınlanabilir. Şirket içi veya son kullanıcıya yönelik doküman paylaşım süreçlerinizde kullanılabilir.',
-    'whatis_desc4' => 'Firma özel uygulama ile müşterilerimiz, kendilerine ait, kendi logo ve firma isimlerinin olduğu bir uygulamaya sahip olur. Bu uygulamanın içinde bir PDF kütüphanesi yer alır.',
-    'whatis_desc5' => 'Yine firmaya özel kullanıcı adı ve şifre ile GalePress Doküman Yönetim Sistemi\'ne erişilir ve uygulamanın kütüphanesinde yer alacak PDF\'ler için ekleme, çıkarma ve yayınlama işlemleri gerçekleştirilir.',
-    'whatis_desc6' => 'Doküman Yönetim Sisteminin bir parçası olarak çalışan İnteraktif İçerik Ekleme Sistemi ile PDF\'ler üzerine hareketli ve sesli görseller eklemek mümkündür. Bu işlemler sürükle bırak mantığı ile basit bir şekilde gerçekleştirilir. Okuyuculara da mobil platformlarda nitelikli, ayrıntılı ve ilgi çekici içerik deneyimi sağlanır.',
+    'whatis_desc1' => 'Gale Press, gazete, dergi, katalog, kitap, eğitim dökümanı, kullanıcı klavuzu,  ' .
+        'gibi dokümanların, tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlayan ' .
+        'WEB platformu ve Mobil Uygulamasıdır.',
+    'whatis_desc2' => 'Teknoloji hergün gelişmekte ve akıllı cihazların ulaşılabilirliği artmaktadır. ' .
+        'Teknolojinin bize sunduğu yeni imkanlar ise yeni tecrübeler yaşamamıza sebep olmaktadır. ' .
+        'Yeni teknoloji altyapısını kullanan Gale Press; dokümanların, tablet bilgisayarlar ve ' .
+        'akıllı telefonlar üzerinden basımını, yayınlamasını ve dağıtımını sağlamaktadır.',
+    'whatis_desc3' => 'Bu platform ile matbu baskı alınan veya alınmayan dokümanlar kod bilgisi gerektirmeden, ' .
+        'kolayca yayınlanabilir. Katalog, kullanıcı kılavuzu, bülten, dergi, gazete, kitap, eğitim dokümanı, ' .
+        'tanıtım broşürü, flyer, kampanya duyuruları, şirket içi dokümanlar, fiyat listeleri yayınlanabilir. ' .
+        'Şirket içi veya son kullanıcıya yönelik doküman paylaşım süreçlerinizde kullanılabilir.',
+    'whatis_desc4' => 'Firma özel uygulama ile müşterilerimiz, kendilerine ait, kendi logo ve firma ' .
+        'isimlerinin olduğu bir uygulamaya sahip olur. Bu uygulamanın içinde bir PDF kütüphanesi yer alır.',
+    'whatis_desc5' => 'Yine firmaya özel kullanıcı adı ve şifre ile Gale Press Doküman Yönetim Sistemi\'ne ' .
+        'erişilir ve uygulamanın kütüphanesinde yer alacak PDF\'ler için ekleme, çıkarma ve ' .
+        'yayınlama işlemleri gerçekleştirilir.',
+    'whatis_desc6' => 'Doküman Yönetim Sisteminin bir parçası olarak çalışan İnteraktif İçerik ' .
+        'Ekleme Sistemi ile PDF\'ler üzerine hareketli ve sesli görseller eklemek mümkündür. ' .
+        'Bu işlemler sürükle bırak mantığı ile basit bir şekilde gerçekleştirilir. ' .
+        'Okuyuculara da mobil platformlarda nitelikli, ayrıntılı ve ilgi çekici içerik deneyimi sağlanır.',
     'whatis_technology' => 'Teknoloji',
     'whatis_sharedoc' => 'Doküman Paylaşımı',
     'whatis_logo' => 'Logo ve Uygulama Adı',
@@ -208,7 +228,7 @@ return array(
 								<li><i class="icon-time"></i> Cumartesi - Pazar (Kapalı)</li>',
 
     'sitemap_whous' => 'Biz Kimiz?',
-    'sitemap_whous_detail' => 'GalePress; dünyadan ülkemize hızla yayılan bu oluşumun merkezinde yer alıp, hem yayıncılar hem de okuyucuların bu yeni çağın yayıncılık düzeninde yerlerini almalarını sağlayan çözümler sunmaktadır.',
+    'sitemap_whous_detail' => 'Gale Press; dünyadan ülkemize hızla yayılan bu oluşumun merkezinde yer alıp, hem yayıncılar hem de okuyucuların bu yeni çağın yayıncılık düzeninde yerlerini almalarını sağlayan çözümler sunmaktadır.',
     'sitemap_whous_detail1' => 'Çevreye duyarlı yayın çözümü',
     'sitemap_whous_detail2' => 'Kolay Kullanım',
     'sitemap_whous_detail3' => 'Tek Tuşla Yayınlama',
@@ -243,8 +263,8 @@ return array(
     'article_brandvalue_content' => '<h2>Mobil Uygulamalarla Marka Değerinizi Yükseltin</h2>
 		<p>Güçlü markaların başarısının ardında yüksek marka değerleri yatar ve güçlü markaların pazarda büyümeleri rakiplerine oranla daha kolaydır. Farklılık ve yenilik getirmek, bilinirlik marka değerini yükseltmek için yardımcı faktörlerdir.</p>
 		<p>Dijital bir çağda yaşadığımız günümüzde, şirketler için mobil uygulama geliştirip müşterileriyle bu kanal üzerinden etkileşime geçmek rakipler arasından sıyrılmak yolunda büyük bir adım. Artık kullanıcılar tek taraflı iletişimden ziyade karşılıklı etkileşim daha önemli. Etkileşimi sağlamak da mobille mümkün. 1 milyardan fazla websitesine karşılık 2.5 milyonluk mobil uygulama sayısı henüz tüm websitelerinin ve şirketlerin mobil uygulama dünyasına adım atmadığının bir göstergesi. İşte bu noktada mobile geçerek hem müşterilerinizle etkileşime geçebilirsiniz hem de bir farklılık yaratarak pazarda rakiplerinizden önde bir konuma gelebilirsiniz. Üstelik bu dijital dünyaya adaptasyon süreci sonunda marka değeriniz de yükselecektir.</p>
-		<p>Dünyada bir çok marka, yükselen mobil uygulama trendini yakalamak için kendi uygulamalarını geliştirmeye başladı. Galepress sayesinde siz de bu trende dahil olabilir ve marka değerinizi ve bilinirliğinizi yükseltebilirsiniz. Üstelik markanız için uygulama geliştirmek için milyoner olmanız gerekmiyor; farklı opsiyonlar ve çözüm önerileri sayesinde ihtiyaçlarınızı karşılayacak en uygun mobil uygulamayı yapabilirsiniz.</p>
-		<p>Galepress’in deneyimli kadrosunun yardımıyla sürdürülebilir mobil uygulamanızı geliştirmenin şimdi tam vakti!</p>',
+		<p>Dünyada bir çok marka, yükselen mobil uygulama trendini yakalamak için kendi uygulamalarını geliştirmeye başladı. Gale Press sayesinde siz de bu trende dahil olabilir ve marka değerinizi ve bilinirliğinizi yükseltebilirsiniz. Üstelik markanız için uygulama geliştirmek için milyoner olmanız gerekmiyor; farklı opsiyonlar ve çözüm önerileri sayesinde ihtiyaçlarınızı karşılayacak en uygun mobil uygulamayı yapabilirsiniz.</p>
+		<p>Gale Press’in deneyimli kadrosunun yardımıyla sürdürülebilir mobil uygulamanızı geliştirmenin şimdi tam vakti!</p>',
 
     /*********************FOR NEW WEBSITE*************************/
 
@@ -259,7 +279,7 @@ return array(
     'home_video_title' => 'Mobil Dünya Parmaklarınızın Ucunda!',
 
     'home_intro_title' => 'Bütün Çözümler İçin Tek Platform',
-    'home_intro_text' => 'Şirketinizin ihtiyacı olan çözüm müşteri etkileşimini arttırmak, satış etkinliğini yükseltmek, daha iyi elemanlar işe almak veya baskı maliyetlerini düşürmek olabilir. Bu çözümlerin hepsini ve daha fazlasını GalePress\'in çevik yapısı sayesinde çok kısa bir sürede hayata geçirebileceksiniz. Yazılım kiralama modeli sayesinde mobil çözümler departmanınız için personel, daha geniş bir ofis ve danışmanlık gibi masraflarınız da olmayacak. Mobil dünya artık parmaklarınızın ucunda.',
+    'home_intro_text' => 'Şirketinizin ihtiyacı olan çözüm müşteri etkileşimini arttırmak, satış etkinliğini yükseltmek, daha iyi elemanlar işe almak veya baskı maliyetlerini düşürmek olabilir. Bu çözümlerin hepsini ve daha fazlasını Gale Press\'in çevik yapısı sayesinde çok kısa bir sürede hayata geçirebileceksiniz. Yazılım kiralama modeli sayesinde mobil çözümler departmanınız için personel, daha geniş bir ofis ve danışmanlık gibi masraflarınız da olmayacak. Mobil dünya artık parmaklarınızın ucunda.',
     'home_sectors_title' => 'İstediğiniz Her Alanda',
     'home_sectors_digitalpublishing' => 'Dijital Yayıncılık',
     'home_sectors_hr' => 'İnsan Kaynakları',
@@ -268,15 +288,15 @@ return array(
     'home_sectors_pharmaceutical' => 'İlaç',
     'home_sectors_retail' => 'Perakende',
 
-    'home_stars_carrefour' => 'Galepress bizim için bir maliyet değil gelir kalemi oldu. Baskı maliyetlerinden ettiğimiz tasarruf kiralama modeli ile edindiğimiz bu platformun maliyetlerini çoktan dengeledi.',
+    'home_stars_carrefour' => 'Gale Press bizim için bir maliyet değil gelir kalemi oldu. Baskı maliyetlerinden ettiğimiz tasarruf kiralama modeli ile edindiğimiz bu platformun maliyetlerini çoktan dengeledi.',
     'home_stars_carrefour_subtitle' => 'Insert Dağıtımı',
-    'home_stars_zen' => 'Bütün markalar için ulaşması zor olan VIP kitleye erişimimiz Galepress sayesinde farklı bir rotaya girdi. Galepress bizim gözümüzle "dijital dünyanın pırlantası"',
+    'home_stars_zen' => 'Bütün markalar için ulaşması zor olan VIP kitleye erişimimiz Gale Press sayesinde farklı bir rotaya girdi. Gale Press bizim gözümüzle "dijital dünyanın pırlantası"',
     'home_stars_zen_subtitle' => 'Müşteri Sadakati ',
-    'home_stars_renovia' => 'Rakiplerimiz uygulama geliştiriclerle ardı arkası gelmeyen toplantılar yapıp zaman kaybederken Galepress ile 2 hafta içerisinde mobil dünyaya girip müşterilerimize aplikasyonumuzu yükletmeye başladık.',
+    'home_stars_renovia' => 'Rakiplerimiz uygulama geliştiriclerle ardı arkası gelmeyen toplantılar yapıp zaman kaybederken Gale Press ile 2 hafta içerisinde mobil dünyaya girip müşterilerimize aplikasyonumuzu yükletmeye başladık.',
     'home_stars_renovia_subtitle' => 'Pazarlama',
-    'home_stars_pleon' => 'Aradığı bilgileri mobil aplikasyonumuzda bulabilen müşterilerimiz bizi telefonla arayıp bilgi almaktan vazgeçti. Galepress ile kaybedildikten sonra yerine konulamayan tek kaynaktan tasarruf ettik: Zaman.',
+    'home_stars_pleon' => 'Aradığı bilgileri mobil aplikasyonumuzda bulabilen müşterilerimiz bizi telefonla arayıp bilgi almaktan vazgeçti. Gale Press ile kaybedildikten sonra yerine konulamayan tek kaynaktan tasarruf ettik: Zaman.',
     'home_stars_pleon_subtitle' => 'Süreç Yönetimi',
-    'home_stars_mopas' => 'Müşterilerimize her zaman en iyi kaliteyi en uygun fiyata tedarik etme prensibimizi paylaşan bir platform ile çalıştığımız için çok memnunuz. Müşterilerimizi kampanyalarımızdan daha kolay haberdar ederek Galepress sayesinde bir kazan-kazan modeli oluşturabildik.',
+    'home_stars_mopas' => 'Müşterilerimize her zaman en iyi kaliteyi en uygun fiyata tedarik etme prensibimizi paylaşan bir platform ile çalıştığımız için çok memnunuz. Müşterilerimizi kampanyalarımızdan daha kolay haberdar ederek Gale Press sayesinde bir kazan-kazan modeli oluşturabildik.',
     'home_stars_mopas_subtitle' => 'Insert Dağıtımı',
 
     'home_interactive_editor_description' => 'Dokümanınızın içeriğini hareketli ve sesli görsellerle zenginleştirin.',
@@ -287,15 +307,15 @@ return array(
     'home_interactive_compenents' => 'İNTERAKTİF ÖGELER',
     'home_interactive_compenents_text' => 'Yazılı içeriğinizi fotoğraf galerileri, ses dosyaları, videolar ve animasyonlar ile süsleyerek müşterilerinizin dikkat eğrisinin düşmesini engelleyin, dökümanlarınız dijital gürültüden sıyrılarak öne çıksın.',
     'home_push_notification' => 'BİLDİRİM GÖNDER',
-    'home_push_notification_text' => 'Yeni kampanyalarınızı ve gelişmeleri müşterilerinize anlatırken sesinizi duyuramamaktan şikayetçiyseniz çözüm GalePress\'in "push notification" özelliğinde. Mesajlarınızın farkedilmeme riskini ortadan kaldırın, müşterilerinize doğrudan ulaşın ve kampanyalarınız daha başarılı olsun.',
+    'home_push_notification_text' => 'Yeni kampanyalarınızı ve gelişmeleri müşterilerinize anlatırken sesinizi duyuramamaktan şikayetçiyseniz çözüm Gale Press\'in "push notification" özelliğinde. Mesajlarınızın farkedilmeme riskini ortadan kaldırın, müşterilerinize doğrudan ulaşın ve kampanyalarınız daha başarılı olsun.',
     'home_reports' => 'RAPORLAMA',
-    'home_reports_text' => 'Dijital iletişiminizin sonuçlarını analiz edememekten mi şikayetçisiniz? GalePress\'in gelişmiş raporlama arayüzü sayesinde lokasyon, sayfada geçirilen zaman ve daha bir çok kritik veri ile pazarlama hamlenize doping yapabileceksiniz.',
+    'home_reports_text' => 'Dijital iletişiminizin sonuçlarını analiz edememekten mi şikayetçisiniz? Gale Press\'in gelişmiş raporlama arayüzü sayesinde lokasyon, sayfada geçirilen zaman ve daha bir çok kritik veri ile pazarlama hamlenize doping yapabileceksiniz.',
     'home_security' => 'GÜVENLİK',
     'home_security_text' => 'Mobil aplikasyonunuz ile hassas verilerin aktarımını mı yapacaksınız? Artık güvenlik konusunda kaygılanmanıza gerek yok. Bulut sunucuları ve şifreleme özelliği ile istediğiniz hassas bilgileri iş ortaklarınıza aktarabileceksiniz.',
     'home_speed' => 'HIZ',
-    'home_speed_text' => 'İçeriğinizi güncellemek hızınızı kesmesin. Stratejik güncellemeleriniz GalePress\'in hız odaklı sistemi sayesinde dijital çağın güncelleme hızına ayak uydursun.',
+    'home_speed_text' => 'İçeriğinizi güncellemek hızınızı kesmesin. Stratejik güncellemeleriniz Gale Press\'in hız odaklı sistemi sayesinde dijital çağın güncelleme hızına ayak uydursun.',
     'home_speed_theworldisyours' => 'BÜTÜN DÜNYAYA ERİŞİM',
-    'home_speed_theworldisyours_text' => 'GalePress sayesinde giriş yapacağınız aplikasyon pazarları ile rekabet ortamınızın sınırlarını kaldırın. Yeni pazarlar sayesinde yeni fırsatlar ve satışlar elde edin.',
+    'home_speed_theworldisyours_text' => 'Gale Press sayesinde giriş yapacağınız aplikasyon pazarları ile rekabet ortamınızın sınırlarını kaldırın. Yeni pazarlar sayesinde yeni fırsatlar ve satışlar elde edin.',
 
     'footer_detaysoft' => 'Detaysoft',
     'footer_socialmedia' => 'Sosyal Medya',
@@ -306,7 +326,7 @@ return array(
     'howitworks_title' => 'Kolayca 3 Adımda, Tüm İçeriklerinizi 155 Ülke İle Aynı Anda Paylaşın !',
 
     'howitworks_upload' => 'Yükle',
-    'howitworks_upload_text' => 'İçeriklerinizi (.pdf) ”GalePress Dokuman Yonetim Sistemi” sayesinde, tek tıkla uygulamanıza yükleyin.',
+    'howitworks_upload_text' => 'İçeriklerinizi (.pdf) ”Gale Press Dokuman Yonetim Sistemi” sayesinde, tek tıkla uygulamanıza yükleyin.',
     'howitworks_makeinteractive' => 'İnteraktif Yap',
     'howitworks_makeinteractive_text' => 'Yüklediginiz içeriklere, sürükle bırak yöntemiyle interaktif ögeler (ses, video, text, imaj, 360, harita, vb.) ekleyerek içeriklerinizi zevkli kılın.',
     'howitworks_publish' => 'Yayınla',
