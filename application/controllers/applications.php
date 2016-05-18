@@ -393,7 +393,7 @@ class Applications_Controller extends Base_Controller
                 $s->Name = Input::get('Name');
                 $s->Detail = Input::get('Detail');
                 $s->ApplicationLanguage = Input::get('ApplicationLanguage');
-                $s->Price = Input::get('Price');
+                $s->Price = str_replace(',', '', Input::get('Price'));
                 $s->Installment = Input::get('Installment', Application::InstallmentCount);
                 $s->InAppPurchaseActive = Input::get('InAppPurchaseActive', 0);
                 $s->FlipboardActive = Input::get('FlipboardActive', 0);
