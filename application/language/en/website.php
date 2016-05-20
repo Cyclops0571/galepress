@@ -101,8 +101,13 @@ return array(
     'slide_footer' => 'Be the first who integrates into the digital age before your rivals!',
 
     'galepressdpp' => 'Gale Press Digital Publishing Platform',
-    'galepressdpp_desc' => 'At the present time the custom to reach information by the help of printed materials are rapidly been replaced by fast smart phones, multi purpose use tablets, exclusively designed e-readers and other digital gadgets. Digital publishing coming into our lives with the innovative solutions of new age is not an option anymore but a must.<br />
-			              Gale Press, in the center of the phenomenon rapidly expanding in our country, offers solutions for both publishers and the readers who wants to have their own place in this new age of publishing.',
+    'galepressdpp_desc' => 'At the present time the custom to reach information by the help of printed materials ' .
+        'are rapidly been replaced by fast smart phones, multi purpose use tablets, exclusively designed e-readers ' .
+        'and other digital gadgets. Digital publishing coming into our lives with the innovative solutions of ' .
+        'new age is not an option anymore but a must.<br />' .
+        'Gale Press, in the center of the phenomenon rapidly expanding in our country, ' .
+        'offers solutions for both publishers and the readers who wants to have their ' .
+        'own place in this new age of publishing.',
 
     'login' => 'LOGIN',
     'load' => 'Upload',
@@ -137,10 +142,9 @@ return array(
 
     'references' => 'References',
 
-
     'search' => 'Search...',
 
-    //WHAT IS GALEPRESS
+    //WHAT IS Gale Press
     'whatis' => 'What is Gale Press?',
     'whatis_desc1' => 'Gale Press is supplied for tablet and smartsphones reading from newspaper document catalog  books.',
     'whatis_desc2' => 'Day by day smart devices are getting accessible  and technology develop at the same time. Technology cause that the new oppurtunity to new experience in our life. Gale Press which uses the new substructure of technology is provided for publishing, routing.',
@@ -294,28 +298,29 @@ feature you want to add.',
     'home_interactive_editor_text' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
 feature you want to add.',
     'home_interactive_compenents' => 'INTERACTIVE COMPONENTS',
-    'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations to enrich your written material and let them cut through the digital noise.',
+    'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations' .
+        ' to enrich your written material and help your content cut through the digital noise by becoming interactive.',
     'home_push_notification' => 'PUSH NOTIFICATION',
-    'home_push_notification_text' => 'No more unnoticed or ignored messages! With push notifications your customers can learn of your
-new initiatives or developments immediately. Directly reach your most interested parties and achieve
-better results with short term campaigns.',
+    'home_push_notification_text' => 'No more unnoticed or ignored messages! With push notifications ' .
+        'your customers can learn of your new initiatives or developments immediately. ' .
+        'Directly reach your most interested parties and achieve better results with short term campaigns.',
     'home_reports' => 'REPORTING',
-    'home_reports_text' => 'Are you frustrated with the inability to monitor and analyze your digital efforts? The sophisticated
-reporting interface provided by Gale Press can help inform and shape your marketing with cutting
-edge analytics. Location based data, time spent on content and myriad other variables are available
-for your constant evaluation and critiquing.',
+    'home_reports_text' => 'Are you frustrated with the inability to monitor and analyze your digital efforts?  ' .
+        'The sophisticated reporting interface provided by Gale Press can help inform and shape your marketing ' .
+        'with cutting edge analytics. Location based data, time spent on content and myriad other variables ' .
+        'are available for your constant evaluation and critiquing.',
     'home_security' => 'SECURITY',
-    'home_security_text' => 'Do you have confidential and sensitive data to transfer through your mobile app? Don’t worry about
-security with Gale Press. Utilizing cloud servers and encryption features, safely share sensitive data
-with your business partners in the mobile arena.',
+    'home_security_text' => 'Do you have confidential and sensitive data to transfer through your mobile app?  ' .
+        'Don’t worry about security with Gale Press.  Utilizing cloud servers and encryption features, ' .
+        'safely share sensitive data with your business partners in the mobile arena.  ',
     'home_speed' => 'SPEED',
-    'home_speed_text' => 'Don’t let updating your content slow you down. With the speed oriented system of Gale Press, your
-strategic updates will be at the pace of our digital age.',
+    'home_speed_text' => 'Don’t let updating your content slow you down. With the speed oriented ' .
+        'system of Gale Press, your strategic updates will be at the pace of our digital age.  ',
     'home_speed_theworldisyours' => 'THE WORLD IS YOURS',
-    'home_speed_theworldisyours_text' => 'With Gale Press you can enter the app market and remove the borders from your competitive
-environment. Expand and deepen the conversation with your customer base by speaking to them in
-the mobile language they already understand. When ready, add new app markets and expand your
-opportunities worldwide!',
+    'home_speed_theworldisyours_text' => 'With Gale Press you can enter the app market and remove the borders ' .
+        'from your competitive environment. Expand and deepen the conversation with your customer base by ' .
+        'speaking to them in the mobile language they already understand. When ready, add new app markets ' .
+        'and expand your opportunities worldwide!!',
 
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Contact',
@@ -538,8 +543,8 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'company' => 'Company',
     'email_address' => 'Email',
     'billing_info' => 'Billing Info',
-    'identification_number' => 'Identification Number',
     'username_company_name' => 'User or Company Name',
+    'identification_number' => 'Identification Number',
     'tax_administration' => 'Tax Administration',
     'tax_number' => 'Tax Number',
     'country' => 'Country',
