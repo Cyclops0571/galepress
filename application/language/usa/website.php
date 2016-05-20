@@ -326,23 +326,25 @@ opportunities worldwide!',
     'footer_copyright' => '',
     'footer_livechat' => 'Live Support',
 
-    'howitworks_title' => 'Easily 3 steps, The chance to be published in 155 countries !',
+    'howitworks_title' => '3 Easy steps, and be published in 155 countries!',
 
     'howitworks_upload' => 'Upload',
     'howitworks_upload_text' => 'Upload your pdf documents into the system with a single click, using the Gale Press <b>C</b>ontent
 <b>M</b>anagement <b>S</b>ystem, or “ CMS .”',
     'howitworks_makeinteractive' => 'Use Interactive Tools',
-    'howitworks_makeinteractive_text' => 'Insert interactive features like...Audio, front or background Video, Scrolling Text, Revolving Images,
-360 viewer, Maps and more! Watch your content come to life with a combination of interactive tools
-from Gale Press.',
+    'howitworks_makeinteractive_text' => 'Insert interactive features like...' .
+        'Audio, front or background Video, Scrolling Text, Revolving Images, 360 viewer, ' .
+        'Maps and more! Watch your content come to life with a combination of interactive' .
+        ' tools from Gale Press.',
     'howitworks_publish' => 'Publish',
-    'howitworks_publish_text' => 'Close the digital gap and easily publish your content to the entire world without requiring coding
-knowledge.',
+    'howitworks_publish_text' => 'Close the digital gap and easily publish your content ' .
+        'to the entire world without requiring coding knowledge.',
     'howitworks_follow' => 'Follow',
     'howitworks_comp_video' => 'Video',
     'howitworks_comp_video_text' => 'Highlight your message by adding videos.',
     'howitworks_comp_tooltip' => 'Tooltip',
-    'howitworks_comp_tooltip_text' => 'Don’t drown your documents with information, let your curious clients reach the knowledge they seek through the tooltip feature.',
+    'howitworks_comp_tooltip_text' => 'Don’t drown your documents with information, ' .
+        'let your curious clients reach the knowledge they seek through the tooltip feature.',
     'howitworks_comp_audio' => 'Audio',
     'howitworks_comp_audio_text' => 'Insert audio content to your documents to speak directly to your customers.',
     'howitworks_comp_scroller' => 'Scroller',
