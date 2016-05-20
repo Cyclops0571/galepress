@@ -295,8 +295,7 @@ feature you want to add.',
     'home_interactive_editor' => 'INTERACTIVE EDITOR',
     'home_interactive_editor_word1' => 'INTERACTIVE',
     'home_interactive_editor_word2' => 'EDITOR',
-    'home_interactive_editor_text' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
-feature you want to add.',
+    'home_interactive_editor_text' => 'After you have uploaded your pdf documents, bring them to life with drag and drop interactive features.',
     'home_interactive_compenents' => 'INTERACTIVE COMPONENTS',
     'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations' .
         ' to enrich your written material and help your content cut through the digital noise by becoming interactive.',
