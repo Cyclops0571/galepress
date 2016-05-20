@@ -449,7 +449,7 @@ Give your clients the option to complete a “cyber 360* tour” of their future
 and shortens the buying cycle.</p>',
 
     'pharmaceutical_title' => 'B2B',
-    'pharmaceutical_subtitle' => 'No more borders between the field and the headquarters.',
+    'pharmaceutical_subtitle' => 'Give your customers a mobile app that will save time in accessing product offerings, and keep them engaged with your brand.',
     'pharmaceutical_clause1' => 'Streamline your product presentations by giving your sales team a mobile tool on the go!',
     'pharmaceutical_clause2' => 'Go mobile in order to cut back on print overhead and streamline delivery times.',
     'pharmaceutical_clause3' => 'Empower your clients by letting them access the details of your product on their mobile device at a
