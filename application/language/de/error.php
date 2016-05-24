@@ -11,4 +11,6 @@ return array(
     'your_page_not_found' => 'We couldn\'t find the page you were looking for',
     "invalid_excel_file" => "Invalid Excel-Datei",
     "invalid_excel_file_two_rows" => "Ungültige Excel-Datei (die Liste muß mindestens 2 Zeilen enthalten).",
+    'unknown_component_type' => "Unknown component type",
+    'compoenent_not_found' => "Component could not be found",
 );
