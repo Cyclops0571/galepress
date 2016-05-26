@@ -36,32 +36,14 @@ class Clients_Controller extends Base_Controller
 
     public function get_index()
     {
-        $rules = array(
-            'applicationID' => 'required',
-        );
-        if (!Laravel\Validator::make(\Laravel\Input::all(), $rules)->passes()) {
-            return \Laravel\Response::error('404');
-        }
-
-        $applicationID = (int)Input::get('applicationID', 0);
-
-        /* @var $currentUser User */
+        /** @var User $currentUser */
         $currentUser = Auth::User();
-
-        if ($applicationID != 0) {
-            /* @var $applications Application[] */
-            $applications = array();
-            $application = Application::find($applicationID);
-            if ($application->CustomerID != $currentUser->CustomerID) {
-                return Response::error('404');
-            }
-            $applications[] = $application;
-        } else {
-            $applications = $currentUser->Application();
+        $applications = $currentUser->Application();
+        if (empty($applications)) {
+            throw new Exception('This user does not have applications. UserID: ' . $currentUser->UserID);
         }
 
         $appIDSet = array();
-
 
         foreach ($applications as $app) {
             $appIDSet[] = $app->ApplicationID;
