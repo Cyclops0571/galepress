@@ -14,7 +14,7 @@
         <meta name="revisit-after" content="3 days" />
         <meta name="keywords" content="" />
         <meta name="author" content="Serdar Saygılı" />
-        <meta name="copyright" content="Galepress Technology" />
+            <meta name="copyright" content="Gale Press Technology"/>
         <meta name="company" content="Detay Danışmanlık Bilgisayar Hiz. San. ve Dış Tic. A.Ş." />
         <meta name="description" content="" />
         <meta name="verify-v1" content="" />

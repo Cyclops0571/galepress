@@ -30,8 +30,56 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo number_format((float)2795.00, 2);
+        exit;
+        $test = (boolean)rand(0, 1);
+        var_dump($test);
+        exit;
+        $asdf = '0';
+        $bb = (int)$asdf;
+        var_dump($bb);
+        exit;
+        $a = null;
+        $b = null;
+        $c = null;
+        $template['a'] = &$a;
+        $template['b'] = &$b;
+        $template['c'] = &$c;
+        foreach ($template as $key => $value) {
+            $template[$key] = rand(1, 10);
+        }
+        var_dump($template);
+        var_dump($a);
+        var_dump($b);
+        var_dump($c);
+        exit;
+
         echo phpinfo();
         exit;
+
+        return View::make('test.bannertest');
+        var_dump(\Laravel\Auth::User());
+        exit;
+        if (Request::env() == ENV_LIVE) {
+            exit;
+        }
+
+        $paymentAccounts = PaymentAccount::where('StatusID', '=', eStatus::Active)->get();
+        var_dump($paymentAccounts);
+        exit;
+
+        $test = new Application();
+//        var_dump($test->asdfasdfasdf); exit;
+        var_dump($test);
+        $test2 = Application::find(10);
+        var_dump($test2);
+//        if($test) {
+//            echo '1111';
+//        }  else {
+//            echo '22222';
+//        }
+        exit;
+        echo phpinfo();
         $mailData = array(
             'name' => 'Serdar',
             'surname' => 'Saygili',
@@ -152,8 +200,8 @@ class Test_Controller extends Base_Controller
                 throw new Exception($p->get_errmsg());
             }
 
-            $p->set_info("Creator", "Galepress");
-            $p->set_info("Title", "Galepress Interactive PDF");
+            $p->set_info("Creator", "Gale Press");
+            $p->set_info("Title", "Gale Press Interactive PDF");
             //-----------------------------------------------------------------------------------------------
             //open original document
             $docOriginal = $p->open_pdi_document($fileOriginal, "");
@@ -852,6 +900,208 @@ class Test_Controller extends Base_Controller
             echo $a;
         }
         return new Application();
+    }
+
+    public function get_interactive()
+    {
+        File::exists(path('public/geo.php'));
+
+        $pdf = "/vagrant/public/files/test/annotation_top-left.pdf";
+        $pdf = "/vagrant/public/files/test/annotation_top-left2.pdf";
+//        $pdf = "/vagrant/public/files/test/annotation_bottom-right.pdf";
+//        $pdf = "/vagrant/public/files/test/bookmarkHata.pdf";
+        $myPcos = new MyPcos($pdf);
+        $myPcos->checkPageSnapshots();
+        exit;
+        $pageCount = $myPcos->pageCount();
+        echo "-------------ANNOTATIONS---------------", PHP_EOL;
+        echo $myPcos->height(0), PHP_EOL;
+        echo $myPcos->width(0), PHP_EOL;
+        for ($i = 0; $i < $pageCount; $i++) {
+            var_dump($myPcos->getAnnotations($i));
+        }
+
+        echo "-------------BOOKMARKS---------------", PHP_EOL;
+        var_dump($myPcos->getBookmarks());
+        exit;
+
+        $pdfLib = new PDFlib();
+        $pdfLib->set_option("license=" . Config::get('custom.pdflib_license'));
+        $pdfLib->set_option("errorpolicy=return");
+        $doc = $pdfLib->open_pdi_document('/vagrant/public/files/test/bookmarkHata.pdf', "");
+        //1.7ext3
+        echo 'Encryption: ' . $pdfLib->pcos_get_string($doc, "encrypt/description"), PHP_EOL;
+        $pcosmode = $pdfLib->pcos_get_number($doc, "pcosmode");
+        if ($pcosmode == 0) {
+            throw new Exception("Encripted document");
+        }
+
+        $plainMetaData = (int)$pdfLib->pcos_get_number($doc, "encrypt/plainmetadata");
+        $encryptNoCopy = (int)$pdfLib->pcos_get_number($doc, "encrypt/nocopy");
+
+        if ($pcosmode == 1 && !$plainMetaData && $encryptNoCopy != 0) {
+            throw new Exception("Resctricted Access");
+        }
+
+        $pdfversion = $pdfLib->pcos_get_number($doc, "fullpdfversion");
+
+        echo 'pdfversion: ' . $pdfversion, PHP_EOL;
+        echo 'pcosmode: ' . $pcosmode;
+        echo 'PDF/A status: ' . $pdfLib->pcos_get_string($doc, "pdfa"), PHP_EOL;
+        $pageCount = $pdfLib->pcos_get_string($doc, "type:length:pages");
+        echo "length Type";
+        var_dump($pageCount);
+        exit;
+//        for($i = 0; $i < $pageCount; $i++) {
+//            $height = $pdfLib->pcos_get_number($doc, "pages[" . $i . "]/height");
+//            $width = $pdfLib->pcos_get_number($doc, "pages[" . $i . "]/width");
+//            echo "height: " . $height . " width: " . $width, PHP_EOL;
+//        }
+//
+//        $fontCount = $pdfLib->pcos_get_number($doc, "length:fonts");
+//        for($i = 0; $i < $fontCount; $i++){
+//            $fontName = $pdfLib->pcos_get_string($doc, "fonts[" . $i . "]/name");
+//            $embedded = $pdfLib->pcos_get_number($doc, "fonts[" . $i . "]/embedded");
+//            echo "fontName: " . $fontName . " embedded: " . $embedded, PHP_EOL;
+//            $vertical = $pdfLib->pcos_get_string($doc, "fonts[" . $i . "]/vertical");
+//            $ascender = $pdfLib->pcos_get_number($doc, "fonts[" . $i . "]/ascender");
+//            $descender = $pdfLib->pcos_get_number($doc, "fonts[" . $i . "]/descender");
+//            echo "vertical: " . $vertical . " ascender: " . $ascender . " descender: " . $descender, PHP_EOL;
+//        }
+//
+//
+//        $imageCount = $fontCount = $pdfLib->pcos_get_number($doc, "length:images");
+//        for($i = 0; $i < $imageCount; $i++){
+//            $height = $pdfLib->pcos_get_number($doc, "images[" . $i . "]/Height");
+//            $width = $pdfLib->pcos_get_number($doc, "images[" . $i . "]/Width");
+//            $bpc = $pdfLib->pcos_get_number($doc, "images[" . $i . "]/bpc");
+//            echo "height: " . $height . " width: " . $width . ' bpc: ' . $bpc, PHP_EOL;
+//        }
+//
+//        exit;
+        //571571
+        $bookmarkCount = (int)$pdfLib->pcos_get_number($doc, "length:bookmarks");
+        for ($bookmarkIndex = 0; $bookmarkIndex < $bookmarkCount; $bookmarkIndex++) {
+            $bookmarkDestpage = (int)$pdfLib->pcos_get_number($doc, "bookmarks[" . $bookmarkIndex . "]/destpage");
+            $bookmarkTitle = $pdfLib->pcos_get_string($doc, "bookmarks[" . $bookmarkIndex . "]/Title");
+            echo '$bookmarkDestpage' . $bookmarkDestpage, PHP_EOL;
+            echo '$bookmarkTitle' . $bookmarkTitle, PHP_EOL;
+        }
+
+        //echo $bookmarkCount;
+        for ($pageNo = 0; $pageNo < $pageCount; $pageNo++) {
+            $annotations_path = "pages[" . $pageNo . "]/annots";
+            $anncount = (int)$pdfLib->pcos_get_number($doc, "length:" . $annotations_path);
+            echo '$anncount' . $anncount, PHP_EOL;
+            $enterToAnnot = true;
+//            $bookmarkss_path = "pages[" . $pageNo . "]/bookmarks";
+//            $bookmarks = (int)$pdfLib->pcos_get_number($doc, "length:" . $bookmarkss_path);
+//            echo 'bookmarks' . $bookmarks, PHP_EOL;
+            if ($enterToAnnot && $anncount > 0) {
+                $indesignFind = null;
+                if ($pdfLib->pcos_get_string($doc, "type:/Root/Metadata") == "stream") {
+                    $docInfo = $pdfLib->pcos_get_stream($doc, "", "/Root/Metadata");
+                    preg_match("/indesign/i", $docInfo, $indesignFind);
+                }
+
+                //$posStart = strpos($docInfo, '<xmp:CreatorTool>');
+                //$posEnd = strpos($docInfo, '</xmp:CreatorTool>');
+                //$docInfoFind = substr($docInfo, $posStart, $posEnd);
+                //$indesignFind = strpos($docInfo,"InDesign");
+
+                $counter = min(array($anncount, 30)); //30dan fazla interactif öğe sayfada olmasın.
+                for ($ann = 0; $ann < $counter; $ann++) {
+                    $annotation_path = $annotations_path . "[" . $ann . "]";
+                    $linkDest = null;
+                    $pcosmode = null;
+                    $subtype = null;
+                    $uri = null;
+                    $pageHeight = null;
+                    $lowleftX = null;
+                    $lowleftY = null;
+                    $uprightX = null;
+                    $uprightY = null;
+
+                    $propertySet = array();
+                    $propertySet[$annotation_path . "/destpage"] = &$linkDest;
+                    $propertySet["pcosmode"] = &$pcosmode;
+                    $propertySet[$annotation_path . "/Subtype"] = &$subtype;
+                    $propertySet[$annotation_path . "/A/URI"] = &$uri;
+                    $propertySet["pages[" . $pageNo . "]/height"] = &$pageHeight;
+                    //Burada rectX ve rectY ile alakali bir sorun var...
+                    $propertySet[$annotation_path . "/Rect[0]"] = &$lowleftX;
+                    $propertySet[$annotation_path . "/Rect[1]"] = &$lowleftY;
+                    $propertySet[$annotation_path . "/Rect[2]"] = &$uprightX;
+                    $propertySet[$annotation_path . "/Rect[3]"] = &$uprightY;
+                    foreach ($propertySet as $key => $value) {
+                        $propertyType = $pdfLib->pcos_get_string($doc, "type:" . $key);
+                        echo $key . ":", PHP_EOL;
+                        echo "Type:";
+                        var_dump($propertyType);
+
+                        switch ($propertyType) {
+                            case 'null': //null object or object does not exits
+                                break;
+                            case 'boolean': //booean object
+                                break;
+                            case 'number': //integer or real number
+                                $propertySet[$key] = $pdfLib->pcos_get_number($doc, $key);
+                                break;
+                            case 'name': //name object
+                                $propertySet[$key] = $pdfLib->pcos_get_string($doc, $key);
+                                break;
+                            case 'string': //string object
+                                $propertySet[$key] = $pdfLib->pcos_get_string($doc, $key);
+                                break;
+                            case 'array': //array object
+                                $propertySet[$key] = $pdfLib->pcos_get_string($doc, $key);
+                                break;
+                            case 'dict': //dictionary object (but not stream)
+                                $propertySet[$key] = $pdfLib->pcos_get_string($doc, $key);
+                                break;
+                            case 'stream': //stream object which uses only supported filters
+                                $propertySet[$key] = $pdfLib->pcos_get_string($doc, $key);
+                                break;
+                            case 'fstream': //stream object which uses one ore more unsupported filters
+                                $propertySet[$key] = $pdfLib->pcos_get_string($doc, $key);
+                                break;
+
+                        }
+                        var_dump($propertySet[$key]);
+                    }
+                    continue;
+//                    echo " ------------- propertySet ----------------",PHP_EOL;
+//                    var_dump($propertySet);
+//                    continue;
+
+//                    $linkDest = (int)$pdfLib->pcos_get_number($doc, $annotation_path . "/destpage");
+//                    $pcosmode = $pdfLib->pcos_get_string($doc, "pcosmode");
+//                    $subtype = $pdfLib->pcos_get_string($doc, $annotation_path . "/Subtype");
+//                    $objectType = $pdfLib->pcos_get_string($doc, "type:" . $annotation_path . "/A/URI");
+//                    $uri = $pdfLib->pcos_get_string($doc, $annotation_path . "/A/URI");
+                    $pageHeight = (float)$pdfLib->pcos_get_number($doc, "pages[" . $pageNo . "]/height");
+                    var_dump($pageHeight);
+                    continue;
+//                    $rect_path = $annotation_path . "/Rect";
+//                    $rectX = abs($pdfLib->pcos_get_number($doc, $rect_path . "[0]"));
+//                    $rectY = abs($pageHeight - (int)$pdfLib->pcos_get_number($doc, $rect_path . "[3]"));
+//                    $rectWidth = abs($pdfLib->pcos_get_number($doc, $rect_path . "[2]") - $rectX);
+//                    $rectHeight = abs($pageHeight - (int)$pdfLib->pcos_get_number($doc, $rect_path . "[1]") - $rectY);
+
+
+                    //Web Link
+                    if ($objectType != "string" && ($pcosmode == "URI" || $pcosmode == ">>")) {
+                        continue;
+                    } else if (($pcosmode == "URI" || $pcosmode == ">>") && $subtype == "Link" && substr($uri, 0, 2) != "yl") {
+                        //Weblink Component
+                    } else if ($pdfLib->pcos_get_string($doc, $annotation_path . "/Subtype") == "Link") {
+                        //Page Link
+                    }
+                }
+            }
+        }
+
+
     }
 
 }

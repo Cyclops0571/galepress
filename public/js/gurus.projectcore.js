@@ -726,12 +726,19 @@ var cApplication = new function () {
         var obj = $("#TabActive");
         if (obj.is(':checked')) {
             obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
-        }
-        else {
+        } else {
             obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
         }
-        $('.row-save').removeClass('noTouchOpacity');
     };
+
+    this.checkShowDashboard = function () {
+        var obj = $("#ShowDashboard");
+        if (obj.is(':checked')) {
+            obj.closest('.form-row').nextAll().removeClass('noTouchOpacity');
+        } else {
+            obj.closest('.form-row').nextAll().addClass('noTouchOpacity');
+        }
+    }
 
     this.BannerActive = function () {
         var obj = $("#BannerActive");
@@ -1441,6 +1448,41 @@ var cCommon = new function () {
         }
         return qs;
     };
+
+    this.fileUploadInit = function (uploadUrl, fsuccess) {
+        $("#File").fileupload({
+            url: uploadUrl,
+            dataType: 'json',
+            sequentialUploads: true,
+            multipart: true,
+            formData: {
+                'element': 'File'
+            },
+            done: function (e, data) {
+                console.log(data);
+                if (data.textStatus.valueOf() === 'success'.valueOf()) {
+                    var result = data.result;
+                    if (data.result !== null) {
+                        if (result.status.valueOf() === 'success'.valueOf()) {
+                            fsuccess(result);
+                        } else {
+                            cNotification.validation(result.responseMsg);
+                        }
+                    } else {
+                        cNotification.failure(notification['failure']);
+                    }
+                }
+            },
+            fail: function (e, data) {
+                cNotification.failure(notification['failure']);
+            }
+        });
+
+        //select file
+        $("#FileButton").click(function () {
+            $("#File").click();
+        });
+    }
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1766,6 +1808,12 @@ var cGoogleMap = new function () {
     this.save = function () {
         cCommon.save(this.objectName);
     };
+
+    this.delete = function (id) {
+        var url = "/maps/delete";
+        var rowIDPrefix = "googleMapIDSet_";
+        cCommon.delete(url, id, rowIDPrefix);
+    }
 };
 
 var cTemplate = new function () {
@@ -2063,9 +2111,14 @@ var cBanner = new function () {
                     + '<label for="scale"></label>'
                     + '<div class="scrollbox dot">'
                     + '<div class="scale" style="width: 0"></div>'
-                    + '</div></div></td><td>'
-                    + '<a href="#" id="' + BannerID + '" data-name="TargetUrl" data-type="text" data-pk="' + BannerID + '" data-title="Hedef Url:"></a>'
-                    + '</td><td><div class="toggle_div">'
+                    + '</div></div></td>' +
+                    '<td>'
+                    + '<a href="#" id="' + BannerID + '" data-name="TargetUrl" data-type="text" data-pk="' + BannerID + '" data-title="Target Url:"></a>'
+                    + '</td>' +
+                    '<td>' +
+                    '<a href="#" id="description_' + BannerID + '"data-name="Description" data-type="text" data-pk="' + BannerID + '"data-title="Text"></a>' +
+                    '</td>' +
+                    '<td><div class="toggle_div">'
                     + '<input type="checkbox" title="BannerStatus" class="toggleCheckbox" style="color: white" id="BannerStatus_' + BannerID + '" />'
                     + '</div></td><td>' + BannerID + '</td>'
                     + '<td style="alignment-adjust: middle"><div style="padding-top: 8px;">'

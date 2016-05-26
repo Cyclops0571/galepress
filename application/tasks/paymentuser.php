@@ -21,12 +21,14 @@ class PaymentUser_Task
     {
         $WarningMailSet = array();
         /** @var PaymentAccount[] $paymentAccounts */
-        $paymentAccounts = PaymentAccount::all();
+        $paymentAccounts = PaymentAccount::where('StatusID', '=', eStatus::Active)->get();
         foreach ($paymentAccounts as $paymentAccount) {
             $errorReason = "";
             //eger accounttan 1 son bir ay icinde odeme alinmis ise odeme alma.
             $lastPaymentFlag = $paymentAccount->last_payment_day < date("Y-m-d", strtotime("-1 month +1 day"));
-            if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d") && $lastPaymentFlag) {
+            $installmentFlag = $paymentAccount->payment_count < $paymentAccount->Application->Installment;
+            if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d") && $lastPaymentFlag && $installmentFlag) {
+                //InstallmentCount buraya gelecekkkk....
                 //sleep before getting blocked ...
                 sleep(60);
                 $paymentResult = FALSE;

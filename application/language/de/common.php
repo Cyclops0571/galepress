@@ -8,7 +8,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'support' => 'UNTERSTÜTZUNG',
-    'login_caption' => 'Galepress - Einloggen',
+    'login_caption' => 'Gale Press - Einloggen',
     'login_remember' => 'Sichern',
     'login_button' => 'Einloggen',
     'login_button_resetmypassword' => 'Zurückzusetzen',
@@ -193,7 +193,6 @@ return array(
     'applications_list_column11' => 'Ist Abgelaufen?',
 
     'application_settings_caption_detail' => 'App Einstellungen',
-    'application_settings_caption_detail_big' => 'APP EINSTELLUNGEN',
     'application_settings_caption_template' => 'Template Einstellungen',
     'application_settings_caption_banner' => 'Banner Einstellungen',
     'application_settings_store_locator' => 'Händer-Suche',
@@ -216,8 +215,9 @@ return array(
     'applications_in_app_purchase_active' => 'In App Purchase Aktive:',
     'applications_flipboard_active' => 'Flipboard Aktive:',
     'applications_bundle' => 'IOS Bundle:',
-    'applications_startdate' => 'Anfangsdatum (TT.MM.JJJJ):',
-    'applications_expirationdate' => 'Gültigkeit (TT.MM.JJJJ):',
+    'applications_dateformat' => 'TT.MM.JJJJ',
+    'applications_startdate' => 'Anfangsdatum:',
+    'applications_expirationdate' => 'Gültigkeit:',
     'applications_notificationtext' => 'Anzeigetext:',
     'applications_defaultnotificationtext' => 'Neuer Inhalt ist geladen!',
     'applications_file' => 'Ck.Pem:',
@@ -225,6 +225,8 @@ return array(
     'applications_applicationstatus' => 'Applikationsstatus:',
     'applications_iosversion' => 'IOS Version:',
     'applications_ioslink' => 'IOS Link:',
+    'applications_subscription_password' => 'IOS Hex Passsword:',
+    'applications_subscription_password_info' => 'Ios Hex Password for Subscription. You can find it from iTunes Connect -> Features.',
     'applications_androidversion' => 'Android Version:',
     'applications_androidlink' => 'Android Link:',
     'applications_package' => 'Package:',
@@ -428,7 +430,7 @@ return array(
     'orders_hints_appscreenshots' => 'Screenshots resolutions will be displayed on different devices.',
     'orders_placeholders_orderno' => 'Order No',
     'orders_placeholders_appname' => 'Your Application Name',
-    'orders_placeholders_appdescription' => 'Galepress is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
+    'orders_placeholders_appdescription' => 'Gale Press is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
     'orders_formfinal' => 'Send Form',
 
     'reports_caption' => 'Berichte',
@@ -484,7 +486,7 @@ return array(
         ":task görevi yapılırken bir hata oluştu. Hata detayını aşağıda görebilirsiniz.\n\n" .
         ":detail\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
 
     'task_success_subject' => 'Galepress.com-Aufgabe erfolgreich abgeschlossen.',
     'task_success_message' => "" .
@@ -492,7 +494,7 @@ return array(
         ":task görevi başarıyla tamamlandı. Ek açıklamaları aşağıda görebilirsiniz.\n\n" .
         ":detail\n\n" .
         "Saygılarımızla, \n" .
-        "Galepress",
+        "Gale Press",
 
     'dashboard_title' => 'ANZAHL DER DOWNLOADS',
     'dashboard_total' => 'Gesamt',
@@ -527,7 +529,7 @@ return array(
         "To confirm your account, you can click the link below. If you make such a request, please ignore this email.\n\n" .
         ":url\n\n" .
         "Best Regards, \n" .
-        "Galepress",
+        "Gale Press",
     'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
     'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
 
@@ -596,8 +598,8 @@ return array(
     'banners_active' => 'Banner Active',
     'banner_use_costomer_banner' => 'Verwenden Sie Web Source',
     'banners_autoplay' => 'Autoplay',
-    'banners_autoplay_interval' => 'Playback Range (seconds)',
-    'banners_autoplay_speed' => 'Transition Rate (0-100)',
+    'banners_autoplay_interval' => 'Playback Range (millisecond)',
+    'banners_autoplay_speed' => 'Transition Rate (millisecond)',
     'banners_info_target_content' => 'It will open the relevant content when the image is clicked.',
     'banners_info_target_address' => 'It will open the relevant address when the image is clicked.',
     'banners_info_target_desc' => 'It refers to the text, which appear on the image.',
@@ -607,7 +609,15 @@ return array(
     'banners_info_interval' => 'It refers to the transition time between pictures.',
     'banners_info_speed' => 'It refers to the transition speed between images.',
     'banners_info_active' => 'Inactive files are not shown.',
-    'banner_description' => 'Title',
+    'banners_pager_color' => 'Pager Bullet Color',
+    'banners_slide_effect' => 'Slide Effect',
+    'banners_slide_animation_slide' => 'Slide',
+    'banners_slide_animation_fade' => 'Fade',
+    'banners_slide_animation_cube' => 'Cube',
+    'banners_slide_animation_coverflow' => 'Coverflow',
+    'banners_slide_animation_flip' => 'Flip',
+
+    'banner_description' => 'Text',
 
     'banner_list_banner_id' => 'Banner ID',
     'banner_list_customer' => 'Kunde',

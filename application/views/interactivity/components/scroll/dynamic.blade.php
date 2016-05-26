@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>GalePress</title>
+    <title>Gale Press</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/css/prettify.css" type="text/css" rel="stylesheet" />
 	<link href="{{ $baseDirectory }}comp_{{ $id }}/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />

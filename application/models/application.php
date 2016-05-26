@@ -10,6 +10,7 @@
  * @property int $ThemeForeground Description
  * @property int $ThemeForegroundColor Description
  * @property int $Price Description
+ * @property int $Installment Description
  * @property int $InAppPurchaseActive Description
  * @property int $FlipboardActive Description
  * @property string $BundleText Description
@@ -21,38 +22,54 @@
  * @property int $IOSHexPasswordForSubscription Description
  * @property int $AndroidVersion Description
  * @property int $AndroidLink Description
+ * @property int $PackageID
  * @property int $Blocked Description
  * @property int $Status Description
+ * @property int $Trail
  * @property int $Version Description
  * @property int $Force Description
  * @property int $TotalFileSize Description
  * @property int $NotificationText Description
  * @property int $CkPem Description
- * @property int $StatusID Description
- * @property int $CreatorUserID Description
- * @property int $DateCreated Description
- * @property int $ProcessUserID Description
- * @property int $ProcessDate Description
- * @property int $ProcessTypeID Description
  * @property int $BannerActive Description
  * @property int $BannerCustomerActive Description
  * @property int $BannerCustomerUrl Description
  * @property int $BannerAutoplay Description
  * @property int $BannerIntervalTime Description
  * @property int $BannerTransitionRate Description
+ * @property int $BannerColor Description
+ * @property int $BannerSlideAnimation Description
  * @property int $TabActive Description
  * @property int $SubscriptionWeekActive Description
  * @property int $SubscriptionMonthActive Description
  * @property int $SubscriptionYearActive Description
- * @property int PackageID
- * @property int Trail
+ * @property int $ShowDashboard Flag for webservice to force user to optional login
+ * @property int $ConfirmationMessage Confirmation Message for continue to application
+ * @property int $StatusID Description
+ * @property int $CreatorUserID Description
+ * @property int $DateCreated Description
+ * @property int $ProcessUserID Description
+ * @property int $ProcessDate Description
+ * @property int $ProcessTypeID Description
  */
 class Application extends Eloquent
 {
+    const InstallmentCount = 24;
+    const DefaultApplicationForegroundColor = '#0082CA';
+    const DefaultApplicationBannerSlideAnimation = 'slide';
 
     public static $timestamps = false;
     public static $table = 'Application';
     public static $key = 'ApplicationID';
+
+    public function __construct($attributes = array(), $exists = false)
+    {
+        parent::__construct($attributes, $exists);
+        if (!$this->ApplicationID && Auth::User()) {
+            $this->CustomerID = Auth::User()->CustomerID;
+            $this->Installment = Application::InstallmentCount;
+        }
+    }
 
     /**
      *
@@ -211,7 +228,7 @@ class Application extends Eloquent
      *
      * @param int $type
      * @param int $refreshIdentifier
-     * @return type
+     * @return string
      */
     public function SubscriptionIdentifier($type = 1, $refreshIdentifier = false)
     {
@@ -338,6 +355,28 @@ class Application extends Eloquent
             return __('applicationlang.expiretime0days', array('ApplicationName' => $this->Name));
         } else {
             return __('applicationlang.expiretime15days', array('ApplicationName' => $this->Name, 'RemainingDays' => $diff->days));
+        }
+    }
+
+    public function getCkPemPath()
+    {
+        return '/files/customer_' . $this->CustomerID . '/application_' . $this->ApplicationID . '/' . $this->CkPem;
+    }
+
+    public function getBannerColor()
+    {
+        if ($this->BannerColor) {
+            return $this->BannerColor;
+        }
+        return $this->getThemeForegroundColor();
+    }
+
+    public function getThemeForegroundColor()
+    {
+        if ($this->ThemeForegroundColor) {
+            return $this->ThemeForegroundColor;
+        } else {
+            return self::DefaultApplicationForegroundColor;
         }
     }
 }

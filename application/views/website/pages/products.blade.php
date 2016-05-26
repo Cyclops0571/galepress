@@ -9,7 +9,7 @@
 				<div class="span12">
 					<ul class="breadcrumb">
 						<li><a href="/{{ Session::get('language') }}/">{{__('website.page_home')}}</a> <span class="divider">/</span></li>
-						<li class="active">GalePress</li>
+                        <li class="active">Gale Press</li>
 					</ul>
 				</div>
 			</div>

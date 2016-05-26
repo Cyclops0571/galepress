@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <!-- Set the viewport width to device width for mobile -->
-<title>GalePress</title>
+    <title>Gale Press</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Content">
 <link rel="shortcut icon" href="/favicon.ico">

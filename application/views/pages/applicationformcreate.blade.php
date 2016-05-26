@@ -36,8 +36,8 @@ if (isset($_GET['qty'])) {
     <!-- Basic -->
     <meta charset="utf-8">
     <title>Uygulama Oluşturma Formu</title>
-    <meta name="keywords" content="GalePress Dijital Yayıncılık"/>
-    <meta name="description" content="GalePress - Dijital Yayıncılık Platformu">
+    <meta name="keywords" content="Gale Press Dijital Yayıncılık"/>
+    <meta name="description" content="Gale Press - Dijital Yayıncılık Platformu">
     <meta name="author" content="galepress.com">
 
     <!-- Mobile Metas -->
@@ -328,7 +328,7 @@ if (isset($_GET['qty'])) {
                                data-toggle="popover" title="{{ __('common.orders_keywords') }}"
                                data-content="{{ __('common.orders_hints_keywords') }}" class="fa fa-info-circle"></i>
                             <textarea id="Keywords"
-                                      placeholder="GalePress, Dijital Yayıncılık, Digital Publishing, İnteraktif Pdf, Mobil Uygulama, Detaysoft"
+                                      placeholder="Gale Press, Dijital Yayıncılık, Digital Publishing, İnteraktif Pdf, Mobil Uygulama, Detaysoft"
                                       name="Keywords" maxlength="100" rows="2" class="form-control" required></textarea>
                         </div>
                         <hr style="margin-bottom:10px;margin-top:0px;">

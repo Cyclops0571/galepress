@@ -177,19 +177,40 @@ class Applications_Controller extends Base_Controller
      */
     public function get_new()
     {
-        $currentUser = Auth::User();
-
-        if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
-            $data = array(
-                'page' => $this->page,
-                'route' => $this->route,
-                'caption' => $this->caption,
-                'detailcaption' => $this->detailcaption
-            );
-            return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
-                ->nest('filterbar', 'sections.filterbar', $data);
+        if (Auth::User()->UserTypeID != eUserTypes::Manager) {
+            return Redirect::to(__('route.home'));
         }
-        return Redirect::to(__('route.home'));
+
+        $customers = Customer::where('StatusID', '=', eStatus::Active)
+            ->order_by('CustomerName', 'ASC')
+            ->get();
+
+        $groupcodes = DB::table('GroupCode AS gc')
+            ->join('GroupCodeLanguage AS gcl', function ($join) {
+                $join->on('gcl.GroupCodeID', '=', 'gc.GroupCodeID');
+                $join->on('gcl.LanguageID', '=', DB::raw((int)Session::get('language_id')));
+            })
+            ->where('gc.GroupName', '=', 'ApplicationStatus')
+            ->where('gc.StatusID', '=', eStatus::Active)
+            ->order_by('gc.DisplayOrder', 'ASC')
+            ->order_by('gcl.DisplayName', 'ASC')
+            ->get();
+
+        $packages = Package::order_by('PackageID', 'ASC')->get();
+
+        $app = new Application();
+        $data = array(
+            'app' => $app,
+            'customers' => $customers,
+            'groupcodes' => $groupcodes,
+            'packages' => $packages,
+            'page' => $this->page,
+            'route' => $this->route,
+            'caption' => $this->caption,
+            'detailcaption' => $this->detailcaption
+        );
+        return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
+            ->nest('filterbar', 'sections.filterbar', $data);
     }
 
     /**
@@ -198,25 +219,45 @@ class Applications_Controller extends Base_Controller
      */
     public function get_show($id)
     {
-        $currentUser = Auth::User();
-
-        if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
-            $row = Application::find($id);
-            if ($row) {
-                $data = array(
-                    'page' => $this->page,
-                    'route' => $this->route,
-                    'caption' => $this->caption,
-                    'detailcaption' => $this->detailcaption,
-                    'row' => $row
-                );
-                return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
-                    ->nest('filterbar', 'sections.filterbar', $data);
-            } else {
-                return Redirect::to($this->route);
-            }
+        if (Auth::User()->UserTypeID != eUserTypes::Manager) {
+            return Redirect::to(__('route.home'));
         }
-        return Redirect::to(__('route.home'));
+
+        $app = Application::find($id);
+        if (!$app) {
+            return Redirect::to($this->route);
+        }
+
+        $customers = Customer::where('StatusID', '=', eStatus::Active)
+            ->order_by('CustomerName', 'ASC')
+            ->get();
+
+        $groupcodes = DB::table('GroupCode AS gc')
+            ->join('GroupCodeLanguage AS gcl', function ($join) {
+                $join->on('gcl.GroupCodeID', '=', 'gc.GroupCodeID');
+                $join->on('gcl.LanguageID', '=', DB::raw((int)Session::get('language_id')));
+            })
+            ->where('gc.GroupName', '=', 'ApplicationStatus')
+            ->where('gc.StatusID', '=', eStatus::Active)
+            ->order_by('gc.DisplayOrder', 'ASC')
+            ->order_by('gcl.DisplayName', 'ASC')
+            ->get();
+
+        $packages = Package::order_by('PackageID', 'ASC')->get();
+        $data = array(
+            'app' => $app,
+            'customers' => $customers,
+            'groupcodes' => $groupcodes,
+            'packages' => $packages,
+            'page' => $this->page,
+            'route' => $this->route,
+            'caption' => $this->caption,
+            'detailcaption' => $this->detailcaption,
+        );
+
+        return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
+            ->nest('filterbar', 'sections.filterbar', $data);
+
     }
 
     /**
@@ -352,7 +393,8 @@ class Applications_Controller extends Base_Controller
                 $s->Name = Input::get('Name');
                 $s->Detail = Input::get('Detail');
                 $s->ApplicationLanguage = Input::get('ApplicationLanguage');
-                $s->Price = Input::get('Price');
+                $s->Price = str_replace(',', '', Input::get('Price'));
+                $s->Installment = Input::get('Installment', Application::InstallmentCount);
                 $s->InAppPurchaseActive = Input::get('InAppPurchaseActive', 0);
                 $s->FlipboardActive = Input::get('FlipboardActive', 0);
                 $s->BundleText = strtolower(Input::get('BundleText'));
@@ -361,7 +403,6 @@ class Applications_Controller extends Base_Controller
                 $s->ApplicationStatusID = (int)Input::get('ApplicationStatusID');
                 $s->IOSVersion = (int)Input::get('IOSVersion');
                 $s->IOSLink = Input::get('IOSLink', '');
-                $s->IOSHexPasswordForSubscription = Input::get('IOSHexPasswordForSubscription', '');
                 $s->AndroidVersion = (int)Input::get('AndroidVersion');
                 $s->AndroidLink = Input::get('AndroidLink', '');
                 $s->PackageID = (int)Input::get('PackageID');
@@ -492,6 +533,8 @@ class Applications_Controller extends Base_Controller
         $application->ThemeBackground = (int)Input::get("ThemeBackground", 1);
         $application->ThemeForegroundColor = Input::get("ThemeForegroundColor");
         $application->TabActive = (int)Input::get("TabActive", 0);
+        $application->ShowDashboard = (int)Input::get('ShowDashboard', 0);
+        $application->ConfirmationMessage = Input::get("ConfirmationMessage", '');
 
         $tabs = $application->Tabs();
         for ($i = 0; $i < TAB_COUNT; $i++) {
@@ -510,6 +553,7 @@ class Applications_Controller extends Base_Controller
         }
 
         if ($application->InAppPurchaseActive) {
+            $application->IOSHexPasswordForSubscription = Input::get('IOSHexPasswordForSubscription', '');
             foreach (Subscription::types() as $key => $subscription) {
                 $application->subscriptionStatus($key, Input::get("SubscriptionStatus_" . $key));
             }

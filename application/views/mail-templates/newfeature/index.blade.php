@@ -394,7 +394,9 @@ td[class="contact-button"] { border-top: 0px !important; }
 											<!--content-->
 											<tr align="left">
 												<td style="font-family: Verdana, Arial, sans-serif; color:#7f8c8d; font-size:14px; line-height: 28px;">
-													GalePress, artık 2 farklı tema ve 5 farklı renk seçeneğine sahip. Üstelik artık daha çekici. Yeni tasarımımızın nasıl göründüğünü DYS Paneli'nden inceleyebilirsiniz.
+                                                    Gale Press, artık 2 farklı tema ve 5 farklı renk seçeneğine sahip.
+                                                    Üstelik artık daha çekici. Yeni tasarımımızın nasıl göründüğünü DYS
+                                                    Paneli'nden inceleyebilirsiniz.
 												</td>
 											</tr>
 											<!--end content-->

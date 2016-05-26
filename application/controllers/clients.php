@@ -36,32 +36,14 @@ class Clients_Controller extends Base_Controller
 
     public function get_index()
     {
-        $rules = array(
-            'applicationID' => 'required',
-        );
-        if (!Laravel\Validator::make(\Laravel\Input::all(), $rules)->passes()) {
-            \Laravel\Redirect::to(__('route.home')); //571571
-        }
-
-        $applicationID = (int)Input::get('applicationID', 0);
-
-        /* @var $currentUser User */
+        /** @var User $currentUser */
         $currentUser = Auth::User();
-
-        if ($applicationID != 0) {
-            /* @var $applications Application[] */
-            $applications = array();
-            $application = Application::find($applicationID);
-            if ($application->CustomerID != $currentUser->CustomerID) {
-                \Laravel\Redirect::to(__('route.home')); //571571
-            }
-            $applications[] = $application;
-        } else {
-            $applications = $currentUser->Application();
+        $applications = $currentUser->Application();
+        if (empty($applications)) {
+            throw new Exception('This user does not have applications. UserID: ' . $currentUser->UserID);
         }
 
         $appIDSet = array();
-
 
         foreach ($applications as $app) {
             $appIDSet[] = $app->ApplicationID;
@@ -117,7 +99,7 @@ class Clients_Controller extends Base_Controller
         $currentUser = Auth::User();
         $applications = $currentUser->Application();
         foreach ($applications as $app) {
-            $tmpContents = $app->Contents();
+            $tmpContents = $app->Contents(eStatus::Active);
             foreach ($tmpContents as $tmp) {
                 $selectableContents[] = $tmp;
             }
@@ -150,7 +132,7 @@ class Clients_Controller extends Base_Controller
         }
         $applications = $currentUser->Application();
         foreach ($applications as $app) {
-            $tmpContents = $app->Contents();
+            $tmpContents = $app->Contents(eStatus::Active);
             foreach ($tmpContents as $tmp) {
                 $selectableContents[] = $tmp;
             }
@@ -312,6 +294,11 @@ class Clients_Controller extends Base_Controller
      */
     public function post_excelupload()
     {
+//        $obj = new stdClass();
+//        $obj->responseMsg = (string)'asdfasdf';
+//        $obj->status = 'success';
+//        return Response::json($obj);
+
         $selectableContentIDSet = NULL;
         $responseMsg = "";
         $status = "Failed";
@@ -333,7 +320,7 @@ class Clients_Controller extends Base_Controller
         $upload_handler = new UploadHandler($options);
 
         if (!Request::ajax()) {
-            return;
+            return Response::error('404');
         }
 
 
@@ -359,14 +346,17 @@ class Clients_Controller extends Base_Controller
             $updatedUserCount = 0;
             for ($row = 2; $row <= $rowCount; $row++) {
                 $colNo = 1;
-                $applicationID = $data->val($row, $colNo++);
+                $applicationID = (int)$data->val($row, $colNo++);
                 $username = $data->val($row, $colNo++);
                 $password = $data->val($row, $colNo++);
                 $email = $data->val($row, $colNo++);
                 $name = $data->val($row, $colNo++);
                 $surname = $data->val($row, $colNo++);
                 $paidUntil = date("Y-m-d", strtotime($data->val($row, $colNo++)));
-                $contentIDSetNew = explode(",", $data->val($row, $colNo++));
+                $contentIDSetNew = explode(",", $data->val($row, $colNo));
+                if ($applicationID <= 0) {
+                    continue;
+                }
 
                 if (!in_array($applicationID, $appIDSet)) {
                     $responseMsg .= Common::localize("invalid_application_id_at_row") . $row;

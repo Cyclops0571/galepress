@@ -8,7 +8,7 @@ return array(
 	|--------------------------------------------------------------------------
 	*/
     	'support' => 'SUPPORT',
-	'login_caption' => 'Galepress Login',
+    'login_caption' => 'Gale Press Login',
 	'login_remember' => 'Remember me',
 	'login_button' => 'Login',
 	'login_button_resetmypassword' => 'Reset Password',
@@ -16,22 +16,22 @@ return array(
 	'login_goback' => 'Go Back',
 	'login_error' => 'You have entered an incorrect user information!',
 	'login_error_expiration' => 'The period of validity of your application terminated!',
-	'login_email_subject' => 'Galepress.com password resetting e-mail',
+    'login_email_subject' => 'Gale Press password resetting e-mail',
     'login_email_message' => ":firstname :lastname, \n\n"
         . "Your :Application application Username is :username, \n"
         . "Click under the link for reset your password.\n"
         . ":url\n\n"
-        . "Click this link to bypass Password Reset and login to GalePress:\n"
+        . "Click this link to bypass Password Reset and login to Gale Press:\n"
         . "http://www.galepress.com/usa/\n\n"
         . "Regards, \n"
-        . "GalePress",
-    'login_resetpassword_email_subject' => 'Galepress.com password resetting e-mail',
+        . "Gale Press",
+    'login_resetpassword_email_subject' => 'Gale Press password resetting e-mail',
     'login_resetpassword_email_message' => "" .
         ":firstname :lastname, \n\n" .
         "Your :Application application Username is :username, \n\n" .
         "Password is changed as :pass. \n\n" .
         "Regards, \n" .
-        "GalePress",
+        "Gale Press",
 	'login_emailsent' => 'Password reset link has been sent to your e-mail.',
 	'login_emailnotfound' => "A registered E-mail adress hasn't been found!",
 	'login_ticketnotfound' => 'Password reset demand is not found!',
@@ -194,12 +194,11 @@ return array(
 	'applications_list_column11' => 'IsExpired?',
 
 	'application_settings_caption_detail' => 'Application Settings',
-	'application_settings_caption_detail_big' => 'APPLICATION SETTINGS',
-	'application_settings_caption_template' => 'TEMPLATE SETTINGS',
-	'application_settings_caption_banner' => 'BANNER SETTINGS',
+    'application_settings_caption_template' => 'Template Settings',
+    'application_settings_caption_banner' => 'Banner Settings',
     'application_settings_store_locator' => 'Store Locator',
-	'application_settings_caption_tab' => 'TAB SETTINGS',
-	'application_settings_subscription' => 'SUBSCRIPTION SETTINGS',
+    'application_settings_caption_tab' => 'Tab Settings',
+    'application_settings_subscription' => 'Subscription Settings',
 	'application_settings_template_background_tip' => 'It represents application\'s background color.',
 	'application_settings_template_foreground_tip' => 'It represents application\'s foreground color.',
     
@@ -218,8 +217,9 @@ return array(
     'applications_flipboard_active' => 'Flipboard Aktive:',
 	'applications_placeholder_price' => 'Price(For Mounth):',
 	'applications_bundle' => 'IOS Bundle:',
-	'applications_startdate' => 'Starting Date (gg.aa.yyyy):',
-	'applications_expirationdate' => 'Expiration Date (dd.mm.yyyy):',
+    'applications_dateformat' => 'DD.MM.YYYY',
+    'applications_startdate' => 'Starting Date:',
+    'applications_expirationdate' => 'Expiration Date:',
 	'applications_notificationtext' => 'Notification Text:',
 	'applications_defaultnotificationtext' => 'New content has been loaded!',
 	'applications_file' => 'Ck.Pem:',
@@ -227,7 +227,8 @@ return array(
 	'applications_applicationstatus' => 'Application Status:',
 	'applications_iosversion' => 'IOS Version:',
 	'applications_ioslink' => 'IOS Link:',
-    'applications_subscription_password' => 'IOS Subscription Password:',
+    'applications_subscription_password' => 'IOS Hex Passsword:',
+    'applications_subscription_password_info' => 'Ios Hex Password for Subscription. You can find it from iTunes Connect -> Features.',
 	'applications_androidversion' => 'Android Version:',
 	'applications_androidlink' => 'Android Link:',
 	'applications_package' => 'Package:',
@@ -305,7 +306,7 @@ return array(
 	'contents_tooltip_autodownload' => 'Marked content will be downloaded directly without prompting the user. It is recommended for usage in small-sized content, otherwise it will take longer to start the program.',
 	'contents_tooltip_approval' => 'Confirm',
 	'contents_tooltip_blocked' => 'Blocked.',
-	'contents_tooltip_status' => 'Marked contents appear in tablet computers and are downloadable. Leave it blank for the contents that you have uploaded to galepress.com and that you do not want to be downloaded.',
+    'contents_tooltip_status' => 'Marked contents appear in tablet computers and are downloadable. Leave it blank for the contents that you have uploaded to Gale Press and that you do not want to be downloaded.',
 	'contents_tooltip_interactive' => 'Opens interactive designer.',
 	
 	'contents_category_title' => 'Edit the categories',
@@ -431,7 +432,7 @@ return array(
 	'orders_hints_appscreenshots' => 'Screenshots resolutions will be displayed on different devices.',
 	'orders_placeholders_orderno' => 'Order No',
 	'orders_placeholders_appname' => 'Your Application Name',
-	'orders_placeholders_appdescription' => 'Galepress is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
+    'orders_placeholders_appdescription' => 'Gale Press is supplied  for tablet and smartsphones reading from newspaper document catalog  books.',
 	'orders_formfinal' => 'Send Form',
 	
 	'reports_caption' => 'Reports',
@@ -476,22 +477,22 @@ return array(
 	'reports_columns_report1301_admin' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Download Percent"),
 	'reports_columns_report1302' => array("Customer No", "Customer Name", "Application Name", "Content Name", "Country", "City", "District", "Page", "User Count", "Duration (Second)"),
 
-	'task_subject' => 'An error occurred during the task galepress.com',
-	'task_status' => 'Task status message of galepress.com',
+    'task_subject' => 'An error occurred at Gale Press during the task ',
+    'task_status' => 'Task status message of Gale Press',
 	'task_message' => "".
 						"Authorized, \n\n".
 						":task mission not succesfully completed. You can see the mistakes below.\n\n".
 						":detail\n\n".
 						"Regards, \n".
-						"Galepress",
-						
-	'task_success_subject' => 'Galepress.com task was completed successfully',
+        "Gale Press",
+
+    'task_success_subject' => 'Gale Press task was completed successfully',
 	'task_success_message' => "".
 						"Authorized, \n\n".
 						":task mission succesfully completed. You can see the annotations below.\n\n".
 						":detail\n\n".
 						"Regards, \n".
-						"Galepress",
+        "Gale Press",
 	
 	'dashboard_title' => 'CONTENT DOWNLOAD',
 	'dashboard_total' => 'Total',
@@ -526,7 +527,7 @@ return array(
 							"To confirm your account, you can click the link below. If you make such a request, please ignore this email.\n\n".
 							":url\n\n".
 							"Best Regards, \n".
-							"Galepress",
+        "Gale Press",
 	'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
 	'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
 
@@ -595,8 +596,8 @@ return array(
 	'banners_active' => 'Banner Active',
 	'banner_use_costomer_banner' => 'Use Web Source',
 	'banners_autoplay' => 'Autoplay',
-	'banners_autoplay_interval' => 'Playback Range (seconds):',
-	'banners_autoplay_speed' => 'Transition Rate (0-100):',
+    'banners_autoplay_interval' => 'Playback Range (millisecond):',
+    'banners_autoplay_speed' => 'Transition Rate (millisecond):',
 	'banners_info_target_content' => 'It will open the relevant content when the image is clicked.',
 	'banners_info_target_address' => 'It will open the relevant address when the image is clicked.',
 	'banners_info_target_desc' => 'It refers to the text, which appear on the image.',
@@ -606,7 +607,14 @@ return array(
 	'banners_info_interval' => 'It refers to the transition time between pictures.',
 	'banners_info_speed' => 'It refers to the transition speed between images.',
 	'banners_info_active' => 'Inactive files are not shown.',
-	'banner_description' => 'Title',
+    'banners_pager_color' => 'Pager Bullet Color',
+    'banners_slide_effect' => 'Slide Effect',
+    'banners_slide_animation_slide' => 'Slide',
+    'banners_slide_animation_fade' => 'Fade',
+    'banners_slide_animation_cube' => 'Cube',
+    'banners_slide_animation_coverflow' => 'Coverflow',
+    'banners_slide_animation_flip' => 'Flip',
+    'banner_description' => 'Text',
 	
 	'banner_list_banner_id' => 'Banner ID',
 	'banner_list_customer' => 'Customer',
@@ -622,7 +630,7 @@ return array(
 	'tabs_active' => 'Tab Active',
 	
 	'tabs_info_url' => 'You can set a link to the mobile compatible.',
-	'tabs_info_inhouse_url' => 'You can select Galepress feature (Storelocator vs..)',
+    'tabs_info_inhouse_url' => 'You can select Gale Press feature (Storelocator vs..)',
 	'tabs_info_icon' => 'Icon will be displayed in application',
     'tabs_info_active' => 'Only active tabs will be displayed in the mobile application',
 	'tabs_dont_use_feature' => 'Dont use this feature',

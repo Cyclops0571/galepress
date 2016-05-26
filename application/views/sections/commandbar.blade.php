@@ -1,52 +1,38 @@
-<div class="col-md-5" style="padding-top:5px; float:left;">
-    <div class="input-group commands">
+<div class="col-md-5 pull-left">
+    <div class="col-md-offset-0 input-group commands">
         <?php if ((int)Input::get('customerID', 0) > 0): ?>
         <a href="{{URL::to(__('route.'.$page.'_new').'?customerID='.Input::get('customerID', 0))}}"
-           title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle"><span
-                    class="icon-plus"></span></a>
-
+           title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle">
+            <span class="icon-plus"></span>
+        </a>
         <?php elseif ((int)Input::get('applicationID', 0) > 0): ?>
-
         <a href="{{URL::to(__('route.'.$page.'_new').'?applicationID='.Input::get('applicationID', 0))}}"
-           title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle" style="margin-left:5px;"><span
-                    class="icon-plus"></span></a>
-
+           title="{{__('common.commandbar_add')}}" class="widget-icon widget-icon-circle">
+            <span class="icon-plus"></span>
+        </a>
         <?php if (isset(Request::route()->action['as']) && Request::route()->action['as'] == 'contents'): ?>
         <a href="#modalPushNotification" title="Push Notification" data-toggle="modal"
-           data-target="#modalPushNotification" class="widget-icon widget-icon-circle" style="margin-left:10px;"><span
-                    class="icon-bullhorn"></span></a>
-            <?php $application = Application::find(Input::get('applicationID', 0)); ?>
-            <?php if($application && $application->FlipboardActive): ?>
-            <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook"
-               class="widget-icon widget-icon-circle" target="_blank" style="margin-left:10px;"><span
-                        class="icon-book"></span></a>
-            <?php endif; ?>
-        <?php endif; ?>
-
-
-        <?php if (isset(Request::route()->action['as']) && Request::route()->action['as'] == 'maps_list'): ?>
-        <script type="text/javascript">
-            $('.commands span.icon-plus').removeClass().addClass('icon-map-marker location-icon-map-stacked').html('<i class="icon-plus .location-icon-plus-stacked"></i>');
-            $('.commands span.location-icon-map-stacked i').addClass('location-icon-plus-stacked');
-        </script>
-        <a href="#modalMapsList" data-toggle="modal" data-target="#modalMapsList" title="{{__('common.map_preview')}}"
-           class="widget-icon widget-icon-circle" style="margin-left:10px;"><span class="icon-map-marker"
-                                                                                  style="font-size:12px; color:white;"></span>
-            <span class="icon-map-marker"
-                  style="position:absolute; font-size: 9px; margin-left: -14px; color: #0475BA;"></span>
-            <span class="icon-map-marker"
-                  style="position:absolute; font-size: 8px; margin-left: 2px; margin-top:-4px; color:#DB3838;"></span>
+           data-target="#modalPushNotification" class="widget-icon widget-icon-circle">
+            <span class="icon-bullhorn"></span>
         </a>
-
+        <?php $application = Application::find(Input::get('applicationID', 0)); ?>
+        <?php if($application && $application->FlipboardActive): ?>
+        <a href="/tr/flipbook/{{Input::get('applicationID', 0)}}" title="Flipbook"
+           class="widget-icon widget-icon-circle" target="_blank">
+            <span class="icon-book"></span>
+        </a>
+        <?php endif; ?>
         <?php endif; ?>
 
         <?php else: ?>
         <a href="{{URL::to(__('route.'.$page.'_new'))}}" title="{{__('common.commandbar_add')}}"
-           class="widget-icon widget-icon-circle"><span class="icon-plus"></span></a>
+           class="widget-icon widget-icon-circle">
+            <span class="icon-plus"></span>
+        </a>
         <?php endif; ?>
     </div>
 </div>
-<div class="col-md-4" style="float:right; max-width:300px;">
+<div class="col-md-4 commandbar-search">
 
     {{ Form::open($route, 'GET') }}
     {{ Form::hidden('page', '1') }}

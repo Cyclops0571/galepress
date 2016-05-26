@@ -16,7 +16,7 @@
         <meta name="revisit-after" content="3 days" />
         <meta name="keywords" content="" />
         <meta name="author" content="Serdar Saygılı" />
-        <meta name="copyright" content="Galepress Technology" />
+        <meta name="copyright" content="Gale Press Technology"/>
         <meta name="company" content="Detay Danışmanlık Bilgisayar Hiz. San. ve Dış Tic. A.Ş." />
         <meta name="description" content="" />
         <meta name="verify-v1" content="" />
@@ -45,7 +45,7 @@
 
         <link rel="stylesheet" href="/css/template-chooser/master.css?v=<?php echo APP_VER; ?>">
         <link rel="stylesheet" href="/website/styles/device-mockups2.css?v=<?php echo APP_VER; ?>">
-
+        <link rel="stylesheet" href="/css/bootstrap-colorpicker.min.css?v=<?php echo APP_VER; ?>" type="text/css">
         <!-- Begin JavaScript -->
         @include('js.language')
 
@@ -56,6 +56,7 @@
         {{ HTML::script('js/jquery.mask.min.js'); }}
         {{ HTML::script('js/jquery.uniform.min.js'); }}
         {{ HTML::script('js/jquery.knob.js'); }}
+        {{ HTML::script('js/colorpicker.js'); }}
         {{ HTML::script('js/flot/jquery.flot.js'); }}
         {{ HTML::script('js/flot/jquery.flot.animator.js'); }}
         {{ HTML::script('js/flot/jquery.flot.resize.js'); }}

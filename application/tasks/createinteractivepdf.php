@@ -80,8 +80,8 @@ class CreateInteractivePDF_Task
                 throw new Exception($p->get_errmsg());
             }
 
-            $p->set_info("Creator", "Galepress");
-            $p->set_info("Title", "Galepress Interactive PDF");
+            $p->set_info("Creator", "Gale Press");
+            $p->set_info("Title", "Gale Press Interactive PDF");
             //-----------------------------------------------------------------------------------------------
             //open original document
             $docOriginal = $p->open_pdi_document($fileOriginal, "");
@@ -97,7 +97,6 @@ class CreateInteractivePDF_Task
                 $p->begin_page_ext(10, 10, "");
 
                 //open page in original document
-                //$pageOriginal = $p->open_pdi_page($docOriginal, ($page + 1), "cloneboxes");
                 $pageOriginal = $p->open_pdi_page($docOriginal, ($page + 1), "pdiusebox=crop");
                 if ($pageOriginal == 0) {
                     throw new Exception($p->get_errmsg());
@@ -398,6 +397,8 @@ class CreateInteractivePDF_Task
                         } elseif ($componentClass == 'bookmark') {
                             //$propertyText
                             $propertyText = pack('H*', 'feff') . mb_convert_encoding($propertyText, 'UTF-16', 'UTF-8');
+                            $trigger_x = $trigger_x > 0 ? $trigger_x : 0;
+                            $trigger_y = $trigger_y > 0 ? $trigger_y : 0;
                             $p->create_bookmark($propertyText, "destination={page=" . ($page + 1) . " type=fixed left=" . $trigger_x . " top=" . $trigger_y . " zoom=1}");
                             //bookmark
                         }
@@ -444,14 +445,23 @@ class CreateInteractivePDF_Task
             $cf->save();
             //-----------------------------------------------------------------------------------------------
         } catch (PDFlibException $e) {
-            $err = 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg();
+            $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\r\n";
+            $err .= 'PDFlib exception occurred in starter_block sample: [' . $e->get_errnum() . '] ' . $e->get_apiname() . ': ' . $e->get_errmsg() . "\r\n";
+            if (method_exists($e, 'getLine')) {
+                $err .= ' Line: ' . $e->getLine();
+            } else {
+                $err .= ' getLine Method Not Exists';
+            }
+            //$err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
             $cf->save();
             throw new Exception($err);
         } catch (Exception $e) {
-            $err = $e->getMessage();
+            $err = 'ApplicationID: ' . $ApplicationID . ' ContentID:' . $ContentID . ' ContentFileId:' . $ContentFileID . "\n";
+            $err .= $e->getMessage();
+            $err .= 'at File:' . $e->getFile() . ' at Line:' . $e->getLine();
             $cf = ContentFile::find($ContentFileID);
             $cf->ErrorCount = (int)$cf->ErrorCount + 1;
             $cf->LastErrorDetail = $err;
@@ -527,5 +537,4 @@ class CreateInteractivePDF_Task
             }
         }
     }
-
 }

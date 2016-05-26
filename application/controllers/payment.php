@@ -23,10 +23,17 @@ class Payment_Controller extends Base_Controller
             $paymentAccount = new PaymentAccount();
         }
 
+        if ($paymentAccount->PaymentAccountID) {
+            $selectedApp = $paymentAccount->Application;
+        } else {
+            $selectedApp = $applications[0];
+        }
+
         $customerData = array();
         $customerData['city'] = City::all();
         $customerData['paymentAccount'] = $paymentAccount;
         $customerData['applications'] = $applications;
+        $customerData['selectedApp'] = $selectedApp;
 
         return View::make('payment.shop', $customerData);
     }
@@ -78,6 +85,7 @@ class Payment_Controller extends Base_Controller
         $paymentAccount->vergi_dairesi = Input::get('taxOffice');
         $paymentAccount->vergi_no = Input::get('taxNo');
         $paymentAccount->selected_at = date("Y-m-d H:i:s");
+        $paymentAccount->StatusID = eStatus::Active;
         $paymentAccount->save();
 
         $data = array();
@@ -143,13 +151,13 @@ class Payment_Controller extends Base_Controller
         $postData['customer_contact_mobile'] = str_replace(array(" ", "-", "(", ")"), "", $paymentAccount->phone);
         $postData['customer_contact_ip'] = Request::ip();
         $postData['customer_language'] = 'tr';
-        $postData['customer_presentation_usage'] = 'GalepressAylikOdeme_' . date('YmdHisu');
-        $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
+        $postData['customer_presentation_usage'] = 'GalePressAylikOdeme_' . date('YmdHisu');
+        $postData['descriptor'] = 'GalePressAylikOdeme_' . date('YmdHisu');
         $postData['type'] = "DB";
         $postData['amount'] = $paymentAccount->Application->Price * 118;
         $postData['installment_count'] = NULL;
         $postData['currency'] = "TRY";
-        $postData['descriptor'] = 'GalepressAylikOdeme_' . date('YmdHisu');
+        $postData['descriptor'] = 'GalePressAylikOdeme_' . date('YmdHisu');
         $postData['card_register'] = 1;
         $postData['card_number'] = str_replace(" ", "", Input::get("card_number"));
         $postData['card_expiry_year'] = Input::get("card_expiry_year");

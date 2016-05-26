@@ -54,6 +54,8 @@ class Webservice_Applications_Controller extends Base_Controller
                 $clientVersion = $client->Version;
             }
 
+            $showDashboard = (boolean)rand(0, 1);
+
             //Bu responsedaki Application Version Application tablosundaki Versiyon degildir.
             //Client icin ozel olusturulan Application Versiondur.
             return Response::json(array(
@@ -62,7 +64,9 @@ class Webservice_Applications_Controller extends Base_Controller
                 'ApplicationID' => (int)$application->ApplicationID,
                 'ApplicationBlocked' => ((int)$application->Blocked == 1 ? true : false),
                 'ApplicationStatus' => ((int)$application->Status == 1 ? true : false),
-                'ApplicationVersion' => (int)($application->Version + $clientVersion)
+                'ApplicationVersion' => (int)($application->Version + $clientVersion),
+                'ShowDashboard' => (boolean)$application->ShowDashboard,
+                'ConfirmationMessage' => $application->ConfirmationMessage,
             ));
         });
     }
@@ -143,7 +147,7 @@ class Webservice_Applications_Controller extends Base_Controller
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
 
-//INFO:Save token method come from get_contents
+            //INFO:Save token method come from get_contents
             webService::saveToken($ServiceVersion, $customer->CustomerID, $applicationID);
 
             return Response::json(array(
@@ -227,7 +231,7 @@ class Webservice_Applications_Controller extends Base_Controller
      */
     public function get_contents($ServiceVersion, $applicationID)
     {
-        //get user token here then return acourdin to this 571571
+        //get user token here then return acourding to this 573573
         return webService::render(function () use ($ServiceVersion, $applicationID) {
             $isTest = Input::get('isTest', 0) ? TRUE : FALSE;
             $accessToken = Input::get('accessToken', "");

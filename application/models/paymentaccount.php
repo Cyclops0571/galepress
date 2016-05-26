@@ -27,6 +27,7 @@
  * @property int $holder Description
  * @property int $card_verification Description
  * @property int $mail_send Description
+ * @property int $StatusID Description
  * @property int $selected_at Description
  * @property Application $Application Description
  */

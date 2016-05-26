@@ -22,22 +22,22 @@ class Banners_Controller extends Base_Controller
         $this->caption = __('common.applications_caption');
         $this->detailcaption = __('common.banners_caption_detail');
         $this->fields = array();
-        $this->fields[] = __('common.image') . ' (1480x740)';
+        $this->fields[] = __('common.image') . ' (1480x640)';
         $this->fields[] = __('common.banner_list_customer');
         $this->fields[] = __('common.banner_list_application');
         $this->fields[] = __('common.banner_form_target_url');
 //	$this->fields[] = __('common.banner_form_target_content');
-//	$this->fields[] = __('common.banner_description');
+        $this->fields[] = __('common.banner_description');
         $this->fields[] = __('common.banners_list_status');
         $this->fields[] = __('common.banner_list_banner_id');
         $this->fields[] = __('common.detailpage_delete');
 
         if (Auth::User() && (int)Auth::User()->UserTypeID == eUserTypes::Customer) {
             $this->fields = array();
-            $this->fields[] = __('common.image') . ' (1480x740)';
+            $this->fields[] = __('common.image') . ' (1480x640)';
             $this->fields[] = __('common.banner_form_target_url');
 //	    $this->fields[] = __('common.banner_form_target_content');
-//	    $this->fields[] = __('common.banner_description');
+            $this->fields[] = __('common.banner_description');
             $this->fields[] = __('common.banners_list_status');
             $this->fields[] = __('common.banner_list_banner_id');
             $this->fields[] = __('common.detailpage_delete');
@@ -149,17 +149,13 @@ class Banners_Controller extends Base_Controller
                 }
             }
 
-            if (Laravel\Input::has("Description")) {
-                $banner->Description = Input::get("Description");
-            }
-
             if (Laravel\Input::has("Status")) {
                 $banner->Status = (int)Input::get('Status');
             }
 
             if (Laravel\Input::has("name")) {
                 $name = Laravel\Input::get("name");
-                $value = Laravel\Input::get("value", "");
+                $value = (string)Laravel\Input::get("value", "");
                 if ($name == "TargetUrl") {
                     if (!$value) {
                         $banner->TargetUrl = "";
@@ -168,6 +164,8 @@ class Banners_Controller extends Base_Controller
                     } else {
                         $banner->TargetUrl = "http://" . $value;
                     }
+                } else if ($name == "Description") {
+                    $banner->Description = $value;
                 }
             }
             $banner->save();
@@ -193,6 +191,7 @@ class Banners_Controller extends Base_Controller
             "BannerCustomerActive" => 'in:1',
             "BannerIntervalTime" => 'integer|min:1',
             "BannerTransitionRate" => 'integer|min:1',
+            "BannerColor" => 'match:/^#[A-Fa-f0-9]{6}$/',
         );
         if ((int)Input::get("BannerCustomerActive")) {
             $rules["BannerCustomerUrl"] = 'required|min:2';
@@ -204,7 +203,8 @@ class Banners_Controller extends Base_Controller
             "BannerCustomerActive" => __("common.banner_use_costomer_banner"),
             "BannerIntervalTime" => __('common.banners_autoplay_interval'),
             "BannerTransitionRate" => __('common.banners_autoplay_speed'),
-            "BannerCustomerUrl" => __("common.banner_use_costomer_banner")
+            "BannerCustomerUrl" => __("common.banner_use_costomer_banner"),
+            "BannerColor" => __("common.banners_pager_color"),
         );
 
 
@@ -231,6 +231,8 @@ class Banners_Controller extends Base_Controller
         $application->BannerCustomerActive = (int)Input::get("BannerCustomerActive");
         $application->BannerIntervalTime = (int)Input::get("BannerIntervalTime", 0);
         $application->BannerTransitionRate = (int)Input::get("BannerTransitionRate", 0);
+        $application->BannerColor = Input::get('BannerColor');
+        $application->BannerSlideAnimation = Input::get('BannerSlideAnimation');
         $application->save();
         return "success=" . base64_encode("true");
     }

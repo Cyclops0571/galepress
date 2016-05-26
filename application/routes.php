@@ -57,10 +57,13 @@ Route::get("test/download", "test@download");
 Route::post("test/download", "test@download");
 
 Route::get('test/v(:num)', 'test@routetest');
+Route::get('test/interactive', 'test@interactive');
 // </editor-fold>
 
 
-Route::post("client/excelupload", "clients@excelupload");
+Route::post("clients/excelupload", array('before' => 'auth', 'uses' => "clients@excelupload"));
+Route::post("maps/excelupload/(:num)", array('before' => 'auth', 'uses' => "maps@excelupload"));
+Route::get("maps/delete", "maps@delete", array('before' => 'auth'));
 $languages = Config::get('application.languages', array());
 
 Route::post('/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));

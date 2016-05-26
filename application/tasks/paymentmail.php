@@ -138,13 +138,13 @@ class PaymentMail_Task
                     Bundle::start('messages');
                     Message::send(function ($m) use ($subject, $msg, $accountExcelFile, $transactionExcelFile) {
                         /* @var $m \Swiftmailer\Drivers\Driver */
-                        $m->from('serdar.saygili@detaysoft.com', 'Galepress System Admin');
+                        $m->from('serdar.saygili@detaysoft.com', 'Gale Press System Admin');
                         $m->to(array('serdar.saygili@detaysoft.com', 'guler.nesil@detaysoft.com', 'enes.taskiran@detaysoft.com'));
                         $m->html("true");
-                        $m->subject('Galepress Ödeme Bilgilendirme Maili');
+                        $m->subject('Gale Press Ödeme Bilgilendirme Maili');
                         $m->body("Merhaba; <br/>"
                             . "Yeni hesap açan müşterilerimiz ve yeni ödemeler ektedir. <br/>"
-                            . "Galepress ekibi olarak esenlikler dileriz. <br/>"
+                            . "Gale Press ekibi olarak esenlikler dileriz. <br/>"
                             . "İyi çalışmalar");
 
                         if (!empty($accountExcelFile)) {

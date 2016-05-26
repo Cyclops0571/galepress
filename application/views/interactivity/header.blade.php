@@ -1,6 +1,6 @@
 <header>
     <div id="topbar">
-        <div id="logo"><img src="/img/logo.png" alt="GalePress"></div>
+        <div id="logo"><img src="/img/logo.png" alt="Gale Press"></div>
         <div id="user-settings">
             <ul>
                 <!--<li><a href="javascript:void(0);"><i class="icon-question-sign"></i>{{ __('interactivity.help') }}</a></li>-->

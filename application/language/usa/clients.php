@@ -1,8 +1,7 @@
 <?php
 
 return array(
-    "invalid_excel_file_two_rows" => "Invalid Excel File. (There most be at least two rows)",
-    "invalid_excel_file_seven_columns" => "Invalid Excel File. (There most be seven columns.)",
+    "invalid_excel_file_seven_columns" => "Invalid Excel File. (There must be seven columns.)",
     "invalid_application_id_at_row" => "Unauthorized Application ID at Row: ",
     "inserted_mobile_user_count" => "Inserted Mobile User Count: ",
     "updated_mobile_user_count" => "Updated User Count: ",
@@ -21,7 +20,7 @@ return array(
         "Your Username is :username, \n" .
         "Your Password is :pass. \n\n" .
         "Regards, \n" .
-        "GalePress USA",
+        "Gale Press USA",
 
     'login_email_subject' => ':Application Application password resetting e-mail',
     'login_email_message' => ":firstname :lastname, \n\n" .
@@ -29,14 +28,14 @@ return array(
         "Click under the link for reset your :Application applicaton password. If you don't want it, please don't regard this e-mail.\n\n" .
         ":url\n\n" .
         "Regards, \n" .
-        "GalePress USA",
+        "Gale Press USA",
     'login_resetpassword_email_subject' => ':Application Application password resetting e-mail',
     'login_resetpassword_email_message' => ":firstname :lastname, \n\n" .
         "Your :Application Application password changed \n" .
         "Your Username is :username, \n" .
         "Password is changed as :pass. \n\n" .
         "Regards, \n" .
-        "GalePress USA",
+        "Gale Press USA",
     'selected_content_name' => 'Selected Contents',
     'selectable_content_name' => 'Selectable Contents',
     'week_subscription' => 'Weekly Subscription',

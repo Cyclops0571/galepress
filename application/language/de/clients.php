@@ -1,7 +1,6 @@
 <?php
 
 return array(
-    "invalid_excel_file_two_rows" => "Ungültige Excel-Datei (die Liste muß mindestens 2 Zeilen enthalten).",
     "invalid_excel_file_seven_columns" => "Ungültige Excel-Datei (die Liste muß genau 7 Spalten enthalten).",
     "invalid_application_id_at_row" => "Sie verwenden eine unberchtigte App-ID in Zeile:",
     "inserted_mobile_user_count" => "Hinzugefügte Benutzer: ",

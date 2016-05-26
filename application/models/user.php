@@ -32,7 +32,7 @@ class User extends Eloquent
 
     /**
      *
-     * @return Application
+     * @return Application[]
      */
     public function Application($statusID = eStatus::Active)
     {

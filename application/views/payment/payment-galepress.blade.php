@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>GalePress Ödeme</title>
+        <title>Gale Press Ödeme</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="shortcut icon" href="/website/img/favicon2.ico">
         <!-- Latest compiled and minified CSS -->

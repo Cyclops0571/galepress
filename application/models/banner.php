@@ -21,6 +21,7 @@ class Banner extends Eloquent
 
     public static $table = 'Banner';
     public static $key = 'BannerID';
+    public static $slideAnimations = array("slide", "fade", "cube", "coverflow", "flip");
 
     /**
      *

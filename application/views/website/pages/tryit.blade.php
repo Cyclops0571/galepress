@@ -514,7 +514,7 @@
                                 }, 3000);
 
 
-                                /*Google Code for Website Conversion Galepress Conversion*/
+                                /*Google Code for Website Conversion Gale Press Conversion*/
                                 /* <![CDATA[ */
                                 var google_conversion_id = 980149592;
                                 var google_conversion_language = "en";

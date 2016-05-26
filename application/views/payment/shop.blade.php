@@ -191,7 +191,7 @@ $tabIndex = 1;
         <div class="container">
             <h1 class="logo">
                 <a href="index.html">
-                    <img alt="GalePress" data-sticky-width="252" data-sticky-height="82"
+                    <img alt="Gale Press" data-sticky-width="252" data-sticky-height="82"
                          src="/website/img/logo-dark.png">
                 </a>
             </h1>
@@ -406,7 +406,7 @@ $tabIndex = 1;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Ödeme Sayfasına Doğru...</h4>
+                <h4 class="modal-title"><?php echo __('website.towards_payment_page'); ?></h4>
             </div>
             <form action="/odeme" method="post" id="userInfos" class="form-horizontal" novalidate>
                 <div class="modal-body">
@@ -416,6 +416,7 @@ $tabIndex = 1;
                             jQuery('#loading').show();
                             var app = JSON.parse($('#applicationID option:selected').attr('data-application'));
                             $("#Price").val(app["attributes"]["Price"]);
+                            $("#Installment").val(app["attributes"]["Installment"]);
 
                             var paymentAccount = null;
                             //application degisti bu yeni applicasyonun PaymentAccountu bize gerekli.
@@ -478,10 +479,16 @@ $tabIndex = 1;
                                 }
                                 ?>
 
-                                <input type="text" name="Price" id="Price" class="form-control textbox disabled"
+                                <input type="text" name="Price" id="Price" class="form-control textbox" disabled
                                        value="{{ $selectedApplicationPrice }}"/>
                                 <span class="input-group-addon">TL + (KDV)</span>
                             </div>
+                        </div>
+                    </div>
+                    <div id='userInterfacePriceDiv' class='form-group'>
+                        <div class="col-md-3">{{ __('common.applications_price') }}</div>
+                        <div class="col-md-9">
+                            <span class="info-content"><?php echo $selectedApp->Installment; ?></span>
                         </div>
                     </div>
                     <hr>

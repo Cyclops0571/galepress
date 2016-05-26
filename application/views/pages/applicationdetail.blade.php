@@ -1,103 +1,30 @@
 @layout('layouts.master')
 
 @section('content')
-
     <?php
-    $ApplicationID = 0;
-    $CustomerID = 0;
-    $Name = '';
-    $Detail = '';
-    $ApplicationLanguage = '';
-    $Price = '';
-    $BundleText = '';
-    $StartDate = '';
-    $ExpirationDate = '';
-    $ApplicationStatusID = 0;
-    $IOSVersion = 0;
-    $IOSLink = '';
-    $IOSHexPasswordForSubscription = "";
-    $AndroidVersion = 0;
-    $AndroidLink = '';
-    $PackageID = 0;
-    $Blocked = 0;
-    $Status = 0;
-    $Trail = 0;
-    $Version = 0;
-    $NotificationText = '';
-    $CkPem = '';
-    $InAppPurchaseActive = 0;
-    $FlipboardActive = 0;
-
-    if (isset($row)) {
-        /** @var Application $row */
-        $ApplicationID = (int)$row->ApplicationID;
-        $CustomerID = (int)$row->CustomerID;
-        $Name = $row->Name;
-        $Detail = $row->Detail;
-        $ApplicationLanguage = $row->ApplicationLanguage;
-        $Price = $row->Price;
-        $InAppPurchaseActive = $row->InAppPurchaseActive;
-        $FlipboardActive = $row->FlipboardActive;
-        $BundleText = $row->BundleText;
-        $StartDate = $row->StartDate;
-        $ExpirationDate = $row->ExpirationDate;
-        $ApplicationStatusID = (int)$row->ApplicationStatusID;
-        $IOSVersion = (int)$row->IOSVersion;
-        $IOSLink = $row->IOSLink;
-        $IOSHexPasswordForSubscription = $row->IOSHexPasswordForSubscription;
-        $AndroidVersion = (int)$row->AndroidVersion;
-        $AndroidLink = $row->AndroidLink;
-        $PackageID = (int)$row->PackageID;
-        $Blocked = (int)$row->Blocked;
-        $Status = (int)$row->Status;
-        $Trail = (int)$row->Trail;
-        $Version = (int)$row->Version;
-        $NotificationText = $row->NotificationText;
-        $CkPem = $row->CkPem;
-    } else {
-        $CustomerID = (int)Input::get('customerID', 0);
-    }
-
-    $customers = DB::table('Customer')
-            ->where('StatusID', '=', eStatus::Active)
-            ->order_by('CustomerName', 'ASC')
-            ->get();
-
-    $groupcodes = DB::table('GroupCode AS gc')
-            ->join('GroupCodeLanguage AS gcl', function ($join) {
-                $join->on('gcl.GroupCodeID', '=', 'gc.GroupCodeID');
-                $join->on('gcl.LanguageID', '=', DB::raw((int)Session::get('language_id')));
-            })
-            ->where('gc.GroupName', '=', 'ApplicationStatus')
-            ->where('gc.StatusID', '=', eStatus::Active)
-            ->order_by('gc.DisplayOrder', 'ASC')
-            ->order_by('gcl.DisplayName', 'ASC')
-            ->get();
-
-    $packages = DB::table('Package')
-            ->order_by('PackageID', 'ASC')
-            ->get();
-    $Price = number_format((float)$Price, 2);
+    /** @var $app Application */
     ?>
     <div class="col-md-8">
+        {{ Form::open(__('route.applications_save'), 'POST') }}
+        {{ Form::token() }}
+                <!-- APPLICATION INFO START -->
         <div class="block block-drop-shadow">
             <div class="header">
                 <h2>{{ __('common.detailpage_caption') }}</h2>
             </div>
             <div class="content controls">
-                {{ Form::open(__('route.applications_save'), 'POST') }}
-                {{ Form::token() }}
+                <input type="hidden" name="ApplicationID" id="ApplicationID"
+                       value="<?php echo (int)$app->ApplicationID ?>"/>
                 <div class="form-row">
-                    <input type="hidden" name="ApplicationID" id="ApplicationID" value="{{ $ApplicationID }}"/>
-
                     <div class="col-md-3">{{ __('common.applications_customer') }} <span class="error">*</span></div>
                     {{ $errors->first('CustomerID', '<p class="error">:message</p>') }}
                     <div class="col-md-9">
-                        <select class="form-control select2 required" style="width: 100%;" tabindex="-1" id="CustomerID"
-                                name="CustomerID">
-                            <option value=""{{ ($CustomerID == 0 ? ' selected="selected"' : '') }}></option>
+                        <select class="form-control select2 required" name="CustomerID">
+                            <option value=""<?php echo($app->CustomerID ? '' : ' selected="selected"'); ?>></option>
                             @foreach ($customers as $customer)
-                                <option value="{{ $customer->CustomerID }}"{{ ($CustomerID == $customer->CustomerID ? ' selected="selected"' : '') }}>{{ $customer->CustomerName }}</option>
+                                <option value="{{ $customer->CustomerID }}"{{ ($app->CustomerID == $customer->CustomerID ? ' selected="selected"' : '') }}>
+                                    {{ $customer->CustomerName }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -108,77 +35,19 @@
                     {{ $errors->first('Name', '<p class="error">:message</p>') }}
                     <div class="col-md-9">
                         <input type="text" name="Name" id="Name" class="form-control textbox required"
-                               value="{{ $Name }}"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_detail') }}</div>
-                    <div class="col-md-9">
-                        <textarea name="Detail" id="Detail" class="form-control" rows="2"
-                                  cols="20">{{ $Detail }}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.application_language') }}</div>
-                    <div class="col-md-9">
-                        <select class="form-control select2 required" style="width: 100%;" tabindex="-1"
-                                id="ApplicationLanguage" name="ApplicationLanguage">
-                            @if(empty($ApplicationLanguage))
-                                <option value=""></option>
-                            @endif
-                            @foreach (Laravel\Config::get('application.languages') as $lang)
-                                <option value="{{ $lang }}" {{ ($lang == $ApplicationLanguage ? ' selected="selected"' : '') }}>{{ $lang }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_price') }}</div>
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <input type="text" name="Price" id="Price" class="form-control textbox"
-                                   placeholder="{{__('common.applications_placeholder_price')}}" value="{{ $Price }}"/>
-                            <span class="input-group-addon">TL + (KDV)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_in_app_purchase_active') }}</div>
-                    <div class="col-md-9">
-                        <input type="checkbox" name="InAppPurchaseActive" id="InAppPurchaseActive"
-                               value="1"{{ $InAppPurchaseActive ? ' checked="checked"' : '' }} />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_subscription_password') }}</div>
-                    <div class="col-md-9">
-                        <input type="text" name="IOSHexPasswordForSubscription" id="IOSHexPasswordForSubscription" class="form-control textbox"
-                               value="{{ $IOSHexPasswordForSubscription }}"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_flipboard_active') }}</div>
-                    <div class="col-md-9">
-                        <input type="checkbox" name="FlipboardActive" id="FlipboardActive"
-                               value="1"{{ $FlipboardActive ? ' checked="checked"' : '' }} />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_bundle') }}</div>
-                    <div class="col-md-9">
-                        <input type="text" name="BundleText" id="BundleText" class="form-control textbox"
-                               value="{{ $BundleText }}"/>
+                               value="<?php echo $app->Name ?>"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-3">{{ __('common.applications_startdate') }}<span class="error">*</span></div>
                     {{ $errors->first('StartDate', '<p class="error">:message</p>') }}
                     <div class="col-md-9">
-                        <input type="text" name="StartDate" id="StartDate" class="form-control textbox date required"
-                               disable="disable" value="{{ Common::dateRead($StartDate, 'd.m.Y') }}"/>
+                        <div class="input-group">
+                            <input type="text" name="StartDate" id="StartDate"
+                                   class="form-control textbox date required"
+                                   disable="disable" value="{{ Common::dateRead($app->StartDate, 'd.m.Y') }}"/>
+                            <span class="input-group-addon"><?php echo __('common.applications_dateformat'); ?></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -186,28 +55,46 @@
                     </div>
                     {{ $errors->first('ExpirationDate', '<p class="error">:message</p>') }}
                     <div class="col-md-9">
-                        <input type="text" name="ExpirationDate" id="ExpirationDate"
-                               class="form-control textbox date required" disable="disable"
-                               value="{{ Common::dateRead($ExpirationDate, 'd.m.Y') }}"/>
+                        <div class="input-group">
+                            <input type="text" name="ExpirationDate" id="ExpirationDate"
+                                   class="form-control textbox date required" disable="disable"
+                                   value="{{ Common::dateRead($app->ExpirationDate, 'd.m.Y') }}"/>
+                            <span class="input-group-addon"><?php echo __('common.applications_dateformat'); ?></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_notificationtext') }}</div>
+                    <div class="col-md-3">{{ __('common.application_language') }}<span class="error">*</span></div>
                     <div class="col-md-9">
-                        <input type="text" name="NotificationText" id="NotificationText" class="form-control textbox"
-                               value="{{ $NotificationText }}"/>
+                        <select class="form-control select2 required" name="ApplicationLanguage">
+                            <option value="" <?php echo($app->ApplicationLanguage ? '' : ' selected="selected"'); ?>></option>
+                            <?php foreach (Laravel\Config::get('application.languages') as $lang): ?>
+                            <option value="<?php echo $lang; ?>" <?php echo $lang == $app->ApplicationLanguage ? ' selected="selected"' : ''; ?>>
+                                <?php echo $lang; ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_detail') }}</div>
+                    <div class="col-md-9">
+                        <textarea name="Detail" id="Detail" class="form-control" rows="2"
+                                  cols="20"><?php echo $app->Detail; ?></textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-3">{{ __('common.applications_file') }}</div>
                     <div class="col-md-9">
                         <div class="fileupload_container">
-                            @if(strlen($CkPem) > 0)
-                                <a href="/files/customer_{{ $CustomerID }}/application_{{ $ApplicationID }}/{{ $CkPem }}"
-                                   target="_blank" class="uploadedfile">{{ __('common.contents_filelink') }}</a><br/>
-                            @endif
-                            <input type="file" name="CkPem" id="CkPem" class="hidden"/>
+                            <?php if($app->CkPem): ?>
+                            <a href="<?php echo $app->getCkPemPath() ?>" target="_blank" class="uploadedfile">
+                                {{ __('common.contents_filelink') }}
+                            </a>
+                            <br/>
+                            <?php endif; ?>
 
+                            <input type="file" name="CkPem" id="CkPem" class="hidden"/>
                             <div id="CkPemButton" class="uploadify hide"
                                  style="height: 30px; width: 120px; opacity: 1;">
                                 <div id="File-button" class="uploadify-button "
@@ -225,11 +112,9 @@
                                     <div class="scale" style="width: 0%"></div>
                                 </div>
                             </div>
-
                         </div>
-
                         <input type="hidden" name="hdnCkPemSelected" id="hdnCkPemSelected" value="0"/>
-                        <input type="hidden" name="hdnCkPemName" id="hdnCkPemName" value="{{ $CkPem }}"/>
+                        <input type="hidden" name="hdnCkPemName" id="hdnCkPemName" value="{{ $app->CkPem }}"/>
                         <script type="text/javascript">
                             $(function () {
                                 $("#CkPem").fileupload({
@@ -288,53 +173,12 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_applicationstatus') }}</div>
-                    <div class="col-md-9">
-                        <select class="form-control select2" style="width: 100%;" tabindex="-1" id="ApplicationStatusID"
-                                name="ApplicationStatusID">
-                            <option value=""{{ ($ApplicationStatusID == 0 ? ' selected="selected"' : '') }}></option>
-                            @foreach ($groupcodes as $groupcode)
-                                <option value="{{ $groupcode->GroupCodeID }}"{{ ($ApplicationStatusID == $groupcode->GroupCodeID ? ' selected="selected"' : '') }}>{{ $groupcode->DisplayName }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_iosversion') }}</div>
-                    <div class="col-md-9">
-                        <input type="text" name="IOSVersion" id="IOSVersion" class="form-control textbox"
-                               value="{{ $IOSVersion }}"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_ioslink') }}</div>
-                    <div class="col-md-9">
-                        <input type="text" name="IOSLink" id="IOSLink" class="form-control textbox"
-                               value="{{ $IOSLink }}"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_androidversion') }}</div>
-                    <div class="col-md-9">
-                        <input type="text" name="AndroidVersion" id="AndroidVersion" class="form-control textbox"
-                               value="{{ $AndroidVersion }}"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3">{{ __('common.applications_androidlink') }}</div>
-                    <div class="col-md-9">
-                        <input type="text" name="AndroidLink" id="AndroidLink" class="form-control textbox"
-                               value="{{ $AndroidLink }}"/>
-                    </div>
-                </div>
-                <div class="form-row">
                     <div class="col-md-3">{{ __('common.applications_package') }}</div>
                     <div class="col-md-9">
-                        <select class="form-control select2 required" style="width: 100%;" tabindex="-1" id="PackageID"
-                                name="PackageID">
-                            <option value=""{{ ($PackageID == 0 ? ' selected="selected"' : '') }}></option>
+                        <select class="form-control select2 required" name="PackageID">
+                            <option value=""{{ ((int)$app->PackageID == 0 ? ' selected="selected"' : '') }}></option>
                             @foreach ($packages as $package)
-                                <option value="{{ $package->PackageID }}"{{ ($PackageID == $package->PackageID ? ' selected="selected"' : '') }}>{{ $package->Name }}</option>
+                                <option value="{{ $package->PackageID }}"{{ ((int)$app->PackageID == $package->PackageID ? ' selected="selected"' : '') }}>{{ $package->Name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -344,7 +188,7 @@
                     <div class="col-md-9">
                         <div class="checkbox-inline">
                             <input type="checkbox" name="Blocked" id="Blocked"
-                                   value="1"{{ ((int)$Blocked == 1 ? ' checked="checked"' : '') }} />
+                                   value="1"{{ ((int)(int)$app->Blocked == 1 ? ' checked="checked"' : '') }} />
                         </div>
                     </div>
                 </div>
@@ -353,38 +197,149 @@
                     <div class="col-md-9">
                         <div class="checkbox-inline">
                             <input type="checkbox" name="Status" id="Status"
-                                   value="1"{{ ((int)$Status == 1 ? ' checked="checked"' : '') }} />
+                                   value="1"{{ ((int)$app->Status == 1 ? ' checked="checked"' : '') }} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPLICATION PRICE START -->
+        <div class="block block-drop-shadow">
+            <div class="header">
+                <h2>{{ __('common.applications_price') }}</h2>
+            </div>
+            <div class="content controls">
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_price') }}</div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <input type="text" name="Price" id="Price" class="form-control textbox"
+                                   placeholder="{{__('common.applications_placeholder_price')}}"
+                                   value="<?php echo number_format((float)$app->Price, 2); ?>"/>
+                            <span class="input-group-addon">TL + (KDV)</span>
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-3">Trail?</div>
+                    <div class="col-md-3">
+                        <?php echo __('applicationlang.installment_count') ?>
+                    </div>
                     <div class="col-md-9">
-                        <select class="form-control select2 required" style="width: 100%;" tabindex="-1" id="Trail"
-                                name="Trail">
-                            <option value="2"{{ ($Trail == 2 ? ' selected="selected"' : '') }}>Müşterimiz</option>
-                            <option value="1"{{ ($Trail == 1 ? ' selected="selected"' : '') }}>Deneme Sürümü</option>
+                        <select class="form-control select2" name="Installment">
+                            <?php for($i = Application::InstallmentCount; $i > 0; $i--): ?>
+                            <option value="<?php echo $i ?>" <?php echo $app->Installment == $i ? ' selected="selected"' : "" ?>>
+                                <?php echo $i; ?>
+                            </option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPLICATION OPTIONAL SETTINGS -->
+        <div class="block block-drop-shadow">
+            <div class="header">
+                <h2>{{ __('applicationlang.other_options') }}</h2>
+            </div>
+            <div class="content controls">
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_in_app_purchase_active') }}</div>
+                    <div class="col-md-9">
+                        <input type="checkbox" name="InAppPurchaseActive" id="InAppPurchaseActive"
+                               value="1"{{ (int)$app->InAppPurchaseActive ? ' checked="checked"' : '' }} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_flipboard_active') }}</div>
+                    <div class="col-md-9">
+                        <input type="checkbox" name="FlipboardActive" id="FlipboardActive"
+                               value="1"{{ $app->FlipboardActive ? ' checked="checked"' : '' }} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_bundle') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="BundleText" id="BundleText" class="form-control textbox"
+                               value="<?php echo $app->BundleText; ?>"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_notificationtext') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="NotificationText" id="NotificationText" class="form-control textbox"
+                               value="{{ $app->NotificationText }}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_applicationstatus') }}</div>
+                    <div class="col-md-9">
+                        <select class="form-control select2" name="ApplicationStatusID">
+                            <option value=""{{ ((int)$app->ApplicationStatusID == 0 ? ' selected="selected"' : '') }}></option>
+                            @foreach ($groupcodes as $groupcode)
+                                <option value="{{ $groupcode->GroupCodeID }}"{{ ((int)$app->ApplicationStatusID == $groupcode->GroupCodeID ? ' selected="selected"' : '') }}>{{ $groupcode->DisplayName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_iosversion') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="IOSVersion" id="IOSVersion" class="form-control textbox"
+                               value="{{ (int)$app->IOSVersion }}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_ioslink') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="IOSLink" id="IOSLink" class="form-control textbox"
+                               value="{{ $app->IOSLink }}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_androidversion') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="AndroidVersion" id="AndroidVersion" class="form-control textbox"
+                               value="{{ (int)$app->AndroidVersion }}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">{{ __('common.applications_androidlink') }}</div>
+                    <div class="col-md-9">
+                        <input type="text" name="AndroidLink" id="AndroidLink" class="form-control textbox"
+                               value="{{ $app->AndroidLink }}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3"><?php echo __('applicationlang.application_type') ?></div>
+                    <div class="col-md-9">
+                        <select class="form-control select2 required" name="Trail">
+                            <option value="2"{{ ((int)$app->Trail == 2 ? ' selected="selected"' : '') }}>Müşterimiz
+                            </option>
+                            <option value="1"{{ ((int)$app->Trail == 1 ? ' selected="selected"' : '') }}>Deneme Sürümü
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-8"></div>
                     <div class="col-md-2">
-                        @if($ApplicationID != 0)
-                            <a href="#modal_default_10" data-toggle="modal"><input type="button"
-                                                                                   value="{{ __('common.detailpage_delete') }}"
-                                                                                   name="delete"
-                                                                                   class="btn delete expand remove"/></a>
-                        @endif
+                        <?php if($app->ApplicationID): ?>
+                        <a href="#modal_default_10" data-toggle="modal"><input type="button"
+                                                                               value="{{ __('common.detailpage_delete') }}"
+                                                                               name="delete"
+                                                                               class="btn delete expand remove"/></a>
+                        <?php endif; ?>
                     </div>
                     <div class="col-md-2">
                         <input type="button" class="btn my-btn-success" name="save"
                                value="{{ __('common.detailpage_update') }}" onclick="cApplication.save();"/>
                     </div>
                 </div>
-                {{ Form::close() }}
             </div>
         </div>
+        {{ Form::close() }}
     </div>
     <div class="modal modal-info" id="modal_default_10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">

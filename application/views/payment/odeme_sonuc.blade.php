@@ -6,10 +6,10 @@
 
 		<!-- Basic -->
 		<meta charset="utf-8">
-		<title>GalePress Shop</title>		
-		<meta name="keywords" content="GalePress, Paketler" />
-		<meta name="description" content="GalePress paket bilgilerinin bulunduğu sayfa.">
-		<meta name="author" content="GalePress">
+        <title>Gale Press Shop</title>
+        <meta name="keywords" content="Gale Press, Paketler"/>
+        <meta name="description" content="Gale Press paket bilgilerinin bulunduğu sayfa.">
+        <meta name="author" content="Gale Press">
 		<link rel="shortcut icon" href="/website/img/favicon2.ico">
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,7 +118,8 @@
 				<div class="container">
 					<h1 class="logo">
 						<a href="{{Config::get('custom.iyzico_return_url')}}">
-							<img alt="GalePress" data-sticky-width="252" data-sticky-height="82" src="/website/img/logo-dark.png">
+                            <img alt="Gale Press" data-sticky-width="252" data-sticky-height="82"
+                                 src="/website/img/logo-dark.png">
 						</a>
 					</h1>
 					<nav>
@@ -203,7 +204,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<h2>GalePress Ödeme Sonucu</h2>
+                                <h2>Gale Press Ödeme Sonucu</h2>
 							</div>
 						</div>
 					</div>

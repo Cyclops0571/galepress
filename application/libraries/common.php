@@ -599,19 +599,19 @@ class Common
         Bundle::start('messages');
         Message::send(function ($m) use ($username, $email, $amount) {
             $body = "Sayın " . $username . ", \r\n"
-                . "Galepress Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
+                . "Gale Press Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
                 . "Firmamız adına teşekkür eder iyi günler dileriz.\r\n\r\n\r\n"
-                . "Saygılarımızla Galepress";
+                . "Saygılarımızla Gale Press";
             $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
             $m->to($email);
-            $m->subject("Galepress Dijital Yayin Platformu Otomatik Ödeme Maili");
+            $m->subject("Gale Press Dijital Yayin Platformu Otomatik Ödeme Maili");
             $m->body($body);
         });
     }
 
     public static function sendPaymentUserReminderMail($userList)
     {
-        return; //571571
+        return; //573573
         Bundle::start('messages');
         foreach ($userList as $user) {
             if (!in_array($user["warning_mail_phase"], array(1, 2, 3))) {
@@ -645,7 +645,7 @@ class Common
 
                 $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($user["email"]);
-                $m->subject("Galepress Dijital Yayin Platformu Ödeme Hatırlatma Maili");
+                $m->subject("Gale Press Dijital Yayin Platformu Ödeme Hatırlatma Maili");
                 $m->body($msg);
             });
         }
@@ -659,7 +659,7 @@ class Common
             Message::send(function ($m) use ($adminMail, $msg) {
                 $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
                 $m->to($adminMail);
-                $m->subject("Galepress Ödeme Hatırlatma Maili");
+                $m->subject("Gale Press Ödeme Hatırlatma Maili");
                 $m->body($msg);
             });
         }

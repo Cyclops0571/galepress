@@ -1,185 +1,208 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
 
-        <title>GALERPESS BANNER SLIDER</title>
+    <title>GALERPESS BANNER SLIDER</title>
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <link rel="stylesheet" href="/css/masterslider/style/masterslider.css" />
-        <link href="/css/masterslider/skins/black-2/style.css" rel='stylesheet' type='text/css'>
-        <link href='/css/masterslider/style/ms-gallery-style.css' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/deneme/Swiper-master/dist/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
 
-        <script src="/js/masterslider/jquery-1.10.2.min.js"></script>
-        <script src="/js/masterslider/jquery.easing.min.js"></script>
-        <script src="/js/masterslider/masterslider.js?v=3"></script>
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/deneme/Swiper-master/dist/js/swiper.min.js"></script>
 
-        <style>			
-            #ms-gallery-1{
-                margin:0 auto;
-            }
-            body{
-                margin:0;
-            }
-            .ms-gallery-template .ms-bullets.ms-dir-h,.ms-bullets.ms-dir-h .ms-bullets-count {
-                right: 3% !important;
-            }
-            .ms-gallery-template .ms-gallery-botcont{
-                position: fixed !important;
-                bottom:0 !important;
-                width: 100% !important;
-                opacity: 0; //0.7
-                height: 13% !important;
-            }
-            .ms-gallery-template .ms-slide-info{
-                padding: 0px 20px !important;
-                font-size: 0.8em !important;
-            }
-            .ms-info{
-                display: table-cell !important;
-                vertical-align: middle !important;
-            }
-            .ms-bullets-count{
-                display: table-cell !important;
-                vertical-align: middle !important;
-            }
-            .ms-gallery-template .ms-gal-playbtn{
-                display: none !important;
-            }
-            .ms-gallery-template .ms-gal-thumbtoggle{
-                display: none !important;
-            }
-            .ms-timerbar{
-                display: none !important;
-            }
-            .ms-slide-info.ms-dir-h,.ms-bullets.ms-dir-h{
-                height: 100% !important;
-                display: table !important;
-                top:0 !important;
-            }
-            *{
-                -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-            }
-        </style>
+    <style>
+        html {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
 
-    </head>
+        body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
 
-    <?php
-    //opacity 0.7 idi 0 a cektim
-    if (false) {
-	$savedBanner = new Banner();
-	$application = new Application();
-    }
-    $Autoplay = $application->BannerAutoplay;
-    $IntervalTime = $application->BannerIntervalTime;
-    $TransitionRate = $application->BannerTransitionRate;
-    ?>
-    <body>
-        <div class="ms-gallery-template" id="ms-gallery-1">
-            <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
-		<?php foreach ($bannerSet as $savedBanner): ?>
-    		<div class="ms-slide" data-delay="{{$IntervalTime}}">
-			<?php $imgPath = $savedBanner->getImagePath(); ?>
-    		    <img src="/img/bannerSlider/blank.gif" data-src="{{$imgPath}}" />
-    		    <div class="ms-info"></div>
-			<?php if (!empty($savedBanner->TargetUrl)): ?>
-			    <a href="{{$savedBanner->TargetUrl}}" target="_blank"></a> 
-			<?php endif; ?>
-    		</div>
-		<?php endforeach; ?>
+        .swiper-container {
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+
+        .swiper-wrapper {
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+
+        .swiper-slide {
+            width: auto;
+            text-align: center;
+            font-size: 18px;
+            background: transparent;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .myImage {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .image-container {
+            position: relative;
+        }
+
+        .myBorder {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            position: absolute;
+            bottom: 15%;
+            width: 100%;
+
+            font-size: large;
+            text-align: left;
+            color: #333333;
+            background-color: rgba(250, 250, 250, 0.6);
+            box-shadow: 0 0 3px 3px rgba(250, 250, 250, 0.6);
+        }
+
+        .myText {
+            margin-left: 5%;
+            font-family: 'Open Sans';
+        }
+
+        .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+            bottom: 3px;
+            left: 0;
+            width: 100%;
+        }
+
+        .myswiper-pagination-bullet-active {
+            opacity: 1;
+            background: <?php echo $application->getBannerColor(); ?>;
+        }
+    </style>
+</head>
+
+<?php
+/** @var Application $application */
+$IntervalTime = (int)$application->BannerAutoplay * $application->BannerIntervalTime;
+$TransitionRate = $application->BannerTransitionRate;
+?>
+<body>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <?php foreach ($bannerSet as $savedBanner): ?>
+        <div class="swiper-slide">
+            <div class="image-container">
+                <?php if (!empty($savedBanner->TargetUrl)) : ?>
+                <a href="<?php echo $savedBanner->TargetUrl; ?>">
+                    <?php endif; ?>
+                    <img class="myImage" src="<?php echo $savedBanner->getImagePath() ?>"/>
+                    <?php if (!empty($savedBanner->Description)) : ?>
+                    <div class="myBorder">
+					<span class="myText">
+						<?php echo $savedBanner->Description; ?>
+					</span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($savedBanner->TargetUrl)) : ?>
+                </a>
+                <?php endif; ?>
             </div>
         </div>
-    </body>
+        <?php endforeach; ?>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</div>
 
-    <script type="text/javascript" >
-var slider = new MasterSlider();
-var ua = navigator.userAgent.toLowerCase();
-var isAndroid = ua.indexOf("android") > - 1; // Detect Android devices
-if (isAndroid) {
-var screenOrientation = (screen.width > screen.height) ? 90 : 0;
-if (screenOrientation === 90) {
-slider.setup('masterslider', {
-width:740,
-height:window.innerHeight,
-space:0,
-view:'fadeBasic',
-layout: 'partialview',
-fillMode: 'stretch',
-speed: {{$TransitionRate}},
-autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
-});
-}
-else {
-slider.setup('masterslider', {
-width:740,
-height:window.innerHeight,
-space:0,
-view:'fadeBasic',
-layout: 'fullscreen',
-fillMode: 'stretch',
-speed: {{$TransitionRate}},
-autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
-});
-}
-}
-else {
-function doOnOrientationChange()
-{
-switch (window.orientation)
-{
-case - 90:
-case 90:
-slider.setup('masterslider', {
-width:740,
-height:window.innerHeight,
-space:0,
-view:'fadeBasic',
-layout: 'partialview',
-fillMode: 'stretch',
-speed: {{$TransitionRate}},
-autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
-});
-break;
-default:
-slider.setup('masterslider', {
-width:740,
-height:window.innerHeight,
-space:0,
-view:'fadeBasic',
-layout: 'fullscreen',
-fillMode: 'stretch',
-speed: {{$TransitionRate}},
-autoplay: <?php echo json_encode($Autoplay == 1 ? true : false); ?>
-});
-break;
-}
-}
-doOnOrientationChange();
-}
-// slider.control('arrows');	
-var gallery = new MSGallery('ms-gallery-1', slider);
-gallery.setup();
-slider.api.addEventListener(MSSliderEvent.CHANGE_START, function(){
-$(".ms-gallery-botcont").stop(true);
-$(".ms-gallery-botcont").animate({opacity: 0}, 750);
-});
-slider.api.addEventListener(MSSliderEvent.CHANGE_END, function(){
-//                    $(".ms-gallery-botcont").delay(2500).animate({opacity: 0.7}, 2500);
-});
-$('#ms-gallery-1').click(function(){
-$("#ms-gallery-1 .ms-gallery-botcont").stop(true);
-if ($("#ms-gallery-1 .ms-gallery-botcont").css('opacity') > 0){
-$("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0}, 250);
-} else{
-//            $("#ms-gallery-1 .ms-gallery-botcont").animate({opacity: 0.7}, 250);
-}
-});
-$(".ms-info").each(function() {
-if ($(this).text().length > 50){
-var infoText = $(this).text();
-infoText = infoText.substring(0, 50);
-$(this).text(infoText + "...");
-}
-});
-    </script>
+<script>
+    var lastPageX = 0;
+    var lastPageX2 = 0;
+    var myslideNext = false;
+
+    $('.image-container').css('height', $('body').height());
+    $('.swiper-slide').css('width', Math.ceil($('body').height() * 2.3125));
+
+    var swiper = new Swiper('.swiper-container', {
+        autoHeight: true,
+        bulletActiveClass: 'myswiper-pagination-bullet-active',
+        speed: <?php echo $TransitionRate; ?>,
+        autoplay: <?php echo $IntervalTime; ?>,
+        pagination: '.swiper-pagination',
+        slidesPerView: 'auto',
+        loop: true,
+        loopedSlides: 0,
+        centeredSlides: true,
+        spaceBetween: 10,
+        effect: '<?php echo $application->BannerSlideAnimation; ?>',
+        longSwipes: false,
+        resistance: false,
+        touchMoveStopPropagation: false,
+        runCallbacksOnInit: false,
+        noSwiping: false,
+        onSlideChangeEnd: function (swiper) {
+            myslideNext = false;
+            swiper.slideTo(swiper.activeIndex, <?php echo $TransitionRate; ?>, false);
+            swiper.startAutoplay();
+        },
+        onSlidePrevStart: function (swiper) {
+            myslideNext = false;
+        },
+        onSlideNextStart: function (swiper) {
+            myslideNext = false;
+        },
+        onTouchMove: function (swiper, event) {
+            if (!event.touches) {
+                return;
+            } else if (!event.touches[0]) {
+                return;
+            }
+
+            if (lastPageX2 != 0 && lastPageX != 0) {
+                if (lastPageX2 > lastPageX && lastPageX > event.touches[0].pageX) {
+                    setTimeout(slideNext, 100);
+                } else if (lastPageX2 < lastPageX && lastPageX < event.touches[0].pageX) {
+                    setTimeout(slidePrev, 100);
+                }
+            }
+            lastPageX2 = lastPageX;
+            lastPageX = event.touches[0].pageX;
+            myslideNext = true;
+        }
+    });
+
+
+    function slideNext() {
+        if (myslideNext) {
+            swiper.slideNext();
+        }
+    }
+    function slidePrev() {
+        if (myslideNext) {
+            swiper.slidePrev();
+        }
+    }
+</script>
+</body>
 </html>

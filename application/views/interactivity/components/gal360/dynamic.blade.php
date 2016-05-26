@@ -33,7 +33,7 @@ foreach($files as $file)
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<title>GalePress</title>
+    <title>Gale Press</title>
 	<meta name="Description" content="" />
     <meta name="viewport" content="user-scalable=no" />
 	<script src="{{ $baseDirectory }}comp_{{ $id }}/jquery.min.js" type="text/javascript"></script>
