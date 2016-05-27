@@ -261,16 +261,23 @@ class Payment_Controller extends Base_Controller
         $paymentResult = "Error";
         $response64decoded = Input::get("response");
         if (!empty($response64decoded)) {
+            $errorLog = new ServerErrorLog();
+            $errorLog->Header = 571;
+            $errorLog->Url = 'Server 3ds payment';
+            $errorLog->Parameters = $response64decoded;
+            $errorLog->ErrorMessage = 'Response Data';
+            $errorLog->save();
             $paymentResult = "Iyzico servis saglayıcısı şu anda cevap vermiyor. Lütfen daha sonra tekrar deneyiniz.";
             return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
         }
+
         try {
             $result = json_decode(base64_decode($response64decoded), TRUE);
         } catch (Exception $e) {
             $errorLog = new ServerErrorLog();
             $errorLog->Header = 571;
             $errorLog->Url = 'Server 3ds payment';
-            $errorLog->Parameters = json_encode($response64decoded);
+            $errorLog->Parameters = $response64decoded;
             $errorLog->ErrorMessage = 'Response Message could not decoded';
             $errorLog->save();
         }
