@@ -137,7 +137,7 @@ class Payment_Controller extends Base_Controller
         $postData = array();
         if ($secure3D) {
             $postData['response_mode'] = "ASYNC";
-            $postData['return_url'] = Config::get("custom.iyzico_return_url") . '/payment-response';
+            $postData['return_url'] = Config::get("custom.iyzico_return_url") . '/payment-response'; //571571 Burada hata var...
         } else {
             $postData['response_mode'] = "SYNC";
         }
@@ -264,10 +264,35 @@ class Payment_Controller extends Base_Controller
             $paymentResult = "Iyzico servis saglayıcısı şu anda cevap vermiyor. Lütfen daha sonra tekrar deneyiniz.";
             return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
         }
-        $result = json_decode(base64_decode($response64decoded), TRUE);
+        try {
+            $result = json_decode(base64_decode($response64decoded), TRUE);
+        } catch (Exception $e) {
+            $errorLog = new ServerErrorLog();
+            $errorLog->Header = 571;
+            $errorLog->Url = 'Server 3ds payment';
+            $errorLog->Parameters = json_encode($response64decoded);
+            $errorLog->ErrorMessage = 'Response Message could not decoded';
+            $errorLog->save();
+        }
         if (!isset($result['transaction']['transaction_id'])) {
+            $errorLog = new ServerErrorLog();
+            $errorLog->Header = 571;
+            $errorLog->Url = 'Server 3ds payment';
+            $errorLog->Parameters = json_encode($result);
+            $errorLog->ErrorMessage = 'Response Message does not have transaction_id';
+            $errorLog->save();
             $paymentResult = "Iyzico servis saglayıcısında bir hata oldu. Lütfen daha sonra tekrar deneyiniz"; //transaction_id dönmüyor ??
             return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
+        }
+
+        $paymentTransaction = PaymentTransaction::find($result['transaction']['external_id']);
+        if (!$paymentTransaction) {
+            $errorLog = new ServerErrorLog();
+            $errorLog->Header = 571;
+            $errorLog->Url = 'Server 3ds payment';
+            $errorLog->Parameters = json_encode($result);
+            $errorLog->ErrorMessage = 'Payment Transaction Data does not exists in Database.';
+            $errorLog->save();
         }
 
         if (isset($result['transaction']['state']) && strstr($result['transaction']['state'], "paid")) {
@@ -286,7 +311,7 @@ class Payment_Controller extends Base_Controller
             $paymentAccount->holder = $result['account']['holder'];
             $paymentAccount->save();
 
-            $paymentTransaction = PaymentTransaction::find($result['transaction']['external_id']);
+
             $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
             $paymentTransaction->CustomerID = $user->CustomerID;
             $paymentTransaction->transaction_id = $result['transaction']['transaction_id'];
@@ -295,17 +320,16 @@ class Payment_Controller extends Base_Controller
             $paymentTransaction->state = $result['transaction']['state'];
             $paymentTransaction->amount = $result['transaction']['amount'];
             $paymentTransaction->currency = $result['transaction']['currency'];
-            $paymentTransaction->response = json_encode($result);
+            $paymentTransaction->response3d = json_encode($result);
             $paymentTransaction->paid = 1;
             $paymentTransaction->save();
         } else {
-            $paymentTransaction = PaymentTransaction::find($result['transaction']['external_id']);
             $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
             $paymentTransaction->CustomerID = $user->CustomerID;
             $paymentTransaction->transaction_id = $result['transaction']['transaction_id'];
             $paymentTransaction->external_id = $result['transaction']['external_id'];
             $paymentTransaction->state = "rejected";
-            $paymentTransaction->response = json_encode($result);
+            $paymentTransaction->response3d = json_encode($result);
             $paymentTransaction->save();
             if (!empty($result['response']["error_message_tr"])) {
                 $paymentResult = $result['response']["error_message_tr"];
