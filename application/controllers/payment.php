@@ -260,7 +260,7 @@ class Payment_Controller extends Base_Controller
         }
         $paymentResult = "Error";
         $response64decoded = Input::get("response");
-        if (!empty($response64decoded)) {
+        if (empty($response64decoded)) {
             $errorLog = new ServerErrorLog();
             $errorLog->Header = 571;
             $errorLog->Url = 'Server 3ds payment';
