@@ -128,8 +128,19 @@ class ContentFile extends Eloquent
         return $expMessage;
     }
 
-    public function save()
+    public function save($closing = false)
     {
+        if ($closing) {
+            $this->Included = 1;
+            $this->Interactivity = 1;
+            $this->HasCreated = 0;
+            $this->ErrorCount = 0;
+            $this->InteractiveFilePath = '';
+            $this->InteractiveFileName = '';
+            $this->InteractiveFileName2 = '';
+            $this->InteractiveFileSize = 0;
+        }
+
         if (!$this->dirty()) {
             return true;
         }
@@ -303,4 +314,6 @@ class ContentFile extends Eloquent
     {
         return $this->has_many('ContentFilePage', $this->key())->where('StatusID', '=', eStatus::Active);
     }
+
+
 }

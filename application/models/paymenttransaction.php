@@ -13,8 +13,10 @@
  * @property int $currency Description
  * @property int $request Description
  * @property int $response Description
+ * @property int $response3d Description
  * @property int $paid Description
  * @property int $mail_send Description
+ * @method  static PaymentTransaction find(int $id)
  */
 class PaymentTransaction extends Eloquent {
 
