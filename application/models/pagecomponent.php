@@ -21,6 +21,7 @@ class PageComponent extends Eloquent
     public static $timestamps = false;
     public static $table = 'PageComponent';
     public static $key = 'PageComponentID';
+    public static $ignoredProperties = array('id', 'process', 'fileselected', 'posterimageselected', 'modaliconselected');
 
     public function Component()
     {

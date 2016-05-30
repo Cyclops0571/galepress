@@ -481,7 +481,7 @@ Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 
 Route::get('maps/webview/(:num)', array('as' => 'map_view', 'uses' => 'maps@webview'));
 Route::get('payment/paymentAcountByApplicationID/(:num)', array('as' => 'app_payment_data', 'uses' => 'payment@paymentAcountByApplicationID'));
 
-Route::get('payment-response', array('as' => 'website_odeme_response_post', 'before' => 'auth', 'uses' => 'payment@odemeResponse'));
+Route::get('payment-response', array('as' => 'iyzico_3ds_return_url', 'before' => 'auth', 'uses' => 'payment@odemeResponse'));
 
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));
