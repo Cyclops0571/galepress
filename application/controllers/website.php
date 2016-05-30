@@ -723,4 +723,16 @@ class Website_Controller extends Base_Controller
         }
     }
 
+    public function get_signUp() {
+        return Laravel\View::make('website.signup');
+    }
+
+    public function get_forgotPassword() {
+        return Laravel\View::make('website.forgotpassword');
+    }
+
+    public function get_signIn() {
+        return Laravel\View::make('website.signin');
+    }
+
 }

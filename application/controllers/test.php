@@ -16,7 +16,6 @@ class Test_Controller extends Base_Controller
         parent::__construct();
     }
 
-
     public function get_index($test = 1)
     {
         echo number_format((float)2795.00, 2);

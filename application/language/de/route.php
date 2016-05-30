@@ -7,6 +7,7 @@ return array(
     | Route Language Lines
     |--------------------------------------------------------------------------
     */
+
     'login' => 'anmelden',
     'forgotmypassword' => 'passwortvergessen',
     'resetmypassword' => 'passwortzuruecksetzen',
@@ -30,6 +31,7 @@ return array(
     'clients_send' => 'mobilnutzer/senden',
     'clients_delete' => 'mobilnutzer/loeschen',
     'clients_register' => 'mobilnutzer/registrieren/(:num)',
+    'clients_update' => 'clients/update/(:num)/(:any)',
     'clients_register_save' => 'mobilnutzer/registrierungspeichern',
     'clients_registered' => 'mobilnutzer/erfolgreichregistriert',
     'clients_forgotpassword' => 'mobilnutzer/passwortvergessen/(:num)',
@@ -140,9 +142,16 @@ return array(
     'banners_show' => 'banner/(:num)',
     'banners_new' => 'banner/neu',
     'banners_save' => 'banner/speichern',
+    'banners_setting_save' => 'banners/setting_save',
     'banners_delete' => 'banner/loeschen/',
     'banners_order' => 'banner/reihenfolge/',
 
     'my_ticket' => 'meinetickets',
 
+ //   'managements_list' => 'managements/list',
+ //   'managements_save' => 'managements/save',
+
+    'sign_up' => 'kunde/eintrag',
+    'forgot_password' => 'kunde/passwort',
+    'sign_in' => 'kunde/anmelden',
 );

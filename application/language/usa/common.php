@@ -1,12 +1,11 @@
 <?php
 
 return array(
-
-    /*
-    |--------------------------------------------------------------------------
-    | Common Language Lines
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | Common Language Lines
+        |--------------------------------------------------------------------------
+        */
     'support' => 'SUPPORT',
     'login_caption' => 'Gale Press Login',
     'login_remember' => 'Remember me',
@@ -26,8 +25,7 @@ return array(
         . "Regards, \n"
         . "Gale Press USA",
     'login_resetpassword_email_subject' => 'Gale Press password resetting e-mail',
-    'login_resetpassword_email_message' => "" .
-        ":firstname :lastname, \n\n" .
+    'login_resetpassword_email_message' => "" .":firstname :lastname, \n\n" .
         "Your :Application application Username is :username, \n\n" .
         "Password is changed as :pass. \n\n" .
         "Regards, \n" .
@@ -452,12 +450,12 @@ return array(
     'reports_refresh' => 'Refresh',
     'reports_excel' => 'Download to Excel',
     'reports_viewonmap' => 'View on map',
-    /*
-    'reports_customer_report' => 'CUSTOMER REPORT',
-    'reports_application_report' => 'APPLICATION REPORT',
-    'reports_content_report' => 'CONTENT REPORT',
-    'reports_device_report' => 'DEVICE REPORT',
-    */
+        /*
+        'reports_customer_report' => 'CUSTOMER REPORT',
+        'reports_application_report' => 'APPLICATION REPORT',
+        'reports_content_report' => 'CONTENT REPORT',
+        'reports_device_report' => 'DEVICE REPORT',
+        */
     'reports_date1' => 'Date:',
     'reports_print' => 'Print',
     'reports_device' => 'Device',
@@ -603,6 +601,7 @@ return array(
     'banners_info_target_desc' => 'It refers to the text, which appear on the image.',
     'banners_info_autoplay' => 'Automatically toggle between the images.',
     'banners_info_banner_active' => 'Banner will be shown before content list.',
+    'banners_info_use_customer_banner' => 'Content of banner comes from HTML source of this url.',
     'banners_info_interval' => 'It refers to the transition time between pictures.',
     'banners_info_speed' => 'It refers to the transition speed between images.',
     'banners_info_active' => 'Inactive files are not shown.',
@@ -624,6 +623,7 @@ return array(
 
     'tabs_url' => 'Mobile compatible web link',
     'tabs_title' => 'Tab Title',
+    'tabs_tab_name' => 'Tab',
     'tabs_inhouse_url' => 'Tab Feature',
     'tabs_icon' => 'Icon',
     'tabs_active' => 'Tab Active',

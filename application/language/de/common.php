@@ -1,12 +1,11 @@
 <?php
 
 return array(
-
-    /*
-    |--------------------------------------------------------------------------
-    | Common Language Lines
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | Common Language Lines
+        |--------------------------------------------------------------------------
+        */
     'support' => 'UNTERSTÜTZUNG',
     'login_caption' => 'Gale Press - Einloggen',
     'login_remember' => 'Sichern',
@@ -214,6 +213,7 @@ return array(
     'applications_price' => 'Price(For Mounth):',
     'applications_in_app_purchase_active' => 'In App Purchase Aktive:',
     'applications_flipboard_active' => 'Flipboard Aktive:',
+    'applications_placeholder_price' => 'Price(For Mounth):',
     'applications_bundle' => 'IOS Bundle:',
     'applications_dateformat' => 'TT.MM.JJJJ',
     'applications_startdate' => 'Anfangsdatum:',
@@ -450,16 +450,12 @@ return array(
     'reports_refresh' => 'Erneuern',
     'reports_excel' => 'als Excel herunterladen',
     'reports_viewonmap' => 'Auf der Karte anzeigen',
-    /*
-    'reports_customer_report' => 'KUNDENBERICHT
-',
-    'reports_application_report' => 'APPLIKATIONSBERICHT
-',
-    'reports_content_report' => 'INHALTSBERICHT
-',
-    'reports_device_report' => 'GERÄTEBERICHT
-',
-    */
+        /*
+        'reports_customer_report' => 'KUNDENBERICHT',
+        'reports_application_report' => 'APPLIKATIONSBERICHT',
+        'reports_content_report' => 'INHALTSBERICHT',
+        'reports_device_report' => 'GERÄTEBERICHT',
+        */
     'reports_date1' => 'Datum:',
     'reports_print' => 'Drucken',
     'reports_device' => 'Gerät',
@@ -616,7 +612,6 @@ return array(
     'banners_slide_animation_cube' => 'Cube',
     'banners_slide_animation_coverflow' => 'Coverflow',
     'banners_slide_animation_flip' => 'Flip',
-
     'banner_description' => 'Text',
 
     'banner_list_banner_id' => 'Banner ID',
@@ -628,6 +623,7 @@ return array(
 
     'tabs_url' => 'Mobile compatible web link',
     'tabs_title' => 'Tab-Titel',
+    'tabs_tab_name' => 'Tab',
     'tabs_inhouse_url' => 'Tab-Funktion',
     'tabs_icon' => 'Symbol',
     'tabs_active' => 'Tab aktivieren',

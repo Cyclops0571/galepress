@@ -2,11 +2,11 @@
 
 return array(
 
-    /*
-    |--------------------------------------------------------------------------
-    | Website Language Lines
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | Website Language Lines
+        |--------------------------------------------------------------------------
+        */
     'title' => 'Gale Press - Digitale Publikationsplattform',
     'keywords' => 'Gale Press Digitale Publikations',
     'description' => 'Gale Press - Digitale Publikationsplattform',
@@ -43,7 +43,8 @@ return array(
     'page_search' => 'Suchen...',
 
     'galepress' => 'Was ist Gale Press?',
-    'galepress_desc' => 'Ermöglicht den Abruf der Dokumente wie Zeitungen, Zeitschriften, Kataloge und Bücher <br> auf den Tabletcomputern und Smartphones.',
+    'galepress_desc' => 'Ermöglicht den Abruf der Dokumente wie Zeitungen, Zeitschriften, Kataloge und Bücher <br>
+auf den Tabletcomputern und Smartphones.',
 
     'mobile' => 'MOBILE APPLIKATION',
     'mobile_desc' => 'Haben Sie eigene Applikation im Appstore.',
@@ -54,7 +55,8 @@ return array(
     'cms_desc2' => 'Firmeneigene Benutzerdaten',
     'cms_desc3' => 'Anzeige der eingekauften Applikationen',
     'cms_desc4' => 'PDF-Hochladung für Applikation',
-    'cms_desc5' => 'Dynamische Kategoriestruktur',
+    'cms_desc5' => 'Push-Benachrichtigung',
+    'cms_desc6' => 'Dynamische Kategoriestruktur',
 
     'cms2' => 'DOKUMENTEN MANAGEMENT SYSTEM',
     'cms2_abbr' => 'DMS',
@@ -97,8 +99,7 @@ return array(
     'slide_footer' => 'Integrieren Sie sich in die digitale Welt vor Ihrer Konkurrenten!',
 
     'galepressdpp' => 'Gale Press - Digitale Publikationsplattform',
-    'galepressdpp_desc' => 'Informationszugriff auf den Druckmaterialien wird heutzutage immer mehr durch Smaprtphones, multifunktionellen Tabletcomputer, besondere E-Reader und durch die weiteren digitalen Geräte ersetzt. Die neue digitale Publikation, die mit den innovativen Lösungen unseres neuen Zeitalters einhergehen, ist nicht mehr eine Alternative sondern ein Muß. <br>
-Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch unser Land betrifft, und bietet neue Lösungen an, die nicht nur für Publisher sondern auch für Leser einen festen Standpunkt ermöglichen.',
+    'galepressdpp_desc' => 'Informationszugriff auf den Druckmaterialien wird heutzutage immer mehr durch Smaprtphones, multifunktionellen Tabletcomputer, besondere E-Reader und durch die weiteren digitalen Geräte ersetzt. Die neue digitale Publikation, die mit den innovativen Lösungen unseres neuen Zeitalters einhergehen, ist nicht mehr eine Alternative sondern ein Muß. <br> Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch unser Land betrifft, und bietet neue Lösungen an, die nicht nur für Publisher sondern auch für Leser einen festen Standpunkt ermöglichen.',
 
     'login' => 'LOGIN',
     'load' => 'Hochladen',
@@ -121,7 +122,6 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'contact' => 'Kontakt',
     'block' => 'Block',
 
-
     'address' => 'Adresse:',
     'address_istanbul' => 'Alemdağ Cad. No: 109, 34692 Üsküdar / İstanbul / Türkiye<br />',
     'address_usa' => 'Tustin, CA / USA<br />',
@@ -134,11 +134,9 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
 
     'references' => 'Unsere Referenzen',
 
-
     'search' => 'Suchen...',
 
-
-    //WHAT IS GALEPRESS
+        //WHAT IS GALEPRESS
     'whatis' => 'Nedir?',
     'whatis_desc1' => 'Gale Press ermöglicht als eine Web-Plattform und eine mobile Applikation den Abruf der Dokumente wie Zeitungen, Zeitschriften, Kataloge, Bücher, Ausbildungsmaterialien, Gebrauchsanweisungen, etc. auf den Tabletcomputern und Smartphones.',
     'whatis_desc2' => 'Die Technologie wird jeden Tag weiterentwickelt und erhöht die Verfügbarkeit der Smartphones. Die neuen technologischen Möglichkeiten bieten uns auch neue Erlebnisse an. Gale Press benutz die neue technologische Infrastruktur und ermöglicht die Publikation bzw. Veröffentlichung und Verteilung der Dokumente über Tabletcomputer und Smartphones.',
@@ -151,7 +149,7 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'whatis_logo' => 'Logo und Name der Anwendung',
     'whatis_cms' => 'Dokumenten Management System?',
 
-    //PRODUCTS
+        //PRODUCTS
     'products_mobileapp' => 'Über uns',
     'products_mobileapp_desc' => 'Haben Sie eigene Applikation im Appstore',
     'products_mobileapp_desc1' => 'Eigene Applikation im eigenen Namen und mit eigenem Logo',
@@ -172,8 +170,9 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'interactive_content_desc4' => 'Feststellung der Teile von PDF-Dateien für Erweiterungen',
     'interactive_content_desc5' => 'Anzeige der PDF-Seite im Vordergrund als kleine Bilder',
     'interactive_content_desc6' => 'Vorschau der hochgeladenen interaktiven Bilddateien',
+    'interactive_content_desc7' => 'Added to list of interactive visual',
 
-    //TUTORIALS
+        //TUTORIALS
     'interactive_settings' => 'EINSTELLUNGEN',
     'interactive_upload_pdf' => 'PDF LADEN',
     'interactive_general' => 'INTERAKTIVER EDITOR - ALLGEMEINES',
@@ -191,7 +190,7 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'interactive_slider' => 'INTERAKTIVER EDITOR - SLIDER',
     'interactive_animation' => 'INTERAKTIVER EDITOR - ANIMATION',
 
-    //CONTACT
+        //CONTACT
     'page_contact_upper' => 'KONTAKT',
     'contact_email_success' => '<strong>Erfolgreich!</strong> Nachricht gesendet.',
     'contact_email_error' => '<strong>Fehler!</strong> Ein Fehler aufgetreten!',
@@ -211,12 +210,12 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'sitemap_whous_detail2' => 'Einfach zu bedienen',
     'sitemap_whous_detail3' => 'Veröffentlichung mit einem Button',
 
-    //BLOG
+        //BLOG
     'blog_article' => 'Artikel',
     'blog_articles' => 'Artikel',
     'blog_read_more' => 'Weiterlesen...',
 
-    //ARTICLES
+        //ARTICLES
     'article_workflow_title' => 'Mobile Apps Are Changing the Workflow – Is Your Company Ready For It?',
     'article_workflow_intro' => 'According to a research done in the USA in 2013, only 4% of 700 companies are developing mobile apps to support supply chain management, logistics, purchase, purchase support, maintenance and service fields. On the other hand, all of these 700 companies believe that within two years at least half of the sector they work in will have their own mobile apps. Two years is really a short period of time for this 4% to increase.',
     'article_workflow_content' => '<h2>Mobile Apps Are Changing the Workflow – Is Your Company Ready For It?</h2>
@@ -245,6 +244,7 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
 		<p>Many brands have started developing their own apps to catch the increasing mobile app trend. With Gale press you can start being part of the trend and increase both your brand equity and awareness. Moreover, you don’t need to be a millionaire to develop apps for your brand; with different options and solutions matching your company’s needs you can develop the perfect mobile app.</p>
 		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>',
 
+        /*********************FOR NEW WEBSITE*************************/
 
     'menu_howitworks' => 'FUNKTIONSWEISE?',
     'menu_solutions' => 'LÖSUNGEN',
@@ -257,10 +257,12 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'home_video_title' => 'Ihr Zugang in die mobile Welt!',
     'home_intro_title' => 'Eine Platform für digitale Lösungen',
     'home_intro_text' => 'Ganz gleich ob Sie die Ihre Kundenkommunikation verbessern, Ihre Umsätze steigern,' .
-        ' qualifiziertes Personal suchen oder Ihre Druckkosten senken wollen. Mit der flexiblen Struktur der' .
+        ' qualifiziertes Personal suchen oder Ihre Druckkosten ' .
+        'senken wollen. Mit der flexiblen Struktur der' .
         ' Gale Press CMS Lösung können Sie diese und weitere Szenarien einfach und schnell abbilden. ' .
         ' Dank dem Mietmodell von Gale Press sparen Sie etwaige Kosten für den Aufbau ' .
-        'einer eigenen Abteilung für mobile Lösungen. Im digitalen Zeitalter ist Gale Press Ihre Verbindung in die mobile Welt.',
+        'einer eigenen Abteilung für mobile Lösungen. Im digitalen Zeitalter ist Gale Press Ihre Verbindung' .
+        ' in die mobile Welt.',
     'home_sectors_title' => 'Branchenlösungen',
     'home_sectors_digitalpublishing' => 'Digitale Publikationen',
     'home_sectors_hr' => 'Personalwirtschaft',
@@ -297,15 +299,12 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'home_speed_text' => 'Ihre Publikationen können Sie mit nur einem Klick in Echtzeit veröffentlichen.',
     'home_speed_theworldisyours' => 'GLOBALE LÖSUNG',
     'home_speed_theworldisyours_text' => 'Mit der MAKING MEDIA DIGITAL App bieten Sie Ihren Kunden eine global verfügbare Lösung.',
-
-
+    'footer_detaysoft' => 'Detaysoft',
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Kontakt',
     'footer_copyright' => '© 2013 Detaysoft  - Alle Rechte vorbehalten',
     'footer_livechat' => 'Live Support',
-
     'howitworks_title' => 'In 3 Schritten zur Veröffentlichung in 155 Ländern!',
-
     'howitworks_upload' => 'PDF Hochladen',
     'howitworks_upload_text' => 'Laden Sie mit einem Klick Ihre PDF-Dokumente ins "Gale Press Document Management System".',
     'howitworks_makeinteractive' => 'Interaktive Gestaltung',
@@ -394,6 +393,7 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'pharmaceutical_clause1' => 'Digitalisieren Sie den Beratungsprozess Ihrer Pharmaberater mit Ärzten und Apothekern. Präsentieren Sie Ihren Kunden mittels Ihrer App Arzneimittel und ausführliche Beschreibungen auf mobilen Endgeräten.',
     'pharmaceutical_clause2' => 'Da die Ärzte meist viele Patienten betreuen und wenig Zeit übrig haben, sollten Sie ihnen ausführliche Unterlagen in einer App zur Verfügung stellen und den Bestellprozess digital verfolgen.',
     'pharmaceutical_clause3' => 'Vermitteln Sie neue Arzneimittel ausführlich in Ihrer Pharma-App und steigern Sie Ihre Umsätze mittels dem Bestellformular in der App.',
+    'pharmaceutical_clause4' => 'Supercharge your sales potential with the online sales tool built into your mobile catalog.',
     'pharmaceutical_description' => 'Mit einer Pharma-App geben Sie Ihren Pharmaberatern die Möglichkeit, Arzneimittel Präsentationen mittels einer App vorzunehmen. Gleichzeitig können Ärzte und Apotheker in interaktiven, digitalen Produktbroschüren blättern und direkt aus der App heraus Bestellungen vornehmen. Sparen Sie die kostenintensiven Druck- und Portokosten für Produktbroschüren. Mittels der App sehen Sie ganz genau, welche  Broschüren geöffnet wurden und wie lange die Verweildauer auf den einzelnen Seiten war und können Ihr Vertriebscontrolling optimieren.',
 
     'retail_title' => 'HANDEL',
@@ -411,6 +411,7 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'tryit_form_name_placeholder' => 'Geben Sie Ihren Vornamen ein...',
     'tryit_form_lastname' => 'Nachname',
     'tryit_form_lastname_placeholder' => 'Geben Sie Ihren Nachnamen ein...',
+    'tryit_form_email' => 'E-mail',
     'tryit_form_email_placeholder' => 'Geben Sie Ihren E-mail Adresse ein...',
     'tryit_form_appname' => 'Name der App',
     'tryit_form_appname_placeholder' => 'Geben Sie den App Namen ein...',
@@ -452,8 +453,7 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'webinar_form_name_surname_placeholder' => 'Geben Sie Ihren Vor- und Nachnamen ein...',
     'webinar_form_phone_placeholder' => 'Geben Sie Ihre Telefonnummer ein...',
     'webinar_form_submit' => 'Für Schulung anmelden',
-    'webinar_accept_email' => 'Ich bin mit der Zusendung von Informationen über Ihre Dienstleistungen einverstanden. ' .
-        'Diese Einwilligung kann ich jederzeit schriftlich z.B. per E-Mail an <marketing@mmd.biz> mit Wirkung für die Zukunft widerrufen.',
+    'webinar_accept_email' => 'Ich bin mit der Zusendung von Informationen über Ihre Dienstleistungen einverstanden. ' .'Diese Einwilligung kann ich jederzeit schriftlich z.B. per E-Mail an <marketing@mmd.biz> mit Wirkung für die Zukunft widerrufen.',
     'about_us_url' => 'http://www.detaysoft.com/kurumsal/',
     'contact_url' => 'http://www.detaysoft.com/iletisim/',
 
@@ -478,4 +478,24 @@ Gale Press befindet sich inmitten einer neuen Entwicklung, die weltweit auch uns
     'valid_email' => 'Please enter a valid email address.',
     'valid_identification_number' => 'Please enter a valid identification number.',
     'towards_payment_page' => 'Ödeme Sayfasına Doğru...',
+
+    'signup_name' => 'Name...',
+    'signup_surname' => 'Surname...',
+    'signup_id' => 'Account Name...',
+    'signup_mail' => 'Mail...',
+    'signup_password' => 'Password...',
+    'signup_passwordagain' => 'Password Again...',
+    'signup_registry' => 'Register',
+    'signup_connect' => 'Login with',
+    'signup_withoutacc' => 'Continue without login',
+    'signup_title' => 'Sign Up',
+
+    'forgot_password_mail' => 'Email',
+    'forgot_password_button' => 'Senden',
+    'forgot_password_title' => 'Forgot Passwort',
+
+    'signin_name' => 'Account Name',
+    'signin_password' => 'Password',
+    'signin_button' => 'Login',
+    'signin_title' => 'Sign In',
 );

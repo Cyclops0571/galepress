@@ -7,11 +7,9 @@ return array(
     "other_options" => 'Other Options',
 
     "dashboard_settings" => 'Dashbord Settings:',
-    "show_dashboard" => 'Show Dashboard:',
+    "show_dashboard" => 'Show Login Page:',
     "show_dashboard_info" => 'Send client to dashboard when application is opened.',
     "confirmation_message" => 'Confirmation Message:',
     "confirmation_message_info" => 'If the client does not approve this message he/she cannot access to content!',
-
-
 
 );

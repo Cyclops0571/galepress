@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    /*
-    |--------------------------------------------------------------------------
-    | Common Language Lines
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | Common Language Lines
+        |--------------------------------------------------------------------------
+        */
     'support' => 'DESTEK',
     'login_caption' => 'Gale Press Login',
     'login_remember' => 'Beni hatırla',
@@ -22,6 +22,8 @@ return array(
         ":url\n\n" .
         "Saygılarımızla, \n" .
         "Gale Press",
+
+
     'login_resetpassword_email_subject' => 'Gale Press parola sıfırlama e-postası',
     'login_resetpassword_email_message' => "Sayın :firstname :lastname, \n\n" .
         ":Application uygulaması icin kullanıcı Adınız :username, \n\n" .
@@ -152,7 +154,6 @@ return array(
         . 'Başka parola yazarsanız kullanıcının şifresi değişir ve kullanıcıya yeni parolası mail gönderilir.)',
     'clients_timezone' => 'Zaman Dilimi',
 
-
     'customers_caption' => 'Müşteriler',
     'customers_caption_detail' => 'Müşteri Detayı',
     'customers_list_column1' => '',
@@ -194,7 +195,7 @@ return array(
     'application_settings_caption_template' => 'Tema Ayarları',
     'application_settings_caption_banner' => 'Banner Ayarları',
     'application_settings_store_locator' => 'Bayi Lokasyonları',
-    'application_settings_caption_tab' => 'Tab Ayarları ',
+    'application_settings_caption_tab' => 'Sekme Ayarları ',
     'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
     'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
     'application_settings_subscription' => 'Üyelik Ayarları',
@@ -357,6 +358,7 @@ return array(
     'orders_list_column4' => 'E-posta',
     'orders_list_column5' => 'ID',
     'orders_application' => 'Uygulama:',
+    'orders_orderno' => 'Sipariş Numarası:',
     'orders_name' => 'Uygulama Adı',
     'orders_description' => 'Açıklama',
     'orders_keywords' => 'Anahtar Kelimeler',
@@ -448,6 +450,12 @@ return array(
     'reports_refresh' => 'Yenile',
     'reports_excel' => 'Excel olarak indir',
     'reports_viewonmap' => 'Harita üzerinde göster',
+        /*
+        'reports_customer_report' => 'CUSTOMER REPORT',
+        'reports_application_report' => 'APPLICATION REPORT',
+        'reports_content_report' => 'CONTENT REPORT',
+        'reports_device_report' => 'DEVICE REPORT',
+        */
     'reports_date1' => 'Tarih:',
     'reports_print' => 'Yazdır',
     'reports_device' => 'Cihaz',
@@ -615,9 +623,10 @@ return array(
 
     'tabs_url' => 'Web link',
     'tabs_title' => 'Başlık',
-    'tabs_inhouse_url' => 'Tab Özelliği',
+    'tabs_tab_name' => 'Sekme',
+    'tabs_inhouse_url' => 'Sekme Özelliği',
     'tabs_icon' => 'İkon',
-    'tabs_active' => 'Tab Active',
+    'tabs_active' => 'Sekme Aktif',
 
     'tabs_info_url' => 'Mobil uyumlu bir link girebilirsiniz.',
     'tabs_info_inhouse_url' => 'Gale Press özelliği secebilirsiniz (Storelocator vs..)',
@@ -625,8 +634,8 @@ return array(
     'tabs_info_active' => 'Yanlızca aktif tablar mobil uygulamada gösterilecektir',
     'tabs_dont_use_feature' => 'Bu özelliği kullanma',
 
-    'tabs_tab_status' => 'Tab Durumu',
-    'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım tablar gözüksün. Uygulamanıza en fazla 2 tab ekleyebilirsiniz.',
+    'tabs_tab_status' => 'Sekme Durumu',
+    'tabs_info_tab_status' => 'Uygulamamda ayarlayacağım sekmeler gözüksün. Uygulamanıza en fazla 2 sekme ekleyebilirsiniz.',
 
     'tabs_warning_url' => 'geçerli bir web adresi girilmedi.',
 

@@ -73,7 +73,7 @@ return array(
 	'video_poster' => 'Poster Of Video',
 	'video_poster_tooltip' => 'Only .png or .jpeg format downloadable.',
 	'video_poster_option1' => 'No Poster',
-	'video_poster_option2' => 'Download the poster',
+	'video_poster_option2' => 'Upload a poster',
 	'video_poster_text' => 'Click here to upload a file',
 	'video_modal_icon_text' => 'Click here to upload a modal icon',
 	'video_poster_error' => 'A valid video file was not found in the address you entered. Please enter a new address.',
@@ -98,7 +98,7 @@ return array(
 	'audio_poster' => 'Poster Of Audio',
 	'audio_poster_tooltip' => 'Only .mp3 format downloadable',
 	'audio_poster_option1' => 'Give poster from video',
-	'audio_poster_option2' => 'Download the poster',
+	'audio_poster_option2' => 'Upload a poster',
 	'audio_poster_text' => 'Click here to upload a file',
 	'audio_poster_error' => 'Select a video file that does not have a valid address. Please enter a new address.',
 	
