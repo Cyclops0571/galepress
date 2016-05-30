@@ -61,7 +61,7 @@ class ContentFilePage extends Eloquent
             $userID = Auth::User()->UserID;
         }
 
-        if ($this->Height = 0 || $this->Width == 0) {
+        if ($this->Height == 0 || $this->Width == 0) {
             $prevFilePage = $this->previousContentFilePage();
             if ($prevFilePage) {
                 if ($this->Height == 0) {
