@@ -2,11 +2,11 @@
 
 return array(
 
-    /*
-    |--------------------------------------------------------------------------
-    | Website Language Lines
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | Website Language Lines
+        |--------------------------------------------------------------------------
+        */
     'title' => 'Gale Press - Dijital Yayın Platformu',
     'keywords' => 'Gale Press Dijital Yayıncılık',
     'description' => 'Gale Press - Dijital Yayıncılık Platformu',
@@ -43,8 +43,8 @@ return array(
     'page_search' => 'ara',
 
     'galepress' => 'NEDİR?',
-    'galepress_desc' => 'Gazete, dergi, katalog, kitap gibi dokümanların, <br />tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
-
+    'galepress_desc' => 'Gazete, dergi, katalog, kitap gibi dokümanların, <br />
+tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
 
     'mobile' => 'MOBİL UYGULAMA',
     'mobile_desc' => 'Appstore\'da kendi adınıza uygulamanız olsun.',
@@ -89,10 +89,8 @@ return array(
     'advantages_slider_desc9' => 'Okuyucularınız sıkılmadan yayınlarınızı incelesin',
     'advantages_slider_desc10' => 'Yüksek matbaa baskı maliyeti, dağıtım maliyeti, tekrar baskımaliyeti, baskı süresi',
     'advantages_slider_desc11' => 'Dağıtım fazlası dokümanlar, arşiv zorluğu olmadan yayıncılık imkanı.',
-    'advantages_slider_desc12' => 'Bulut altyapısı ile yazılım yatırım maliyeti, donanım, destek maliyeti olmadan
- kullandığın kadar öde yaklaşımı ile mobil platform hizmeti',
-    'advantages_slider_desc13' => 'Detaysoft’un 1. seviye Turquality danışmanlık firma seviyesi sayesinde yatırımın yarısı
- devlet teşviğinden sağlanabilir.',
+    'advantages_slider_desc12' => 'Bulut altyapısı ile yazılım yatırım maliyeti, donanım, destek maliyeti olmadan kullandığın kadar öde yaklaşımı ile mobil platform hizmeti',
+    'advantages_slider_desc13' => 'Detaysoft’un 1. seviye Turquality danışmanlık firma seviyesi sayesinde yatırımın yarısı devlet teşviğinden sağlanabilir.',
     'advantages_slider_desc14' => 'Belirleyeceğiniz anahtar kelimeler ile App. Store’ da bulunabilme',
 
     'flipbook' => 'Flipbook',
@@ -101,13 +99,7 @@ return array(
     'slide_footer' => 'Dijital çağa rakiplerinizden önce entegre olun!',
 
     'galepressdpp' => 'Gale Press Dijital Yayın Platformu',
-    'galepressdpp_desc' => 'Günümüzde bilgiye basılı materyallerden ulaşma alışkanlığı ' .
-        'yerini hızla akıllı telefonlara, çok amaçlı tabletlere, özel geliştirilmiş ' .
-        'e-okuyuculara ve diğer dijital cihazlara bırakıyor. Yeni çağın yenilikçi çözümleriyle ' .
-        'birlikte hızla hayatımıza giren dijital yayıncılık artık bir seçenek değil, bir gereklilik ' .
-        'olarak karşımıza çıkmaya başladı.<br />Gale Press; dünyadan ülkemize hızla yayılan bu oluşumun ' .
-        'merkezinde yer alıp, hem yayıncılar hem de okuyucuların bu yeni çağın yayıncılık düzeninde ' .
-        'yerlerini almalarını sağlayan çözümler sunmaktadır.',
+    'galepressdpp_desc' => 'Günümüzde bilgiye basılı materyallerden ulaşma alışkanlığı ' .'yerini hızla akıllı telefonlara, çok amaçlı tabletlere, özel geliştirilmiş ' .'e-okuyuculara ve diğer dijital cihazlara bırakıyor. Yeni çağın yenilikçi çözümleriyle ' .'birlikte hızla hayatımıza giren dijital yayıncılık artık bir seçenek değil, bir gereklilik ' .'olarak karşımıza çıkmaya başladı.<br />Gale Press; dünyadan ülkemize hızla yayılan bu oluşumun ' .'merkezinde yer alıp, hem yayıncılar hem de okuyucuların bu yeni çağın yayıncılık düzeninde ' .'yerlerini almalarını sağlayan çözümler sunmaktadır.',
 
     'login' => 'LOGIN',
     'load' => 'Yükle',
@@ -142,37 +134,22 @@ return array(
 
     'references' => 'Referanslarımız',
 
-
     'search' => 'Arama yapın...',
 
-    //WHAT IS Gale Press
+        //WHAT IS Gale Press
     'whatis' => 'Nedir?',
-    'whatis_desc1' => 'Gale Press, gazete, dergi, katalog, kitap, eğitim dökümanı, kullanıcı klavuzu,  ' .
-        'gibi dokümanların, tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlayan ' .
-        'WEB platformu ve Mobil Uygulamasıdır.',
-    'whatis_desc2' => 'Teknoloji hergün gelişmekte ve akıllı cihazların ulaşılabilirliği artmaktadır. ' .
-        'Teknolojinin bize sunduğu yeni imkanlar ise yeni tecrübeler yaşamamıza sebep olmaktadır. ' .
-        'Yeni teknoloji altyapısını kullanan Gale Press; dokümanların, tablet bilgisayarlar ve ' .
-        'akıllı telefonlar üzerinden basımını, yayınlamasını ve dağıtımını sağlamaktadır.',
-    'whatis_desc3' => 'Bu platform ile matbu baskı alınan veya alınmayan dokümanlar kod bilgisi gerektirmeden, ' .
-        'kolayca yayınlanabilir. Katalog, kullanıcı kılavuzu, bülten, dergi, gazete, kitap, eğitim dokümanı, ' .
-        'tanıtım broşürü, flyer, kampanya duyuruları, şirket içi dokümanlar, fiyat listeleri yayınlanabilir. ' .
-        'Şirket içi veya son kullanıcıya yönelik doküman paylaşım süreçlerinizde kullanılabilir.',
-    'whatis_desc4' => 'Firma özel uygulama ile müşterilerimiz, kendilerine ait, kendi logo ve firma ' .
-        'isimlerinin olduğu bir uygulamaya sahip olur. Bu uygulamanın içinde bir PDF kütüphanesi yer alır.',
-    'whatis_desc5' => 'Yine firmaya özel kullanıcı adı ve şifre ile Gale Press Doküman Yönetim Sistemi\'ne ' .
-        'erişilir ve uygulamanın kütüphanesinde yer alacak PDF\'ler için ekleme, çıkarma ve ' .
-        'yayınlama işlemleri gerçekleştirilir.',
-    'whatis_desc6' => 'Doküman Yönetim Sisteminin bir parçası olarak çalışan İnteraktif İçerik ' .
-        'Ekleme Sistemi ile PDF\'ler üzerine hareketli ve sesli görseller eklemek mümkündür. ' .
-        'Bu işlemler sürükle bırak mantığı ile basit bir şekilde gerçekleştirilir. ' .
-        'Okuyuculara da mobil platformlarda nitelikli, ayrıntılı ve ilgi çekici içerik deneyimi sağlanır.',
+    'whatis_desc1' => 'Gale Press, gazete, dergi, katalog, kitap, eğitim dökümanı, kullanıcı klavuzu,  ' . 'gibi dokümanların, tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlayan ' . 'WEB platformu ve Mobil Uygulamasıdır.',
+    'whatis_desc2' => 'Teknoloji hergün gelişmekte ve akıllı cihazların ulaşılabilirliği artmaktadır. ' .'Teknolojinin bize sunduğu yeni imkanlar ise yeni tecrübeler yaşamamıza sebep olmaktadır. ' .'Yeni teknoloji altyapısını kullanan Gale Press; dokümanların, tablet bilgisayarlar ve ' .'akıllı telefonlar üzerinden basımını, yayınlamasını ve dağıtımını sağlamaktadır.',
+    'whatis_desc3' => 'Bu platform ile matbu baskı alınan veya alınmayan dokümanlar kod bilgisi gerektirmeden, ' .'kolayca yayınlanabilir. Katalog, kullanıcı kılavuzu, bülten, dergi, gazete, kitap, eğitim dokümanı, ' .'tanıtım broşürü, flyer, kampanya duyuruları, şirket içi dokümanlar, fiyat listeleri yayınlanabilir. ' .'Şirket içi veya son kullanıcıya yönelik doküman paylaşım süreçlerinizde kullanılabilir.',
+    'whatis_desc4' => 'Firma özel uygulama ile müşterilerimiz, kendilerine ait, kendi logo ve firma ' .'isimlerinin olduğu bir uygulamaya sahip olur. Bu uygulamanın içinde bir PDF kütüphanesi yer alır.',
+    'whatis_desc5' => 'Yine firmaya özel kullanıcı adı ve şifre ile Gale Press Doküman Yönetim Sistemi\'ne ' .'erişilir ve uygulamanın kütüphanesinde yer alacak PDF\'ler için ekleme, çıkarma ve ' .'yayınlama işlemleri gerçekleştirilir.',
+    'whatis_desc6' => 'Doküman Yönetim Sisteminin bir parçası olarak çalışan İnteraktif İçerik ' .'Ekleme Sistemi ile PDF\'ler üzerine hareketli ve sesli görseller eklemek mümkündür. ' .'Bu işlemler sürükle bırak mantığı ile basit bir şekilde gerçekleştirilir. ' .'Okuyuculara da mobil platformlarda nitelikli, ayrıntılı ve ilgi çekici içerik deneyimi sağlanır.',
     'whatis_technology' => 'Teknoloji',
     'whatis_sharedoc' => 'Doküman Paylaşımı',
     'whatis_logo' => 'Logo ve Uygulama Adı',
     'whatis_cms' => 'Doküman Yönetim Paneli',
 
-    //PRODUCTS
+        //PRODUCTS
     'products_mobileapp' => 'Mobil Uygulama',
     'products_mobileapp_desc' => 'Appstore\'da kendi adınıza uygulamanız olsun.',
     'products_mobileapp_desc1' => 'Kendi adınıza ve kendi logonuzla size özel uygulama',
@@ -195,7 +172,7 @@ return array(
     'interactive_content_desc6' => 'Eklenen interaktif görsellerin ön izlemesinin yapılabilmesi',
     'interactive_content_desc7' => 'Eklenen interaktif görsellerin listelenmesi',
 
-    //TUTORIALS
+        //TUTORIALS
     'interactive_settings' => 'AYARLAR',
     'interactive_upload_pdf' => 'PDF YÜKLEME',
     'interactive_general' => 'İNTERAKTİF TASARLAYICI - GENEL',
@@ -213,7 +190,7 @@ return array(
     'interactive_slider' => 'İNTERAKTİF TASARLAYICI - SLIDER',
     'interactive_animation' => 'İNTERAKTİF TASARLAYICI - ANİMASYON',
 
-    //CONTACT
+        //CONTACT
     'page_contact_upper' => 'İLETİŞİM',
     'contact_email_success' => '<strong>Başarılı!</strong> Mesajınız gönderildi.',
     'contact_email_error' => '<strong>Hata!</strong> Bir hata oluştu!',
@@ -233,22 +210,22 @@ return array(
     'sitemap_whous_detail2' => 'Kolay Kullanım',
     'sitemap_whous_detail3' => 'Tek Tuşla Yayınlama',
 
-    //BLOG
+        //BLOG
     'blog_article' => 'Makale',
     'blog_articles' => 'Makaleler',
     'blog_read_more' => 'Devamını Oku...',
 
-    //ARTICLES
+        //ARTICLES
     'article_workflow_title' => 'Mobil Uygulamalar İş Akışını Değiştiriyor – Sizin Şirketiniz Buna Hazır mı?',
     'article_workflow_intro' => '2013 yılında Amerika’da yapılmış bir araştırmaya göre 700 şirketin sadece %4’ünün tedarik zinciri yönetimi, lojistik, satın alma, satış desteği, bakım ve hizmet alanlarında destekleyici mobil uygulamalar geliştirdiği ortaya çıktı. Buna karşılık şirketlerin tamamı iki yıl içinde bulundukları sektördeki kuruluşların en azından yarısının kendi mobil uygulamaları olacağına inanıyor. %4’lük oranın bu derece artması için iki yıl oldukça kısa bir süre.',
-    'article_workflow_content' =>
-        '<h2>Mobil Uygulamalar İş Akışını Değiştiriyor – Sizin Şirketiniz Buna Hazır mı?</h2>
+    'article_workflow_content' => '<h2>Mobil Uygulamalar İş Akışını Değiştiriyor – Sizin Şirketiniz Buna Hazır mı?</h2>
 		<p>2013 yılında Amerika’da yapılmış bir araştırmaya göre 700 şirketin sadece %4’ünün tedarik zinciri yönetimi, lojistik, satın alma, satış desteği, bakım ve hizmet alanlarında destekleyici mobil uygulamalar geliştirdiği ortaya çıktı. Buna karşılık şirketlerin tamamı iki yıl içinde bulundukları sektördeki kuruluşların en azından yarısının kendi mobil uygulamaları olacağına inanıyor. %4’lük oranın bu derece artması için iki yıl oldukça kısa bir süre.</p>
 		<p>Peki sizin şirketiniz için bu ne demek? İki yıl içinde şirketlerin iç iletişim alanında kullanımı için tasarlanmış mobil uygulamalar ve rekabet avantajı hayli önem kazanacak. Bu yüzden tüm yöneticiler kendilerine şu soruyu sormalı: “İki yıl sonra, mobil uygulama geliştirmemiş ve iş akışını değiştirmemiş şirketlerden biri olmak istiyor muyum?” Bu soruya evet demek oldukça zor.</p>
 		<p>Gerçekleşmesi kesin olan “hard trend” şirketlerin kendi işlerine uygun mobil uygulamalar gerçekleştirmesiyken bu noktada “soft trend” sizin bu uygulamayı kullanıp kullanmayacağınız. </p>
 		<p>Göz önünde bulundurulması gereken başka bir nokta daha var: Son yıllarda büyük ve küçük her şirkette akıllı telefon ve tablet kullanımı gözle görülür bir şekilde arttı ve bu “hard trend” hızla artmaya devam edecek. Aynı zamanda akılı cihazlarımızın, kablolu ve kablosuz ağların, özel veya genel kullanıma açık bulut sistemlerinin kapasitelerinin artmasıyla birlikte kurumsal zekayı kullanmanın maliyeti düşüyor. Burada asıl sorulması gereken soru, maliyetler azalıp kapasite artarken nasıl harekete geçileceği.</p>
 		<p>Anahtar nokta, şirketinizin mobil uygulama geliştirecek kapasitesi olup olmadığını değerlendirmek. Bazı şirketler bu kapasiteye sahipken bazıları sahip değil; bu, şirket ve IT departmanın büyüklüğüne bağlı. Mobil uygulama geliştirebilecek kapasite ve yeteneğe sahip birçok genç var. Önerimiz bu kişileri işe almanız veya kiralamanız doğrultusunda. Kısacası, eğer şirketinizde halihazırda mobil uygulama geliştirecek ilgi ve yeteneğe sahip bir genç yetenek yoksa, birini bulmanın şimdi tam zamanı. Onların günümüzde ve gelecekte sunacakları çok büyük bir katma değer olduğunu unutmayın.</p>
 		<p>Mobil uygulama devrimine hazırlanmalısınız. Unutmayın, şu anda iki devrim birden yaşıyoruz. Birincisi kişisel bilgisayarlarımızın yerlerini akıllı telefon ve tabletlere bıraktığı donanım devrimi, ikincisi ise mobil uygulamaların bu cihazları yönetmeye başladığı yazılım devrimi. Bu demek oluyor ki; mobil uygulamaların, iş akışını değiştiren hızlı yükselişi göz ardı edemeyeceğiz bir “hard trend”. Bu yüzden, rakiplerinizin kolayca ulaşabileceği hazır uygulamalara karşılık size rekabet avantajı sağlayacak kendi mobil uygulamalarınızı geliştirecek yetkinliğe ihtiyacınız var. Mobiliteyi kullanarak iş akışını değiştiren firmalar gelecekte yeni başarılar elde edecek. Şimdi iş akışında bir dönüşüm yaratmanın tam vakti.</p>',
+
 
     'article_whymobile_title' => 'Neden Mobile Geçmelisiniz?',
     'article_whymobile_intro' => 'Mobil devrime kayıtsız kalmak artık pek mümkün değil. Haberlerle, gazetelerde, bloglarda, herkesin elinde olan akıllı telefon ve tabletler, bunlarla neler yapılabileceği, iş yerine nasıl entegre edilebileceği ve bunların hayatımızda ne kadar yer kapladığından bahsediliyor. Akıllı telefon ve tabletlerin hayatımıza girmesiyle birlikte bilgisayar satışlarının düştüğü de bir gerçek, artık pazarın yeni kralları mobil cihazlar. Bilgisayarlar halen içerik üretmek için kullanılıyor fakat mobil cihazlarla bu içeriğe anında ulaşabilir ve üretebiliyoruz. Araştırmalara göre bilgisayarlar genellikle mesai saatleri içinde kullanılırken güne akıllı telefonlarla başlayıp tabletlerle bitiriyoruz. Kullanıcıların mobil cihazları tercih etmelerinin başlıca sebepleri ise kullanım kolaylığı ve her an yanlarında bulundurabilmeleri.',
@@ -258,6 +235,7 @@ return array(
 		<p>2013 yılı başında mobil uygulama kullanan kullanıcı sayısı 1.186 milyarken bu sayının 2017 yılına kadar 4.4 milyara ulaşması bekleniyor. 2013 yılında Apple App Store üzerinden 50 milyar, Google Play üzerinden ise 48 milyar uygulama indirildiği de göz ardı edilemeyecek bir veri. 2017 yılında toplam indirilmiş uygulama sayısının 250 milyarı aşacağı öngörülüyor. </p>
 		<p>Mobil ile birlikte büyüyen başka bir pazar ise online satış. Alışveriş uygulamalarının sayısı artarken insanlar da artık online alışveriş kavramına iyice alışmış durumda. Amazon ve eBay gibi e-ticaret portallarının yükselişi de bunu destekleyen başarılar. Buralardan yapılan alışverişlerle ilgili iyi veya kötü yorumların da yine sosyal medya üzerinden yapıldığını unutmamak lazım. Ayrıca mobil siparişler ve rezervasyonlar, sadakat programları, etkinlik LCVlerinin uygulamalar üzerinden alınması, online dergi ve gazete abonelikleri şirket satışlarının artmasında etkili olan ve kullanıcıyı kazanmaya yardımcı araçlar arasında. Bu araçlar özellikle küçük şirketlerin değerlendirmesi ve rekabet avantajı elde etmesi konusunda öne çıkıyor. Büyük şirketler yüksek reklam ve pazarlama bütçeleri sayesinde müşteri kazanırken küçük şirketler ürün ve hizmet kalitesi ve itibarları sayesinde müşteri kazanıyor. Mobil uygulamalardan faydalanmaya başladıkları takdirde küçük şirketlerin müşteri kazanması ve satışlarını arttırması çok daha kolay olacaktır. </p>',
 
+
     'article_brandvalue_title' => 'Mobil Uygulamalarla Marka Değerinizi Yükseltin',
     'article_brandvalue_intro' => 'Güçlü markaların başarısının ardında yüksek marka değerleri yatar ve güçlü markaların pazarda büyümeleri rakiplerine oranla daha kolaydır. Farklılık ve yenilik getirmek, bilinirlik marka değerini yükseltmek için yardımcı faktörlerdir.',
     'article_brandvalue_content' => '<h2>Mobil Uygulamalarla Marka Değerinizi Yükseltin</h2>
@@ -266,7 +244,7 @@ return array(
 		<p>Dünyada bir çok marka, yükselen mobil uygulama trendini yakalamak için kendi uygulamalarını geliştirmeye başladı. Gale Press sayesinde siz de bu trende dahil olabilir ve marka değerinizi ve bilinirliğinizi yükseltebilirsiniz. Üstelik markanız için uygulama geliştirmek için milyoner olmanız gerekmiyor; farklı opsiyonlar ve çözüm önerileri sayesinde ihtiyaçlarınızı karşılayacak en uygun mobil uygulamayı yapabilirsiniz.</p>
 		<p>Gale Press’in deneyimli kadrosunun yardımıyla sürdürülebilir mobil uygulamanızı geliştirmenin şimdi tam vakti!</p>',
 
-    /*********************FOR NEW WEBSITE*************************/
+        /*********************FOR NEW WEBSITE*************************/
 
     'menu_howitworks' => 'NASIL ÇALIŞIR?',
     'menu_solutions' => 'ÇÖZÜMLER',
@@ -277,9 +255,14 @@ return array(
     'menu_explore' => 'Keşfedin',
 
     'home_video_title' => 'Mobil Dünya Parmaklarınızın Ucunda!',
-
     'home_intro_title' => 'Bütün Çözümler İçin Tek Platform',
-    'home_intro_text' => 'Şirketinizin ihtiyacı olan çözüm müşteri etkileşimini arttırmak, satış etkinliğini yükseltmek, daha iyi elemanlar işe almak veya baskı maliyetlerini düşürmek olabilir. Bu çözümlerin hepsini ve daha fazlasını Gale Press\'in çevik yapısı sayesinde çok kısa bir sürede hayata geçirebileceksiniz. Yazılım kiralama modeli sayesinde mobil çözümler departmanınız için personel, daha geniş bir ofis ve danışmanlık gibi masraflarınız da olmayacak. Mobil dünya artık parmaklarınızın ucunda.',
+    'home_intro_text' => 'Şirketinizin ihtiyacı olan çözüm müşteri etkileşimini arttırmak, satış etkinliğini yükseltmek, ' .
+        'daha iyi elemanlar işe almak veya baskı maliyetlerini ' .
+        'düşürmek olabilir. Bu çözümlerin hepsini ve daha ' .
+        'fazlasını Gale Press\'in çevik yapısı sayesinde çok kısa bir sürede hayata geçirebileceksiniz. ' .
+        'Yazılım kiralama modeli sayesinde mobil çözümler departmanınız ' .
+        'için personel, daha geniş bir ofis ve ' .
+        'danışmanlık gibi masraflarınız da olmayacak. Mobil dünya artık parmaklarınızın ucunda.',
     'home_sectors_title' => 'İstediğiniz Her Alanda',
     'home_sectors_digitalpublishing' => 'Dijital Yayıncılık',
     'home_sectors_hr' => 'İnsan Kaynakları',
@@ -316,15 +299,12 @@ return array(
     'home_speed_text' => 'İçeriğinizi güncellemek hızınızı kesmesin. Stratejik güncellemeleriniz Gale Press\'in hız odaklı sistemi sayesinde dijital çağın güncelleme hızına ayak uydursun.',
     'home_speed_theworldisyours' => 'BÜTÜN DÜNYAYA ERİŞİM',
     'home_speed_theworldisyours_text' => 'Gale Press sayesinde giriş yapacağınız aplikasyon pazarları ile rekabet ortamınızın sınırlarını kaldırın. Yeni pazarlar sayesinde yeni fırsatlar ve satışlar elde edin.',
-
     'footer_detaysoft' => 'Detaysoft',
     'footer_socialmedia' => 'Sosyal Medya',
     'footer_contact' => 'İletişim',
     'footer_copyright' => 'Copyright 2013 © Her hakkı Detay Danışmalık A.Ş.\'ye aittir',
     'footer_livechat' => 'Canlı Destek',
-
     'howitworks_title' => 'Kolayca 3 Adımda, Tüm İçeriklerinizi 155 Ülke İle Aynı Anda Paylaşın !',
-
     'howitworks_upload' => 'Yükle',
     'howitworks_upload_text' => 'İçeriklerinizi (.pdf) ”Gale Press Dokuman Yonetim Sistemi” sayesinde, tek tıkla uygulamanıza yükleyin.',
     'howitworks_makeinteractive' => 'İnteraktif Yap',
@@ -413,6 +393,7 @@ return array(
     'pharmaceutical_clause1' => 'Mümessillerinin doktorlara ilaç tanıtımı sürecini dijitale taşıyın. İlaç tanıtma aplikasyonu sayesinde müşterilerinize ilaç detayları ve sunumlarını mobil cihazlar üzerinden yapın.',
     'pharmaceutical_clause2' => 'Müşterileriniz olan doktorlarla olan ilaç satış ve teslimat süresini minimuma indirmek için mobile geçin. İlaç detaylarını da bulabilecekleri aplikasyon sayesinde sipariş ve satış adımlarını dijital ortam üzerinden yürütün.',
     'pharmaceutical_clause3' => 'Ürünlerinizi tüm detaylarıyla sunabileceğiz online kataloğu aplikasyonunuza dahil edeceğiniz online satış tooluyla satışlarınıza yeni bir soluk katın.',
+    'pharmaceutical_clause4' => 'Mobil katalog online satış aracı ile satış potansiyelini güçlendirin.',
     'pharmaceutical_description' => 'Artık mümessilleriniz doktorlara ilaç sunumunu mobil uygulamanız üzerinden yapabilir. Broşür ve sipariş formlarını dijitale geçirin ve böylece doktorların uygulama üzerinden detaylı olarak inceleyebilecekleri ilaç siparişleri online sipariş formu üzerinden anında sisteminize düşsün. Teslimat süresi ve broşür baskı maliyetlerinden kurtulun. Gelişmiş veri toplama sistemi sayesinde içeriğinize kim, nereden ulaşmış ve ne kadar zaman harcamış görün, sahadaki personel yönetiminizi sağlam verilere dayandırarak yeniden planlayın.',
 
     'retail_title' => 'PERAKENDE',
@@ -497,4 +478,24 @@ return array(
     'valid_email' => 'Lütfen geçerli bir email adresi girin.',
     'valid_identification_number' => 'Lütfen geçerli bir tc kimlik numarası girin.',
     'towards_payment_page' => 'Towards Payment Page...',
+
+    'signup_name' => 'Ad...',
+    'signup_surname' => 'Soyad...',
+    'signup_id' => 'Kullanıcı Adı...',
+    'signup_mail' => 'E-Posta...',
+    'signup_password' => 'Şifre...',
+    'signup_passwordagain' => 'Şifre Tekrar...',
+    'signup_registry' => 'Kayıt',
+    'signup_connect' => 'Şununla bağlan',
+    'signup_withoutacc' => 'Üye girişi olmadan devam et',
+    'signup_title' => 'Kayıt Ol',
+
+    'forgot_password_mail' => 'E-Mail',
+    'forgot_password_button' => 'Gönder',
+    'forgot_password_title' => 'Şifremi Unuttum',
+
+    'signin_name' => 'Kullanıcı Adı',
+    'signin_password' => 'Şifre',
+    'signin_button' => 'Giriş',
+    'signin_title' => 'Giriş',
 );

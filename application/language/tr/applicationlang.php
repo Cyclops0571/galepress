@@ -7,8 +7,8 @@ return array(
     "other_options" => 'Diğer Seçenekler',
 
     "dashboard_settings" => 'Açılış Ayarları:',
-    "show_dashboard" => 'Anasayfaya Yönlendir:',
-    "show_dashboard_info" => 'Uygulama açıldığında kullanıcıyı login olması için anasayfaya yönlendir.',
+    "show_dashboard" => 'Girişe yönlendir:',
+    "show_dashboard_info" => 'Uygulama açıldığında kullanıcıyı giriş yapması için anasayfaya yönlendir.',
     "confirmation_message" => 'Doğrulama Mesajı:',
     "confirmation_message_info" => 'Eğer kullanıcı bu mesajı doğrulamazsa uygulamaya devam edemez!',
 

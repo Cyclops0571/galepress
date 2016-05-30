@@ -16,18 +16,6 @@ class Test_Controller extends Base_Controller
         parent::__construct();
     }
 
-    public function get_signUp() {
-        return Laravel\View::make('test.signup');
-    }
-
-    public function get_forgotPassword() {
-        return Laravel\View::make('test.forgotpassword');
-    }
-
-    public function get_signIn() {
-        return Laravel\View::make('test.signin');
-    }
-
     public function get_index($test = 1)
     {
         echo number_format((float)2795.00, 2);

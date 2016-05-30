@@ -449,6 +449,10 @@ foreach ($languages as $currentLanguage) {
 
     // </editor-fold>
 
+    Route::get(__('route.sign_up')->get($currentLanguage), "website@signUp");
+    Route::get(__('route.forgot_password')->get($currentLanguage), "website@forgotPassword");
+    Route::get(__('route.sign_in')->get($currentLanguage), "website@signIn");
+
 //	Route::post('/common/imageupload_ltie10', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload_ltie10'));
 //	Route::post('/common/imageupload', array('as' => 'banners_imageupload_ltie10', 'uses' => 'common@imageupload'));
 }

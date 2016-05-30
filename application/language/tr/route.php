@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return array(
 
@@ -7,6 +7,7 @@ return array(
     | Route Language Lines
     |--------------------------------------------------------------------------
     */
+
     'login' => 'giris',
     'forgotmypassword' => 'parolami-unuttum',
     'resetmypassword' => 'parolami-sifirla',
@@ -22,7 +23,7 @@ return array(
     'users_save' => 'kullanicilar/kaydet',
     'users_send' => 'kullanicilar/gonder',
     'users_delete' => 'kullanicilar/sil',
-    
+
     'clients' => 'mobil-kullanici',
     'clients_new' => 'mobil-kullanici/yeni',
     'clients_show' => 'mobil-kullanici/(:num)',
@@ -97,6 +98,7 @@ return array(
     'interactivity_check' => 'etkilesimli-pdf/kontrolet',
     'interactivity_save' => 'etkilesimli-pdf/kaydet',
     'interactivity_transfer' => 'etkilesimli-pdf/aktar',
+    //'interactivity_delete' => 'interactive-pdf/sil',
     'interactivity_upload' => 'etkilesimli-pdf/yukle',
     'interactivity_upload2' => 'etkilesimli-pdf/yukle2',
     'interactivity_loadpage' => 'etkilesimli-pdf/sayfayukle',
@@ -148,4 +150,8 @@ return array(
 
     'managements_list' => 'managements/list',
     'managements_save' => 'managements/save',
+
+    'sign_up' => 'musteri/kaydol',
+    'forgot_password' => 'musteri/parolahatirlatma',
+    'sign_in' => 'musteri/giris',
 );

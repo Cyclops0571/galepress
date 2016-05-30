@@ -7,6 +7,7 @@ return array(
     | Route Language Lines
     |--------------------------------------------------------------------------
     */
+
     'login' => 'login',
     'forgotmypassword' => 'forgot-my-password',
     'resetmypassword' => 'reset-my-password',
@@ -149,4 +150,8 @@ return array(
 
     'managements_list' => 'managements/list',
     'managements_save' => 'managements/save',
+
+    'sign_up' => 'customer/register',
+    'forgot_password' => 'customer/password',
+    'sign_in' => 'customer/signin',
 );

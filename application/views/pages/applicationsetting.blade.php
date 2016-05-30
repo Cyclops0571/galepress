@@ -133,7 +133,7 @@
                 <div class="col-md-5 text-center" style="height:30px; padding-right:0">
                     <hr style="border-top: 1px solid black; border-bottom: 1px solid #565656; margin-top:15px;">
                 </div>
-                <div class="col-md-2 text-center">Tab <?php echo $tabNo; ?></div>
+                <div class="col-md-2 text-center">{{ __('common.tabs_tab_name')}} <?php echo $tabNo; ?></div>
                 <div class="col-md-5 text-center" style="height:30px; padding-left:0">
                     <hr style="border-top: 1px solid black; border-bottom: 1px solid #565656; margin-top:15px;">
                 </div>
