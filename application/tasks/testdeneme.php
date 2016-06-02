@@ -10,16 +10,8 @@ class TestDeneme_Task
 
     public function run()
     {
-        ContentFile::makeContentInteractive(1994, 2655, 0);
-        //echo Laravel\Request::env();
-//        $connection = new AMQPConnection('localhost', 5672, 'galepress', 'galeprens');
-//        $channel = $connection->channel();
-//        $channel->queue_declare('queue_interactivepdf', false, false, false, false);
-//        $msg = new AMQPMessage('Hello World!');
-//        $channel->basic_publish($msg, '', 'queue_interactivepdf');
-//        echo " [x] Sent 'Hello World!'\n";
-//        $channel->close();
-//        $connection->close();
+        $cf = ContentFile::find(2716);
+        ContentFile::makeContentInteractive($cf);
     }
 
     public function consume()

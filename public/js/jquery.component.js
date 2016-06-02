@@ -964,38 +964,63 @@
             else if (componentName == "link") {
                 //link
                 $("#prop-" + id + " div.js-radio").click(function () {
-                    var value = $(this).attr("optionvalue");
-
-                    $("#prop-" + id + " div.topage").addClass("hide");
-                    $("#prop-" + id + " div.tourl").addClass("hide");
-
-                    if (value == "1") {
-                        $("#prop-" + id + " div.topage").removeClass("hide");
-                    }
-                    else {
-                        $("#prop-" + id + " div.tourl").removeClass("hide");
+                    var value = parseInt($(this).attr("optionvalue"));
+                    switch (value) {
+                        case 1:
+                            $("#prop-" + id + " div.topage").removeClass("hide");
+                            $("#prop-" + id + " div.tourl").addClass("hide");
+                            $("#prop-" + id + " div.tomail").addClass("hide");
+                            break;
+                        case 2:
+                            $("#prop-" + id + " div.topage").addClass("hide");
+                            $("#prop-" + id + " div.tourl").removeClass("hide");
+                            $("#prop-" + id + " div.tomail").addClass("hide");
+                            break;
+                        case 3:
+                            $("#prop-" + id + " div.topage").addClass("hide");
+                            $("#prop-" + id + " div.tourl").addClass("hide");
+                            $("#prop-" + id + " div.tomail").removeClass("hide");
+                            break;
                     }
                 });
 
-                $("#prop-" + id + " a.btn").click(function () {
+                $("#prop-" + id + " a.to-url").click(function () {
                     var url = $('#comp-' + id + '-url').val();
                     var valid = (url.length > 0);
 
-                    $("#prop-" + id + " span.success").addClass("hide");
-                    $("#prop-" + id + " span.error").addClass("hide");
+                    $("#prop-" + id + " span.success.to-url").addClass("hide");
+                    $("#prop-" + id + " span.error.to-url").addClass("hide");
 
                     if (valid) {
                         if (isUrlReachable(url)) {
-                            $("#prop-" + id + " span.success").removeClass("hide");
+                            $("#prop-" + id + " span.success.to-url").removeClass("hide");
                         }
                         else {
-                            $("#prop-" + id + " span.error").removeClass("hide");
+                            $("#prop-" + id + " span.error.to-url").removeClass("hide");
                         }
-                    }
-                    else {
-                        $("#prop-" + id + " span.error").removeClass("hide");
+                    } else {
+                        $("#prop-" + id + " span.error.to-url").removeClass("hide");
                     }
                 });
+
+                $("#prop-" + id + " a.to-mail").click(function () {
+                    var mail = $('#comp-' + id + '-mail').val();
+                    var valid = (mail.length > 0);
+
+                    $("#prop-" + id + " span.success.to-mail").addClass("hide");
+                    $("#prop-" + id + " span.error.to-mail").addClass("hide");
+
+                    if (valid) {
+                        if (isValidEmailAddress(mail)) {
+                            $("#prop-" + id + " span.success.to-mail").removeClass("hide");
+                        } else {
+                            $("#prop-" + id + " span.error.to-mail").removeClass("hide");
+                        }
+                    } else {
+                        $("#prop-" + id + " span.error.to-mail").removeClass("hide");
+                    }
+                });
+
             }
             else if (componentName == "webcontent") {
                 //webcontent

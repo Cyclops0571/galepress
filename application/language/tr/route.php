@@ -62,7 +62,6 @@ return array(
     'contents_save' => 'icerikler/kaydet',
     'contents_delete' => 'icerikler/sil',
     'contents_uploadfile' => 'icerikler/dosya-yukle',
-    'contents_uploadfile2' => 'icerikler/dosya-yukle2',
     'contents_uploadcoverimage' => 'icerikler/kapakresmi-yukle',
     'contents_uploadcoverimage2' => 'icerikler/kapakresmi-yukle2',
 

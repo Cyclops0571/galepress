@@ -123,6 +123,7 @@ return array(
 	'link_type_tooltip' => 'Link-type view and define other properties.',
 	'link_option1' => 'Go to a page in PDF',
 	'link_option2' => 'Go to a web address',
+    'link_option3' => 'Send E-mail',
 	'link_page' => 'PDF Page:',
 	'link_success' => 'The information entered is valid.',
 	'link_error' => 'The information entered is not valid.',
@@ -244,4 +245,7 @@ return array(
 	'preview' => 'Preview',
 	'preview_on' => 'On',
 	'preview_off' => 'Off',
+
+    'download_original_pdf' => 'Original Pdf',
+    'download_original_pdf_tooltip' => 'Download the original pdf',
 );

@@ -67,50 +67,41 @@ class ContentFile extends Eloquent
         }
 
         try {
-            DB::transaction(function () use (&$cf) {
-                $targetFileNameFull = path('public') . $cf->FilePath . '/' . $cf->FileName;
-                $cf->Interactivity = ContentFile::InteractivityProcessAvailable;
-                $cf->save();
+            $targetFileNameFull = path('public') . $cf->FilePath . '/' . $cf->FileName;
+            $cf->Interactivity = ContentFile::InteractivityProcessAvailable;
+            $cf->save();
 
-                //extract zip file
-                $zip = new ZipArchive();
-                $res = $zip->open($targetFileNameFull);
-                if ($res === true) {
-                    $zip->extractTo($cf->pdfFolderPathAbsolute());
-                    $zip->close();
+            //extract zip file
+            $zip = new ZipArchive();
+            $res = $zip->open($targetFileNameFull);
+            if ($res === true) {
+                $zip->extractTo($cf->pdfFolderPathAbsolute());
+                $zip->close();
+            }
+            $pdfFileNameFull = $cf->pdfFolderPathAbsolute() . '/' . $cf->getPdfName();
+
+            $myPcos = new MyPcos($pdfFileNameFull);
+            $cf->createPdfSnapShots();
+            $myPcos->checkPageSnapshots();
+            for ($i = 0; $i < $myPcos->pageCount(); $i++) {
+                $cfp = new ContentFilePage();
+                $cfp->ContentFileID = $cf->ContentFileID;
+                $cfp->No = $i + 1;
+                $cfp->Width = $myPcos->width($i);
+                $cfp->Height = $myPcos->height($i);
+                $cfp->FilePath = $cf->pdfFolderPathRelative();
+                $cfp->FileName = $myPcos->getImageFileName($i);
+                $cfp->FileSize = File::size($cf->pdfFolderPathAbsolute() . '/' . $cfp->FileName);
+                $cfp->save();
+                if ($cf->Transferred != 1) {
+                    $myPcos->arrangeBookmarkNew($cfp);
+                    $myPcos->arrangeAnnotationNew($cfp, $i);
                 }
 
-
-                $pdfFileNameFull = $cf->pdfFolderPathAbsolute() . '/' . $cf->getPdfName();
-
-                $myPcos = new MyPcos($pdfFileNameFull);
-                $cf->createPdfSnapShots();
-                $myPcos->checkPageSnapshots();
-                for ($i = 0; $i < $myPcos->pageCount(); $i++) {
-                    $cfp = new ContentFilePage();
-                    $cfp->ContentFileID = $cf->ContentFileID;
-                    $cfp->No = $i + 1;
-                    $cfp->Width = $myPcos->width($i);
-                    $cfp->Height = $myPcos->height($i);
-                    $cfp->FilePath = $cf->pdfFolderPathRelative();
-                    $cfp->FileName = $myPcos->getImageFileName($i);
-                    $cfp->FileSize = File::size($cf->pdfFolderPathAbsolute() . '/' . $cfp->FileName);
-                    $cfp->save();
-                    // </editor-fold>
-                    if ($cf->Transferred != 1) {
-                        $myPcos->arrangeBookmarkNew($cfp);
-                        $myPcos->arrangeAnnotationNew($cfp, $i);
-                    }
-
-                }
-                $cf = ContentFile::find($cf->ContentFileID);
-                $cf->comparePages();
-                $myPcos->closePdf();
-            });
-//            572572 burada interactivityi trigger etmeye gerek yok
-//            if (Laravel\Request::env() == ENV_LIVE) {
-//                interactivityQueue::trigger();
-//            }
+            }
+            $cf = ContentFile::find($cf->ContentFileID);
+            $cf->comparePages();
+            $myPcos->closePdf();
         } catch (PDFlibException $e) {
             $cf->Interactivity = ContentFile::InteractivityProcessAvailable;
             $cf->save();
@@ -290,6 +281,11 @@ class ContentFile extends Eloquent
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('ContentFileID', 'DESC')
             ->first();
+    }
+
+    public function pdfOriginalLink()
+    {
+        return '/' . $this->pdfFolderPathRelative() . '/file.pdf';
     }
 
     public function Pages($statusID)

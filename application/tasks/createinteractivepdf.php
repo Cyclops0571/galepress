@@ -187,6 +187,8 @@ class CreateInteractivePDF_Task
                                 $propertyType = (int)$cp->Value;
                             } elseif ($cp->Name == 'url') {
                                 $propertyUrl = $cp->Value;
+                            } elseif ($cp->Name == 'mail') {
+                                $propertyMail = $cp->Value;
                             } elseif ($cp->Name == 'page') {
                                 $propertyPage = (int)$cp->Value;
                             } elseif ($cp->Name == 'text') {
@@ -198,27 +200,6 @@ class CreateInteractivePDF_Task
                             } elseif ($cp->Name == 'zoom') {
                                 $propertyZoom = (float)$cp->Value;
                             }
-
-
-                            /*
-                              elseif($cp->Name == 'videoinit') $propertyVideoinit = $cp->Value;
-                              elseif($cp->Name == 'hidecontrols') $propertyHidecontrols = (int)$cp->Value;
-                              elseif($cp->Name == 'restartwhenfinished') $propertyRestartwhenfinished = (int)$cp->Value;
-                              elseif($cp->Name == 'mute') $propertyMute = (int)$cp->Value;
-                              elseif($cp->Name == 'posteroption') $propertyPosteroption = (int)$cp->Value;
-                              elseif($cp->Name == 'posterimagename') $propertyPosterimagename = $cp->Value;
-                              elseif($cp->Name == 'boxcolor') $propertyBoxcolor = $cp->Value;
-                              elseif($cp->Name == 'iconcolor') $propertyIconcolor = $cp->Value;
-                              elseif($cp->Name == 'opacity') $propertyOpacity = (int)$cp->Value;
-                              elseif($cp->Name == 'content') $propertyContent = $cp->Value;
-                             */
-
-                            /*
-                              else
-                              {
-                              $param .= (Str::length($param) > 0 ? '&' : '?').$cp->Name.'='.$cp->Value;
-                              }
-                             */
                             $data = array_merge($data, array($cp->Name => $cp->Value));
                         }
 
@@ -384,8 +365,12 @@ class CreateInteractivePDF_Task
                                 }
                                 $action = $p->create_action("URI", "url {" . $propertyUrl . $qs . "}");
                                 $p->create_annotation($x, $y, $x + $w, $y + $h, "Link", "linewidth=0 action {activate $action}");
+                            } else if ($propertyType == 3) {
+                                //mailto
+                                $propertyMail = "mailto:" . $propertyMail;
+                                $action = $p->create_action("URI", "url {" . $propertyMail . "}");
+                                $p->create_annotation($x, $y, $x + $w, $y + $h, "Link", "linewidth=0 action {activate $action}");
                             }
-                            //link
                         } elseif ($componentClass == 'webcontent') {
                             if (strpos($propertyUrl, '?') !== false) {
                                 $qs = str_replace('?', '&', $qs);
@@ -437,8 +422,6 @@ class CreateInteractivePDF_Task
 
             $cf = ContentFile::find($ContentFileID);
             $cf->HasCreated = 1;
-            //$cf->ErrorCount = 0;
-            //$cf->LastErrorDetail = '';
             $cf->InteractiveFilePath = $baseRelativePath;
             $cf->InteractiveFileName = 'file.zip';
             $cf->InteractiveFileSize = File::size($basePath . '/file.zip');

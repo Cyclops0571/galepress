@@ -62,7 +62,6 @@ return array(
     'contents_save' => 'inhalte/speichern',
     'contents_delete' => 'inhalte/loeschen',
     'contents_uploadfile' => 'inhalte/Dateihochladen',
-    'contents_uploadfile2' => 'inhalte/datei2hochladen',
     'contents_uploadcoverimage' => 'deckblatthochladen',
     'contents_uploadcoverimage2' => 'Deckblatt2hochladen',
 

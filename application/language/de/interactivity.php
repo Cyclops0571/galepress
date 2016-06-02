@@ -123,6 +123,7 @@ return array(
 	'link_type_tooltip' => 'Definieren Sie die Ansicht des Linktlps und die weiteren Eigenschaften',
 	'link_option1' => 'Gehe zur Seite in der PDF',
 	'link_option2' => 'Gehe zur Web-Seite',
+    'link_option3' => 'E-Mail senden',
 	'link_page' => 'PDF-Seite:',
 	'link_success' => 'Die eingegebenen Daten sind gültig.',
 	'link_error' => 'Die eingegebenen Daten sind nicht gültig.',
@@ -244,4 +245,7 @@ return array(
 	'preview' => 'Vorschau',
 	'preview_on' => 'Auf',
 	'preview_off' => 'Aus',
+
+    'download_original_pdf' => 'Original Pdf',
+    'download_original_pdf_tooltip' => 'Download the original pdf',
 );

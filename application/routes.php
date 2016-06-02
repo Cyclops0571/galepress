@@ -232,71 +232,7 @@ foreach ($languages as $currentLanguage) {
     //Route::get('/copy/(:num)/(:all)', array('as' => 'copy', 'before' => 'auth', 'uses' => 'contents@copy'));
     Route::post(__('route.contents_delete')->get($currentLanguage), array('as' => 'contents_delete', 'before' => 'auth' . $csrf, 'uses' => 'contents@delete'));
     Route::post(__('route.contents_uploadfile')->get($currentLanguage), array('as' => 'contents_uploadfile', 'before' => 'auth', 'uses' => 'contents@uploadfile'));
-    Route::post(__('route.contents_uploadfile2')->get($currentLanguage), array('do' => function () {
-        try {
-            $rules = array(
-                'Filedata' => 'mimes:pdf'
-                //'Filedata' => 'mimes:pdf,zip'
-            );
-            $v = Validator::make(Input::all(), $rules);
-            if ($v->passes()) {
-                $rnd = Str::random(20);
-                $file = Input::file('Filedata');
-                $filePath = path('public') . 'files/temp';
-                $fileName = File::name($file['name']);
-                $fileExt = File::extension($file['name']);
-                $tempFile = $fileName . '_' . $rnd . '.' . $fileExt;
-
-                if (!File::exists($filePath)) {
-                    File::mkdir($filePath);
-                }
-
-                $success = Input::upload('Filedata', $filePath, $tempFile);
-                if ($success) {
-                    $ret = Uploader::ContentsUploadFile($tempFile);
-                    return "success=" . base64_encode("true") . "&filename=" . base64_encode($ret['fileName']) . "&imageFile=" . base64_encode($ret['imageFile']);
-                }
-                return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('');
-            } else {
-                return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
-            }
-        } catch (Exception $e) {
-            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
-        }
-    }));
     Route::post(__('route.contents_uploadcoverimage')->get($currentLanguage), array('as' => 'contents_uploadcoverimage', 'before' => 'auth', 'uses' => 'contents@uploadcoverimage'));
-    Route::post(__('route.contents_uploadcoverimage2')->get($currentLanguage), array('do' => function () {
-        try {
-            $rules = array(
-                'Filedata' => 'image'
-                //'Filedata' => 'image|max:3000'
-            );
-            $v = Validator::make(Input::all(), $rules);
-            if ($v->passes()) {
-                $file = Input::file('Filedata');
-                $filePath = path('public') . 'files/temp';
-                $fileName = File::name($file['name']);
-                $fileExt = File::extension($file['name']);
-                $tempFile = $fileName . '_' . Str::random(20) . '.' . $fileExt;
-
-                if (!File::exists($filePath)) {
-                    File::mkdir($filePath);
-                }
-
-                $success = Input::upload('Filedata', $filePath, $tempFile);
-
-                if ($success) {
-                    $ret = Uploader::UploadImage($tempFile);
-                    return "success=" . base64_encode("true") . "&filename=" . base64_encode($ret['fileName']);
-                }
-                return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('');
-            } else {
-                return "success=" . base64_encode("false") . "&errmsg=" . base64_encode(__('common.detailpage_validation'));
-            }
-        } catch (Exception $e) {
-            return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
-        }
-    }));
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Password">

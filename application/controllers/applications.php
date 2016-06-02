@@ -326,7 +326,6 @@ class Applications_Controller extends Base_Controller
                         $p->DeviceType = $token->DeviceType;
                         $p->Sent = 0;
                         $p->ErrorCount = 0;
-                        //$p->LastErrorDetail = '';
                         $p->StatusID = eStatus::Active;
                         $p->CreatorUserID = $currentUser->UserID;
                         $p->DateCreated = new DateTime();

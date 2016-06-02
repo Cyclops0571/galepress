@@ -195,16 +195,19 @@ class Content extends Eloquent
         }
     }
 
+    /**
+     * @param int $customerID
+     * @return ContentFile|int|null
+     */
     public function processPdf($customerID)
     {
         if ((int)Input::get('hdnFileSelected', 0) != 1) {
-            return (int)DB::table('ContentFile')
-                ->where('ContentID', '=', $this->ContentID)
+            return (int)ContentFile::where('ContentID', '=', $this->ContentID)
                 ->where('StatusID', '=', eStatus::Active)
                 ->max('ContentFileID');
         }
 
-        $contentFileID = 0;
+        $ContentFile = null;
         $sourceFileName = Input::get('hdnFileName');
         $sourceFilePath = 'files/temp';
         $sourceRealPath = path('public') . $sourceFilePath;
@@ -227,34 +230,38 @@ class Content extends Eloquent
             File::move($sourceFileNameFull, $targetFileNameFull);
             File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
 
-            $f = new ContentFile();
-            $f->ContentID = $this->ContentID;
-            $f->DateAdded = new DateTime();
-            //$f->FilePath = '/'.$targetFilePath;
-            $f->FilePath = $targetFilePath;
-            $f->FileName = $targetFileName;
-            //$f->FileName2 = '';
-            $f->FileSize = File::size($targetFileNameFull);
-            $f->Transferred = (int)Input::get('Transferred', '0');
-            $f->StatusID = eStatus::Active;
-            $f->CreatorUserID = Auth::User()->UserID;
-            $f->DateCreated = new DateTime();
-            $f->ProcessUserID = Auth::User()->UserID;
-            $f->ProcessDate = new DateTime();
-            $f->ProcessTypeID = eProcessTypes::Insert;
-            $f->save();
-
-            $contentFileID = $f->ContentFileID;
+            $ContentFile = new ContentFile();
+            $ContentFile->ContentID = $this->ContentID;
+            $ContentFile->DateAdded = new DateTime();
+            $ContentFile->FilePath = $targetFilePath;
+            $ContentFile->FileName = $targetFileName;
+            $ContentFile->FileSize = File::size($targetFileNameFull);
+            $ContentFile->Transferred = (int)Input::get('Transferred', '0');
+            $ContentFile->StatusID = eStatus::Active;
+            $ContentFile->CreatorUserID = Auth::User()->UserID;
+            $ContentFile->DateCreated = new DateTime();
+            $ContentFile->ProcessUserID = Auth::User()->UserID;
+            $ContentFile->ProcessDate = new DateTime();
+            $ContentFile->ProcessTypeID = eProcessTypes::Insert;
+            $ContentFile->save();
         }
-
-        return $contentFileID;
+        return $ContentFile;
     }
 
-    public function processImage($customerID, $contentFileID)
+    /**
+     * @param int $customerID
+     * @param ContentFile $contentFile
+     * @throws Exception
+     */
+    public function processImage($customerID, $contentFile)
     {
         if ((int)Input::get('hdnCoverImageFileSelected', 0) != 1) {
             return;
         }
+        if (!$contentFile) {
+            return;
+        }
+
         $sourceFileName = Input::get('hdnCoverImageFileName');
         $sourceFilePath = 'files/temp';
         $sourceRealPath = path('public') . $sourceFilePath;
@@ -305,7 +312,7 @@ class Content extends Eloquent
             $this->save();
 
             $c = new ContentCoverImageFile();
-            $c->ContentFileID = $contentFileID;
+            $c->ContentFileID = $contentFile->ContentFileID;
             $c->DateAdded = new DateTime();
             $c->FilePath = $targetFilePath;
             $c->SourceFileName = $targetFileName;

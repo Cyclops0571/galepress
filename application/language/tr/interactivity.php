@@ -123,6 +123,7 @@ return array(
 	'link_type_tooltip' => 'Link tipi görünümünü ve diğer özelliklerini tanımlayın.',
 	'link_option1' => 'PDF\'deki bir sayfaya git',
 	'link_option2' => 'Web adresine git',
+    'link_option3' => 'E-posta gönder',
 	'link_page' => 'PDF Sayfa:',
 	'link_success' => 'Girilen bilgileri gecerli.',
 	'link_error' => 'Girilen bilgiler gecerli degil.',
@@ -244,4 +245,7 @@ return array(
 	'preview' => 'Önizleme',
 	'preview_on' => 'Açık',
 	'preview_off' => 'Kapalı',
+
+    'download_original_pdf' => 'Orijinal Pdf',
+    'download_original_pdf_tooltip' => 'Üzerinde işlem yapılmamış Orjinal Pdfi indir.',
 );

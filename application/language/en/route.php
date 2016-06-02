@@ -62,7 +62,6 @@ return array(
     'contents_save' => 'contents/save',
     'contents_delete' => 'contents/delete',
     'contents_uploadfile' => 'contents/load-file',
-    'contents_uploadfile2' => 'contents/load-file2',
     'contents_uploadcoverimage' => 'contents/load-coverart',
     'contents_uploadcoverimage2' => 'contents/load-coverart2',
 

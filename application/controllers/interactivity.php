@@ -210,12 +210,6 @@ class Interactivity_Controller extends Base_Controller
             return Redirect::to('/' . __('route.contents') . '/' . $cf->ContentID . '?error=' . __('error.interactivity_conflict'));
         }
 
-        $errorMsg = ContentFile::makeContentInteractive($cf);
-        if ($errorMsg) {
-            Common::sendErrorMail($errorMsg);
-            return View::make('interactivity.error', array('errmsg' => $errorMsg));
-        }
-        
         $data = array(
             'content' => $content,
             'ContentID' => $cf->ContentID,
@@ -229,6 +223,7 @@ class Interactivity_Controller extends Base_Controller
             ->nest('header', 'interactivity.header', $data)
             ->nest('sidebar', 'interactivity.sidebar', $data)
             ->nest('footer', 'interactivity.footer', $data);
+
     }
 
     public function get_fb($applicationID)
@@ -557,7 +552,6 @@ class Interactivity_Controller extends Base_Controller
                                     $pcp->ProcessTypeID = eProcessTypes::Insert;
                                     $pcp->save();
                                 }
-
                             }
                         } elseif ($clientProcess == 'removed' && $clientPageComponentID > 0) {
                             DB::table('PageComponentProperty')

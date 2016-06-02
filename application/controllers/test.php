@@ -18,6 +18,26 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+
+        $cf = ContentFile::find(2719);
+        ContentFile::makeContentInteractive($cf);
+        exit;
+
+        $x = ContentFile::find(2714);
+        echo $x->pdfOriginalLink();
+        exit;
+        $pdfFileNameFull = $x->pdfFolderPathAbsolute() . '/' . $x->getPdfName();
+        $myPcos = new MyPcos($pdfFileNameFull);
+        for ($i = 0; $i < $myPcos->pageCount(); $i++) {
+            echo $myPcos->width($i) . " - " . $myPcos->height($i) . "</br>";
+        }
+        //echo $x->pdfFolderPathRelative();
+        exit;
+        $string = 'eyJyZXNwb25zZSI6eyJzdGF0ZSI6InN1Y2Nlc3MiLCJkYXRlX3RpbWUiOiIxNi0wNS0yNyAxMjo1NToyMSIsInJlcXVlc3RfaWQiOiJNVFEyTkRNMU16Y3hPUUlPQ2haMjVaWnJja0xYSUN6WSJ9LCJtb2RlIjoibGl2ZSIsImNhcmRfdG9rZW4iOiJNVFEyTkRNMU16WTROUUdQYTdnVkFiVkMxZVdHQ0Z6dSIsInRyYW5zYWN0aW9uIjp7InRyYW5zYWN0aW9uX2lkIjoiTVRRMk5ETTFNelk0TlFWWmVzY3RrNUlHNDhjZE1MVVoiLCJleHRlcm5hbF9pZCI6IjIwNzgiLCJyZWZlcmVuY2VfaWQiOiIyMDc4Iiwic3RhdGUiOiJwYWlkIiwiYW1vdW50IjoiMS4xOCIsImN1cnJlbmN5IjoiVFJZIiwiY29ubmVjdG9yX3R5cGUiOiJHYXJhbnRpIiwiaW5zdGFsbG1lbnRfY291bnQiOjAsImNvbm5lY3Rvcl9hdXRoX2NvZGUiOiI1MDg4NjEifSwiY3VzdG9tZXIiOnsiZmlyc3RfbmFtZSI6IlNlcmRhciIsImxhc3RfbmFtZSI6IlNheWdcdTAxMzFsXHUwMTMxIiwiZW1haWwiOiJzcmRzYXlnaWxpQGdtYWlsLmNvbSJ9LCJhY2NvdW50Ijp7ImJpbiI6IjUzMTUzMSIsImJyYW5kIjoiTUFTVEVSQ0FSRCIsImV4cGlyeV9tb250aCI6IjEyIiwiZXhwaXJ5X3llYXIiOiIyMDE5IiwibGFzdGZvdXJkaWdpdHMiOiI0NTA4IiwiaG9sZGVyIjoiU2VyZGFyIFNheWdpbGkiLCJjYXJkX2ZhbWlseSI6IkJvbnVzIiwiY2FyZF90eXBlIjoiQ1JFRElUX0NBUkQiLCJjYXJkX2Fzc29jaWF0aW9uIjoiTUFTVEVSX0NBUkQiLCJpc3N1ZXJfYmFua19jb2RlIjoiMzIiLCJpc3N1ZXJfYmFua19uYW1lIjoiVEVCIn19';
+        $tmp = json_decode(base64_decode($string), true);
+        var_dump($tmp);
+        exit;
+        
         echo number_format((float)2795.00, 2);
         exit;
         $test = (boolean)rand(0, 1);
@@ -546,8 +566,6 @@ class Test_Controller extends Base_Controller
 
             $cf = ContentFile::find($ContentFileID);
             $cf->HasCreated = 1;
-            //$cf->ErrorCount = 0;
-            //$cf->LastErrorDetail = '';
             $cf->InteractiveFilePath = $baseRelativePath;
             $cf->InteractiveFileName = 'file.zip';
             $cf->InteractiveFileSize = File::size($basePath . '/file.zip');

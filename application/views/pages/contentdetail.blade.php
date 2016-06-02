@@ -24,6 +24,7 @@
     $Blocked = 0;
     $Status = 0;
     $Version = 0;
+    $ContentFile = null;
     $ContentFileID = 0;
     $Transferable = false;
     $Transferred = false;
@@ -49,20 +50,16 @@
         $Blocked = (int)$row->Blocked;
         $Status = (int)$row->Status;
         $Version = (int)$row->Version;
-        $ContentFileID = (int)DB::table('ContentFile')
-                ->where('ContentID', '=', $ContentID)
-                ->where('StatusID', '=', eStatus::Active)
-                ->max('ContentFileID');
 
-        $oldContentFile = DB::table('ContentFile')
-                ->where('ContentID', '=', $ContentID)
+        /** @var ContentFile $ContentFile */
+        $ContentFile = ContentFile::where('ContentID', '=', $ContentID)
                 ->where('StatusID', '=', eStatus::Active)
                 ->order_by('ContentFileID', 'DESC')
-                ->take(1)
                 ->first();
-        if ($oldContentFile) {
-            $Transferable = (int)$oldContentFile->Interactivity == 1;
-            $Transferred = (int)$oldContentFile->Transferred == 1;
+        if ($ContentFile) {
+            $ContentFileID = $ContentFile->ContentFileID;
+            $Transferable = (int)$ContentFile->Interactivity == 1;
+            $Transferred = (int)$ContentFile->Transferred == 1;
         }
 
         if ($IsMaster == 1) {
@@ -221,7 +218,8 @@
                         <script type="text/javascript">
                             $('#File').ready(function () {
                                 $('#File').css('opacity', '1');
-                            });</script>
+                            });
+                        </script>
 
                         <div id="FileButton" class="uploadify hide" style="height: 30px; width: 120px; opacity: 1;">
                             <div id="File-button" class="uploadify-button "
@@ -255,10 +253,11 @@
                     <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_file') }}"><span
                                     class="icon-info-sign"></span></a></div>
                 </div>
-                @if($ContentID > 0 && $ContentFileID > 0 && $authInteractivity)
+                    @if($ContentFileID > 0 && $authInteractivity)
                     <div class="form-row">
-                        <div class="col-md-3"
-                             style="padding-top:8px;">{{ __('common.contents_file_interactive_label') }}</div>
+                        <div class="col-md-3" style="padding-top:8px;">
+                            {{ __('common.contents_file_interactive_label') }}
+                        </div>
                         <div class="col-md-8">
                             <div class="fileupload_container">
                                 <div class="col-md-3" id="contentPdfButton">
@@ -279,31 +278,12 @@
                                     </section>
                                 </div>
                             </div>
-                            <?php
-                            echo '<div class="col-md-6" style="padding-top: 8px">';
-                            $cf = DB::table('ContentFile')->where('ContentFileID', '=', $ContentFileID)->first();
-                            if ($cf) {
-                                if ((int)$cf->Interactivity == 1 && $authInteractivity) {
-                                    if ((int)$cf->HasCreated == 1) {
-//echo '<a href="/'.Session::get('language').'/'.__('route.contents_request').'?RequestTypeID=1001&ContentID='.$ContentID.'" target="_blank" class="uploadedfile">'.__('common.contents_filelink').'</a><br />';
-                                        echo '<span>' . __('common.contents_interactive_file_has_been_created') . '</span>';
-                                    } else {
-                                        echo '<span>' . __('common.contents_interactive_file_hasnt_been_created') . '</span>';
-                                    }
-                                } else {
-                                    echo '<span><a href="/' . Session::get('language') . '/' . __('route.contents_request') . '?RequestTypeID=1001&ContentID=' . $ContentID . '" target="_blank" class="uploadedfile">' . __('common.contents_filelink') . '</a></span>';
-                                }
-                            }
-                            $error = Input::get('error');
-                            if (isset($error)) {
-                                echo '<br><span style="color:#f0d737;">' . $error . '</span>';
-                            }
-                            echo '</div>';
-                            ?>
                         </div>
-                        <div class="col-md-1"><a class="tipr"
-                                                 title="{{ __('common.contents_tooltip_interactive') }}"><span
-                                        class="icon-info-sign"></span></a></div>
+                        <div class="col-md-1">
+                            <a class="tipr" title="{{ __('common.contents_tooltip_interactive') }}">
+                                <span class="icon-info-sign"></span>
+                            </a>
+                        </div>
                     </div>
                     @if(sizeof($contentList)>0)
                         <div class="form-row">
@@ -333,6 +313,22 @@
                         </div>
                     @endif
                 @endif
+                    <?php if($ContentFile): ?>
+                    <div class="form-row">
+                        <div class="col-md-3"><?php echo __('interactivity.download_original_pdf'); ?></div>
+                        <div class="col-md-8">
+                            <a href="<?php echo $ContentFile->pdfOriginalLink();?>" download="mypdf.pdf">
+                                <img width="24px" height="24px" src="/img/cloud-download-32x32.svg"/>
+                            </a>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="tipr" title="{{ __('interactivity.download_original_pdf_tooltip') }}">
+                                <span class="icon-info-sign"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
             </div>
         </div>
         <div class="block">
