@@ -253,12 +253,12 @@
                     <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_file') }}"><span
                                     class="icon-info-sign"></span></a></div>
                 </div>
-                    @if($ContentFileID > 0 && $authInteractivity)
+                    @if($ContentFile && $authInteractivity)
                     <div class="form-row">
                         <div class="col-md-3" style="padding-top:8px;">
                             {{ __('common.contents_file_interactive_label') }}
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-3">
                             <div class="fileupload_container">
                                 <div class="col-md-3" id="contentPdfButton">
                                     <section>
@@ -267,20 +267,12 @@
                                            onclick="cContent.openInteractiveIDE({{ $ContentFileID }});"
                                            id="btn_interactive">&#xF011;</a>
                                         <span></span>
-                                        @if($ContentID > 0 && $ContentFileID > 0 && $authInteractivity && $Transferred)
-                                            <script type="text/javascript">
-                                                <!--
-                                                //alert('transfer ettikten sonra interaktif tasarlayiciyi acip kontrol ediniz!');
-                                                //document.write('TAAARRARRARRARAA');
-                                                // -->
-                                            </script>
-                                        @endif
                                     </section>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6" style="padding-top: 8px">
-                            <?php if($ContentFile && $ContentFile->Interactivity == 1 && $authInteractivity): ?>
+                        <div class="col-md-5" style="padding-top: 8px">
+                            <?php if($ContentFile->Interactivity == 1): ?>
                             <?php if((int)$ContentFile->HasCreated == 1): ?>
                             <span><?php echo __('common.contents_interactive_file_has_been_created'); ?> </span>
                             <?php else: ?>
