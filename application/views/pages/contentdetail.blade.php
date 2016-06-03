@@ -212,7 +212,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-3">{{ __('common.contents_file') }}{{ $ContentID == 0 ? ' <span class="error">*</span>' : '' }}</div>
-                    <div class="col-md-2" id="contentPdfFile">
+                    <div class="col-md-3" id="contentPdfFile">
 
                         <input type="file" name="File" class="btn btn-mini hidden" id="File" style="opacity:0;"/>
                         <script type="text/javascript">
@@ -242,7 +242,7 @@
                         <input type="hidden" name="hdnFileName"
                                id="hdnFileName"{{ $ContentID == 0 ? ' class="required"' : '' }} />
                     </div>
-                    <div class="col-md-6" style="padding-left:30px; padding-top:2px;">
+                    <div class="col-md-5" style="padding-top:2px;">
                         @if($ContentID > 0 && $ContentFileID > 0 && $authInteractivity && $Transferable)
                             <div class="checkbox-inline">
                                 <input type="checkbox" name="Transferred" id="Transferred" value="1" checked="checked"/>
@@ -258,18 +258,13 @@
                         <div class="col-md-3" style="padding-top:8px;">
                             {{ __('common.contents_file_interactive_label') }}
                         </div>
-                        <div class="col-md-3">
-                            <div class="fileupload_container">
-                                <div class="col-md-3" id="contentPdfButton">
-                                    <section>
-                                        <!--<a href="javascript:void(0);" onclick="cContent.openInteractiveIDE({{ $ContentFileID }});" id="btn_interactive">&#xF011;</a>-->
-                                        <a href="/{{ Session::get('language') }}/{{ __('route.interactivity') }}/{{ $ContentFileID }}"
-                                           onclick="cContent.openInteractiveIDE({{ $ContentFileID }});"
-                                           id="btn_interactive">&#xF011;</a>
-                                        <span></span>
-                                    </section>
-                                </div>
-                            </div>
+                        <div class="col-md-3" id="contentPdfButton">
+                            <section>
+                                <a href="/{{ Session::get('language') }}/{{ __('route.interactivity') }}/{{ $ContentFileID }}"
+                                   onclick="cContent.openInteractiveIDE({{ $ContentFileID }});"
+                                   id="btn_interactive">&#xF011;</a>
+                                <span></span>
+                            </section>
                         </div>
                         <div class="col-md-5" style="padding-top: 8px">
                             <?php if($ContentFile->Interactivity == 1): ?>
@@ -280,7 +275,7 @@
                             <?php endif; ?>
                             <?php endif; ?>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1" style="padding-top: 8px">
                             <a class="tipr" title="{{ __('common.contents_tooltip_interactive') }}">
                                 <span class="icon-info-sign"></span>
                             </a>

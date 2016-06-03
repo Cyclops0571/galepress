@@ -137,7 +137,7 @@ class Payment_Controller extends Base_Controller
         $postData = array();
         if ($secure3D) {
             $postData['response_mode'] = "ASYNC";
-            $postData['return_url'] = Config::get("custom.iyzico_return_url") . '/payment-response'; //571571 Burada hata var...
+            $postData['return_url'] = Config::get("custom.galepress_https_url") . '/payment-response'; //571571 Burada hata var...
         } else {
             $postData['response_mode'] = "SYNC";
         }

@@ -3,7 +3,7 @@
 $serverUrl = 'http://www.galepress.com';
 $mailEmail = 'info@galepress.com'; //sifre: detay2006
 $paymentEnv = 'live';
-$iyzicoReturnUrl = 'https://www.galepress.com';
+$galepressHttpsUrl = 'https://www.galepress.com';
 $iyzicoApiID = 'im015089500879819fdc991436189064';
 $iyzicoSecret = 'im015536200eaf0002c8d01436189064';
 $paymentAmount = 100;
@@ -18,7 +18,7 @@ if (Laravel\Request::env() == ENV_TEST) {
     $iyzicoApiID = 'im095675100e6b443315841436188424';
     $iyzicoSecret = 'im09762570052d771a4b2d1436188424';
     $paymentEnv = 'test';
-    $iyzicoReturnUrl = 'https://www.galetest.com';
+    $galepressHttpsUrl = 'https://www.galetest.com';
     $serverUrl = 'http://galetest.com';
     $paymentAmount = 1;
     $csrf = "";
@@ -27,7 +27,7 @@ if (Laravel\Request::env() == ENV_TEST) {
     $iyzicoApiID = 'im095675100e6b443315841436188424';
     $iyzicoSecret = 'im09762570052d771a4b2d1436188424';
     $paymentEnv = 'test';
-    $iyzicoReturnUrl = 'http://localhost';
+    $galepressHttpsUrl = 'http://localhost';
     $serverUrl = 'http://localhost';
     $paymentAmount = 1;
 }
@@ -66,7 +66,7 @@ return array(
     'api_key9' => 'AIzaSyCfeHTzoY_xhcCogtb1XYYUZ4_bzDlruvs',
     'payment_environment' => $paymentEnv,
     'iyzico_url' => 'https://iyziconnect.com/post/v1/',
-    'iyzico_return_url' => $iyzicoReturnUrl,
+    'galepress_https_url' => $galepressHttpsUrl,
     'iyzico_bin_check_url' => 'https://api.iyzico.com/bin-check',
     'iyzico_api_id' => $iyzicoApiID,
     'iyzico_secret' => $iyzicoSecret,
