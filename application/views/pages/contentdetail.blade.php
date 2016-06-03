@@ -279,6 +279,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6" style="padding-top: 8px">
+                            <?php if($ContentFile && $ContentFile->Interactivity == 1 && $authInteractivity): ?>
+                            <?php if((int)$ContentFile->HasCreated == 1): ?>
+                            <span><?php echo __('common.contents_interactive_file_has_been_created'); ?> </span>
+                            <?php else: ?>
+                            <span><?php echo __('common.contents_interactive_file_hasnt_been_created'); ?> </span>
+                            <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
                         <div class="col-md-1">
                             <a class="tipr" title="{{ __('common.contents_tooltip_interactive') }}">
                                 <span class="icon-info-sign"></span>
