@@ -498,4 +498,6 @@ return array(
     'signin_password' => 'Password',
     'signin_button' => 'Login',
     'signin_title' => 'Sign In',
+
+    'download_gpviewer' => '<b>Test your contents with </b> GP Viewer Application now!',
 );

@@ -498,4 +498,6 @@ tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
     'signin_password' => 'Şifre',
     'signin_button' => 'Giriş',
     'signin_title' => 'Giriş',
+
+    'download_gpviewer' => '<b>İçeriklerinizi</b> GP Viewer Uygulaması Sayesinde <b>Hemen Test Edin!</b>',
 );

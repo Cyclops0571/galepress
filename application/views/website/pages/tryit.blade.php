@@ -411,6 +411,28 @@
                                        class="btn btn-bordered btn-block">{{__('website.tryit_form_return')}}</a>
                                 </div>
                             </div>
+                            <div class="panel-transparent-row"></div>
+                            <div class="panel-footing" style="padding: 10px;">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center;">
+                                        {{__('website.download_gpviewer')}}
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 5px; align-content: center">
+                                    <div class="col-xs-3 col-sm-3 col-md-3"></div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3">
+                                        <a href="<?php echo Config::get("custom.galepress_https_url"); ?>/enterprise/gpviewer/ipa/GalePress.plist">
+                                            <img style="width: 100%; height:auto;" src="/website/img/appstore.png"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1"></div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3">
+                                        <a href="<?php echo Config::get("custom.galepress_https_url"); ?>/enterprise/gpviewer/ipa/gpviewer.apk">
+                                            <img style="width: 100%; height:auto;" src="/website/img/googleplay.png"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

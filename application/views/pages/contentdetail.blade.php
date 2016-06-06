@@ -500,7 +500,7 @@
                                    value="{{ __('common.detailpage_save') }}" onclick="cContent.save();"/>
                         </div>
                     @else
-                        <div class="col-md-5">
+                        <div class="col-md-offset-3 col-md-5">
                             <a href="#modal_default_11" class="btn delete expand remove" style="width:100%;"
                                data-toggle="modal">{{ __('content.remove_from_mobile_device') }}</a>
                         </div>
@@ -508,11 +508,10 @@
                             <a href="#modal_default_10" class="btn delete expand remove" style="width:100%;"
                                data-toggle="modal">{{ __('common.detailpage_delete') }}</a>
                         </div>
-                        <div class="col-md-2">
-                            <!-- HATA OLDUGU ICIN GIZLENDI -->
+                        <!--<div class="col-md-2">
                             <input type="button" value="{{ __('common.contents_copy_btn') }}" class="btn my-btn-send"
                                    onclick="cContent.copy();"/>
-                        </div>
+                        </div> -->
                         <div class="col-md-2">
                             <input type="button" class="btn my-btn-success" name="save"
                                    value="{{ __('common.detailpage_update') }}" onclick="cContent.save();"/>
