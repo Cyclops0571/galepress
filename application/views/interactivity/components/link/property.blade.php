@@ -35,7 +35,7 @@ if(isset($Properties))
                      optionvalue="3">{{ __('interactivity.link_option3') }}</div>
                 <input type="hidden" name="comp-{id}-type" id="comp-{id}-type" value="{{ $type }}" />
             </div>
-            <div class="topage{{ ($type != 2 ? ' hide' : '') }}">
+            <div class="topage{{ ($type != 1 ? ' hide' : '') }}">
                 <div class="inline">
                     <label for="comp-{id}-page">{{ __('interactivity.link_page') }}</label>
                     <select class="select js-select" name="comp-{id}-page" id="comp-{id}-page">
