@@ -202,9 +202,10 @@ class Content extends Eloquent
     public function processPdf($customerID)
     {
         if ((int)Input::get('hdnFileSelected', 0) != 1) {
-            return (int)ContentFile::where('ContentID', '=', $this->ContentID)
+            return ContentFile::where('ContentID', '=', $this->ContentID)
                 ->where('StatusID', '=', eStatus::Active)
-                ->max('ContentFileID');
+                ->order_by('ContentFileID', 'DESC')
+                ->first();
         }
 
         $ContentFile = null;
@@ -291,6 +292,7 @@ class Content extends Eloquent
 
             File::move($sourceFileNameFull, $targetFileNameFull);
             if ((int)Input::get('hdnFileSelected', 0) == 0) {
+                sleep(1);
                 File::copy($targetFileNameFull, $destinationFolder . '/' . IMAGE_ORIGINAL . IMAGE_EXTENSION);
             }
             $pictureInfoSet = array();

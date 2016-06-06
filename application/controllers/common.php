@@ -8,6 +8,8 @@ class Common_Controller extends Base_Controller
     //login
     public function get_login()
     {
+//        var_dump(\Laravel\Cookie::get(GO_BACK_TO_SHOP));
+//        exit;
         if (Auth::check()) {
             return Redirect::to(__('route.home'));
         } else {
