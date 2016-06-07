@@ -99,21 +99,29 @@ class Maps_Controller extends Base_Controller
         }
 
         $data = array();
-        $data["applicationID"] = (int)Input::get('applicationID', '0');
+        $applicationID = $googleMap->ApplicationID;
+        $application = Application::find($applicationID);
+        $initialLocation = $application->initialLocation();
+        $data["applicationID"] = $application;
         $data["googleMap"] = $googleMap;
         $data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $googleMap->ApplicationID;
         $data['caption'] = $this->caption;
+        $data["initialLocation"] = $initialLocation;
         return View::make("pages." . Str::lower($this->table) . "detail", $data)->nest('filterbar', 'sections.filterbar', $data);
     }
 
     public function get_new()
     {
+        $applicationID = (int)Input::get('applicationID', '0');
+        $application = Application::find($applicationID);
+        $initialLocation = $application->initialLocation();
         $data = array();
-        $data["ApplicationID"] = (int)Input::get('applicationID', '0');
+        $data["ApplicationID"] = $applicationID;
         $data["googleMap"] = FALSE;
         $data['route'] = $this->route = __('route.' . $this->page) . '?applicationID=' . $data["ApplicationID"];
         $data['caption'] = $this->caption;
         $data['detailcaption'] = $this->detailcaption;
+        $data["initialLocation"] = $initialLocation;
         return View::make('pages.' . Str::lower($this->table) . 'detail', $data)->nest('filterbar', 'sections.filterbar', $data);
     }
 
@@ -168,9 +176,12 @@ class Maps_Controller extends Base_Controller
         }
 
         $googleMapSet = GoogleMap::where('ApplicationID', '=', $applicationID)->where("statusID", "=", eStatus::Active)->get();
+        $application = Application::find($applicationID);
+        $initialLocation = $application->initialLocation();
 
         $data = array();
         $data["googleMapSet"] = $googleMapSet;
+        $data["initialLocation"] = $initialLocation;
         return View::make("pages." . Str::lower($this->table) . "location", $data);
     }
 
@@ -185,6 +196,8 @@ class Maps_Controller extends Base_Controller
 
         $data = array();
         $data["googleMapSet"] = $googleMapSet;
+        $initialLocation = $application->initialLocation();
+        $data["initialLocation"] = $initialLocation;
         return View::make("pages." . Str::lower($this->table) . "webview", $data);
     }
 

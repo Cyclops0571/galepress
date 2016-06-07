@@ -108,13 +108,14 @@
     {{ HTML::script('js/jquery.uniform.min.js'); }}
     <script src="http://maps.google.com/maps/api/js"></script>
     <script type="text/javascript">
-        var initialLocation;
-                <?php if(count($googleMapSet)): ?>
-                    var turkey = new google.maps.LatLng(<?php echo $googleMapSet[0]->Latitude ;?>, <?php echo $googleMapSet[0]->Longitude ?>);
-                <?php else: ?>
-                    var turkey = new google.maps.LatLng(38.9574155, 35.2415759);
-                <?php endif; ?>
-                var browserSupportFlag = new Boolean();
+        var coordinates = <?php echo json_encode($initialLocation);?>;
+                @if(count($googleMapSet))
+        var initialLocation = new google.maps.LatLng(<?php echo $googleMapSet[0]->Latitude;?>, <?php echo $googleMapSet[0]->Longitude ?>);
+                @else
+        var initialLocation = new google.maps.LatLng(Number(coordinates.x), Number(coordinates.y));
+                @endif
+        var browserSupportFlag = new Boolean();
+
 
         function initialize() {
             var myOptions = {
@@ -130,7 +131,7 @@
             });
 
                     <?php foreach($googleMapSet as $googleMap): ?>
-                        var content = "";
+            var content = "";
             var contentTitle = <?php echo json_encode($googleMap->Name); ?>;
             var contentDesc = <?php echo json_encode($googleMap->Description); ?>;
             var contentAddress = <?php echo json_encode($googleMap->Address); ?>;
@@ -158,7 +159,7 @@
             i++;
                     <?php endforeach; ?>
 
-                    var locationImage = {
+            var locationImage = {
                         url: '/img/maps/bullet_blue.png',
                         // This marker is 20 pixels wide by 32 pixels tall.
                         size: new google.maps.Size(32, 32),
@@ -185,7 +186,6 @@
                         },
                         {maximumAge: 600000, timeout: 3000}
                 );
-                // Try Google Gears Geolocation
             } else {
                 browserSupportFlag = false;
                 handleNoGeolocation(browserSupportFlag);
@@ -196,9 +196,6 @@
                     google.maps.event.addListener(map, 'bounds_changed', function () {
                         $('#zoomBtn').removeClass('clicked');
                     });
-                    if (!initialLocation) {
-                        initialLocation = turkey;
-                    }
                     map.setCenter(initialLocation);
                     smoothZoom(map, 14, map.getZoom());
                     setTimeout(function () {
@@ -208,7 +205,6 @@
             }
 
             function handleNoGeolocation(errorFlag) {
-                initialLocation = turkey;
                 map.setCenter(initialLocation);
                 $("#zoomBtn").hide();
             }

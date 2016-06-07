@@ -379,4 +379,30 @@ class Application extends Eloquent
             return self::DefaultApplicationForegroundColor;
         }
     }
+
+    public function initialLocation()
+    {
+        $currentLang = $this->ApplicationLanguage;
+        if (Auth::User()) {
+            $currentLang = Session::get('language');
+        }
+
+        $location = array();
+        switch ($currentLang) {
+            case 'tr':
+                $location['x'] = '41.010455';
+                $location['y'] = '28.985400';
+                break;
+            case 'de':
+                $location['x'] = '52.518667';
+                $location['y'] = '13.404631';
+                break;
+            case 'en':
+            case 'usa':
+            default:
+                $location['x'] = '38.907147';
+                $location['y'] = '-77.036545';
+        }
+        return $location;
+    }
 }

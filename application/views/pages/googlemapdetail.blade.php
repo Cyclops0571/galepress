@@ -70,12 +70,14 @@
         }
     </style>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
     <script type="text/javascript">
-        var markerLat = {{$Latitude}};
-        var markerLog = {{$Longitude}};
-        var initialLocation;
-        var turkey = new google.maps.LatLng(38.9574155, 35.2415759);
+        var markerLat = Number({{$Latitude}});
+        var markerLog = Number({{$Longitude}});
+        var coordinates = <?php echo json_encode($initialLocation);?>;
+        var initialLocation = new google.maps.LatLng(Number(coordinates.x), Number(coordinates.y));
+        if (markerLat != 0 || markerLog != 0) {
+            initialLocation = new google.maps.LatLng(markerLat, markerLog);
+        }
         var browserSupportFlag = new Boolean();
 
         $(window).resize(function () {
@@ -119,15 +121,7 @@
             }
 
             function handleNoGeolocation(errorFlag) {
-                if (errorFlag === true) {
-                    $("#zoomBtn").hide();
-                    alert("Geolocation service failed. We've placed you in Turkey.");
-                    initialLocation = turkey;
-                } else {
-                    $("#zoomBtn").hide();
-                    alert("Your browser doesn't support geolocation. We've placed you in Turkey.");
-                    initialLocation = turkey;
-                }
+                $("#zoomBtn").hide();
                 map.setCenter(initialLocation);
             }
 

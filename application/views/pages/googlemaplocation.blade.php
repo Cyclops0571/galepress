@@ -88,10 +88,9 @@
 
     </style>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
     <script type="text/javascript">
-        var initialLocation;
-        var turkey = new google.maps.LatLng(38.9574155, 35.2415759);
+        var coordinates = <?php echo json_encode($initialLocation);?>;
+        var initialLocation = new google.maps.LatLng(Number(coordinates.x), Number(coordinates.y));
         var browserSupportFlag = new Boolean();
 
         function initialize() {
@@ -111,7 +110,6 @@
                     })
             );
                     <?php endforeach; ?>
-
                     var locationImage = {
                         url: '/img/maps/bullet_blue.png',
                         // This marker is 20 pixels wide by 32 pixels tall.
@@ -150,9 +148,6 @@
                     google.maps.event.addListener(map, 'bounds_changed', function () {
                         $('#zoomBtn').removeClass('clicked');
                     });
-                    if (!initialLocation) {
-                        initialLocation = turkey;
-                    }
                     map.setCenter(initialLocation);
                     smoothZoom(map, 14, map.getZoom());
 
@@ -165,15 +160,7 @@
             }
 
             function handleNoGeolocation(errorFlag) {
-                if (errorFlag === true) {
-                    $("#zoomBtn").hide();
-                    alert("Geolocation service failed. We've placed you in Turkey.");
-                    initialLocation = turkey;
-                } else {
-                    $("#zoomBtn").hide();
-                    alert("Your browser doesn't support geolocation. We've placed you in Turkey.");
-                    initialLocation = turkey;
-                }
+                $("#zoomBtn").hide();
             }
         }
 
