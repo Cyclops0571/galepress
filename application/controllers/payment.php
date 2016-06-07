@@ -8,8 +8,14 @@ class Payment_Controller extends Base_Controller
     public function get_shop()
     {
         $user = Auth::User();
+        if (!$user) {
+            setcookie(GO_BACK_TO_SHOP, GO_BACK_TO_SHOP, time() + Config::get('session.lifetime') * 60, "/");
+            return Redirect::to(__('route.home'));
+        }
+
         $customer = Customer::find($user->CustomerID);
         if (!$customer) {
+            setcookie(GO_BACK_TO_SHOP, GO_BACK_TO_SHOP, time() + Config::get('session.lifetime') * 60, "/");
             return Redirect::to(__('route.home'));
         }
 
@@ -34,7 +40,7 @@ class Payment_Controller extends Base_Controller
         $customerData['paymentAccount'] = $paymentAccount;
         $customerData['applications'] = $applications;
         $customerData['selectedApp'] = $selectedApp;
-
+        setcookie(GO_BACK_TO_SHOP, GO_BACK_TO_SHOP, 1, "/");
         return View::make('payment.shop', $customerData);
     }
 

@@ -396,18 +396,15 @@ var cUser = new function () {
 
             cUser.doAsyncRequest(t, u, data, function (ret) {
                 cNotification.success(null, ret.getValue("msg"));
-                if (getParameterByName("shopping")) {
-                    window.location.href = '/' + currentLanguage + '/shop';
+                var redirectUrl = '/' + currentLanguage + '/' + route["home"];
+                if ($.cookie('gobacktoshop') == 'gobacktoshop') {
+                    redirectUrl = '/' + currentLanguage + '/' + route["shop"];
+                }
+
+                if (window.top != window) {
+                    window.top.location.href = redirectUrl;
                 } else {
-                    try {
-                        if (window.top != window) {
-                            window.top.location.href = '/' + currentLanguage + '/' + route["home"];
-                        } else {
-                            window.location.href = '/' + currentLanguage + '/' + route["home"];
-                        }
-                    } catch (err) {
-                        window.location.href = '/' + currentLanguage + '/' + route["home"];
-                    }
+                    window.location.href = redirectUrl;
                 }
             });
 
