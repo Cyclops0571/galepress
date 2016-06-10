@@ -18,7 +18,9 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-
+//        website_odeme_post
+        echo \Laravel\URL::to_route('website_odeme_post');
+        exit;
         $cf = ContentFile::find(2719);
         ContentFile::makeContentInteractive($cf);
         exit;

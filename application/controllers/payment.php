@@ -104,7 +104,7 @@ class Payment_Controller extends Base_Controller
     /**
      * iyzco.com dan 6 hane icin kart bilgisi sorar.
      * sonrasinda gene iyzco.comdan odemeyi almaya calisir...
-     * 3d secure yapilmis ise get_odemeResponse a gider.
+     * 3d secure yapilmis ise get_secure_3d_response a gider.
      */
     public function post_payment_approval()
     {
@@ -143,7 +143,7 @@ class Payment_Controller extends Base_Controller
         $postData = array();
         if ($secure3D) {
             $postData['response_mode'] = "ASYNC";
-            $postData['return_url'] = Config::get("custom.galepress_https_url") . '/payment-response'; //571571 Burada hata var...
+            $postData['return_url'] = Config::get("custom.galepress_https_url") . '/' . Config::get('application.language') . '/3d-secure-response';
         } else {
             $postData['response_mode'] = "SYNC";
         }
@@ -235,7 +235,7 @@ class Payment_Controller extends Base_Controller
                     $paymentTransaction->state = 'rejected';
                 }
                 $paymentTransaction->save();
-                if (!empty($resultJson['response']["error_message_tr"])) {
+                if (Config::get('application.language') == 'tr' && !empty($resultJson['response']["error_message_tr"])) {
                     $paymentResult = $resultJson['response']["error_message_tr"];
                 } else {
                     $paymentResult = $resultJson['response']["error_message"];
@@ -253,7 +253,7 @@ class Payment_Controller extends Base_Controller
      * 3d secure kullanilmis ise buraya geliyoruz
      * @return Redirect
      */
-    public function get_odemeResponse()
+    public function get_secure_3d_response()
     {
         $user = Auth::User();
         $customer = Customer::find($user->CustomerID);
