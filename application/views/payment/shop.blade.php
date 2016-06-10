@@ -231,16 +231,13 @@ $tabIndex = 1;
                                                 <ul class="sub-menu">
                                                     <li>
                                                         <span class="read"><?php echo __('website.read'); ?></span>
-                                                        <span class="mega-menu-sub-title">MESAFELİ SATIŞ SÖZLEŞMESİ</span>
+                                                        <span class="mega-menu-sub-title"><?php echo __('website.distance_sales_contract'); ?></span>
                                                         <ul class="sub-menu">
                                                             <li>
                                                                 <a href="/website/sozlesme/mesafeli-satis-sozlesmesi.docx?1"><img
                                                                             src="/website/styles/shop/img/mesafeliSatis.jpg"
-                                                                            width="200"/></a></li>
-                                                            <!-- <li><a href="feature-icons.html">Icons</a></li>
-                                                            <li><a href="feature-animations.html">Animations</a></li>
-                                                            <li><a href="feature-typography.html">Typography</a></li>
-                                                            <li><a href="feature-grid-system.html">Grid System</a></li> -->
+                                                                            width="200"/></a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -249,11 +246,13 @@ $tabIndex = 1;
                                                 <ul class="sub-menu">
                                                     <li>
                                                         <span class="read"><?php echo __('website.read'); ?></span>
-                                                        <span class="mega-menu-sub-title">GİZLİLİK SÖZLEŞMESİ</span>
+                                                        <span class="mega-menu-sub-title"><?php echo __('website.confidentiality_agreement');?></span>
                                                         <ul class="sub-menu">
-                                                            <li><a href="/website/sozlesme/gizlilik.docx"><img
+                                                            <li>
+                                                                <a href="/website/sozlesme/gizlilik.docx"><img
                                                                             src="/website/styles/shop/img/gizlilik.jpg"
-                                                                            width="200"/></a></li>
+                                                                            width="200"/></a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -408,7 +407,8 @@ $tabIndex = 1;
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title"><?php echo __('website.towards_payment_page'); ?></h4>
             </div>
-            <form action="/odeme" method="post" id="userInfos" class="form-horizontal" novalidate>
+            <form action="{{URL::to_route((string)__('route.payment_card_info'));}}" method="post" id="userInfos"
+                  class="form-horizontal" novalidate>
                 <div class="modal-body">
                     <?php if (count($applications) > 1): ?>
                     <script>
@@ -448,7 +448,7 @@ $tabIndex = 1;
                             );
                         }
                     </script>
-                        <h5 class="col-xs-12"><?php echo strtoupper((string)__('website.application_selection'));?></h5>
+                    <h5 class="col-xs-12"><?php echo strtoupper((string)__('website.application_selection'));?></h5>
 
                     <div class="form-group">
                         <label for="applicationID" class="control-label col-xs-3"
@@ -481,7 +481,7 @@ $tabIndex = 1;
 
                                 <input type="text" name="Price" id="Price" class="form-control textbox" disabled
                                        value="{{ $selectedApplicationPrice }}"/>
-                                <span class="input-group-addon">TL + (KDV)</span>
+                                <span class="input-group-addon"><?php echo __('website.currency'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -496,7 +496,7 @@ $tabIndex = 1;
                     <input type="hidden" name="applicationID" value="<?php echo $applications[0]->ApplicationID; ?>"/>
                     <?php endif; ?>
 
-                        <h5 class="col-xs-12"><?php echo __('website.user_info');?></h5>
+                    <h5 class="col-xs-12"><?php echo __('website.user_info');?></h5>
                     <div class="form-group">
                         <label for="customerType" class="control-label col-xs-3" style="padding-top: 16px;">
                             <?php echo __('website.individual') . '/' . __('website.company');?>
@@ -534,7 +534,7 @@ $tabIndex = 1;
                         </div>
                     </div>
                     <hr>
-                        <h5 class="col-xs-12"><?php echo __('website.billing_info');?></h5>
+                    <h5 class="col-xs-12"><?php echo __('website.billing_info');?></h5>
 
                     <div class="form-group">
                         <label for="customerTitle"

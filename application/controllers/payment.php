@@ -61,7 +61,7 @@ class Payment_Controller extends Base_Controller
         return View::make('payment.odeme', $customerData);
     }
 
-    public function post_odeme()
+    public function post_card_info()
     {
         $user = Auth::User();
         $customer = Customer::find($user->CustomerID);
@@ -98,7 +98,7 @@ class Payment_Controller extends Base_Controller
         $data["paymentAccount"] = $paymentAccount;
         $data["application"] = $application;
 
-        return View::make('payment.payment-galepress', $data);
+        return View::make('payment.card_info', $data);
     }
 
     /**
@@ -243,7 +243,7 @@ class Payment_Controller extends Base_Controller
             }
 
 
-            return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
+            return Redirect::to_route("website_payment_result_get", array(str_replace('%2F', '/', urlencode($paymentResult))));
         } else {
             print_r($response);
         }
@@ -344,7 +344,7 @@ class Payment_Controller extends Base_Controller
             $paymentTransaction->state = "rejected";
             $paymentTransaction->response3d = json_encode($result);
             $paymentTransaction->save();
-            if (!empty($result['response']["error_message_tr"])) {
+            if (Config::get('application.language') == 'tr' && !empty($result['response']["error_message_tr"])) {
                 $paymentResult = $result['response']["error_message_tr"];
             } else {
                 $paymentResult = $result['response']["error_message"];
@@ -353,15 +353,15 @@ class Payment_Controller extends Base_Controller
         return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
     }
 
-    public function get_odemeSonuc($encodedResult)
+    public function get_payment_result($encodedResult)
     {
         $result = urldecode($encodedResult);
         if ($result == "Success") {
-            $payDataMsg = "Ödemeniz başarıyla gerçekleşti, teşekkür ederiz...";
-            $payDataTitle = "Ödeme Başarılı!";
+            $payDataMsg = __('website.payment_result_successful');
+            $payDataTitle = __('website.payment_successful');
         } else {
             $payDataMsg = $result;
-            $payDataTitle = "Ödeme Başarısız!";
+            $payDataTitle = __('website.payment_failure');
         }
         $data = array('payDataMsg' => $payDataMsg, 'payDataTitle' => $payDataTitle, 'result' => $result);
         return View::make('payment.odeme_sonuc', $data);

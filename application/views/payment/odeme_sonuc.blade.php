@@ -204,7 +204,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-                                <h2>Gale Press Ödeme Sonucu</h2>
+                                <h2>{{__('website.galepress_payment_result')}}</h2>
 							</div>
 						</div>
 					</div>
@@ -229,38 +229,6 @@
 			</div>
 
 			<footer id="footer">
-				<div class="container">
-					<div class="row">
-
-						<div class="col-md-5">
-							<div class="newsletter">
-								<h4>Hakkımızda</h4>
-								<p>Detaysoft, 13 yılı aşkın bir süredir, yazılım uygulamaları ve yenilikçi geliştirme konusunda, personel sayısı 200'ü aşan ve kendi sektöründe lider kuruluşlara danışmanlık hizmeti vermektedir.</p>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<div class="contact-details">
-								<h4>İletişim</h4>
-								<ul class="contact">
-									<li><p><i class="icon icon-map-marker"></i> <strong>Adres:</strong> Alemdağ Cad. No: 109, Üsküdar / İstanbul / Türkiye</p></li>
-									<li><p><i class="icon icon-phone"></i> <strong>Telefon:</strong> +90 (216) 443 13 29</p></li>
-									<li><p><i class="icon icon-print"></i> <strong>Fax:</strong> +90 (216) 443 08 27</p></li>
-									<li><p><i class="icon icon-envelope"></i> <strong>Email:</strong> <a href="mailto:info@galepress.com">info@galepress.com</a></p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<h4>Takip Edin</h4>
-							<div class="social-icons">
-								<ul class="social-icons">
-									<li class="facebook"><a href="https://www.facebook.com/pages/Galepress/267455253374597?fref=ts" target="_blank" data-placement="bottom" rel="tooltip" title="Facebook">Facebook</a></li>
-									<li class="twitter"><a href="https://twitter.com/GalePress" target="_blank" data-placement="bottom" rel="tooltip" title="Twitter">Twitter</a></li>
-									<li class="linkedin"><a href="https://www.linkedin.com/company/galepress" target="_blank" data-placement="bottom" rel="tooltip" title="Linkedin">Linkedin</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="footer-copyright">
 					<div class="container">
 						<div class="row">
@@ -297,14 +265,5 @@
 		<script src="/website/styles/shop/vendor/jflickrfeed/jflickrfeed.js"></script>
 		<script src="/website/styles/shop/vendor/magnific-popup/magnific-popup.js"></script>
 		<script src="/website/styles/shop/vendor/mediaelement/mediaelement-and-player.js"></script>
-		
-		<!-- Theme Initializer -->
-		<script src="/website/scripts/shop/theme.plugins.js"></script>
-		<script src="/website/scripts/shop/theme.js"></script>
-		
-		<!-- Custom JS -->
-		<script src="/website/scripts/shop/custom.js"></script>
-		<script src="/website/scripts/shop/validate/jquery.mask.min.js"></script>
-
 	</body>
 </html>

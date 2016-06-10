@@ -153,4 +153,6 @@ return array(
     'sign_up' => 'customer/register',
     'forgot_password' => 'customer/password',
     'sign_in' => 'customer/signin',
+
+    'payment_card_info' => 'payment/card-info',
 );

@@ -115,10 +115,9 @@ foreach ($languages as $currentLanguage) {
     Route::get('payment-galepress', array('as' => 'website_payment_galepress_get', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
     Route::post('payment-galepress', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
     // Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
-
-    Route::post('odeme', array('as' => 'website_odeme_post', 'before' => 'auth', 'uses' => 'payment@odeme'));
+    Route::post(__('route.payment_card_info')->get($currentLanguage), array('as' => __('route.payment_card_info')->get($currentLanguage), 'before' => 'auth', 'uses' => 'payment@card_info'));
     Route::post('odeme-onay', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_approval'));
-    Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'payment@odemeSonuc'));
+    Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'payment@payment_result'));
 
     // <editor-fold defaultstate="collapsed" desc="Common">
 

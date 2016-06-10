@@ -153,4 +153,6 @@ return array(
     'sign_up' => 'musteri/kaydol',
     'forgot_password' => 'musteri/parolahatirlatma',
     'sign_in' => 'musteri/giris',
+
+    'payment_card_info' => 'odeme/kart-bilgisi',
 );
