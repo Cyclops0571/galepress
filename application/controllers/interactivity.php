@@ -348,7 +348,7 @@ class Interactivity_Controller extends Base_Controller
             if (!$contentFilePage) {
                 return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('ContentFilePage not found');
             } else {
-                if ($contentFilePage->OperationStatus) {
+                if ($contentFilePage->OperationStatus && strtotime($contentFilePage->ProcessDate) > time() - 5 * 60) {
                     return "success=" . base64_encode("false") . "&errmsg=" . base64_encode('Previous save operation not complete');
                 } else {
                     $contentFilePage->OperationStatus = 1;
