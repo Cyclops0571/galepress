@@ -371,7 +371,7 @@ class Interactivity_Controller extends Base_Controller
                     $contentFile = ContentFile::find($contentFileID);
                     $contentFile->Included = ($included == 1 ? 1 : 0);
                     if ($closing == "true") {
-                        $contentFile->Interactivity = 1;
+                        $contentFile->Interactivity = ContentFile::InteractivityProcessAvailable;
                         $contentFile->HasCreated = 0;
                         $contentFile->ErrorCount = 0;
                         $contentFile->InteractiveFilePath = '';

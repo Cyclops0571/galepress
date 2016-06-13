@@ -49,8 +49,12 @@ class ContentFile extends Eloquent
      * @param ContentFile $cf
      * @return string
      */
-    public static function makeContentInteractive(ContentFile &$cf)
+    public static function makeContentInteractive(&$cf)
     {
+        if (!$cf) {
+            return;
+        }
+
         $expMessage = '';
         if (count($cf->ContentFilePage) > 0) {
             //contentFile coktan interactif yapilmis bisey yapmadan donelim.

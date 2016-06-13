@@ -256,7 +256,7 @@ class Common
                 $oContentFilePath = $cf->FilePath;
                 $oContentFileName = $cf->FileName;
 
-                if ((int)$cf->Interactivity == 1) {
+                if ((int)$cf->Interactivity == ContentFile::InteractivityProcessAvailable) {
                     //$oContentFilePath = $cf->InteractiveFilePath;
                     //$oContentFileName = $cf->InteractiveFileName;
                     if ((int)$cf->HasCreated == 1) {
@@ -315,7 +315,7 @@ class Common
                 $oContentFilePath = $cf->FilePath;
                 $oContentFileName = $cf->FileName;
 
-                if ((int)$cf->Interactivity == 1) {
+                if ((int)$cf->Interactivity == ContentFile::InteractivityProcessAvailable) {
                     //$oContentFilePath = $cf->InteractiveFilePath;
                     //$oContentFileName = $cf->InteractiveFileName;
                     if ((int)$cf->HasCreated == 1) {

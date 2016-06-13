@@ -252,18 +252,22 @@ class Content extends Eloquent
     /**
      * @param int $customerID
      * @param ContentFile $contentFile
+     * @param int $coverImageFileSelected
+     * @param string $coverImageFileName
      * @throws Exception
      */
-    public function processImage($customerID, $contentFile)
+    public function processImage($customerID, $contentFile, $coverImageFileSelected, $coverImageFileName)
     {
-        if ((int)Input::get('hdnCoverImageFileSelected', 0) != 1) {
-            return;
-        }
+
         if (!$contentFile) {
             return;
         }
+        
+        if ($coverImageFileSelected != 1) {
+            return;
+        }
 
-        $sourceFileName = Input::get('hdnCoverImageFileName');
+        $sourceFileName = $coverImageFileName;
         $sourceFilePath = 'files/temp';
         $sourceRealPath = path('public') . $sourceFilePath;
         $sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
