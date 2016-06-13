@@ -40,6 +40,8 @@
  * @property int $BannerColor Description
  * @property int $BannerSlideAnimation Description
  * @property int $TabActive Description
+ * @property int $GoogleDeveloperKey Description
+ * @property int $GoogleDeveloperEmail Description
  * @property int $SubscriptionWeekActive Description
  * @property int $SubscriptionMonthActive Description
  * @property int $SubscriptionYearActive Description

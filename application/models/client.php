@@ -116,17 +116,28 @@ class Client extends Eloquent
     {
         require_once path('bundle') . '/google/src/Google/autoload.php';
         $client = new Google_Client();
+        $application = $this->Application;
         // set Application Name to the name of the mobile app
-        $client->setApplicationName($this->Application->Name);
+        $client->setApplicationName($application->Name);
         // get p12 key file
-        $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
+        if (!empty($application->GoogleDeveloperKey)) {
+            $key = file_get_contents(path('app') . 'keys/' . $application->GoogleDeveloperKey);
+        } else {
+            $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
+        }
+
+        if (!empty($application->GoogleDeveloperEmail)) {
+            $email = $application->GoogleDeveloperEmail;
+        } else {
+            $email = '552236962262-compute@developer.gserviceaccount.com';
+        }
 
         // create assertion credentials class and pass in:
         // - service account email address
         // - query scope as an array (which APIs the call will access)
         // - the contents of the key file
         $cred = new Google_Auth_AssertionCredentials(
-            '552236962262-compute@developer.gserviceaccount.com',
+            $email,
             array('https://www.googleapis.com/auth/androidpublisher'),
             $key
         );
@@ -243,17 +254,31 @@ class Client extends Eloquent
     {
         require_once path('bundle') . '/google/src/Google/autoload.php';
         $client = new Google_Client();
+
+        $application = $this->Application
         // set Application Name to the name of the mobile app
-        $client->setApplicationName($this->Application->Name);
+        $client->setApplicationName($application->Name);
+
+
         // get p12 key file
-        $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
+        if (!empty($application->GoogleDeveloperKey)) {
+            $key = file_get_contents(path('app') . 'keys/' . $application->GoogleDeveloperKey);
+        } else {
+            $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
+        }
+
+        if (!empty($application->GoogleDeveloperEmail)) {
+            $email = $application->GoogleDeveloperEmail;
+        } else {
+            $email = '552236962262-compute@developer.gserviceaccount.com';
+        }
 
         // create assertion credentials class and pass in:
         // - service account email address
         // - query scope as an array (which APIs the call will access)
         // - the contents of the key file
         $cred = new Google_Auth_AssertionCredentials(
-            '552236962262-compute@developer.gserviceaccount.com',
+            $email,
             array('https://www.googleapis.com/auth/androidpublisher'),
             $key
         );
