@@ -239,6 +239,42 @@ class Client extends Eloquent
         }
     }
 
+    public function checkReceiptGoogleTest($clientReceipt)
+    {
+        require_once path('bundle') . '/google/src/Google/autoload.php';
+        $client = new Google_Client();
+        // set Application Name to the name of the mobile app
+        $client->setApplicationName($this->Application->Name);
+        // get p12 key file
+        $key = file_get_contents(path('app') . 'keys/GooglePlayAndroidDeveloper-74176ee02cd0.p12');
+
+        // create assertion credentials class and pass in:
+        // - service account email address
+        // - query scope as an array (which APIs the call will access)
+        // - the contents of the key file
+        $cred = new Google_Auth_AssertionCredentials(
+            '552236962262-compute@developer.gserviceaccount.com',
+            array('https://www.googleapis.com/auth/androidpublisher'),
+            $key
+        );
+        // add the credentials to the client
+        $client->setAssertionCredentials($cred);
+        // create a new Android Publisher service class
+        $service = new Google_Service_AndroidPublisher($client);
+        // use the purchase token to make a call to Google to get the subscription info
+        /** @var Content $content */
+        $content = Content::where("Identifier", '=', $clientReceipt->SubscriptionID)->where("ApplicationID", '=', $this->Application->ApplicationID)->first();
+        if ($content) {
+            //content ise valide edip contenti erişebilir content listesine koyacağız...
+            $productPurchaseResponse = $service->purchases_products->get($clientReceipt->PackageName, $clientReceipt->SubscriptionID, $clientReceipt->Receipt);
+            var_dump($productPurchaseResponse);
+        } else {
+            //applicationda $productID var mi kontrol edecegiz...
+            $subscriptionResponse = $service->purchases_subscriptions->get($clientReceipt->PackageName, $clientReceipt->SubscriptionID, $clientReceipt->Receipt);
+            var_dump($subscriptionResponse);
+        }
+    }
+
     public function CheckReceiptCLI()
     {
         /** @var ClientReceipt[] $clientReceipts */

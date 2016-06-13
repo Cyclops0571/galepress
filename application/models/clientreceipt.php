@@ -26,7 +26,7 @@ class ClientReceipt extends Eloquent
      */
     public static function find($ClientReceiptID, $columns = array('*'))
     {
-        return ClientContent::where(self::$key, "=", $ClientReceiptID)->first($columns);
+        return ClientReceipt::where(self::$key, "=", $ClientReceiptID)->first($columns);
     }
 
     public function save()
