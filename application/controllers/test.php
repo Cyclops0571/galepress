@@ -20,7 +20,7 @@ class Test_Controller extends Base_Controller
     {
         $client = Client::find(488);
         $clientReceipt = ClientReceipt::find(99);
-        $client->checkReceiptGoogle($clientReceipt);
+        $client->checkReceiptGoogleTest($clientReceipt);
     }
 
     public function create($ContentFileID, $Included)
