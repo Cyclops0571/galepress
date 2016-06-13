@@ -255,7 +255,7 @@ class Client extends Eloquent
         require_once path('bundle') . '/google/src/Google/autoload.php';
         $client = new Google_Client();
 
-        $application = $this->Application
+        $application = $this->Application;
         // set Application Name to the name of the mobile app
         $client->setApplicationName($application->Name);
 
