@@ -18,7 +18,7 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        echo 'arda'; exit;
+        echo 'arda22'; exit;
         $client = Client::find(488);
         $clientReceipt = ClientReceipt::find(99);
         $client->checkReceiptGoogleTest($clientReceipt);
