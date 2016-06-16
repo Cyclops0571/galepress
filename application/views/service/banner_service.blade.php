@@ -141,6 +141,7 @@ $TransitionRate = $application->BannerTransitionRate;
     var lastPageX = 0;
     var lastPageX2 = 0;
     var myslideNext = false;
+    var myslidePrev = false;
     var myBulletClass = undefined;
     var sliderAnimation = '<?php echo $application->BannerSlideAnimation; ?>';
     $('.image-container').css('height', $('body').height());
@@ -167,14 +168,13 @@ $TransitionRate = $application->BannerTransitionRate;
         resistance: false,
         touchMoveStopPropagation: false,
         runCallbacksOnInit: false,
-        noSwiping: false,
+        noSwiping: true,
         onSlideChangeEnd: function (swiper) {
             myslideNext = false;
-            swiper.slideTo(swiper.activeIndex, <?php echo $TransitionRate; ?>, false);
             swiper.startAutoplay();
         },
         onSlidePrevStart: function (swiper) {
-            myslideNext = false;
+            myslidePrev = false;
         },
         onSlideNextStart: function (swiper) {
             myslideNext = false;
@@ -188,25 +188,28 @@ $TransitionRate = $application->BannerTransitionRate;
 
             if (lastPageX2 != 0 && lastPageX != 0) {
                 if (lastPageX2 > lastPageX && lastPageX > event.touches[0].pageX) {
+                    swiper.stopAutoplay();
                     setTimeout(slideNext, 100);
+                    myslideNext = true;
                 } else if (lastPageX2 < lastPageX && lastPageX < event.touches[0].pageX) {
+                    swiper.stopAutoplay();
                     setTimeout(slidePrev, 100);
+                    myslidePrev = true;
                 }
             }
             lastPageX2 = lastPageX;
             lastPageX = event.touches[0].pageX;
-            myslideNext = true;
         }
     });
-
 
     function slideNext() {
         if (myslideNext) {
             swiper.slideNext();
         }
     }
+
     function slidePrev() {
-        if (myslideNext) {
+        if (myslidePrev) {
             swiper.slidePrev();
         }
     }
