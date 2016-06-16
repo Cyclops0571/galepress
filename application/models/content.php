@@ -229,7 +229,9 @@ class Content extends Eloquent
 
             $originalImageFileName = pathinfo($sourceFileNameFull, PATHINFO_FILENAME) . IMAGE_ORJ_EXTENSION;
             File::move($sourceFileNameFull, $targetFileNameFull);
-            File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
+            if (File::exists($sourceRealPath . "/" . $originalImageFileName)) {
+                File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
+            }
 
             $ContentFile = new ContentFile();
             $ContentFile->ContentID = $this->ContentID;

@@ -6,7 +6,7 @@
     <title>GALERPESS BANNER SLIDER</title>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/deneme/Swiper-master/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="/js/Swiper-master/dist/css/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
     <style>
         body {

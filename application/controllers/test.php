@@ -18,6 +18,9 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        $path = path('public') . 'files\customer_60\application_58\content_2050\file_2732\file_1.jpg';
+        echo pathinfo($path, PATHINFO_FILENAME);
+        exit;
         echo 'arda223344'; exit;
         $client = Client::find(488);
         $clientReceipt = ClientReceipt::find(99);
