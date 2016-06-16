@@ -168,7 +168,7 @@ $TransitionRate = $application->BannerTransitionRate;
         resistance: false,
         touchMoveStopPropagation: false,
         runCallbacksOnInit: false,
-        noSwiping: true,
+        noSwiping: false,
         onSlideChangeEnd: function (swiper) {
             myslideNext = false;
             swiper.startAutoplay();
