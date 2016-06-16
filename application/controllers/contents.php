@@ -364,7 +364,7 @@ class Contents_Controller extends Base_Controller
                 $contentID = $content->ContentID;
                 $contentFile = $content->processPdf($customerID);
                 $content->processImage($customerID, $contentFile, (int)Input::get('hdnCoverImageFileSelected', 0), Input::get('hdnCoverImageFileName'));
-                ContentFile::makeContentInteractive($contentFile);
+                ContentFile::createPdfPages($contentFile);
             } catch (Exception $e) {
                 return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
             }
@@ -459,7 +459,7 @@ class Contents_Controller extends Base_Controller
                 $cf->FileName = $contentFile->FileName;
                 $cf->FileSize = $contentFile->FileSize;
                 $cf->Transferred = $contentFile->Transferred;
-                $cf->Interactivity = 0;
+                $cf->Interactivity = Interactivity::ProcessAvailable;
                 $cf->HasCreated = 0;
                 //$cf->InteractiveFilePath = 'files/customer_' . $customerID . '/application_' . $c->ApplicationID . '/content_' . $c->ContentID;
                 $cf->InteractiveFileName = $contentFile->InteractiveFileName;
@@ -675,7 +675,7 @@ class Contents_Controller extends Base_Controller
 
             $targetHasCreated = ContentFile::find($targetContentFileID);
             if ($targetHasCreated) {
-                $targetHasCreated->Interactivity = 1;
+                $targetHasCreated->Interactivity = Interactivity::ProcessQueued;
                 $targetHasCreated->HasCreated = 0;
                 $targetHasCreated->save();
             }

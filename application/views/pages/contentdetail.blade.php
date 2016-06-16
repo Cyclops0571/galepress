@@ -58,8 +58,8 @@
                 ->first();
         if ($ContentFile) {
             $ContentFileID = $ContentFile->ContentFileID;
-            $Transferable = (int)$ContentFile->Interactivity == ContentFile::InteractivityProcessAvailable;
-            $Transferred = (int)$ContentFile->Transferred == 1;
+            $Transferable = True;
+            $Transferred = $ContentFile->Transferred == 1;
         }
 
         if ($IsMaster == 1) {
@@ -267,7 +267,7 @@
                             </section>
                         </div>
                         <div class="col-md-5" style="padding-top: 8px">
-                            <?php if($ContentFile->Interactivity == ContentFile::InteractivityProcessAvailable): ?>
+                            <?php if($ContentFile->Interactivity == Interactivity::ProcessQueued): ?>
                             <?php if((int)$ContentFile->HasCreated == 1): ?>
                             <span><?php echo __('common.contents_interactive_file_has_been_created'); ?> </span>
                             <?php else: ?>

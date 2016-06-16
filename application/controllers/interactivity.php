@@ -5,8 +5,8 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class Interactivity_Controller extends Base_Controller
 {
-
     public $restful = true;
+
 
     public function get_preview()
     {
@@ -206,7 +206,7 @@ class Interactivity_Controller extends Base_Controller
             return View::make('interactivity.error', array('errmsg' => __('error.your_page_not_found')));
         }
 
-        if ($cf->Interactivity == ContentFile::InteractivityProcessContinues) {
+        if ($cf->Interactivity == Interactivity::ProcessContinues) {
             return Redirect::to('/' . __('route.contents') . '/' . $cf->ContentID . '?error=' . __('error.interactivity_conflict'));
         }
 
@@ -371,7 +371,7 @@ class Interactivity_Controller extends Base_Controller
                     $contentFile = ContentFile::find($contentFileID);
                     $contentFile->Included = ($included == 1 ? 1 : 0);
                     if ($closing == "true") {
-                        $contentFile->Interactivity = ContentFile::InteractivityProcessAvailable;
+                        $contentFile->Interactivity = Interactivity::ProcessQueued;
                         $contentFile->HasCreated = 0;
                         $contentFile->ErrorCount = 0;
                         $contentFile->InteractiveFilePath = '';

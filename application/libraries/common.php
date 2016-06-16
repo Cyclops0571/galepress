@@ -256,91 +256,13 @@ class Common
                 $oContentFilePath = $cf->FilePath;
                 $oContentFileName = $cf->FileName;
 
-                if ((int)$cf->Interactivity == ContentFile::InteractivityProcessAvailable) {
-                    //$oContentFilePath = $cf->InteractiveFilePath;
-                    //$oContentFileName = $cf->InteractiveFileName;
+                if ((int)$cf->Interactivity == Interactivity::ProcessQueued) {
                     if ((int)$cf->HasCreated == 1) {
                         $oContentFilePath = $cf->InteractiveFilePath;
                         $oContentFileName = $cf->InteractiveFileName;
                     } else {
                         throw new Exception(__('common.contents_interactive_file_hasnt_been_created'), "104");
                     }
-                }
-            } else {
-                throw new Exception(__('common.list_norecord'), "102");
-            }
-        } else {
-            throw new Exception(__('common.list_norecord'), "102");
-        }
-    }
-
-    public static function getContentDetailWithCoverImage(
-        $ContentID, &$oCustomerID, &$oApplicationID, &$oContentID, &$oContentFileID, &$oContentFilePath, &$oContentFileName, &$oContentCoverImageFileID, &$oContentCoverImageFilePath, &$oContentCoverImageFileName, &$oContentCoverImageFileName2)
-    {
-        $oCustomerID = 0;
-        $oApplicationID = 0;
-        $oContentID = 0;
-        $oContentFileID = 0;
-        $oContentFilePath = '';
-        $oContentFileName = '';
-        $oContentCoverImageFileID = 0;
-        $oContentCoverImageFilePath = '';
-        $oContentCoverImageFileName = '';
-        $oContentCoverImageFileName2 = '';
-
-        $c = DB::table('Customer AS c')
-            ->join('Application AS a', function ($join) {
-                $join->on('a.CustomerID', '=', 'c.CustomerID');
-                $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
-            })
-            ->join('Content AS o', function ($join) use ($ContentID) {
-                $join->on('o.ContentID', '=', DB::raw($ContentID));
-                $join->on('o.ApplicationID', '=', 'a.ApplicationID');
-                $join->on('o.StatusID', '=', DB::raw(eStatus::Active));
-            })
-            ->where('c.StatusID', '=', eStatus::Active)
-            ->first(array('c.CustomerID', 'a.ApplicationID', 'o.ContentID', 'o.IsProtected'));
-        if ($c) {
-            $oCustomerID = (int)$c->CustomerID;
-            $oApplicationID = (int)$c->ApplicationID;
-            $oContentID = (int)$c->ContentID;
-
-            $cf = DB::table('ContentFile')
-                ->where('ContentID', '=', $oContentID)
-                ->where('StatusID', '=', eStatus::Active)
-                ->order_by('ContentFileID', 'DESC')
-                ->first();
-            if ($cf) {
-                $oContentFileID = (int)$cf->ContentFileID;
-                $oContentFilePath = $cf->FilePath;
-                $oContentFileName = $cf->FileName;
-
-                if ((int)$cf->Interactivity == ContentFile::InteractivityProcessAvailable) {
-                    //$oContentFilePath = $cf->InteractiveFilePath;
-                    //$oContentFileName = $cf->InteractiveFileName;
-                    if ((int)$cf->HasCreated == 1) {
-                        //$oContentFilePath = $cf->InteractiveFilePath;
-                        //$oContentFileName = $cf->InteractiveFileName;
-                        $oContentFilePath = '';
-                        $oContentFileName = '';
-                    } else {
-                        //Cover image oldugundan engellenmemeli!!!
-                        //throw new Exception(__('common.contents_interactive_file_hasnt_been_created'), "104");
-                    }
-                }
-
-                $cif = DB::table('ContentCoverImageFile')
-                    ->where('ContentFileID', '=', $oContentFileID)
-                    ->where('StatusID', '=', eStatus::Active)
-                    ->order_by('ContentCoverImageFileID', 'DESC')
-                    ->first();
-                if ($cif) {
-                    $oContentCoverImageFileID = (int)$cif->ContentCoverImageFileID;
-                    $oContentCoverImageFilePath = $cif->FilePath;
-                    $oContentCoverImageFileName = $cif->FileName;
-                    $oContentCoverImageFileName2 = $cif->FileName2;
-                } else {
-                    throw new Exception(__('common.list_norecord'), "102");
                 }
             } else {
                 throw new Exception(__('common.list_norecord'), "102");

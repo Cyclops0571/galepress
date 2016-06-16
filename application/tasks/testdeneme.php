@@ -11,7 +11,7 @@ class TestDeneme_Task
     public function run()
     {
         $cf = ContentFile::find(2716);
-        ContentFile::makeContentInteractive($cf);
+        ContentFile::createPdfPages($cf);
     }
 
     public function consume()

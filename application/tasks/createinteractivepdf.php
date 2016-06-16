@@ -8,7 +8,7 @@ class CreateInteractivePDF_Task
 //        Common::sendEmail(Config::get('custom.admin_email_set'), 'Serdar Saygili', 'Interactive Local', 'Start');
         try {
             $cf = DB::table('ContentFile')
-                ->where('Interactivity', '=', ContentFile::InteractivityProcessAvailable)
+                ->where('Interactivity', '=', Interactivity::ProcessQueued)
                 ->where(function ($query) {
                     $query->where_null('HasCreated');
                     $query->or_where('HasCreated', '<>', 1);
