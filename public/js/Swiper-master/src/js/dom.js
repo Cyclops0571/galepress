@@ -180,7 +180,6 @@ var Dom7 = (function () {
                     }
                 }
             }
-
             var events = eventName.split(' ');
             var i, j;
             for (i = 0; i < this.length; i++) {
@@ -243,7 +242,6 @@ var Dom7 = (function () {
                 listener(e);
                 dom.off(eventName, targetSelector, proxy, capture);
             }
-
             dom.on(eventName, targetSelector, proxy, capture);
         },
         trigger: function (eventName, eventData) {
@@ -264,7 +262,6 @@ var Dom7 = (function () {
         transitionEnd: function (callback) {
             var events = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'],
                 i, j, dom = this;
-
             function fireCallBack(e) {
                 /*jshint validthis:true */
                 if (e.target !== this) return;
@@ -273,7 +270,6 @@ var Dom7 = (function () {
                     dom.off(events[i], fireCallBack);
                 }
             }
-
             if (callback) {
                 for (i = 0; i < events.length; i++) {
                     dom.on(events[i], fireCallBack);

@@ -62,6 +62,7 @@ var defaults = {
     mousewheelSensitivity: 1,
     // Hash Navigation
     hashnav: false,
+    hashnavReplaceState: false,
     // Breakpoints
     breakpoints: undefined,
     // Slides grid
@@ -151,6 +152,7 @@ var defaults = {
     paginationTotalClass: 'swiper-pagination-total',
     paginationHiddenClass: 'swiper-pagination-hidden',
     paginationProgressbarClass: 'swiper-pagination-progressbar',
+    lazyLoadingClass: 'swiper-lazy',
     // Observer
     observer: false,
     observeParents: false,
@@ -444,21 +446,35 @@ s.velocity = 0;
  ===========================*/
 s.lockSwipeToNext = function () {
     s.params.allowSwipeToNext = false;
+    if (s.params.allowSwipeToPrev === false && s.params.grabCursor) {
+        s.unsetGrabCursor();
+    }
 };
 s.lockSwipeToPrev = function () {
     s.params.allowSwipeToPrev = false;
+    if (s.params.allowSwipeToNext === false && s.params.grabCursor) {
+        s.unsetGrabCursor();
+    }
 };
 s.lockSwipes = function () {
     s.params.allowSwipeToNext = s.params.allowSwipeToPrev = false;
+    if (s.params.grabCursor) s.unsetGrabCursor();
 };
 s.unlockSwipeToNext = function () {
     s.params.allowSwipeToNext = true;
+    if (s.params.allowSwipeToPrev === true && s.params.grabCursor) {
+        s.setGrabCursor();
+    }
 };
 s.unlockSwipeToPrev = function () {
     s.params.allowSwipeToPrev = true;
+    if (s.params.allowSwipeToNext === true && s.params.grabCursor) {
+        s.setGrabCursor();
+    }
 };
 s.unlockSwipes = function () {
     s.params.allowSwipeToNext = s.params.allowSwipeToPrev = true;
+    if (s.params.grabCursor) s.setGrabCursor();
 };
 
 /*=========================
@@ -470,11 +486,17 @@ function round(a) {
 /*=========================
  Set grab cursor
  ===========================*/
-if (s.params.grabCursor) {
+s.setGrabCursor = function (moving) {
     s.container[0].style.cursor = 'move';
-    s.container[0].style.cursor = '-webkit-grab';
-    s.container[0].style.cursor = '-moz-grab';
-    s.container[0].style.cursor = 'grab';
+    s.container[0].style.cursor = moving ? '-webkit-grabbing' : '-webkit-grab';
+    s.container[0].style.cursor = moving ? '-moz-grabbin' : '-moz-grab';
+    s.container[0].style.cursor = moving ? 'grabbing' : 'grab';
+};
+s.unsetGrabCursor = function () {
+    s.container[0].style.cursor = '';
+};
+if (s.params.grabCursor) {
+    s.setGrabCursor();
 }
 /*=========================
  Update on Images Ready
@@ -488,7 +510,6 @@ s.loadImage = function (imgElement, src, srcset, checkForComplete, callback) {
     function onReady() {
         if (callback) callback();
     }
-
     if (!imgElement.complete || !checkForComplete) {
         if (src) {
             image = new window.Image();
@@ -518,7 +539,6 @@ s.preloadImages = function () {
             s.emit('onImagesReady', s);
         }
     }
-
     for (var i = 0; i < s.imagesToLoad.length; i++) {
         s.loadImage(s.imagesToLoad[i], (s.imagesToLoad[i].currentSrc || s.imagesToLoad[i].getAttribute('src')), (s.imagesToLoad[i].srcset || s.imagesToLoad[i].getAttribute('srcset')), true, _onReady);
     }
@@ -900,6 +920,10 @@ s.updateActiveIndex = function () {
     s.previousIndex = s.activeIndex;
     s.activeIndex = newActiveIndex;
     s.updateClasses();
+    s.updateRealIndex();
+};
+s.updateRealIndex = function () {
+    s.realIndex = s.slides.eq(s.activeIndex).attr('data-swiper-slide-index') || s.activeIndex;
 };
 
 /*=========================
@@ -1061,12 +1085,12 @@ s.update = function (updateTranslate) {
         s.scrollbar.set();
     }
     function forceSetTranslate() {
+        var translate = s.rtl ? -s.translate : s.translate;
         newTranslate = Math.min(Math.max(s.translate, s.maxTranslate()), s.minTranslate());
         s.setWrapperTranslate(newTranslate);
         s.updateActiveIndex();
         s.updateClasses();
     }
-
     if (updateTranslate) {
         var translated, newTranslate;
         if (s.controller && s.controller.spline) {
@@ -1151,13 +1175,21 @@ s.onResize = function (forceUpdatePagination) {
  ===========================*/
 
 //Define Touch Events
-var desktopEvents = ['mousedown', 'mousemove', 'mouseup'];
-if (window.navigator.pointerEnabled) desktopEvents = ['pointerdown', 'pointermove', 'pointerup'];
-else if (window.navigator.msPointerEnabled) desktopEvents = ['MSPointerDown', 'MSPointerMove', 'MSPointerUp'];
+s.touchEventsDesktop = {start: 'mousedown', move: 'mousemove', end: 'mouseup'};
+if (window.navigator.pointerEnabled) s.touchEventsDesktop = {
+    start: 'pointerdown',
+    move: 'pointermove',
+    end: 'pointerup'
+};
+else if (window.navigator.msPointerEnabled) s.touchEventsDesktop = {
+    start: 'MSPointerDown',
+    move: 'MSPointerMove',
+    end: 'MSPointerUp'
+};
 s.touchEvents = {
-    start: s.support.touch || !s.params.simulateTouch ? 'touchstart' : desktopEvents[0],
-    move: s.support.touch || !s.params.simulateTouch ? 'touchmove' : desktopEvents[1],
-    end: s.support.touch || !s.params.simulateTouch ? 'touchend' : desktopEvents[2]
+    start: s.support.touch || !s.params.simulateTouch ? 'touchstart' : s.touchEventsDesktop.start,
+    move: s.support.touch || !s.params.simulateTouch ? 'touchmove' : s.touchEventsDesktop.move,
+    end: s.support.touch || !s.params.simulateTouch ? 'touchend' : s.touchEventsDesktop.end
 };
 
 
@@ -1484,11 +1516,8 @@ s.onTouchMove = function (e) {
         }
         allowMomentumBounce = false;
         //Grab Cursor
-        if (s.params.grabCursor) {
-            s.container[0].style.cursor = 'move';
-            s.container[0].style.cursor = '-webkit-grabbing';
-            s.container[0].style.cursor = '-moz-grabbin';
-            s.container[0].style.cursor = 'grabbing';
+        if (s.params.grabCursor && (s.params.allowSwipeToNext === true || s.params.allowSwipeToPrev === true)) {
+            s.setGrabCursor(true);
         }
     }
     isMoved = true;
@@ -1572,11 +1601,8 @@ s.onTouchEnd = function (e) {
     allowTouchCallbacks = false;
     if (!isTouched) return;
     //Return Grab Cursor
-    if (s.params.grabCursor && isMoved && isTouched) {
-        s.container[0].style.cursor = 'move';
-        s.container[0].style.cursor = '-webkit-grab';
-        s.container[0].style.cursor = '-moz-grab';
-        s.container[0].style.cursor = 'grab';
+    if (s.params.grabCursor && isMoved && isTouched && (s.params.allowSwipeToNext === true || s.params.allowSwipeToPrev === true)) {
+        s.setGrabCursor(false);
     }
 
     // Time diff
@@ -1862,7 +1888,7 @@ s.slideTo = function (slideIndex, speed, runCallbacks, internal) {
     if (typeof speed === 'undefined') speed = s.params.speed;
     s.previousIndex = s.activeIndex || 0;
     s.activeIndex = slideIndex;
-
+    s.updateRealIndex();
     if ((s.rtl && -translate === s.translate) || (!s.rtl && translate === s.translate)) {
         // Update Height
         if (s.params.autoHeight) {
@@ -1966,6 +1992,15 @@ s._slidePrev = function (speed) {
 };
 s.slideReset = function (runCallbacks, speed, internal) {
     return s.slideTo(s.activeIndex, speed, runCallbacks);
+};
+
+s.disableTouchControl = function () {
+    s.params.onlyExternal = true;
+    return true;
+};
+s.enableTouchControl = function () {
+    s.params.onlyExternal = false;
+    return true;
 };
 
 /*=========================

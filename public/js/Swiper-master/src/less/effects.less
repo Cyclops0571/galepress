@@ -45,7 +45,6 @@
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); /* Firefox 16+, IE10, Opera 12.50+ */
   }
 }
-
 /* Coverflow */
 .swiper-container-coverflow, .swiper-container-flip {
   .swiper-wrapper {
@@ -53,26 +52,25 @@
     -ms-perspective: 1200px;
   }
 }
-
 /* Cube + Flip */
 .swiper-container-cube, .swiper-container-flip {
   overflow: visible;
-  .swiper-slide {
-    pointer-events: none;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 1;
     .swiper-slide {
       pointer-events: none;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+      z-index: 1;
+      .swiper-slide {
+        pointer-events: none;
+      }
     }
-  }
   .swiper-slide-active {
     &, & .swiper-slide-active {
       pointer-events: auto;
     }
-  }
+    }
   .swiper-slide-shadow-top, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left, .swiper-slide-shadow-right {
     z-index: 0;
     -webkit-backface-visibility: hidden;
@@ -81,7 +79,6 @@
     backface-visibility: hidden;
   }
 }
-
 /* Cube */
 .swiper-container-cube {
   .swiper-slide {
@@ -116,7 +113,6 @@
     z-index: 0;
   }
 }
-
 /* Fade */
 .swiper-container-fade {
   &.swiper-container-free-mode {
@@ -127,20 +123,20 @@
       -o-transition-timing-function: ease-out;
       transition-timing-function: ease-out;
     }
-  }
-  .swiper-slide {
-    pointer-events: none;
-    -webkit-transition-property: opacity;
-    -moz-transition-property: opacity;
-    -o-transition-property: opacity;
-    transition-property: opacity;
+    }
     .swiper-slide {
       pointer-events: none;
+      -webkit-transition-property: opacity;
+      -moz-transition-property: opacity;
+      -o-transition-property: opacity;
+      transition-property: opacity;
+      .swiper-slide {
+        pointer-events: none;
+      }
     }
-  }
   .swiper-slide-active {
     &, & .swiper-slide-active {
       pointer-events: auto;
     }
-  }
+    }
 }

@@ -90,7 +90,6 @@ s.controller = {
     setTransition: function (duration, byController) {
         var controlled = s.params.control;
         var i;
-
         function setControlledTransition(c) {
             c.setWrapperTransition(duration, s);
             if (duration !== 0) {
@@ -105,7 +104,6 @@ s.controller = {
                 });
             }
         }
-
         if (s.isArray(controlled)) {
             for (i = 0; i < controlled.length; i++) {
                 if (controlled[i] !== byController && controlled[i] instanceof Swiper) {

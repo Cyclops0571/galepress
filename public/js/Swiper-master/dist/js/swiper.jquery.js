@@ -1,15 +1,15 @@
 /**
  * Swiper 3.3.1
  * Most modern mobile touch slider and framework with hardware accelerated transitions
- *
+ * 
  * http://www.idangero.us/swiper/
- *
+ * 
  * Copyright 2016, Vladimir Kharlampidi
  * The iDangero.us
  * http://www.idangero.us/
- *
+ * 
  * Licensed under MIT
- *
+ * 
  * Released on: February 7, 2016
  */
 (function () {
@@ -213,7 +213,7 @@
              onLazyImageLoad: function (swiper, slide, image)
              onLazyImageReady: function (swiper, slide, image)
              */
-
+        
         };
         var initialVirtualTranslate = params && params.virtualTranslate;
 
@@ -490,7 +490,6 @@
         function round(a) {
             return Math.floor(a);
         }
-
         /*=========================
          Set grab cursor
          ===========================*/
@@ -512,7 +511,6 @@
             function onReady() {
                 if (callback) callback();
             }
-
             if (!imgElement.complete || !checkForComplete) {
                 if (src) {
                     image = new window.Image();
@@ -542,7 +540,6 @@
                     s.emit('onImagesReady', s);
                 }
             }
-
             for (var i = 0; i < s.imagesToLoad.length; i++) {
                 s.loadImage(s.imagesToLoad[i], (s.imagesToLoad[i].currentSrc || s.imagesToLoad[i].getAttribute('src')), (s.imagesToLoad[i].srcset || s.imagesToLoad[i].getAttribute('srcset')), true, _onReady);
             }
@@ -578,7 +575,6 @@
                 }
             }, s.params.autoplay);
         }
-
         s.startAutoplay = function () {
             if (typeof s.autoplayTimeoutId !== 'undefined') return false;
             if (!s.params.autoplay) return false;
@@ -1091,7 +1087,6 @@
                 s.updateActiveIndex();
                 s.updateClasses();
             }
-
             if (updateTranslate) {
                 var translated, newTranslate;
                 if (s.controller && s.controller.spline) {
@@ -1174,7 +1169,7 @@
         /*=========================
          Events
          ===========================*/
-
+        
         //Define Touch Events
         var desktopEvents = ['mousedown', 'mousemove', 'mouseup'];
         if (window.navigator.pointerEnabled) desktopEvents = ['pointerdown', 'pointermove', 'pointerup'];
@@ -1299,7 +1294,6 @@
             }
             return el[0];
         }
-
         s.updateClickedSlide = function (e) {
             var slide = findElementInEvent(e, '.' + s.params.slideClass);
             var slideFound = false;
@@ -2147,7 +2141,6 @@
 
             s.observers.push(observer);
         }
-
         s.initObservers = function () {
             if (s.params.observeParents) {
                 var containerParents = s.container.parents();
@@ -2179,7 +2172,7 @@
             var slides = s.wrapper.children('.' + s.params.slideClass);
 
             if (s.params.slidesPerView === 'auto' && !s.params.loopedSlides) s.params.loopedSlides = slides.length;
-
+        
             s.loopedSlides = parseInt(s.params.loopedSlides || s.params.slidesPerView, 10);
             s.loopedSlides = s.loopedSlides + s.params.loopAdditionalSlides;
             if (s.loopedSlides > slides.length) {
@@ -2986,7 +2979,6 @@
             setTransition: function (duration, byController) {
                 var controlled = s.params.control;
                 var i;
-
                 function setControlledTransition(c) {
                     c.setWrapperTransition(duration, s);
                     if (duration !== 0) {
@@ -3001,7 +2993,6 @@
                         });
                     }
                 }
-
                 if (s.isArray(controlled)) {
                     for (i = 0; i < controlled.length; i++) {
                         if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
@@ -3108,7 +3099,6 @@
                 if (kc === 38) s.slidePrev();
             }
         }
-
         s.disableKeyboardControl = function () {
             s.params.keyboardControl = false;
             $(document).off('keydown', handleKeyboard);
@@ -3242,7 +3232,6 @@
             else e.returnValue = false;
             return false;
         }
-
         s.disableMousewheelControl = function () {
             if (!s.mousewheel.event) return false;
             s.container.off(s.mousewheel.event, handleMousewheel);
@@ -3297,7 +3286,6 @@
 
             el.transform('translate3d(' + pX + ', ' + pY + ',0px)');
         }
-
         s.parallax = {
             setTranslate: function () {
                 s.container.children('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]').each(function () {
@@ -3734,7 +3722,6 @@
             domLib.fn.transitionEnd = function (callback) {
                 var events = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'],
                     i, j, dom = this;
-
                 function fireCallBack(e) {
                     /*jshint validthis:true */
                     if (e.target !== this) return;
@@ -3743,7 +3730,6 @@
                         dom.off(events[i], fireCallBack);
                     }
                 }
-
                 if (callback) {
                     for (i = 0; i < events.length; i++) {
                         dom.on(events[i], fireCallBack);

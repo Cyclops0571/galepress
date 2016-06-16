@@ -17,7 +17,6 @@ if (domLib) {
         domLib.fn.transitionEnd = function (callback) {
             var events = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'],
                 i, j, dom = this;
-
             function fireCallBack(e) {
                 /*jshint validthis:true */
                 if (e.target !== this) return;
@@ -26,7 +25,6 @@ if (domLib) {
                     dom.off(events[i], fireCallBack);
                 }
             }
-
             if (callback) {
                 for (i = 0; i < events.length; i++) {
                     dom.on(events[i], fireCallBack);

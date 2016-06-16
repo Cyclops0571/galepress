@@ -165,7 +165,6 @@
             file.contents = new Buffer(newFileContents);
         }
     }
-
     gulp.task('scripts', function (cb) {
         gulp.src(swiper.jsFiles)
             .pipe(tap(function (file, t) {
