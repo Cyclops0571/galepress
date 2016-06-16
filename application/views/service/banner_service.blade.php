@@ -100,6 +100,7 @@
             opacity: 1;
             background: <?php echo $application->getBannerColor(); ?>;
         }
+
     </style>
 </head>
 
@@ -140,12 +141,18 @@ $TransitionRate = $application->BannerTransitionRate;
     var lastPageX = 0;
     var lastPageX2 = 0;
     var myslideNext = false;
-
+    var myBulletClass = undefined;
+    var sliderAnimation = '<?php echo $application->BannerSlideAnimation; ?>';
     $('.image-container').css('height', $('body').height());
     $('.swiper-slide').css('width', Math.ceil($('body').height() * 2.3125));
 
+    if (sliderAnimation == 'cube') {
+        myBulletClass = 'hidden';
+    }
+
     var swiper = new Swiper('.swiper-container', {
         autoHeight: true,
+        bulletClass: myBulletClass,
         bulletActiveClass: 'myswiper-pagination-bullet-active',
         speed: <?php echo $TransitionRate; ?>,
         autoplay: <?php echo $IntervalTime; ?>,
@@ -155,7 +162,7 @@ $TransitionRate = $application->BannerTransitionRate;
         loopedSlides: 0,
         centeredSlides: true,
         spaceBetween: 10,
-        effect: '<?php echo $application->BannerSlideAnimation; ?>',
+        effect: sliderAnimation,
         longSwipes: false,
         resistance: false,
         touchMoveStopPropagation: false,
