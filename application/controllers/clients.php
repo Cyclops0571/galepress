@@ -465,9 +465,10 @@ class Clients_Controller extends Base_Controller
         $data = array();
         $data["application"] = $client->Application;
         $data["client"] = $client;
-
+        //
         return View::make(Laravel\Request::$route->controller . '.clientregister', $data);
     }
+
 
     public function post_clientregister()
     {
@@ -723,5 +724,4 @@ class Clients_Controller extends Base_Controller
         $data = array();
         return View::make(Laravel\Request::$route->controller . '.passwordreseted', $data);
     }
-
 }
