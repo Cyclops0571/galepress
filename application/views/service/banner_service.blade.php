@@ -6,11 +6,11 @@
     <title>GALERPESS BANNER SLIDER</title>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/deneme/Swiper-master/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="/js/Swiper-master/dist/css/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
 
     <script src="/js/jquery-2.1.4.min.js"></script>
-    <script src="/deneme/Swiper-master/dist/js/swiper.min.js"></script>
+    <script src="/js/Swiper-master/dist/js/swiper.min.js"></script>
 
     <style>
         html {
@@ -100,6 +100,7 @@
             opacity: 1;
             background: <?php echo $application->getBannerColor(); ?>;
         }
+
     </style>
 </head>
 
@@ -140,12 +141,19 @@ $TransitionRate = $application->BannerTransitionRate;
     var lastPageX = 0;
     var lastPageX2 = 0;
     var myslideNext = false;
-
+    var myslidePrev = false;
+    var myBulletClass = undefined;
+    var sliderAnimation = '<?php echo $application->BannerSlideAnimation; ?>';
     $('.image-container').css('height', $('body').height());
     $('.swiper-slide').css('width', Math.ceil($('body').height() * 2.3125));
 
+    if (sliderAnimation == 'cube') {
+        myBulletClass = 'hidden';
+    }
+
     var swiper = new Swiper('.swiper-container', {
         autoHeight: true,
+        bulletClass: myBulletClass,
         bulletActiveClass: 'myswiper-pagination-bullet-active',
         speed: <?php echo $TransitionRate; ?>,
         autoplay: <?php echo $IntervalTime; ?>,
@@ -155,7 +163,7 @@ $TransitionRate = $application->BannerTransitionRate;
         loopedSlides: 0,
         centeredSlides: true,
         spaceBetween: 10,
-        effect: '<?php echo $application->BannerSlideAnimation; ?>',
+        effect: sliderAnimation,
         longSwipes: false,
         resistance: false,
         touchMoveStopPropagation: false,
@@ -163,11 +171,10 @@ $TransitionRate = $application->BannerTransitionRate;
         noSwiping: false,
         onSlideChangeEnd: function (swiper) {
             myslideNext = false;
-            swiper.slideTo(swiper.activeIndex, <?php echo $TransitionRate; ?>, false);
             swiper.startAutoplay();
         },
         onSlidePrevStart: function (swiper) {
-            myslideNext = false;
+            myslidePrev = false;
         },
         onSlideNextStart: function (swiper) {
             myslideNext = false;
@@ -181,25 +188,28 @@ $TransitionRate = $application->BannerTransitionRate;
 
             if (lastPageX2 != 0 && lastPageX != 0) {
                 if (lastPageX2 > lastPageX && lastPageX > event.touches[0].pageX) {
+                    swiper.stopAutoplay();
                     setTimeout(slideNext, 100);
+                    myslideNext = true;
                 } else if (lastPageX2 < lastPageX && lastPageX < event.touches[0].pageX) {
+                    swiper.stopAutoplay();
                     setTimeout(slidePrev, 100);
+                    myslidePrev = true;
                 }
             }
             lastPageX2 = lastPageX;
             lastPageX = event.touches[0].pageX;
-            myslideNext = true;
         }
     });
-
 
     function slideNext() {
         if (myslideNext) {
             swiper.slideNext();
         }
     }
+
     function slidePrev() {
-        if (myslideNext) {
+        if (myslidePrev) {
             swiper.slidePrev();
         }
     }

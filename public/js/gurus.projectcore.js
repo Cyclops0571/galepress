@@ -1050,7 +1050,6 @@ cContent = new function () {
     };
 
     this.addFileUpload = function () {
-
         $("#File").fileupload({
             url: '/' + currentLanguage + '/' + route["contents_uploadfile"],
             dataType: 'json',
@@ -1060,6 +1059,7 @@ cContent = new function () {
             },
             add: function (e, data) {
                 if (/\.(pdf)$/i.test(data.files[0].name)) {
+                    $("input[name='save']").attr('disabled', 'disabled');
                     $('#hdnFileSelected').val("1");
                     var $forFile = $("[for='File']");
                     $forFile.removeClass("hide");
@@ -1098,6 +1098,8 @@ cContent = new function () {
                     //auto save
                     if (parseInt($("#ContentID").val()) > 0) {
                         cContent.save();
+                    } else {
+                        $("input[name='save']").removeAttr('disabled');
                     }
                 }
             },

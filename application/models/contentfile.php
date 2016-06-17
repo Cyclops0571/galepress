@@ -9,6 +9,7 @@
  * @property int $FileName Description
  * @property int $FileName2 Description
  * @property int $FileSize Description
+ * @property int $PageCreateProgress Description
  * @property int $Transferred Description
  * @property int $Interactivity Description
  * @property int $HasCreated Description
@@ -29,15 +30,13 @@
  */
 class ContentFile extends Eloquent
 {
-
-    const InteractivityProcessAvailable = 1;
-    const InteractivityProcessContinues = 2;
+    const ContentFileInUse = 1;
+    const ContentFileAvailable = 0;
     public static $timestamps = false;
     public static $table = 'ContentFile';
     public static $key = 'ContentFileID';
     private static $_bookmarkAdded = false;
     private $_pfdName = '';
-
     /*
       public function Content()
       {
@@ -46,10 +45,11 @@ class ContentFile extends Eloquent
      */
 
     /**
+     *
      * @param ContentFile $cf
      * @return string
      */
-    public static function makeContentInteractive(&$cf)
+    public static function createPdfPages(&$cf)
     {
         if (!$cf) {
             return;
@@ -61,7 +61,7 @@ class ContentFile extends Eloquent
             return '';
         }
 
-        $cf->Interactivity = ContentFile::InteractivityProcessContinues;
+        $cf->PageCreateProgress = ContentFile::ContentFileInUse;
         $cf->save();
 
 
@@ -72,9 +72,6 @@ class ContentFile extends Eloquent
 
         try {
             $targetFileNameFull = path('public') . $cf->FilePath . '/' . $cf->FileName;
-            $cf->Interactivity = ContentFile::InteractivityProcessAvailable;
-            $cf->save();
-
             //extract zip file
             $zip = new ZipArchive();
             $res = $zip->open($targetFileNameFull);
@@ -107,19 +104,17 @@ class ContentFile extends Eloquent
             $cf->comparePages();
             $myPcos->closePdf();
         } catch (PDFlibException $e) {
-            $cf->Interactivity = ContentFile::InteractivityProcessAvailable;
-            $cf->save();
             $expMessage = "PDFlib exception occurred in :<br/>" .
                 "File:" . $e->getFile() . "<br/>" .
                 "Line:" . $e->getLine() . "<br/>" .
                 "[" . $e->get_errnum() . "] " . $e->get_apiname() . ": " . $e->get_errmsg();
         } catch (Exception $e) {
-            $cf->Interactivity = ContentFile::InteractivityProcessAvailable;
-            $cf->save();
             $expMessage = "File:" . $e->getFile() . "\r\n";
             $expMessage .= "Line:" . $e->getLine() . "\r\n";
             $expMessage .= "Message:" . $e->getMessage() . "\r\n";
         }
+//        $cf->PageCreateProgress  = ContentFile::ContentFileAvailable;
+//        $cf->save();
         return $expMessage;
     }
 
@@ -127,7 +122,7 @@ class ContentFile extends Eloquent
     {
         if ($closing) {
             $this->Included = 1;
-            $this->Interactivity = 1;
+            $this->Interactivity = Interactivity::ProcessQueued;
             $this->HasCreated = 0;
             $this->ErrorCount = 0;
             $this->InteractiveFilePath = '';
