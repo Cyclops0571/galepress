@@ -243,6 +243,7 @@ class Users_Controller extends Base_Controller
      */
     public function post_delete()
     {
+        //
         $currentUser = Auth::User();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
