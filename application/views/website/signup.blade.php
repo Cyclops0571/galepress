@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="/css/signUpBootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/signUpStyle.css">
 
-
     <title><?php echo __('website.signup_title') ?></title>
 
 </head>
