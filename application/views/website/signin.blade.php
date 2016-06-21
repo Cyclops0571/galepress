@@ -30,5 +30,6 @@
         <p style="margin: 3em 0 3em 0;"><?php echo __('website.forgot_password_title') ?></p>
     </div>
 </div>
+
 </body>
 </html>
