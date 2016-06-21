@@ -18,8 +18,12 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-
         //arda commit test
+        //serdar commit test
+        $tmp = array(1, 2);
+        echo json_encode($tmp);
+        exit;
+
         $path = path('public') . 'files\customer_60\application_58\content_2050\file_2732\file_1.jpg';
         echo pathinfo($path, PATHINFO_FILENAME);
         exit;

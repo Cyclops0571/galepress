@@ -25,15 +25,8 @@
 	SetEnv downgrade-1.0
 	RewriteRule . - [E=no-gzip:1]
 
-	#RewriteRule ^soap$ /tr/soap [P]
-	#Redirect 301  /soap.php /tr/soap/
-	#Redirect 301 /soap.php /tr/soap [NC,P]
-
-	#RewriteCond %{REQUEST_URI} /soap.php
-	#RewriteRule (.*) $/soap1 [L]
-
-	#RewriteCond %{REQUEST_URI} ^/soap.php [NC]
-	#RewriteRule ^(.*)$ http://v2.galepress.com/tr/soap [R=301,NC]
+	RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+	RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 	
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
