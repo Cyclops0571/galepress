@@ -21,6 +21,7 @@
             <input class="textbox inputText keyIcon" type="password" placeholder="<?php echo __('website.signin_password') ?>">
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <button type="button" class="kayitOl"><?php echo __('website.signin_button') ?></button>
@@ -30,6 +31,5 @@
         <p style="margin: 3em 0 3em 0;"><?php echo __('website.forgot_password_title') ?></p>
     </div>
 </div>
-
 </body>
 </html>
