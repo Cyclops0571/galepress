@@ -17,7 +17,7 @@ $socialMediaLinks['fa-instagram'] = __('common.fa-instagram');
                         <h6 class="upper widget-title">{{__('website.footer_socialmedia')}}</h6>
                         <ul class="social-icon sep-top-xs">
                             <?php foreach($socialMediaLinks as $faIcon => $url): ?>
-                            <li><a href="<?php echo $url ?>" class="fa <?php echo $faIcon ?> fa-lg"></a></li>
+                            <li><a href="<?php echo $url ?>" class="fa <?php echo $faIcon ?> fa-lg" target="_blank"></a></li>
                             <?php endforeach; ?>
                         </ul>
                         <?php if( Config::get("application.language") != 'usa'): ?>
