@@ -26,7 +26,7 @@ return array(
 
     'subscription_welcome_part2' => "İlk tasarımını yayınlamak için ihtiyacın olan bütün bilgileri Gale Press’in senin"
         . "için hazırladı videolardan öğrenebilirsin.</br></br>",
-    'activation' => 'Aktivation',
+    'activation' => 'Aktivasyon',
     'contactform_recipient' => 'Gale Press',
     'contactform_subject' => 'Gale Press İletişim Formu',
     'contanct_email' => 'info@galepress.com',
