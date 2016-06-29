@@ -871,7 +871,7 @@ if (isset($_GET['qty'])) {
                                                             'type': 'uploadpdf'
                                                         },
                                                         add: function (e, data) {
-                                                            if (data.files[0].size / 1024 / 1024 > 5) {
+                                                            if (data.files[0].size / 1024 / 1024 > 100) {
 
                                                                 $('.alert').removeClass('alert-info').addClass('alert-error').show();
                                                                 $('.alert span').text('{{ __("common.orders_warning_pdfmaxfilesize") }}');
