@@ -33,7 +33,7 @@ return array(
         . "To download the GP Viewer for Android, <a href=\"https://www.galepress.com/enterprise/gpviewer/ipa/gpviewer.apk\">click here</a></br></br>",
     'subscription_welcome_part2' => "Now you can watch the tutorial videos that is made for you.</br></br>"
         . "Sincerely </br>Gale Press",
-    'activation' => 'Aktivation',
+    'activation' => 'Aktivierung',
     'contactform_recipient' => 'Gale Press',
     'contactform_subject' => 'Gale Press Contact Form',
     'contanct_email' => 'info@galepress.com', //sifre: detay2006

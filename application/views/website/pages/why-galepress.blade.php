@@ -48,7 +48,7 @@
             <div data-wow-delay=".5s" class="col-md-12 wow bounceInDown animated" style="visibility: visible; -webkit-animation-delay: 0.5s;">
               <div class="section-title text-center">
                 <div class="row">
-                  <h3><span>{{__('website.howitworks_title')}}</span></h3>
+                  <h3><span style="font-weight: 800">{{__('website.howitworks_title')}}</span></h3>
                 </div>
               </div>
             </div>

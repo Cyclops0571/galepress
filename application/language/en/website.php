@@ -254,15 +254,13 @@ return array(
     'menu_login' => 'LOGIN',
     'menu_explore' => 'Explore',
 
-    'home_video_title' => 'The Mobile world is now at your fingertips!',
+    'home_video_title' => 'The Mobile App world is now at your fingertips!',
     'home_intro_title' => 'One Mobile App Platform to Rule Them All',
-    'home_intro_text' => 'The solution your organization needs may be increasing ' .
-        'customer loyalty/brand development, increasing sales, engaging/retaining ' .
-        'employees or decreasing overhead on print material.  With Gale Press you ' .
-        'can bridge the digital gap and offer an engaging mobile App experience. ' .
-        'Thanks to our software leasing model (MAaaS), you won\'t need a custom app ' .
-        'or an internal mobile solutions team. Contact us today and use Gale Press ' .
-        'to bring the mobile app world to your fingertips.',
+    'home_intro_text' => 'The solution your organization needs may be increasing customer loyalty/brand development,
+    increasing sales, engaging/retaining employees or decreasing overhead on print material.  With Gale Press you
+    can bridge the digital gap and offer an engaging mobile App experience. Thanks to our software leasing model
+    (MAaaS), you won\'t need a custom app or an internal mobile solutions team. Contact us today and use Gale Press
+    to bring the mobile app world to your fingertips.',
     'home_sectors_title' => 'For Every Sector',
     'home_sectors_digitalpublishing' => 'Digital Publishing',
     'home_sectors_hr' => 'Human Resources',
