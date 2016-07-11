@@ -2,11 +2,11 @@
 
 return array(
 
-        /*
-        |--------------------------------------------------------------------------
-        | Website Language Lines
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Website Language Lines
+    |--------------------------------------------------------------------------
+    */
     'title' => 'Gale Press - Digital Publishing Platform',
     'keywords' => 'Gale Press Digital Publishing',
     'description' => 'Gale Press - Digital Publishing Platform',
@@ -63,7 +63,9 @@ return array(
     'cms2_desc' => 'Member Login Screen to Manage Your Content',
 
     'interactive' => 'INTERACTIVE DESIGN PANEL',
-    'interactive_desc' => 'Chance to enrich by exporting introduction<br /> videos, intro-audios, image slides, 3d images, panoromic product and place images,<br/> interactive maps and info buttons.<br />',
+    'interactive_desc' => 'Chance to enrich by exporting introduction<br />
+	videos, intro-audios, image slides, 3d images, panoromic product and place images,<br/>
+	interactive maps and info buttons.<br />',
 
     'reports' => 'REPORTS',
     'reports_desc' => 'With feedback reports to be aware of everything',
@@ -99,7 +101,13 @@ return array(
     'slide_footer' => 'Be the first who integrates into the digital age before your rivals!',
 
     'galepressdpp' => 'Gale Press Digital Publishing Platform',
-    'galepressdpp_desc' => 'At the present time the custom to reach information by the help of printed materials ' .'are rapidly been replaced by fast smart phones, multi purpose use tablets, exclusively designed e-readers ' .'and other digital gadgets. Digital publishing coming into our lives with the innovative solutions of ' .'new age is not an option anymore but a must.<br />' .'Gale Press, in the center of the phenomenon rapidly expanding in our country, ' .'offers solutions for both publishers and the readers who wants to have their ' .'own place in this new age of publishing.',
+    'galepressdpp_desc' => 'At the present time the custom to reach information by the help of printed materials ' .
+        'are rapidly been replaced by fast smart phones, multi purpose use tablets, exclusively designed e-readers ' .
+        'and other digital gadgets. Digital publishing coming into our lives with the innovative solutions of ' .
+        'new age is not an option anymore but a must.<br />' .
+        'Gale Press, in the center of the phenomenon rapidly expanding in our country, ' .
+        'offers solutions for both publishers and the readers who wants to have their ' .
+        'own place in this new age of publishing.',
 
     'login' => 'LOGIN',
     'load' => 'Upload',
@@ -136,7 +144,7 @@ return array(
 
     'search' => 'Search...',
 
-        //WHAT IS Gale Press
+    //WHAT IS Gale Press
     'whatis' => 'What is Gale Press?',
     'whatis_desc1' => 'Gale Press is supplied for tablet and smartsphones reading from newspaper document catalog  books.',
     'whatis_desc2' => 'Day by day smart devices are getting accessible  and technology develop at the same time. Technology cause that the new oppurtunity to new experience in our life. Gale Press which uses the new substructure of technology is provided for publishing, routing.',
@@ -149,7 +157,7 @@ return array(
     'whatis_logo' => 'Logo ve Application Name',
     'whatis_cms' => 'Document Management Panel',
 
-        //PRODUCTS
+    //PRODUCTS
     'products_mobileapp' => 'Mobile Application',
     'products_mobileapp_desc' => 'Particular application for each firm with the authority of editing.',
     'products_mobileapp_desc1' => 'Special application with your own logo and for your name.',
@@ -172,7 +180,7 @@ return array(
     'interactive_content_desc6' => 'PDF pages displaying thumbnails at the top',
     'interactive_content_desc7' => 'Added to list of interactive visual',
 
-        //TUTORIALS
+    //TUTORIALS
     'interactive_settings' => 'SETTINGS',
     'interactive_upload_pdf' => 'PDF UPLOADS',
     'interactive_general' => 'INTERACTIVE DESIGNER - GENERAL',
@@ -190,7 +198,7 @@ return array(
     'interactive_slider' => 'INTERACTIVE DESIGNER - SLIDER',
     'interactive_animation' => 'INTERACTIVE DESIGNER - ANIMATION',
 
-        //CONTACT
+    //CONTACT
     'page_contact_upper' => 'CONTACT',
     'contact_email_success' => '<strong>Success!</strong> Your message is sent.',
     'contact_email_error' => '<strong>Error!</strong>',
@@ -210,12 +218,12 @@ return array(
     'sitemap_whous_detail2' => 'Easy to Use',
     'sitemap_whous_detail3' => 'One-Click Publish',
 
-        //BLOG
+    //BLOG
     'blog_article' => 'Article',
     'blog_articles' => 'Articles',
     'blog_read_more' => 'Read More...',
 
-        //ARTICLES
+    //ARTICLES
     'article_workflow_title' => 'Mobile Apps Are Changing the Workflow – Is Your Company Ready For It?',
     'article_workflow_intro' => 'According to a research done in the USA in 2013, only 4% of 700 companies are developing mobile apps to support supply chain management, logistics, purchase, purchase support, maintenance and service fields. On the other hand, all of these 700 companies believe that within two years at least half of the sector they work in will have their own mobile apps. Two years is really a short period of time for this 4% to increase.',
     'article_workflow_content' => '<h2>Mobile Apps Are Changing the Workflow – Is Your Company Ready For It?</h2>
@@ -244,7 +252,7 @@ return array(
 		<p>Many brands have started developing their own apps to catch the increasing mobile app trend. With Gale Press you can start being part of the trend and increase both your brand equity and awareness. Moreover, you don’t need to be a millionaire to develop apps for your brand; with different options and solutions matching your company’s needs you can develop the perfect mobile app.</p>
 		<p>Now is the time to develop your sustainable mobile app with the help of our experience staff! </p>',
 
-        /*********************FOR NEW WEBSITE*************************/
+    /*********************FOR NEW WEBSITE*************************/
 
     'menu_howitworks' => 'HOW IT WORKS?',
     'menu_solutions' => 'SOLUTIONS',
@@ -254,13 +262,15 @@ return array(
     'menu_login' => 'LOGIN',
     'menu_explore' => 'Explore',
 
-    'home_video_title' => 'The Mobile App world is now at your fingertips!',
+    'home_video_title' => 'The Mobile world is now at your fingertips!',
     'home_intro_title' => 'One Mobile App Platform to Rule Them All',
-    'home_intro_text' => 'The solution your organization needs may be increasing customer loyalty/brand development,
-    increasing sales, engaging/retaining employees or decreasing overhead on print material.  With Gale Press you
-    can bridge the digital gap and offer an engaging mobile App experience. Thanks to our software leasing model
-    (MAaaS), you won\'t need a custom app or an internal mobile solutions team. Contact us today and use Gale Press
-    to bring the mobile app world to your fingertips.',
+    'home_intro_text' => 'The solution your organization needs may be increasing ' .
+        'customer loyalty/brand development, increasing sales, engaging/retaining ' .
+        'employees or decreasing overhead on print material.  With Gale Press you ' .
+        'can bridge the digital gap and offer an engaging mobile App experience. ' .
+        'Thanks to our software leasing model (MAaaS), you won\'t need a custom app ' .
+        'or an internal mobile solutions team. Contact us today and use Gale Press ' .
+        'to bring the mobile app world to your fingertips.',
     'home_sectors_title' => 'For Every Sector',
     'home_sectors_digitalpublishing' => 'Digital Publishing',
     'home_sectors_hr' => 'Human Resources',
@@ -280,40 +290,61 @@ return array(
     'home_stars_mopas' => 'We’re glad that we are using a platform which has the same principle we have; supplying the best quality for the best price. Thanks to Gale Press, we’ve created a win-win situation where we can notify our customers on spot.',
     'home_stars_mopas_subtitle' => 'Insert Distribution',
 
-    'home_interactive_editor_description' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the feature you want to add.',
+    'home_interactive_editor_description' => 'Adding interactive content to your documents has never been so easy. Simply drag and drop the
+feature you want to add.',
     'home_interactive_editor' => 'INTERACTIVE EDITOR',
     'home_interactive_editor_word1' => 'INTERACTIVE',
     'home_interactive_editor_word2' => 'EDITOR',
     'home_interactive_editor_text' => 'After you have uploaded your pdf documents, bring them to life with drag and drop interactive features.',
     'home_interactive_compenents' => 'INTERACTIVE COMPONENTS',
-    'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations' .' to enrich your written material and help your content cut through the digital noise by becoming interactive.',
+    'home_interactive_compenents_text' => 'Add photo galleries, audio files, videos and animations' .
+        ' to enrich your written material and help your content cut through the digital noise by becoming interactive.',
     'home_push_notification' => 'PUSH NOTIFICATION',
-    'home_push_notification_text' => 'No more unnoticed or ignored messages! With push notifications ' .'your customers can learn of your new initiatives or developments immediately. ' .'Directly reach your most interested parties and achieve better results with short term campaigns.',
+    'home_push_notification_text' => 'No more unnoticed or ignored messages! With push notifications ' .
+        'your customers can learn of your new initiatives or developments immediately. ' .
+        'Directly reach your most interested parties and achieve better results with short term campaigns.',
     'home_reports' => 'REPORTING',
-    'home_reports_text' => 'Are you frustrated with the inability to monitor and analyze your digital efforts?  ' .'The sophisticated reporting interface provided by Gale Press can help inform and shape your marketing ' .'with cutting edge analytics. Location based data, time spent on content and myriad other variables ' .'are available for your constant evaluation and critiquing.',
+    'home_reports_text' => 'Are you frustrated with the inability to monitor and analyze your digital efforts?  ' .
+        'The sophisticated reporting interface provided by Gale Press can help inform and shape your marketing ' .
+        'with cutting edge analytics. Location based data, time spent on content and myriad other variables ' .
+        'are available for your constant evaluation and critiquing.',
     'home_security' => 'SECURITY',
-    'home_security_text' => 'Do you have confidential and sensitive data to transfer through your mobile app?  ' .'Don’t worry about security with Gale Press.  Utilizing cloud servers and encryption features, ' .'safely share sensitive data with your business partners in the mobile arena.  ',
+    'home_security_text' => 'Do you have confidential and sensitive data to transfer through your mobile app?  ' .
+        'Don’t worry about security with Gale Press.  Utilizing cloud servers and encryption features, ' .
+        'safely share sensitive data with your business partners in the mobile arena.  ',
     'home_speed' => 'SPEED',
-    'home_speed_text' => 'Don’t let updating your content slow you down. With the speed oriented ' .'system of Gale Press, your strategic updates will be at the pace of our digital age.  ',
+    'home_speed_text' => 'Don’t let updating your content slow you down. With the speed oriented ' .
+        'system of Gale Press, your strategic updates will be at the pace of our digital age.  ',
     'home_speed_theworldisyours' => 'THE WORLD IS YOURS',
-    'home_speed_theworldisyours_text' => 'With Gale Press you can enter the app market and remove the borders ' .'from your competitive environment. Expand and deepen the conversation with your customer base by ' .'speaking to them in the mobile language they already understand. When ready, add new app markets ' .'and expand your opportunities worldwide!!',
-    'footer_detaysoft' => 'Detaysoft',
+    'home_speed_theworldisyours_text' => 'With Gale Press you can enter the app market and remove the borders ' .
+        'from your competitive environment. Expand and deepen the conversation with your customer base by ' .
+        'speaking to them in the mobile language they already understand. When ready, add new app markets ' .
+        'and expand your opportunities worldwide!!',
+
     'footer_socialmedia' => 'Social Media',
     'footer_contact' => 'Contact',
-    'footer_copyright' => 'Copyright 2013 © Detay Danışmalık A.Ş. All rights reserved.',
+    'footer_copyright' => '',
     'footer_livechat' => 'Live Support',
+
     'howitworks_title' => '3 Easy steps, and be published in 155 countries!',
+
     'howitworks_upload' => 'Upload',
-    'howitworks_upload_text' => 'Upload your pdf documents into the system with a single click, using the Gale Press <b>C</b>ontent <b>M</b>anagement <b>S</b>ystem, or “ CMS .”',
+    'howitworks_upload_text' => 'Upload your pdf documents into the system with a single click, using the Gale Press <b>C</b>ontent
+<b>M</b>anagement <b>S</b>ystem, or “ CMS .”',
     'howitworks_makeinteractive' => 'Use Interactive Tools',
-    'howitworks_makeinteractive_text' => 'Insert interactive features like...' .'Audio, front or background Video, Scrolling Text, Revolving Images, 360 viewer, ' .'Maps and more! Watch your content come to life with a combination of interactive' .' tools from Gale Press.',
+    'howitworks_makeinteractive_text' => 'Insert interactive features like...' .
+        'Audio, front or background Video, Scrolling Text, Revolving Images, 360 viewer, ' .
+        'Maps and more! Watch your content come to life with a combination of interactive' .
+        ' tools from Gale Press.',
     'howitworks_publish' => 'Publish',
-    'howitworks_publish_text' => 'Close the digital gap and easily publish your content ' .'to the entire world without requiring coding knowledge.',
+    'howitworks_publish_text' => 'Close the digital gap and easily publish your content ' .
+        'to the entire world without requiring coding knowledge.',
     'howitworks_follow' => 'Follow',
     'howitworks_comp_video' => 'Video',
     'howitworks_comp_video_text' => 'Highlight your message by adding videos.',
     'howitworks_comp_tooltip' => 'Tooltip',
-    'howitworks_comp_tooltip_text' => 'Don’t drown your documents with information, ' .'let your curious clients reach the knowledge they seek through the tooltip feature.',
+    'howitworks_comp_tooltip_text' => 'Don’t drown your documents with information, ' .
+        'let your curious clients reach the knowledge they seek through the tooltip feature.',
     'howitworks_comp_audio' => 'Audio',
     'howitworks_comp_audio_text' => 'Insert audio content to your documents to speak directly to your customers.',
     'howitworks_comp_scroller' => 'Scroller',
@@ -358,49 +389,98 @@ return array(
     'dp_title' => 'DIGITAL PUBLISHING',
     'dp_subtitle' => 'No more printing costs.',
     'dp_clause1' => 'Publish your printed materials frequently and update easily through the Gale Press homepage.',
-    'dp_clause2' => 'By presenting your catalog and products in great detail, you provide an easy mobile purchasing platform for your customers and a new sales channel for your organization.',
-    'dp_clause3' => 'Leverage the Gale Press platform by creating a new revenue stream for your advertisers with exciting and interactive features',
+    'dp_clause2' => 'By presenting your catalog and products in great detail, you provide an easy mobile purchasing
+platform for your customers and a new sales channel for your organization.',
+    'dp_clause3' => 'Leverage the Gale Press platform by creating a new revenue stream for your advertisers with exciting
+and interactive features',
     'dp_clause4' => 'Save money and help the environment by eliminating expensive printing costs.',
-    'dp_description' => 'Print material is going fully digital. Bridge the digital gap and deliver your brochures, catalogs and periodicals to your readers via your own branded mobile application. Present your products to the tiniest detail on your mobile app and use the online sales tool to boost revenue. Adding interactive material to your in]magazine commercials with help separate you from the competition and increase ad revenue.',
+    'dp_description' => 'Print material is going fully digital. Bridge the digital gap and deliver your brochures, catalogs and
+periodicals to your readers via your own branded mobile application. Present your products to the
+tiniest detail on your mobile app and use the online sales tool to boost revenue. Adding interactive
+material to your in]magazine commercials with help separate you from the competition and increase
+ad revenue.',
 
     'hr_title' => 'HUMAN RESOURCES',
     'hr_subtitle' => 'Expand your talent pool.',
     'hr_clause1' => 'Separate your business from its competitors and create a culture of communication and cohesion.',
-    'hr_clause2' => 'Use mobile technology to boost internal communications and keep your employees within you digital reach.',
+    'hr_clause2' => 'Use mobile technology to boost internal communications and keep your employees within your
+digital reach.',
     'hr_clause3' => 'Publish an internal digital newsletter on your mobile app and watch your employees grow as a team.',
-    'hr_clause4' => 'Leverage Gale Press to bridge the digital gap and bring efficiency and cohesion to your HR department.',
-    'hr_description' => 'Essentially all business processes have migrated to mobile, so why not HR as well? Instead of paying third parties to post and process your job applicants, develop your own mobile application and move the recruitment process to your mobile app. Impress applicants while making the process more efficient for both parties. Also share performance reports with management and publish company wide newsletters to keep everyone connected and informed. Send them directly to employees using the “push notification” feature.',
+    'hr_clause4' => 'Leverage Gale Press to bridge the digital gap and bring efficiency and cohesion to your HR
+department.',
+    'hr_description' => 'Essentially all business processes have migrated to mobile, so why not HR as well? Instead of paying
+third parties to post and process your job applicants, develop your own mobile application and move
+the recruitment process to your mobile app. Impress applicants while making the process more
+efficient for both parties.
+Also share performance reports with management and publish company wide newsletters to keep
+everyone connected and informed. Send them directly to employees using the “push notification”
+feature.',
 
     'education_title' => 'EDUCATION',
     'education_subtitle' => 'Constant education with mobile.',
-    'education_clause1' => 'Make the classroom digital and allow each classroom or department their own mobile application to publish assignments, lesson plans and more.',
+    'education_clause1' => 'Make the classroom digital and allow each classroom or department their own mobile application to
+publish assignments, lesson plans and more.',
     'education_clause2' => 'Create interactive content to engage students in the digital language they already speak.',
-    'education_clause3' => 'Increase the effectiveness of “home work” assignments by making them accessible via the app and sharing them with parents in a simple and effective way.',
-    'education_clause4' => 'Maintain a digital curriculum and give your students the tools to thrive in the rapidly developing digital/mobile world!',
-    'education_description' => 'Why not invite your students to use their smartphones and tablets for their education? Bridge the digital gap and transform a distraction into a learning device. Hold your students’ attention by creating interactive content which fits the digital age. Now students can access class materials and assignments anywhere, anytime, from their mobile device. Send announcements via “push notification” to parents, students and faculty with ease. With Gale Press on your team, everyone stays up to date.',
+    'education_clause3' => 'Increase the effectiveness of “home work” assignments by making them accessible via the app and
+sharing them with parents in a simple and effective way.',
+    'education_clause4' => 'Maintain a digital curriculum and give your students the tools to thrive in the rapidly developing
+digital/mobile world!',
+    'education_description' => 'Why not invite your students to use their smartphones and tablets for their education? Bridge the
+digital gap and transform a distraction into a learning device. Hold your students’ attention by
+creating interactive content which fits the digital age. Now students can access class materials and
+assignments anywhere, anytime, from their mobile device. Send announcements via “push
+notification” to parents, students and faculty with ease. With Gale Press on your team, everyone stays
+up to date.',
 
     'realestate_title' => 'REAL ESTATE',
     'realestate_subtitle' => 'One step ahead of the competition.',
     'realestate_clause1' => 'Move the marketing of your estates and residences to mobile.',
     'realestate_clause2' => 'Share the details of your construction projects through your own mobile application.',
     'realestate_clause3' => 'Now you can share the details of your ready to sale residence projects digitally and offer your customers the chance to do a cyber tour. With the 360° tour feature boost your sales and marketing channels.',
-    'realestate_description' => 'It is impossible to ignore the rise of the real estate sector. It is equally impossible to ignore the rise of the digital revolution in real estate. Now you can affordably market your real estate listings to the mobile audience. Having a mobile application is standard practice for this industry and if you have not made the jump, Gale Press is your best opportunity. Share all the details of your listings and let the shopper tour via the 360* feature. Save your clients time and give them a product they will easily navigate through. Allow them to sort the properties they like the most and only visit viable options, saving both parties valuable time. <p>Save printing costs and move the marketing of your properties to the mobile world. </p> <p>Share the details and progress of your new development projects in real time. Give your clients the option to complete a “cyber 360* tour” of their future home, which saves time and shortens the buying cycle.</p>',
+    'realestate_description' => 'It is impossible to ignore the rise of the real estate sector. It is equally impossible to ignore
+the rise of the digital revolution in real estate. Now you can affordably market your real estate listings
+to the mobile audience. Having a mobile application is standard practice for this industry and if you
+have not made the jump, Gale Press is your best opportunity. Share all the details of your listings and
+let the shopper tour via the 360* feature. Save your clients time and give them a product they will
+easily navigate through. Allow them to sort the properties they like the most and only visit viable
+options, saving both parties valuable time.
+<p>Save printing costs and move the marketing of your properties to the mobile world. </p>
+<p>Share the details and progress of your new development projects in real time.
+Give your clients the option to complete a “cyber 360* tour” of their future home, which saves time
+and shortens the buying cycle.</p>',
 
     'pharmaceutical_title' => 'B2B',
     'pharmaceutical_subtitle' => 'Give your customers a mobile app that will save time in accessing product offerings, and keep them engaged with your brand.',
     'pharmaceutical_clause1' => 'Streamline your product presentations by giving your sales team a mobile tool on the go!',
     'pharmaceutical_clause2' => 'Go mobile in order to cut back on print overhead and streamline delivery times.',
-    'pharmaceutical_clause3' => 'Empower your clients by letting them access the details of your product on their mobile device at a time most convenient for them.',
+    'pharmaceutical_clause3' => 'Empower your clients by letting them access the details of your product on their mobile device at a
+time most convenient for them.',
     'pharmaceutical_clause4' => 'Supercharge your sales potential with the online sales tool built into your mobile catalog.',
-    'pharmaceutical_description' => 'Your sales representatives can unleash the power of mobile apps when doing their presentations. Easily link the mobile device to a larger screen for quick and simple sharing. Convert your brochures and order forms to digital and let clients examine your portfolio and purchase your products in a manner most convenient for them. Cut back on print costs and streamline order taking with the same tool, Gale Press. With our cutting edge analytics available, your marketing team can easily gather data that was impossible to discern with traditional print methods. You will know who looked at what, where they were when they were looking, how long they looked and more. Supercharge your field presence with the power of data collected through your mobile app.',
+    'pharmaceutical_description' => 'Your sales representatives can unleash the power of mobile apps when doing their presentations.
+Easily link the mobile device to a larger screen for quick and simple sharing. Convert your brochures
+and order forms to digital and let clients examine your portfolio and purchase your products in a
+manner most convenient for them. Cut back on print costs and streamline order taking with the same
+tool, Gale Press. With our cutting edge analytics available, your marketing team can easily gather data
+that was impossible to discern with traditional print methods. You will know who looked at what,
+where they were when they were looking, how long they looked and more. Supercharge your field
+presence with the power of data collected through your mobile app.',
 
     'retail_title' => 'RETAIL',
     'retail_subtitle' => 'Every second counts.',
     'retail_clause1' => 'Publish all your print advertising campaigns with your mobile app',
-    'retail_clause2' => 'Bridge the digital gap and let your customers shop your products from the comfort of their own device at their leisure',
+    'retail_clause2' => 'Bridge the digital gap and let your customers shop your products from the comfort of their own
+device at their leisure',
     'retail_clause3' => 'Geographically target customers with “push notification” feature for short term strategies',
     'retail_clause4' => 'Decrease your printed material costs.',
-    'retail_description' => 'Time has never been more valuable. Every second is vital both to our employees and our customers. Gale Press offers a mobile solution which can save you time while allowing your customers the ultimate shopping convenience. They have access to what you offer at any time, on any device. Through our mobile platform, you can offer e‐commerce and online ordering options to better serve your customers. Gale Press offers the opportunity to stand out from your competitors, or at least to stay competitive in the rapidly digitized mobile world.</br> In addition to saving money on printing catalogues and brochures, you can market to and target customers geographically using our location based services.</br> Go mobile! Don’t let your competitors beat you to the future of digital marketing.',
+    'retail_description' => 'Time has never been more valuable. Every second is vital both to our employees and our customers.
+Gale Press offers a mobile solution which can save you time while allowing your customers the
+ultimate shopping convenience. They have access to what you offer at any time, on any device.
+Through our mobile platform, you can offer e‐commerce and online ordering options to better serve
+your customers. Gale Press offers the opportunity to stand out from your competitors, or at least to
+stay competitive in the rapidly digitized mobile world.</br>
+In addition to saving money on printing catalogues and brochures, you can market to and target
+customers geographically using our location based services.</br>
+Go mobile! Don’t let your competitors beat you to the future of digital marketing.',
 
     'tryit_form_title' => 'Create Application',
     'tryit_form_subtitle' => 'It Is Free!',
