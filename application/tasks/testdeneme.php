@@ -10,8 +10,10 @@ class TestDeneme_Task
 
     public function run()
     {
-        $cf = ContentFile::find(2716);
-        ContentFile::createPdfPages($cf);
+        echo "Asdfaasdfasdf";
+        return;
+//        $cf = ContentFile::find(2716);
+//        ContentFile::createPdfPages($cf);
     }
 
     public function consume()
