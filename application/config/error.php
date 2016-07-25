@@ -69,7 +69,7 @@ return array(
         $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
         /** @var Exception $exception */
         $serverErrorLog->ErrorMessage = $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine();
-        $serverErrorLog->StackTrace = $exception->getTraceAsString();
+        $serverErrorLog->StackTrace = Common::getExceptionTraceAsString($exception);
         $serverErrorLog->save();
         //Log::exception($exception);
 	},
