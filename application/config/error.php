@@ -61,14 +61,15 @@ return array(
 	| text files within the application storage directory.
 	|
 	*/
-
 	'logger' => function($exception)
 	{
         $serverErrorLog = new ServerErrorLog();
         $serverErrorLog->Header = 500;
-        $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
-        $serverErrorLog->ErrorMessage = $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine();
         $serverErrorLog->Url = \Laravel\Request::uri();
+        $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
+        /** @var Exception $exception */
+        $serverErrorLog->ErrorMessage = $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine();
+        $serverErrorLog->StackTrace = $exception->getTraceAsString();
         $serverErrorLog->save();
         //Log::exception($exception);
 	},
