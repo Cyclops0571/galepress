@@ -25,7 +25,12 @@ if(isset($Properties))
 
                 if (Str::length($filename) > 0) {
                     $fileSelected = 1;
-                    $files .= '<li>' . ($index > 9 ? "" . $index : "0" . $index) . ' - ' . Str::limit_exact($filename, 20) . '<input type="hidden" name="comp-{id}-filename[]" class="required" value="' . $filename . '" /><a href="javascript:void(0);" class="delete"><i class="icon-remove"></i></a></li>';
+                    $files .= '<li>' . ($index > 9 ? "" . $index : "0" . $index) . ' - ' . Str::limit_exact($filename, 20) .
+                            '<input type="hidden" name="comp-{id}-filename[]" class="required" value="' . $filename . '" />' .
+                            '<a href="javascript:void(0);" class="delete">' .
+                            '<i class="icon-remove"></i>' .
+                            '</a>' .
+                            '</li>';
                 }
                 break;
             case 'transparent':

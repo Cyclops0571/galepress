@@ -281,9 +281,6 @@ class Applications_Controller extends Base_Controller
                 throw new Exception(__('error.unauthorized_user_attempt'));
             }
 
-            Config::get('application.profile');
-            Config::get('application.');
-
             $currentUser = Auth::User();
             DB::transaction(function () use ($currentUser, $id) {
                 $customerID = 0;

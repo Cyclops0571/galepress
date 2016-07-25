@@ -10,6 +10,7 @@
  * @property string Url
  * @property string Parameters
  * @property string ErrorMessage
+ * @property string StackTrace
  */
 class ServerErrorLog extends Eloquent
 {

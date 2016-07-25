@@ -28,7 +28,7 @@ class Interactivity_Controller extends Base_Controller
                         $postedData = Input::get();
 
                         foreach ($postedData as $name => $value) {
-                            if (Common::startsWith($name, 'comp-' . $id)) {
+                            if (Common::startsWith($name, 'comp-' . $id . "-")) {
                                 $name = str_replace('comp-' . $id . '-', "", $name);
 
                                 if ($name !== "id" && $name !== "process" && $name !== "fileselected" && $name !== "posterimageselected" && $name !== "modaliconselected") {
@@ -387,7 +387,7 @@ class Interactivity_Controller extends Base_Controller
                     foreach ($ids as $id) {
                         $properties = array();
                         foreach ($postedData as $name => $value) {
-                            if (Common::startsWith($name, 'comp-' . $id)) {
+                            if (Common::startsWith($name, 'comp-' . $id . "-")) {
                                 $name = str_replace('comp-' . $id . '-', "", $name);
                                 if (!in_array($name, $ignoredProperties)) {
                                     $properties[$name] = $value;
