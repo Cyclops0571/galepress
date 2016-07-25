@@ -1024,11 +1024,14 @@ class Common
                 }
                 $args = join(", ", $args);
             }
+            $file = isset($frame['file']) ? $frame['file'] : '';
+            $line = isset($frame['line']) ? $frame['line'] : '';
+            $function = isset($frame['function']) ? $frame['function'] : '';
             $rtn .= sprintf("#%s %s(%s): %s(%s)\n",
                 $count,
-                $frame['file'],
-                $frame['line'],
-                $frame['function'],
+                "File: " . $file,
+                "Line: " . $line,
+                "Function: " . $function,
                 $args);
             $count++;
         }
