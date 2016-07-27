@@ -32,6 +32,7 @@
  * @property int $NotificationText Description
  * @property int $CkPem Description
  * @property int $BannerActive Description
+ * @property int $BannerRandom Description
  * @property int $BannerCustomerActive Description
  * @property int $BannerCustomerUrl Description
  * @property int $BannerAutoplay Description

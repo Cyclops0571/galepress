@@ -565,13 +565,12 @@ class Clients_Controller extends Base_Controller
 
     /**
      * Show successfull register message
-     * @return type
+     * @return View
      */
     public function get_registered()
     {
         //ajax ile atilan request duzgun ise buraya donecegim.
-        $data = array();
-        return View::make(Laravel\Request::$route->controller . '.registered', $data);
+        return View::make(Laravel\Request::$route->controller . '.registered');
     }
 
     public function get_forgotpassword($applicationID)

@@ -528,6 +528,7 @@ return array(
         "Gale Press",
     'login_accounthasbeenconfirmed' => 'Hesabınız başarıyla onaylandı.',
     'login_accountticketnotfound' => 'Hesap onaylama talebiniz bulunamadı!',
+    'registration_succesful' => 'Hesabınız başarıyla oluşturuldu.',
 
     'welcome_email_title' => 'Hoşgeldiniz!',
 

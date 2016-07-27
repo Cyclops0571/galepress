@@ -5,6 +5,6 @@
     <h2><?php echo __('common.detailpage_caption'); ?> </h2>
 </div>
 <div class="content controls">
-    Kayit isleminiz Basarili
+    <h2>{{__('common.registration_succesful')}}</h2>
 </div>
 @endsection

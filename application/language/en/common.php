@@ -528,6 +528,7 @@ return array(
 				"Gale Press",
 		'login_accounthasbeenconfirmed' => 'Your account has been successfully verified.',
 		'login_accountticketnotfound' => 'Your request has not been found to confirm account!',
+    'registration_succesful' => 'Your account has been successfully created.',
 
 		'welcome_email_title' => 'Welcome!',
 
