@@ -214,7 +214,7 @@ $(document).ready(function () {
     $(".tip").tooltip({placement: 'top'});
     $(".tipb").tooltip({placement: 'bottom'});
     $(".tipl").tooltip({placement: 'left'});
-    $(".tipr").tooltip({placement: 'right'});
+    $(".tipr").tooltip({placement: 'auto'});
 
     $(".site-settings-button").click(function () {
 	if ($(this).parent('.site-settings').hasClass('active'))

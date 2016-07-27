@@ -595,6 +595,8 @@ return array(
     'banners_active' => 'Banner Active',
     'banner_use_costomer_banner' => 'Verwenden Sie Web Source',
     'banners_autoplay' => 'Autoplay',
+    'banners_random' => 'Random',
+    'banners_info_random' => 'Banner images will be shown in random order.',
     'banners_autoplay_interval' => 'Playback Range (millisecond)',
     'banners_autoplay_speed' => 'Transition Rate (millisecond)',
     'banners_info_target_content' => 'It will open the relevant content when the image is clicked.',

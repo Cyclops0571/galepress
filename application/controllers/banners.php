@@ -228,6 +228,7 @@ class Banners_Controller extends Base_Controller
 
         $application->BannerActive = Input::get("BannerActive", "off") == "on" ? 1 : 0;
         $application->BannerAutoplay = Input::get("BannerAutoplay", "off") == "on" ? 1 : 0;
+        $application->BannerRandom = Input::get("BannerRandom", "off") == "on" ? 1 : 0;
         $application->BannerCustomerActive = (int)Input::get("BannerCustomerActive");
         $application->BannerIntervalTime = (int)Input::get("BannerIntervalTime", 0);
         $application->BannerTransitionRate = (int)Input::get("BannerTransitionRate", 0);
@@ -292,11 +293,17 @@ class Banners_Controller extends Base_Controller
         if (!$application || !$bannerSet) {
             return "";
         }
+        
+        if ($application->BannerRandom) {
+            shuffle($bannerSet);
+        }
+
         $data = array();
         $data['caption'] = $this->caption;
         $data['detailcaption'] = $this->detailcaption;
         $data["application"] = $application;
         $data['bannerSet'] = $bannerSet;
+//            $application->BannerRandom ? shuffle($bannerSet) : $bannerSet;
         return View::make("service.banner_service", $data);
     }
 

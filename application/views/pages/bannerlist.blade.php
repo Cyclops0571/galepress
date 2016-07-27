@@ -8,7 +8,7 @@
 ?>
 
         <!--<form id="list">-->
-<div class="col-md-12">
+<div class="col-md-11">
     <form id="bannerForm">
         <input type="hidden" name="applicationID" value="<?php echo $application->ApplicationID; ?>"/>
 
@@ -38,8 +38,9 @@
                                     class="icon-info-sign"></span></a></div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-3"><label class="label-grey"
-                                                 for="BannerAutoplay">{{__('common.banners_autoplay')}}</label></div>
+                    <div class="col-md-3">
+                        <label class="label-grey" for="BannerAutoplay">{{__('common.banners_autoplay')}}</label>
+                    </div>
                     <div class="col-md-8 toggle_div">
                         <input type="checkbox"
                                <?php echo $application->BannerAutoplay ? 'checked' : ''; ?>
@@ -58,6 +59,29 @@
                                     class="icon-info-sign"></span></a>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label class="label-grey" for="BannerAutoplay">{{__('common.banners_random')}}</label>
+                    </div>
+                    <div class="col-md-8 toggle_div">
+                        <input type="checkbox"
+                               <?php echo $application->BannerRandom ? 'checked' : ''; ?>
+                               data-toggle="toggle" data-size="mini"
+                               id="BannerRandom" name="BannerRandom"
+                               data-style="ios"
+                               data-onstyle="info"
+                               data-offstyle="danger"
+                               data-on="<?php echo __('common.active'); ?>"
+                               data-off="<?php echo __('common.passive'); ?>"
+                               data-width="60"
+                        />
+                    </div>
+                    <div class="col-md-1">
+                        <a class="tipr" title="{{ __('common.banners_info_random') }}"><span
+                                    class="icon-info-sign"></span></a>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="col-md-3"><label class="label-grey"
                                                  for="BannerIntervalTime">{{__('common.banners_autoplay_interval')}}</label>

@@ -595,6 +595,8 @@ return array(
     'banners_active' => 'Banner Aktif',
     'banner_use_costomer_banner' => 'Dış Kaynak Kullan',
     'banners_autoplay' => 'Otomatik Oynat',
+    'banners_random' => 'Rastgele',
+    'banners_info_random' => 'Banner resimleri karışık sırada gösterilmesini sağlar.',
     'banners_autoplay_interval' => 'Oynatma Aralığı (milisaniye)',
     'banners_autoplay_speed' => 'Geçiş Hızı (milisaniye)',
     'banners_info_target_content' => 'Resme tıklayınca ilgili içeriğin açılmasını sağlar.',
