@@ -18,6 +18,72 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo "Adsfasdf";
+        exit;
+        $options = new Iyzipay\Options();
+
+        $options->setApiKey("sandbox-056gEWAwqXC2F2HKpFWsahJXUmuGX5pg");
+        $options->setSecretKey("sandbox-OTcrn59sNuj2P1pyaAWQRkuSp17y7e6y");
+        $options->setBaseUrl("https://sandbox-api.iyzipay.com/");
+
+
+//        $cardNo = "5528790000000008";
+//        $cardPassword = "283126";
+//        $cvv = 111;
+//        $year = 2019;
+//        $month = 11;
+//        $result = \Iyzipay\Model\ApiTest::retrieve($options);
+
+        $request = new \Iyzipay\Request\CreateBasicPaymentRequest();
+        $request->setLocale(\Iyzipay\Model\Locale::TR);
+        $conversationID = "65165165161561561" . time();
+        $request->setConversationId($conversationID);
+        $request->setBuyerEmail("srdsaygili@gmail.com");
+        $request->setBuyerId("B2323");
+        $request->setBuyerIp("212.156.57.114");
+        $request->setConnectorName("522-garanti");
+        $request->setInstallment(1);
+        $request->setPaidPrice("1");
+        $request->setPrice("1");
+        $request->setCurrency(\Iyzipay\Model\Currency::TL);
+
+//
+//        $request->setLocale(\Iyzipay\Model\Locale::TR);
+//        $request->setConversationId("123456789");
+//        $request->setBuyerEmail("email@email.com");
+//        $request->setBuyerId("B2323");
+//        $request->setBuyerIp("85.34.78.112");
+//        $request->setConnectorName("Garanti");
+//        $request->setInstallment(1);
+//        $request->setPaidPrice("1");
+//        $request->setPrice("1");
+//        $request->setCurrency(\Iyzipay\Model\Currency::TL);
+
+        $paymentCard = new \Iyzipay\Model\PaymentCard();
+        $paymentCard->setCardHolderName("John Doe");
+        $paymentCard->setCardNumber("5528790000000008");
+        $paymentCard->setExpireMonth("12");
+        $paymentCard->setExpireYear("2030");
+        $paymentCard->setCvc("123");
+        $paymentCard->setRegisterCard(1);
+
+        $request->setPaymentCard($paymentCard);
+
+        # make request
+        $basicPayment = \Iyzipay\Model\BasicPayment::create($request, $options);
+
+        # print result
+        print_r($basicPayment);
+
+        exit;
+
+
+        //email: srdsaygili@gmail.com
+        //password: Serdar12
+
+        print_r($result);
+        exit;
+
         //arda commit test
         //serdar commit test
         $tmp = array(1, 2);
