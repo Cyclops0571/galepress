@@ -18,7 +18,7 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        echo "Adsfasdf";
+        echo "Adsfasdf1231233123";
         exit;
         $options = new Iyzipay\Options();
 
