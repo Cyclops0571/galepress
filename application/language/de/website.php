@@ -480,7 +480,7 @@ auf den Tabletcomputern und Smartphones.',
     'towards_payment_page' => 'Ödeme Sayfasına Doğru...',
 
     'signup_name' => 'Name...',
-    'signup_surname' => 'Surname...',
+    'signup_surname' => 'Last Name...',
     'signup_id' => 'Account Name...',
     'signup_mail' => 'Mail...',
     'signup_password' => 'Password...',

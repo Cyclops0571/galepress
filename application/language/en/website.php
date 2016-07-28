@@ -485,7 +485,7 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'tryit_form_title' => 'Create Application',
     'tryit_form_subtitle' => 'It Is Free!',
     'tryit_form_name' => 'Name',
-    'tryit_form_name_surname' => 'Name Surname',
+    'tryit_form_name_surname' => 'Name & Last Name',
     'tryit_form_name_placeholder' => 'Enter your name...',
     'tryit_form_lastname' => 'Last Name',
     'tryit_form_lastname_placeholder' => 'Enter your last name...',

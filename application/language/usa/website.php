@@ -485,7 +485,7 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'tryit_form_title' => 'Create Application',
     'tryit_form_subtitle' => 'It Is Free!',
     'tryit_form_name' => 'Name',
-    'tryit_form_name_surname' => 'Name Surname',
+    'tryit_form_name_surname' => 'Name & Last Name',
     'tryit_form_name_placeholder' => 'Enter your name...',
     'tryit_form_lastname' => 'Last Name',
     'tryit_form_lastname_placeholder' => 'Enter your last name...',
@@ -528,7 +528,7 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'blog_tutorials' => 'Tutorials',
 
     'webinar_phone' => 'Phone',
-    'webinar_form_name_surname_placeholder' => 'Enter your name and surname...',
+    'webinar_form_name_surname_placeholder' => 'Enter your name and last name...',
     'webinar_form_phone_placeholder' => 'Enter your phone number...',
     'webinar_form_submit' => 'Register To Tutorial',
     'webinar_accept_email' => 'I accept to getting email from this Gale Press Digital Publishing Company',
@@ -558,7 +558,7 @@ Go mobile! Don’t let your competitors beat you to the future of digital market
     'towards_payment_page' => 'Towards Payment Page...',
 
     'signup_name' => 'Name...',
-    'signup_surname' => 'Surname...',
+    'signup_surname' => 'Last Name...',
     'signup_id' => 'Account Name...',
     'signup_mail' => 'Mail...',
     'signup_password' => 'Password...',
