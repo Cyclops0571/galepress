@@ -542,7 +542,7 @@ class Applications_Controller extends Base_Controller
             $tabs[$i]->TabTitle = Input::get("TabTitle_" . $j, 'Başlık ' . $j);
             $tabs[$i]->Url = Input::get("Url_" . $j, '');
             $tabs[$i]->InhouseUrl = Input::get("InhouseUrl_" . $j, '');
-            $tabs[$i]->IconUrl = Input::get("hiddenSelectedIcon_" . $j, '');
+            $tabs[$i]->IconUrl = Input::get("hiddenSelectedIcon_" . $j, '/img/app-icons/1.png');
             $tabs[$i]->Status = (int)Input::get("TabStatus_" . $j, 0);
             $tabs[$i]->StatusID = eStatus::Active;
             $tabs[$i]->save();
