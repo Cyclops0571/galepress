@@ -846,4 +846,23 @@ class Contents_Controller extends Base_Controller
         return "success=" . base64_encode("true") . "&SubscriptionIdentifier=" . base64_encode($subscriptionIdentifier);
     }
 
+    public function post_interactivity_status() {
+        set_time_limit(0);
+        $rules = array(
+            "contentFileID" => "required|numeric|min:1",
+        );
+        $v = Validator::make(Input::all(), $rules);
+        if (!$v->passes()) {
+            return ajaxResponse::error($v->errors->first());
+        }
+        $contentFileID = Input::get("contentFileID");
+        for($i = 0; $i < 240; $i++) {
+            $contentFile = ContentFile::find($contentFileID);
+            if($contentFile && $contentFile->HasCreated) {
+                return ajaxResponse::success();
+            }
+            sleep(1);
+        }
+        return ajaxResponse::error();
+    }
 }

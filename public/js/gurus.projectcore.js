@@ -820,6 +820,38 @@ cContent = new function () {
         cReport.OnChange(obj);
     };
 
+    this.checkInteractivityStatus = function (contentFileID, element, text) {
+        var t = 'POST';
+        var u = '/' + currentLanguage + '/' + route['contents_interactivity_status'];
+        var d = "contentFileID=" + contentFileID;
+        var loopAgain = true;
+        var ajaxReq = function() {
+            $.ajax({
+                type: t,
+                url: u,
+                data: d,
+                dataType: 'json',
+                /**
+                 *
+                 * @param {{errmsg: string, success:boolean, successMsg:string }} ret
+                 */
+                success: function (ret) {
+                    if(ret.success) {
+
+                        $(element).removeClass("progress-striped active")
+                        $(element).find(".progress-bar").text(text);
+                    } else {
+                        setTimeout(ajaxReq, 1000);
+                    }
+                },
+                error: function (ret) {
+                    cNotification.failure(ret.errmsg);
+                }
+            });
+        }
+        ajaxReq();
+    }
+
     this.save = function () {
         if (!$("#IsMaster").is(':checked') && $("#IsProtected").is(':checked')) {
             var t = 'GET';

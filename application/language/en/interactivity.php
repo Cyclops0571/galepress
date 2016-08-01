@@ -248,4 +248,7 @@ return array(
 
     'download_original_pdf' => 'Original Pdf',
     'download_original_pdf_tooltip' => 'Download the original pdf',
+
+    'interactivity_status' => 'Interactivity Status',
+    'interactivity_status_tooltip' => 'Interactivity status information',
 );

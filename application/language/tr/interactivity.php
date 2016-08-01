@@ -248,4 +248,7 @@ return array(
 
     'download_original_pdf' => 'Orijinal Pdf',
     'download_original_pdf_tooltip' => 'Üzerinde işlem yapılmamış Orjinal Pdfi indir.',
+
+    'interactivity_status' => 'İnteractivite Durumu',
+    'interactivity_status_tooltip' => 'İnteraktivite Durum Bilgisi',
 );

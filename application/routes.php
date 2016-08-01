@@ -64,6 +64,7 @@ Route::get('test/interactive', 'test@interactive');
 Route::post("clients/excelupload", array('before' => 'auth', 'uses' => "clients@excelupload"));
 Route::post("maps/excelupload/(:num)", array('before' => 'auth', 'uses' => "maps@excelupload"));
 Route::get("maps/delete", "maps@delete", array('before' => 'auth'));
+Route::post((string)__('route.contents_interactivity_status'), array('uses' => "contents@interactivity_status"));
 $languages = Config::get('application.languages', array());
 
 Route::post('/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));

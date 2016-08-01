@@ -160,8 +160,7 @@
                                 }
                                 ?>
                                 <option value="{{ $category->CategoryID }}"{{ ($cnt > 0 ? ' selected="selected"' : '') }}>{{ $category->Name }}</option>
-                                @endforeach
-                                        <!--<option value="-1" class="modify">{{ __('common.contents_category_title') }}</option>-->
+                        @endforeach
                         </select>
                         <script type="text/javascript">
                             $('#CategoryID').ready(function () {
@@ -200,7 +199,7 @@
                             <input type="text" name="UnpublishDate" id="UnpublishDate"
                                    class="form-control textbox date {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabledFields') }}"
                                    value="{{ Common::dateRead($UnpublishDate, 'd.m.Y') }}" {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabled="disabled"') }} />
-						<span class="input-group-addon">
+                            <span class="input-group-addon">
 							<input type="checkbox" name="IsUnpublishActive" id="IsUnpublishActive"
                                    value="1"{{ ((int)$IsUnpublishActive == 1 ? ' checked="checked"' : '') }} />
 						</span>
@@ -253,12 +252,12 @@
                     <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_file') }}"><span
                                     class="icon-info-sign"></span></a></div>
                 </div>
-                    @if($ContentFile && $authInteractivity)
+                @if($ContentFile && $authInteractivity)
                     <div class="form-row">
                         <div class="col-md-3" style="padding-top:8px;">
                             {{ __('common.contents_file_interactive_label') }}
                         </div>
-                        <div class="col-md-3" id="contentPdfButton">
+                        <div class="col-md-8" id="contentPdfButton">
                             <section>
                                 <a href="/{{ Session::get('language') }}/{{ __('route.interactivity') }}/{{ $ContentFileID }}"
                                    onclick="cContent.openInteractiveIDE({{ $ContentFileID }});"
@@ -266,21 +265,42 @@
                                 <span></span>
                             </section>
                         </div>
-                        <div class="col-md-5" style="padding-top: 8px">
-                            <?php if($ContentFile->Interactivity == Interactivity::ProcessQueued): ?>
-                            <?php if((int)$ContentFile->HasCreated == 1): ?>
-                            <span><?php echo __('common.contents_interactive_file_has_been_created'); ?> </span>
-                            <?php else: ?>
-                            <span><?php echo __('common.contents_interactive_file_hasnt_been_created'); ?> </span>
-                            <?php endif; ?>
-                            <?php endif; ?>
-                        </div>
                         <div class="col-md-1" style="padding-top: 8px">
                             <a class="tipr" title="{{ __('common.contents_tooltip_interactive') }}">
                                 <span class="icon-info-sign"></span>
                             </a>
                         </div>
                     </div>
+                    <?php if($ContentFile->Interactivity == Interactivity::ProcessQueued): ?>
+                    <div class="form-row">
+                        <div class="col-md-3">{{__('interactivity.interactivity_status')}}</div>
+                        <div class="col-md-8">
+                            <?php if($ContentFile->HasCreated == 1): ?>
+                            <div class="process">
+                                <div id="interactivityStatus" class="progress-bar progress-bar-success"
+                                     style="width: 100%">
+                                    <span><?php echo __('common.contents_interactive_file_has_been_created'); ?></span>
+                                </div>
+                            </div>
+                            <?php else: ?>
+                            <div id="interactivityStatus" class="progress progress-striped active">
+                                <div class="progress-bar progress-bar-success" role="progressbar" style="width: 100%">
+                                    <?php echo __('common.contents_interactive_file_hasnt_been_created'); ?>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                cContent.checkInteractivityStatus(<?php echo $ContentFile->ContentFileID; ?>, '#interactivityStatus', <?php echo json_encode((string)__('common.contents_interactive_file_has_been_created'));?>);
+                            </script>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="tipr" title="{{ __('interactivity.interactivity_status_tooltip') }}">
+                                <span class="icon-info-sign"></span>
+                            </a>
+                        </div>
+
+                    </div>
+                    <?php endif; ?>
                     @if(sizeof($contentList)>0)
                         <div class="form-row">
                             <div class="col-md-3">{{ __('common.contents_interactivity_copy_title') }}</div>
@@ -290,8 +310,11 @@
                                         class="form-control select2">
                                     <option value="">{{ __('common.contents_interactivity_target') }}</option>
                                     @foreach ($contentList as $cList)
-                                        <option value="{{ $cList->ContentID }}">{{ $cList->Name }} @if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
-                                                <i> -> AppID:{{ $cList->ApplicationID }}</i>@endif</option>
+                                        <option value="{{ $cList->ContentID }}">{{ $cList->Name }}
+                                            @if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
+                                                <i> -> AppID:{{ $cList->ApplicationID }}</i>
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -309,21 +332,21 @@
                         </div>
                     @endif
                 @endif
-                    <?php if($ContentFile): ?>
-                    <div class="form-row">
-                        <div class="col-md-3"><?php echo __('interactivity.download_original_pdf'); ?></div>
-                        <div class="col-md-8">
-                            <a href="<?php echo $ContentFile->pdfOriginalLink();?>" download="mypdf.pdf">
-                                <img width="24px" height="24px" src="/img/cloud-download-32x32.svg"/>
-                            </a>
-                        </div>
-                        <div class="col-md-1">
-                            <a class="tipr" title="{{ __('interactivity.download_original_pdf_tooltip') }}">
-                                <span class="icon-info-sign"></span>
-                            </a>
-                        </div>
+                <?php if($ContentFile): ?>
+                <div class="form-row">
+                    <div class="col-md-3"><?php echo __('interactivity.download_original_pdf'); ?></div>
+                    <div class="col-md-8">
+                        <a href="<?php echo $ContentFile->pdfOriginalLink();?>" download="mypdf.pdf">
+                            <img width="24px" height="24px" src="/img/cloud-download-32x32.svg"/>
+                        </a>
                     </div>
-                    <?php endif; ?>
+                    <div class="col-md-1">
+                        <a class="tipr" title="{{ __('interactivity.download_original_pdf_tooltip') }}">
+                            <span class="icon-info-sign"></span>
+                        </a>
+                    </div>
+                </div>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -396,7 +419,7 @@
                         <div class="input-group">
                             <input type="text" id="ContentIdenfier" value="<?php echo $Identifier; ?>"
                                    readonly="readonly">
-						<span class="input-group-btn">
+                            <span class="input-group-btn">
 							<button class="btn btn-primary urlCheck" type="button"
                                     onclick="cContent.refreshIdentifier(<?php echo $ContentID; ?>);">
                                 <span class="icon-refresh"></span>
@@ -508,7 +531,7 @@
                             <a href="#modal_default_10" class="btn delete expand remove" style="width:100%;"
                                data-toggle="modal">{{ __('common.detailpage_delete') }}</a>
                         </div>
-                        <!--<div class="col-md-2">
+                    <!--<div class="col-md-2">
                             <input type="button" value="{{ __('common.contents_copy_btn') }}" class="btn my-btn-send"
                                    onclick="cContent.copy();"/>
                         </div> -->

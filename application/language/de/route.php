@@ -155,4 +155,5 @@ return array(
     'sign_in' => 'kunde/anmelden',
 
     'payment_card_info' => 'zahlung/karten-info',
+    'contents_interactivity_status' => 'contents/interactivity_status'
 );

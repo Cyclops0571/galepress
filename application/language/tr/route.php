@@ -155,4 +155,5 @@ return array(
     'sign_in' => 'musteri/giris',
 
     'payment_card_info' => 'odeme/kart-bilgisi',
+    'contents_interactivity_status' => 'contents/interactivity_status'
 );
