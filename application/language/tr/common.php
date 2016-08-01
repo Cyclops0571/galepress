@@ -663,4 +663,7 @@ return array(
     'fa-instagram' => 'https://www.instagram.com/galepresstr/',
     'fa-twitter' => 'https://twitter.com/galepresstr',
     'fa-facebook' => 'https://www.facebook.com/pages/Galepress/267455253374597?fref=ts',
+
+    "tutorial" => "Eğitim Videoları",
+    "tutorial_link" => "http://www.galepress.com/blog/blog/blog-thumbnail-videos/",
 );

@@ -12,4 +12,5 @@ return array(
     "confirmation_message" => 'Confirmation Message:',
     "confirmation_message_info" => 'If the client does not approve this message he/she cannot access to content!',
 
+
 );

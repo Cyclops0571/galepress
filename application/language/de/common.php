@@ -663,4 +663,7 @@ return array(
     'fa-instagram' => 'https://www.instagram.com/galepressusa/',
     'fa-twitter' => 'https://twitter.com/galepressusa',
     'fa-facebook' => 'https://www.facebook.com/GalePress-USA-1530611593895881/?ref=hl',
+
+    "tutorial" => "Tutorial Videos",
+    "tutorial_link" => "https://www.youtube.com/channel/UCIJuAlRjVwV6OdCK9uzoN5w",
 );

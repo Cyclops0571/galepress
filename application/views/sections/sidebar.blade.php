@@ -91,10 +91,15 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
         @endif
         @if($showPaymentLink)
             <li>
-                <a href="{{URL::to(__('route.shop'))}}"><span
+                <a href="{{URL::to(__('route.shop'))}}" ><span
                             class="icon-credit-card"></span>{{ __('common.application_payment') }}</a>
             </li>
         @endif
+        <li>
+            <a href="{{__('common.tutorial_link')}}" target="_blank">
+                <span class="icon-question-sign"></span> {{__('common.tutorial')}}
+            </a>
+        </li>
     </ul>
 @else
     <ul class="page-navigation bg-light">
