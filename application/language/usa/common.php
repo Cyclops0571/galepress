@@ -49,7 +49,7 @@ return array(
     'menu_contents' => 'Contents',
     'menu_orders' => 'Orders',
     'menu_users' => 'Users',
-    'menu_mydetail' => 'User Informations',
+    'menu_mydetail' => 'User Information',
     'menu_pushnotify' => 'Push Notification',
     'menu_logout' => 'Exit',
 
