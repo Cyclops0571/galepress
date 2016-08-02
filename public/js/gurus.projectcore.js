@@ -1177,7 +1177,7 @@ cContent = new function () {
                 var progress = data.loaded / data.total * 100;
                 var $forCoverImageFile = $("#CoverImageFileProgress");
                 $forCoverImageFile.find("label").html(progress.toFixed(0) + '%');
-                $forCoverImageFile.find("div.scale").html(progress.toFixed(0) + '%');
+                $forCoverImageFile.find('div.scale').css('width', progress.toFixed(0) + '%');
             },
             done: function (e, data) {
                 if (data.textStatus == 'success') {
