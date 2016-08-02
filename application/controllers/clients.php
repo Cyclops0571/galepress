@@ -37,7 +37,7 @@ class Clients_Controller extends Base_Controller
     public function get_index()
     {
         /** @var User $currentUser */
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         $applications = $currentUser->Application();
         if (empty($applications)) {
             throw new Exception('This user does not have applications. UserID: ' . $currentUser->UserID);
@@ -96,7 +96,7 @@ class Clients_Controller extends Base_Controller
     {
         $selectableContents = NULL;
         /* @var $currentUser User */
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         $applications = $currentUser->Application();
         foreach ($applications as $app) {
             $tmpContents = $app->Contents(eStatus::Active);
@@ -122,7 +122,7 @@ class Clients_Controller extends Base_Controller
     {
         $selectableContents = NULL;
         /* @var $currentUser User */
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         /* @var $client Client */
         $client = Client::find($id);
@@ -166,7 +166,7 @@ class Clients_Controller extends Base_Controller
      */
     public function post_delete()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         $id = (int)Input::get($this->pk, '0');
 
         $s = Client::find($id);
@@ -194,7 +194,7 @@ class Clients_Controller extends Base_Controller
     public function post_save()
     {
         /* @var $currentUser User */
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         /* @var $applications Application[] */
         $applications = $currentUser->Application();
         $appIDSet = array();
@@ -303,7 +303,7 @@ class Clients_Controller extends Base_Controller
         $responseMsg = "";
         $status = "Failed";
         /* @var $user User */
-        $user = Auth::User();
+        $user = Auth::user();
         $applications = $user->Application();
         $appIDSet = array();
         foreach ($applications as $application) {

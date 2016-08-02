@@ -26,7 +26,7 @@
                     </div>
                 </div> 
                 <div class="form-row">
-                    @if((int)Auth::User()->UserTypeID == eUserTypes::Manager) 
+                    @if((int)Auth::user()->UserTypeID == eUserTypes::Manager)
                     <div class="col-md-3">{{ __('common.reports_customer') }}</div>
                     <div class="col-md-3">
                         <select class="form-control select2" style="width: 100%;" tabindex="-1" id="ddlCustomer" name="ddlCustomer" onChange="cCustomer.CustomerOnChange($(this));">
@@ -34,7 +34,7 @@
                         </select>
                     </div>
                     @else
-                    <input type="hidden" id="ddlCustomer" name="ddlCustomer" value="{{ Auth::User()->CustomerID }}">
+                    <input type="hidden" id="ddlCustomer" name="ddlCustomer" value="{{ Auth::user()->CustomerID }}">
                      @endif
                 </div> 
                 <div class="form-row{{ ($report == "101" || $report == "1101" ? ' hidden' : '') }}">
@@ -91,7 +91,7 @@
                     <!--
                     $(function(){							
                         <?php 
-                        if((int)Auth::User()->UserTypeID == eUserTypes::Manager) {
+                        if((int)Auth::user()->UserTypeID == eUserTypes::Manager) {
                             echo 'cCustomer.loadCustomerOptionList();';
                             echo 'cReport.loadCountryOptionList();';
                         }

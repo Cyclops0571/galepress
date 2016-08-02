@@ -68,8 +68,8 @@ class Application extends Eloquent
     public function __construct($attributes = array(), $exists = false)
     {
         parent::__construct($attributes, $exists);
-        if (!$this->ApplicationID && Auth::User()) {
-            $this->CustomerID = Auth::User()->CustomerID;
+        if (!$this->ApplicationID && Auth::user()) {
+            $this->CustomerID = Auth::user()->CustomerID;
             $this->Installment = Application::InstallmentCount;
         }
     }
@@ -144,7 +144,7 @@ class Application extends Eloquent
 
     public function CheckOwnership()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             return true;
         }
@@ -270,8 +270,8 @@ class Application extends Eloquent
         }
 
         $userID = -1;
-        if (Auth::User()) {
-            $userID = Auth::User()->UserID;
+        if (Auth::user()) {
+            $userID = Auth::user()->UserID;
         }
 
         if ((int)$this->ApplicationID == 0) {
@@ -386,7 +386,7 @@ class Application extends Eloquent
     public function initialLocation()
     {
         $currentLang = $this->ApplicationLanguage;
-        if (Auth::User()) {
+        if (Auth::user()) {
             $currentLang = Session::get('language');
         }
 

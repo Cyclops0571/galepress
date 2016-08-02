@@ -272,11 +272,11 @@
                         <div class="head-panel nm" style="border-top: 1px solid">
                             <div class="hp-info hp-simple pull-left hp-inline">
                                 <span class="icon-user"></span>&nbsp;{{__('common.statistics_user')}}&nbsp;<span
-                                        class="reportSubtitle">{{ Auth::User()->Username; }}</span>
+                                        class="reportSubtitle">{{ Auth::user()->Username; }}</span>
                             </div>
                             <?php
                             /* @var $s Sessionn */
-                            $s = Auth::User()->Session(1, 1);
+                            $s = Auth::user()->Session(1, 1);
                             $lastLoginDate = '';
                             $lastLoginTime = '';
                             if ($s) {

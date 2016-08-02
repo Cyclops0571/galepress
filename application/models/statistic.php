@@ -55,8 +55,8 @@ class Statistic extends Eloquent
         }
 
         $userID = -1;
-        if (Auth::User()) {
-            $userID = Auth::User()->UserID;
+        if (Auth::user()) {
+            $userID = Auth::user()->UserID;
         }
 
         if ((int)$this->StatisticID == 0) {

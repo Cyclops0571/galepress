@@ -19,21 +19,21 @@
                         <div class="col-md-3">{{ __('common.users_firstname') }} <span class="error">*</span></div>
                         {{ $errors->first('FirstName', '<p class="error">:message</p>') }}
                         <div class="col-md-9">
-                            <input type="text" name="FirstName" id="FirstName" class="form-control textbox required" value="{{ Auth::User()->FirstName }}" />
+                            <input type="text" name="FirstName" id="FirstName" class="form-control textbox required" value="{{ Auth::user()->FirstName }}" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-3">{{ __('common.users_lastname') }} <span class="error">*</span></div>
                         {{ $errors->first('LastName', '<p class="error">:message</p>') }}
                         <div class="col-md-9">
-                            <input  type="text" name="LastName" id="LastName" class="form-control textbox required" value="{{ Auth::User()->LastName }}"/>
+                            <input  type="text" name="LastName" id="LastName" class="form-control textbox required" value="{{ Auth::user()->LastName }}"/>
                         </div>
                     </div>                        
                     <div class="form-row">
                         <div class="col-md-3">{{ __('common.users_email') }} <span class="error">*</span></div>
                          {{ $errors->first('Email', '<p class="error">:message</p>') }}
                         <div class="col-md-9">
-                            <input type="text" name="Email" id="Email" class="form-control textbox required" value="{{ Auth::User()->Email }}"/>
+                            <input type="text" name="Email" id="Email" class="form-control textbox required" value="{{ Auth::user()->Email }}"/>
                         </div>
                     </div>
                     <div class="form-row">

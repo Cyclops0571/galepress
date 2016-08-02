@@ -24,7 +24,7 @@ class Maps_Controller extends Base_Controller
         $this->fields[] = array(__('common.maps_list_latitude'), 'Latitude');
         $this->fields[] = array(__('common.maps_list_longitude'), 'Longitude');
         $this->fields[] = array(__('common.maps_list_google_map_id'), 'GoogleMapID');
-        if (Auth::User() && (int)Auth::User()->UserTypeID == eUserTypes::Manager) {
+        if (Auth::user() && (int)Auth::user()->UserTypeID == eUserTypes::Manager) {
             $this->fields = array();
             $this->fields[] = array(__('common.maps_list_customer'), 'CustomerName');
             $this->fields[] = array(__('common.maps_list_application'), 'ApplicationName');
@@ -58,7 +58,7 @@ class Maps_Controller extends Base_Controller
                 $query->or_where('Description', 'LIKE', $searchWord);
             });
         }
-        if ((int)Auth::User()->UserTypeID != eUserTypes::Manager) {
+        if ((int)Auth::user()->UserTypeID != eUserTypes::Manager) {
             $markerSetQuery->where('ApplicationID', '=', $applicationID);
         } else {
             $markerSetQuery->join('Application as a', function ($join) {
@@ -216,7 +216,7 @@ class Maps_Controller extends Base_Controller
         $responseMsg = "";
         $status = "Failed";
         /* @var $user User */
-        $user = Auth::User();
+        $user = Auth::user();
         $applications = $user->Application();
         $appIDSet = array();
         foreach ($applications as $application) {

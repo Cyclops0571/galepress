@@ -173,7 +173,7 @@
                        class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
-                        <?php if ((int)Auth::User()->UserTypeID == eUserTypes::Customer): ?>
+                        <?php if ((int)Auth::user()->UserTypeID == eUserTypes::Customer): ?>
                         <th>
                             <div class="input-group commands">
                                 <a href="#"
@@ -193,7 +193,7 @@
                     <?php foreach ($rows as $row): ?>
 
                     <tr id="bannerIDSet_<?php echo $row->BannerID ?>" class="{{ HTML::oddeven($page) }}">
-                        <?php if ((int)Auth::User()->UserTypeID == eUserTypes::Manager): ?>
+                        <?php if ((int)Auth::user()->UserTypeID == eUserTypes::Manager): ?>
                         <td><?php echo $row->CustomerName; ?></td>
                         <td><?php echo $row->ApplicationName; ?></td>
                         <?php else: ?>

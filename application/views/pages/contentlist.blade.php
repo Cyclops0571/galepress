@@ -40,7 +40,7 @@
         <div class="block bg-light-ltr">
             <div class="content controls bg-light-rtl">
                 <div class="form-row ">
-                    <?php if(Auth::User()->UserTypeID == eUserTypes::Customer): ?>
+                    <?php if(Auth::user()->UserTypeID == eUserTypes::Customer): ?>
                     {{ $commandbar }}
                     <?php endif; ?>
                 </div>
@@ -50,7 +50,7 @@
                                class="table table-bordered table-striped table-hover">
                             <thead>
                             <tr>
-                                @if($currentPageNo < 2 && (int)Auth::User()->UserTypeID == eUserTypes::Customer)
+                                @if($currentPageNo < 2 && (int)Auth::user()->UserTypeID == eUserTypes::Customer)
                                     <th><?php echo __('common.sort'); ?></th>
                                 @endif
                                 <?php foreach ($fields as $field): ?>
@@ -63,7 +63,7 @@
                             <tbody>
                             <form id="contentOrderForm">
                                 @forelse($rows->results as $row)
-                                    @if((int)Auth::User()->UserTypeID == eUserTypes::Manager)
+                                    @if((int)Auth::user()->UserTypeID == eUserTypes::Manager)
                                         <tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}">
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->CustomerName) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->ApplicationName) }}</td>
@@ -72,7 +72,7 @@
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->Status) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->ContentID) }}</td>
                                         </tr>
-                                    @elseif((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+                                    @elseif((int)Auth::user()->UserTypeID == eUserTypes::Customer)
                                         <tr id="contentIDSet_{{$row->ContentID}}" class="{{ HTML::oddeven($page) }}"
                                             @if($row->IsMaster==1)style="background:#5D5D5D;"@endif>
                                             <?php if ($page < 2): ?>

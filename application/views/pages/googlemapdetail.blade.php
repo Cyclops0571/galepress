@@ -173,7 +173,7 @@
             {{ Form::open(__('route.maps_detail'), 'POST') }}
             {{ Form::token() }}
             <input type="hidden" name="GoogleMapID" id="GoogleMapID" value="{{ $GoogleMapID }}"/>
-            @if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+            @if((int)Auth::user()->UserTypeID == eUserTypes::Customer)
                 <input type="hidden" name="applicationID" id="ApplicationID" value="{{ $ApplicationID }}"/>
             @endif
             <div class="content np">

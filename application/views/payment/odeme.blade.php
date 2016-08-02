@@ -1,5 +1,5 @@
 <?php
-$user = Auth::User();
+$user = Auth::user();
 $url = "https://api.iyzico.com/v2/create";   // sorgularda kullanacağımız endpoint
 $data =  'api_id=im0322080005c70f195bca1434712720' . //size özel iyzico api
 '&secret=im0339018007d7a8f10f1c1434712720' . // size özel iyzico secret

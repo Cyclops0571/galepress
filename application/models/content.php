@@ -129,7 +129,7 @@ class Content extends Eloquent
                     $a = Content::find($content->ContentID);
                     $a->IsMaster = 0;
                     $a->Version = (int)$a->Version + 1;
-                    $a->ProcessUserID = Auth::User()->UserID;
+                    $a->ProcessUserID = Auth::user()->UserID;
                     $a->ProcessDate = new DateTime();
                     $a->ProcessTypeID = eProcessTypes::Update;
                     $a->save();
@@ -155,8 +155,8 @@ class Content extends Eloquent
             return true;
         }
         $userID = -1;
-        if (Auth::User()) {
-            $userID = Auth::User()->UserID;
+        if (Auth::user()) {
+            $userID = Auth::user()->UserID;
         }
 
         if ((int)$this->ContentID == 0) {
@@ -214,7 +214,7 @@ class Content extends Eloquent
         $sourceRealPath = path('public') . $sourceFilePath;
         $sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
 
-        $targetFileName = Auth::User()->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
+        $targetFileName = Auth::user()->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
         $targetFilePath = 'files/customer_' . $customerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID;
         $destinationFolder = path('public') . $targetFilePath;
         $targetFileNameFull = $destinationFolder . '/' . $targetFileName;
@@ -241,9 +241,9 @@ class Content extends Eloquent
             $ContentFile->FileSize = File::size($targetFileNameFull);
             $ContentFile->Transferred = (int)Input::get('Transferred', '0');
             $ContentFile->StatusID = eStatus::Active;
-            $ContentFile->CreatorUserID = Auth::User()->UserID;
+            $ContentFile->CreatorUserID = Auth::user()->UserID;
             $ContentFile->DateCreated = new DateTime();
-            $ContentFile->ProcessUserID = Auth::User()->UserID;
+            $ContentFile->ProcessUserID = Auth::user()->UserID;
             $ContentFile->ProcessDate = new DateTime();
             $ContentFile->ProcessTypeID = eProcessTypes::Insert;
             $ContentFile->save();
@@ -274,7 +274,7 @@ class Content extends Eloquent
         $sourceRealPath = path('public') . $sourceFilePath;
         $sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
 
-        $targetFileName = Auth::User()->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
+        $targetFileName = Auth::user()->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
         $targetFilePath = 'files/customer_' . $customerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID;
         $destinationFolder = path('public') . $targetFilePath;
         $targetFileNameFull = $destinationFolder . '/' . $targetFileName;
@@ -328,9 +328,9 @@ class Content extends Eloquent
             $c->FileName2 = $targetThumbFileName . IMAGE_EXTENSION;
             $c->FileSize = File::size($destinationFolder . "/" . $targetMainFileName . ".jpg");
             $c->StatusID = eStatus::Active;
-            $c->CreatorUserID = Auth::User()->UserID;
+            $c->CreatorUserID = Auth::user()->UserID;
             $c->DateCreated = new DateTime();
-            $c->ProcessUserID = Auth::User()->UserID;
+            $c->ProcessUserID = Auth::user()->UserID;
             $c->ProcessDate = new DateTime();
             $c->ProcessTypeID = eProcessTypes::Insert;
             $c->save();

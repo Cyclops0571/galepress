@@ -20,7 +20,7 @@ class Categories_Controller extends Base_Controller
 	
 	public function get_index()
     {
-		$currentUser = Auth::User();
+		$currentUser = Auth::user();
 		
 		try
 		{
@@ -34,7 +34,7 @@ class Categories_Controller extends Base_Controller
 						->order_by('Name', 'ASC')
 						->get();
 						
-			if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+			if((int)Auth::user()->UserTypeID == eUserTypes::Customer)
 			{
 				$rows = DB::table('Application AS a')
 							->join('Category AS t', function($join)
@@ -72,7 +72,7 @@ class Categories_Controller extends Base_Controller
 	//POST
 	public function post_save()
     {
-		$currentUser = Auth::User();
+		$currentUser = Auth::user();
 		
 		$id = (int)Input::get('CategoryCategoryID', '0');
 		$applicationID = (int)Input::get('CategoryApplicationID', '0');
@@ -127,7 +127,7 @@ class Categories_Controller extends Base_Controller
 	
 	public function post_delete()
     {
-		$currentUser = Auth::User();
+		$currentUser = Auth::user();
 		
 		$id = (int)Input::get($this->pk, '0');
 		

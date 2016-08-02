@@ -589,7 +589,7 @@ Ottavio.portfolio = function(){
         messageContainer.animate({opacity:0, height:'0px'}).empty();
 
         if (typeof closeURL !== 'undefined' && closeURL !== '') {
-            location = '#_';
+            document.location = '#_';
         }
         portfolioGrid.find('.item.current').removeClass('current' );
     }

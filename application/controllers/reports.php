@@ -43,7 +43,7 @@ class Reports_Controller extends Base_Controller {
 		$reportFilter->showAsXlsForm = (int) Input::get('xls', '0');
 		$reportFilter->map = (int) Input::get('map', '0');
 		$reportFilter->rowCount = (int) Config::get('custom.rowcount');
-		$reportFilter->userTypeID = Auth::User()->UserTypeID == eUserTypes::Manager ? eUserTypes::Manager : eUserTypes::Customer;
+		$reportFilter->userTypeID = Auth::user()->UserTypeID == eUserTypes::Manager ? eUserTypes::Manager : eUserTypes::Customer;
 
 		switch ($reportFilter->reportID) {
 			case Report::customerTraficReport :

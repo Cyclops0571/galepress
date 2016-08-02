@@ -33,7 +33,7 @@ class Users_Controller extends Base_Controller
 
     public function get_index()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             try {
@@ -103,7 +103,7 @@ class Users_Controller extends Base_Controller
 
     public function get_new()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             $data = array(
@@ -120,7 +120,7 @@ class Users_Controller extends Base_Controller
 
     public function get_show($id)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             $row = User::find($id);
@@ -144,7 +144,7 @@ class Users_Controller extends Base_Controller
     //POST
     public function post_save()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             $id = (int)Input::get($this->pk, '0');
@@ -203,7 +203,7 @@ class Users_Controller extends Base_Controller
      */
     public function post_send()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             $id = (int)Input::get($this->pk, '0');
@@ -244,7 +244,7 @@ class Users_Controller extends Base_Controller
     public function post_delete()
     {
         //
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             $id = (int)Input::get($this->pk, '0');

@@ -1,5 +1,5 @@
 	
-    @if(Auth::User()->UserTypeID != eUserTypes::Manager)
+    @if(Auth::user()->UserTypeID != eUserTypes::Manager)
 	
     <div class="modal in" id="modalMapsList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="false" style="display: none; overflow:hidden;">
         <div class="modal-dialog" style="width:40%; margin-top:0 !important; padding-top:0 !important;">

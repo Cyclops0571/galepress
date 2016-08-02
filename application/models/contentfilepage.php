@@ -57,8 +57,8 @@ class ContentFilePage extends Eloquent
             return true;
         }
         $userID = -1;
-        if (Auth::User()) {
-            $userID = Auth::User()->UserID;
+        if (Auth::user()) {
+            $userID = Auth::user()->UserID;
         }
 
         if ($this->Height == 0 || $this->Width == 0) {
@@ -123,7 +123,7 @@ class ContentFilePage extends Eloquent
                 ->update(
                     array(
                         'StatusID' => eStatus::Deleted,
-                        'ProcessUserID' => Auth::User()->UserID,
+                        'ProcessUserID' => Auth::user()->UserID,
                         'ProcessDate' => new DateTime(),
                         'ProcessTypeID' => eProcessTypes::Update
                     )
@@ -158,7 +158,7 @@ class ContentFilePage extends Eloquent
 
                         $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pageComponent->PageComponentID;
                         $targetPathFull = path('public') . $targetPath;
-                        $targetFile = Auth::User()->UserID . '_' . date("YmdHis") . '_' . $v;
+                        $targetFile = Auth::user()->UserID . '_' . date("YmdHis") . '_' . $v;
                         //360
                         if ($componentType == ContentFilePage::slide360) {
                             $targetFile = ($index < 10 ? '0' . $index : '' . $index) . '.jpg';
@@ -194,9 +194,9 @@ class ContentFilePage extends Eloquent
                         $pcp->Name = $name;
                         $pcp->Value = $v;
                         $pcp->StatusID = eStatus::Active;
-                        $pcp->CreatorUserID = Auth::User()->UserID;
+                        $pcp->CreatorUserID = Auth::user()->UserID;
                         $pcp->DateCreated = new DateTime();
-                        $pcp->ProcessUserID = Auth::User()->UserID;
+                        $pcp->ProcessUserID = Auth::user()->UserID;
                         $pcp->ProcessDate = new DateTime();
                         $pcp->ProcessTypeID = eProcessTypes::Insert;
                         $pcp->save();
@@ -213,7 +213,7 @@ class ContentFilePage extends Eloquent
 
                     $targetPath = 'files/customer_' . $customerID . '/application_' . $applicationID . '/content_' . $contentID . '/file_' . $contentFileID . '/output/comp_' . $pageComponent->PageComponentID;
                     $targetPathFull = path('public') . $targetPath;
-                    $targetFile = Auth::User()->UserID . '_' . date("YmdHis") . '_' . $value;
+                    $targetFile = Auth::user()->UserID . '_' . date("YmdHis") . '_' . $value;
                     $targetFileNameFull = $targetPathFull . '/' . $targetFile;
 
                     if (!File::exists($targetPathFull)) {
@@ -251,9 +251,9 @@ class ContentFilePage extends Eloquent
                 $pcp->Name = $name;
                 $pcp->Value = $value;
                 $pcp->StatusID = eStatus::Active;
-                $pcp->CreatorUserID = Auth::User()->UserID;
+                $pcp->CreatorUserID = Auth::user()->UserID;
                 $pcp->DateCreated = new DateTime();
-                $pcp->ProcessUserID = Auth::User()->UserID;
+                $pcp->ProcessUserID = Auth::user()->UserID;
                 $pcp->ProcessDate = new DateTime();
                 $pcp->ProcessTypeID = eProcessTypes::Insert;
                 $pcp->save();
@@ -298,7 +298,7 @@ class ContentFilePage extends Eloquent
             ->update(
                 array(
                     'StatusID' => eStatus::Deleted,
-                    'ProcessUserID' => Auth::User()->UserID,
+                    'ProcessUserID' => Auth::user()->UserID,
                     'ProcessDate' => new DateTime(),
                     'ProcessTypeID' => eProcessTypes::Update
                 )
@@ -311,7 +311,7 @@ class ContentFilePage extends Eloquent
             ->update(
                 array(
                     'StatusID' => eStatus::Deleted,
-                    'ProcessUserID' => Auth::User()->UserID,
+                    'ProcessUserID' => Auth::user()->UserID,
                     'ProcessDate' => new DateTime(),
                     'ProcessTypeID' => eProcessTypes::Update
                 )

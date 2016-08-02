@@ -28,7 +28,7 @@ class Common
 
     public static function CheckCategoryOwnership($categoryID)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
             $count = DB::table('Customer AS c')
@@ -55,7 +55,7 @@ class Common
 
     public static function CheckCategoryOwnershipWithApplication($applicationID, $categoryID)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         $chk4Application = Common::CheckApplicationOwnership($applicationID);
 
@@ -94,7 +94,7 @@ class Common
 
     public static function CheckApplicationOwnership($applicationID)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         if ($currentUser == NULL) {
             return FALSE;
         }
@@ -125,7 +125,7 @@ class Common
 
     public static function CheckContentPasswordOwnership($contentPasswordID)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
             $count = DB::table('Customer AS c')
@@ -688,7 +688,7 @@ class Common
             $hour = 0;
             $minute = 0;
 
-            $timezone = Auth::User()->Timezone;
+            $timezone = Auth::user()->Timezone;
             $timezone = str_replace('UTC', '', $timezone);
             $timezone = preg_replace('/\s+/', '', $timezone);
             //var_dump($timezone);
@@ -843,7 +843,7 @@ class Common
 
     public static function getLocationData($type, $customerID, $applicationID, $contentID, $country = '', $city = '')
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         $isCountry = false;
         $isCity = false;
@@ -897,7 +897,7 @@ class Common
 
     public static function CheckContentOwnership($contentID)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
             $content = Content::find($contentID);

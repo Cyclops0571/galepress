@@ -31,7 +31,7 @@ class Contents_Controller extends Base_Controller
         $this->fields[] = array(__('common.contents_list_content_id'), 'ContentID');
 
         if (Auth::check()) {
-            if ((int)Auth::User()->UserTypeID == eUserTypes::Customer) {
+            if ((int)Auth::user()->UserTypeID == eUserTypes::Customer) {
                 $this->fields = array();
                 $this->fields[] = array(__('common.contents_list_content_name'), 'Name');
                 $this->fields[] = array(__('common.contents_list_content_category'), 'CategoryName');
@@ -46,7 +46,7 @@ class Contents_Controller extends Base_Controller
 
     public function get_index()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         $applicationID = (int)Input::get('applicationID', 0);
         $search = Input::get('search', '');
         $sort = Input::get('sort', $this->defaultSort);
@@ -164,7 +164,7 @@ class Contents_Controller extends Base_Controller
 
         if (((int)$currentUser->UserTypeID == eUserTypes::Customer)) {
             $appCount = DB::table('Application')
-                ->where('CustomerID', '=', Auth::User()->CustomerID)
+                ->where('CustomerID', '=', Auth::user()->CustomerID)
                 ->where('ApplicationID', '=', $applicationID)
                 ->where('ExpirationDate', '>=', DB::raw('CURDATE()'))
                 ->count();
@@ -253,7 +253,7 @@ class Contents_Controller extends Base_Controller
 
     public function get_show($id)
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         $showCropPage = Cookie::get(SHOW_IMAGE_CROP, 0);
         Cookie::put(SHOW_IMAGE_CROP, 0);
         $row = Content::find($id);
@@ -308,7 +308,7 @@ class Contents_Controller extends Base_Controller
     {
         set_time_limit(3000);
         $contentID = 0;
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         $id = (int)Input::get($this->pk, '0');
         $applicationID = (int)Input::get('ApplicationID', '0');
@@ -702,7 +702,7 @@ class Contents_Controller extends Base_Controller
                 $s = Content::find($id);
                 if ($s) {
                     $s->StatusID = eStatus::Deleted;
-                    $s->ProcessUserID = Auth::User()->UserID;
+                    $s->ProcessUserID = Auth::user()->UserID;
                     $s->ProcessDate = new DateTime();
                     $s->ProcessTypeID = eProcessTypes::Update;
                     $s->save();

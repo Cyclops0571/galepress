@@ -323,7 +323,7 @@ class Interactivity_Controller extends Base_Controller
     {
         try {
             //Log::info('logInfo -- ' . 'line:' . __LINE__ . ' time:' . microtime());
-            $currentUser = Auth::User();
+            $currentUser = Auth::user();
 
             $included = (int)Input::get('included');
             $contentFileID = (int)Input::get('contentfileid', 0);
@@ -606,7 +606,7 @@ class Interactivity_Controller extends Base_Controller
     {
         //return "success=".base64_encode("false");
         try {
-            $currentUser = Auth::User();
+            $currentUser = Auth::user();
             $pageFrom = (int)Input::get('from', '0');
             $pageTo = (int)Input::get('to', '0');
             $componentID = (int)Input::get('componentid', '0');
@@ -724,7 +724,7 @@ class Interactivity_Controller extends Base_Controller
     {
         //return "success=".base64_encode("false");
         try {
-            $currentUser = Auth::User();
+            $currentUser = Auth::user();
 
             $contentFileID = (int)Input::get('contentfileid', '0');
             $contentID = (int)ContentFile::find($contentFileID)->ContentID;
@@ -794,7 +794,7 @@ class Interactivity_Controller extends Base_Controller
     public function post_loadpage()
     {
         try {
-            $currentUser = Auth::User();
+            $currentUser = Auth::user();
 
             $contentFileID = (int)Input::get('contentfileid');
             $pageNo = (int)Input::get('pageno');

@@ -1093,7 +1093,7 @@ cContent = new function () {
                 if (/\.(pdf)$/i.test(data.files[0].name)) {
                     $("input[name='save']").attr('disabled', 'disabled');
                     $('#hdnFileSelected').val("1");
-                    var $forFile = $("[for='File']");
+                    var $forFile = $("#FileProgress");
                     $forFile.removeClass("hide");
                     data.context = $forFile;
                     data.context.find('a').click(function (e) {
@@ -1109,7 +1109,7 @@ cContent = new function () {
             },
             progressall: function (e, data) {
                 var progress = data.loaded / data.total * 100;
-                var $forFile = $("[for='File']");
+                var $forFile = $("#FileProgress");
                 $forFile.find('label').html(progress.toFixed(0) + '%');
                 $forFile.find('div.scale').css('width', progress.toFixed(0) + '%');
             },
@@ -1119,7 +1119,7 @@ cContent = new function () {
                     var imageFile = data.result.imageFile;
 
                     $('#hdnFileName').val(fileName);
-                    $("[for='File']").addClass("hide");
+                    $("#FileProgress").addClass("hide");
 
                     $('#hdnCoverImageFileSelected').val("1");
                     $('#hdnCoverImageFileName').val(imageFile);
@@ -1136,7 +1136,7 @@ cContent = new function () {
                 }
             },
             fail: function () {
-                $("[for='File']").addClass("hide");
+                $("#FileProgress").addClass("hide");
             }
         });
 
@@ -1158,7 +1158,7 @@ cContent = new function () {
             add: function (e, data) {
                 if (/\.(gif|jpg|jpeg|tiff|png)$/i.test(data.files[0].name)) {
                     $('#hdnCoverImageFileSelected').val("1");
-                    var $forCoverImageFile = $("[for='CoverImageFile']");
+                    var $forCoverImageFile = $("#CoverImageFileProgress");
                     $forCoverImageFile.removeClass("hide");
 
                     data.context = $forCoverImageFile;
@@ -1175,7 +1175,7 @@ cContent = new function () {
             },
             progressall: function (e, data) {
                 var progress = data.loaded / data.total * 100;
-                var $forCoverImageFile = $("[for='CoverImageFile']");
+                var $forCoverImageFile = $("#CoverImageFileProgress");
                 $forCoverImageFile.find("label").html(progress.toFixed(0) + '%');
                 $forCoverImageFile.find("div.scale").html(progress.toFixed(0) + '%');
             },
@@ -1186,7 +1186,7 @@ cContent = new function () {
 
                     $('#hdnCoverImageFileName').val(fileName);
                     $('#imgPreview').attr("src", "/files/temp/" + fileName);
-                    $("[for='CoverImageFile']").addClass("hide");
+                    $("#CoverImageFileProgress").addClass("hide");
 
                     //auto save
                     if (parseInt($("#ContentID").val()) > 0) {
@@ -1195,7 +1195,7 @@ cContent = new function () {
                 }
             },
             fail: function () {
-                $("[for='CoverImageFile']").addClass("hide");
+                $("#CoverImageFileProgress").addClass("hide");
             }
         });
 

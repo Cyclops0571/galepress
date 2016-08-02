@@ -77,7 +77,7 @@ class Applications_Controller extends Base_Controller
      */
     public function get_index()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             try {
@@ -177,7 +177,7 @@ class Applications_Controller extends Base_Controller
      */
     public function get_new()
     {
-        if (Auth::User()->UserTypeID != eUserTypes::Manager) {
+        if (Auth::user()->UserTypeID != eUserTypes::Manager) {
             return Redirect::to(__('route.home'));
         }
 
@@ -219,7 +219,7 @@ class Applications_Controller extends Base_Controller
      */
     public function get_show($id)
     {
-        if (Auth::User()->UserTypeID != eUserTypes::Manager) {
+        if (Auth::user()->UserTypeID != eUserTypes::Manager) {
             return Redirect::to(__('route.home'));
         }
 
@@ -281,7 +281,7 @@ class Applications_Controller extends Base_Controller
                 throw new Exception(__('error.unauthorized_user_attempt'));
             }
 
-            $currentUser = Auth::User();
+            $currentUser = Auth::user();
             DB::transaction(function () use ($currentUser, $id) {
                 $customerID = 0;
                 $applicationID = 0;
@@ -355,7 +355,7 @@ class Applications_Controller extends Base_Controller
      */
     public function post_save()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         if ((int)$currentUser->UserTypeID == eUserTypes::Manager) {
             $id = (int)Input::get($this->pk, '0');
 
@@ -438,7 +438,7 @@ class Applications_Controller extends Base_Controller
      */
     public function post_delete()
     {
-        $currentUser = Auth::User();
+        $currentUser = Auth::user();
         $id = (int)Input::get($this->pk, '0');
         $s = Application::find($id);
 

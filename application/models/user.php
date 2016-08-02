@@ -62,7 +62,7 @@ class User extends Eloquent
      */
     public function Session($take = 1, $skip = 0)
     {
-        $query = Sessionn::where('UserID', '=', Auth::User()->UserID)
+        $query = Sessionn::where('UserID', '=', Auth::user()->UserID)
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('SessionID', 'DESC')
             ->take($take)

@@ -7,7 +7,7 @@ class Payment_Controller extends Base_Controller
 
     public function get_shop()
     {
-        $user = Auth::User();
+        $user = Auth::user();
         if (!$user) {
             setcookie(GO_BACK_TO_SHOP, GO_BACK_TO_SHOP, time() + Config::get('session.lifetime') * 60, "/");
             return Redirect::to(__('route.home'));
@@ -63,7 +63,7 @@ class Payment_Controller extends Base_Controller
 
     public function post_card_info()
     {
-        $user = Auth::User();
+        $user = Auth::user();
         $customer = Customer::find($user->CustomerID);
         $application = Application::find(Input::get("applicationID"));
         if (!$customer) {
@@ -108,7 +108,7 @@ class Payment_Controller extends Base_Controller
      */
     public function post_payment_approval()
     {
-        $user = Auth::User();
+        $user = Auth::user();
         $customer = Customer::find($user->CustomerID);
         if (!$customer) {
             return Redirect::to(__('route.home'));
@@ -255,7 +255,7 @@ class Payment_Controller extends Base_Controller
      */
     public function get_secure_3d_response()
     {
-        $user = Auth::User();
+        $user = Auth::user();
         $customer = Customer::find($user->CustomerID);
         if (!$customer) {
             return Redirect::to(__('route.home'));

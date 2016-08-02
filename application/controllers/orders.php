@@ -29,7 +29,7 @@ class Orders_Controller extends Base_Controller {
     }
 
     public function get_index() {
-	$currentUser = Auth::User();
+	$currentUser = Auth::user();
 
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    try {
@@ -105,7 +105,7 @@ class Orders_Controller extends Base_Controller {
     }
 
     public function get_new() {
-	$currentUser = Auth::User();
+	$currentUser = Auth::user();
 
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    $data = array(
@@ -121,7 +121,7 @@ class Orders_Controller extends Base_Controller {
     }
 
     public function get_show($id) {
-	$currentUser = Auth::User();
+	$currentUser = Auth::user();
 
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    $row = Order::find($id);
@@ -145,7 +145,7 @@ class Orders_Controller extends Base_Controller {
     //POST
     public function post_save() {
 	$userID = 0;
-	$currentUser = Auth::User();
+	$currentUser = Auth::user();
 
 	if ($currentUser !== NULL) {
 	    $userID = (int) $currentUser->UserID;
@@ -369,7 +369,7 @@ class Orders_Controller extends Base_Controller {
     }
 
     public function post_delete() {
-	$currentUser = Auth::User();
+	$currentUser = Auth::user();
 
 	if ((int) $currentUser->UserTypeID == eUserTypes::Manager) {
 	    $id = (int) Input::get($this->pk, '0');

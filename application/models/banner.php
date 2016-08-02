@@ -65,7 +65,7 @@ class Banner extends Eloquent
         $application = $this->Application;
         $tmpFilePath = path('public') . PATH_TEMP_FILE . '/' . $tmpFileName;
         $destinationFolder = path('public') . 'files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/';
-        $sourcePicturePath = $destinationFolder . Auth::User()->UserID . '_' . date("YmdHis") . '_' . $tmpFileName;
+        $sourcePicturePath = $destinationFolder . Auth::user()->UserID . '_' . date("YmdHis") . '_' . $tmpFileName;
         if (!is_file($tmpFilePath)) {
             return;
         }

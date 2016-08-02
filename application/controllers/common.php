@@ -65,7 +65,7 @@ class Common_Controller extends Base_Controller
 
         if (Auth::attempt(array('username' => $username, 'password' => $password, 'StatusID' => eStatus::Active))) {
             //once biz kontrol ettik simdi laravele diyoruz ki git kontrol et bilgileri tekrardan duzgun kullaniciyi login et - salaklik 572572
-            $user = Auth::User();
+            $user = Auth::user();
             $s = new Sessionn;
             $s->UserID = $user->UserID;
             $s->IP = Request::ip(); //getenv("REMOTE_ADDR");
@@ -201,7 +201,7 @@ class Common_Controller extends Base_Controller
     public function get_logout()
     {
         if (Auth::check()) {
-            $user = Auth::User();
+            $user = Auth::user();
 
             $sessionID = DB::table('Session')
                 ->where('UserID', '=', $user->UserID)
@@ -228,18 +228,18 @@ class Common_Controller extends Base_Controller
     //home
     public function get_home()
     {
-        if ((int)Auth::User()->UserTypeID == eUserTypes::Manager) {
+        if ((int)Auth::user()->UserTypeID == eUserTypes::Manager) {
             return View::make('pages.homeadmin');
         }
 
         $applications = DB::table('Application')
-            ->where('CustomerID', '=', Auth::User()->CustomerID)
+            ->where('CustomerID', '=', Auth::user()->CustomerID)
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('Name', 'ASC')
             ->get();
 
         //parametrik olacak
-        $customerID = (int)Auth::User()->CustomerID;
+        $customerID = (int)Auth::user()->CustomerID;
         $applicationID = (int)Input::get('ddlApplication', '0');
         if ($applicationID == 0) {
             foreach ($applications as $app) {
@@ -394,7 +394,7 @@ class Common_Controller extends Base_Controller
         $v = Validator::make(Input::all(), $rules);
         if ($v->passes()) {
             /** @var User $s */
-            $s = User::find(Auth::User()->UserID);
+            $s = User::find(Auth::user()->UserID);
             $s->FirstName = $firstName;
             $s->LastName = $lastName;
             $s->Email = $email;
@@ -402,7 +402,7 @@ class Common_Controller extends Base_Controller
                 $s->Password = Hash::make($password);
             }
             $s->Timezone = $timezone;
-            $s->ProcessUserID = Auth::User()->UserID;
+            $s->ProcessUserID = Auth::user()->UserID;
             $s->ProcessDate = new DateTime();
             $s->ProcessTypeID = eProcessTypes::Update;
             $s->save();
@@ -573,7 +573,7 @@ class Common_Controller extends Base_Controller
 
             if (Auth::facebookAttempt(array('username' => $user->Username, 'fbemail' => $user->FbEmail, 'StatusID' => eStatus::Active))) {
 
-                $user = Auth::User();
+                $user = Auth::user();
                 $s = new Sessionn;
                 $s->UserID = $user->UserID;
                 $s->IP = Request::ip(); //getenv("REMOTE_ADDR");
@@ -597,7 +597,7 @@ class Common_Controller extends Base_Controller
 
             if (Auth::facebookAttempt(array('username' => $user->Username, 'fbemail' => $user->FbEmail, 'StatusID' => eStatus::Active))) {
 
-                $user = Auth::User();
+                $user = Auth::user();
                 $s = new Sessionn;
                 $s->UserID = $user->UserID;
                 $s->IP = Request::ip(); //getenv("REMOTE_ADDR");
@@ -667,7 +667,7 @@ class Common_Controller extends Base_Controller
         //find out if user exists
         $users = sts\singleton::get('sts\users');
         /** @var User $laravelUser */
-        $laravelUser = Laravel\Auth::User();
+        $laravelUser = Laravel\Auth::user();
         $ticketUserExists = $users->is_user($laravelUser->Username);
         if (!$ticketUserExists) {
             //add user to the system

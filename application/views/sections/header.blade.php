@@ -2,9 +2,9 @@
 /*
 $title = Config::get('custom.companyname');
 
-if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+if((int)Auth::user()->UserTypeID == eUserTypes::Customer)
 {
-    $customer = Auth::User()->Customer();
+    $customer = Auth::user()->Customer();
     
     $title = $customer->CustomerName;
 }
@@ -19,7 +19,7 @@ if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
     </div>
     <!-- end site_info-->
     <div id="date">
-        @if((int)Auth::User()->UserTypeID == eUserTypes::Customer)
+        @if((int)Auth::user()->UserTypeID == eUserTypes::Customer)
             <?php
             $applicationID = (int)Input::get('applicationID', 0);
             

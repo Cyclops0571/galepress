@@ -13,13 +13,13 @@ $reportLinks = array(101, 201, 301, 302, 1001, 1101, 1201, 1301, 1302);
     <div class="control"><a href="#" class="psn-control"><span class="icon-reorder" style="color:#1681bf;"></span></a>
     </div>
 </div>
-@if(Auth::User()->UserTypeID == eUserTypes::Customer)
+@if(Auth::user()->UserTypeID == eUserTypes::Customer)
     <?php
     /** @var Application[] $applicationSet */
-    $applicationSet = Auth::User()->Customer()->Applications(eStatus::Active);
+    $applicationSet = Auth::user()->Customer()->Applications(eStatus::Active);
     $reportLinks = array(1001, 1301, 1302);
-    $customer = Auth::User()->Customer();
-    $title = Auth::User()->FirstName . " " . Auth::User()->LastName;
+    $customer = Auth::user()->Customer();
+    $title = Auth::user()->FirstName . " " . Auth::user()->LastName;
     $showPaymentLink = false;
     $showInAppPuchaseLink = false;
 

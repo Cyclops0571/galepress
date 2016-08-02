@@ -42,7 +42,7 @@ class ContentPasswords_Controller extends Base_Controller {
 	 * @throws Exception
      */
 	public function get_index() {
-		$currentUser = Auth::User();
+		$currentUser = Auth::user();
 
 		try {
 			$contentID = (int) Input::get('contentID', 0);
@@ -53,7 +53,7 @@ class ContentPasswords_Controller extends Base_Controller {
 					->order_by('Name', 'ASC')
 					->get();
 
-			if ((int) Auth::User()->UserTypeID == eUserTypes::Customer) {
+			if ((int) Auth::user()->UserTypeID == eUserTypes::Customer) {
 				$rows = DB::table('Customer AS c')
 						->join('Application AS a', function($join) {
 							$join->on('a.CustomerID', '=', 'c.CustomerID');
@@ -100,7 +100,7 @@ class ContentPasswords_Controller extends Base_Controller {
 	 * @return string
      */
 	public function post_save() {
-		$currentUser = Auth::User();
+		$currentUser = Auth::user();
 
 		$rules = array(
 			'ContentPasswordID' => 'required|integer',
@@ -160,7 +160,7 @@ class ContentPasswords_Controller extends Base_Controller {
 	 * @return string
      */
 	public function post_delete() {
-		$currentUser = Auth::User();
+		$currentUser = Auth::user();
 
 		$id = (int) Input::get($this->pk, '0');
 
