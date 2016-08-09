@@ -876,3 +876,48 @@ table a.sort_up {
 .label-grey {
     color: #dddddd;
 }
+
+#dialog-cover-image .modal-dialog {
+    /*width: 50%;*/
+    min-width: 590px;
+    margin-top: 0;
+    padding: 28px 0;
+}
+
+#dialog-cover-image .modal-dialog .modal-body {
+
+    padding: 0;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/*  UPDATED! flip the pane when hovered */
+/*.flip-container:hover .front {
+transform: rotateY(180deg);
+}*/
+
+.flip-container, .front {
+    width: 590px;
+    height: auto;
+}
+
+/* hide back of pane during swap */
+.front {
+    backface-visibility: hidden;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#coverImageIframe {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden;
+}

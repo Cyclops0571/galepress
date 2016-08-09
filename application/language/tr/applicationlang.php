@@ -11,5 +11,6 @@ return array(
     "show_dashboard_info" => 'Uygulama açıldığında kullanıcıyı giriş yapması için anasayfaya yönlendir.',
     "confirmation_message" => 'Doğrulama Mesajı:',
     "confirmation_message_info" => 'Eğer kullanıcı bu mesajı doğrulamazsa uygulamaya devam edemez!',
-
+    "subscription_activation_warning_title" => 'Market Ayarları Gerekli',
+    "subscription_activation_warning_body" => 'Satın alınabilir üyeliği aktive etmeden önce, Google Play ve Apple Store marketlerinde gerekli ayarlamaları yaptığınızdan emin olun.',
 );

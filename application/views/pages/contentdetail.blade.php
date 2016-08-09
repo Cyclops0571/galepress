@@ -881,52 +881,6 @@
         </div>
     </div>
 
-    <style type="text/css">
-        #dialog-cover-image .modal-dialog {
-            /*width: 50%;*/
-            min-width: 590px;
-            margin-top: 0;
-            padding: 28px 0;
-        }
-
-        #dialog-cover-image .modal-dialog .modal-body {
-
-            padding: 0;
-        }
-
-        /* entire container, keeps perspective */
-        .flip-container {
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-
-        /*  UPDATED! flip the pane when hovered */
-        /*.flip-container:hover .front {
-        transform: rotateY(180deg);
-        }*/
-
-        .flip-container, .front {
-            width: 590px;
-            height: auto;
-        }
-
-        /* hide back of pane during swap */
-        .front {
-            backface-visibility: hidden;
-            transition: 0.6s;
-            transform-style: preserve-3d;
-
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        #coverImageIframe {
-            width: 100% !important;
-            height: 100% !important;
-            overflow: hidden;
-        }
-    </style>
     <div class="modal" id="dialog-cover-image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4"
          aria-hidden="true" style="display:none;">
         <div class="modal-dialog flip-container">
@@ -951,7 +905,29 @@
         </div>
     </div>
 
+    <div class="modal" id="content-buyable-warning" tabindex="-1" role="dialog" aria-labelledby="content-buyable-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{__('content.buyable_warning_title')}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{__('content.buyable_warning_body')}}
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-5">
+                        <input type="button" value="{{ __('common.contents_category_warning_ok') }}"
+                               class="btn my-btn-default" data-dismiss="modal"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
+        var showBuyableModal = {{json_encode(!$IsBuyable)}};
         var showCropPage = {{json_encode($showCropPage)}};
         $(function () {
             var ContentID = parseInt($("#ContentID").val());
@@ -980,6 +956,13 @@
                 dialogCoverImage.modal('show');
                 coverImageIframe.attr("iframeContentID", ContentID);
             }
+
+            $('#IsBuyable').click(function () {
+                if ($(this).is(':checked') && showBuyableModal) {
+                    showBuyableModal = false;
+                    $('#content-buyable-warning').modal('show');
+                }
+            });
 
         })
     </script>
