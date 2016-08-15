@@ -68,6 +68,7 @@ Route::post((string)__('route.contents_interactivity_status'), array('uses' => "
 $languages = Config::get('application.languages', array());
 
 Route::post('/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));
+Route::post('/search', 'webservice.search@search');
 foreach ($languages as $currentLanguage) {
     // <editor-fold defaultstate="collapsed" desc="website">
     Route::get(__('route.website_products')->get($currentLanguage), array('as' => 'website_products_get', 'uses' => 'website@products'));
