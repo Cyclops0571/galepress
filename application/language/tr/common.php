@@ -194,7 +194,7 @@ return array(
     'application_settings_caption_detail' => 'Uygulama Ayarları',
     'application_settings_caption_template' => 'Tema Ayarları',
     'application_settings_caption_banner' => 'Banner Ayarları',
-    'application_settings_store_locator' => 'Bayi Lokasyonları',
+    'application_settings_store_locator' => 'Lokasyon Ekle',
     'application_settings_caption_tab' => 'Sekme Ayarları ',
     'application_settings_template_background_tip' => 'Uygulamanın arkaplan rengini ifade eder.',
     'application_settings_template_foreground_tip' => 'Uygulamadaki yazıların ve butonların rengini ifade eder.',
