@@ -23,7 +23,7 @@ class Webservice_Search_Controller extends Base_Controller
         if($v->fails()) {
             return ajaxResponse::error($v->errors->first());
         }
-        $url = 'http://212.156.57.114:8087/inmemory';
+        $url = 'http://37.9.205.205/search';
         $applicationID = Input::get('applicationID');
         $application = Application::find($applicationID);
         $query = Input::get('query');
