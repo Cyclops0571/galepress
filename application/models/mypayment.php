@@ -95,6 +95,10 @@ class MyPayment
         $lastPaymentFlag = $paymentAccount->last_payment_day < date("Y-m-d", strtotime("-1 month +1 day"));
         $installmentFlag = $paymentAccount->payment_count < $paymentAccount->Application->Installment;
         if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d") && $lastPaymentFlag && $installmentFlag) {
+            $cardToken = $this->paymentAccount->cardToken;
+            if(empty($cardToken)) {
+                return $userInfoSet;
+            }
             //sleep before getting blocked ...
             $this->setPaymentTransaction($this->paymentAccount);
             $request = $this->getRequest();
