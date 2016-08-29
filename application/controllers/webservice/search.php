@@ -17,6 +17,7 @@ class Webservice_Search_Controller extends Base_Controller
     public function post_search() {
         $rules = array(
             "applicationID" => 'required|integer|exists:Application,ApplicationID',
+            "contentID" => 'integer|exists:Content,ContentID',
             "query" => 'required'
             );
         $v = \Laravel\Validator::make(Input::all(), $rules);
@@ -26,9 +27,15 @@ class Webservice_Search_Controller extends Base_Controller
         $url = 'http://37.9.205.205/search';
         $applicationID = Input::get('applicationID');
         $application = Application::find($applicationID);
+        $contentID = Input::get('contentID', 0);
         $query = Input::get('query');
+        if($contentID) {
+            $id = 'customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/content_' . $contentID;
+        } else {
+            $id = 'customer_' . $application->CustomerID . '/application_' . $application->ApplicationID;
+        }
         $parameters = array(
-            'id' => 'customer_' . $application->CustomerID . '/application_' . $application->ApplicationID,
+            'id' => $id,
             'query' => $query,
         );
         $ch = curl_init();
