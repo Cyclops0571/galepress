@@ -16,4 +16,10 @@ class ServerErrorLog extends Eloquent
 {
     public static $table = 'ServerErrorLog';
     public static $key = 'ServerErrorLogID';
+
+    public function save()
+    {
+        $this->Parameters = json_encode($this->Parameters);
+        return parent::save();
+    }
 }

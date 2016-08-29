@@ -420,7 +420,7 @@ $tabIndex = 1;
 
                             var paymentAccount = null;
                             //application degisti bu yeni applicasyonun PaymentAccountu bize gerekli.
-                            $.get('payment/paymentAcountByApplicationID/' + app["attributes"]["ApplicationID"],
+                            $.get('payment/paymentAccountByApplicationID/' + app["attributes"]["ApplicationID"],
                                     function (data) {
                                         jQuery('#loading').hide();
                                         paymentAccount = JSON.parse(data);

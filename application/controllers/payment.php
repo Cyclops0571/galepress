@@ -101,6 +101,12 @@ class Payment_Controller extends Base_Controller
         return View::make('payment.card_info', $data);
     }
 
+    public function get_payment_approval()
+    {
+        echo "Adsfadsf";
+        exit;
+    }
+
     /**
      * iyzco.com dan 6 hane icin kart bilgisi sorar.
      * sonrasinda gene iyzco.comdan odemeyi almaya calisir...
@@ -125,232 +131,65 @@ class Payment_Controller extends Base_Controller
             ->where('paid', '=', 1)
             ->get();
 
-        if (count($oldPaymentTransactions)) {
-            $paymentResult = "Aynı gün içerisinde iki ödeme yapamazsınız.";
+        if (FALSE && count($oldPaymentTransactions)) {
+            $paymentResult = (string)__('error.cannot_make_two_payment_in_the_same_day');
             return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
         }
 
-        //send data
-        //response
-        //paid
-        //transactioni burada baslatayim....
-        $paymentTransaction = new PaymentTransaction();
-        $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
-        $paymentTransaction->CustomerID = $user->CustomerID;
-        $paymentTransaction->save();
+        $paymentCard = new \Iyzipay\Model\PaymentCard();
+        $paymentCard->setCardHolderName(Input::get("card_holder_name"));
+        $paymentCard->setCardNumber(str_replace(" ", "", Input::get("card_number")));
+        $paymentCard->setExpireMonth(Input::get("card_expiry_month"));
+        $paymentCard->setExpireYear(Input::get("card_expiry_year"));
+        $paymentCard->setCvc(Input::get("card_verification"));
+        $paymentCard->setRegisterCard(1);
         $secure3D = Input::get("3d_secure", 0);
 
-        $postData = array();
+        $payment = new MyPayment();
         if ($secure3D) {
-            $postData['response_mode'] = "ASYNC";
-            $postData['return_url'] = Config::get("custom.galepress_https_url") . '/' . Config::get('application.language') . '/3d-secure-response';
+            $basicThreedsInitialize = $payment->paymentFromWebThreeD($paymentCard);
+            return $basicThreedsInitialize->getHtmlContent();
         } else {
-            $postData['response_mode'] = "SYNC";
-        }
-        $postData['api_id'] = Config::get("custom.iyzico_api_id");
-        $postData['secret'] = Config::get("custom.iyzico_secret");
-        $postData['mode'] = Config::get("custom.payment_environment");
-        $postData['external_id'] = $paymentTransaction->PaymentTransactionID;
-        $postData['customer_first_name'] = $user->FirstName;
-        $postData['customer_last_name'] = $user->LastName;
-        $postData['customer_contact_email'] = $paymentAccount->email;
-        $postData['customer_contact_mobile'] = str_replace(array(" ", "-", "(", ")"), "", $paymentAccount->phone);
-        $postData['customer_contact_ip'] = Request::ip();
-        $postData['customer_language'] = 'tr';
-        $postData['customer_presentation_usage'] = 'GalePressAylikOdeme_' . date('YmdHisu');
-        $postData['descriptor'] = 'GalePressAylikOdeme_' . date('YmdHisu');
-        $postData['type'] = "DB";
-        $postData['amount'] = $paymentAccount->Application->Price * 118;
-        $postData['installment_count'] = NULL;
-        $postData['currency'] = "TRY";
-        $postData['descriptor'] = 'GalePressAylikOdeme_' . date('YmdHisu');
-        $postData['card_register'] = 1;
-        $postData['card_number'] = str_replace(" ", "", Input::get("card_number"));
-        $postData['card_expiry_year'] = Input::get("card_expiry_year");
-        $postData['card_expiry_month'] = Input::get("card_expiry_month");
-        $postData['card_brand'] = strtoupper(Input::get("card_brand"));
-        $postData['card_holder_name'] = Input::get("card_holder_name");
-        $postData['card_verification'] = Input::get("card_verification");
-        $postData['connector_type'] = "Garanti";
-        $paymentTransaction->request = json_encode($postData);
-        $paymentTransaction->save();
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, Config::get('custom.iyzico_url'));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, Common::getPostDataString($postData));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-        //curl_setopt($ch, CURLOPT_FAILONERROR, true);
-        $response = curl_exec($ch);
-
-        if ($response === false) {
-            $paymentResult = "Iyzico servis saglayıcısı şu anda cevap vermiyor. Lütfen daha sonra tekrar deneyiniz.";
-            return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
-        }
-        $paymentTransaction->response = $response;
-        $paymentTransaction->save();
-
-        $resultJson = json_decode($response, true);
-
-        if (!$secure3D) {
-            $paymentResult = "Error";
-            if (isset($resultJson['transaction']['state']) && strstr($resultJson['transaction']['state'], "paid")) {
+            $basicPayment = $payment->paymentFromWeb($paymentCard);
+            if ($basicPayment->getStatus() == 'success') {
                 $paymentResult = "Success";
-                if ($paymentAccount->payment_count == 0) {
-                    $paymentAccount->FirstPayment = date('Y-m-d');
-                }
-                $paymentAccount->last_payment_day = date("Y-m-d");
-                $paymentAccount->CustomerID = $user->CustomerID;
-                $paymentAccount->payment_count = (int)$paymentAccount->payment_count + 1;
-                $paymentAccount->card_token = $resultJson['card_token'];
-                $paymentAccount->bin = $resultJson['account']['bin'];
-                $paymentAccount->brand = $resultJson['account']['brand'];
-                $paymentAccount->expiry_month = $resultJson['account']['expiry_month'];
-                $paymentAccount->expiry_year = $resultJson['account']['expiry_year'];
-                $paymentAccount->last_4_digits = $resultJson['account']['lastfourdigits'];
-                $paymentAccount->holder = $resultJson['account']['holder'];
-                $paymentAccount->card_verification = Input::get("card_verification");
-                $paymentAccount->save();
-
-                $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
-                $paymentTransaction->CustomerID = $user->CustomerID;
-                $paymentTransaction->transaction_id = $resultJson['transaction']['transaction_id'];
-                $paymentTransaction->external_id = $resultJson['transaction']['external_id'];
-                $paymentTransaction->reference_id = $resultJson['transaction']['reference_id'];
-                $paymentTransaction->state = $resultJson['transaction']['state'];
-                $paymentTransaction->amount = $resultJson['transaction']['amount'];
-                $paymentTransaction->currency = $resultJson['transaction']['currency'];
-                $paymentTransaction->paid = 1;
-                $paymentTransaction->save();
             } else {
-                $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
-                $paymentTransaction->CustomerID = $user->CustomerID;
-                if (isset($resultJson['transaction'])) {
-                    $paymentTransaction->transaction_id = $resultJson['transaction']['transaction_id'];
-                    $paymentTransaction->external_id = $resultJson['transaction']['external_id'];
-                    $paymentTransaction->reference_id = $resultJson['transaction']['reference_id'];
-                    $paymentTransaction->state = $resultJson['transaction']['state'];
-                } else {
-                    $paymentTransaction->state = 'rejected';
-                }
-                $paymentTransaction->save();
-                if (Config::get('application.language') == 'tr' && !empty($resultJson['response']["error_message_tr"])) {
-                    $paymentResult = $resultJson['response']["error_message_tr"];
-                } else {
-                    $paymentResult = $resultJson['response']["error_message"];
-                }
+                $paymentResult = $basicPayment->getErrorMessage();
             }
-
-
             return Redirect::to_route("website_payment_result_get", array(str_replace('%2F', '/', urlencode($paymentResult))));
-        } else {
-            print_r($response);
         }
     }
 
     /**
      * 3d secure kullanilmis ise buraya geliyoruz
-     * @return Redirect
+     * @return Laravel\Redirect
      */
-    public function get_secure_3d_response()
-    {
-        $user = Auth::user();
-        $customer = Customer::find($user->CustomerID);
-        if (!$customer) {
-            return Redirect::to(__('route.home'));
-        }
-        $paymentAccount = $customer->getLastSelectedPaymentAccount();
-        if (!$paymentAccount) {
-            return Redirect::to('shop');
-        }
-        $paymentResult = "Error";
-        $response64decoded = Input::get("response");
-        if (empty($response64decoded)) {
+    public function post_secure_3d_response() {
+        $response = Input::all();
+        if (empty($response)) {
             $errorLog = new ServerErrorLog();
             $errorLog->Header = 571;
             $errorLog->Url = 'Server 3ds payment';
-            $errorLog->Parameters = $response64decoded;
+            $errorLog->Parameters = Input::all();
             $errorLog->ErrorMessage = 'Response Data';
             $errorLog->save();
-            $paymentResult = "Iyzico servis saglayıcısı şu anda cevap vermiyor. Lütfen daha sonra tekrar deneyiniz.";
-            return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
-        }
-
-        try {
-            $result = json_decode(base64_decode($response64decoded), TRUE);
-        } catch (Exception $e) {
+            $responseText = (string)__('error.service_supplier_do_not_answer_try_again_later');
+        } else if (!isset($response['status'])) {
             $errorLog = new ServerErrorLog();
             $errorLog->Header = 571;
             $errorLog->Url = 'Server 3ds payment';
-            $errorLog->Parameters = $response64decoded;
-            $errorLog->ErrorMessage = 'Response Message could not decoded';
+            $errorLog->Parameters = Input::all();
+            $errorLog->ErrorMessage = 'Response status does not exists.';
             $errorLog->save();
-        }
-        if (!isset($result['transaction']['transaction_id'])) {
-            $errorLog = new ServerErrorLog();
-            $errorLog->Header = 571;
-            $errorLog->Url = 'Server 3ds payment';
-            $errorLog->Parameters = json_encode($result);
-            $errorLog->ErrorMessage = 'Response Message does not have transaction_id';
-            $errorLog->save();
-            $paymentResult = "Iyzico servis saglayıcısında bir hata oldu. Lütfen daha sonra tekrar deneyiniz"; //transaction_id dönmüyor ??
-            return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
-        }
-
-        $paymentTransaction = PaymentTransaction::find($result['transaction']['external_id']);
-        if (!$paymentTransaction) {
-            $errorLog = new ServerErrorLog();
-            $errorLog->Header = 571;
-            $errorLog->Url = 'Server 3ds payment';
-            $errorLog->Parameters = json_encode($result);
-            $errorLog->ErrorMessage = 'Payment Transaction Data does not exists in Database.';
-            $errorLog->save();
-        }
-
-        if (isset($result['transaction']['state']) && strstr($result['transaction']['state'], "paid")) {
-            $paymentResult = "Success";
-            if ($paymentAccount->payment_count == 0) {
-                $paymentAccount->FirstPayment = date('Y-m-d');
-            }
-            $paymentAccount->payment_count = (int)$paymentAccount->payment_count + 1;
-            $paymentAccount->last_payment_day = date("Y-m-d");
-            $paymentAccount->card_token = $result['card_token'];
-            $paymentAccount->bin = $result['account']['bin'];
-            $paymentAccount->brand = $result['account']['brand'];
-            $paymentAccount->expiry_month = $result['account']['expiry_month'];
-            $paymentAccount->expiry_year = $result['account']['expiry_year'];
-            $paymentAccount->last_4_digits = $result['account']['lastfourdigits'];
-            $paymentAccount->holder = $result['account']['holder'];
-            $paymentAccount->save();
-
-
-            $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
-            $paymentTransaction->CustomerID = $user->CustomerID;
-            $paymentTransaction->transaction_id = $result['transaction']['transaction_id'];
-            $paymentTransaction->external_id = $result['transaction']['external_id'];
-            $paymentTransaction->reference_id = $result['transaction']['reference_id'];
-            $paymentTransaction->state = $result['transaction']['state'];
-            $paymentTransaction->amount = $result['transaction']['amount'];
-            $paymentTransaction->currency = $result['transaction']['currency'];
-            $paymentTransaction->response3d = json_encode($result);
-            $paymentTransaction->paid = 1;
-            $paymentTransaction->save();
+            $responseText = (string)__('error.there_is_an_error_on_the_service_supplier_please_try_again_later');
         } else {
-            $paymentTransaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
-            $paymentTransaction->CustomerID = $user->CustomerID;
-            $paymentTransaction->transaction_id = $result['transaction']['transaction_id'];
-            $paymentTransaction->external_id = $result['transaction']['external_id'];
-            $paymentTransaction->state = "rejected";
-            $paymentTransaction->response3d = json_encode($result);
-            $paymentTransaction->save();
-            if (Config::get('application.language') == 'tr' && !empty($result['response']["error_message_tr"])) {
-                $paymentResult = $result['response']["error_message_tr"];
-            } else {
-                $paymentResult = $result['response']["error_message"];
-            }
+            $iyzicoResponse = new iyzico3dsResponse($response);
+            $payment = new MyPayment();
+            $responseText = $payment->get3dsResponse($iyzicoResponse);
+
         }
-        return Redirect::to_route("website_payment_result_get", array(urlencode($paymentResult)));
+
+        return Redirect::to(str_replace("(:all)", urlencode($responseText), (string)__("route.website_payment_result")));
     }
 
     public function get_payment_result($encodedResult)
@@ -367,7 +206,7 @@ class Payment_Controller extends Base_Controller
         return View::make('payment.odeme_sonuc', $data);
     }
 
-    public function get_paymentAcountByApplicationID($appID)
+    public function get_paymentAccountByApplicationID($appID)
     {
         $paymentAccount = PaymentAccount::where('ApplicationID', "=", $appID)->first();
         return json_encode($paymentAccount);

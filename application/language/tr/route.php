@@ -154,6 +154,7 @@ return array(
     'forgot_password' => 'musteri/parolahatirlatma',
     'sign_in' => 'musteri/giris',
 
+    'payment_approvement' => 'odeme/onay',
     'payment_card_info' => 'odeme/kart-bilgisi',
     'contents_interactivity_status' => 'contents/interactivity_status'
 );

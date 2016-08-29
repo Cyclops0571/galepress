@@ -154,6 +154,7 @@ return array(
     'forgot_password' => 'kunde/passwort',
     'sign_in' => 'kunde/anmelden',
 
+    'payment_approvement' => 'zalhung/approvement',
     'payment_card_info' => 'zahlung/karten-info',
     'contents_interactivity_status' => 'contents/interactivity_status'
 );

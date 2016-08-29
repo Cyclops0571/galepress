@@ -3,7 +3,7 @@
 HTML::macro('nav_link', function($route, $text)
 {
     $class = (URI::is($route) || URI::is($route.'/*')) ? ' class="active"' : '';
-    $href = URL::to($route);
+    $href =  URL::to($route);
     
     $action = Request::route();
     $action = $action->action;

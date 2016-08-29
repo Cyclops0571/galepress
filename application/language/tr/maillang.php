@@ -30,4 +30,9 @@ return array(
     'contactform_recipient' => 'Gale Press',
     'contactform_subject' => 'Gale Press İletişim Formu',
     'contanct_email' => 'info@galepress.com',
+    'payment_successful_subject' => "Gale Press Dijital Yayin Platformu Ödeme Maili",
+    'payment_successful_body' => "Sayın :HOLDER \r\n"
+        . "Gale Press Dijital Yayin Platformundan aldığınız ürünün ödemesi :PRICE :CURRENCY hesabınızdan tahsil edilmiştir. \r\n"
+        . "Firmamız adına teşekkür eder iyi günler dileriz.\r\n\r\n\r\n"
+        . "Saygılarımızla Gale Press",
 );

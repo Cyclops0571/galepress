@@ -50,6 +50,8 @@ Route::get('/', function () {
 Route::get('test/iosInternalTest', 'test@iosInternalTest');
 Route::get("test", "test@index");
 Route::post("test", "test@index");
+Route::get("test2", "test@test2");
+Route::post("test2", "test@test2");
 Route::get("move", "test@moveInteractivite");
 Route::get("test/image", "test@image");
 Route::post("test/image", "test@image");
@@ -112,14 +114,16 @@ foreach ($languages as $currentLanguage) {
     Route::get(__('route.website_article_workflow')->get($currentLanguage), array('as' => 'website_article_workflow_get', 'uses' => 'website@article_workflow'));
     Route::get(__('route.website_article_brandvalue')->get($currentLanguage), array('as' => 'website_article_brandvalue_get', 'uses' => 'website@article_brandvalue'));
     Route::get(__('route.website_article_whymobile')->get($currentLanguage), array('as' => 'website_article_whymobile_get', 'uses' => 'website@article_whymobile'));
-    Route::get(__('route.shop')->get($currentLanguage), array('as' => 'website_shop', 'uses' => 'payment@shop'));
 
+
+    //<editor-fold desc="Payment">
+    Route::get(__('route.shop')->get($currentLanguage), array('as' => 'website_shop', 'uses' => 'payment@shop'));
     Route::get('payment-galepress', array('as' => 'website_payment_galepress_get', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
     Route::post('payment-galepress', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_galepress'));
-    // Route::post('odeme', array('as' => 'website_odeme_get', 'uses' => 'website@odeme'));
     Route::post(__('route.payment_card_info')->get($currentLanguage), array('as' => __('route.payment_card_info')->get($currentLanguage), 'before' => 'auth', 'uses' => 'payment@card_info'));
-    Route::post('odeme-onay', array('as' => 'website_payment_galepress_post', 'before' => 'auth', 'uses' => 'payment@payment_approval'));
+    Route::post(__('route.payment_approvement')->get($currentLanguage), array('as' => 'payment_approvement', 'before' => 'auth', 'uses' => 'payment@payment_approval'));
     Route::get(__('route.website_payment_result')->get($currentLanguage), array('as' => 'website_payment_result_get', 'uses' => 'payment@payment_result'));
+    //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Common">
 
@@ -416,9 +420,10 @@ Route::get("banners/delete", array('as' => 'banners_delete', 'before' => 'auth',
 Route::post("banners/order/(:num)", array('as' => 'banners_order', 'before' => 'auth', 'uses' => 'banners@order'));
 Route::get("banners/service_view/(:num)", array('as' => 'banners_service_view', 'uses' => 'banners@service_view'));
 Route::get('maps/webview/(:num)', array('as' => 'map_view', 'uses' => 'maps@webview'));
-Route::get('payment/paymentAcountByApplicationID/(:num)', array('as' => 'app_payment_data', 'uses' => 'payment@paymentAcountByApplicationID'));
+Route::get('payment/paymentAccountByApplicationID/(:num)', array('as' => 'app_payment_data', 'uses' => 'payment@paymentAccountByApplicationID'));
 
 Route::get('3d-secure-response', array('as' => 'iyzico_3ds_return_url', 'before' => 'auth', 'uses' => 'payment@secure_3d_response'));
+Route::post('3d-secure-response', array('as' => 'iyzico_3ds_return_url', 'before' => 'auth', 'uses' => 'payment@secure_3d_response'));
 
 // WS
 Route::get('ws/latest-version', array('uses' => 'ws.index@latestVersion'));
@@ -520,7 +525,7 @@ Route::post('webservice/(:num)/statistics', array('uses' => 'webservice.statisti
 Event::listen('404', function () {
     $serverErrorLog = new ServerErrorLog();
     $serverErrorLog->Header = 404;
-    $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
+    $serverErrorLog->Parameters = \Laravel\Input::all();
     $serverErrorLog->Url = \Laravel\Request::uri();
     $serverErrorLog->save();
     return Response::error('404');

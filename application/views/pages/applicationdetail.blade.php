@@ -217,7 +217,7 @@
                             <input type="text" name="Price" id="Price" class="form-control textbox"
                                    placeholder="{{__('common.applications_placeholder_price')}}"
                                    value="<?php echo number_format((float)$app->Price, 2); ?>"/>
-                            <span class="input-group-addon">TL + (KDV)</span>
+                            <span class="input-group-addon">{{__('website.currency')}}</span>
                         </div>
                     </div>
                 </div>

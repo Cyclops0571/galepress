@@ -38,4 +38,9 @@ return array(
     'contactform_recipient' => 'Gale Press',
     'contactform_subject' => 'Gale Press Contact Form',
     'contanct_email' => 'usa@galepress.com', //sifre:DetayUsa
+    'payment_successful_subject' => "Gale Press Digital Publishing Platform Payment Mail",
+    'payment_successful_body' => "Dear :HOLDER \r\n"
+        . "The price of the service which is bought from Gale Press Digital Publishing Platform  :PRICE :CURRENCY is charged from your bank account. \r\n"
+        . "Thank you for choosing us and have a nice day.\r\n\r\n\r\n"
+        . "Best Regards\r\n Gale Press",
 );

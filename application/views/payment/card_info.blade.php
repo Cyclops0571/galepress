@@ -120,12 +120,12 @@ if (false) {
     <div class="card-wrapper"></div>
 
     <div class="form-container active">
-        <form action="/odeme-onay" method="post" id="paymentForm" class="form-horizontal" autocomplete="off">
+        <form action="<?php echo URL::to(__('route.payment_approvement')); ?>" method="post" id="paymentForm" class="form-horizontal" autocomplete="off">
             <input type="hidden" name="card_brand" id="card_brand" value=""/>
             <div class="form-group">
                 <label class="control-label col-md-5">{{__('website.price')}}</label>
                 <label class="control-label col-md-7">
-                    <?php echo $application->Price * 1.18 ?> {{__('website.currency')}}
+                    <?php echo $application->Price ?> {{__('website.currency')}}
                 </label>
             </div>
             <div class="form-group">
@@ -207,7 +207,7 @@ if (false) {
                             <h4 class="modal-title">{{__('website.payment_confirm')}}</h4>
                         </div>
                         <div class="modal-body">
-                            <label class="control-label">{{__('website.payment_confirmation_alert', array("COST" => $application->Price * 1.18 . $currency))}}</label>
+                            <label class="control-label">{{__('website.payment_confirmation_alert', array("COST" => $application->Price . $currency))}}</label>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default"

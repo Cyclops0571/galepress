@@ -516,21 +516,6 @@ class Common
         }
     }
 
-    public static function sendPaymentUserSuccesMail($username, $email, $amount)
-    {
-        Bundle::start('messages');
-        Message::send(function ($m) use ($username, $email, $amount) {
-            $body = "Sayın " . $username . ", \r\n"
-                . "Gale Press Dijital Yayin Platformundan aldığınız ürünün otomatik ödemesi " . $amount . "TL  hesabınızdan tahsil edilmiştir. \r\n"
-                . "Firmamız adına teşekkür eder iyi günler dileriz.\r\n\r\n\r\n"
-                . "Saygılarımızla Gale Press";
-            $m->from((string)__('maillang.contanct_email'), Config::get('custom.mail_displayname'));
-            $m->to($email);
-            $m->subject("Gale Press Dijital Yayin Platformu Otomatik Ödeme Maili");
-            $m->body($body);
-        });
-    }
-
     public static function sendPaymentUserReminderMail($userList)
     {
         return; //573573
