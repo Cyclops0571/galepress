@@ -96,7 +96,7 @@ class MyPayment
         $installmentFlag = $paymentAccount->payment_count < $paymentAccount->Application->Installment;
         if ($paymentAccount->payment_count > 0 && $paymentAccount->ValidUntil <= date("Y-m-d") && $lastPaymentFlag && $installmentFlag) {
             $cardToken = $this->paymentAccount->cardToken;
-            if(empty($cardToken)) {
+            if (empty($cardToken)) {
                 return $userInfoSet;
             }
             //sleep before getting blocked ...
@@ -191,7 +191,7 @@ class MyPayment
 
         //lets get the PaymentAccount now
         $this->paymentAccount = PaymentAccount::find($this->paymentTransaction->PaymentAccountID);
-        if($response->status == 'success') {
+        if ($response->status == 'success') {
             $request = new \Iyzipay\Request\CreateThreedsPaymentRequest();
             $request->setLocale(MyPayment::getLang());
             $request->setConversationId($response->conversationId);
@@ -202,5 +202,72 @@ class MyPayment
             return "Success";
         }
         return (string)__('error.something_went_wrong');
+    }
+
+    private function iyzicoSystemChange()
+    {
+        $accountIds = array();
+        /** @var PaymentAccount[] $paymentAccounts */
+        $paymentAccounts = PaymentAccount::all();
+        foreach ($paymentAccounts as $paymentAccount) {
+            if (!empty($paymentAccount->card_token) && empty($paymentAccount->cardToken)) {
+                $parameters = array();
+                $parameters['api_id'] = "im015089500879819fdc991436189064";
+                $parameters['secret'] = "im015536200eaf0002c8d01436189064";
+                $parameters['rnd'] = "x8y_jdsik9";
+                $parameters['mode'] = "live";
+                $parameters['card_token'] = "MTQ2NTU1MTM3MAjEScntHCMR93OAUQGi";
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://iyziconnect.com/card-storage/get-card-detail/v2/");
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                if (!empty($response)) {
+                    $myResponse = json_decode($response, true);
+                }
+                if (!isset($myResponse['response']["state"])) {
+                    continue;
+                }
+
+                if ($myResponse['response']["state"] != "success") {
+                    continue;
+                }
+
+                $transaction = new PaymentTransaction();
+                $transaction->PaymentAccountID = $paymentAccount->PaymentAccountID;
+                $transaction->request = "token request";
+                $transaction->save();
+
+
+                $request = new \Iyzipay\Request\CreateCardRequest();
+                $request->setLocale(\Iyzipay\Model\Locale::TR);
+                $request->setConversationId($transaction->PaymentAccountID);
+                $request->setEmail($paymentAccount->email);
+
+                $cardInformation = new \Iyzipay\Model\CardInformation();
+                $cardInformation->setCardAlias("");
+                $cardInformation->setCardHolderName($paymentAccount->holder);
+                $cardInformation->setCardNumber($myResponse['card']["pan"]);
+                $cardInformation->setExpireMonth($myResponse['card']["expiry_month"]);
+                $cardInformation->setExpireYear($myResponse['card']["expiry_year"]);
+                $request->setCard($cardInformation);
+
+                $options = new \Iyzipay\Options();
+                $options->setApiKey(MyPayment::iyzicoApiKey);
+                $options->setSecretKey(MyPayment::iyzicoSecretKey);
+                $options->setBaseUrl(MyPayment::iyzicoBaseUrl);
+                # make request
+                $card = \Iyzipay\Model\Card::create($request, $options);
+                $paymentAccount->cardToken = $card->getCardToken();
+                $paymentAccount->cardUserKey = $card->getCardUserKey();
+                $paymentAccount->save();
+                $accountIds[] = $paymentAccount->PaymentAccountID;
+
+            }
+        }
+
+        echo implode(',', $accountIds);
     }
 }
