@@ -111,7 +111,7 @@ class Common
             $a = Application::find($applicationID);
             if ($a) {
                 if ((int)$a->StatusID == eStatus::Active) {
-                    $c = $a->Customer();
+                    $c = $a->Customer;
                     if ((int)$c->StatusID == eStatus::Active) {
                         if ((int)$currentUser->CustomerID == (int)$c->CustomerID) {
                             return true;
@@ -889,7 +889,7 @@ class Common
             if ($content) {
                 if ((int)$content->StatusID == eStatus::Active) {
                     if ((int)$content->Application->StatusID == eStatus::Active) {
-                        $c = $content->Application->Customer();
+                        $c = $content->Application->Customer;
                         if ((int)$c->StatusID == eStatus::Active) {
                             if ((int)$currentUser->CustomerID == (int)$c->CustomerID) {
                                 return true;

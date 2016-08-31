@@ -4,7 +4,7 @@ $title = Config::get('custom.companyname');
 
 if((int)Auth::user()->UserTypeID == eUserTypes::Customer)
 {
-    $customer = Auth::user()->Customer();
+    $customer = Auth::user()->Customer;
     
     $title = $customer->CustomerName;
 }

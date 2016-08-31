@@ -22,6 +22,7 @@
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
  * @property int $ConfirmCode Description
+ * @property Customer $Customer Description
  */
 class User extends Eloquent
 {
@@ -51,7 +52,7 @@ class User extends Eloquent
      */
     public function Customer()
     {
-        return $this->belongs_to('Customer', 'CustomerID')->first();
+        return $this->belongs_to('Customer', 'CustomerID');
     }
 
     /**

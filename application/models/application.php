@@ -54,6 +54,7 @@
  * @property int $ProcessUserID Description
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
+ * @property Customer $Customer Description
  */
 class Application extends Eloquent
 {
@@ -151,7 +152,7 @@ class Application extends Eloquent
 
         if ((int)$currentUser->UserTypeID == eUserTypes::Customer) {
             if ((int)$this->StatusID == eStatus::Active) {
-                $c = $this->Customer();
+                $c = $this->Customer;
                 if ((int)$c->StatusID == eStatus::Active) {
                     if ((int)$currentUser->CustomerID == (int)$c->CustomerID) {
                         return true;
@@ -168,7 +169,7 @@ class Application extends Eloquent
      */
     public function Customer()
     {
-        return $this->belongs_to('Customer', 'CustomerID')->first();
+        return $this->belongs_to('Customer', 'CustomerID');
     }
 
     public function incrementAppVersion()

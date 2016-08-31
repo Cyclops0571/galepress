@@ -164,7 +164,7 @@ class Applications_Controller extends Base_Controller
 
             if ($option == 1) {
                 $data = array(
-                    'rows' => $currentUser->Customer()->Applications(eStatus::Active)
+                    'rows' => $currentUser->Customer->Applications(eStatus::Active)
                 );
                 return View::make('pages.' . Str::lower($this->table) . 'optionlist', $data);
             }
