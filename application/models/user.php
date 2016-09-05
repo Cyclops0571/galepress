@@ -41,7 +41,7 @@ class User extends Eloquent
         if ($this->UserTypeID == eUserTypes::Manager) {
             $applications = Application::where('StatusID', '=', $statusID)->get();
         } else {
-            $applications = $this->Customer()->Applications($statusID);
+            $applications = $this->Customer->Applications($statusID);
         }
         return $applications;
     }
