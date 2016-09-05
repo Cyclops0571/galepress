@@ -62,6 +62,14 @@ Route::get('test/v(:num)', 'test@routetest');
 Route::get('test/interactive', 'test@interactive');
 // </editor-fold>
 
+//<editor-fold defaultstate="collapesd" desc="Qr Code">
+Route::get('iyzicoqr', 'iyzicoqr@index');
+Route::post('iyzicoqr', 'iyzicoqr@save');
+Route::get('open_iyzico_iframe', array('as' => 'get_iyzico_iframe', 'uses' => 'iyzicoqr@open_iyzico_iframe') );
+Route::get('checkout_result_form', array('as' => 'get_checkout_result_form', 'uses' => 'iyzicoqr@checkout_result_form'));
+Route::post('checkout_result_form', array('as' => 'post_checkout_result_form', 'uses' => 'iyzicoqr@checkout_result_form'));
+//</editor-fold>
+
 
 Route::post("clients/excelupload", array('before' => 'auth', 'uses' => "clients@excelupload"));
 Route::post("maps/excelupload/(:num)", array('before' => 'auth', 'uses' => "maps@excelupload"));

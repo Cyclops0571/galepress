@@ -477,7 +477,7 @@ tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
     'valid_phone' => 'Lütfen geçerli bir telefon adresi girin.',
     'valid_email' => 'Lütfen geçerli bir email adresi girin.',
     'valid_identification_number' => 'Lütfen geçerli bir tc kimlik numarası girin.',
-    'towards_payment_page' => 'Towards Payment Page...',
+    'towards_payment_page' => 'Ödeme Sayfasına Doğru...',
 
     'signup_name' => 'Ad...',
     'signup_surname' => 'Soyad...',

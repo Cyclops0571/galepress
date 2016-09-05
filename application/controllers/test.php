@@ -18,13 +18,47 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
-        //testtest
+        $s = "asdf serdar say gili";
+        echo strtok($s, ' ');
+        echo strtok($s, ' ');
+        exit;
+
+//        echo \Laravel\URL::to('open_iyzico_iframe', true, false, false);
+        var_dump(Redirect::to(URL::to('open_iyzico_iframe', true, false, false) . '?qrCodeId=' . 5));
+        exit;
+        $rules = array(
+            "id" => 'required|integer',
+            "price" => 'required',
+            "cb" => 'required'
+        );
+//        $v = Validator::make(Input::all(), $rules);
+
+        $cb = Input::get('cb');
+        if(strpos($cb, 'https://') === false ||  strpos($cb, 'http://') === false) {
+            $cb = 'http://' . $cb;
+        }
+//        echo $cb; exit;
+//        return Redirect::to($cb);
+
+
+        $cities = array();
+        $cities[] = City::where("CityID", "=", 34)->first();
+        $cities[] = City::where("CityID", "=", 6)->first();
+        $cities[] = City::where("CityID", "=", 35)->first();
+        $orderedCities = City::where_not_in("CityID", array(6,34,35))->order_by('CityName')->get();
+        $cities = array_merge($cities, $orderedCities);
+        $data = array();
+        $data["city"] = $cities;
+
+        return View::make('test.iframebilling', $data);
+        # create request class
+
+
+//        echo $checkoutFormInitialize->getCheckoutFormContent();
     }
 
     public function get_test2()
     {
-
-        echo "adsfasdfasdf";
         var_dump(Input::all());
     }
 

@@ -11,6 +11,9 @@ class MyPayment
     const iyzicoApiKey = "lGdLZQMXMGjJKAPX7RJtyWP3XLYnvWbT";
     const iyzicoSecretKey = "jYhw4nt0Zy55TtceMj320WAVzApj7sPL";
     const iyzicoBaseUrl = "https://api.iyzipay.com/";
+    const sandboxIyzicoApiKey = "sandbox-056gEWAwqXC2F2HKpFWsahJXUmuGX5pg";
+    const sandboxIyzicoSecretKey = "sandbox-OTcrn59sNuj2P1pyaAWQRkuSp17y7e6y";
+    const sandboxIyzicoBaseUrl = "https://sandbox-api.iyzipay.com/";
 
     /** @var Iyzipay\Options */
     public $options = null;

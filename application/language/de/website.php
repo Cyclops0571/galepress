@@ -477,7 +477,7 @@ auf den Tabletcomputern und Smartphones.',
     'valid_phone' => 'Please enter a valid phone number.',
     'valid_email' => 'Please enter a valid email address.',
     'valid_identification_number' => 'Please enter a valid identification number.',
-    'towards_payment_page' => 'Ödeme Sayfasına Doğru...',
+    'towards_payment_page' => 'Towards Payment Page...',
 
     'signup_name' => 'Name...',
     'signup_surname' => 'Last Name...',
