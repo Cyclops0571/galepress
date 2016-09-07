@@ -340,6 +340,7 @@ feature you want to add.',
     'howitworks_publish_text' => 'Close the digital gap and easily publish your content ' .
         'to the entire world without requiring coding knowledge.',
     'howitworks_follow' => 'Follow',
+    'howitworks_follow_text' => 'Before publishing your contents, preview with GP Viewer.',
     'howitworks_comp_video' => 'Video',
     'howitworks_comp_video_text' => 'Highlight your message by adding videos.',
     'howitworks_comp_tooltip' => 'Tooltip',

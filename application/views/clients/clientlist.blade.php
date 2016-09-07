@@ -11,19 +11,19 @@
                     <div class="input-group commands">
                         <a href="{{URL::to(__('route.'.$page.'_new'))}}" title="{{__('common.commandbar_add')}}"
                            class="widget-icon widget-icon-circle">
-                            <span class="icon-plus"></span>
+                            <span class="icon-plus-sign" style="font-size: 20px;"></span>
                         </a>
                         <!--excel sample file download-->
                         <a href='<?php echo Client::getSampleXmlUrl(); ?>' download='SampleClientExcel.xls'
                            title="{{__('common.commandbar_excel_download')}}" class="widget-icon widget-icon-circle">
-                            <span class="icon-download" style="font-size: 15px;"></span>
+                            <span class="icon-my-download" style="font-size: 20px;"></span>
                         </a>
 
                         <!--excel file upload commandbar_excel_add-->
                         <input type="file" name="File" class="btn btn-mini hidden" id="File" style="opacity:0;"/>
                         <a id='FileButton' for='File' href="javascript:void(0)"
                            title="{{__('common.commandbar_excel_upload')}}" class="widget-icon widget-icon-circle">
-                            <span class="icon-upload" style="font-size: 15px;"></span>
+                            <span class="icon-my-upload" style="font-size: 20px;"></span>
                         </a>
                         <script>
                             cCommon.fileUploadInit(

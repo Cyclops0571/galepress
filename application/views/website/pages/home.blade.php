@@ -70,9 +70,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row text-center">
                             <div data-wow-delay="0.5s"
-                                 class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
+                                 class="sectors col-md-4 col-xs-6 col-sm-4 text-center light wow fadeInUp">
                                 <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_digitalpublishing')}}"><img
                                             src="/website/img/sectors/new/dijital.png" data-wow-delay="0.7s"
                                             class="wow fadeInUp"></a>
@@ -81,16 +81,7 @@
                                        style="max-height:30px;">{{__('website.home_sectors_digitalpublishing')}}</p></a>
                             </div>
                             <div data-wow-delay="0.5s"
-                                 class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                                <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_humanresources')}}"><img
-                                            src="/website/img/sectors/new/ik.png" data-wow-delay="0.9s"
-                                            class="wow fadeInUp"></a>
-                                <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_humanresources')}}">
-                                    <p data-wow-delay="0.9s"
-                                       class="lead x2 wow fadeInLeft">{{__('website.home_sectors_hr')}}</p></a>
-                            </div>
-                            <div data-wow-delay="0.5s"
-                                 class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
+                                 class="sectors col-md-4 col-xs-6 col-sm-4 text-center light wow fadeInUp">
                                 <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_education')}}"><img
                                             src="/website/img/sectors/new/egitim.png" data-wow-delay="1.1s"
                                             class="wow fadeInUp"></a>
@@ -100,28 +91,7 @@
                                 </a>
                             </div>
                             <div data-wow-delay="0.5s"
-                                 class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                                <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_realty')}}"><img
-                                            src="/website/img/sectors/new/gayrimenkul.png" data-wow-delay="1.3s"
-                                            class="wow fadeInUp"></a>
-                                <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_realty')}}"><p
-                                            data-wow-delay="1.3s"
-                                            class="lead x2 wow fadeInLeft">{{__('website.home_sectors_realestate')}}</p>
-                                </a>
-                            </div>
-                            <div data-wow-delay="0.5s"
-                                 class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
-                                <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_medicine')}}">
-                                    <img src="<?php echo __('filelang.medikal-or-b2b'); ?>" data-wow-delay="1.5s"
-                                         class="wow fadeInUp">
-                                </a>
-                                <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_medicine')}}"><p
-                                            data-wow-delay="1.5s"
-                                            class="lead x2 wow fadeInLeft">{{__('website.home_sectors_pharmaceutical')}}</p>
-                                </a>
-                            </div>
-                            <div data-wow-delay="0.5s"
-                                 class="sectors col-md-2 col-xs-6 col-sm-4 text-center light wow fadeInUp">
+                                 class="sectors col-md-4 col-xs-6 col-sm-4 text-center light wow fadeInUp">
                                 <a href="/{{ Session::get('language') }}/{{__('route.website_sectors_retail')}}"><img
                                             src="/website/img/sectors/new/perakende.png" data-wow-delay="1.7s"
                                             class="wow fadeInUp"></a>

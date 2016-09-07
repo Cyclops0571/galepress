@@ -158,7 +158,7 @@ class MyPcos
 
             //Web Link
             if ($linkDest == -1 || $subtype != "Link") {
-                //baska bir pdf dokumanina link veriyor bunu gecelim
+                //baska bir pdf dokümanina link veriyor bunu gecelim
                 //link olmayan annotationlari geciyorum.
                 continue;
             }
