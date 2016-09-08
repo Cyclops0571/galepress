@@ -18,6 +18,8 @@ require 'paths.php';
 // --------------------------------------------------------------
 require path('sys').'core.php';
 
+require_once path("base") . "php-amqplib/vendor/autoload.php";
+
 // --------------------------------------------------------------
 // Launch the Laravel "Artisan" CLI.
 // --------------------------------------------------------------

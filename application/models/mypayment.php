@@ -207,7 +207,7 @@ class MyPayment
         return (string)__('error.something_went_wrong');
     }
 
-    private function iyzicoSystemChange()
+    public function iyzicoSystemChange()
     {
         $accountIds = array();
         /** @var PaymentAccount[] $paymentAccounts */
