@@ -18,6 +18,12 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        echo "asdfas"; exit;
+        $s = Input::get('s');
+        var_dump(preg_match('/^[A-Z]/', $s));
+        exit;
+
+
         $s = "asdf serdar say gili";
         echo strtok($s, ' ');
         echo strtok($s, ' ');
