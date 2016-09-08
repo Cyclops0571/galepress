@@ -219,7 +219,7 @@ class MyPayment
                 $parameters['secret'] = "im015536200eaf0002c8d01436189064";
                 $parameters['rnd'] = "x8y_jdsik9";
                 $parameters['mode'] = "live";
-                $parameters['card_token'] = "MTQ2NTU1MTM3MAjEScntHCMR93OAUQGi";
+                $parameters['card_token'] = $paymentAccount->card_token;
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, "https://iyziconnect.com/card-storage/get-card-detail/v2/");
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
