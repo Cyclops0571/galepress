@@ -14,6 +14,7 @@
  * @property string Phone
  * @property string TcNo
  * @property string Price
+ * @property string Parameter
  * @property string CallbackUrl
  */
 class Qrcode extends Eloquent

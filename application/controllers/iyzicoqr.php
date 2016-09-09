@@ -9,7 +9,8 @@ class Iyzicoqr_Controller extends Base_Controller
         $rules = array(
             "id" => 'required|integer',
             "price" => 'required',
-            "cb" => 'required'
+            "cb" => 'required',
+            "pm" => 'required'
         );
         $v = Validator::make(Input::all(), $rules);
         if($v->fails()) {
@@ -19,6 +20,7 @@ class Iyzicoqr_Controller extends Base_Controller
         $cb = Input::get('cb');
         $price = Input::get('price');
         $id = Input::get('id');
+        $pm = Input::get('pm');
         if(strpos($cb, 'https://') === false ||  strpos($cb, 'http://') === false) {
             $cb = 'http://' . $cb;
         }
@@ -34,6 +36,7 @@ class Iyzicoqr_Controller extends Base_Controller
         $data["id"] = $id;
         $data["price"] = $price;
         $data["cb"] = $cb;
+        $data["pm"] = $pm;
 
         return View::make('test.iframebilling', $data);
     }
@@ -48,6 +51,7 @@ class Iyzicoqr_Controller extends Base_Controller
             "phone" => 'required',
             "tc" => 'required',
             "address" => 'required',
+            "pm" => 'required'
         );
         $v = Validator::make(Input::all(), $rules);
         if($v->fails()) {
@@ -58,6 +62,7 @@ class Iyzicoqr_Controller extends Base_Controller
         $qrCode->CallbackUrl = Input::get("callback");
         $qrCode->QrSiteClientID = Input::get("qrCodeClientId");
         $qrCode->Price = Input::get("price");
+        $qrCode->Parameter = Input::get("pm");
         $qrCode->Name = Input::get("name");
         $qrCode->Email = Input::get("email");
         $qrCode->Phone = Input::get("phone");
@@ -165,7 +170,7 @@ class Iyzicoqr_Controller extends Base_Controller
         $options->setBaseUrl(MyPayment::iyzicoBaseUrl);
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($request, $options);
         # print result
-        return Redirect::to($qrCode->CallbackUrl . "?success=" . $checkoutForm->getStatus() . "&message=" . $checkoutForm->getErrorMessage());
+        return Redirect::to($qrCode->CallbackUrl . "?success=" . $checkoutForm->getStatus() . "&message=" . $checkoutForm->getErrorMessage() . "&pm=" . $qrCode->Parameter );
     }
 
 }

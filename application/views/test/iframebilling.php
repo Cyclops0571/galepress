@@ -22,6 +22,7 @@
             <input type="hidden" name="callback" value="<?php echo $cb; ?>"/>
             <input type="hidden" name="qrCodeClientId" value="<?php echo $id; ?>"/>
             <input type="hidden" name="price" value="<?php echo $price; ?>"/>
+            <input type="hidden" name="pm" value="<?php echo $pm; ?>"/>
             <h3 class="col-xs-12">Fatura Bilgileri</h3>
             <div class="form-group">
                 <label><h4>Fiyat: <?php echo $price; ?> </h4></label>
