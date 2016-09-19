@@ -1010,6 +1010,12 @@ hr.slim {
   margin: 0;
   text-align: center;
 }
+
+.icon-box.icon-xs .icon-box-content img {
+    margin: auto;
+    display: block;
+}
+
 .icon-box.icon-horizontal {
   text-align: center;
 }

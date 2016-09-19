@@ -34,7 +34,7 @@
             <div class="col-md-3 sep-bottom-md">
               <div class="icon-box icon-xs icon-gradient">
                 <div class="icon-box-content">
-                  <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
+                  <img src="/website/img/cloud.png">
                   <p>
                     {{__('website.dp_clause1')}}
                   </p>
@@ -44,7 +44,7 @@
             <div class="col-md-3 sep-bottom-md">
               <div class="icon-box icon-xs icon-gradient">
                 <div class="icon-box-content">
-                  <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
+                    <img src="/website/img/cart.png">
                   <p>
                     {{__('website.dp_clause2')}}
                   </p>
@@ -54,7 +54,7 @@
             <div class="col-md-3 sep-bottom-md">
               <div class="icon-box icon-xs icon-gradient">
                 <div class="icon-box-content">
-                  <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
+                    <img src="/website/img/goingup.png">
                   <p>
                     {{__('website.dp_clause3')}}
                   </p>
@@ -64,7 +64,7 @@
             <div class="col-md-3 sep-bottom-md">
               <div class="icon-box icon-xs icon-gradient">
                 <div class="icon-box-content">
-                  <h6 style="font-size:5px;"><i class="fa fa-circle"></i></h6>
+                    <img src="/website/img/cart.png">
                   <p>
                     {{__('website.dp_clause4')}}
                   </p>
