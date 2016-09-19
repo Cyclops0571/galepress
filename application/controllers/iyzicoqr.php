@@ -141,8 +141,9 @@ class Iyzicoqr_Controller extends Base_Controller
         $options->setSecretKey(MyPayment::iyzicoSecretKey);
         $options->setBaseUrl(MyPayment::iyzicoBaseUrl);
         $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($request, $options);
-        # print result
-        print_r($checkoutFormInitialize);
+//        if(\Laravel\Request::env() == ENV_LOCAL) {
+//            print_r($checkoutFormInitialize);
+//        }
 
         $data = array();
         $data["checkoutFormInitialize"] = $checkoutFormInitialize;
@@ -158,7 +159,7 @@ class Iyzicoqr_Controller extends Base_Controller
         }
 
         /** @var Qrcode $qrCode */
-        $qrCode = Qrcode::find(Input::get("QrcodeID"));
+        $qrCode = Qrcode::find(Input::get("qrCodeId"));
         $request = new \Iyzipay\Request\RetrieveCheckoutFormRequest();
         $request->setLocale(\Iyzipay\Model\Locale::TR);
         $request->setConversationId(Input::get("qrCodeId"));
@@ -170,7 +171,13 @@ class Iyzicoqr_Controller extends Base_Controller
         $options->setBaseUrl(MyPayment::iyzicoBaseUrl);
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($request, $options);
         # print result
-        return Redirect::to($qrCode->CallbackUrl . "?success=" . $checkoutForm->getStatus() . "&message=" . $checkoutForm->getErrorMessage() . "&pm=" . $qrCode->Parameter );
+        $resultUrl = array();
+        $resultUrl[] = $qrCode->CallbackUrl . "?success=" . $checkoutForm->getStatus();
+        $resultUrl[] = "message=" . $checkoutForm->getErrorMessage();
+        $resultUrl[] = "pm=" . $qrCode->Parameter;
+        $resultUrl[] = "price=" . $qrCode->Price;
+        $resultUrl[] = "id=" . $qrCode->QrSiteClientID;
+        return Redirect::to(implode('&', $resultUrl));
     }
 
 }
