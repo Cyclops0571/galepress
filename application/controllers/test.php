@@ -18,6 +18,8 @@ class Test_Controller extends Base_Controller
 
     public function get_index($test = 1)
     {
+        var_dump(Input::all());
+        echo "test"; exit;
         /** @var MyPayment $payment */
         $payment = new MyPayment();
         $payment->iyzicoSystemChange();

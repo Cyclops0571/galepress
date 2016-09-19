@@ -10,9 +10,9 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <title>GalePress Shop</title>
-    <meta name="keywords" content="GalePress, Paketler"/>
-    <meta name="description" content="GalePress paket bilgilerinin bulunduğu sayfa.">
-    <meta name="author" content="GalePress">
+    <meta name="keywords" content="Gale Press, Paketler"/>
+    <meta name="description" content="Gale Press paket bilgilerinin bulunduğu sayfa.">
+    <meta name="author" content="Gale Press">
     <link rel="shortcut icon" href="/website/img/favicon2.ico">
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

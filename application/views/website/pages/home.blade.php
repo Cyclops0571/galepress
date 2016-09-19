@@ -112,148 +112,75 @@
         <div class="container">
             <div data-auto-play="false" data-items="4" data-auto-height="false"
                  class="home-showcase owl-carousel owl-theme">
-                <div class="item">
-                    <div class="col-md-12">
-                        <div class="sep-top-xs sep-bottom-sm item-ipad">
-                            <div class="team-photo">
-                                <div class="device-mockup section-showcase" data-device="ipad"
-                                     data-orientation="portrait" data-color="white">
-                                    <div class="device">
-                                        <div class="screen">
-                                            <div data-auto-play="true" data-items="3" data-single-item="true"
-                                                 class="owl-carousel owl-theme">
-                                                <div class="item"><img src="/website/img/clients/carrefoursa/1.jpg"
-                                                                       alt="" class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/carrefoursa/2.jpg"
-                                                                       alt="" class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/carrefoursa/3.jpg"
-                                                                       alt="" class="img-responsive"></div>
+                <?php
+                        $sliderItems =  array();
+                        $sliderItems['karsan'] = array(
+                                'name' => 'KARSAN',
+                                'subtitle' => (string)__('website.home_stars_karsan_subtitle'),
+                                'em' => (string)__('website.home_stars_karsan')
+                        );
+                        $sliderItems['mothlyfitness'] = array(
+                                'name' => 'MONTLY FITNESS',
+                                'subtitle' => (string)__('website.home_stars_montly_fitness_subtitle'),
+                                'em' => (string)__('website.home_stars_montly_fitness')
+                        );
+                        $sliderItems['dagitimkanali'] = array(
+                                'name' => 'DAĞITIM KANALI',
+                                'subtitle' => (string)__('website.home_stars_dagitim_kanali_subtitle'),
+                                'em' => (string)__('website.home_stars_dagitim_kanali')
+                        );
+                        $sliderItems['bthaber'] = array(
+                                'name' => 'BT HABER',
+                                'subtitle' => (string)__('website.home_stars_bt_haber_subtitle'),
+                                'em' => (string)__('website.home_stars_bt_haber')
+                        );
+                        $sliderItems['carrefoursa'] = array(
+                                'name' => 'CarrefourSA',
+                                'subtitle' => (string)__('website.home_stars_carrefour_subtitle'),
+                                'em' => (string)__('website.home_stars_carrefour')
+                        );
+                        $sliderItems['prestijyayincilik'] = array(
+                                'name' => 'PRESTIJ YAYINCILIK',
+                                'subtitle' => (string)__('website.home_stars_prestij_yayincilik_subtitle'),
+                                'em' => (string)__('website.home_stars_prestij_yayincilik')
+                        );
+                        $sliderItems['erphaber'] = array(
+                                'name' => 'ERP HABER',
+                                'subtitle' => (string)__('website.home_stars_erp_haber_subtitle'),
+                                'em' => (string)__('website.home_stars_erp_haber')
+                        );
+                        $sliderItems['betonsa'] = array(
+                                'name' => 'BetonSA',
+                                'subtitle' => (string)__('website.home_stars_betonsa_subtitle'),
+                                'em' => (string)__('website.home_stars_betonsa')
+                        );
+
+                        ?>
+
+                <?php foreach($sliderItems as $comp => $si): ?>
+                    <div class="item">
+                        <div class="col-md-12">
+                            <div class="sep-top-xs sep-bottom-sm item-ipad">
+                                <div class="team-photo">
+                                    <div class="device-mockup section-showcase" data-device="ipad"
+                                         data-orientation="portrait" data-color="white">
+                                        <div class="device">
+                                            <div class="screen">
+                                                <img src="/website/img/clients/<?php echo $comp; ?>.jpg"
+                                                     alt="" class="img-responsive">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="team-name">
-                            <h5 class="upper">CarrefourSA</h5>
-                            <span>{{__('website.home_stars_carrefour_subtitle')}}</span>
-                        </div>
-                        <em>{{__('website.home_stars_carrefour')}}</em>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="col-md-12">
-                        <div class="sep-top-xs sep-bottom-sm item-ipad">
-                            <div class="team-photo">
-                                <div class="device-mockup section-showcase" data-device="ipad"
-                                     data-orientation="portrait" data-color="white">
-                                    <div class="device">
-                                        <div class="screen">
-                                            <div data-auto-play="true" data-items="3" data-single-item="true"
-                                                 data-auto-height="true" class="owl-carousel owl-theme">
-                                                <div class="item"><img src="/website/img/clients/zendiamond/1.jpg"
-                                                                       alt="" class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/zendiamond/2.jpg"
-                                                                       alt="" class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/zendiamond/3.jpg"
-                                                                       alt="" class="img-responsive"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="team-name">
+                                <h5 class="upper"><?php echo $si['name'];?></h5>
+                                <span><?php echo $si['subtitle']; ?></span>
                             </div>
+                            <em><?php echo $si['em']; ?></em>
                         </div>
-                        <div class="team-name">
-                            <h5 class="upper">Zen Diamond</h5><span>{{__('website.home_stars_zen_subtitle')}}</span>
-                        </div>
-                        <em>{{__('website.home_stars_zen')}}</em>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="col-md-12">
-                        <div class="sep-top-xs sep-bottom-sm item-ipad">
-                            <div class="team-photo">
-                                <div class="device-mockup section-showcase" data-device="ipad"
-                                     data-orientation="portrait" data-color="white">
-                                    <div class="device">
-                                        <div class="screen">
-                                            <div data-auto-play="true" data-items="3" data-single-item="true"
-                                                 data-auto-height="true" class="owl-carousel owl-theme">
-                                                <div class="item"><img src="/website/img/clients/renovia/1.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/renovia/2.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/renovia/3.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-name">
-                            <h5 class="upper">Renovia</h5><span>{{__('website.home_stars_renovia_subtitle')}}</span>
-                        </div>
-                        <em>{{__('website.home_stars_renovia')}}</em>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="col-md-12">
-                        <div class="sep-top-xs sep-bottom-sm item-ipad">
-                            <div class="team-photo">
-                                <div class="device-mockup section-showcase" data-device="ipad"
-                                     data-orientation="portrait" data-color="white">
-                                    <div class="device">
-                                        <div class="screen">
-                                            <div data-auto-play="true" data-items="3" data-single-item="true"
-                                                 data-auto-height="true" class="owl-carousel owl-theme">
-                                                <div class="item"><img src="/website/img/clients/pleon/1.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/pleon/2.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/pleon/3.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-name">
-                            <h5 class="upper">Pleon Sportivo</h5>
-                            <span>{{__('website.home_stars_pleon_subtitle')}}</span>
-                        </div>
-                        <em>{{__('website.home_stars_pleon')}}</em>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="col-md-12">
-                        <div class="sep-top-xs sep-bottom-sm item-ipad">
-                            <div class="team-photo">
-                                <div class="device-mockup section-showcase" data-device="ipad"
-                                     data-orientation="portrait" data-color="white">
-                                    <div class="device">
-                                        <div class="screen">
-                                            <div data-auto-play="true" data-items="3" data-single-item="true"
-                                                 data-auto-height="true" class="owl-carousel owl-theme">
-                                                <div class="item"><img src="/website/img/clients/mopas/1.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/mopas/2.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                                <div class="item"><img src="/website/img/clients/mopas/3.jpg" alt=""
-                                                                       class="img-responsive"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-name">
-                            <h5 class="upper">Mopaş</h5><span>{{__('website.home_stars_mopas_subtitle')}}</span>
-                        </div>
-                        <em>{{__('website.home_stars_mopas')}}</em>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -357,7 +284,7 @@
                 </div>
                 <div class="col-md-3 icon-gradient">
                     <div class="icon-box icon-horizontal icon-lg">
-                        <img src="/website/img/infographic/gray/6.png"></i>
+                        <img src="/website/img/infographic/gray/6.png">
                         <div class="icon-box-content">
                             <h5 class="upper" style="color:#0986c2;">{{__('website.home_reports')}}</h5>
 
