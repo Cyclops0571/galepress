@@ -517,7 +517,7 @@ tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
     'home_stars_karsan_subtitle' => 'Katalog',
     'home_stars_montly_fitness' => 'Okuyucularımıza daha hızlı ve daha ulaşılabilir bir çözüm sunmak istiyorduk. Gale Press bunun için biçilmiş kaftandı. Sadece 10 gün içerisinde kolaylıkla yönetebildiğimiz bir mobil uygulamaya sahip olduk.',
     'home_stars_montly_fitness_subtitle' => 'Dergi',
-    'home_stars_dagitim_kanali' => 'Gale presi bir yıldan beri kullanıyorum, dergi sahibi olarak müşterilerimize gurur ile taktim edebileceğim bir aplikasyon. Kulanım kolaylığının yanında sayfalara adeta yeniden hayat veren özellikleri bir yayıncı olarak en çok etkilendiğim yönleri.Teşekkürler Gale press
+    'home_stars_dagitim_kanali' => 'Gale Press\'i bir yıldan beri kullanıyorum, dergi sahibi olarak müşterilerimize gurur ile taktim edebileceğim bir aplikasyon. Kulanım kolaylığının yanında sayfalara adeta yeniden hayat veren özellikleri bir yayıncı olarak en çok etkilendiğim yönleri.Teşekkürler Gale press
 Yıldırım Söylemez',
     'home_stars_dagitim_kanali_subtitle' => 'Dergi',
     'home_stars_bt_haber' => 'Bilgi Teknolojileri dünyasından haberler sunan bir platform olarak bizlerin de dijital dünyaya adım atması gerekiyordu. Bu işi hakkıyla ve en hızlı şekilde yapan Gale Press ekibine sonsuz teşekkürlerimizi bir borç biliriz.',
