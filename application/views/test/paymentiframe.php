@@ -18,7 +18,7 @@
 </head>
 <body>
 <div id="iyzipay-checkout-form" class="popup">
-    <?php echo $checkoutFormInitialize->getCheckoutFormContent(); ?>
 </div>
+<?php echo $checkoutFormInitialize->getCheckoutFormContent(); ?>
 </body>
 </html>
