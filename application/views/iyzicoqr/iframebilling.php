@@ -45,11 +45,11 @@
                        type="email" tabindex="2" placeholder="Email" required value="<?php echo $qrCode->Email; ?>">
             </div>
             <div class="form-group">
-                <input id="phone" pattern="[0-9]{11,11}" name="phone" size="20" type="number" step="1"
+                <input id="phone" pattern="[0-9]{11,11}" name="phone" size="20" type="number" maxlength="11" minlength="11" step="1"
                        class="form-control" tabindex="3" placeholder="Telefon (05XX1234567)" required value="<?php echo $qrCode->Phone; ?>">
             </div>
             <div class="form-group">
-                <input class="form-control" id="tc" name="tc" type="number" pattern="[0-9]{11,11}" step="1"
+                <input class="form-control" id="tc" name="tc" type="number" pattern="[0-9]{11,11}" maxlength="11" minlength="11" step="1"
                        tabindex="3" placeholder="T. C. Kimlik Numarası (12345678910)" required value="<?php echo $qrCode->TcNo; ?>"/>
             </div>
             <div class="form-group">
