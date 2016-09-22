@@ -16,6 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<?php
+/** @var Qrcode $qrCode  */
+/** @var City[] $city */
+?>
 <div class="container">
     <div class="col-md-12">
         <form method="post">
@@ -34,25 +38,28 @@
             <?php endif; ?>
             <div class="form-group">
                 <input id="nameSurname" class="form-control" maxlength="50" name="name" size="50"
-                       type="text" tabindex="1" placeholder="İsim Soyisim" required/>
+                       type="text" tabindex="1" placeholder="İsim Soyisim" required value="<?php echo $qrCode->Name; ?>"/>
             </div>
             <div class="form-group">
                 <input id="email" class="form-control" maxlength="50" name="email" size="50"
-                       type="email" tabindex="2" placeholder="Email" required>
+                       type="email" tabindex="2" placeholder="Email" required value="<?php echo $qrCode->Email; ?>">
             </div>
             <div class="form-group">
-                <input id="phone" pattern="[0-9]{11}" name="phone" size="20" type="number" step="1"
-                       class="form-control" tabindex="3" placeholder="Telefon (05XX1234567)" required>
+                <input id="phone" pattern="[0-9]{11,11}" name="phone" size="20" type="number" step="1"
+                       class="form-control" tabindex="3" placeholder="Telefon (05XX1234567)" required value="<?php echo $qrCode->Phone; ?>">
             </div>
             <div class="form-group">
-                <input class="form-control" id="tc" name="tc" type="number" pattern="[0-9]{11}" step="1"
-                       tabindex="3" placeholder="T. C. Kimlik Numarası (12345678910)" required/>
+                <input class="form-control" id="tc" name="tc" type="number" pattern="[0-9]{11,11}" step="1"
+                       tabindex="3" placeholder="T. C. Kimlik Numarası (12345678910)" required value="<?php echo $qrCode->TcNo; ?>"/>
             </div>
             <div class="form-group">
                 <select id="city" class="form-control required" name="city" tabindex="6" required>
+                    <?php if(empty($qrCode->City)): ?>
                     <option selected="selected" disabled="disabled">Lütfen Şehir Seçin</option>
+                    <?php endif; ?>
                     <?php foreach ($city as $c): ?>
-                        <option value="<?php echo $c->CityName; ?>">
+                        <?php $isSelected =  $c->CityName == $qrCode->City ? 'selected="selected"' : ''; ?>
+                        <option value="<?php echo $c->CityName; ?>" <?php echo $isSelected; ?> >
                             <?php echo $c->CityName; ?>
                         </option>
                     <?php endforeach; ?>
@@ -60,7 +67,7 @@
             </div>
             <div class="form-group">
             <textarea id="address" class="form-control" maxlength="100" name="address" rows="4"
-                      tabindex="6" placeholder="Adres Bilgisi (Sok. No, Konut No)" required ></textarea>
+                      tabindex="6" placeholder="Adres Bilgisi (Sok. No, Konut No)" required ><?php echo $qrCode->Address ?></textarea>
             </div>
             <button class="btn btn-primary" id="payBtn" type="submit">Devam Et</button>
         </form>
