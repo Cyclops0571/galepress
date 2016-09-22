@@ -129,6 +129,9 @@ class Iyzicoqr_Controller extends Base_Controller
         $options->setSecretKey(MyPayment::iyzicoSecretKey);
         $options->setBaseUrl(MyPayment::iyzicoBaseUrl);
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($request, $options);
+//        var_dump($checkoutForm); exit;
+        /** @var Iyzipay\Model\PaymentItem[] $items */
+        $items = $checkoutForm->getPaymentItems();
 
         $resultUrl = array();
         $resultUrl[] = $qrCode->CallbackUrl . "?success=" . $checkoutForm->getStatus();
@@ -136,7 +139,7 @@ class Iyzicoqr_Controller extends Base_Controller
         $resultUrl[] = "pm=" . $qrCode->Parameter;
         $resultUrl[] = "price=" . $qrCode->Price;
         $resultUrl[] = "id=" . $qrCode->QrSiteClientID;
-        $resultUrl[] = "pid=" . $checkoutForm->getPaymentId();
+        $resultUrl[] = "tid=" . ($items ? $items[0]->getPaymentTransactionId() : "");
         return Redirect::to(implode('&', $resultUrl));
     }
 
