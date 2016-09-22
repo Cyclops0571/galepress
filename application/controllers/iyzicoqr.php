@@ -6,15 +6,25 @@ class Iyzicoqr_Controller extends Base_Controller
 
     public function get_index()
     {
-        $rules = array(
-            "id" => 'required|integer',
-            "price" => 'required',
-            "cb" => 'required',
-            "pm" => 'required'
-        );
-        $v = Validator::make(Input::all(), $rules);
-        if($v->fails()) {
-            return $v->errors->first();
+        $errorMessage = "";
+        $qrCodeId = Input::get('qrCodeId', 0);
+
+        if(empty($qrCodeId)) {
+            $rules = array(
+                "id" => 'required|integer',
+                "price" => 'required',
+                "cb" => 'required',
+                "pm" => 'required'
+            );
+            $v = Validator::make(Input::all(), $rules);
+            if($v->fails()) {
+                return $v->errors->first();
+            }
+        } else {
+            /** @var Qrcode $qrCode */
+            $qrCode = Qrcode::find(Input::get('qrCodeId'));
+            $checkoutFormInitialize = $qrCode->makeIyzicoIframeRequrest();
+            $errorMessage = $checkoutFormInitialize->getErrorMessage();
         }
 
         $cb = Input::get('cb');
@@ -37,6 +47,7 @@ class Iyzicoqr_Controller extends Base_Controller
         $data["price"] = $price;
         $data["cb"] = $cb;
         $data["pm"] = $pm;
+        $data["errorMessage"] = $errorMessage;
 
         return View::make('test.iframebilling', $data);
     }
@@ -82,68 +93,10 @@ class Iyzicoqr_Controller extends Base_Controller
         }
         /** @var Qrcode $qrCode */
         $qrCode = Qrcode::find(Input::get('qrCodeId'));
-
-        $name = explode(" ", $qrCode->Name);
-        $firstName = '';
-        $lastName = '';
-        for($i = 0; $i < count($name) - 1; $i++) {
-            $firstName = $firstName . $name[$i] . " ";
+        $checkoutFormInitialize = $qrCode->makeIyzicoIframeRequrest();
+        if(!empty($checkoutFormInitialize->getErrorMessage())) {
+            return Redirect::to(URL::to('iyzicoqr', null, false, false) . '?qrCodeId=' . $qrCode->QrcodeID);
         }
-
-        $firstName = trim($firstName);
-        $lastName = $name[count($name) -1];
-
-        //<editor-fold desc="Request">
-        $request = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
-        $request->setLocale(\Iyzipay\Model\Locale::TR);
-        $request->setConversationId($qrCode->QrcodeID);
-        $request->setPrice($qrCode->Price);
-        $request->setPaidPrice($qrCode->Price);
-        $request->setCurrency(\Iyzipay\Model\Currency::TL);
-        $request->setBasketId($qrCode->QrcodeID);
-        $request->setPaymentGroup(\Iyzipay\Model\PaymentGroup::PRODUCT);
-        $request->setCallbackUrl(URL::to('checkout_result_form', null, false, false) . "?qrCodeId=" . $qrCode->QrcodeID);
-        $request->setEnabledInstallments(array(1, 2, 3, 6, 9));
-        //</editor-fold>
-
-        $buyer = new \Iyzipay\Model\Buyer();
-        $buyer->setId($qrCode->QrSiteClientID);
-        $buyer->setEmail($qrCode->Email);
-        $buyer->setName($firstName);
-        $buyer->setSurname($lastName);
-        $buyer->setIdentityNumber($qrCode->TcNo);
-        $buyer->setRegistrationAddress($qrCode->Address);
-        $buyer->setCity($qrCode->City);
-        $buyer->setCountry("Turkey");
-        $request->setBuyer($buyer);
-
-        $billingAddress = new \Iyzipay\Model\Address();
-        $billingAddress->setContactName($qrCode->Name);
-        $billingAddress->setCity($qrCode->City);
-        $billingAddress->setCountry("Turkey");
-        $billingAddress->setAddress($qrCode->Address);
-        $request->setBillingAddress($billingAddress);
-
-        $basketItems = array();
-        $firstBasketItem = new \Iyzipay\Model\BasketItem();
-        $firstBasketItem->setId($qrCode->QrcodeID);
-        $firstBasketItem->setName("Qrcode Kredisi");
-        $firstBasketItem->setCategory1("Qr-Code Kredisi");
-//        $firstBasketItem->setCategory2("Accessories");
-        $firstBasketItem->setItemType(\Iyzipay\Model\BasketItemType::VIRTUAL);
-        $firstBasketItem->setPrice($qrCode->Price);
-        $basketItems[] = $firstBasketItem;
-        $request->setBasketItems($basketItems);
-
-        # make request
-        $options = new \Iyzipay\Options();
-        $options->setApiKey(MyPayment::iyzicoApiKey);
-        $options->setSecretKey(MyPayment::iyzicoSecretKey);
-        $options->setBaseUrl(MyPayment::iyzicoBaseUrl);
-        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($request, $options);
-//        if(\Laravel\Request::env() == ENV_LOCAL) {
-//            print_r($checkoutFormInitialize);
-//        }
 
         $data = array();
         $data["checkoutFormInitialize"] = $checkoutFormInitialize;

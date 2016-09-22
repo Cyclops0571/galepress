@@ -72,7 +72,7 @@ class CreateInteractivePDF_Task
 
             $fileOutput = $basePath . "/" . $pdfFile;
             //-----------------------------------------------------------------------------------------------
-            $p = new pdflib();
+            $p = new PDFlib();
             $p->set_option("license=" . Config::get('custom.pdflib_license'));
             $p->set_option("errorpolicy=return");
             $doc = $p->begin_document($fileOutput, "destination={type=fitwindow} pagelayout=singlepage");

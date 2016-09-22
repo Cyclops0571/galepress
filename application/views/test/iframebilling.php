@@ -27,6 +27,11 @@
             <div class="form-group">
                 <label><h4>Fiyat: <?php echo $price; ?> </h4></label>
             </div>
+            <?php if(!empty($errorMessage)): ?>
+                <div class="alert alert-danger">
+                    <strong>Hata!</strong> <?php echo $errorMessage; ?>
+                </div>
+            <?php endif; ?>
             <div class="form-group">
                 <input id="nameSurname" class="form-control" maxlength="50" name="name" size="50"
                        type="text" tabindex="1" placeholder="İsim Soyisim" required/>
@@ -36,12 +41,12 @@
                        type="email" tabindex="2" placeholder="Email" required>
             </div>
             <div class="form-group">
-                <input id="phone" maxlength="14" name="phone" size="20" type="text"
-                       class="form-control" tabindex="3" placeholder="Telefon" required>
+                <input id="phone" pattern="[0-9]{11}" name="phone" size="20" type="number" step="1"
+                       class="form-control" tabindex="3" placeholder="Telefon (05XX1234567)" required>
             </div>
             <div class="form-group">
-                <input class="form-control" id="tc" name="tc" type="text" maxlength="11"
-                       tabindex="3" placeholder="T. C. Kimlik Numarası" required/>
+                <input class="form-control" id="tc" name="tc" type="number" pattern="[0-9]{11}" step="1"
+                       tabindex="3" placeholder="T. C. Kimlik Numarası (12345678910)" required/>
             </div>
             <div class="form-group">
                 <select id="city" class="form-control required" name="city" tabindex="6" required>
