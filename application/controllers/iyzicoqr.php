@@ -94,7 +94,8 @@ class Iyzicoqr_Controller extends Base_Controller
         /** @var Qrcode $qrCode */
         $qrCode = Qrcode::find(Input::get('qrCodeId'));
         $checkoutFormInitialize = $qrCode->makeIyzicoIframeRequrest();
-        if(!empty($checkoutFormInitialize->getErrorMessage())) {
+        $errorMessage = $checkoutFormInitialize->getErrorMessage();
+        if(!empty($errorMessage)) {
             return Redirect::to(URL::to('iyzicoqr', null, false, false) . '?qrCodeId=' . $qrCode->QrcodeID);
         }
 
