@@ -29,7 +29,7 @@
             <input type="hidden" name="pm" value="<?php echo $pm; ?>"/>
             <h3 class="col-xs-12">Fatura Bilgileri</h3>
             <div class="form-group">
-                <label><h4>Fiyat: <?php echo $price; ?> </h4></label>
+                <label><h4>Fiyat: <?php echo $price; ?> TL</h4></label>
             </div>
             <?php if(!empty($errorMessage)): ?>
                 <div class="alert alert-danger">
