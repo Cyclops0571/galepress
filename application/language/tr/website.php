@@ -255,14 +255,14 @@ tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
     'menu_explore' => 'Keşfedin',
 
     'home_video_title' => 'Mobil Dünya Parmaklarınızın Ucunda!',
-    'home_intro_title' => 'Bütün Çözümler İçin Tek Platform',
-    'home_intro_text' => 'Şirketinizin ihtiyacı olan çözüm müşteri etkileşimini arttırmak, satış etkinliğini yükseltmek, ' .
-        'daha iyi elemanlar işe almak veya baskı maliyetlerini ' .
-        'düşürmek olabilir. Bu çözümlerin hepsini ve daha ' .
-        'fazlasını Gale Press\'in çevik yapısı sayesinde çok kısa bir sürede hayata geçirebileceksiniz. ' .
-        'Yazılım kiralama modeli sayesinde mobil çözümler departmanınız ' .
-        'için personel, daha geniş bir ofis ve ' .
-        'danışmanlık gibi masraflarınız da olmayacak. Mobil dünya artık parmaklarınızın ucunda.',
+    'home_intro_title' => 'Mobil Dünyada Yeralmak Hiç Bu Kadar Kolay Olmamıştı!',
+    'home_intro_text' => 'GalePress; dergi, katalog, bülten gibi herhangi bir yayınınızı tablet ' .
+        'bilgisayarlar ve akıllı telefonlar üzerinde, size ait bir mobil uygulama sağlayarak, ' .
+        'interaktif halde yayınlayabilme imkanı sağlayan dijital yayıncılık çözümüdür.' .
+        'Sizi basım-dağıtım maliyetlerinden kurtarırken farklı gelir modelleri imkanı oluşturmaktadır. ' .
+        'Yönetimi kolay ve kullanıcı dostu panel yapısı sayesinde uygulamanızı çok kısa bir sürede ' .
+        'hayata geçirebilirsiniz. Üstelik yüksek yatırım maliyeti ve zaman kaybı olmadan kiralama ' .
+        'modeli ile de sahip olabilirsiniz. ',
     'home_sectors_title' => 'İstediğiniz Her Alanda',
     'home_sectors_digitalpublishing' => 'Dijital Yayıncılık',
     'home_sectors_hr' => 'İnsan Kaynakları',
