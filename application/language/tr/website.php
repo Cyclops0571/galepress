@@ -258,7 +258,8 @@ tablet bilgisayarlar ve akıllı telefonlar üzerinden okunmasını sağlar.',
     'home_intro_title' => 'Mobil Dünyada Yeralmak Hiç Bu Kadar Kolay Olmamıştı!',
     'home_intro_text' => 'GalePress; dergi, katalog, bülten gibi herhangi bir yayınınızı tablet ' .
         'bilgisayarlar ve akıllı telefonlar üzerinde, size ait bir mobil uygulama sağlayarak, ' .
-        'interaktif halde yayınlayabilme imkanı sağlayan dijital yayıncılık çözümüdür.' .
+        'interaktif halde yayınlayabilme imkanı sağlayan dijital yayıncılık çözümüdür.</p>' .
+        '<p class="lead lighter" style="font-size:1.7em; color:black; font-weight:lighter;">' .
         'Sizi basım-dağıtım maliyetlerinden kurtarırken farklı gelir modelleri imkanı oluşturmaktadır. ' .
         'Yönetimi kolay ve kullanıcı dostu panel yapısı sayesinde uygulamanızı çok kısa bir sürede ' .
         'hayata geçirebilirsiniz. Üstelik yüksek yatırım maliyeti ve zaman kaybı olmadan kiralama ' .
