@@ -17,12 +17,14 @@ foreach($files as $file)
         if(!$preview)
         {
             $vFile = $baseDirectory.'comp_'.$id.'/'.$filename;
+            $baseDirectory = $baseDirectory . "gal360";
             $myArray[$counter] = $vFile;
             $counter++;
         }
         else
         {
             $vFile = '/'.$file;
+            $baseDirectory = $baseDirectory . "comp_";
             $myArray[$counter] = $vFile;
             $counter++;
         }
@@ -35,9 +37,9 @@ foreach($files as $file)
     <title>Gale Press</title>
     <meta name="Description" content="" />
     <meta name="viewport" content="user-scalable=no" />
-    <script src="{{ $baseDirectory }}gal360/jquery.min.js" type="text/javascript"></script>
-    <script src="{{ $baseDirectory }}gal360/jquery.mobile.vmouse.js" type="text/javascript"></script>
-    <script src="{{ $baseDirectory }}gal360/javascriptviewer_jso.js" type="text/javascript"></script>
+    <script src="{{ $baseDirectory }}/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ $baseDirectory }}/jquery.mobile.vmouse.js" type="text/javascript"></script>
+    <script src="{{ $baseDirectory }}/javascriptviewer_jso.js" type="text/javascript"></script>
     <style type="text/css">
         body,html{
             margin: 0 !important;
@@ -58,7 +60,7 @@ foreach($files as $file)
 
 <div id="image_holder_x">
     <img id="product_image_x" src="{{$vFile}}" style="position:relative;width:100%;height:auto;opacity:0"/>
-    <img src="{{ $baseDirectory }}gal360/img/gale.png" id="loading">
+    <img src="{{ $baseDirectory }}/img/gale.png" id="loading">
 </div>
 
 <script type="text/javascript">

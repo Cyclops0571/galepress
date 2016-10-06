@@ -22,11 +22,13 @@ if (!$preview) {
     if (!empty($vPosterImageFile)) {
         $vPosterImageFile = $baseDirectory . 'comp_' . $id . '/' . $vPosterImageFile;
     }
+    $baseDirectory = $baseDirectory . "video";
 } else {
     $vFile = '/' . $filename;
     if (!empty($vPosterImageFile)) {
         $vPosterImageFile = '/' . $posterimagename;
     }
+    $baseDirectory = $baseDirectory . "comp_";
 }
 ?>
         <!DOCTYPE html>
@@ -34,10 +36,10 @@ if (!$preview) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1">
-    <script src="{{ $baseDirectory }}video/js/jquery.js"></script>
+    <script src="{{ $baseDirectory }}/js/jquery.js"></script>
     <title>Gale Press</title>
-    <link href="{{ $baseDirectory }}video/css/video-js.css" rel="stylesheet" type="text/css">
-    <script src="{{ $baseDirectory }}video/js/video.js" type="text/javascript"></script>
+    <link href="{{ $baseDirectory }}/css/video-js.css" rel="stylesheet" type="text/css">
+    <script src="{{ $baseDirectory }}/js/video.js" type="text/javascript"></script>
     <style>
         * {
             overflow: hidden !important;

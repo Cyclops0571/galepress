@@ -12,10 +12,12 @@ else {
 if(!$preview)
 {
     $vFile = $baseDirectory.'comp_'.$id.'/'.$vFile;
+    $baseDirectory = $baseDirectory . "audio";
 }
 else
 {
     $vFile = '/'.$filename;
+    $baseDirectory = $baseDirectory . "comp_";
 }
 ?>
         <!DOCTYPE html>
@@ -24,14 +26,14 @@ else
     <meta charset="utf-8">
     <title>Gale Press</title>
     <meta name="viewport" content="user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="{{ $baseDirectory }}audio/css/index.css" />
-    <script type="text/javascript" src="{{ $baseDirectory }}audio/CrbUI/audio/button/js/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ $baseDirectory }}audio/CrbUI/audio/button/js/modernizr.js"></script>
-    <script type="text/javascript" src="{{ $baseDirectory }}audio/CrbUI/audio/button/js/swfobject.js"></script>
-    <script type="text/javascript" src="{{ $baseDirectory }}audio/CrbUI/audio/button/js/CrbUI_AudioButton-0.74.adv.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ $baseDirectory }}/css/index.css" />
+    <script type="text/javascript" src="{{ $baseDirectory }}/CrbUI/audio/button/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ $baseDirectory }}/CrbUI/audio/button/js/modernizr.js"></script>
+    <script type="text/javascript" src="{{ $baseDirectory }}/CrbUI/audio/button/js/swfobject.js"></script>
+    <script type="text/javascript" src="{{ $baseDirectory }}/CrbUI/audio/button/js/CrbUI_AudioButton-0.74.adv.js"></script>
     <script type="text/javascript">
         CrbUI_A_CONF['COLOR'] = '#0091ec';
-        CrbUI_A_CONF['PATH'] = '{{ $baseDirectory }}audio/';
+        CrbUI_A_CONF['PATH'] = '{{ $baseDirectory }}/';
     </script>
     <style type="text/css">
         *{

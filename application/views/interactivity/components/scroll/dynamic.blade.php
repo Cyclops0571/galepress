@@ -1,11 +1,18 @@
+<?php
+if(!$preview) {
+    $baseDirectory = $baseDirectory . "scroll";
+} else {
+    $baseDirectory = $baseDirectory . "comp_";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gale Press</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
-    <link href="{{ $baseDirectory }}scroll/css/prettify.css" type="text/css" rel="stylesheet" />
-    <link href="{{ $baseDirectory }}scroll/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />
+    <link href="{{ $baseDirectory }}/css/prettify.css" type="text/css" rel="stylesheet" />
+    <link href="{{ $baseDirectory }}/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
         *{
             -webkit-tap-highlight-color: transparent !important;
@@ -35,8 +42,8 @@
 <div class="overview">
     {{$content}}
 </div>
-<script src="{{ $baseDirectory }}scroll/lib/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="{{ $baseDirectory }}scroll/js/jquery.slimscroll.min.js"></script>
+<script src="{{ $baseDirectory }}/lib/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{{ $baseDirectory }}/js/jquery.slimscroll.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.overview').slimScroll({

@@ -13,18 +13,18 @@ if(File::exists($vFile) && is_file($vFile)) {
     $fname = File::name($vFile);
     $fext = File::extension($vFile);
     $vFile = $fname.'.'.$fext;
-}
-else {
+} else {
     $vFile = '';
 }
-if(!$preview)
-{
+
+if(!$preview) {
     $vFile = $baseDirectory.'comp_'.$id.'/'.$vFile;
-}
-else
-{
+    $baseDirectory = $baseDirectory . "tooltip";
+} else {
     $vFile = '/'.$filename;
+    $baseDirectory = $baseDirectory . "comp_";
 }
+
 $vFile2 = path('public').$filename2;
 if(File::exists($vFile2) && is_file($vFile2)) {
     $fname2 = File::name($vFile2);
@@ -61,8 +61,8 @@ $rgb = array($r, $g, $b);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
-    <link href="{{ $baseDirectory }}tooltip/css/prettify.css" type="text/css" rel="stylesheet" />
-    <link href="{{ $baseDirectory }}tooltip/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />
+    <link href="{{ $baseDirectory }}/css/prettify.css" type="text/css" rel="stylesheet" />
+    <link href="{{ $baseDirectory }}/ckeditor/fonts/fonts.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
         body{
             overflow: hidden;
@@ -148,9 +148,9 @@ $rgb = array($r, $g, $b);
         {{$content}}
     </div>
 </div>
-<script src="{{ $baseDirectory }}tooltip/lib/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="{{ $baseDirectory }}tooltip/js/prettify.js"></script>
-<script type="text/javascript" src="{{ $baseDirectory }}tooltip/js/jquery.slimscroll.min.js"></script>
+<script src="{{ $baseDirectory }}/lib/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{{ $baseDirectory }}/js/prettify.js"></script>
+<script type="text/javascript" src="{{ $baseDirectory }}/js/jquery.slimscroll.min.js"></script>
 <script>
     $(document).ready(function() {
         var ua = navigator.userAgent.toLowerCase();

@@ -23,6 +23,13 @@ foreach ($files as $file) {
     }
     $index = $index + 1;
 }
+
+if(!$preview) {
+    $baseDirectory = $baseDirectory . "slideshow";
+} else {
+    $baseDirectory = $baseDirectory . "comp_";
+}
+
 ?>
         <!DOCTYPE html>
 <html lang="en">
@@ -36,22 +43,22 @@ foreach ($files as $file) {
     <meta name="author" content="Dmitry Semenov">
     <meta name="viewport" content="user-scalable=no">
     <!-- slider JS files -->
-    <script class="rs-file" src="{{ $baseDirectory }}slideshow/assets/royalslider/jquery-1.8.3.min.js"></script>
+    <script class="rs-file" src="{{ $baseDirectory }}/assets/royalslider/jquery-1.8.3.min.js"></script>
     <script class="rs-file"
-            src="{{ $baseDirectory }}slideshow/assets/royalslider/jquery.royalslider.min.js"></script>
-    <link class="rs-file" href="{{ $baseDirectory }}slideshow/assets/royalslider/royalslider.css" rel="stylesheet">
+            src="{{ $baseDirectory }}/assets/royalslider/jquery.royalslider.min.js"></script>
+    <link class="rs-file" href="{{ $baseDirectory }}/assets/royalslider/royalslider.css" rel="stylesheet">
     <!-- syntax highlighter -->
-    <script src="{{ $baseDirectory }}slideshow/assets/preview-assets/js/highlight.pack.js"></script>
-    <script src="{{ $baseDirectory }}slideshow/assets/preview-assets/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="{{ $baseDirectory }}/assets/preview-assets/js/highlight.pack.js"></script>
+    <script src="{{ $baseDirectory }}/assets/preview-assets/js/jquery-ui-1.8.22.custom.min.js"></script>
     <script> hljs.initHighlightingOnLoad();</script>
     <!-- preview-related stylesheets -->
-    <link href="{{ $baseDirectory }}slideshow/assets/preview-assets/css/reset.css" rel="stylesheet">
-    <link href="{{ $baseDirectory }}slideshow/assets/preview-assets/css/smoothness/jquery-ui-1.8.22.custom.css"
+    <link href="{{ $baseDirectory }}/assets/preview-assets/css/reset.css" rel="stylesheet">
+    <link href="{{ $baseDirectory }}/assets/preview-assets/css/smoothness/jquery-ui-1.8.22.custom.css"
           rel="stylesheet">
-    <link href="{{ $baseDirectory }}slideshow/assets/preview-assets/css/github.css" rel="stylesheet">
+    <link href="{{ $baseDirectory }}/assets/preview-assets/css/github.css" rel="stylesheet">
     <!-- slider stylesheets -->
     <link class="rs-file"
-          href="{{ $baseDirectory }}slideshow/assets/royalslider/skins/default-inverted/rs-default-inverted.css"
+          href="{{ $baseDirectory }}/assets/royalslider/skins/default-inverted/rs-default-inverted.css"
           rel="stylesheet">
     <!-- slider css -->
     <style>
