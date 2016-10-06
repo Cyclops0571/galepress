@@ -14,6 +14,8 @@
  * @property int CreatorUserID
  * @property int ProcessUserID
  * @property PageComponentProperty[] PageComponentProperty
+ * @property ContentFilePage ContentFilePage
+ * @property Component $Component
  */
 class PageComponent extends Eloquent
 {
@@ -25,7 +27,7 @@ class PageComponent extends Eloquent
 
     public function Component()
     {
-        return $this->belongs_to('Component', 'ComponentID')->first();
+        return $this->belongs_to('Component', 'ComponentID');
     }
 
     public function save()
@@ -58,18 +60,29 @@ class PageComponent extends Eloquent
      */
     public function moveToNewContentFile(ContentFile $newContentFile, ContentFile $oldContentFile)
     {
-        $mypath = '/output/comp_' . $this->PageComponentID;
-        if (File::exists($oldContentFile->pdfFolderPathAbsolute() . $mypath)) {
-            File::mvdir($oldContentFile->pdfFolderPathAbsolute() . $mypath, $newContentFile->pdfFolderPathAbsolute() . $mypath);
+        $myPath = '/output/comp_' . $this->PageComponentID;
+        if (File::exists($oldContentFile->pdfFolderPathAbsolute() . $myPath)) {
+            File::mvdir($oldContentFile->pdfFolderPathAbsolute() . $myPath, $newContentFile->pdfFolderPathAbsolute() . $myPath);
         }
-        $myHtml = $mypath . '.html';
+        $myHtml = $myPath . '.html';
         if (File::exists($oldContentFile->pdfFolderPathAbsolute() . $myHtml)) {
             File::move($oldContentFile->pdfFolderPathAbsolute() . $myHtml, $newContentFile->pdfFolderPathAbsolute() . $myHtml);
         }
     }
 
+    /**
+     * @return \Laravel\Database\Eloquent\Query
+     */
     public function PageComponentProperty()
     {
-        return $this->has_many('PageComponentProperty', $this->key())->where('StatusID', '=', eStatus::Active);
+        return $this->has_many('PageComponentProperty', self::$key)->where('StatusID', '=', eStatus::Active);
     }
+
+    /**
+     * @return \Laravel\Database\Eloquent\Query
+     */
+    public function ContentFilePage() {
+        return $this->belongs_to('ContentFilePage', 'ContentFilePageID');
+    }
+
 }

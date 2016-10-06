@@ -28,27 +28,16 @@ if (!$preview) {
         $vPosterImageFile = '/' . $posterimagename;
     }
 }
-
-/*
-if((int)$modal == 1) {
-	//$w = '100%';
-	//$h = '100%';
-}
-else {
-	$w = $w - 20;
-	$h = $h - 10;
-}
-*/
 ?>
         <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1">
-    <script src="{{ $baseDirectory }}comp_{{ $id }}/js/jquery.js"></script>
+    <script src="{{ $baseDirectory }}video/js/jquery.js"></script>
     <title>Gale Press</title>
-    <link href="{{ $baseDirectory }}comp_{{ $id }}/css/video-js.css" rel="stylesheet" type="text/css">
-    <script src="{{ $baseDirectory }}comp_{{ $id }}/js/video.js" type="text/javascript"></script>
+    <link href="{{ $baseDirectory }}video/css/video-js.css" rel="stylesheet" type="text/css">
+    <script src="{{ $baseDirectory }}video/js/video.js" type="text/javascript"></script>
     <style>
         * {
             overflow: hidden !important;
@@ -93,14 +82,14 @@ else {
 <?php //var_dump($modal XOR (!$showcontrols)); ?>
 <video id="example_video_1" class="video-js vjs-default-skin"
        {{($videoinit=='onload' ? 'autoplay' : '')}}
-       {{($showcontrols==1 ? 'controls' : '')}}
-       {{($restartwhenfinished==1 ? 'loop' : '')}}
-       preload="auto"
-       width="{{$w}}" height="{{$h}}"
-       {{empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'}}
-       {{ ($modal XOR (!$showcontrols)) ? 'onclick="startVideo()"' : ''}}
-       data-setup="{}" style="position:fixed; height:100% !important;">
-    <source src="{{ ($option==1 ? $vFile : $url) }}" type='video/mp4'/>
+{{($showcontrols==1 ? 'controls' : '')}}
+{{($restartwhenfinished==1 ? 'loop' : '')}}
+preload="auto"
+width="{{$w}}" height="{{$h}}"
+{{empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'}}
+{{ ($modal XOR (!$showcontrols)) ? 'onclick="startVideo()"' : ''}}
+data-setup="{}" style="position:fixed; height:100% !important;">
+<source src="{{ ($option==1 ? $vFile : $url) }}" type='video/mp4'/>
 </video>
 
 <script type="text/javascript">
@@ -158,5 +147,3 @@ else {
 </script>
 </body>
 </html>
-
-

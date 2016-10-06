@@ -4,6 +4,7 @@ class Uploader
 {
 
     /**
+     * @desc creates a zip file from the uploaded url and creates first page.
      * @param $pdfFile
      * @return array
      */
@@ -80,10 +81,8 @@ class Uploader
         }
 
         $im->resampleImage(72, 72, Imagick::FILTER_BOX, 1);
-        //$im->setImageColorspace(255);
         $im->setCompression(Imagick::COMPRESSION_JPEG);
         $im->setCompressionQuality(80);
-        //$im->setImageFormat('jpeg');
         $im->setImageFormat('jpg');
         $im->writeImage($filePath . '/' . $imageFileOriginal);
 

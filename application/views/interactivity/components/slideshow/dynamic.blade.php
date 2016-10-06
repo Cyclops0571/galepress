@@ -36,22 +36,22 @@ foreach ($files as $file) {
     <meta name="author" content="Dmitry Semenov">
     <meta name="viewport" content="user-scalable=no">
     <!-- slider JS files -->
-    <script class="rs-file" src="{{ $baseDirectory }}comp_{{ $id }}/assets/royalslider/jquery-1.8.3.min.js"></script>
+    <script class="rs-file" src="{{ $baseDirectory }}slideshow/assets/royalslider/jquery-1.8.3.min.js"></script>
     <script class="rs-file"
-            src="{{ $baseDirectory }}comp_{{ $id }}/assets/royalslider/jquery.royalslider.min.js"></script>
-    <link class="rs-file" href="{{ $baseDirectory }}comp_{{ $id }}/assets/royalslider/royalslider.css" rel="stylesheet">
+            src="{{ $baseDirectory }}slideshow/assets/royalslider/jquery.royalslider.min.js"></script>
+    <link class="rs-file" href="{{ $baseDirectory }}slideshow/assets/royalslider/royalslider.css" rel="stylesheet">
     <!-- syntax highlighter -->
-    <script src="{{ $baseDirectory }}comp_{{ $id }}/assets/preview-assets/js/highlight.pack.js"></script>
-    <script src="{{ $baseDirectory }}comp_{{ $id }}/assets/preview-assets/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="{{ $baseDirectory }}slideshow/assets/preview-assets/js/highlight.pack.js"></script>
+    <script src="{{ $baseDirectory }}slideshow/assets/preview-assets/js/jquery-ui-1.8.22.custom.min.js"></script>
     <script> hljs.initHighlightingOnLoad();</script>
     <!-- preview-related stylesheets -->
-    <link href="{{ $baseDirectory }}comp_{{ $id }}/assets/preview-assets/css/reset.css" rel="stylesheet">
-    <link href="{{ $baseDirectory }}comp_{{ $id }}/assets/preview-assets/css/smoothness/jquery-ui-1.8.22.custom.css"
+    <link href="{{ $baseDirectory }}slideshow/assets/preview-assets/css/reset.css" rel="stylesheet">
+    <link href="{{ $baseDirectory }}slideshow/assets/preview-assets/css/smoothness/jquery-ui-1.8.22.custom.css"
           rel="stylesheet">
-    <link href="{{ $baseDirectory }}comp_{{ $id }}/assets/preview-assets/css/github.css" rel="stylesheet">
+    <link href="{{ $baseDirectory }}slideshow/assets/preview-assets/css/github.css" rel="stylesheet">
     <!-- slider stylesheets -->
     <link class="rs-file"
-          href="{{ $baseDirectory }}comp_{{ $id }}/assets/royalslider/skins/default-inverted/rs-default-inverted.css"
+          href="{{ $baseDirectory }}slideshow/assets/royalslider/skins/default-inverted/rs-default-inverted.css"
           rel="stylesheet">
     <!-- slider css -->
     <style>
@@ -63,47 +63,13 @@ foreach ($files as $file) {
 
         body {
             overflow: hidden;
-            /*
-            width:
-
-
-
-
-
-
-
-
-
-        {{ $w }}          px;
-			height:
-
-
-
-
-
-
-
-
-
-        {{ $h }}          px;
-			*/
             width: 100%;
             height: 100%;
             @if((int)$transparent == 1)
-                      background: transparent !important;
+                       background: transparent !important;
             @else
-                      background: {{ $bgcolor }}           !important;
+                       background: {{ $bgcolor }}            !important;
         @endif
-
-
-
-
-
-
-
-
-
-
         }
 
         <?php if($modal):?>
@@ -166,14 +132,14 @@ foreach ($files as $file) {
         }
 
         @else
-		#slider-in-laptop .rsSlide img {
+        #slider-in-laptop .rsSlide img {
             width: 100% !important;
             height: 100% !important;
         }
 
         @endif
 
-		.rsDefaultInv .rsBullet {
+        .rsDefaultInv .rsBullet {
             width: 15px;
             height: 15px;
             display: inline-block;
@@ -220,7 +186,6 @@ foreach ($files as $file) {
             $filename = $fname . '.' . $fext;
 
             if (!$preview) {
-                //$vFile = 'comp_'.$id.'/'.$filename;
                 $vFile = $baseDirectory . 'comp_' . $id . '/' . $filename;
             } else {
                 $vFile = '/' . $file;
@@ -246,10 +211,10 @@ foreach ($files as $file) {
             _initGlobalCaption: function () {
                 var self = this;
                 var i = 0;
-                self.ev.on('rsAfterContentSet', function (e, slideObject) {
+                self.ev.on('rsAfterContentSet', function () {
                     arrangeImageTopMargin();
                 });
-                self.ev.on('rsBeforeMove', function (e, slideObject) {
+                self.ev.on('rsBeforeMove', function () {
                     setTimeout(function () {
                         arrangeImageTopMargin();
                     }, 100);

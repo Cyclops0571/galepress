@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($files)) $files = array();   
+if(!isset($files)) $files = array();
 if(!isset($modal)) $modal = 0;
 if(!isset($transparent)) $transparent = 0;
 if(!isset($bgcolor)) $bgcolor = '#151515';
@@ -16,7 +16,6 @@ foreach($files as $file)
         $filename = $fname.'.'.$fext;
         if(!$preview)
         {
-            //$vFile = 'comp_'.$id.'/'.$filename;
             $vFile = $baseDirectory.'comp_'.$id.'/'.$filename;
             $myArray[$counter] = $vFile;
             $counter++;
@@ -34,35 +33,35 @@ foreach($files as $file)
 <html lang="en-US">
 <head>
     <title>Gale Press</title>
-	<meta name="Description" content="" />
+    <meta name="Description" content="" />
     <meta name="viewport" content="user-scalable=no" />
-	<script src="{{ $baseDirectory }}comp_{{ $id }}/jquery.min.js" type="text/javascript"></script>
-    <script src="{{ $baseDirectory }}comp_{{ $id }}/jquery.mobile.vmouse.js" type="text/javascript"></script>
-    <script src="{{ $baseDirectory }}comp_{{ $id }}/javascriptviewer_jso.js" type="text/javascript"></script>
+    <script src="{{ $baseDirectory }}gal360/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ $baseDirectory }}gal360/jquery.mobile.vmouse.js" type="text/javascript"></script>
+    <script src="{{ $baseDirectory }}gal360/javascriptviewer_jso.js" type="text/javascript"></script>
     <style type="text/css">
-    body,html{
-        margin: 0 !important;
-        overflow: hidden !important;
-    }
-    #loading{
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        z-index: 999999;
-    }
-    *{
-        -webkit-tap-highlight-color: transparent !important;
-    }
+        body,html{
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+        #loading{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 999999;
+        }
+        *{
+            -webkit-tap-highlight-color: transparent !important;
+        }
     </style>
 </head>
 <body>
 
-    <div id="image_holder_x">
-        <img id="product_image_x" src="{{$vFile}}" style="position:relative;width:100%;height:auto;opacity:0"/>
-        <img src="{{ $baseDirectory }}comp_{{ $id }}/img/gale.png" id="loading">
-    </div>
+<div id="image_holder_x">
+    <img id="product_image_x" src="{{$vFile}}" style="position:relative;width:100%;height:auto;opacity:0"/>
+    <img src="{{ $baseDirectory }}gal360/img/gale.png" id="loading">
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         var presentation_x = new javascriptViewer($('#product_image_x'),{
             total_frames: {{ count($files) }},
@@ -77,10 +76,10 @@ foreach($files as $file)
             $('#loading').css({transform: 'rotate(' + counter + 'deg)'});
         });
         $(presentation_x).on('loadImageEnd', function() {
-                $("#loading").fadeOut(2000);
-         });
+            $("#loading").fadeOut(2000);
+        });
         presentation_x.start();
     });
-    </script>
+</script>
 </body>
 </html>

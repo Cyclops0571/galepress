@@ -216,7 +216,7 @@ class Interactivity_Controller extends Base_Controller
             'ContentFileID' => $cf->ContentFileID,
             'included' => (int)$cf->Included,
             'filename' => $cf->FileName,
-            'pages' => $cf->ContentFilePage
+            'pages' => $cf->ContentFilePages
         );
 
         return View::make('interactivity.master', $data)
@@ -835,7 +835,7 @@ class Interactivity_Controller extends Base_Controller
                 ->where('StatusID', '=', eStatus::Active)
                 ->get();
             foreach ($pc as $c) {
-                $componentClass = PageComponent::find($c->PageComponentID)->Component()->Class;
+                $componentClass = PageComponent::find($c->PageComponentID)->Component->Class;
 
                 $cp = DB::table('PageComponentProperty')
                     ->where('PageComponentID', '=', $c->PageComponentID)

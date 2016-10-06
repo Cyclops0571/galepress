@@ -17,7 +17,8 @@
  * @property int ProcessUserID
  * @property DateTime DateCreated
  * @property int CreatorUserID
- * @property PageComponent[] $PageComponent
+ * @property PageComponent[] $PageComponents
+ * @property ComponentHandler[] $ComponentHandlers
  */
 class ContentFilePage extends Eloquent
 {
@@ -28,7 +29,7 @@ class ContentFilePage extends Eloquent
     const Web = 5;
     const Tooltip = 6;
     const Scroller = 7;
-    const Slideshow = 8;
+    const SlideShow = 8;
     const slide360 = 9;
     const Bookmark = 10;
     const Animation = 11;
@@ -97,9 +98,13 @@ class ContentFilePage extends Eloquent
             ->first();
     }
 
-    public function PageComponent()
+    public function PageComponents()
     {
         return $this->has_many('PageComponent', $this->key())->where('StatusID', '=', eStatus::Active);
+    }
+
+    public function ComponentHandlers() {
+        return $this->has_many('ComponentHandler', $this->key())->where('StatusID', '=', eStatus::Active);
     }
 
     public function setComponentByType($componentType, $pageComponentID, $componentNo, $postData)
@@ -330,6 +335,13 @@ class ContentFilePage extends Eloquent
             }
         }
         return $properties;
+    }
+
+    public function nextPage() {
+        return ContentFilePage::where('ContentFileID', '=', $this->ContentFileID)
+            ->where('No', '=', $this->No + 1)
+            ->where('StatusID', '=', eStatus::Active)
+            ->first();
     }
 
     private function componentFactory($componentID, $componentPageOrder, $postData)
