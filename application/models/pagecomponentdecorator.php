@@ -322,6 +322,8 @@ class PageComponentDecorator
         if(File::exists($componentZipPath)) {
             if(!is_file($componentZipPath)) {
                 File::rmdir($componentZipPath);
+            } else {
+                File::delete($componentZipPath);
             }
         }
         File::mkdir($componentZipPath);
