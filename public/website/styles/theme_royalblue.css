@@ -251,8 +251,8 @@ fieldset[disabled] .btn-light.active {
 }
 #filters .btn-light.btn-bordered,
 .btn-light.btn-bordered {
-  color: #ffffff;
-  background-color: transparent;
+  color: #0986c2;
+  /*background-color: transparent;*/
   border-color: #ffffff;
 }
 #filters .btn-light.btn-bordered:hover,

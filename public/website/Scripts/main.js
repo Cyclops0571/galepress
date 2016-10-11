@@ -882,14 +882,14 @@ $(document).ready(function() {
     //   }
     // );
 
-    $('body').on('click', function(e) {
-        if(e.target.id=="videoSlide"){
-            if ($('#home-video')[0].paused) 
-                $('#home-video')[0].play();
-            else 
-                $('#home-video')[0].pause();
-        }
-    });
+    // $('body').on('click', function(e) {
+    //     if(e.target.id=="videoSlide"){
+    //         if ($('#home-video')[0].paused)
+    //             $('#home-video')[0].play();
+    //         else
+    //             $('#home-video')[0].pause();
+    //     }
+    // });
 
     // $( ".sectors" ).parent().find('p').hover(
     //   function() {
