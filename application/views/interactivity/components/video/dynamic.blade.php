@@ -82,14 +82,12 @@ if (!$preview) {
 </head>
 <body>
 <?php //var_dump($modal XOR (!$showcontrols)); ?>
-<video id="example_video_1" class="video-js vjs-default-skin"
-       {{($videoinit=='onload' ? 'autoplay' : '')}}
-{{($showcontrols==1 ? 'controls' : '')}}
-{{($restartwhenfinished==1 ? 'loop' : '')}}
-preload="auto"
-width="{{$w}}" height="{{$h}}"
-{{empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"'}}
-{{ ($modal XOR (!$showcontrols)) ? 'onclick="startVideo()"' : ''}}
+<video id="example_video_1" class="video-js vjs-default-skin" preload="auto" width="<?php echo $w;?>" height="<?php echo $h;?>"
+       <?php echo $videoinit=='onload' ? 'autoplay ' : ''; ?>
+       <?php echo $showcontrols==1 ? 'controls ' : ''; ?>
+       <?php echo $restartwhenfinished==1 ? 'loop ' : '';?>
+       <?php echo empty($vPosterImageFile) ? '' : 'poster="' . $vPosterImageFile . '"';?>
+       <?php echo ($modal XOR !$showcontrols) ? 'onclick="startVideo()"' : '';?>
 data-setup="{}" style="position:fixed; height:100% !important;">
 <source src="{{ ($option==1 ? $vFile : $url) }}" type='video/mp4'/>
 </video>
