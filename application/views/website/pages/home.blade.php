@@ -4,27 +4,27 @@
     <section id="home" class="demo-1">
         <!-- Start slider-wrapper-->
         <div id="slider" style="display:none;" class="sl-slider-wrapper">
-            <div class="fluid-width-video-wrapper" style="z-index:98;">
-                <video id="home-video" autoplay="autoplay" loop="loop" muted="muted" style="width:100% !important;"
-                       poster="/website/img/video/poster.jpg">
-                    <source src="/website/video/galepressVideo.mp4" type="video/mp4">
-                </video>
-            </div>
+            {{--<div class="fluid-width-video-wrapper" style="z-index:98;">--}}
+                {{--<video id="home-video" autoplay="autoplay" loop="loop" muted="muted" style="width:100% !important;"--}}
+                       {{--poster="/website/img/video/poster.jpg">--}}
+                    {{--<source src="/website/video/galepressVideo.mp4" type="video/mp4">--}}
+                {{--</video>--}}
+            {{--</div>--}}
             <div class="sl-slider" style="z-index:99;">
                 <!-- start slide-->
-                <div data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25"
-                     data-slice1-scale="2" data-slice2-scale="2" class="sl-slide">
-                    <div style="background-image: url(/website/img/intro-home9.jpg);" class="sl-slide-inner"></div>
-                </div>
+                {{--<div data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25"--}}
+                     {{--data-slice1-scale="2" data-slice2-scale="2" class="sl-slide">--}}
+                    {{--<div style="background-image: url(/website/img/intro-home9.jpg);" class="sl-slide-inner"></div>--}}
+                {{--</div>--}}
                 <div data-orientation="horizontal" data-slice1-rotation="10" data-slice2-rotation="-15"
                      data-slice1-scale="1.5" data-slice2-scale="1.5" class="sl-slide" style="z-index:99;">
 
-                    <div style="background: none;" class="sl-slide-inner">
+                    <div class="sl-slide-inner">
 
                         <div class="slide-container">
                             <div class="slide-content text-center" id="videoSlide" style="display:none;">
                                 <h2 class="main-title"
-                                    style="font-weight:200; margin-bottom:40px;">{{__('website.home_video_title')}}</h2>
+                                    style="margin-bottom:40px;">{{__('website.home_video_title')}}</h2>
                                 <blockquote class="sep-top-xs">
                                     <a href="/{{ Session::get('language') }}/{{__('route.website_tryit')}}"
                                        class="btn btn-light btn-bordered btn-lg">{{__('website.menu_tryit_small')}}</a><a
@@ -32,11 +32,6 @@
                                             class="btn btn-primary btn-lg">{{__('website.menu_explore')}}</a>
                                 </blockquote>
                             </div>
-                            <!-- <iframe src="//player.vimeo.com/video/121023414?title=0&amp;byline=0&amp;badge=0&amp;portrait=0&amp;color=59a1de&amp;autoplay=1&amp;loop=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
-                            <!-- <iframe src="http://galetest.com/website/video/galepress.mp4" frameborder="0" style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe> -->
-                            <!-- <video autoplay loop poster="/website/img/video/poster.jpg">
-                              <source src="/website/video/galepress.mp4" type="video/mp4">
-                            </video> -->
                         </div>
                     </div>
                 </div>

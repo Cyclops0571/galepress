@@ -15,8 +15,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
     <link rel="shortcut icon" href="/website/img/favicon2.ico">
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,200italic,400italic&subset=latin,latin-ext'
-          rel='stylesheet' type='text/css'>
+    <!-- Web Fonts -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,200italic,400italic&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'>-->
+    <script src="https://use.typekit.net/rqo4imd.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <!-- Web Fonts End -->
+
     <link rel="stylesheet" href="/website/styles/font-awesome.css?v=<?php echo APP_VER; ?>">
     <link rel="stylesheet" href="/website/styles/owl.carousel.css?v=<?php echo APP_VER; ?>">
     <link rel="stylesheet" href="/website/styles/owl.theme.css?v=<?php echo APP_VER; ?>">
