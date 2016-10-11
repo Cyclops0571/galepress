@@ -330,12 +330,20 @@ iframe {
 }
 
 .sl-slide-horizontal .sl-slide-inner {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9),  rgba(0, 0, 0, 0)),
-    url('/website/img/homebackground.jpg') no-repeat center center fixed;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('/website/img/homebackground.gif') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+@media (min-width: 1334px) {
+    .sl-slide-horizontal .sl-slide-inner {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('/website/img/homebackground.gif') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 }
 
 section {
