@@ -83,26 +83,18 @@ class PageComponentDecorator
 
 
         switch ($this->pageComponent->ComponentID) {
+            case Component::ComponentAnimation:
+            case Component::ComponentTooltip:
+            case Component::ComponentScroller:
+            case Component::ComponentSlideShow:
+            case Component::Component360:
+                $this->createDefaultComponent();
+                break;
             case Component::ComponentVideo:
                 $this->createVideo();
                 break;
             case Component::ComponentAudio:
                 $this->createAudio();
-                break;
-            case Component::ComponentAnimation:
-                $this->createAnimation();
-                break;
-            case Component::ComponentTooltip:
-                $this->createTooltip();
-                break;
-            case Component::ComponentScroller:
-                $this->createScroll();
-                break;
-            case Component::ComponentSlideShow:
-                $this->createSlideShow();
-                break;
-            case Component::Component360:
-                $this->create360();
                 break;
             case Component::ComponentMap:
                 $this->createMap();
@@ -120,9 +112,19 @@ class PageComponentDecorator
 
     }
 
-    private function createVideo()
+    private function createDefaultComponent()
     {
         $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
+        $this->createComponentFolder();
+        $this->copyComponentZipFiles();
+        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
+        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
+        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
+        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
+    }
+
+    private function createVideo()
+    {
 
         //video url youtube embed
         if (!(strpos($this->propertyUrl, 'www.youtube.com/embed') === false)) {
@@ -140,110 +142,18 @@ class PageComponentDecorator
                 "Link", "linewidth=0 action {activate $action}"
             );
         } else {
-            $this->createComponentFolder();
-            $this->copyComponentZipFiles();
-            $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-            File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-            $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-            $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
+            $this->createDefaultComponent();
         }
     }
 
     private function createAudio()
     {
-        $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
-        $this->createComponentFolder();
-        $this->copyComponentZipFiles();
-
         $this->x = $this->trigger_x;
         $this->y = $this->trigger_y - $this->trigger_h;
         $this->w = $this->trigger_w;
         $this->h = $this->trigger_h;
 
-        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
-    }
-
-    private function createAnimation()
-    {
-        $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
-        $this->createComponentFolder();
-        $this->copyComponentZipFiles();
-        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
-    }
-
-    private function createTooltip()
-    {
-        $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
-        $this->createComponentFolder();
-        $this->copyComponentZipFiles();
-        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
-    }
-
-    private function createScroll()
-    {
-        $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
-        $this->createComponentFolder();
-        $this->copyComponentZipFiles();
-        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
-    }
-
-    private function createSlideShow()
-    {
-        $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
-        $this->createComponentFolder();
-        $this->copyComponentZipFiles();
-
-        $files = DB::table('PageComponentProperty')
-            ->where('PageComponentID', '=', $this->pageComponent->PageComponentID)
-            ->where('Name', '=', 'filename')
-            ->where('StatusID', '=', eStatus::Active)
-            ->order_by('PageComponentPropertyID', 'ASC')
-            ->get();
-        $arr = array();
-        foreach ($files as $file) {
-            array_push($arr, $file->Value);
-        }
-        $this->data = array_merge($this->data, array('files' => $arr));
-
-        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
-    }
-
-    private function create360()
-    {
-        $outputPath = $this->contentFile->pdfFolderPathAbsolute() . '/output';
-        $this->createComponentFolder();
-        $this->copyComponentZipFiles();
-        $files = DB::table('PageComponentProperty')
-            ->where('PageComponentID', '=', $this->pageComponent->PageComponentID)
-            ->where('Name', '=', 'filename')
-            ->where('StatusID', '=', eStatus::Active)
-            ->order_by('PageComponentPropertyID', 'ASC')
-            ->get();
-        $arr = array();
-        foreach ($files as $file) {
-            array_push($arr, $file->Value);
-        }
-        $this->data = array_merge($this->data, array('files' => $arr));
-
-        $content = View::make('interactivity.components.' . $this->pageComponent->Component->Class . '.dynamic', $this->data)->render();
-        File::put($outputPath . '/comp_' . $this->pageComponent->PageComponentID . '.html', $content);
-        $action = $this->pdfLib->create_action("URI", "url {" . $this->getUrl() . "}");
-        $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
+        $this->createDefaultComponent();
     }
 
     private function createMap()
@@ -265,10 +175,6 @@ class PageComponentDecorator
     private function createLink()
     {
         switch ($this->propertyType) {
-            case self::LINK_PAGE:
-                $optlist = "destination={page=" . $this->propertyPage . " type=fixed left=10 top=10 zoom=1}";
-                $action = $this->pdfLib->create_action("GOTO", $optlist);
-                break;
             case self::LINK_HTML:
                 if (strpos($this->propertyUrl, '?') !== false) {
                     $this->qs = str_replace('?', '&', $this->qs);
@@ -279,6 +185,10 @@ class PageComponentDecorator
                 $this->propertyMail = "mailto:" . $this->propertyMail;
                 $action = $this->pdfLib->create_action("URI", "url {" . $this->propertyMail . "}");
                 break;
+            case self::LINK_PAGE:
+            default:
+                $optlist = "destination={page=" . $this->propertyPage . " type=fixed left=10 top=10 zoom=1}";
+                $action = $this->pdfLib->create_action("GOTO", $optlist);
         }
         $this->pdfLib->create_annotation($this->x, $this->y, $this->x + $this->w, $this->y + $this->h, "Link", "linewidth=0 action {activate $action}");
     }
@@ -301,26 +211,30 @@ class PageComponentDecorator
         $this->pdfLib->create_bookmark($this->propertyText, "destination={page=" . ($this->pageComponent->ContentFilePage->No) . " type=fixed left=" . $this->trigger_x . " top=" . $this->trigger_y . " zoom=1}");
     }
 
-    private function getPath() {
+    private function getPath()
+    {
         return $this->getOutputPath() . '/comp_' . $this->pageComponent->PageComponentID;
 
     }
 
-    private function getOutputPath() {
+    private function getOutputPath()
+    {
         return $this->contentFile->pdfFolderPathAbsolute() . '/output';
     }
 
-    private function createComponentFolder() {
+    private function createComponentFolder()
+    {
 
         if (!File::exists($this->getPath())) {
             File::mkdir($this->getPath());
         }
     }
 
-    public function copyComponentZipFiles() {
+    public function copyComponentZipFiles()
+    {
         $componentZipPath = $this->getOutputPath() . '/' . mb_strtolower($this->pageComponent->Component->Class);
-        if(File::exists($componentZipPath)) {
-            if(!is_file($componentZipPath)) {
+        if (File::exists($componentZipPath)) {
+            if (!is_file($componentZipPath)) {
                 File::rmdir($componentZipPath);
             } else {
                 File::delete($componentZipPath);
@@ -354,18 +268,10 @@ class PageComponentDecorator
         return implode('/', $link);
     }
 
-//    private function getWebUrl() {
-//        if($this->propertyUrl != '' || $this->propertyUrl != 'http://' || $this->propertyUrl != 'https://') {
-//            if (strpos($this->propertyUrl, '?') !== false) {
-//                $this->qs = str_replace('?', '&', $this->qs);
-//            }
-//            return $this->propertyUrl . $this->qs;
-//        }
-//    }
-
     private function mapMyProperties()
     {
 
+        $files = array();
         $this->trigger_x = 0;
         $this->trigger_y = 0;
         $this->trigger_w = 60;
@@ -386,47 +292,67 @@ class PageComponentDecorator
         $this->propertyZoom = 0.09;
 
         foreach ($this->pageComponent->PageComponentProperty as $cp) {
-            if ($cp->Name == 'trigger-x') {
-                $this->trigger_x = (int)$cp->Value;
-            } elseif ($cp->Name == 'trigger-y') {
-                $this->trigger_y = (int)$cp->Value;
-            } elseif ($cp->Name == 'x') {
-                $this->x = (int)$cp->Value;
-            } elseif ($cp->Name == 'y') {
-                $this->y = (int)$cp->Value;
-            } elseif ($cp->Name == 'w') {
-                $this->w = (int)$cp->Value;
-            } elseif ($cp->Name == 'h') {
-                $this->h = (int)$cp->Value;
-            } elseif ($cp->Name == 'import') {
-                $this->propertyImport = (int)$cp->Value;
-            } elseif ($cp->Name == 'modal') {
-                $this->propertyModal = (int)$cp->Value;
-            } elseif ($cp->Name == 'type') {
-                $this->propertyType = (int)$cp->Value;
-            } elseif ($cp->Name == 'url') {
-                $this->propertyUrl = $cp->Value;
-            } elseif ($cp->Name == 'mail') {
-                $this->propertyMail = $cp->Value;
-            } elseif ($cp->Name == 'page') {
-                $this->propertyPage = (int)$cp->Value;
-            } elseif ($cp->Name == 'text') {
-                $this->propertyText = $cp->Value;
-            } elseif ($cp->Name == 'lat') {
-                $this->propertyLat = $cp->Value;
-            } elseif ($cp->Name == 'lon') {
-                $this->propertyLon = $cp->Value;
-            } elseif ($cp->Name == 'zoom') {
-                $this->propertyZoom = (float)$cp->Value;
+            switch ($cp->Name) {
+                case 'trigger-x':
+                    $this->trigger_x = (int)$cp->Value;
+                    break;
+                case 'trigger-y':
+                    $this->trigger_y = (int)$cp->Value;
+                    break;
+                case 'x':
+                    $this->x = (int)$cp->Value;
+                    break;
+                case 'y':
+                    $this->y = (int)$cp->Value;
+                    break;
+                case 'w':
+                    $this->w = (int)$cp->Value;
+                    break;
+                case 'h':
+                    $this->h = (int)$cp->Value;
+                    break;
+                case 'import':
+                    $this->propertyImport = (int)$cp->Value;
+                    break;
+                case 'modal':
+                    $this->propertyModal = (int)$cp->Value;
+                    break;
+                case 'type':
+                    $this->propertyType = (int)$cp->Value;
+                    break;
+                case 'url':
+                    $this->propertyUrl = $cp->Value;
+                    break;
+                case 'mail':
+                    $this->propertyMail = $cp->Value;
+                    break;
+                case 'page':
+                    $this->propertyPage = (int)$cp->Value;
+                    break;
+                case 'text':
+                    $this->propertyText = $cp->Value;
+                    break;
+                case 'lat':
+                    $this->propertyLat = $cp->Value;
+                    break;
+                case 'lon':
+                    $this->propertyLon = $cp->Value;
+                    break;
+                case 'zoom':
+                    $this->propertyZoom = (float)$cp->Value;
+                    break;
+                case 'filename':
+                    $files[] = $cp->Value;
+                    break;
             }
-
-            if ($this->propertyModal == 1) {
-                $this->trigger_w = 52;
-                $this->trigger_h = 52;
-            }
-
             $this->data = array_merge($this->data, array($cp->Name => $cp->Value));
         }
+
+        if ($this->propertyModal == 1) {
+            $this->trigger_w = 52;
+            $this->trigger_h = 52;
+        }
+        $this->data = array_merge($this->data, array('files' => $files));
 
         //reverse y
         $this->y = $this->pageComponent->ContentFilePage->Height - $this->y - $this->h;
@@ -436,9 +362,5 @@ class PageComponentDecorator
         $paramQS[] = 'componentTypeID=' . $this->pageComponent->ComponentID;
         $paramQS[] = 'modal=' . $this->propertyModal;
         $this->qs = '?' . implode("&", $paramQS);
-    }
-
-    public function addToZip(ZipArchive $zip) {
-
     }
 }
