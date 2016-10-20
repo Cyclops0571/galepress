@@ -258,6 +258,7 @@ class Content extends Eloquent
 
     private function callIndexingService(ContentFile $contentFile) {
         //http://37.9.205.205/indexing?path=customer_127/application_135/content_5207/file_6688/file.pdf'
+        $contentFile->Indexed = 0;
         $pdfPath = 'customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID . '/file_' . $contentFile->ContentFileID . '/file.pdf';
         @$ch = curl_init('http://37.9.205.205/indexing?path=' .  $pdfPath);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
@@ -267,9 +268,15 @@ class Content extends Eloquent
             $resultJson = json_decode($result, true);
             if(isset($resultJson['status']) && $resultJson['status'] == 1) {
                 $contentFile->Indexed = 1;
-                $contentFile->save();
             }
         }
+
+        if($contentFile->Indexed == 0) {
+            $error = new ServerErrorLog();
+            $error->ErrorMessage = "Indexing error - ContentFileID: " . $contentFile->ContentFileID . " -  response: " . json_encode($result);
+            $error->save();
+        }
+        $contentFile->save();
     }
 
     /**
