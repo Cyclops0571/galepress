@@ -35,6 +35,8 @@
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
  * @property Application $Application Description
+ * @property ContentTopic[] $ContentTopics Description
+ * @property ContentFile $ContentFile Description
  */
 class Content extends Eloquent
 {
@@ -199,7 +201,7 @@ class Content extends Eloquent
      * @param int $customerID
      * @return ContentFile|int|null
      */
-    public function processPdf($customerID)
+    public function processPdf()
     {
         if ((int)Input::get('hdnFileSelected', 0) != 1) {
             return ContentFile::where('ContentID', '=', $this->ContentID)
@@ -215,7 +217,7 @@ class Content extends Eloquent
         $sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
 
         $targetFileName = Auth::user()->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
-        $targetFilePath = 'files/customer_' . $customerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID;
+        $targetFilePath = 'files/customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID;
         $destinationFolder = path('public') . $targetFilePath;
         $targetFileNameFull = $destinationFolder . '/' . $targetFileName;
 
@@ -247,8 +249,27 @@ class Content extends Eloquent
             $ContentFile->ProcessDate = new DateTime();
             $ContentFile->ProcessTypeID = eProcessTypes::Insert;
             $ContentFile->save();
+            $this->callIndexingService($ContentFile);
+
         }
+
         return $ContentFile;
+    }
+
+    private function callIndexingService(ContentFile $contentFile) {
+        //http://37.9.205.205/indexing?path=customer_127/application_135/content_5207/file_6688/file.pdf'
+        $pdfPath = 'customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID . '/file_' . $contentFile->ContentFileID . '/file.pdf';
+        @$ch = curl_init('http://37.9.205.205/indexing?path=' .  $pdfPath);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($ch);
+        if(!empty($result) ) {
+            $resultJson = json_decode($result, true);
+            if(isset($resultJson['status']) && $resultJson['status'] == 1) {
+                $contentFile->Indexed = 1;
+                $contentFile->save();
+            }
+        }
     }
 
     /**
@@ -258,13 +279,13 @@ class Content extends Eloquent
      * @param string $coverImageFileName
      * @throws Exception
      */
-    public function processImage($customerID, $contentFile, $coverImageFileSelected, $coverImageFileName)
+    public function processImage($contentFile, $coverImageFileSelected, $coverImageFileName)
     {
 
         if (!$contentFile) {
             return;
         }
-        
+
         if ($coverImageFileSelected != 1) {
             return;
         }
@@ -275,7 +296,7 @@ class Content extends Eloquent
         $sourceFileNameFull = $sourceRealPath . '/' . $sourceFileName;
 
         $targetFileName = Auth::user()->UserID . '_' . date("YmdHis") . '_' . $sourceFileName;
-        $targetFilePath = 'files/customer_' . $customerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID;
+        $targetFilePath = 'files/customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID;
         $destinationFolder = path('public') . $targetFilePath;
         $targetFileNameFull = $destinationFolder . '/' . $targetFileName;
 
@@ -389,4 +410,47 @@ class Content extends Eloquent
         return $categories;
     }
 
+    public function ContentTopics()
+    {
+        return $this->has_many('ContentTopic', 'ContentID');
+    }
+
+    /**
+     * @desc Saves Topic - Content relations to ContentTopic table
+     * @param array $topicIds
+     */
+    public function setTopics($topicIds)
+    {
+        if(empty($topicIds)) {
+            foreach ($this->ContentTopics as $contentTopic) {
+                $contentTopic->delete();
+            }
+            return;
+        }
+        $myTopicIds = array();
+        foreach ($this->ContentTopics as $contentTopic) {
+            $myTopicIds[] = $contentTopic->TopicID;
+        }
+
+
+        foreach ($topicIds as $topicId) {
+            foreach ($this->ContentTopics as $contentTopic) {
+                if (!in_array($contentTopic->TopicID, $topicIds)) {
+                    $contentTopic->delete();
+                }
+            }
+            if (!in_array($topicId, $myTopicIds)) {
+                $contentTopic = new ContentTopic();
+                $contentTopic->ContentID = $this->ContentID;
+                $contentTopic->TopicID = $topicId;
+                $contentTopic->save();
+            }
+        }
+    }
+
+    public function ContentFile() {
+        return $this->has_one('ContentFile', 'ContentID')
+            ->where('StatusID', '=', eStatus::Active)
+            ->order_by('ContentFileID', 'DESC')->take(1);
+    }
 }

@@ -20,6 +20,7 @@
  * @property int $InteractiveFileName2 Description
  * @property int $InteractiveFileSize Description
  * @property int $Included Description
+ * @property int $Indexed Description
  * @property int $StatusID Description
  * @property int $DateCreated Description
  * @property int $ProcessUserID Description

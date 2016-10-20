@@ -94,7 +94,6 @@ Ottavio.slider = (function(){
     };
 })();
 Ottavio.events.push(Ottavio.slider.init);
-// end slitslider module
 
 
 // search bar module

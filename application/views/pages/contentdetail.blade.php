@@ -4,68 +4,41 @@
 
     <?php
     /** @var Application $app */
-    $ContentID = 0;
-    $Name = '';
-    $Detail = '';
-    $MonthlyName = '';
-    $PublishDate = '';
-    $IsUnpublishActive = 0;
-    $UnpublishDate = '';
-    $CategoryID = 0;
-    $IsProtected = 0;
-    $Password = '';
-    $IsBuyable = 0;
-    $CurrencyID = 0;
-    $IsMaster = 0;
-    $Orientation = 0;
-    $Identifier = '';
-    $AutoDownload = 0;
-    $Approval = 0;
-    $Blocked = 0;
-    $Status = 0;
-    $Version = 0;
-    $ContentFile = null;
-    $ContentFileID = 0;
-    $Transferable = false;
-    $Transferred = false;
+    /** @var Content $content */
 
-    if (isset($row)) {
-        $ContentID = (int)$row->ContentID;
-        $Name = e($row->Name);
-        $Detail = $row->Detail;
-        $MonthlyName = $row->MonthlyName;
-        $PublishDate = $row->PublishDate;
-        $UnpublishDate = $row->UnpublishDate;
-        $IsUnpublishActive = $row->IsUnpublishActive;
-        $CategoryID = (int)$row->CategoryID;
-        $IsProtected = (int)$row->IsProtected;
-        $Password = $row->Password;
-        $IsBuyable = (int)$row->IsBuyable;
-        $CurrencyID = (int)$row->CurrencyID;
-        $IsMaster = (int)$row->IsMaster;
-        $Orientation = (int)$row->Orientation;
-        $Identifier = $row->getIdentifier();
-        $AutoDownload = (int)$row->AutoDownload;
-        $Approval = (int)$row->Approval;
-        $Blocked = (int)$row->Blocked;
-        $Status = (int)$row->Status;
-        $Version = (int)$row->Version;
 
-        /** @var ContentFile $ContentFile */
-        $ContentFile = ContentFile::where('ContentID', '=', $ContentID)
-                ->where('StatusID', '=', eStatus::Active)
-                ->order_by('ContentFileID', 'DESC')
-                ->first();
-        if ($ContentFile) {
-            $ContentFileID = $ContentFile->ContentFileID;
-            $Transferable = True;
-            $Transferred = $ContentFile->Transferred == 1;
-        }
+    $ContentID = (int)$content->ContentID;
+    $Name = e($content->Name);
+    $Detail = $content->Detail;
+    $MonthlyName = $content->MonthlyName;
+    $PublishDate = $content->PublishDate;
+    $UnpublishDate = $content->UnpublishDate;
+    $IsUnpublishActive = $content->IsUnpublishActive;
+    $CategoryID = (int)$content->CategoryID;
+    $IsProtected = (int)$content->IsProtected;
+    $Password = $content->Password;
+    $IsBuyable = (int)$content->IsBuyable;
+    $CurrencyID = (int)$content->CurrencyID;
+    $IsMaster = (int)$content->IsMaster;
+    $Orientation = (int)$content->Orientation;
+    $Identifier = $content->getIdentifier();
+    $AutoDownload = (int)$content->AutoDownload;
+    $Approval = (int)$content->Approval;
+    $Blocked = (int)$content->Blocked;
+    $Status = (int)$content->Status;
+    $Version = (int)$content->Version;
 
-        if ($IsMaster == 1) {
-            $IsProtected = 0;
-            $Password = '';
-        }
+    /** @var ContentFile $ContentFile */
+    $ContentFile = $content->ContentFile;
+    if ($ContentFile) {
+        $ContentFileID = $ContentFile->ContentFileID;
+        $Transferable = True;
+        $Transferred = $ContentFile->Transferred == 1;
+    }
+
+    if ($IsMaster == 1) {
+        $IsProtected = 0;
+        $Password = '';
     }
     $authInteractivity = (1 == (int)$app->Package()->Interactive);
     $authMaxPDF = Common::AuthMaxPDF($app->ApplicationID);
@@ -78,7 +51,7 @@
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('Name', 'ASC')
             ->get();
-    $groupcodes = DB::table('GroupCode AS gc')
+    $groupCodes = DB::table('GroupCode AS gc')
             ->join('GroupCodeLanguage AS gcl', function ($join) {
                 /** @var \Laravel\Database\Query\Join $join */
                 $join->on('gcl.GroupCodeID', '=', 'gc.GroupCodeID');
@@ -140,7 +113,7 @@
                     </div>
                     <div class="col-md-8">
                         <select id="CategoryID" name="chkCategoryID[]" multiple="multiple" class="chosen-container"
-                                style="opacity:0 !important;" required>
+                                required>
                             <?php
                             $cnt = 0;
                             if ($ContentID > 0) {
@@ -164,10 +137,6 @@
                             <option value="{{ $category->CategoryID }}"{{ ($cnt > 0 ? ' selected="selected"' : '') }}>{{ $category->Name }}</option>
                             <?php endforeach; ?>
                         </select>
-                        <script type="text/javascript">
-                            $('#CategoryID').ready(function () {
-                                $('#CategoryID').css('opacity', '1');
-                            });</script>
                     </div>
                     <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_category') }}"><span
                                     class="icon-info-sign"></span></a></div>
@@ -209,7 +178,8 @@
                                    class="form-control textbox date {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabledFields') }}"
                                    value="{{ Common::dateRead($UnpublishDate, 'd.m.Y') }}" {{ ((int)$IsUnpublishActive == 1 ?  '' : ' disabled="disabled"') }} />
                             <span class="input-group-addon">
-							<input type="checkbox" title="{{ __('common.contents_unpublishdate') }}" name="IsUnpublishActive" id="IsUnpublishActive"
+							<input type="checkbox" title="{{ __('common.contents_unpublishdate') }}"
+                                   name="IsUnpublishActive" id="IsUnpublishActive"
                                    value="1"{{ ((int)$IsUnpublishActive == 1 ? ' checked="checked"' : '') }} />
 						</span>
                         </div>
@@ -238,8 +208,9 @@
                         </div>
 
                         <div id="FileProgress" class="myProgress hide">
-                            <a href="javascript:void(0);">{{ __('interactivity.cancel') }} <i
-                                        class="icon-remove"></i></a>
+                            <a href="javascript:void(0);">{{ __('interactivity.cancel') }}
+                                <i class="icon-remove"></i>
+                            </a>
                             <label for="scale">0%</label>
 
                             <div class="scrollbox dot">
@@ -407,6 +378,38 @@
                 </div>
             </div>
         </div>
+
+        <?php if(false && !empty($app->ApplicationTopics)): ?>
+        <div class="block">
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label for="topicIds">
+                        Dergilik Gonderilecek Kategoriler
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <select id="topicIds" name="topicIds[]" class="choosen-container" multiple="multiple" required>
+                        <?php
+                        $contentTopicIds = array_map(function($o) {return $o->TopicID;}, $content->ContentTopics);
+                        foreach($app->ApplicationTopics as $applicationTopic):?>
+                        <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) ? ' selected="selected"' : '';
+
+                        ?>
+                        <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
+                            <?php echo $applicationTopic->Topic->Name ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
+                        <span class="icon-info-sign"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <div class="block {{ ((int)$IsMaster == 1 ? 'disabledFields' : '') }}">
             <div class="content controls" style="overflow:visible">
                 <div class="form-row">
@@ -491,8 +494,8 @@
                         <select id="CurrencyID" name="CurrencyID" disabled class="form-control select2"
                                 style="width: 100%;" tabindex="-1">
                             <option value=""{{ ($CurrencyID == 0 ? ' selected="selected"' : '') }}>{{ __('common.reports_select') }}</option>
-                            @foreach ($groupcodes as $groupcode)
-                                <option value="{{ $groupcode->GroupCodeID }}"{{ ($CurrencyID == $groupcode->GroupCodeID ? ' selected="selected"' : '') }}>{{ $groupcode->DisplayName }}</option>
+                            @foreach ($groupCodes as $groupCode)
+                                <option value="{{ $groupCode->GroupCodeID }}"{{ ($CurrencyID == $groupCode->GroupCodeID ? ' selected="selected"' : '') }}>{{ $groupCode->DisplayName }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -568,8 +571,11 @@
                                    value="1"{{ ((int)$Status == 1 ? ' checked="checked"' : '') }} />
                         </div>
                     </div>
-                    <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_status') }}"><span
-                                    class="icon-info-sign"></span></a></div>
+                    <div class="col-md-1">
+                        <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
+                            <span class="icon-info-sign"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -624,8 +630,10 @@
                         <div class="input-group file" style="margin: 0 auto; display:inline-block;">
                             <input type="file" name="CoverImageFile" id="CoverImageFile" class="hidden"/>
 
-                            <div id="CoverImageFileButton" class="uploadify hide" style="height: 30px; width: 120px; opacity: 1;">
-                                <div id="File-button" class="uploadify-button " style="height: 30px; line-height: 30px; width: 120px;">
+                            <div id="CoverImageFileButton" class="uploadify hide"
+                                 style="height: 30px; width: 120px; opacity: 1;">
+                                <div id="File-button" class="uploadify-button "
+                                     style="height: 30px; line-height: 30px; width: 120px;">
                                     <span class="uploadify-button-text">{{ __('common.contents_coverimage_select') }}</span>
                                 </div>
                             </div>
@@ -934,6 +942,11 @@
             var dialogCoverImage = $('#dialog-cover-image');
             var coverImageIframe = $('#coverImageIframe');
             var coverImageModalBody = $('#coverImageModalBody');
+            $("#CategoryID, #topicIds").chosen({
+                placeholder_text_single: javascriptLang['select'],
+                placeholder_text_multiple: javascriptLang['select'],
+                no_results_text: javascriptLang['no_results'],
+            });
 
             cContent.addFileUpload();
             cContent.addImageUpload();

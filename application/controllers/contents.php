@@ -234,6 +234,7 @@ class Contents_Controller extends Base_Controller
             'route' => $this->route,
             'caption' => $this->caption,
             'detailcaption' => $this->detailcaption,
+            'content' => new Content(),
             'showCropPage' => 0,
         );
         $applicationID = Input::get('applicationID', '0');
@@ -256,7 +257,7 @@ class Contents_Controller extends Base_Controller
         $currentUser = Auth::user();
         $showCropPage = Cookie::get(SHOW_IMAGE_CROP, 0);
         Cookie::put(SHOW_IMAGE_CROP, 0);
-        $row = Content::find($id);
+        $content = Content::find($id);
 
         if (((int)$currentUser->UserTypeID == eUserTypes::Manager)) {
             $contentList = DB::table('Content')
@@ -273,9 +274,9 @@ class Contents_Controller extends Base_Controller
 //                ->get(array('ContentID', 'Name', 'ApplicationID'));
             $contentList = array();
         }
-        if ($row) {
+        if ($content) {
             if (Common::CheckContentOwnership($id)) {
-                $this->route = __('route.' . $this->page) . '?applicationID=' . $row->ApplicationID;
+                $this->route = __('route.' . $this->page) . '?applicationID=' . $content->ApplicationID;
 
 
                 $data = array(
@@ -283,14 +284,14 @@ class Contents_Controller extends Base_Controller
                     'route' => $this->route,
                     'caption' => $this->caption,
                     'detailcaption' => $this->detailcaption,
-                    'row' => $row,
-                    'app' => $row->Application,
+                    'content' => $content,
+                    'app' => $content->Application,
                     'showCropPage' => $showCropPage,
                     'contentList' => $contentList,
                 );
 
                 if (((int)$currentUser->UserTypeID == eUserTypes::Customer)) {
-                    if ($row->Application->ExpirationDate < date('Y-m-d')) {
+                    if ($content->Application->ExpirationDate < date('Y-m-d')) {
                         return View::make('pages.expiredpage', $data)->nest('filterbar', 'sections.filterbar', $data);
                     }
                 }
@@ -359,11 +360,11 @@ class Contents_Controller extends Base_Controller
                 $content->ifModifiedDoNeccessarySettings($selectedCategories);
                 $content->save();
                 $content->setCategory($selectedCategories);
+                $content->setTopics(Input::get('topicIds', array()));
 
-                $customerID = Application::find($applicationID)->CustomerID;
                 $contentID = $content->ContentID;
-                $contentFile = $content->processPdf($customerID);
-                $content->processImage($customerID, $contentFile, (int)Input::get('hdnCoverImageFileSelected', 0), Input::get('hdnCoverImageFileName'));
+                $contentFile = $content->processPdf();
+                $content->processImage($contentFile, (int)Input::get('hdnCoverImageFileSelected', 0), Input::get('hdnCoverImageFileName'));
                 ContentFile::createPdfPages($contentFile);
             } catch (Exception $e) {
                 return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
