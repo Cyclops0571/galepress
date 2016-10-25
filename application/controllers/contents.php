@@ -366,6 +366,7 @@ class Contents_Controller extends Base_Controller
                 $contentFile = $content->processPdf();
                 $content->processImage($contentFile, (int)Input::get('hdnCoverImageFileSelected', 0), Input::get('hdnCoverImageFileName'));
                 ContentFile::createPdfPages($contentFile);
+                $content->callIndexingService($contentFile);
             } catch (Exception $e) {
                 return "success=" . base64_encode("false") . "&errmsg=" . base64_encode($e->getMessage());
             }

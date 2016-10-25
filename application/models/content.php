@@ -236,6 +236,7 @@ class Content extends Eloquent
                 File::move($sourceRealPath . "/" . $originalImageFileName, $destinationFolder . "/" . IMAGE_ORIGINAL . IMAGE_EXTENSION);
             }
 
+
             $ContentFile = new ContentFile();
             $ContentFile->ContentID = $this->ContentID;
             $ContentFile->DateAdded = new DateTime();
@@ -250,16 +251,19 @@ class Content extends Eloquent
             $ContentFile->ProcessDate = new DateTime();
             $ContentFile->ProcessTypeID = eProcessTypes::Insert;
             $ContentFile->save();
-            $this->callIndexingService($ContentFile);
-
         }
 
         return $ContentFile;
     }
 
-    private function callIndexingService(ContentFile $contentFile)
+    /**
+     * @desc Calls an outer service for indexing pdfs
+     * @param ContentFile $contentFile
+     */
+    public function callIndexingService(ContentFile $contentFile)
     {
         //http://37.9.205.205/indexing?path=customer_127/application_135/content_5207/file_6688/file.pdf'
+
         $contentFile->Indexed = 0;
         $pdfPath = 'customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID . '/file_' . $contentFile->ContentFileID . '/file.pdf';
         $requestUrl = 'http://37.9.205.205/indexing?path=' . $pdfPath;
