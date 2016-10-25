@@ -1,7 +1,8 @@
 <?php
 
 class Ws_v102_Contents_Controller extends Base_Controller
-{       const serviceVersion = 102;
+{
+    const serviceVersion = 102;
 	public $restful = true;
 	
 	public function get_version($contentID)
@@ -25,30 +26,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 		return Ws::render(function() use ($contentID)
 		{
 			$content = Ws::getContent($contentID, Ws_v102_Contents_Controller::serviceVersion);
-			return Response::json(array(
-				'status' => 0,
-				'error' => "",
-				'ContentID' => (int)$content->ContentID,
-				'ContentOrderNo' => (int)$content->OrderNo,
-				'ContentName' => $content->Name,
-				'ContentDetail' => $content->Detail,
-                'ContentCategories' => $content->WebserviceCategories(102),
-				'ContentMonthlyName' => $content->MonthlyName,
-				'ContentIsProtected' => ((int)$content->IsProtected == 1 ? true : false),
-				'ContentIsBuyable' => ((int)$content->IsBuyable == 1 ? true : false),
-				'ContentPrice' => '',
-				'ContentCurrency' => $content->Currency(1),
-				'ContentIdentifier' => $content->getIdentifier(),
-				'ContentIsMaster' => ((int)$content->IsMaster == 1 ? true : false),
-				'ContentOrientation' => (int)$content->Orientation,
-				'ContentAutoDownload' => ((int)$content->AutoDownload == 1 ? true : false),
-				'ContentBlocked' => (bool)$content->Blocked,
-				'ContentStatus' => (bool)$content->Status,
-				'ContentVersion' => (int)$content->Version,
-				'ContentPdfVersion' => (1000 + ($content->PdfVersion === null ? 1 : (int)$content->PdfVersion)),
-				'ContentCoverImageVersion' => (1000 + ($content->CoverImageVersion === null ? 1 : (int)$content->CoverImageVersion)),
-                                'RemoveFromMobile' => (bool)$content->RemoveFromMobile
-			));
+            return Response::json($content->getServiceDataDetailed(Ws_v102_Contents_Controller::serviceVersion));
 		});
 	}
 

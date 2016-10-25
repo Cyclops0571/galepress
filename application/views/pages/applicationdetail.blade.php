@@ -5,9 +5,9 @@
     /** @var $app Application */
     ?>
     <div class="col-md-8">
-        {{ Form::open(__('route.applications_save'), 'POST') }}
-        {{ Form::token() }}
-                <!-- APPLICATION INFO START -->
+    {{ Form::open(__('route.applications_save'), 'POST') }}
+    {{ Form::token() }}
+    <!-- APPLICATION INFO START -->
         <div class="block block-drop-shadow">
             <div class="header">
                 <h2>{{ __('common.detailpage_caption') }}</h2>
@@ -83,6 +83,41 @@
                                   cols="20"><?php echo $app->Detail; ?></textarea>
                     </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label class="label-grey"
+                               for="topicIds">{{ __('applicationlang.application_category') }}</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="topicStatus"
+                                   <?php echo $app->TopicStatus ? 'checked="checked"' : ''?>
+                                   id="topicStatus">
+                          </span>
+                            <select id="topicIds" name="topicIds[]" multiple="multiple"
+                                    class="chosen-container" required>
+                                <?php
+                                /** @var Topic[] $topics */
+                                foreach ($topics as $topic): ?>
+                                <?php
+                                $selected = '';
+                                foreach ($app->ApplicationTopics as $applicationTopic) {
+                                    if ($applicationTopic->TopicID == $topic->TopicID) {
+                                        $selected = ' selected="selected"';
+                                    }
+                                }
+                                ?>
+                                <option value="<?php echo $topic->TopicID ?>" <?php echo $selected ?>>
+                                    <?php echo $topic->Name; ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="col-md-3">{{ __('common.applications_file') }}</div>
                     <div class="col-md-9">
@@ -115,61 +150,6 @@
                         </div>
                         <input type="hidden" name="hdnCkPemSelected" id="hdnCkPemSelected" value="0"/>
                         <input type="hidden" name="hdnCkPemName" id="hdnCkPemName" value="{{ $app->CkPem }}"/>
-                        <script type="text/javascript">
-                            $(function () {
-                                $("#CkPem").fileupload({
-                                    url: '/' + currentLanguage + '/' + route["applications_uploadfile"],
-                                    dataType: 'json',
-                                    sequentialUploads: true,
-                                    formData: {
-                                        'element': 'CkPem'
-                                    },
-                                    add: function (e, data) {
-                                        if (/\.(pem)$/i.test(data.files[0].name)) {
-                                            $('#hdnCkPemSelected').val("1");
-                                            var ckPem = $("[for='CkPem']");
-                                            ckPem.removeClass("hide");
-
-                                            data.context = ckPem;
-                                            data.context.find('a').click(function (e) {
-                                                e.preventDefault();
-                                                data = ckPem.data('data') || {};
-                                                if (data.jqXHR) {
-                                                    data.jqXHR.abort();
-                                                }
-                                            });
-                                            var xhr = data.submit();
-                                            data.context.data('data', {jqXHR: xhr});
-                                        }
-                                    },
-                                    progressall: function (e, data) {
-                                        var progress = data.loaded / data.total * 100;
-                                        var ckPem = $("[for='CkPem']");
-
-                                        ckPem.find('label').html(progress.toFixed(0) + '%');
-                                        ckPem.find('div.scale').css('width', progress.toFixed(0) + '%');
-                                    },
-                                    done: function (e, data) {
-                                        if (data.textStatus == 'success') {
-                                            var fileName = data.result['CkPem'][0].name;
-
-                                            $('#hdnCkPemName').val(fileName);
-                                            $("[for='CkPem']").addClass("hide");
-                                        }
-                                    },
-                                    fail: function (e, data) {
-                                        $("[for='CkPem']").addClass("hide");
-                                    }
-                                });
-
-                                //select file
-                                $("#CkPemButton").removeClass("hide").click(function () {
-
-                                    $("#CkPem").click();
-                                });
-
-                            });
-                        </script>
                     </div>
                 </div>
                 <div class="form-row">
@@ -359,4 +339,77 @@
             </div>
         </div>
     </div>
+
+    <!--suppress JSJQueryEfficiency -->
+    <script type="text/javascript">
+        $(function () {
+            var topicIds = $("#topicIds");
+            topicIds.chosen({
+                placeholder_text_single: javascriptLang['select'],
+                placeholder_text_multiple: javascriptLang['select'],
+                no_results_text: javascriptLang['no_results'],
+            });
+            $('#topicIds').prop('disabled', !$('#topicStatus').is(':checked')).trigger('chosen:updated');
+            $('#topicStatus').on('click', function () {
+                $('#topicIds').prop('disabled', !$('#topicStatus').is(':checked')).trigger('chosen:updated');
+            });
+            var inputGroup = $('.input-group');
+            inputGroup.find('.chosen-container').css({"height": "100%"});
+            inputGroup.find('.chosen-choices').css({"border": "1px solid rgba(0, 0, 0, 0)", "border-radius": "3px"});
+            inputGroup.find('.search-field').css("margin", "3px 0 1px 3px");
+
+            $("#CkPem").fileupload({
+                url: '/' + currentLanguage + '/' + route["applications_uploadfile"],
+                dataType: 'json',
+                sequentialUploads: true,
+                formData: {
+                    'element': 'CkPem'
+                },
+                add: function (e, data) {
+                    if (/\.(pem)$/i.test(data.files[0].name)) {
+                        $('#hdnCkPemSelected').val("1");
+                        var ckPem = $("[for='CkPem']");
+                        ckPem.removeClass("hide");
+
+                        data.context = ckPem;
+                        data.context.find('a').click(function (e) {
+                            e.preventDefault();
+                            data = ckPem.data('data') || {};
+                            if (data.jqXHR) {
+                                data.jqXHR.abort();
+                            }
+                        });
+                        var xhr = data.submit();
+                        data.context.data('data', {jqXHR: xhr});
+                    }
+                },
+                progressall: function (e, data) {
+                    var progress = data.loaded / data.total * 100;
+                    var ckPem = $("[for='CkPem']");
+
+                    ckPem.find('label').html(progress.toFixed(0) + '%');
+                    ckPem.find('div.scale').css('width', progress.toFixed(0) + '%');
+                },
+                done: function (e, data) {
+                    if (data.textStatus == 'success') {
+                        var fileName = data.result['CkPem'][0].name;
+
+                        $('#hdnCkPemName').val(fileName);
+                        $("[for='CkPem']").addClass("hide");
+                    }
+                },
+                fail: function (e, data) {
+                    $("[for='CkPem']").addClass("hide");
+                }
+            });
+
+            //select file
+            $("#CkPemButton").removeClass("hide").click(function () {
+
+                $("#CkPem").click();
+            });
+
+        });
+    </script>
+
 @endsection

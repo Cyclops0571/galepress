@@ -15,4 +15,8 @@ class Topic extends Eloquent
     public static $timestamps = false;
     public static $table = 'Topic';
     public static $key = 'TopicID';
+
+    public function getServiceData() {
+        return array('id' => $this->TopicID, 'name' => $this->Name);
+    }
 }

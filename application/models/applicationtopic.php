@@ -16,6 +16,6 @@ class ApplicationTopic extends Eloquent
     public static $key = 'ApplicationTopicID';
 
     public function Topic() {
-        return $this->has_one('Topic', 'TopicID');
+        return $this->belongs_to('Topic', 'TopicID');
     }
 }

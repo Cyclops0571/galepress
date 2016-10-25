@@ -219,6 +219,7 @@ class Applications_Controller extends Base_Controller
      */
     public function get_show($id)
     {
+
         if (Auth::user()->UserTypeID != eUserTypes::Manager) {
             return Redirect::to(__('route.home'));
         }
@@ -253,8 +254,8 @@ class Applications_Controller extends Base_Controller
             'route' => $this->route,
             'caption' => $this->caption,
             'detailcaption' => $this->detailcaption,
+            'topics' => Topic::where('StatusID', '=', eStatus::Active )->get()
         );
-
         return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
             ->nest('filterbar', 'sections.filterbar', $data);
 
@@ -381,49 +382,39 @@ class Applications_Controller extends Base_Controller
                 }
 
                 if ($id == 0) {
-                    $s = new Application();
+                    $application = new Application();
                 } else {
-                    $s = Application::find($id);
+                    $application = Application::find($id);
                 }
-                $s->CustomerID = (int)Input::get('CustomerID');
-                $s->Name = Input::get('Name');
-                $s->Detail = Input::get('Detail');
-                $s->ApplicationLanguage = Input::get('ApplicationLanguage');
-                $s->Price = str_replace(',', '', Input::get('Price'));
-                $s->Installment = Input::get('Installment', Application::InstallmentCount);
-                $s->InAppPurchaseActive = Input::get('InAppPurchaseActive', 0);
-                $s->FlipboardActive = Input::get('FlipboardActive', 0);
-                $s->BundleText = strtolower(Input::get('BundleText'));
-                $s->StartDate = new DateTime(Common::dateWrite(Input::get('StartDate')));
-                $s->ExpirationDate = new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
-                $s->ApplicationStatusID = (int)Input::get('ApplicationStatusID');
-                $s->IOSVersion = (int)Input::get('IOSVersion');
-                $s->IOSLink = Input::get('IOSLink', '');
-                $s->AndroidVersion = (int)Input::get('AndroidVersion');
-                $s->AndroidLink = Input::get('AndroidLink', '');
-                $s->PackageID = (int)Input::get('PackageID');
-                $s->Blocked = (int)Input::get('Blocked');
-                $s->Status = (int)Input::get('Status');
-                $s->Trail = (int)Input::get('Trail');
-                $s->NotificationText = Input::get('NotificationText');
-                $s->CkPem = $targetFileName;
-                $s->save();
-
-                if ((int)Input::get('hdnCkPemSelected', 0) == 1 && File::exists($sourceFileNameFull)) {
-                    $applicationID = $s->ApplicationID;
-                    $customerID = Application::find($applicationID)->CustomerID;
-
-                    //$targetFileName = $currentUser->UserID.'_'.date("YmdHis").'_'.$sourceFileName;
-                    $targetFilePath = 'files/customer_' . $customerID . '/application_' . $applicationID;
-                    $targetRealPath = path('public') . $targetFilePath;
-                    $targetFileNameFull = $targetRealPath . '/' . $targetFileName;
-
-                    if (!File::exists($targetRealPath)) {
-                        File::mkdir($targetRealPath);
-                    }
-
-                    File::move($sourceFileNameFull, $targetFileNameFull);
+                $application->CustomerID = (int)Input::get('CustomerID');
+                $application->Name = Input::get('Name');
+                $application->Detail = Input::get('Detail');
+                $application->ApplicationLanguage = Input::get('ApplicationLanguage');
+                $application->Price = str_replace(',', '', Input::get('Price'));
+                $application->Installment = Input::get('Installment', Application::InstallmentCount);
+                $application->InAppPurchaseActive = Input::get('InAppPurchaseActive', 0);
+                $application->FlipboardActive = Input::get('FlipboardActive', 0);
+                $application->BundleText = strtolower(Input::get('BundleText'));
+                $application->StartDate = new DateTime(Common::dateWrite(Input::get('StartDate')));
+                $application->ExpirationDate = new DateTime(Common::dateWrite(Input::get('ExpirationDate')));
+                $application->ApplicationStatusID = (int)Input::get('ApplicationStatusID');
+                $application->IOSVersion = (int)Input::get('IOSVersion');
+                $application->IOSLink = Input::get('IOSLink', '');
+                $application->AndroidVersion = (int)Input::get('AndroidVersion');
+                $application->AndroidLink = Input::get('AndroidLink', '');
+                $application->PackageID = (int)Input::get('PackageID');
+                $application->Blocked = (int)Input::get('Blocked');
+                $application->Status = (int)Input::get('Status');
+                $application->Trail = (int)Input::get('Trail');
+                $application->NotificationText = Input::get('NotificationText');
+                $application->CkPem = $targetFileName;
+                $application->TopicStatus = Input::get('topicStatus', 0) === "on";
+                $application->save();
+                if(Input::get('hdnCkPemSelected', 0)) {
+                    $application->handleCkPem($sourceFileNameFull);
                 }
+
+                $application->setTopics(Input::get('topicIds', array()));
 
                 return "success=" . base64_encode("true");
             } else {

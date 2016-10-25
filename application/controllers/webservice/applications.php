@@ -16,7 +16,7 @@ class Webservice_Applications_Controller extends Base_Controller
     {
 
         return webService::render(function () use ($ServiceVersion, $applicationID) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             return Response::json(array(
                 'status' => 0,
@@ -29,13 +29,6 @@ class Webservice_Applications_Controller extends Base_Controller
         });
     }
 
-    public static function checkServiceVersion($ServiceVersion)
-    {
-        if (!in_array($ServiceVersion, self::$availableServices)) {
-            throw eServiceError::getException(eServiceError::ServiceNotFound);
-        }
-    }
-
     /**
      *
      * @param int $ServiceVersion
@@ -45,7 +38,7 @@ class Webservice_Applications_Controller extends Base_Controller
     public function post_version($ServiceVersion, $applicationID)
     {
         return webService::render(function () use ($ServiceVersion, $applicationID) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             $accessToken = Input::get('accessToken', "");
             $clientVersion = 0;
@@ -87,7 +80,7 @@ class Webservice_Applications_Controller extends Base_Controller
               2: Zorla
               3: Sil ve zorla
              */
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             /* @var $application Application */
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
@@ -142,7 +135,7 @@ class Webservice_Applications_Controller extends Base_Controller
               2: Zorla
               3: Sil ve zorla
              */
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             /* @var $application Application */
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             $customer = webService::getCheckCustomer($ServiceVersion, $application->CustomerID);
@@ -190,7 +183,7 @@ class Webservice_Applications_Controller extends Base_Controller
     public function get_categories($ServiceVersion, $applicationID)
     {
         return webService::render(function () use ($ServiceVersion, $applicationID) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
             $categories = webService::getCheckApplicationCategories($ServiceVersion, $applicationID);
             return Response::json(array(
@@ -211,7 +204,7 @@ class Webservice_Applications_Controller extends Base_Controller
     public function get_categoryDetail($ServiceVersion, $applicationID, $categoryID)
     {
         return webService::render(function () use ($ServiceVersion, $applicationID, $categoryID) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
             $category = webService::getCheckApplicationCategoryDetail($ServiceVersion, $applicationID, $categoryID);
             return Response::json(array(
@@ -235,7 +228,7 @@ class Webservice_Applications_Controller extends Base_Controller
         return webService::render(function () use ($ServiceVersion, $applicationID) {
             $isTest = Input::get('isTest', 0) ? TRUE : FALSE;
             $accessToken = Input::get('accessToken', "");
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             $application = webService::getCheckApplication($ServiceVersion, $applicationID);
             $baseUrl = Config::get('custom.url');
             $tabs = array();
@@ -289,12 +282,12 @@ class Webservice_Applications_Controller extends Base_Controller
      * This function is used for Gp Viewer Application
      * Other Applications dont use this function
      * @param int $ServiceVersion
-     * @return type
+     * @return string
      */
     public function post_authorized_application_list($ServiceVersion)
     {
         return webService::render(function () use ($ServiceVersion) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             $username = Input::get('username');
             $password = Input::get('password');
             $applicationSet = array();
@@ -329,7 +322,7 @@ class Webservice_Applications_Controller extends Base_Controller
 
     /**
      * Authenticate the client to the application
-     * @param type $ServiceVersion
+     * @param int $ServiceVersion
      * @return Laravel\Response
      */
     public function post_login_application($ServiceVersion)
@@ -339,7 +332,7 @@ class Webservice_Applications_Controller extends Base_Controller
             $username = Laravel\Input::get("username");
             $password = Laravel\Input::get("password");
 
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
             $client = webService::getCheckClient($ServiceVersion, $applicationID, $username, $password);
 
@@ -381,7 +374,7 @@ class Webservice_Applications_Controller extends Base_Controller
             $name = Laravel\Input::get("name");
             Laravel\Config::set("application.language", Laravel\Input::get("clientLanguage"));
             $surname = Laravel\Input::get("surname");
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
             $client = Client::where("ApplicationID", "=", $applicationID)
                 ->where("StatusID", "=", eStatus::Active)
@@ -444,7 +437,7 @@ class Webservice_Applications_Controller extends Base_Controller
     public function post_androidrestore($ServiceVersion, $applicationID)
     {
         return webService::render(function () use ($ServiceVersion, $applicationID) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
 
             $errorIdentifier = array();
@@ -499,7 +492,7 @@ class Webservice_Applications_Controller extends Base_Controller
     public function post_receipt($ServiceVersion, $applicationID)
     {
         return webService::render(function () use ($ServiceVersion, $applicationID) {
-            Webservice_Applications_Controller::checkServiceVersion($ServiceVersion);
+            webService::checkServiceVersion($ServiceVersion);
             webService::getCheckApplication($ServiceVersion, $applicationID);
 
             $rules = array(

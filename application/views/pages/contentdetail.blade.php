@@ -5,8 +5,6 @@
     <?php
     /** @var Application $app */
     /** @var Content $content */
-
-
     $ContentID = (int)$content->ContentID;
     $Name = e($content->Name);
     $Detail = $content->Detail;
@@ -31,7 +29,7 @@
     /** @var ContentFile $ContentFile */
     $ContentFile = $content->ContentFile;
     if ($ContentFile) {
-        $ContentFileID = $ContentFile->ContentFileID;
+        $ContentFileID = (int)$ContentFile->ContentFileID;
         $Transferable = True;
         $Transferred = $ContentFile->Transferred == 1;
     }
@@ -62,6 +60,7 @@
             ->order_by('gc.DisplayOrder', 'ASC')
             ->order_by('gcl.DisplayName', 'ASC')
             ->get();
+
     ?>
     <iframe id="interactivity" class="interactivity"></iframe>
     {{ Form::open(__('route.contents_save'), 'POST', array('enctype' => 'multipart/form-data')) }}
@@ -105,6 +104,40 @@
                     <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_detail') }}"><span
                                     class="icon-info-sign"></span></a></div>
                 </div>
+                <?php if($app->TopicStatus == eStatus::Active && count($app->ApplicationTopics)): ?>
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label for="topicIds">{{ __('applicationlang.application_category') }}</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" name="topicStatus"
+                               <?php echo $content->TopicStatus || !$content->ContentID ? 'checked="checked"' : ''?>
+                               id="topicStatus">
+                      </span>
+                            <select id="topicIds" name="topicIds[]" multiple="multiple" class="chosen-container" required>
+                                <?php
+                                $contentTopicIds = array_map(function ($o) {
+                                    return $o->TopicID;
+                                }, $content->ContentTopics);
+                                foreach($app->ApplicationTopics as $applicationTopic):?>
+                                <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) || !$content->ContentID ? ' selected="selected"' : '';?>
+                                <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
+                                    <?php echo $applicationTopic->Topic->Name; ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
+                            <span class="icon-info-sign"></span>
+                        </a>
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <div class="form-row">
                     <div class="col-md-3">
                         <label class="label-grey" for="CategoryID">{{ __('common.contents_category') }}</label>
@@ -223,7 +256,7 @@
                                id="hdnFileName"{{ $ContentID == 0 ? ' class="required"' : '' }} />
                     </div>
                     <div class="col-md-5" style="padding-top:2px;">
-                        @if($ContentID > 0 && $ContentFileID > 0 && $authInteractivity && $Transferable)
+                        @if($ContentID > 0 && $ContentFile && $authInteractivity && $Transferable)
                             <div class="checkbox-inline">
                                 <input type="checkbox" name="Transferred" id="Transferred" value="1" checked="checked"/>
                             </div>
@@ -378,37 +411,6 @@
                 </div>
             </div>
         </div>
-
-        <?php if(false && !empty($app->ApplicationTopics)): ?>
-        <div class="block">
-            <div class="form-row">
-                <div class="col-md-3">
-                    <label for="topicIds">
-                        Dergilik Gonderilecek Kategoriler
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    <select id="topicIds" name="topicIds[]" class="choosen-container" multiple="multiple" required>
-                        <?php
-                        $contentTopicIds = array_map(function($o) {return $o->TopicID;}, $content->ContentTopics);
-                        foreach($app->ApplicationTopics as $applicationTopic):?>
-                        <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) ? ' selected="selected"' : '';
-
-                        ?>
-                        <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
-                            <?php echo $applicationTopic->Topic->Name ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
-                        <span class="icon-info-sign"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
 
         <div class="block {{ ((int)$IsMaster == 1 ? 'disabledFields' : '') }}">
             <div class="content controls" style="overflow:visible">
@@ -947,6 +949,15 @@
                 placeholder_text_multiple: javascriptLang['select'],
                 no_results_text: javascriptLang['no_results'],
             });
+
+            $('#topicIds').prop('disabled', !$('#topicStatus').is(':checked')).trigger('chosen:updated');
+            $('#topicStatus').on('click', function () {
+                $('#topicIds').prop('disabled', !$('#topicStatus').is(':checked')).trigger('chosen:updated');
+            });
+            var inputGroup = $('.input-group');
+            inputGroup.find('.chosen-container').css({"height": "100%"});
+            inputGroup.find('.chosen-choices').css({"border": "1px solid rgba(0, 0, 0, 0)", "border-radius": "3px"});
+            inputGroup.find('.search-field').css("margin", "3px 0 1px 3px");
 
             cContent.addFileUpload();
             cContent.addImageUpload();

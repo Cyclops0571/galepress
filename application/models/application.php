@@ -48,6 +48,7 @@
  * @property int $SubscriptionYearActive Description
  * @property int $ShowDashboard Flag for webservice to force user to optional login
  * @property int $ConfirmationMessage Confirmation Message for continue to application
+ * @property int $TopicStatus Description
  * @property int $StatusID Description
  * @property int $CreatorUserID Description
  * @property int $DateCreated Description
@@ -55,6 +56,7 @@
  * @property int $ProcessDate Description
  * @property int $ProcessTypeID Description
  * @property Customer $Customer Description
+ * @property ApplicationTopic[] $ApplicationTopics Description
  */
 class Application extends Eloquent
 {
@@ -350,12 +352,13 @@ class Application extends Eloquent
         return $categories;
     }
 
-    public function getExpireTimeMessage() {
+    public function getExpireTimeMessage()
+    {
 //        {{ $expApp->Name }} {{$diff->days}}
         $date1 = new DateTime($this->ExpirationDate);
         $date2 = new DateTime(date('Y-m-d'));
         $diff = $date1->diff($date2);
-        if($diff->days == 0) {
+        if ($diff->days == 0) {
             return __('applicationlang.expiretime0days', array('ApplicationName' => $this->Name));
         } else {
             return __('applicationlang.expiretime15days', array('ApplicationName' => $this->Name, 'RemainingDays' => $diff->days));
@@ -408,5 +411,60 @@ class Application extends Eloquent
                 $location['y'] = '-77.036545';
         }
         return $location;
+    }
+
+    public function ApplicationTopics()
+    {
+        return $this->has_many('ApplicationTopic', self::$key);
+    }
+
+    public function setTopics($newTopicIds)
+    {
+        if($this->TopicStatus != eStatus::Active) {
+            return;
+        }
+        if(empty($newTopicIds)) {
+            foreach ($this->ApplicationTopics as $applicationTopic) {
+                $applicationTopic->delete();
+            }
+            return;
+        }
+
+        $applicationTopicIds = array();
+        foreach ($this->ApplicationTopics as $topic) {
+            $applicationTopicIds[] = $topic->TopicID;
+        }
+
+
+        foreach ($newTopicIds as $newTopicId) {
+            foreach ($this->ApplicationTopics as $applicationTopic) {
+                if (!in_array($applicationTopic->TopicID, $newTopicIds)) {
+                    $applicationTopic->delete();
+                }
+            }
+            if (!in_array($newTopicId, $applicationTopicIds)) {
+                $applicationTopic = new ApplicationTopic();
+                $applicationTopic->ApplicationID = $this->ApplicationID;
+                $applicationTopic->TopicID = $newTopicId;
+                $applicationTopic->save();
+            }
+        }
+
+    }
+
+    public function handleCkPem($sourceFileNameFull)
+    {
+        if (File::exists($sourceFileNameFull)) {
+
+            $targetFilePath = 'files/customer_' . $this->CustomerID . '/application_' . $this->ApplicationID;
+            $targetRealPath = path('public') . $targetFilePath;
+            $targetFileNameFull = $targetRealPath . '/' . $this->CkPem;
+
+            if (!File::exists($targetRealPath)) {
+                File::mkdir($targetRealPath);
+            }
+
+            File::move($sourceFileNameFull, $targetFileNameFull);
+        }
     }
 }

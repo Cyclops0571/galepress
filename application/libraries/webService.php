@@ -6,6 +6,7 @@ class webService
     const GoogleConsumptionStatePurchased = 0;
     const GoogleConsumptionStateCanceled = 1;
     const GoogleConsumptionStateRefunded = 2;
+    public static $availableServices = array(103);
 
     /**
      * If there is a exception then catches it and returns a valid Response else returns what the Closure returns
@@ -113,10 +114,7 @@ class webService
         $rs = $query->get();
         $contents = array();
         foreach ($rs as $r) {
-            $serveContent = $r->PublishDate <= date("Y-m-d H:i:s");
-            $serveContent = $serveContent && ($r->IsUnpublishActive == 0 || $r->UnpublishDate > date("Y-m-d"));
-            $serveContent = $serveContent || ($r->RemoveFromMobile == eRemoveFromMobile::Active);
-            if ($serveContent) {
+            if ($r->serveContent()) {
 
                 //check if client has an access to wanted content.
                 $clientBoughtContent = FALSE;
@@ -131,23 +129,7 @@ class webService
                     }
                 }
 
-                array_push($contents, array(
-                    'ContentID' => (int)$r->ContentID,
-                    'ContentName' => $r->Name,
-                    'ContentMonthlyName' => $r->MonthlyName,
-                    'ContentIsMaster' => (bool)$r->IsMaster,
-                    'ContentOrientation' => (int)$r->Orientation,
-                    'ContentBlocked' => (bool)$r->Blocked,
-                    'ContentStatus' => (bool)$r->Status,
-                    'ContentVersion' => (int)$r->Version,
-                    'ContentOrderNo' => (int)$r->OrderNo,
-                    'RemoveFromMobile' => (bool)$r->RemoveFromMobile,
-                    'ContentIsBuyable' => (bool)$r->IsBuyable,
-                    'ContentPrice' => (string)$r->Price,
-                    'ContentCurrency' => $r->Currency(1),
-                    'ContentIdentifier' => $r->getIdentifier(),
-                    'ContentBought' => $clientBoughtContent,
-                ));
+                array_push($contents, array_merge($r->getServiceData(), array('ContentBought' => $clientBoughtContent)));
             }
         }
         return $contents;
@@ -404,4 +386,10 @@ class webService
         }
     }
 
+    public static function checkServiceVersion($ServiceVersion)
+    {
+        if (!in_array($ServiceVersion, self::$availableServices)) {
+            throw eServiceError::getException(eServiceError::ServiceNotFound);
+        }
+    }
 }

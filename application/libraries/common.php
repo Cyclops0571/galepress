@@ -1022,4 +1022,19 @@ class Common
         }
         return $rtn;
     }
+
+    public static function Cast(&$destination, stdClass $source)
+    {
+        $sourceReflection = new \ReflectionObject($source);
+        $sourceProperties = $sourceReflection->getProperties();
+        foreach ($sourceProperties as $sourceProperty) {
+            $name = $sourceProperty->getName();
+            if (gettype($destination->{$name}) == "object") {
+                self::Cast($destination->{$name}, $source->$name);
+            } else {
+                $destination->{$name} = $source->$name;
+            }
+        }
+    }
+
 }

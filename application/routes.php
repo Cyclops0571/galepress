@@ -513,6 +513,11 @@ Route::get('webservice/(:num)/contents/(:num)/cover-image', array('uses' => 'web
 Route::get('webservice/(:num)/contents/(:num)/file', array('uses' => 'webservice.contents@file'));
 // WS-Statistics
 Route::post('webservice/(:num)/statistics', array('uses' => 'webservice.statistics@create'));
+//WS-Topic
+Route::any('webservice/(:num)/topic', array('uses' => 'webservice.topic@topic'));
+Route::any('webservice/(:num)/application-topic', array('uses' => 'webservice.topic@applicationTopic'));
+
+
 // </editor-fold>
 
 /*

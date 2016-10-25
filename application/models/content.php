@@ -28,6 +28,7 @@
  * @property int $PdfVersion Description
  * @property int $CoverImageVersion Description
  * @property int $TotalFileSize Description
+ * @property int $TopicStatus Description
  * @property int $StatusID Description
  * @property int $CreatorUserID Description
  * @property int $DateCreated Description
@@ -256,22 +257,23 @@ class Content extends Eloquent
         return $ContentFile;
     }
 
-    private function callIndexingService(ContentFile $contentFile) {
+    private function callIndexingService(ContentFile $contentFile)
+    {
         //http://37.9.205.205/indexing?path=customer_127/application_135/content_5207/file_6688/file.pdf'
         $contentFile->Indexed = 0;
         $pdfPath = 'customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID . '/file_' . $contentFile->ContentFileID . '/file.pdf';
-        @$ch = curl_init('http://37.9.205.205/indexing?path=' .  $pdfPath);
+        @$ch = curl_init('http://37.9.205.205/indexing?path=' . $pdfPath);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);
-        if(!empty($result) ) {
+        if (!empty($result)) {
             $resultJson = json_decode($result, true);
-            if(isset($resultJson['status']) && $resultJson['status'] == 1) {
+            if (isset($resultJson['status']) && $resultJson['status'] == 1) {
                 $contentFile->Indexed = 1;
             }
         }
 
-        if($contentFile->Indexed == 0) {
+        if ($contentFile->Indexed == 0) {
             $error = new ServerErrorLog();
             $error->ErrorMessage = "Indexing error - ContentFileID: " . $contentFile->ContentFileID . " -  response: " . json_encode($result);
             $error->save();
@@ -368,6 +370,9 @@ class Content extends Eloquent
 
     public function getIdentifier($refreshIdentifier = false)
     {
+        if (!$this->ContentID) {
+            return $this->Identifier;
+        }
         if (empty($this->Identifier) || $refreshIdentifier) {
             if (empty($this->Application->BundleText)) {
                 $identifier = "www.galepress.com." . $this->ContentID . "t" . time();
@@ -428,7 +433,11 @@ class Content extends Eloquent
      */
     public function setTopics($topicIds)
     {
-        if(empty($topicIds)) {
+        if ($this->TopicStatus != eStatus::Active) {
+            return;
+        }
+
+        if (empty($topicIds)) {
             foreach ($this->ContentTopics as $contentTopic) {
                 $contentTopic->delete();
             }
@@ -455,9 +464,52 @@ class Content extends Eloquent
         }
     }
 
-    public function ContentFile() {
+    public function ContentFile()
+    {
         return $this->has_one('ContentFile', 'ContentID')
             ->where('StatusID', '=', eStatus::Active)
             ->order_by('ContentFileID', 'DESC')->take(1);
     }
+
+
+    public function serveContent()
+    {
+        $serveContent = $this->PublishDate <= date("Y-m-d H:i:s");
+        $serveContent = $serveContent && ($this->IsUnpublishActive == 0 || $this->UnpublishDate > date("Y-m-d"));
+        $serveContent = $serveContent || ($this->RemoveFromMobile == eRemoveFromMobile::Active);
+        return $serveContent;
+    }
+
+    public function getServiceData()
+    {
+        return array(
+            'status' => 0,
+            'error' => "",
+            'ContentID' => (int)$this->ContentID,
+            'ContentOrderNo' => (int)$this->OrderNo,
+            'ContentName' => $this->Name,
+            'ContentDetail' => $this->Detail,
+            'ContentMonthlyName' => $this->MonthlyName,
+            'ContentIsProtected' => ((int)$this->IsProtected == 1 ? true : false),
+            'ContentIsBuyable' => ((int)$this->IsBuyable == 1 ? true : false),
+            'ContentPrice' => '',
+            'ContentCurrency' => $this->Currency(1),
+            'ContentIdentifier' => $this->getIdentifier(),
+            'ContentIsMaster' => ((int)$this->IsMaster == 1 ? true : false),
+            'ContentOrientation' => (int)$this->Orientation,
+            'ContentAutoDownload' => ((int)$this->AutoDownload == 1 ? true : false),
+            'ContentBlocked' => (bool)$this->Blocked,
+            'ContentStatus' => (bool)$this->Status,
+            'ContentVersion' => (int)$this->Version,
+            'ContentPdfVersion' => (int)$this->PdfVersion,
+            'ContentCoverImageVersion' => (int)$this->CoverImageVersion,
+            'RemoveFromMobile' => (bool)$this->RemoveFromMobile
+        );
+    }
+
+    public function getServiceDataDetailed($serviceVersion)
+    {
+        return array_merge($this->getServiceData(), array('ContentCategories' => $this->WebserviceCategories($serviceVersion)));
+    }
 }
+

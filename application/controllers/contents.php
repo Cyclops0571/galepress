@@ -308,7 +308,6 @@ class Contents_Controller extends Base_Controller
     public function post_save()
     {
         set_time_limit(3000);
-        $contentID = 0;
         $currentUser = Auth::user();
 
         $id = (int)Input::get($this->pk, '0');
@@ -348,6 +347,7 @@ class Contents_Controller extends Base_Controller
                 $content->setPassword(Input::get('Password'));
                 $content->setMaster((int)Input::get('IsMaster'));
                 $content->AutoDownload = (int)Input::get('AutoDownload');
+                $content->TopicStatus = Input::get('topicStatus', 0) === "on";
                 $content->Status = (int)Input::get('Status');
                 if ($content->Status == eStatus::Active) {
                     $content->RemoveFromMobile = eRemoveFromMobile::Passive;

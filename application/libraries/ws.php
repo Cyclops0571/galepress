@@ -86,32 +86,12 @@ class Ws
         }
 
         $rs = $query->get();
-//        var_dump(DB::last_query()) ; exit;
-//        var_dump($rs); exit;
+        /** @var Content[] $rs */
         if ($rs) {
             $contents = array();
             foreach ($rs as $r) {
-                $r instanceof Content;
-                $serveContent = $r->PublishDate <= date("Y-m-d H:i:s");
-                $serveContent = $serveContent && ($r->IsUnpublishActive == 0 || $r->UnpublishDate > date("Y-m-d"));
-                $serveContent = $serveContent || ($r->RemoveFromMobile == eRemoveFromMobile::Active);
-                if ($serveContent) {
-                    array_push($contents, array(
-                        'ContentID' => (int)$r->ContentID,
-                        'ContentName' => $r->Name,
-                        'ContentMonthlyName' => $r->MonthlyName,
-                        'ContentIsMaster' => (bool)$r->IsMaster,
-                        'ContentOrientation' => (int)$r->Orientation,
-                        'ContentBlocked' => (bool)$r->Blocked,
-                        'ContentStatus' => (bool)$r->Status,
-                        'ContentVersion' => (int)$r->Version,
-                        'ContentOrderNo' => (int)$r->OrderNo,
-                        'RemoveFromMobile' => (bool)$r->RemoveFromMobile,
-                        'ContentIsBuyable' => (bool)$r->IsBuyable,
-                        'ContentPrice' => $r->Price,
-                        'ContentCurrency' => $r->Currency(1),
-                        'ContentIdentifier' => $r->getIdentifier(),
-                    ));
+                if ($r->serveContent()) {
+                    array_push($contents, $r->getServiceData());
                 }
             }
             return $contents;
