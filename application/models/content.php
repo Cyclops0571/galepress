@@ -492,6 +492,7 @@ class Content extends Eloquent
             'status' => 0,
             'error' => "",
             'ContentID' => (int)$this->ContentID,
+            'ApplicationID' => (int)$this->ApplicationID,
             'ContentOrderNo' => (int)$this->OrderNo,
             'ContentName' => $this->Name,
             'ContentDetail' => $this->Detail,
