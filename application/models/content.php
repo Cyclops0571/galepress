@@ -262,7 +262,8 @@ class Content extends Eloquent
         //http://37.9.205.205/indexing?path=customer_127/application_135/content_5207/file_6688/file.pdf'
         $contentFile->Indexed = 0;
         $pdfPath = 'customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/content_' . $this->ContentID . '/file_' . $contentFile->ContentFileID . '/file.pdf';
-        @$ch = curl_init('http://37.9.205.205/indexing?path=' . $pdfPath);
+        $requestUrl = 'http://37.9.205.205/indexing?path=' . $pdfPath;
+        @$ch = curl_init($requestUrl);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);
@@ -276,6 +277,7 @@ class Content extends Eloquent
         if ($contentFile->Indexed == 0) {
             $error = new ServerErrorLog();
             $error->ErrorMessage = "Indexing error - ContentFileID: " . $contentFile->ContentFileID . " -  response: " . json_encode($result);
+            $error->Parameters = $requestUrl;
             $error->save();
         }
         $contentFile->save();

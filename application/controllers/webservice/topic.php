@@ -27,7 +27,7 @@ class Webservice_Topic_Controller extends Controller
                           Application.ExpirationDate > curdate() AND
                           Application.TopicStatus = ? AND 
                           Application.StatusID = ? AND 
-                          ApplicationTopic.ApplicationTopicID = ?
+                          ApplicationTopic.TopicID = ?
                       GROUP BY tmp.ApplicationID";
             $results = DB::query($sql, array($topicID, eStatus::Active, eStatus::Active, $topicID));
             $response = array();
