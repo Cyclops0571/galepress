@@ -35,7 +35,7 @@ class Webservice_Topic_Controller extends Controller
             foreach ($results as $result) {
                 $content = new Content();
                 Common::Cast($content, $result);
-                $response["contents"][] = array_merge($content->getServiceDataDetailed($serviceVersion), array('ApplicationName' => $result->ApplicationName));
+                $response["contents"][] = array_merge($content->getServiceData(), array('ApplicationName' => $result->ApplicationName));
             }
             $topics = Topic::where('StatusID', '=', eStatus::Active)->order_by('Order')->get();
             $response["topics"] = array_map(function(/** @var Topic $o */$o) {return $o->getServiceData();}, $topics);
