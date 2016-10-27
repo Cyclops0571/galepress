@@ -19,18 +19,18 @@ class PushNotification_Task
             $pn = DB::table('Customer AS c')
                 ->join('Application AS a', function ($join) {
                     $join->on('a.CustomerID', '=', 'c.CustomerID');
-                    $join->on('a.StatusID', '=', DB::raw(eStatus::Active));
+                    $join->on('a.StatusID', '=', eStatus::Active);
                 })
                 ->join('PushNotification AS p', function ($join) {
                     $join->on('p.CustomerID', '=', 'c.CustomerID');
                     $join->on('p.ApplicationID', '=', 'a.ApplicationID');
-                    $join->on('p.StatusID', '=', DB::raw(eStatus::Active));
+                    $join->on('p.StatusID', '=', eStatus::Active);
                 })
                 ->join('PushNotificationDevice AS d', function ($join) {
                     $join->on('d.PushNotificationID', '=', 'p.PushNotificationID');
-                    $join->on('d.Sent', '=', DB::raw(0));
-                    $join->on('d.ErrorCount', '=', DB::raw(0));
-                    $join->on('d.StatusID', '=', DB::raw(eStatus::Active));
+                    $join->on('d.Sent', '=', 0);
+                    $join->on('d.ErrorCount', '=', 0);
+                    $join->on('d.StatusID', '=', eStatus::Active);
                 })
                 ->where('c.StatusID', '=', eStatus::Active)
                 ->order_by('p.PushNotificationID', 'DESC')
@@ -150,7 +150,7 @@ class PushNotification_Task
         );
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://android.googleapis.com/gcm/send');
+        curl_setopt($ch, CURLOPT_URL, 'https://gcm-http.googleapis.com/gcm/send');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $data['headers']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
