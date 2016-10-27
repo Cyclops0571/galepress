@@ -207,7 +207,8 @@ class Applications_Controller extends Base_Controller
             'page' => $this->page,
             'route' => $this->route,
             'caption' => $this->caption,
-            'detailcaption' => $this->detailcaption
+            'detailcaption' => $this->detailcaption,
+            'topics' => array(),
         );
         return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
             ->nest('filterbar', 'sections.filterbar', $data);
