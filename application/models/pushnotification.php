@@ -12,6 +12,7 @@
  * @property int $ProcessUserID
  * @property int $ProcessDate
  * @property int $ProcessTypeID
+ * @property Application $Application
  */
 class PushNotification extends Eloquent
 {
@@ -19,4 +20,7 @@ class PushNotification extends Eloquent
 	public static $table = 'PushNotification';
 	public static $key = 'PushNotificationID';
 
+    public function Application() {
+        return $this->belongs_to("Application", "ApplicationID");
+    }
 }

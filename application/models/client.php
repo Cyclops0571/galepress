@@ -201,7 +201,6 @@ class Client extends Eloquent
     /**
      * @param $clientReceipt
      * @throws Exception
-     * @throws ServerErrorException
      */
     private function checkReceiptIos($clientReceipt)
     {

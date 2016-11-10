@@ -63,14 +63,14 @@ return array(
 	*/
 	'logger' => function($exception)
 	{
-        $serverErrorLog = new ServerErrorLog();
-        $serverErrorLog->Header = 500;
-        $serverErrorLog->Url = \Laravel\Request::uri();
-        $serverErrorLog->Parameters = json_encode(\Laravel\Input::all());
+        $myErrorLog = new ServerErrorLog();
+        $myErrorLog->Header = 500;
+        $myErrorLog->Url = \Laravel\Request::uri();
+        $myErrorLog->Parameters = json_encode(\Laravel\Input::all());
         /** @var Exception $exception */
-        $serverErrorLog->ErrorMessage = $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine();
-        $serverErrorLog->StackTrace = Common::getExceptionTraceAsString($exception);
-        $serverErrorLog->save();
+        $myErrorLog->ErrorMessage = $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine();
+        $myErrorLog->StackTrace = Common::getExceptionTraceAsString($exception);
+        $myErrorLog->save();
         //Log::exception($exception);
 	},
 

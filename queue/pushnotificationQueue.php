@@ -5,6 +5,8 @@ require_once $baseDir . "php-amqplib/vendor/autoload.php";
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
+//galepress.com:15672 is the management page
+
 
 $lockFile = $baseDir . 'lock/PushNotification_Task.lock';
 $fp = fopen($lockFile, 'r+');

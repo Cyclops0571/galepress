@@ -343,7 +343,7 @@ class webService
         // see: http://php.net/manual/en/function.file-get-contents.php
         $result = file_get_contents($endpoint, FALSE, $context);
         if ($result === FALSE) {
-            throw new ServerErrorException('Error validating transaction.', 560);
+            throw new Exception('Error validating transaction.', 560);
         }
         // Decode json object (TRUE variable decodes as an associative array)
         return json_decode($result, TRUE);

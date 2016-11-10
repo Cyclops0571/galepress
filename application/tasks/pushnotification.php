@@ -16,60 +16,25 @@ class PushNotification_Task
         //https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html
         //https://developer.apple.com/library/ios/technotes/tn2265/_index.html
         try {
-            $pn = DB::table('Customer AS c')
-                ->join('Application AS a', function ($join) {
-                    $join->on('a.CustomerID', '=', 'c.CustomerID');
-                    $join->on('a.StatusID', '=', eStatus::Active);
-                })
-                ->join('PushNotification AS p', function ($join) {
-                    $join->on('p.CustomerID', '=', 'c.CustomerID');
-                    $join->on('p.ApplicationID', '=', 'a.ApplicationID');
-                    $join->on('p.StatusID', '=', eStatus::Active);
-                })
-                ->join('PushNotificationDevice AS d', function ($join) {
-                    $join->on('d.PushNotificationID', '=', 'p.PushNotificationID');
-                    $join->on('d.Sent', '=', 0);
-                    $join->on('d.ErrorCount', '=', 0);
-                    $join->on('d.StatusID', '=', eStatus::Active);
-                })
-                ->where('c.StatusID', '=', eStatus::Active)
-                ->order_by('p.PushNotificationID', 'DESC')
-                ->order_by('d.PushNotificationDeviceID', 'DESC')
-                ->get(array('c.CustomerID', 'a.ApplicationID', 'a.CkPem', 'p.PushNotificationID', 'p.NotificationText', 'd.PushNotificationDeviceID', 'd.DeviceToken', 'd.DeviceType'));
-            if (count($pn) > 0) {
-                $consoleLog = new ConsoleLog(__CLASS__, "Push Notification");
-                $consoleLog->save();
-                foreach ($pn as $n) {
-                    try {
-                        $result = false;
-                        if ($n->DeviceType === 'ios') {
-                            $cert = path('public') . 'files/customer_' . $n->CustomerID . '/application_' . $n->ApplicationID . '/' . $n->CkPem;
-                            $result = $this->iosInternal($cert, $n->NotificationText, $n->DeviceToken);
-                        } elseif ($n->DeviceType === 'android') {
-                            $result = $this->androidInternal($n->NotificationText, $n->DeviceToken);
-                        }
-
-                        if ($result) {
-                            $c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
-                            $c->Sent = 1;
-                            $c->save();
-                        } else {
-                            //throw new Exception('Message not delivered!');
-                            $c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
-                            $c->ErrorCount = (int)$c->ErrorCount + 1;
-                            $c->LastErrorDetail = 'Message not delivered!';
-                            $c->save();
-                        }
-                    } catch (Exception $e) {
-                        $c = PushNotificationDevice::find((int)$n->PushNotificationDeviceID);
-                        $c->ErrorCount = (int)$c->ErrorCount + 1;
-                        $c->LastErrorDetail = $e->getMessage();
-                        $c->save();
-                    }
+            while(true) {
+                /** @var PushNotificationDevice $tempPND */
+                $tempPND = PushNotificationDevice::where('Sent', '=', 0)
+                    ->where('ErrorCount', '=', 0)
+                    ->where('StatusID', '=', eStatus::Active)
+                    ->first();
+                if(!$tempPND) {
+                    break;
+                } elseif (!$tempPND->PushNotification) {
+                    break;
                 }
 
-                $consoleLog->cli_text .= " PushnotificationID:" . $pn[0]->PushNotificationID . " Success";
-                $consoleLog->save();
+                if(!isset($consoleLog)) {
+                    $consoleLog = new ConsoleLog(__CLASS__, "Push Notification");
+                    $consoleLog->save();
+                }
+
+                mobileService::androidInternal($tempPND->PushNotification);
+                mobileService::iosInternal($tempPND->PushNotification);
             }
         } catch (Exception $e) {
             $msg = __('common.task_message', array(
@@ -187,6 +152,7 @@ class PushNotification_Task
 
     public function ios($args)
     {
+        return;
         $applicationID = $args[0];
         $message = $args[1];
         $deviceToken = $args[2];
@@ -203,6 +169,7 @@ class PushNotification_Task
 
     public function android($args)
     {
+        return;
         $applicationID = $args[0];
         $message = $args[1];
         $deviceToken = $args[2];

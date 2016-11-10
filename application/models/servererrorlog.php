@@ -22,4 +22,14 @@ class ServerErrorLog extends Eloquent
         $this->Parameters = json_encode($this->Parameters);
         return parent::save();
     }
+
+    public static function logAndSave($header, $url, $message, $parameters = array(), $stackTrace = "")
+    {
+        $self = new self();
+        $self->Header = $header;
+        $self->Url = $url;
+        $self->Parameters = $parameters;
+        $self->ErrorMessage = $message;
+        $self->StackTrace = $stackTrace;
+    }
 }

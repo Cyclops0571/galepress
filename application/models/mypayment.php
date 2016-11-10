@@ -142,7 +142,6 @@ class MyPayment
     }
 
     /**
-     * @param User $user
      * @param PaymentAccount $paymentAccount
      * @return PaymentTransaction
      */
