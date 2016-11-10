@@ -72,6 +72,15 @@ class mobileService
                 } else if (isset($results[$i]['error'])) {
                     $pushNotificationDevices[$i]->ErrorCount = $pushNotificationDevices[$i]->ErrorCount + 1;
                     $pushNotificationDevices[$i]->LastErrorDetail = $results[$i]['error'];
+                    if($results[$i]['error'] == "NotRegistered") {
+                        /** @var Token[] $notRegisteredTokens */
+                        $notRegisteredTokens = Token::where('DeviceToken', '=', $pushNotificationDevices[$i]->DeviceToken)
+                            ->where('DeviceType', '=', $deviceType)->get();
+                        foreach($notRegisteredTokens as $notRegisteredToken) {
+                            $notRegisteredToken->StatusID = eStatus::Deleted;
+                            $notRegisteredToken->save();
+                        }
+                    }
                 }
                 $pushNotificationDevices[$i]->save();
 
@@ -113,7 +122,7 @@ class mobileService
             ->where('ErrorCount', '=', 0)
             ->where('PushNotificationID', '=', $pushNotification->PushNotificationID)
             ->where('DeviceType', '=', "ios")
-            ->where('StatusID', '=', eStatus::Active)->get();
+            ->where('StatusID', '=', eStatus::Active)->order_by("PushNotificationDeviceID DESC")->get();
 //	$appID = 424;
 //	$udid1 = 'E6A7CFD9-FE39-4C33-B7F4-6651404ED040';
 //	$deviceToken1 = '22d08c4579f9a0d0e07fe7fdcd0a064989ecb93b06f7a1cf7c3a5f130b36c776';
@@ -133,32 +142,31 @@ class mobileService
 
         if ($fp) {
             // Create the payload body
+            $body['aps'] = array(
+                'alert' => $pushNotification->NotificationText,
+                'sound' => 'default',
+                'badge' => 0
+            );
+
+            // Encode the payload as JSON
+            $payload = json_encode($body);
             foreach ($pushNotificationDevicesAll as $pushNotificationDevice) {
-                $body['aps'] = array(
-                    'alert' => $pushNotification->NotificationText,
-                    'sound' => 'default'
-                );
-
-                // Encode the payload as JSON
-                $payload = json_encode($body);
-
                 // Build the binary notification
                 $msg = chr(0) . pack('n', 32) . pack('H*', $pushNotificationDevice->DeviceToken) . pack('n', strlen($payload)) . $payload;
 
-                // Send it to the server
-                try {
-                    usleep(20);
-                    $result = fwrite($fp, $msg, strlen($msg));
-                } catch (Exception $e) {
-                    try {
-                        echo "sleep 1 sec", PHP_EOL ;
-                        sleep(1);
-                        $result = fwrite($fp, $msg, strlen($msg));
-                    } catch (Exception $e){
-                        echo "still exception - " . $e->getMessage() , PHP_EOL ;
-                        ServerErrorLog::logAndSave('571', 'Push Notification', $e->getMessage());
+                $result = fwrite($fp, $msg, strlen($msg));
+                while(!$result) {
+                    fclose($fp);
+                    sleep(1);
+                    stream_context_set_option($ctx, 'ssl', 'local_cert', $cert);
+                    stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+                    $fp = stream_socket_client('ssl://gateway.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
+                    if(!$fp) {
+                        continue;
                     }
-
+                    sleep(5);
+                    $result = fwrite($fp, $msg, strlen($msg));
+                    fwrite(STDOUT, "try rewrite\n");
                 }
 
 
