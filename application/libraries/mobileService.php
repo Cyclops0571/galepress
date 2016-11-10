@@ -175,7 +175,7 @@ class mobileService
                     $pushNotificationDevice->ErrorCount++;
                     $pushNotificationDevice->LastErrorDetail = json_encode($err) . " - " . json_encode($errstr);
                 }
-                $pushNotification->save();
+                $pushNotificationDevice->save();
             }
 
             fclose($fp);
