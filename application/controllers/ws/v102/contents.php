@@ -37,7 +37,7 @@ class Ws_v102_Contents_Controller extends Base_Controller
 
 			$height = (int)Input::get('height', '0');
 			$width = (int)Input::get('width', '0');
-			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? SMALL_IMAGE_FILE : NORMAL_IMAGE_FILE;
+			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? eRequestType::SMALL_IMAGE_FILE : eRequestType::NORMAL_IMAGE_FILE;
 			$content = Ws::getContent($contentID);
 			$urlPatern = Config::get('custom.url') . "/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
 			$url = sprintf($urlPatern, $height, $width, $requestTypeID, (int)$content->ContentID);

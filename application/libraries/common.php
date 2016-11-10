@@ -419,10 +419,10 @@ class Common
             }
         } else {
             switch ($RequestTypeID) {
-                case SMALL_IMAGE_FILE:
+                case eRequestType::SMALL_IMAGE_FILE:
                     $fileName = $contentCoverImageFile->FileName2;
                     break;
-                case NORMAL_IMAGE_FILE:
+                case eRequestType::NORMAL_IMAGE_FILE:
                     $fileName = $contentCoverImageFile->FileName2;
                     break;
                 default:

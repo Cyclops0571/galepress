@@ -52,7 +52,7 @@ class Ws_v100_Contents_Controller extends Base_Controller
 	{
 		return Ws::render(function() use ($contentID)
 		{
-			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? SMALL_IMAGE_FILE : NORMAL_IMAGE_FILE;
+			$requestTypeID = ((int)Input::get('size', '0')) == 1 ? eRequestType::SMALL_IMAGE_FILE : eRequestType::NORMAL_IMAGE_FILE;
 			$content = Ws::getContent($contentID);
 			return Response::json(array(
 				'status' => 0,

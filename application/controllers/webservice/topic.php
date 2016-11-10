@@ -14,29 +14,45 @@ class Webservice_Topic_Controller extends Controller
     {
         return webService::render(function () use ($serviceVersion) {
             webService::checkServiceVersion($serviceVersion);
-            $topicID = Input::get('topicID', 1);
-            $sql = "SELECT tmp.*, Application.Name AS ApplicationName FROM 
-                      (SELECT Content.*, ContentTopic.TopicID FROM Content INNER JOIN ContentTopic ON Content.ContentID = ContentTopic.ContentID
+            $height = (int)Input::get('height', '0');
+            $width = (int)Input::get('width', '0');
+            $imageUrlPattern = Config::get("custom.url") . "/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
+
+            /** @var ApplicationTopic[] $applicationsWhichHaveATopics */
+            $applicationsWhichHaveATopics = ApplicationTopic::group_by("ApplicationID")->get();
+            $response = array();
+            $response["applications"] = array();
+            foreach($applicationsWhichHaveATopics as $applicationsWhichHaveATopic ) {
+                $application = Application::find($applicationsWhichHaveATopic->ApplicationID);
+                /** @var ApplicationTopic[] $topics */
+                $applicationTopics = ApplicationTopic::where("ApplicationID", "=", $application->ApplicationID)->get();
+                $responseChunk = array();
+                $responseChunk["Topics"] = array();
+                foreach($applicationTopics as $applicationTopic) {
+                    $sql = "SELECT Content.* FROM Content INNER JOIN ContentTopic ON Content.ContentID = ContentTopic.ContentID
                         WHERE Content.StatusID = 1 AND 
                         Content.PublishDate < curdate() AND 
-                        ContentTopic.TopicID = ? 
-                        ORDER BY Content.ProcessDate DESC) tmp 
-                  JOIN Application ON Application.ApplicationID = tmp.ApplicationID 
-                  JOIN ApplicationTopic ON ApplicationTopic.ApplicationID = tmp.ApplicationID
-                  WHERE  
-                          Application.ExpirationDate > curdate() AND
-                          Application.TopicStatus = ? AND 
-                          Application.StatusID = ? AND 
-                          ApplicationTopic.TopicID = ?
-                      GROUP BY tmp.ApplicationID";
-            $results = DB::query($sql, array($topicID, eStatus::Active, eStatus::Active, $topicID));
-            $response = array();
-            $response["contents"] = array();
-            foreach ($results as $result) {
-                $content = new Content();
-                Common::Cast($content, $result);
-                $response["contents"][] = array_merge($content->getServiceData(), array('ApplicationName' => $result->ApplicationName));
+                        ContentTopic.TopicID = ? AND 
+                        Content.ApplicationID = ?
+                        ORDER BY Content.ProcessDate DESC LIMIT 0, 1";
+                    $results = DB::query($sql, array($applicationTopic->TopicID, $applicationTopic->ApplicationID));
+                    foreach($results as $result) {
+                        $content = new Content();
+                        Common::Cast($content, $result);
+                        $responseTopicChunk = array();
+                        $responseTopicChunk["TopicID"] = $applicationTopic->TopicID;
+                        $responseTopicChunk["CoverImageUrl"] = sprintf($imageUrlPattern, $height, $width, eRequestType::SMALL_IMAGE_FILE, $content->ContentID);
+                        $responseChunk["Topics"][] = $responseTopicChunk;
+                    }
+                }
+                if(!empty($responseChunk["Topics"])) {
+                    $responseChunk["ApplicationID"] = $application->ApplicationID;
+                    $responseChunk["ApplicationName"] = $application->Name;
+                    $responseChunk["Version"] = $application->Version;
+                    $response["applications"][] = $responseChunk;
+                }
             }
+
             $topics = Topic::where('StatusID', '=', eStatus::Active)->order_by('Order')->get();
             $response["topics"] = array_map(function(/** @var Topic $o */$o) {return $o->getServiceData();}, $topics);
             return json_encode($response);

@@ -201,7 +201,7 @@ class Contents_Controller extends Base_Controller
 
         //http://localhost/tr/icerikler/talep?RequestTypeID=203&ApplicationID=1&ContentID=1187&Password=
         try {
-            if ($RequestTypeID == PDF_FILE) {
+            if ($RequestTypeID == eRequestType::PDF_FILE) {
                 //get file
                 $oCustomerID = 0;
                 $oApplicationID = 0;
