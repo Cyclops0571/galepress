@@ -146,7 +146,20 @@ class mobileService
                 $msg = chr(0) . pack('n', 32) . pack('H*', $pushNotificationDevice->DeviceToken) . pack('n', strlen($payload)) . $payload;
 
                 // Send it to the server
-                $result = fwrite($fp, $msg, strlen($msg));
+                try {
+                    usleep(20);
+                    $result = fwrite($fp, $msg, strlen($msg));
+                } catch (Exception $e) {
+                    try {
+                        echo "sleep 1 sec", PHP_EOL ;
+                        sleep(1);
+                        $result = fwrite($fp, $msg, strlen($msg));
+                    } catch (Exception $e){
+                        echo "still exception - " . $e->getMessage() , PHP_EOL ;
+                        ServerErrorLog::logAndSave('571', 'Push Notification', $e->getMessage());
+                    }
+
+                }
 
 
                 if ($result) {
