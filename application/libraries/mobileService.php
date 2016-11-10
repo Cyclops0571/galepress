@@ -44,7 +44,6 @@ class mobileService
 
 
             $responseArray = json_decode($response, TRUE);
-            var_dump($responseArray);
             if (!isset($responseArray['results'])) {
                 ServerErrorLog::logAndSave(571, 'Push Notification', '$responseArray["results"] is empty');
                 continue;
@@ -122,7 +121,7 @@ class mobileService
             ->where('ErrorCount', '=', 0)
             ->where('PushNotificationID', '=', $pushNotification->PushNotificationID)
             ->where('DeviceType', '=', "ios")
-            ->where('StatusID', '=', eStatus::Active)->order_by("PushNotificationDeviceID DESC")->get();
+            ->where('StatusID', '=', eStatus::Active)->order_by("PushNotificationDeviceID", "DESC")->get();
 //	$appID = 424;
 //	$udid1 = 'E6A7CFD9-FE39-4C33-B7F4-6651404ED040';
 //	$deviceToken1 = '22d08c4579f9a0d0e07fe7fdcd0a064989ecb93b06f7a1cf7c3a5f130b36c776';
