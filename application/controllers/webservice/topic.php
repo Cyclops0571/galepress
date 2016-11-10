@@ -31,7 +31,7 @@ class Webservice_Topic_Controller extends Controller
                 foreach($applicationTopics as $applicationTopic) {
                     $sql = "SELECT Content.* FROM Content INNER JOIN ContentTopic ON Content.ContentID = ContentTopic.ContentID
                         WHERE Content.StatusID = 1 AND 
-                        Content.PublishDate < curdate() AND 
+                        Content.PublishDate <= curdate() AND 
                         ContentTopic.TopicID = ? AND 
                         Content.ApplicationID = ?
                         ORDER BY Content.ProcessDate DESC LIMIT 0, 1";
