@@ -49,9 +49,8 @@ class PushNotification_Task
 
     public function iosInternal($cert, $message, $deviceToken)
     {
-//	$appID = 424;
-//	$udid1 = 'E6A7CFD9-FE39-4C33-B7F4-6651404ED040';
-//	$deviceToken1 = '22d08c4579f9a0d0e07fe7fdcd0a064989ecb93b06f7a1cf7c3a5f130b36c776';
+        //at dunyasi - ApplicationID: 592 CustomerID: 599
+        //serdar saygili iphone device token: 53599c08189c13e53faec9f6842808d14b0195fc775b02c7e78481741b7be076
         $success = false;
 
         // Put your private key's passphrase here:

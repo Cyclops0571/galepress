@@ -55,7 +55,7 @@ class Webservice_Topic_Controller extends Controller
 
             $topics = Topic::where('StatusID', '=', eStatus::Active)->order_by('Order')->get();
             $response["topics"] = array_map(function(/** @var Topic $o */$o) {return $o->getServiceData();}, $topics);
-            return json_encode($response);
+            return Response::json($response);
         });
 
 
@@ -86,7 +86,7 @@ class Webservice_Topic_Controller extends Controller
                 }
             }
 
-            return json_encode($serviceData);
+            return Response::json($serviceData);
         });
     }
 
