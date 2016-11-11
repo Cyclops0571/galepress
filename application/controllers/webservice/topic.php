@@ -42,7 +42,7 @@ class Webservice_Topic_Controller extends Controller
                         $responseTopicChunk = array();
                         $responseTopicChunk["TopicID"] = $applicationTopic->TopicID;
                         $responseTopicChunk["CoverImageUrl"] = sprintf($imageUrlPattern, $height, $width, eRequestType::SMALL_IMAGE_FILE, $content->ContentID);
-                        $responseTopicChunk["ProcessDate"] = strtotime($content->ProcessDate);
+                        $responseTopicChunk["Order"] = strtotime($content->ProcessDate);
                         $responseChunk["Topics"][] = $responseTopicChunk;
                     }
                 }
