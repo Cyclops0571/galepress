@@ -115,9 +115,12 @@ class Uploader
         );
     }
 
-    public static function UploadImage($tempFile)
+    public static function CmykControl($tempFile)
     {
         $filePath = path('public') . 'files/temp/';
+        if(\Laravel\File::extension($filePath . "/" . $tempFile) == "gif") {
+            return;
+        }
 
         $im = new imagick();
         $im->readImage($filePath . "/" . $tempFile);
@@ -151,9 +154,6 @@ class Uploader
         $im->clear();
         $im->destroy();
         unset($im);
-        return array(
-            'fileName' => $tempFile
-        );
     }
 
     public static function OrdersUploadFile($tempFile, $type)

@@ -773,8 +773,8 @@ class Contents_Controller extends Base_Controller
         $obj = $arr[0];
         $tempFile = $obj->name;
         //var_dump($obj->name);
-        $ret = Uploader::UploadImage($tempFile);
-        return Response::json($ret);
+        Uploader::CmykControl($tempFile);
+        return Response::json(array("fileName" => $tempFile));
     }
 
 

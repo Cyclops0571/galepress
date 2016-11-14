@@ -280,10 +280,10 @@ class Banners_Controller extends Base_Controller
         $arr = $json[$element];
         $obj = $arr[0];
         $tempFile = $obj->name;
-        //var_dump($obj->name);
-        $ret = Uploader::UploadImage($tempFile);
-        $banner->processImage($ret["fileName"]);
-        return Response::json($ret);
+
+        Uploader::CmykControl($tempFile);
+        $banner->processImage($tempFile);
+        return Response::json(array("fileName" => $banner->ImagePublicPath));
     }
 
     public function get_service_view($applicationID)

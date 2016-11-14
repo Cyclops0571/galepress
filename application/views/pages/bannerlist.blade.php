@@ -264,12 +264,10 @@
 <script type="text/javascript">
     var appID = parseInt(<?php echo $application->ApplicationID ?>);
     var currentBannerID = 0;
-    var imageSource = "";
     var ActiveText = "{{ __('common.active') }}";
     var PassiveText = "{{ __('common.passive') }}";
     function fileUpload(obj) {
         currentBannerID = $(obj).attr("id").split("_")[1];
-        imageSource = $(obj).attr("src");
         $("#ImageFile").click();
     }
     $(function () {
@@ -351,7 +349,7 @@
             },
             done: function (e, data) {
                 if (data.textStatus === 'success') {
-                    $("#bannerImage_" + currentBannerID).attr("src", imageSource + "?v=" + Math.random()).removeClass("hide");
+                    $("#bannerImage_" + currentBannerID).attr("src", data.result.fileName + "?v=" + Math.random()).removeClass("hide");
                     $("#uploadProgress_" + currentBannerID).addClass("hide");
                 }
             }

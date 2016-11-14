@@ -76,6 +76,18 @@ class Banner extends Eloquent
 
         File::move($tmpFilePath, $sourcePicturePath);
 
+        if(\Laravel\File::extension($sourcePicturePath) == 'gif') {
+            $this->ImagePublicPath = '/files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/' . $this->BannerID . ".gif";
+            $this->ImageLocalPath = $destinationFolder . $this->BannerID . ".gif";
+            $this->save();
+            File::copy($sourcePicturePath, $destinationFolder . "/" . $this->BannerID . ".gif");
+            return;
+        }
+
+        $this->ImagePublicPath = '/files/customer_' . $application->CustomerID . '/application_' . $application->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
+        $this->ImageLocalPath = $destinationFolder . $this->BannerID . IMAGE_EXTENSION;
+        $this->save();
+
         $pictureInfoSet = array();
         $pictureInfoSet[] = array("width" => 1480, "height" => 640, "imageName" => $this->BannerID);
         foreach ($pictureInfoSet as $pInfo) {
@@ -118,7 +130,7 @@ class Banner extends Eloquent
 
     public function getImagePath()
     {
-        return '/files/customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
+        return $this->ImagePublicPath;
     }
 
 }
