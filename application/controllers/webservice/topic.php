@@ -25,7 +25,7 @@ class Webservice_Topic_Controller extends Controller
             foreach($applicationsWhichHaveATopics as $applicationsWhichHaveATopic ) {
                 $application = Application::find($applicationsWhichHaveATopic->ApplicationID);
                 $responseChunk = array();
-                if($application->TopicStatus == eStatus::Deleted) {
+                if($application->TopicStatus != eStatus::Active) {
                     continue;
                 }
                 /** @var ApplicationTopic[] $topics */
