@@ -109,6 +109,7 @@ class ImageClass
         $im->clear();
         $im->destroy();
         unset($im);
+        return $imageAbsolutePath;
     }
 
 // </editor-fold>

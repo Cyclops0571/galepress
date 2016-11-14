@@ -181,6 +181,11 @@ class mobileService
 
             fclose($fp);
         } else {
+            foreach($pushNotificationDevicesAll as $pushNotificationDevice) {
+                $pushNotificationDevice->ErrorCount++;
+                $pushNotificationDevice->LastErrorDetail = "stream_socket_client(): failed to create an SSL handle";
+                $pushNotificationDevice->save();
+            }
             ServerErrorLog::logAndSave("571", 'Push Notification', json_encode($err) . " - " . json_encode($errstr));
         }
         return $success;
