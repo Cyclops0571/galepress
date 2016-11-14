@@ -343,8 +343,27 @@ class Webservice_Applications_Controller extends Base_Controller
             $result = array();
             $result['accessToken'] = $client->Token;
             return Laravel\Response::json($result);
-        }
-        );
+        });
+    }
+
+    public function get_login_application($ServiceVersion) {
+        return webService::render(function () use ($ServiceVersion) {
+            $applicationID = Laravel\Input::get("applicationID");
+            $username = Laravel\Input::get("username");
+            $password = Laravel\Input::get("password");
+
+            webService::checkServiceVersion($ServiceVersion);
+            webService::getCheckApplication($ServiceVersion, $applicationID);
+            $client = webService::getCheckClient($ServiceVersion, $applicationID, $username, $password);
+
+            if (!$client) {
+                return FALSE;
+            }
+
+            $result = array();
+            $result['accessToken'] = $client->Token;
+            return Laravel\Response::json($result);
+        });
     }
 
     public function post_fblogin($ServiceVersion)

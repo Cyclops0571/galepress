@@ -505,6 +505,7 @@ Route::post('webservice/(:num)/applications/(:num)/androidrestore', array('uses'
 Route::get('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
 Route::post('webservice/(:num)/applications/authorized_application_list', array('uses' => 'webservice.applications@authorized_application_list'));
 Route::post('webservice/(:num)/applications/login_application', array('uses' => 'webservice.applications@login_application'));
+Route::get('webservice/(:num)/applications/login_application', array('uses' => 'webservice.applications@login_application'));
 Route::post('webservice/(:num)/applications/fblogin', array('uses' => 'webservice.applications@fblogin'));
 // WS-Contents
 Route::get('webservice/(:num)/contents/(:num)/version', array('uses' => 'webservice.contents@version'));

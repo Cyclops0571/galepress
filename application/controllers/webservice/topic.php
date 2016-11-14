@@ -24,9 +24,12 @@ class Webservice_Topic_Controller extends Controller
             $response["applications"] = array();
             foreach($applicationsWhichHaveATopics as $applicationsWhichHaveATopic ) {
                 $application = Application::find($applicationsWhichHaveATopic->ApplicationID);
+                $responseChunk = array();
+                if($application->TopicStatus == eStatus::Deleted) {
+                    continue;
+                }
                 /** @var ApplicationTopic[] $topics */
                 $applicationTopics = ApplicationTopic::where("ApplicationID", "=", $application->ApplicationID)->get();
-                $responseChunk = array();
                 $responseChunk["Topics"] = array();
                 foreach($applicationTopics as $applicationTopic) {
                     $sql = "SELECT Content.* FROM Content INNER JOIN ContentTopic ON Content.ContentID = ContentTopic.ContentID
