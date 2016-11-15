@@ -130,6 +130,22 @@ class Banner extends Eloquent
 
     public function getImagePath()
     {
+        if(empty($this->ImagePublicPath)) {
+            if(!$this->BannerID) {
+                return '';
+            }
+            $destinationFolder = path('public') . 'files/customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/banner/';
+            $this->ImagePublicPath = '/files/customer_' . $this->Application->CustomerID . '/application_' . $this->ApplicationID . '/banner/' . $this->BannerID . IMAGE_EXTENSION;
+            $this->ImageLocalPath = $destinationFolder . $this->BannerID . IMAGE_EXTENSION;
+            if(!File::exists($this->ImageLocalPath)) {
+                if (!File::exists($destinationFolder)) {
+                    File::mkdir($destinationFolder);
+                }
+                File::copy(path('public') . 'images/upload_image.png', $this->ImageLocalPath);
+            }
+            $this->save();
+
+        }
         return $this->ImagePublicPath;
     }
 
