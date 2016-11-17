@@ -486,11 +486,9 @@ class Content extends Eloquent
         return $serveContent;
     }
 
-    public function getServiceData()
+    public function getServiceData($addStatusCode = true)
     {
-        return array(
-            'status' => 0,
-            'error' => "",
+        $result = array(
             'ContentID' => (int)$this->ContentID,
             'ApplicationID' => (int)$this->ApplicationID,
             'ContentOrderNo' => (int)$this->OrderNo,
@@ -512,6 +510,13 @@ class Content extends Eloquent
             'ContentCoverImageVersion' => (int)$this->CoverImageVersion,
             'RemoveFromMobile' => (bool)$this->RemoveFromMobile
         );
+        if($addStatusCode) {
+            $status = array();
+            $status["status"] = 0;
+            $status["error"] = "";
+            $result = array_merge($result, $status);
+        }
+        return $result;
     }
 
     public function getServiceDataDetailed($serviceVersion)

@@ -59,6 +59,8 @@ class Webservice_Topic_Controller extends Controller
 
             $topics = Topic::where('StatusID', '=', eStatus::Active)->order_by('Order')->get();
             $response["topics"] = array_map(function(/** @var Topic $o */$o) {return $o->getServiceData();}, $topics);
+            $response["status"] = 0;
+            $response["error"] = "";
             return Response::json($response);
         });
 
@@ -86,10 +88,12 @@ class Webservice_Topic_Controller extends Controller
             foreach ($contents as $content) {
                 if ($content->serveContent()) {
                     //currently ignoring buyable contents...
-                    $serviceData[] = $content->getServiceData();
+                    $serviceData["contents"][] = $content->getServiceData(false);
                 }
             }
 
+            $serviceData["status"] = 0;
+            $serviceData["error"] = "";
             return Response::json($serviceData);
         });
     }
