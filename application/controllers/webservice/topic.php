@@ -53,6 +53,9 @@ class Webservice_Topic_Controller extends Controller
                     $responseChunk["ApplicationID"] = $application->ApplicationID;
                     $responseChunk["ApplicationName"] = $application->Name;
                     $responseChunk["Version"] = $application->Version;
+                    $responseChunk["IosLink"] = $application->IOSLink;
+                    $responseChunk["AndroidLink"] = $application->AndroidLink;
+                    $responseChunk["Version"] = $application->Version;
                     $response["applications"][] = $responseChunk;
                 }
             }
@@ -72,7 +75,7 @@ class Webservice_Topic_Controller extends Controller
         return webService::render(function () use ($serviceVersion) {
             $applicationID = Input::get("applicationID", 0);
             webService::checkServiceVersion($serviceVersion);
-            $application = webService::getCheckApplication($serviceVersion, $applicationID);
+            webService::getCheckApplication($serviceVersion, $applicationID);
             $topicID = Input::get("topicID", 1);
             $contents = Content::join('ContentTopic', 'Content.ContentID', '=', 'ContentTopic.ContentID')
                 ->where('ContentTopic.TopicID', '=', $topicID)
