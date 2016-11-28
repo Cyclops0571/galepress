@@ -22,16 +22,16 @@ class Webservice_Topic_Controller extends Controller
             $applicationsWhichHaveATopics = ApplicationTopic::group_by("ApplicationID")->get();
             $response = array();
             $response["applications"] = array();
-            foreach($applicationsWhichHaveATopics as $applicationsWhichHaveATopic ) {
+            foreach ($applicationsWhichHaveATopics as $applicationsWhichHaveATopic) {
                 $application = Application::find($applicationsWhichHaveATopic->ApplicationID);
                 $responseChunk = array();
-                if($application->TopicStatus != eStatus::Active) {
+                if ($application->TopicStatus != eStatus::Active) {
                     continue;
                 }
                 /** @var ApplicationTopic[] $topics */
                 $applicationTopics = ApplicationTopic::where("ApplicationID", "=", $application->ApplicationID)->get();
                 $responseChunk["Topics"] = array();
-                foreach($applicationTopics as $applicationTopic) {
+                foreach ($applicationTopics as $applicationTopic) {
                     $sql = "SELECT Content.* FROM Content INNER JOIN ContentTopic ON Content.ContentID = ContentTopic.ContentID
                         WHERE Content.StatusID = 1 AND 
                         Content.PublishDate <= curdate() AND 
@@ -39,7 +39,7 @@ class Webservice_Topic_Controller extends Controller
                         Content.ApplicationID = ?
                         ORDER BY Content.ProcessDate DESC LIMIT 0, 1";
                     $results = DB::query($sql, array($applicationTopic->TopicID, $applicationTopic->ApplicationID));
-                    foreach($results as $result) {
+                    foreach ($results as $result) {
                         $content = new Content();
                         Common::Cast($content, $result);
                         $responseTopicChunk = array();
@@ -49,7 +49,7 @@ class Webservice_Topic_Controller extends Controller
                         $responseChunk["Topics"][] = $responseTopicChunk;
                     }
                 }
-                if(!empty($responseChunk["Topics"])) {
+                if (!empty($responseChunk["Topics"])) {
                     $responseChunk["ApplicationID"] = $application->ApplicationID;
                     $responseChunk["ApplicationName"] = $application->Name;
                     $responseChunk["Version"] = $application->Version;
@@ -61,7 +61,10 @@ class Webservice_Topic_Controller extends Controller
             }
 
             $topics = Topic::where('StatusID', '=', eStatus::Active)->order_by('Order')->get();
-            $response["topics"] = array_map(function(/** @var Topic $o */$o) {return $o->getServiceData();}, $topics);
+            $response["topics"] = array_map(function (/** @var Topic $o */
+                $o) {
+                return $o->getServiceData();
+            }, $topics);
             $response["status"] = 0;
             $response["error"] = "";
             return Response::json($response);
@@ -77,12 +80,28 @@ class Webservice_Topic_Controller extends Controller
             webService::checkServiceVersion($serviceVersion);
             webService::getCheckApplication($serviceVersion, $applicationID);
             $topicID = Input::get("topicID", 1);
-            $contents = Content::join('ContentTopic', 'Content.ContentID', '=', 'ContentTopic.ContentID')
-                ->where('ContentTopic.TopicID', '=', $topicID)
-                ->where("Content.ApplicationID", '=', $applicationID)
+            $applicationTopics = ApplicationTopic::where("ApplicationID", "=", $applicationID)->get();
+            $applicationTopicIds = array_map(function (ApplicationTopic $o) {
+                return $o->TopicID;
+            }, $applicationTopics);
+
+            if (empty($applicationTopicIds)) {
+                throw eServiceError::getException(eServiceError::ContentNotFound);
+            }
+
+            $contentsQuery = Content::join('ContentTopic', 'Content.ContentID', '=', 'ContentTopic.ContentID');
+            if ($topicID > 0) {
+                // if topicID = -1 return all contents.
+                $contentsQuery->where('ContentTopic.TopicID', '=', $topicID);
+            }
+
+
+            $contents = $contentsQuery->where("Content.ApplicationID", '=', $applicationID)
+                ->where("Content.StatusID", "=", eStatus::Active)
+                ->where_in("ContentTopic.TopicID", $applicationTopicIds)
                 ->order_by('Content.ProcessDate', "DESC")->get();
 
-            if(empty($contents)) {
+            if (empty($contents)) {
                 throw eServiceError::getException(eServiceError::ContentNotFound);
             }
 
