@@ -105,7 +105,7 @@ class PageComponentDecorator
             case Component::ComponentWeb:
                 $this->createWeb();
                 break;
-            case 'bookmark':
+            case Component::ComponentBookmark:
                 $this->createBookmark();
                 break;
         }
