@@ -13,5 +13,5 @@ return array(
     "confirmation_message_info" => 'Eğer kullanıcı bu mesajı doğrulamazsa uygulamaya devam edemez!',
     "subscription_activation_warning_title" => 'Market Ayarları Gerekli',
     "subscription_activation_warning_body" => 'Satın alınabilir üyeliği aktive etmeden önce, Google Play ve Apple Store marketlerinde gerekli ayarlamaları yaptığınızdan emin olun.',
-    "application_category" => "Dergilik Kategori",
+    "application_category" => "G-RAFF Kategori",
 );
