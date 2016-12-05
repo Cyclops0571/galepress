@@ -24,9 +24,10 @@ class CreateInteractivePDF_Task
                 try {
                     $f->createInteractivePdf();
                 } catch (Exception $e) {
+
                     $msg = __('common.task_message', array(
                             'task' => '`CreateInteractivePDF`',
-                            'detail' => $e->getMessage()
+                            'detail' => $e->getMessage() . " --- Trace ---" . $e->getTraceAsString()
                         )
                     );
                     Common::sendErrorMail($msg);
@@ -35,7 +36,7 @@ class CreateInteractivePDF_Task
         } catch (Exception $e) {
             $msg = __('common.task_message', array(
                     'task' => '`CreateInteractivePDF`',
-                    'detail' => $e->getMessage()
+                    'detail' => $e->getMessage() . " --- Trace ---" . $e->getTraceAsString()
                 )
             );
             Common::sendErrorMail($msg);
