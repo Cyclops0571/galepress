@@ -1,28 +1,9 @@
 <?php
-$index = 0;
-$newWidth = 0;
-$newHeight = 0;
 if (!isset($files)) $files = array();
 if (!isset($autoplay)) $autoplay = false;
 if (!isset($modal)) $modal = 0;
 if (!isset($transparent)) $transparent = 0;
 if (!isset($bgcolor)) $bgcolor = '#151515';
-
-foreach ($files as $file) {
-    //$filename = path('public').$file->Value;
-    $filename = path('public') . $file;
-    if (File::exists($filename) && is_file($filename)) {
-        if ($index == 0) {
-            $im = new imagick($filename);
-            $geo = $im->getImageGeometry();
-            $imageWidth = $geo['width'];
-            $imageHeight = $geo['height'];
-            $newWidth = $h * $imageWidth / $imageHeight;
-            $newHeight = $h;
-        }
-    }
-    $index = $index + 1;
-}
 
 if(!$preview) {
     $sourceFilesDirectory = $baseDirectory . "slideshow";
@@ -185,7 +166,6 @@ if(!$preview) {
     <?php
     //var_dump($files);
     foreach ($files as $file) {
-        //$filename = path('public').$file->Value;
         $filename = path('public') . $file;
         if (File::exists($filename) && is_file($filename)) {
             $fname = File::name($filename);
