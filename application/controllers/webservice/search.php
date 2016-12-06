@@ -48,4 +48,9 @@ class Webservice_Search_Controller extends Base_Controller
         return $response;
 
     }
+
+    public function post_searchgraff(){
+        $result = array();
+        return Response::json($result);
+    }
 }
