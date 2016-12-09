@@ -34,6 +34,8 @@ class Contents_Controller extends Base_Controller
             if ((int)Auth::user()->UserTypeID == eUserTypes::Customer) {
                 $this->fields = array();
                 $this->fields[] = array(__('common.contents_list_content_name'), 'Name');
+                $this->fields[] = array(__('common.contents_list_contents_detail'), 'Detail');
+                $this->fields[] = array(__('common.contents_list_contents_monthlyname'), 'Order');
                 $this->fields[] = array(__('common.contents_list_content_category'), 'CategoryName');
                 $this->fields[] = array(__('common.contents_list_content_publishdate'), 'PublishDate');
                 $this->fields[] = array(__('common.contents_list_content_unpublishdate'), 'UnpublishDate');
@@ -66,8 +68,10 @@ class Contents_Controller extends Base_Controller
         $sql = '' .
             'SELECT ' .
             'c.CustomerID, ' .
-            'c.CustomerName, '
-            . 'o.OrderNo,' .
+            'c.CustomerName, ' .
+            'o.OrderNo,' .
+            'o.Detail,' .
+            'o.MonthlyName,' .
             'a.ApplicationID, ' .
             'a.Name AS ApplicationName, ' .
             'o.Name, ' .
