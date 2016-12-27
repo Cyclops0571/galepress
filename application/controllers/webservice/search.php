@@ -86,7 +86,6 @@ class Webservice_Search_Controller extends Base_Controller
         foreach ($response->result as $key => $result) {
             $contentIds[] = $result->contentId;
         }
-        var_dump($response); exit;
         $availableContents = Content::getAccessibleTopicContents($contentIds);
         $availableContentIds = array_map(function(Content $content){return $content->ContentID;}, $availableContents);
         //var_dump($response); exit;
