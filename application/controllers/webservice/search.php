@@ -87,11 +87,18 @@ class Webservice_Search_Controller extends Base_Controller
             $contentIds[] = $result->contentId;
         }
         $availableContents = Content::getAccessibleTopicContents($contentIds);
+        $availableContentsKeyWithContentID = array();
+
+//        var_dump($response); exit;
+        array_map(function(Content $content) use (&$availableContentsKeyWithContentID) { $availableContentsKeyWithContentID[$content->ContentID] = $content->ApplicationID; }, $availableContents);
         $availableContentIds = array_map(function(Content $content){return $content->ContentID;}, $availableContents);
-        //var_dump($response); exit;
-        foreach ($response->result as $key => $result) {
+//        var_dump($availableContentIds); exit;
+        foreach ($response->result as $key => &$result) {
+//                var_dump($response->result[$key]); exit;
             if(!in_array($result->contentId, $availableContentIds)) {
                 unset($response->result[$key]);
+            } else {
+                $response->result[$key]->applicationId = $availableContentsKeyWithContentID[$response->result[$key]->contentId];
             }
         }
         return Response::json($response);
