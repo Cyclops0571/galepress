@@ -108,10 +108,8 @@ class Crop_Controller extends Base_Controller {
 		}
 		
 		$content = Content::find($contentID);
-		$application = Application::find($content->ApplicationID);
 		$content->CoverImageVersion++;
 		$content->save();
-		$application->incrementAppVersion();
 		return Redirect::to($this->route . '#saved');
 	}
 

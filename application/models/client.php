@@ -71,6 +71,13 @@ class Client extends Eloquent
         parent::save();
     }
 
+    public function isContentBought($contentID) {
+        $boughtContentIDSet = explode(",", $this->ContentIDSet);
+        if (in_array($contentID, $boughtContentIDSet)) {
+            return TRUE;
+        }
+        return false;
+    }
 
 
     /**

@@ -113,22 +113,11 @@ class webService
         /** @var Content[] $rs */
         $rs = $query->get();
         $contents = array();
+        /* @var $client Client */
+        $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
         foreach ($rs as $r) {
             if ($r->serveContent()) {
-
-                //check if client has an access to wanted content.
-                $clientBoughtContent = FALSE;
-                /* @var $client Client */
-                $client = webService::getClientFromAccessToken($accessToken, $application->ApplicationID);
-                if (!$client) {
-                    $clientBoughtContent = FALSE;
-                } else {
-                    $boughtContentIDSet = explode(",", $client->ContentIDSet);
-                    if (in_array($r->ContentID, $boughtContentIDSet)) {
-                        $clientBoughtContent = TRUE;
-                    }
-                }
-
+                $clientBoughtContent = $client && $client->isContentBought($r->ContentID);
                 array_push($contents, array_merge($r->getServiceData(), array('ContentBought' => $clientBoughtContent)));
             }
         }

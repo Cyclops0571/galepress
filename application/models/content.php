@@ -523,5 +523,41 @@ class Content extends Eloquent
     {
         return array_merge($this->getServiceData(), array('ContentCategories' => $this->WebserviceCategories($serviceVersion)));
     }
+
+    /**
+     * @param int[] $contentIds
+     * @return Content[]
+     */
+    public static function getAccessibleContents($contentIds) {
+        return Content::where_in('ContentID', $contentIds)
+            ->where('StatusID', '=', eStatus::Active)
+            ->where('PublishDate', '<=', DB::raw('now()'))
+            ->where(function(\Laravel\Database\Query $query) {
+                $query->where('IsUnpublishActive', '=', 0);
+                $query->or_where('UnpublishDate', '>', DB::raw('now()'));
+            })
+            ->order_by('OrderNo', 'DESC')
+            ->order_by('MonthlyName', 'ASC')
+            ->order_by('Name', 'ASC')->get();
+    }
+
+    /**
+     * @param int[] $contentIds
+     * @return Content[]
+     */
+    public static function getAccessibleTopicContents($contentIds) {
+        return Content::where_in('Content.ContentID', $contentIds)
+            ->where('StatusID', '=', eStatus::Active)
+            ->where('PublishDate', '<=', DB::raw('now()'))
+            ->where(function(\Laravel\Database\Query $query) {
+                $query->where('IsUnpublishActive', '=', 0);
+                $query->or_where('UnpublishDate', '>', DB::raw('now()'));
+            })
+            ->join('ContentTopic', 'Content.ContentID', '=', 'ContentTopic.ContentID')
+            ->order_by('OrderNo', 'DESC')
+            ->order_by('MonthlyName', 'ASC')
+            ->order_by('Name', 'ASC')->get();
+    }
+
 }
 

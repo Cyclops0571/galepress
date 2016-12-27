@@ -40,7 +40,7 @@ class Webservice_Search_Controller extends Base_Controller
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
@@ -50,7 +50,52 @@ class Webservice_Search_Controller extends Base_Controller
     }
 
     public function post_searchgraff(){
-        $result = array();
-        return Response::json($result);
+        $rules = array(
+            "applicationIds" => 'required',
+            "query" => 'required'
+        );
+        $v = \Laravel\Validator::make(Input::all(), $rules);
+        if($v->fails()) {
+            return ajaxResponse::error($v->errors->first());
+        }
+        $url = 'http://37.9.205.205/search';
+        $applicationIds = json_decode(Input::get('applicationIds'));
+        $applications = Application::where_in('ApplicationID', $applicationIds)->get();
+        $paths = array();
+        foreach ($applications as $application) {
+            $paths[] = 'customer_' . $application->CustomerID . '/application_' . $application->ApplicationID;
+        }
+        $query = Input::get('query');
+
+        $parameters = array(
+            'id' => implode(',', $paths),
+            'query' => $query,
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $rawResponse = curl_exec($ch);
+        curl_close($ch);
+        if(empty($rawResponse)) {
+            return Response::json(array());
+        }
+        $response = json_decode($rawResponse);
+        $topicContentIds = array();
+        $contentIds = array();
+        foreach ($response->result as $key => $result) {
+            $contentIds[] = $result->contentId;
+        }
+        var_dump($response); exit;
+        $availableContents = Content::getAccessibleTopicContents($contentIds);
+        $availableContentIds = array_map(function(Content $content){return $content->ContentID;}, $availableContents);
+        //var_dump($response); exit;
+        foreach ($response->result as $key => $result) {
+            if(!in_array($result->contentId, $availableContentIds)) {
+                unset($response->result[$key]);
+            }
+        }
+        return Response::json($response);
     }
 }

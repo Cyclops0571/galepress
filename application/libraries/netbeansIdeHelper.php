@@ -56,6 +56,7 @@ class DB extends Laravel\Database {}
  * @method static \Laravel\Database\Query where_not_in(string $column, array $values, string $connector = 'AND')
  * @method static \Laravel\Database\Query with(string $column)
  * @method static \Laravel\Database\Query order_by(string $column, string $direction = 'asc')
+ * @method static \Laravel\Database\Query group_by(string $column)
  * @method static \Laravel\Database\Query take(int $value)
  * @method static \Laravel\Database\Query select(array $columns = array('*'))
  * @method static \Laravel\Database\Query join(string $table, string $column1, string $operator = null, string $column2 = null, string $type = 'INNER')

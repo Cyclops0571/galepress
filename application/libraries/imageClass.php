@@ -74,13 +74,15 @@ class ImageClass
     }
 
     /**
-     *
+     * Without loosing the aspect ratio crops the image from the middle then
+     * resizes the image to the wanted height and width
      * @param string $sourceFile
      * @param string $destinationFolder
      * @param int $width
      * @param int $height
      * @param string $outputImageName
      * @param bool $addHeightWidth
+     * @return string Absolute path of the image
      */
     public static function cropImage($sourceFile, $destinationFolder, $width, $height, $outputImageName = IMAGE_CROPPED_NAME, $addHeightWidth = TRUE)
     {
