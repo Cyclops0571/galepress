@@ -82,7 +82,6 @@ class Webservice_Search_Controller extends Base_Controller
             return Response::json(array());
         }
         $response = json_decode($rawResponse);
-        $topicContentIds = array();
         $contentIds = array();
         foreach ($response->result as $key => $result) {
             $contentIds[] = $result->contentId;
