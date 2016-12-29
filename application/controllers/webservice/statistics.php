@@ -25,7 +25,7 @@ class Webservice_Statistics_Controller extends Base_Controller
             if (strlen($id) > 0 && strlen($deviceID) > 0) {
 
                 if($isGraff) {
-                    $cnt = Statistic::where('UID', '=', $id)->where('DeviceID', '=', $deviceID)->count();
+                    $cnt = StatisticGraff::where('UID', '=', $id)->where('DeviceID', '=', $deviceID)->count();
                 } else {
                     $cnt = Statistic::where('UID', '=', $id)->where('DeviceID', '=', $deviceID)->count();
                 }
