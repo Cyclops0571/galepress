@@ -21,7 +21,7 @@
 class StatisticGraff extends Eloquent
 {
 
-    public static $timestamps = false;
+    public static $timestamps = true;
     public static $table = 'StatisticGraff';
     public static $key = 'StatisticGraffID';
 
