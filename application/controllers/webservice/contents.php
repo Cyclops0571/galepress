@@ -37,7 +37,7 @@ class Webservice_Contents_Controller extends Base_Controller
             $requestTypeID = ((int)Input::get('size', '0')) == 1 ? eRequestType::SMALL_IMAGE_FILE : eRequestType::NORMAL_IMAGE_FILE;
             $content = Ws::getContent($contentID);
             $urlPatern = Config::get('custom.url') . "/tr/icerikler/talep?W=%s&H=%s&RequestTypeID=%s&ContentID=%s";
-            $url = sprintf($urlPatern, $height, $width, $requestTypeID, (int)$content->ContentID);
+            $url = sprintf($urlPatern, $width, $height, $requestTypeID, (int)$content->ContentID);
             return Response::json(array(
                 'status' => 0,
                 'error' => "",
