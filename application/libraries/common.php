@@ -413,7 +413,7 @@ class Common
                     throw new Exception(__('common.file_notfound'), "102");
                 }
                 $im = new Imagick($originalImage);
-                $im->resizeImage($Width, $Height, Imagick::FILTER_LANCZOS, 1, TRUE);
+                $im->resizeImage($Width, $Height, Imagick::FILTER_LANCZOS, 1);
                 $im->writeImage($pathInfoOI["dirname"] . "/" . $fileName);
                 $im->destroy();
             }
