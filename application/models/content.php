@@ -529,6 +529,9 @@ class Content extends Eloquent
      * @return Content[]
      */
     public static function getAccessibleContents($contentIds) {
+        if(empty($contentIds)) {
+            return array();
+        }
         return Content::where_in('ContentID', $contentIds)
             ->where('StatusID', '=', eStatus::Active)
             ->where('PublishDate', '<=', DB::raw('now()'))
@@ -546,6 +549,9 @@ class Content extends Eloquent
      * @return Content[]
      */
     public static function getAccessibleTopicContents($contentIds) {
+        if(empty($contentIds)) {
+            return array();
+        }
         return Content::where_in('Content.ContentID', $contentIds)
             ->where('StatusID', '=', eStatus::Active)
             ->where('PublishDate', '<=', DB::raw('now()'))
