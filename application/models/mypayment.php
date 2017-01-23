@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: p1027
- * Date: 18.08.2016
- * Time: 15:54
- */
+
 class MyPayment
 {
     const iyzicoApiKey = "lGdLZQMXMGjJKAPX7RJtyWP3XLYnvWbT";

@@ -71,6 +71,7 @@ class Webservice_Search_Controller extends Base_Controller
             'id' => implode(',', $paths),
             'query' => $query,
         );
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -82,24 +83,29 @@ class Webservice_Search_Controller extends Base_Controller
             return Response::json(array());
         }
         $response = json_decode($rawResponse);
-        $contentIds = array();
-        foreach ($response->result as $key => $result) {
-            $contentIds[] = $result->contentId;
-        }
-        $availableContents = Content::getAccessibleTopicContents($contentIds);
-        $availableContentsKeyWithContentID = array();
 
-//        var_dump($response); exit;
-        array_map(function(Content $content) use (&$availableContentsKeyWithContentID) { $availableContentsKeyWithContentID[$content->ContentID] = $content->ApplicationID; }, $availableContents);
-        $availableContentIds = array_map(function(Content $content){return $content->ContentID;}, $availableContents);
-//        var_dump($availableContentIds); exit;
-        foreach ($response->result as $key => &$result) {
-//                var_dump($response->result[$key]); exit;
-            if(!in_array($result->contentId, $availableContentIds)) {
-                unset($response->result[$key]);
-            } else {
-                $response->result[$key]->applicationId = $availableContentsKeyWithContentID[$response->result[$key]->contentId];
+        $contentIds = array();
+        if(isset($response->result)) {
+            foreach ($response->result as $key => $result) {
+                $contentIds[] = $result->contentId;
             }
+            $availableContents = Content::getAccessibleTopicContents($contentIds);
+            $availableContentsKeyWithContentID = array();
+
+    //        var_dump($response); exit;
+            array_map(function(Content $content) use (&$availableContentsKeyWithContentID) { $availableContentsKeyWithContentID[$content->ContentID] = $content->ApplicationID; }, $availableContents);
+            $availableContentIds = array_map(function(Content $content){return $content->ContentID;}, $availableContents);
+            //var_dump($availableContentIds); exit;
+            foreach ($response->result as $key => &$result) {
+    //                var_dump($response->result[$key]); exit;
+                if(!in_array($result->contentId, $availableContentIds)) {
+                    unset($response->result[$key]);
+                } else {
+                    $response->result[$key]->applicationId = $availableContentsKeyWithContentID[$response->result[$key]->contentId];
+                }
+            }
+        } else {
+            $response = array('status' => 0, 'error' => '', 'result' => array());
         }
         return Response::json($response);
     }
