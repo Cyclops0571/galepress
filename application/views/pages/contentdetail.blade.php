@@ -80,41 +80,6 @@
             <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_detail') }}"><span
                     class="icon-info-sign"></span></a></div>
           </div>
-            <?php if($app->TopicStatus == eStatus::Active && count($app->ApplicationTopics)): ?>
-          <div class="form-row">
-            <div class="col-md-3">
-              <label for="topicIds">{{ __('applicationlang.application_category') }}</label>
-            </div>
-            <div class="col-md-8">
-              <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" name="topicStatus"
-                               <?php echo $content->TopicStatus || !$content->ContentID ? 'checked="checked"' : ''?>
-                               id="topicStatus">
-                      </span>
-                <select id="topicIds" name="topicIds[]" multiple="multiple" class="chosen-container"
-                        required>
-                    <?php
-                    $contentTopicIds = array_map(function ($o) {
-                        return $o->TopicID;
-                    }, $content->ContentTopics);
-                    foreach($app->ApplicationTopics as $applicationTopic):?>
-                    <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) || !$content->ContentID ? ' selected="selected"' : '';?>
-                  <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
-                      <?php echo $applicationTopic->Topic->Name; ?>
-                  </option>
-                    <?php endforeach; ?>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
-                <span class="icon-info-sign"></span>
-              </a>
-            </div>
-          </div>
-            <?php endif; ?>
-
           <div class="form-row">
             <div class="col-md-3">
               <label class="label-grey" for="CategoryID">{{ __('common.contents_category') }}</label>
@@ -156,52 +121,12 @@
               <label class="label-grey" for="MonthlyName">{{ __('common.contents_monthlyname') }}</label>
             </div>
             <div class="col-md-8">
-              <input type="text" name="MonthlyName" id="MonthlyName" class="form-control textbox" placeholder="{{ $content->getMonthlyName() }}" value="{{$content->ContentID ? $content->getMonthlyName() : ''}}"/>
+              <input type="text" name="MonthlyName" id="MonthlyName" class="form-control textbox"
+                     placeholder="{{ $content->getMonthlyName() }}"
+                     value="{{$content->ContentID ? $content->getMonthlyName() : ''}}"/>
             </div>
             <div class="col-md-1"><a class="tipr" title="{{ __('common.contents_tooltip_monthlyname') }}"><span
                     class="icon-info-sign"></span></a></div>
-          </div>
-          <div class="form-row" style="background: none !important;">
-            <div class="col-md-3 ">
-              <label class="label-grey" for="PublishDate">{{ __('common.contents_publishdate') }}</label>
-            </div>
-            <div class="col-md-8">
-              <div class="input-group">
-                <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                <input type="text" name="PublishDate" id="PublishDate" class="form-control textbox date"
-                       value="<?php echo Common::dateRead($content->PublishDate, 'd.m.Y'); ?>"/>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <a class="tipr" title="{{ __('common.contents_tooltip_publishdate') }}">
-                <span class="icon-info-sign"></span>
-              </a>
-            </div>
-          </div>
-          <div class="form-row" style="background: none !important;">
-            <div class="col-md-3 ">
-              <label class="label-grey" for="UnpublishDate">
-                {{ __('common.contents_unpublishdate') }}
-              </label>
-            </div>
-            <div class="col-md-8">
-              <div class="input-group">
-                <div class="input-group-addon"><span class="icon-calendar"></span></div>
-                <input type="text" name="UnpublishDate" id="UnpublishDate"
-                       class="form-control textbox date {{ ((int)$content->IsUnpublishActive == 1 ?  '' : ' disabledFields') }}"
-                       value="{{ Common::dateRead($content->UnpublishDate, 'd.m.Y') }}" {{ ((int)$content->IsUnpublishActive == 1 ?  '' : ' disabled="disabled"') }} />
-                <span class="input-group-addon">
-							<input type="checkbox" title="{{ __('common.contents_unpublishdate') }}"
-                     name="IsUnpublishActive" id="IsUnpublishActive"
-                     value="1"{{ ((int)$content->IsUnpublishActive == 1 ? ' checked="checked"' : '') }} />
-						</span>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <a class="tipr" title="{{ __('common.contents_tooltip_unpublishdate') }}">
-                <span class="icon-info-sign"></span>
-              </a>
-            </div>
           </div>
           <div class="form-row">
             <div
@@ -513,6 +438,7 @@
           </div>
         </div>
       </div>
+
       <div class="block">
         <div class="content controls" style="overflow:visible">
           @if((int)Auth::user()->UserTypeID == eUserTypes::Manager)
@@ -547,6 +473,49 @@
                       class="icon-info-sign"></span></a></div>
             </div>
           @endif
+
+          <div class="form-row" style="background: none !important;">
+            <div class="col-md-3 ">
+              <label class="label-grey" for="PublishDate">{{ __('common.contents_publishdate') }}</label>
+            </div>
+            <div class="col-md-8">
+              <div class="input-group">
+                <div class="input-group-addon"><span class="icon-calendar"></span></div>
+                <input type="text" name="PublishDate" id="PublishDate" class="form-control textbox date"
+                       value="<?php echo Common::dateRead($content->PublishDate, 'd.m.Y'); ?>"/>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <a class="tipr" title="{{ __('common.contents_tooltip_publishdate') }}">
+                <span class="icon-info-sign"></span>
+              </a>
+            </div>
+          </div>
+          <div class="form-row" style="background: none !important;">
+            <div class="col-md-3 ">
+              <label class="label-grey" for="UnpublishDate">
+                {{ __('common.contents_unpublishdate') }}
+              </label>
+            </div>
+            <div class="col-md-8">
+              <div class="input-group">
+                <div class="input-group-addon"><span class="icon-calendar"></span></div>
+                <input type="text" name="UnpublishDate" id="UnpublishDate"
+                       class="form-control textbox date {{ ((int)$content->IsUnpublishActive == 1 ?  '' : ' disabledFields') }}"
+                       value="{{ Common::dateRead($content->UnpublishDate, 'd.m.Y') }}" {{ ((int)$content->IsUnpublishActive == 1 ?  '' : ' disabled="disabled"') }} />
+                <span class="input-group-addon">
+							<input type="checkbox" title="{{ __('common.contents_unpublishdate') }}"
+                     name="IsUnpublishActive" id="IsUnpublishActive"
+                     value="1"{{ ((int)$content->IsUnpublishActive == 1 ? ' checked="checked"' : '') }} />
+						</span>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <a class="tipr" title="{{ __('common.contents_tooltip_unpublishdate') }}">
+                <span class="icon-info-sign"></span>
+              </a>
+            </div>
+          </div>
           <div class="form-row">
             <div class="col-md-3">
               <label for="Status" class="label-grey">
@@ -567,6 +536,46 @@
           </div>
         </div>
       </div>
+
+        <?php if($app->TopicStatus == eStatus::Active && count($app->ApplicationTopics)): ?>
+      <div class="block">
+        <div class="content controls">
+          <div class="form-row">
+            <div class="col-md-3">
+              <label for="topicIds">{{ __('applicationlang.application_category') }}</label>
+            </div>
+            <div class="col-md-8">
+              <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" name="topicStatus"
+                               <?php echo $content->TopicStatus || !$content->ContentID ? 'checked="checked"' : ''?>
+                               id="topicStatus">
+                      </span>
+                <select id="topicIds" name="topicIds[]" multiple="multiple" class="chosen-container"
+                        required>
+                    <?php
+                    $contentTopicIds = array_map(function ($o) {
+                        return $o->TopicID;
+                    }, $content->ContentTopics);
+                    foreach($app->ApplicationTopics as $applicationTopic):?>
+                    <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) || !$content->ContentID ? ' selected="selected"' : '';?>
+                  <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
+                      <?php echo $applicationTopic->Topic->Name; ?>
+                  </option>
+                    <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
+                <span class="icon-info-sign"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <?php endif; ?>
+
       <div class="block">
         <div class="content controls" style="overflow:visible">
           <div class="form-row">
