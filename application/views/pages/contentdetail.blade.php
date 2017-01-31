@@ -277,6 +277,44 @@
 
         </div>
       </div>
+        <?php if($app->TopicStatus == eStatus::Active && count($app->ApplicationTopics)): ?>
+      <div class="block">
+        <div class="content controls">
+          <div class="form-row">
+            <div class="col-md-3">
+              <label for="topicIds">{{ __('applicationlang.application_category') }}</label>
+            </div>
+            <div class="col-md-8">
+              <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" name="topicStatus"
+                               <?php echo $content->TopicStatus || !$content->ContentID ? 'checked="checked"' : ''?>
+                               id="topicStatus">
+                      </span>
+                <select id="topicIds" name="topicIds[]" multiple="multiple" class="chosen-container"
+                        required>
+                    <?php
+                    $contentTopicIds = array_map(function ($o) {
+                        return $o->TopicID;
+                    }, $content->ContentTopics);
+                    foreach($app->ApplicationTopics as $applicationTopic):?>
+                    <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) || !$content->ContentID ? ' selected="selected"' : '';?>
+                  <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
+                      <?php echo $applicationTopic->Topic->Name; ?>
+                  </option>
+                    <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
+                <span class="icon-info-sign"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <?php endif; ?>
       <div class="block">
         <div class="content controls" style="overflow:visible">
           <div class="form-row">
@@ -536,45 +574,6 @@
           </div>
         </div>
       </div>
-
-        <?php if($app->TopicStatus == eStatus::Active && count($app->ApplicationTopics)): ?>
-      <div class="block">
-        <div class="content controls">
-          <div class="form-row">
-            <div class="col-md-3">
-              <label for="topicIds">{{ __('applicationlang.application_category') }}</label>
-            </div>
-            <div class="col-md-8">
-              <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" name="topicStatus"
-                               <?php echo $content->TopicStatus || !$content->ContentID ? 'checked="checked"' : ''?>
-                               id="topicStatus">
-                      </span>
-                <select id="topicIds" name="topicIds[]" multiple="multiple" class="chosen-container"
-                        required>
-                    <?php
-                    $contentTopicIds = array_map(function ($o) {
-                        return $o->TopicID;
-                    }, $content->ContentTopics);
-                    foreach($app->ApplicationTopics as $applicationTopic):?>
-                    <?php $selected = in_array($applicationTopic->TopicID, $contentTopicIds) || !$content->ContentID ? ' selected="selected"' : '';?>
-                  <option value="<?php echo $applicationTopic->TopicID ?>" <?php echo $selected; ?> >
-                      <?php echo $applicationTopic->Topic->Name; ?>
-                  </option>
-                    <?php endforeach; ?>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <a class="tipr" title="{{ __('common.contents_tooltip_status') }}">
-                <span class="icon-info-sign"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <?php endif; ?>
 
       <div class="block">
         <div class="content controls" style="overflow:visible">
