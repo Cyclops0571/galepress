@@ -256,7 +256,7 @@ return array(
     'contents_name' => 'İçerik Adı:',
     'contents_detail' => 'Detay:',
     'contents_category' => 'Kategori:',
-    'contents_monthlyname' => 'Sayı:',
+    'contents_monthlyname' => 'Aylık İsim:',
     'contents_publishdate' => 'Yayınlanma Tarihi:',
     'contents_unpublishdate' => 'Yayından Alınma Tarihi:',
     'contents_file' => 'Dosya:',

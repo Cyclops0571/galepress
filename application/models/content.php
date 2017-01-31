@@ -565,5 +565,12 @@ class Content extends Eloquent
             ->order_by('Name', 'ASC')->get();
     }
 
+    public function getMonthlyName() {
+        if($this->ContentID) {
+            return $this->MonthlyName;
+        }
+        return Common::monthName((int)date('m')) . ' ' . date('Y');
+
+}
 }
 

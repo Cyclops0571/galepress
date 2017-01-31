@@ -256,7 +256,7 @@ return array(
     'contents_name' => 'Content Name:',
     'contents_detail' => 'Detail:',
     'contents_category' => 'Category:',
-    'contents_monthlyname' => 'Issue:',
+    'contents_monthlyname' => 'Monthly Name:',
     'contents_publishdate' => 'Publishing Date:',
     'contents_unpublishdate' => 'Expiration Date:',
     'contents_file' => 'File:',

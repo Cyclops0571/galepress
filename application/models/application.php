@@ -467,4 +467,14 @@ class Application extends Eloquent
             File::move($sourceFileNameFull, $targetFileNameFull);
         }
     }
+
+    /**
+     * @return Category[]
+     */
+    public function getCategories() {
+        return Category::where('ApplicationID', '=', $this->ApplicationID)
+            ->where('StatusID', '=', eStatus::Active)
+            ->order_by('Name', 'ASC')
+            ->get();
+    }
 }

@@ -181,7 +181,6 @@ class Contents_Controller extends Base_Controller
                 }
 
                 $data = array_merge($data, array('appName' => $app->Name));
-
                 return View::make('pages.expiredpage', $data)
                     ->nest('filterbar', 'sections.filterbar', $data)
                     ->nest('commandbar', 'sections.commandbar', $data);
@@ -252,6 +251,8 @@ class Contents_Controller extends Base_Controller
         }
 
         $data['app'] = $app;
+        $data['categories'] = $app->getCategories();
+        $data['groupCodes'] = GroupCode::getGroupCodes();
         return View::make('pages.' . Str::lower($this->table) . 'detail', $data)
             ->nest('filterbar', 'sections.filterbar', $data);
     }
@@ -290,6 +291,8 @@ class Contents_Controller extends Base_Controller
                     'detailcaption' => $this->detailcaption,
                     'content' => $content,
                     'app' => $content->Application,
+                    'categories' => $content->Application->getCategories(),
+                    'groupCodes' => GroupCode::getGroupCodes(),
                     'showCropPage' => $showCropPage,
                     'contentList' => $contentList,
                 );

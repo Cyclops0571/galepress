@@ -25,4 +25,18 @@ class GroupCode extends Eloquent
 		}
 		return '';
 	}
+
+	public static function getGroupCodes() {
+        return DB::table('GroupCode AS gc')
+            ->join('GroupCodeLanguage AS gcl', function ($join) {
+                /** @var \Laravel\Database\Query\Join $join */
+                $join->on('gcl.GroupCodeID', '=', 'gc.GroupCodeID');
+                $join->on('gcl.LanguageID', '=', DB::raw((int)Session::get('language_id')));
+            })
+            ->where('gc.GroupName', '=', 'Currencies')
+            ->where('gc.StatusID', '=', eStatus::Active)
+            ->order_by('gc.DisplayOrder', 'ASC')
+            ->order_by('gcl.DisplayName', 'ASC')
+            ->get();
+    }
 }
