@@ -5,8 +5,9 @@ class UpdateLocation_Task
 
     public function run()
     {
+        ob_end_flush();
         $msg = '';
-        for($i = 0; $i < 90; $i++) {
+        for ($i = 0; $i < 90; $i++) {
             try {
                 $apiRequest = 0;
                 $statistics = Statistic::where_not_null('Lat')
@@ -19,10 +20,10 @@ class UpdateLocation_Task
                     ->order_by('StatisticID', 'DESC')
                     ->take(100)
                     ->get();
-                echo $i * 100, PHP_EOL;
+                echo "current chunk of statistic: " . $i * 100, PHP_EOL;
                 foreach ($statistics as $statistic) {
                     if ((float)$statistic->Lat > 0 && (float)$statistic->Long > 0) {
-
+                        echo "\t total api request count: " . $apiRequest, PHP_EOL;
 
                         $country = '';
                         $city = '';
@@ -90,7 +91,7 @@ class UpdateLocation_Task
             }
         }
 
-        if($msg) {
+        if ($msg) {
             Common::sendErrorMail($msg);
         }
 
