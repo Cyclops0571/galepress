@@ -19,7 +19,7 @@ class UpdateLocation_Task
                     ->order_by('StatisticID', 'DESC')
                     ->take(100)
                     ->get();
-
+                echo $i * 100, PHP_EOL;
                 foreach ($statistics as $statistic) {
                     if ((float)$statistic->Lat > 0 && (float)$statistic->Long > 0) {
 
