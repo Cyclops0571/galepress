@@ -607,7 +607,7 @@
         </div>
       </div>
     </div>
-    <div class="rightbar col-md-3 {{ ($content->ContentID ? ' hidden' : '') }}">
+    <div class="rightbar col-md-3 {{ ($content->ContentID ? '' : '  hidden') }}">
       <div class="block bg-light">
         <div class="content controls" style="overflow:visible">
           <div class="form-row">
