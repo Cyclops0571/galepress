@@ -11,9 +11,13 @@ class UpdateLocation_Task
 
             $statistics = Statistic::where_not_null('Lat')
                 ->where_not_null('Long')
+                ->where('Lat', '!=', 0)
+                ->where('Long', '!=', 0)
+                ->where('Lat', '!=', '')
+                ->where('Long', '!=', '')
                 ->where_null('Country')
                 ->order_by('StatisticID', 'DESC')
-                ->take(1000)
+                ->take(9000)
                 ->get();
 
             foreach ($statistics as $statistic) {
@@ -26,14 +30,6 @@ class UpdateLocation_Task
                     $quarter = '';
                     $avenue = '';
 
-                    //try
-                    //{
-                    $apiIndex = intval($apiRequest / 1000);
-                    if ($apiIndex > 9) {
-                        $apiIndex = 1;
-                    }
-
-//					$apiKey = Config::get('custom.api_key'.$apiIndex);
                     $apiKey = Config::get('custom.google_api_key');
                     $apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
                     $url = sprintf('%s?latlng=%s,%s&sensor=false&key=%s',
