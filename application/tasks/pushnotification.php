@@ -5,6 +5,7 @@ class PushNotification_Task
 
     public function run()
     {
+        ob_end_flush();
         $lockFile = path('base') . 'lock/PushNotification_Task_runner.lock';
         $fp = fopen($lockFile, 'r+');
         /* Activate the LOCK_NB option on an LOCK_EX operation */

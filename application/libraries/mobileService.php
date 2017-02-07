@@ -28,10 +28,11 @@ class mobileService
             $postData['registration_ids'] = array_map(function (PushNotificationDevice $o) {
                 return $o->DeviceToken;
             }, $pushNotificationDevices);
+            $googleApiKey = 'AIzaSyCj2v2727lBWLeXbgM_Hw_VEQgzjDgb8KY';
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://gcm-http.googleapis.com/gcm/send');
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: key=' . Config::get('custom.google_api_key'), 'Content-Type: application/json'));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: key=' . $googleApiKey, 'Content-Type: application/json'));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disabling SSL Certificate support temporarly
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
