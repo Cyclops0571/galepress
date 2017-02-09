@@ -200,7 +200,7 @@
 
                         <div id="myPopover_<?php echo $tabNo ?>" class="hide">
                             <ul class="iconList myIconClass_<?php echo $tabNo; ?>">
-                                <?php for ($i = 1; $i < 8; $i++): ?>
+                                <?php for ($i = 1; $i < 9; $i++): ?>
                                 <li>
                                     <button type="button" class="btn"><img src="/img/app-icons/<?php echo $i ?>.png"
                                                                            width="25"/></button>
