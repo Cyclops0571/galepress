@@ -48,13 +48,13 @@ class Crypter extends Laravel\Crypter {}
  * @method static transaction(Closure $callback) Execute a callback wrapped in a database transaction.
  */
 class DB extends Laravel\Database {}
-
 /**
  * @method static array lists(string $name, string $key = null)
  * @method static \Laravel\Database\Query where(string $column, string $operator = null, mixed $value = null, string $connector = 'AND')
  * @method static \Laravel\Database\Query where_in(string $column, array $values, string $connector = 'AND', boolean $not = false)
  * @method static \Laravel\Database\Query where_not_in(string $column, array $values, string $connector = 'AND')
  * @method static \Laravel\Database\Query with(string $column)
+ * @method static \Laravel\Database\Query where_not_null(string $column)
  * @method static \Laravel\Database\Query order_by(string $column, string $direction = 'asc')
  * @method static \Laravel\Database\Query group_by(string $column)
  * @method static \Laravel\Database\Query take(int $value)

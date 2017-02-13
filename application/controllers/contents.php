@@ -364,7 +364,7 @@ class Contents_Controller extends Base_Controller
                     $content->Approval = (int)Input::get('Approval');
                     $content->Blocked = (int)Input::get('Blocked');
                 }
-                $content->ifModifiedDoNeccessarySettings($selectedCategories);
+                $content->ifModifiedDoNecessarySettings($selectedCategories);
                 $content->save();
                 $content->setCategory($selectedCategories);
                 $content->setTopics(Input::get('topicIds', array()));

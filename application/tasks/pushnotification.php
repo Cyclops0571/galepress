@@ -22,6 +22,7 @@ class PushNotification_Task
                 $tempPND = PushNotificationDevice::where('Sent', '=', 0)
                     ->where('ErrorCount', '=', 0)
                     ->where('StatusID', '=', eStatus::Active)
+                    ->where('DateCreated', '>=', date('Y-m-d'))
                     ->first();
                 if(!$tempPND) {
                     break;

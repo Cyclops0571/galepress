@@ -88,7 +88,7 @@ class Content extends Eloquent
         return $this->has_many('ContentTag', $this->key());
     }
 
-    public function ifModifiedDoNeccessarySettings($selectedCategories)
+    public function ifModifiedDoNecessarySettings($selectedCategories)
     {
         $currentCategories = array();
         $rows = $this->getCategoryIDSet();
@@ -510,7 +510,7 @@ class Content extends Eloquent
             'ContentCoverImageVersion' => (int)$this->CoverImageVersion,
             'RemoveFromMobile' => (bool)$this->RemoveFromMobile
         );
-        if($addStatusCode) {
+        if ($addStatusCode) {
             $status = array();
             $status["status"] = 0;
             $status["error"] = "";
@@ -528,14 +528,15 @@ class Content extends Eloquent
      * @param int[] $contentIds
      * @return Content[]
      */
-    public static function getAccessibleContents($contentIds) {
-        if(empty($contentIds)) {
+    public static function getAccessibleContents($contentIds)
+    {
+        if (empty($contentIds)) {
             return array();
         }
         return Content::where_in('ContentID', $contentIds)
             ->where('StatusID', '=', eStatus::Active)
             ->where('PublishDate', '<=', DB::raw('now()'))
-            ->where(function(\Laravel\Database\Query $query) {
+            ->where(function (\Laravel\Database\Query $query) {
                 $query->where('IsUnpublishActive', '=', 0);
                 $query->or_where('UnpublishDate', '>', DB::raw('now()'));
             })
@@ -548,14 +549,15 @@ class Content extends Eloquent
      * @param int[] $contentIds
      * @return Content[]
      */
-    public static function getAccessibleTopicContents($contentIds) {
-        if(empty($contentIds)) {
+    public static function getAccessibleTopicContents($contentIds)
+    {
+        if (empty($contentIds)) {
             return array();
         }
         return Content::where_in('Content.ContentID', $contentIds)
             ->where('StatusID', '=', eStatus::Active)
             ->where('PublishDate', '<=', DB::raw('now()'))
-            ->where(function(\Laravel\Database\Query $query) {
+            ->where(function (\Laravel\Database\Query $query) {
                 $query->where('IsUnpublishActive', '=', 0);
                 $query->or_where('UnpublishDate', '>', DB::raw('now()'));
             })
@@ -565,12 +567,13 @@ class Content extends Eloquent
             ->order_by('Name', 'ASC')->get();
     }
 
-    public function getMonthlyName() {
-        if($this->ContentID) {
+    public function getMonthlyName()
+    {
+        if ($this->ContentID) {
             return $this->MonthlyName;
         }
         return Common::monthName((int)date('m')) . ' ' . date('Y');
 
-}
+    }
 }
 

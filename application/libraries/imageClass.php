@@ -19,59 +19,6 @@ class ImageClass
 
 // <editor-fold defaultstate="collapsed" desc="getter-setter">
 
-    public static function getObjectSet($where = array(), $showQuery = false)
-    {
-        $imageSet = array();
-        $CI = &get_instance();
-        $CI->db->where($where);
-        $query = $CI->db->get('tbl_image');
-        if ($showQuery) {
-            $querySet[] = $CI->db->last_query();
-        }
-        $result = &$query->result_array();
-
-        foreach ($result as $dbImage) {
-            $imageSet[] = self::convertToImage($dbImage);
-        }
-        return $showQuery ? $querySet : $imageSet;
-    }
-
-    /**
-     *
-     * @param type $dbImage
-     * @return ImageClass
-     */
-    public static function convertToImage($dbImage)
-    {
-
-        $image = new ImageClass();
-        if (isset($dbImage['img_id']) && (int)$dbImage['img_id'] > 0) {
-            $image->isValid = true;
-            $image->img_id = $dbImage['img_id'];
-            $image->img_element_id = $dbImage['img_element_id'];
-            $image->img_type_id = $dbImage['img_type_id'];
-            $image->img_source = $dbImage['img_source'];
-        }
-        return $image;
-    }
-
-    /**
-     *
-     * @param type $objectID
-     * @return ImageClass
-     */
-    public static function cachedObject($objectID)
-    {
-        //this class does not need any cache
-        $CI = get_instance();
-        $CI->db->where('img_id', $objectID);
-        $query = $CI->db->get('tbl_image');
-        $result = &$query->result_array();
-        foreach ($result as $dbImage) {
-            $imageSet[] = self::convertToImage($dbImage);
-        }
-        return isset($imageSet[0]) ? $imageSet[0] : new ImageClass();
-    }
 
     /**
      * Without loosing the aspect ratio crops the image from the middle then
@@ -200,12 +147,6 @@ class ImageClass
             $this->img_type_id = (int)$typeID;
         }
         return $this->img_type_id;
-    }
-
-    public function controlCMYK()
-    {
-        //TODO:check if it is cmyk if cmyk throw an exception
-        ;
     }
 
     /**

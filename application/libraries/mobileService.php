@@ -21,6 +21,7 @@ class mobileService
             ->where('ErrorCount', '=', 0)
             ->where('PushNotificationID', '=', $pushNotification->PushNotificationID)
             ->where('DeviceType', '=', $deviceType)
+            ->where('DateCreated', '>=', date('Y-m-d'))
             ->where('StatusID', '=', eStatus::Active)->get();
 
         foreach (array_chunk($pushNotificationDevicesAll, 1000) as $pushNotificationDevices) {
@@ -122,6 +123,7 @@ class mobileService
             ->where('ErrorCount', '=', 0)
             ->where('PushNotificationID', '=', $pushNotification->PushNotificationID)
             ->where('DeviceType', '=', "ios")
+            ->where('DateCreated', '>=', date('Y-m-d'))
             ->where('StatusID', '=', eStatus::Active)->order_by("PushNotificationDeviceID", "DESC")->get();
 //	$appID = 424;
 //	$udid1 = 'E6A7CFD9-FE39-4C33-B7F4-6651404ED040';
