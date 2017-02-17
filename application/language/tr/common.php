@@ -210,7 +210,7 @@ return array(
     'applications_customer' => 'Müşteri:',
     'applications_applicationname' => 'Uygulama Adı:',
     'applications_detail' => 'Detay:',
-    'applications_price' => 'Fiyat(Aylık):',
+    'applications_price' => 'Fiyat(Kdv Dahil Aylık Fiyat):',
     'applications_in_app_purchase_active' => 'In App Purchase Aktif:',
     'applications_flipboard_active' => 'Flipboard Aktif:',
     'applications_placeholder_price' => 'Fiyat(Aylık):',
