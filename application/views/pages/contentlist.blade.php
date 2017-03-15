@@ -85,7 +85,7 @@
     				    </span>
                                             </td>
                                             <?php endif; ?>
-                                            <td>{{ HTML::link($route.'/'.$row->ContentID, $row->Name) }}</td>
+                                            <td>{{ HTML::link($route.'/'.$row->ContentID, Common::wordWrap($row->Name)) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, Common::wordWrap($row->Detail)) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->MonthlyName) }}</td>
                                             <td>{{ HTML::link($route.'/'.$row->ContentID, $row->CategoryName) }}</td>
