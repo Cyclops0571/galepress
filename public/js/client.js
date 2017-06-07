@@ -55,6 +55,13 @@ var sClient = new function () {
 	sCommon.save('/' + currentLanguage + "/clients/resetpw", fsuccess);
     };
 
+    this.sendPasswordRescueMail = function () {
+        if (!myValidation()) {
+            return false;
+        }
+        sCommon.save('/' + currentLanguage + '/mobile-user/send-token-mail');
+    };
+
     var myValidation = function () {
 	var returnValue = true;
 	$("input").each(function () {

@@ -149,7 +149,7 @@ function set_path($path, $value)
 define("ENV_TEST", "test");
 define("ENV_LOCAL", "local");
 define("ENV_LIVE", "live");
-define("APP_VER", 94);
+define("APP_VER", 96);
 define("IMAGE_CROPPED_NAME", "cropped_image");
 define("IMAGE_CROPPED_2048", "cropped_image_1536x2048.jpg");
 define("IMAGE_ORJ_EXTENSION", "_org.jpg");

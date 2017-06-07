@@ -80,7 +80,28 @@ $languages = Config::get('application.languages', array());
 Route::post('/contactmail', array('as' => 'contactmail', 'uses' => 'website@contactform'));
 Route::post('/search', 'webservice.search@search');
 Route::post('/searchgraff', 'webservice.search@searchgraff');
+
 foreach ($languages as $currentLanguage) {
+    Route::get('mobile-user/reset-password', array('as' => 'mobile_reset_password_form', 'uses' => 'mobile.auth@resetPasswordForm'));
+    Route::any('mobile-user/send-token-mail', array('as' => 'mobile_user_send_token_mail', 'uses' => 'mobile.auth@sendTokenMail'));
+    Route::post("mobile-user/update-password", array('as' => 'mobile_update_password', 'uses' => 'mobile.auth@updatePassword'));
+
+
+    Route::get('mobile-user/register/(:num)', array('as' => 'mobile_user_register', 'uses' => 'mobile.auth@register'));
+    Route::post('mobile-user/store', array('as' => 'mobile_user_store', 'uses' => 'mobile.auth@store'));
+
+    Route::get('mobile-user/edit/(:num)/(:any)', array('as' => 'clients_register_save', 'uses' => 'mobile.auth@edit'));
+    Route::get('mobile-user/registration-success', array('as' => 'mobile_user_registration_success', 'uses' => function ()
+    {
+        return view('mobile.registration_success');
+    }));
+    Route::get('mobile-user/forgot-password/(:num)', array('as' => 'clients_forgot_password', 'uses' => 'mobile.auth@forgotPasswordForm'));
+    Route::get('mobile-user/password-changed', array('as' => 'mobile_user_password_changed', 'uses' => function ()
+    {
+        return view('mobile.password_changed');
+    }));
+
+
     // <editor-fold defaultstate="collapsed" desc="website">
     Route::get(__('route.website_products')->get($currentLanguage), array('as' => 'website_products_get', 'uses' => 'website@products'));
     Route::get(__('route.website_advantages')->get($currentLanguage), array('as' => 'website_advantages_get', 'uses' => 'website@advantages'));
