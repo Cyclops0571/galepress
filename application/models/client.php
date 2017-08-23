@@ -6,6 +6,7 @@
  * @property int $Username Description
  * @property int $Password Description
  * @property int $Email Description
+ * @property int $UpdateAtFirstLoginTry
  * @property int $Token Description
  * @property int $DeviceToken Description
  * @property int $Name Description

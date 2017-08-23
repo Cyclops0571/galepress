@@ -88,8 +88,14 @@ class Mobile_Auth_Controller extends Base_Controller
                 return ajaxResponse::error(__('clients.client_application_invalid'));
             }
 
-            $clientSameUsername = Client::where('ApplicationID', $applicationID)->where('Username', $username)->where('ClientID', "!=", $client->ClientID)->first();
-            $clientSameEmail = Client::where('ApplicationID', $applicationID)->where('Email', $email)->where('ClientID', "!=", $client->ClientID)->first();
+            $clientSameUsername = Client::where('ApplicationID', $applicationID)
+                ->where('Username', $username)
+                ->where('ClientID', "!=", $client->ClientID)
+                ->first();
+            $clientSameEmail = Client::where('ApplicationID', $applicationID)
+                ->where('Email', $email)
+                ->where('ClientID', "!=", $client->ClientID)
+                ->first();
             if ($clientSameUsername)
             {
                 return ajaxResponse::error(__('clients.username_must_be_unique'));

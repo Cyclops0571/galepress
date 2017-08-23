@@ -6,6 +6,8 @@ class webService
     const GoogleConsumptionStatePurchased = 0;
     const GoogleConsumptionStateCanceled = 1;
     const GoogleConsumptionStateRefunded = 2;
+    const VogueAppID = 924;
+    const GqTurkiyeAppID = 925;
     public static $availableServices = array(103);
 
     /**
@@ -295,17 +297,25 @@ class webService
         if (!$client) {
             throw eServiceError::getException(eServiceError::ClientNotFound);
         } else if ($client->Password != $password) {
-            $client->InvalidPasswordAttempts++;
-            $client->save();
-            throw eServiceError::getException(eServiceError::ClientIncorrectPassword);
+            if ($client->UpdateAtFirstLoginTry && ($applicationID == self::VogueAppID || $applicationID == self::GqTurkiyeAppID)) {
+                $client->UpdateAtFirstLoginTry = 0;
+                $client->Password = $password;
+                $client->save();
+            } else {
+                $client->InvalidPasswordAttempts++;
+                $client->save();
+                throw eServiceError::getException(eServiceError::ClientIncorrectPassword);
+            }
         } else if ($client->InvalidPasswordAttempts > 5 && (time() - strtotime($client->updated_at)) < 7200) {
             throw eServiceError::getException(eServiceError::ClientInvalidPasswordAttemptsLimit);
         }
 
         if (empty($client->Token)) {
             $client->Token = $client->Username . "_" . md5(uniqid());
-            $client->save();
         }
+
+        $client->LastLoginDate = date('Y-m-d H:i:s');
+        $client->save();
         return $client;
     }
 
