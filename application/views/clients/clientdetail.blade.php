@@ -5,6 +5,7 @@
     <?php
     $ClientID = 0;
     $ApplicationID = 0;
+    $PaidUntil = '2017-01-01';
     $Username = '';
     $Password = '';
     $Email = '';
@@ -20,6 +21,7 @@
     if (isset($row)) {
         $ClientID = (int)$row->ClientID;
         $ApplicationID = (int)$row->ApplicationID;
+        $PaidUntil = $row->PaidUntil ? $row->PaidUntil : '2017-01-01';
         $Username = $row->Username;
         $Password = $row->Password;
         $Email = $row->Email;
@@ -115,6 +117,19 @@
                     </div>
                     <div class="col-md-1"><a class="tipr" title="<?php echo __('common.users_email'); ?>"><span
                                     class="icon-info-sign"></span></a></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3"><?php echo __('common.client_subscription_deadline'); ?> <span class="error">*</span></div>
+                    <?php echo $errors->first('PaidUntil', '<p class="error">:message</p>'); ?>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="icon-calendar"></span></div>
+                            <input type="text" name="PaidUntil" id="PaidUntil" class="form-control textbox date"
+                                   value="<?php echo Common::dateRead($PaidUntil, 'd.m.Y'); ?>"/>
+                        </div>
+                    </div>
+                    <div class="col-md-1"><a class="tipr" title="<?php echo __('common.client_subscription_deadline'); ?>"><span
+                                class="icon-info-sign"></span></a></div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">

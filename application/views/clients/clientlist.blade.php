@@ -76,14 +76,20 @@
                         <tbody>
                         <?php if (!empty($rows)): ?>
                         <?php foreach ($rows->results as $row): ?>
+                            <?php if($row->LastLoginDate == '0000-00-00 00:00:00'){
+                                $lastLoginDate = 'Kullanıcı henüz login olmamış';
+                            } else {
+                                $lastLoginDate = Common::dateRead($row->LastLoginDate, 'd.m.Y');
+                            } ?>
+                            <?php $paidUntil = $row->PaidUntil ? Common::dateRead($row->LastLoginDate, 'd.m.Y') : '-'; ?>
                         <?php /* @var $row Client */ ?>
                         <tr class="{{ HTML::oddeven($page) }}">
                             <td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Username); ?> </td>
                             <td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Name); ?> </td>
                             <td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Surname); ?> </td>
                             <td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Email); ?> </td>
-                            <td><?php echo HTML::link($route . '/' . $row->ClientID, $row->Application->Name); ?> </td>
-                            <td><?php echo HTML::link($route . '/' . $row->ClientID, Common::dateRead($row->LastLoginDate, 'd.m.Y')); ?> </td>
+                            <td><?php echo HTML::link($route . '/' . $row->ClientID, $paidUntil); ?> </td>
+                            <td><?php echo HTML::link($route . '/' . $row->ClientID, $lastLoginDate); ?> </td>
                             <td><?php echo HTML::link($route . '/' . $row->ClientID, $row->ClientID); ?> </td>
                         </tr>
                         <?php endforeach; ?>

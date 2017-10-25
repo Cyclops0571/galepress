@@ -28,7 +28,7 @@ class Clients_Controller extends Base_Controller
             2 => array('75px', __('common.clients_list_column3'), 'Name'),
             3 => array('75px', __('common.clients_list_column4'), 'Surname'),
             4 => array('100px', __('common.clients_list_column5'), 'Email'),
-            5 => array('75px', __('common.clients_list_column6'), 'ApplicationID'),
+            5 => array('75px', __('common.clients_list_column6'), 'PaidUntil'),
             6 => array('100px', __('common.clients_list_column7'), 'LastLoginDate'),
             7 => array('25px', __('common.clients_list_column8'), 'ClientID')
         );
@@ -257,6 +257,7 @@ class Clients_Controller extends Base_Controller
 
         $client->Name = Input::get('FirstName');
         $client->Surname = Input::get('LastName');
+        $client->PaidUntil = date('Y-m-d', strtotime(Input::get('PaidUntil', date('Y-m-d'))));
         if ($clientID == 0) {
             $client->StatusID = eStatus::Active;
             $client->CreatorUserID = $currentUser->UserID;
