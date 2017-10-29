@@ -6,9 +6,10 @@
     <link rel="stylesheet" type="text/css" href="/css/signUpStyle.css">
 
     <title><?php echo __('website.signup_title') ?></title>
+
 </head>
 <body style="background-image: url(/img/signupimg/bGround.png);background-size: cover;">
-<!-- denemeeee -->
+
 <div class="container">
     <div class="row" style="text-align: right; margin-top: 25px">
         <img class="close" src="/img/signupimg/close.png"/>

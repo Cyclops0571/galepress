@@ -108,10 +108,27 @@ class Test_Controller extends Base_Controller
             echo "request hata aldi";
         }
 
+}
 
         var_dump($result);
         exit;
 
+    public function action_index2($test = 1)
+    {
+	echo 'serdar';
+	echo $this->route; exit;	        
+//  $apiKey = Config::get('custom.api_key'.$apiIndex);
+        $statistic = Statistic::find(7401407);
+        $apiKeyDetay = 'AIzaSyB6iLJTSOH0qniPtozvFEkUFiaJfQdMvRg';
+        $apiKeyGunes = 'IzaSyCmovRVpwDZaFkDRy-iY_47h6OkT1xgIJg';
+        $apiKey = $apiKeyDetay;
+        $apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $url = sprintf('%s?latlng=%s,%s&sensor=false&key=%s',
+            $apiUrl,
+            $statistic->Lat,
+            $statistic->Long,
+            $apiKey
+        );
 
         $content = Content::find(2054);
         var_dump($content->ContentFile);
