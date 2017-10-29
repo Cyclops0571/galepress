@@ -1,1 +1,0 @@
-SELECT * FROM db.PageComponentProperty WHERE PageComponentID IN (SELECT PageComponentID FROM db.PageComponent WHERE ContentFilePageID IN (SELECT ContentFilePageID FROM db.ContentFilePage WHERE ContentFileID=1395) AND StatusID=1) AND StatusID=1;
