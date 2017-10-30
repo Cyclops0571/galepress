@@ -24,7 +24,7 @@ class ReportFilter
     {
         $sqlPath = path('app') . self::SqlFolder . $this->reportID . ($this->map ? "map.sql" : ".sql");
         $sqlTemplate = File::get($sqlPath);
-        $replecements = [
+        $replecements = array(
             '{SD}' => Common::dateWrite($this->startDate, false),
             '{ED}' => Common::dateWrite($this->endDate, false),
             '{CONTENTID}' => $this->contentID > 0 ? $this->contentID : 'null',
@@ -33,7 +33,7 @@ class ReportFilter
             '{COUNTRY}' => ($this->country ? "'$this->country'" : 'null'),
             '{CITY}' => ($this->city ? "'$this->city'" : 'null'),
             '{DISTRICT}' => ($this->district ? "'$this->district'" : 'null'),
-        ];
+        );
 
         foreach ($replecements as $key => $value) {
             $sqlTemplate = str_replace($key, $value, $sqlTemplate);

@@ -17,11 +17,11 @@ class Webservice_Search_Controller extends Base_Controller
 
     public function post_search()
     {
-        $rules = [
+        $rules = array(
             "applicationID" => 'required|integer|exists:Application,ApplicationID',
             "contentID" => 'integer|exists:Content,ContentID',
             "query" => 'required'
-        ];
+        );
         $v = \Laravel\Validator::make(Input::all(), $rules);
         if ($v->fails()) {
             return ajaxResponse::error($v->errors->first());
@@ -37,10 +37,10 @@ class Webservice_Search_Controller extends Base_Controller
         } else {
             $id = 'customer_' . $application->CustomerID . '/application_' . $application->ApplicationID;
         }
-        $parameters = [
+        $parameters = array(
             'id' => $id,
             'query' => $query,
-        ];
+        );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -54,10 +54,10 @@ class Webservice_Search_Controller extends Base_Controller
 
     public function post_searchgraff()
     {
-        $rules = [
+        $rules = array(
             "applicationIds" => 'required',
             "query" => 'required'
-        ];
+        );
         $v = \Laravel\Validator::make(Input::all(), $rules);
         if ($v->fails()) {
             return ajaxResponse::error($v->errors->first());
@@ -65,16 +65,16 @@ class Webservice_Search_Controller extends Base_Controller
         $url = 'http://37.9.205.205/search';
         $applicationIds = json_decode(Input::get('applicationIds'));
         $applications = Application::where_in('ApplicationID', $applicationIds)->get();
-        $paths = [];
+        $paths = array();
         foreach ($applications as $application) {
             $paths[] = 'customer_' . $application->CustomerID . '/application_' . $application->ApplicationID;
         }
         $query = Input::get('query');
 
-        $parameters = [
+        $parameters = array(
             'id' => implode(',', $paths),
             'query' => $query,
-        ];
+        );
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -84,17 +84,17 @@ class Webservice_Search_Controller extends Base_Controller
         $rawResponse = curl_exec($ch);
         curl_close($ch);
         if (empty($rawResponse)) {
-            return Response::json([]);
+            return Response::json(array());
         }
         $response = json_decode($rawResponse);
 
-        $contentIds = [];
+        $contentIds = array();
         if (isset($response->result)) {
             foreach ($response->result as $key => $result) {
                 $contentIds[] = $result->contentId;
             }
             $availableContents = Content::getAccessibleTopicContents($contentIds);
-            $availableContentsKeyWithContentID = [];
+            $availableContentsKeyWithContentID = array();
 
             //        var_dump($response); exit;
             array_map(function (Content $content) use (&$availableContentsKeyWithContentID) {
@@ -114,7 +114,7 @@ class Webservice_Search_Controller extends Base_Controller
                 }
             }
         } else {
-            $response = ['status' => 0, 'error' => '', 'result' => []];
+            $response = array('status' => 0, 'error' => '', 'result' => array());
         }
         $response->result = array_values($response->result);
 
