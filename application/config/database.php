@@ -16,12 +16,6 @@ if (Laravel\Request::env() == ENV_LOCAL) {
     $dbPasswordTicket = '';
 }
 
-//if(TRUE) {ß
-//	$dbName = "db";
-//	$dbUserName = "root";
-//	$dbPassword = "";
-//}
-
 return [
 
     /*
