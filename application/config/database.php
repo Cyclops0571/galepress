@@ -122,7 +122,6 @@ return [
             'password' => '',
             'prefix' => '',
         ],
-
     ],
 
     /*
